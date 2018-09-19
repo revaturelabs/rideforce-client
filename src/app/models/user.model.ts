@@ -5,11 +5,11 @@ export class UserModel {
     firstname: string;
     lastname: string;
     email: string;
-    address: AddressModel;
-    batchend: Date;
+    address?: AddressModel;
+    batchend?: Date;
     Venmo?: string;
-    active: boolean;
+    active?: boolean;
     roleID: number;
     officeID: number;
-
+    photourl?: string;
 }

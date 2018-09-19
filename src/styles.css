@@ -55,7 +55,7 @@ li {
 /**********************
 	Header
 **********************/
-/* .navbar-right {
+.navbar-right {
 	margin-top: .75em;
 	margin-right: 5em;
 }
@@ -73,7 +73,7 @@ a {
     padding-right: 55px;
     font-size: 15px;
 	width: 1000px;
-}  */
+} 
 
 /**********************
 	Chart Containers
@@ -319,7 +319,6 @@ textarea {
 /************************
 	Footer
 ************************/
-
 .footer-margin {
 	margin-top: .85em;
 }

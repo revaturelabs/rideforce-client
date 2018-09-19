@@ -1,7 +1,12 @@
 
 import { Component, OnInit } from '@angular/core';
+import { UserModel } from '../../models/user.model';
+import { AddressModel } from '../../models/address.model';
+import { SwipecardModel } from '../../models/swipecard.model';
 
 import { trigger, keyframes, animate, transition } from '@angular/animations';
+
+
 
 @Component({
   selector: 'app-usercard',
@@ -9,33 +14,24 @@ import { trigger, keyframes, animate, transition } from '@angular/animations';
   styleUrls: ['./usercard.component.css']
 })
 export class UsercardComponent implements OnInit {
+
+
  // constant for swipe action: left or right
  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
    // our list of avatars
- avatars = [
+ swipecards: SwipecardModel[] = [
   {
-       name: 'kristy',
-       image: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
-       distance: 50,
-       contact: 'slack',
-       carinfo: 'donkey',
-       visible: true
-   },
-   {
-       name: 'matthew',
-       image: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
-       visible: false
-   },
-   {
-       name: 'chris',
-       image: 'http://semantic-ui.com/images/avatar/large/chris.jpg',
-       visible: false
-   },
-   {
-       name: 'jenny',
-       image: 'http://semantic-ui.com/images/avatar/large/jenny.jpg',
-       visible: false
-   }
+        user: {
+            userID: 1,
+            firstname: 'kristy',
+            lastname: 'Kreme',
+            email: 'email@mail.com',
+            roleID: 1,
+            officeID: 2,
+            photourl: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
+        },
+        visible: true
+    }
 ];
 
 
@@ -50,7 +46,7 @@ export class UsercardComponent implements OnInit {
    // action triggered when user swipes
    swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT, event) {
        // out of range
-       if (currentIndex > this.avatars.length || currentIndex < 0) {
+       if (currentIndex > this.swipecards.length || currentIndex < 0) {
           return;
        }
 
@@ -58,18 +54,18 @@ export class UsercardComponent implements OnInit {
 
        // swipe right, next avatar
        if (action === this.SWIPE_ACTION.RIGHT) {
-           const isLast = currentIndex === this.avatars.length - 1;
+           const isLast = currentIndex === this.swipecards.length - 1;
            nextIndex = isLast ? 0 : currentIndex + 1;
        }
 
        // swipe left, previous avatar
        if (action === this.SWIPE_ACTION.LEFT) {
            const isFirst = currentIndex === 0;
-           nextIndex = isFirst ? this.avatars.length - 1 : currentIndex - 1;
+           nextIndex = isFirst ? this.swipecards.length - 1 : currentIndex - 1;
        }
 
        // toggle avatar visibility
-       this.avatars.forEach((x, i) => x.visible = (i === nextIndex));
+       this.swipecards.forEach((x, i) => x.visible = (i === nextIndex));
    }
 
 

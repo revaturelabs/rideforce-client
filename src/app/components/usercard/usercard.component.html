@@ -2,16 +2,16 @@
   <h4>Swipe Avatars with HammerJS</h4>
   <!-- loop each avatar in our avatar list -->
   <div class="swipe-box"  
-      *ngFor="let avatar of avatars; let i =index"
+      *ngFor="let card of swipecards; let i =index"
       (swipeleft)="swipe(i, $event.type, $event)" (swiperight)="swipe(i, $event.type, $event)" 
-      [class.visible]="avatar.visible" [class.hidden]="!avatar.visible">
+      [class.visible]="card.visible" [class.hidden]="!card.visible">
       <div class="text-center">
           <img class="revLogo" src="../../../assets/img/revature_logo_250.png" alt="">
-          <img class="avatarImg" [src]="avatar.image" [alt]="avatar.name" >
+          <img class="cardImg" [src]="card.user.photourl" [alt]="card.user.firstname" >
       </div>
       <div class="container"></div>
       <div class>
-          <h1 class="header">{{avatar.name}}</h1>
+          <h1 class="header">{{card.user.firstname}}</h1>
           <h1> duration / distance</h1>
           <h1> contacts</h1>
           <a><h1>link to bio</h1></a>
@@ -24,11 +24,11 @@
       <div class="container-fluid">
         <div class="row">
 
-            <h1>Name: {{avatar.name}}</h1>
-            <h1>Distance: {{avatar.distance}}</h1>
-            <h1>Contact: {{avatar.contact}}</h1>
-            <h1>car info: {{avatar.carinfo}}</h1>
-            <h1 *ngIf="avatar.rideinfo">ride info: {{avatar.rideinfo}}</h1>
+            <h1>Name: {{card.user.firstname}}</h1>
+            <h1>Distance: </h1>
+            <h1>Contact: </h1>
+            <h1>car info: }</h1>
+            <h1 *ngIf="card.rideinfo">ride info: </h1>
         </div>
     </div>
   </div>
