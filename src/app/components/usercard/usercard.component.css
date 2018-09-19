@@ -15,12 +15,12 @@
 
 .revLogo {
     position: absolute;
-    left: 1%;
-    top: 10%;
+    left: 6%;
+    top: 7%;
 }
 
 @media screen and (min-width: 1025px){
-    .avatarImg{
+    .cardImg{
         height: 400px;
         width: 30%
        }
@@ -28,7 +28,7 @@
 
 
 @media screen and (max-width: 1024px){
-    .avatarImg{
+    .cardImg{
         height: 900px;
         width: 100%
     }

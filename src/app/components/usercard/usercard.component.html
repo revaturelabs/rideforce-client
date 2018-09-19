@@ -1,9 +1,9 @@
-<div class="container-fluid">
+<div class="container">
     <h4>Swipe Avatars with HammerJS</h4>
     <!-- loop each avatar in our avatar list -->
     <div class="swipe-box" *ngFor="let card of swipecards; let i =index" (swipeleft)="swipe(i, $event.type, $event)" (swiperight)="swipe(i, $event.type, $event)"
         [class.visible]="card.visible" [class.hidden]="!card.visible">
-        <div class="text-center">
+        <div class="text-center" style="margin: 30px 0px 20px 0px">
             <img class="revLogo" src="../../../assets/img/revature_logo_250.png" alt="">
             <img class="cardImg" [src]="card.user.photourl" [alt]="card.user.firstname">
         </div>
