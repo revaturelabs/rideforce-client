@@ -16,6 +16,9 @@ export class UsercardComponent implements OnInit {
   {
        name: 'kristy',
        image: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
+       distance: 50,
+       contact: 'slack',
+       carinfo: 'donkey',
        visible: true
    },
    {
