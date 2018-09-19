@@ -20,14 +20,15 @@ import { AgmCoreModule } from '@agm/core';
     AppComponent,
     RideswipeComponent,
     LandingComponent,
+    UsercardComponent,
+    HowToComponent,
+    MapComponent,
     LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    UsercardComponent,
-    HowToComponent,
-    MapComponent,
+    
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_KEY'

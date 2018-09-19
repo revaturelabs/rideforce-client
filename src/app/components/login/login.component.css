@@ -27,7 +27,7 @@ h2 {
   margin: 40px 8px 10px 8px; 
   color: #cccccc;
 }
-
+ 
 
 
 /* STRUCTURE */
@@ -45,16 +45,13 @@ h2 {
 }
 
 .wrapper {
-  box-sizing: content-box;
- 
   display: flex;
   align-items: center;
   flex-direction: column; 
   justify-content: center;
   width: 100%;
-  
   min-height: 100%;
-  padding: 0px;
+
 }
 
 #formContent {
@@ -79,8 +76,6 @@ h2 {
   -webkit-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
 }
-
-
 
 /* TABS */
 

@@ -12,10 +12,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  // userLogin: string;
+
   // passLogin: string;
 
-
-
+  
 
 }
