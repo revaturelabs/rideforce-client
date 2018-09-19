@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { RideswipeComponent } from './components/rideswipe/rideswipe.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { UsercardComponent } from './components/usercard/usercard.component';
+import { HowToComponent } from './components/how-to/how-to.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { UsercardComponent } from './components/usercard/usercard.component';
     AppComponent,
     RideswipeComponent,
     LandingComponent,
-    UsercardComponent
+    UsercardComponent,
+    HowToComponent
   ],
   imports: [
     BrowserModule,
