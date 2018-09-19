@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewChild } from '@angular/core'
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 
