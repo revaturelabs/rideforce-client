@@ -12,7 +12,8 @@ import { HowToComponent } from './components/how-to/how-to.component';
 import { MapComponent } from './components/map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
-
+import { RegisterComponent } from './components/register/register.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AgmCoreModule } from '@agm/core';
     LandingComponent,
     UsercardComponent,
     HowToComponent,
-    MapComponent
+    MapComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { AgmCoreModule } from '@agm/core';
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_KEY'
     }),
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
