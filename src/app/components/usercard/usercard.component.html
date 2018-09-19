@@ -1,35 +1,33 @@
-<div>
-  <h4>Swipe Avatars with HammerJS</h4>
-  <!-- loop each avatar in our avatar list -->
-  <div class="swipe-box"  
-      *ngFor="let card of swipecards; let i =index"
-      (swipeleft)="swipe(i, $event.type, $event)" (swiperight)="swipe(i, $event.type, $event)" 
-      [class.visible]="card.visible" [class.hidden]="!card.visible">
-      <div class="text-center">
-          <img class="revLogo" src="../../../assets/img/revature_logo_250.png" alt="">
-          <img class="cardImg" [src]="card.user.photourl" [alt]="card.user.firstname" >
-      </div>
-      <div class="container">
-      <div>
-          <h1 >{{card.user.firstname}}</h1>
-          <h1> duration / distance</h1>
-          <h1> contacts</h1>
-          <a><h1>link to bio</h1></a>
-      </div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <div class="container-fluid">
-        <div class="row">
-
-            <h1>Name: {{card.user.firstname}}</h1>
-            <h1>Distance: </h1>
-            <h1>Contact: </h1>
-            <h1>car info: }</h1>
-            <h1 *ngIf="card.rideinfo">ride info: </h1>
+<div class="container-fluid">
+    <h4>Swipe Avatars with HammerJS</h4>
+    <!-- loop each avatar in our avatar list -->
+    <div class="swipe-box" *ngFor="let card of swipecards; let i =index" (swipeleft)="swipe(i, $event.type, $event)" (swiperight)="swipe(i, $event.type, $event)"
+        [class.visible]="card.visible" [class.hidden]="!card.visible">
+        <div class="text-center">
+            <img class="revLogo" src="../../../assets/img/revature_logo_250.png" alt="">
+            <img class="cardImg" [src]="card.user.photourl" [alt]="card.user.firstname">
+        </div>
+        <div class="container">
+            <div>
+                <h1>{{card.user.firstname}}</h1>
+                <h1> duration / distance</h1>
+                <h1> contacts</h1>
+                <a><h1>link to bio</h1></a>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container-fluid">
+                <div class="row">
+                    <h1>Name: {{card.user.firstname}}</h1>
+                    <h1>Distance: </h1>
+                    <h1>Contact: </h1>
+                    <h1>car info: </h1>
+                    <h1 *ngIf="card.rideinfo">ride info: </h1>
+                </div>
+            </div>
         </div>
     </div>
-  </div>
 </div>
