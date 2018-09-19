@@ -27,10 +27,7 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     UsercardComponent,
     HowToComponent,
-    MapComponent
-  ],
-  imports: [
-    BrowserModule,
+    MapComponent,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_KEY'
