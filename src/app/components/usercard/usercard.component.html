@@ -16,5 +16,20 @@
           <h1> contacts</h1>
           <a><h1>link to bio</h1></a>
       </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="container-fluid">
+        <div class="row">
+
+            <h1>Name: {{avatar.name}}</h1>
+            <h1>Distance: {{avatar.distance}}</h1>
+            <h1>Contact: {{avatar.contact}}</h1>
+            <h1>car info: {{avatar.carinfo}}</h1>
+            <h1 *ngIf="avatar.rideinfo">ride info: {{avatar.rideinfo}}</h1>
+        </div>
+    </div>
   </div>
 </div>
