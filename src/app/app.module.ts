@@ -12,6 +12,7 @@ import { HowToComponent } from './components/how-to/how-to.component';
 import { MapComponent } from './components/map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AgmCoreModule } from '@agm/core';
     LandingComponent,
     UsercardComponent,
     HowToComponent,
-    MapComponent
+    MapComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
