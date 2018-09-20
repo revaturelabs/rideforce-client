@@ -26,8 +26,10 @@ export class RegisterComponent implements OnInit {
   address1: string;
   address2: string;
   city: string;
+
   state: string;
-  zip: number;
+
+  zip: string;
   bio: string;
   contactInfo: string[] = [];
   batch: string;
