@@ -1,3 +1,6 @@
+html{
+	font-size:15px;
+}
 /* You can add global styles to this file, and also import other style files */
 /************************
 	Revature Fonts
@@ -34,17 +37,29 @@ li {
 	font-family: 'Futura-Std-Heavy';
 }
 
+.foot {
+	margin-right: 100%;
+	margin-top: 10%;
+	margin-bottom: 0px;
+}
+.logo{
+    /* width: 95%;  */
+    height: 60%; 
+    padding-top:15%;
+    position: relative;
+}
+
 /************************
 	Revature Colors
 ************************/
 :root {
-	/*** Primary Colors ***/ -
-	-orange: #F26925; -
-	-white: #FFFFF; -
+	/*** Primary Colors ***/ 
+	-orange: #F26925; 
+	-white: #FFFFFF; 
 	-dark-grey: #474C55;
-	/*** Secondary Colors ***/ -
-	-blue: #72A4C2; -
-	-yellow: #FCB414; -
+	/*** Secondary Colors ***/ 
+	-blue: #72A4C2; 
+	-yellow: #FCB414; 
 	-light-grey: #B9B9BA;
 }
 
@@ -343,9 +358,9 @@ html, body {
 }
 
 footer {
-	min-height: 103px;
+	min-height: 17%;
 	background-color: #474C55;
-	font-size: .75em;
+	font-size: 1.1em;
 }
 
 .center {
