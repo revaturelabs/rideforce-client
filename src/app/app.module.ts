@@ -14,9 +14,14 @@ import { HowToComponent } from './components/how-to/how-to.component';
 import { MapComponent } from './components/map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
+<<<<<<< HEAD
 
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
+=======
+import { RegisterComponent } from './components/register/register.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+>>>>>>> dev
 
 @NgModule({
   declarations: [
@@ -33,7 +38,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
-    
+    AppRoutingModule,    
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_KEY'
