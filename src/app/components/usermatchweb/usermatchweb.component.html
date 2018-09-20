@@ -1,0 +1,18 @@
+<div class="container" style="padding-top:40px">
+  <h2>Potential Matches </h2>
+  <div class="grid-container dyn-height">
+    <div *ngFor="let user of users; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
+      <div class="card grid-item">
+        <img class="card-img-top" src={{user.photoUrl}} alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+          <p class="card-text">{{user.address}}</p>
+          <div style="display: flex; justify-content: space-between;">
+              <button type="button" class="btn-danger" style="width:40px">X</button>
+              <button type="button" class="btn-success" style="width:40px">O</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

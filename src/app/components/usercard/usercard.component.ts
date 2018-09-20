@@ -66,8 +66,6 @@ export class UsercardComponent implements OnInit {
     ];
 
 
-    public mobile = false;
-
     currentSwipeCard: SwipecardModel;
     currentIndex = 0;
 
@@ -77,9 +75,6 @@ export class UsercardComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        if (window.screen.width <= 430) { // 768px portrait
-            this.mobile = true;
-        }
         // Sets the current swipe card to the first element of the array if the array has something in it.
         if (this.swipecards.length > 0) {
             this.currentSwipeCard = this.swipecards[0];
