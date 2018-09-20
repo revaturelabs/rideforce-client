@@ -9,196 +9,249 @@
           </div>
           <input type="text" class="form-control" [(ngModel)]="firstName" required>
         </div>
-
+        
         <div class="input-group mb-3 ">
           <div class="input-group-prepend ">
             <span class="input-group-text " id="basic-addon1 ">Last Name</span>
           </div>
           <input type="text" class="form-control" [(ngModel)]="lastName" required>
         </div>
-
+        
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Username</span>
           </div>
           <input type="text" class="form-control" [(ngModel)]="username" required>
         </div>
-
+        
         <div class="input-group mb-3 ">
           <div class="input-group-prepend ">
             <span class="input-group-text " id="basic-addon1 ">Password</span>
           </div>
           <input type="password" class="form-control " [(ngModel)]="password" required>
         </div>
-
+        
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Address 1</span>
           </div>
           <input type="text" class="form-control" [(ngModel)]="address1" required>
         </div>
-
+        
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Address 2</span>
           </div>
           <input type="text" class="form-control" [(ngModel)]="address2" required>
         </div>
-
-
+        
+        
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">City</span>
           </div>
           <input type="text" class="form-control" [(ngModel)]="city" required>
         </div>
-
+        
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State</button>
-            <div class="dropdown-menu" [(ngModel)]="state">
-                <button class="dropdown-item" [value]="AL">AL</button>
-                <button class="dropdown-item" [value]="AK">AK</button>
-                <button class="dropdown-item" [value]="AZ">AZ</button>
-                <button class="dropdown-item" [value]="AR">AR</button>
-                <button class="dropdown-item" [value]="CA">CA</button>
-                <button class="dropdown-item" [value]="CO">CO</button>
-                <button class="dropdown-item" [value]="CT">CT</button>
-                <button class="dropdown-item" [value]="DE">DE</button>
-                <button class="dropdown-item" [value]="DC">DC</button>
-                <button class="dropdown-item" [value]="FL">FL</button>
-                <button class="dropdown-item" [value]="GA">GA</button>
-                <button class="dropdown-item" [value]="HI">HI</button>
-                <button class="dropdown-item" [value]="ID">ID</button>
-                <button class="dropdown-item" [value]="IL">IL</button>
-                <button class="dropdown-item" [value]="IN">IN</button>
-                <button class="dropdown-item" [value]="IA">IA</button>
-                <button class="dropdown-item" [value]="KS">KS</button>
-                <button class="dropdown-item" [value]="KY">KY</button>
-                <button class="dropdown-item" [value]="LA">LA</button>
-                <button class="dropdown-item" [value]="ME">ME</button>
-                <button class="dropdown-item" [value]="MD">MD</button>
-                <button class="dropdown-item" [value]="MA">MA</button>
-                <button class="dropdown-item" [value]="MI">MI</button>
-                <button class="dropdown-item" [value]="MN">MN</button>
-                <button class="dropdown-item" [value]="MS">MS</button>
-                <button class="dropdown-item" [value]="MO">MO</button>
-                <button class="dropdown-item" [value]="MT">MT</button>
-                <button class="dropdown-item" [value]="NE">NE</button>
-                <button class="dropdown-item" [value]="NV">NV</button>
-                <button class="dropdown-item" [value]="NH">NH</button>
-                <button class="dropdown-item" [value]="NJ">NJ</button>
-                <button class="dropdown-item" [value]="NM">NM</button>
-                <button class="dropdown-item" [value]="NY">NY</button>
-                <button class="dropdown-item" [value]="NC">NC</button>
-                <button class="dropdown-item" [value]="ND">ND</button>
-                <button class="dropdown-item" [value]="OH">OH</button>
-                <button class="dropdown-item" [value]="OK">OK</button>
-                <button class="dropdown-item" [value]="OR">OR</button>
-                <button class="dropdown-item" [value]="PA">PA</button>
-                <button class="dropdown-item" [value]="RI">RI</button>
-                <button class="dropdown-item" [value]="SC">SC</button>
-                <button class="dropdown-item" [value]="TN">TN</button>
-                <button class="dropdown-item" [value]="TX">TX</button>
-                <button class="dropdown-item" [value]="UT">UT</button>
-                <button class="dropdown-item" [value]="VT">VT</button>
-                <button class="dropdown-item" [value]="VA">VA</button>
-                <button class="dropdown-item" [value]="WA">WA</button>
-                <button class="dropdown-item" [value]="WV">WV</button>
-                <button class="dropdown-item" [value]="WI">WI</button>
-                <button class="dropdown-item" [value]="WY">WY</button>
+              <div class="form-dropdown">
+                  <span class="input-group-text" id="basic-addon1">State</span>
+                  <select id="type" name="dropdown" required [(ngModel)]="state">
+                      <option value="AL">AL</option>
+                      <option value="AK">AK</option>
+                      <option value="AZ">AZ</option>
+                      <option value="AR">AR</option>
+                      <option value="CA">CA</option>
+                      <option value="CO">CO</option>
+                      <option value="CT">CT</option>
+                      <option value="DE">DE</option>
+                      <option value="DC">DC</option>
+                      <option value="FL">FL</option>
+                      <option value="GA">GA</option>
+                      <option value="HI">HI</option>
+                      <option value="ID">ID</option>
+                      <option value="IL">IL</option>
+                      <option value="IN">IN</option>
+                      <option value="IA">IA</option>
+                      <option value="KS">KS</option>
+                      <option value="KY">KY</option>
+                      <option value="LA">LA</option>
+                      <option value="ME">ME</option>
+                      <option value="MD">MD</option>
+                      <option value="MA">MA</option>
+                      <option value="MI">MI</option>
+                      <option value="MN">MN</option>
+                      <option value="MS">MS</option>
+                      <option value="MO">MO</option>
+                      <option value="MT">MT</option>
+                      <option value="NE">NE</option>
+                      <option value="NV">NV</option>
+                      <option value="NH">NH</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NM">NM</option>
+                      <option value="NY">NY</option>
+                      <option value="NC">NC</option>
+                      <option value="ND">ND</option>
+                      <option value="OH">OH</option>
+                      <option value="OK">OK</option>
+                      <option value="OR">OR</option>
+                      <option value="PA">PA</option>
+                      <option value="RI">RI</option>
+                      <option value="SC">SC</option>
+                      <option value="TN">TN</option>
+                      <option value="TX">TX</option>
+                      <option value="UT">UT</option>
+                      <option value="VT">VT</option>
+                      <option value="VA">VA</option>
+                      <option value="WA">WA</option>
+                      <option value="WV">WV</option>
+                      <option value="WI">WI</option>
+                      <option value="WY">WY</option>
+                  </select>
+              </div>
+          </div>
+        </div>
+        
+        <!-- <option class="dropdown-item" value="AL">AL</option>
+          <option class="dropdown-item" value="AK">AK</option>
+          <option class="dropdown-item" value="AZ">AZ</option>
+          <option class="dropdown-item" value="AR">AR</option>
+          <option class="dropdown-item" value="CA">CA</option>
+          <option class="dropdown-item" value="CO">CO</option>
+          <option class="dropdown-item" value="CT">CT</option>
+          <option class="dropdown-item" value="DE">DE</option>
+          <option class="dropdown-item" value="DC">DC</option>
+          <option class="dropdown-item" value="FL">FL</option>
+          <option class="dropdown-item" value="GA">GA</option>
+          <option class="dropdown-item" value="HI">HI</option>
+          <option class="dropdown-item" value="ID">ID</option>
+          <option class="dropdown-item" value="IL">IL</option>
+          <option class="dropdown-item" value="IN">IN</option>
+          <option class="dropdown-item" value="IA">IA</option>
+          <option class="dropdown-item" value="KS">KS</option>
+          <option class="dropdown-item" value="KY">KY</option>
+          <option class="dropdown-item" value="LA">LA</option>
+          <option class="dropdown-item" value="ME">ME</option>
+          <option class="dropdown-item" value="MD">MD</option>
+          <option class="dropdown-item" value="MA">MA</option>
+          <option class="dropdown-item" value="MI">MI</option>
+          <option class="dropdown-item" value="MN">MN</option>
+          <option class="dropdown-item" value="MS">MS</option>
+          <option class="dropdown-item" value="MO">MO</option>
+          <option class="dropdown-item" value="MT">MT</option>
+          <option class="dropdown-item" value="NE">NE</option>
+          <option class="dropdown-item" value="NV">NV</option>
+          <option class="dropdown-item" value="NH">NH</option>
+          <option class="dropdown-item" value="NJ">NJ</option>
+          <option class="dropdown-item" value="NM">NM</option>
+          <option class="dropdown-item" value="NY">NY</option>
+          <option class="dropdown-item" value="NC">NC</option>
+          <option class="dropdown-item" value="ND">ND</option>
+          <option class="dropdown-item" value="OH">OH</option>
+          <option class="dropdown-item" value="OK">OK</option>
+          <option class="dropdown-item" value="OR">OR</option>
+          <option class="dropdown-item" value="PA">PA</option>
+          <option class="dropdown-item" value="RI">RI</option>
+          <option class="dropdown-item" value="SC">SC</option>
+          <option class="dropdown-item" value="TN">TN</option>
+          <option class="dropdown-item" value="TX">TX</option>
+          <option class="dropdown-item" value="UT">UT</option>
+          <option class="dropdown-item" value="VT">VT</option>
+          <option class="dropdown-item" value="VA">VA</option>
+          <option class="dropdown-item" value="WA">WA</option>
+          <option class="dropdown-item" value="WV">WV</option>
+          <option class="dropdown-item" value="WI">WI</option>
+          <option class="dropdown-item" value="WY">WY</option> -->
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Zip Code</span>
             </div>
+            <input type="text" class="form-control" [(ngModel)]="zip" required>
           </div>
         </div>
-
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Zip Code</span>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="2">
+      <ng-template ngbTabContent>
+        <div class="container-fluid">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">About You</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="bio" required>
           </div>
-          <input type="text" class="form-control" [(ngModel)]="zip" required>
-        </div>
-      </div>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab title="2">
-    <ng-template ngbTabContent>
-      <div class="container-fluid">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">About You</span>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Contact Info</span>
+            </div>
+            <!-- to do: Contact info list -->
+            <input type="text" class="form-control" [(ngModel)]="contactInfo">
           </div>
-          <input type="text" class="form-control" [(ngModel)]="bio" required>
-        </div>
-
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Contact Info</span>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Batch</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="batch">
           </div>
-          <!-- to do: Contact info list -->
-          <input type="text" class="form-control" [(ngModel)]="contactInfo">
         </div>
-
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Batch</span>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="3">
+      <ng-template ngbTabContent>
+        <div class="container-fluid">
+          <button class="btn btn-dark">Car</button>
+          <button class="btn btn-danger">Passenger</button>
+          <button class="btn btn-warning">Both</button>
+          
+          <div class="input-group mb-3">
+            <h3><u>Car Info:</u></h3>
+            <div class="input-group-prepend">
+              <span class="input-group-text">Make</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="carMake">
           </div>
-          <input type="text" class="form-control" [(ngModel)]="batch">
-        </div>
-      </div>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab title="3">
-    <ng-template ngbTabContent>
-      <div class="container-fluid">
-        <button class="btn btn-dark">Car</button>
-        <button class="btn btn-danger">Passenger</button>
-        <button class="btn btn-warning">Both</button>
-
-        <div class="input-group mb-3">
-          <h3><u>Car Info:</u></h3>
-          <div class="input-group-prepend">
-            <span class="input-group-text">Make</span>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Model</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="carModel">
           </div>
-          <input type="text" class="form-control" [(ngModel)]="carMake">
-        </div>
-
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Model</span>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Year</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="carYear">
           </div>
-          <input type="text" class="form-control" [(ngModel)]="carModel">
         </div>
-
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Year</span>
-          </div>
-          <input type="text" class="form-control" [(ngModel)]="carYear">
+      </ng-template>
+    </ngb-tab>
+    
+    <ngb-tab title="4">
+      <ng-template ngbTabContent>
+        <div class="container-fluid text-center">
+          <h3><u>Review and submit:</u></h3>
+          <span>First name: {{firstName}}</span> <br>
+          <span>Last Name: {{lastName}}</span> <br>
+          <span>Username: {{username}}</span> <br>
+          <span>Password: {{password}}</span> <br>
+          <span>Address: {{address1}} {{address2}} <br> {{city}}, {{state}} {{zip}}
+          </span>
+          <br>
+          <span>About you: <br>{{bio}}</span> <br>
+          <!-- contact info -->
+          <span>Batch: {{batch}}</span>
+          <br>
+          <h4><u>Car Info:</u></h4>
+          <span>Make: {{carMake}}</span> <br>
+          <span>Model: {{carModel}}</span> <br>
+          <span>Year: {{carYear}}</span>
         </div>
-      </div>
-    </ng-template>
-  </ngb-tab>
-
-  <ngb-tab title="4">
-    <ng-template ngbTabContent>
-      <div class="container-fluid text-center">
-        <h3><u>Review and submit:</u></h3>
-        <span>First name: {{firstName}}</span> <br>
-        <span>Last Name: {{lastName}}</span> <br>
-        <span>Username: {{username}}</span> <br>
-        <span>Password: {{password}}</span> <br>
-        <span>Address: {{address1}} <br> {{address2}} <br> {{city}}, {{state}} {{zip}}
-        </span>
-        <br>
-        <span>About you: <br>{{bio}}</span> <br>
-        <!-- contact info -->
-        <span>Batch: {{batch}}</span>
-        <br>
-        <h4><u>Car Info:</u></h4>
-        <span>Make: {{carMake}}</span> <br>
-        <span>Model: {{carModel}}</span> <br>
-        <span>Year: {{carYear}}</span>
-      </div>
-    </ng-template>
-  </ngb-tab>
-</ngb-tabset>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
