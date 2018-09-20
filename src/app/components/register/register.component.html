@@ -55,75 +55,67 @@
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">State</span>
-          </div>
-          <select class="form-control bfh-states" data-country="US" data-state="CA"></select>
-          <!-- <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Select State
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item form-control" type="button" value="AL">Alabama</button>
-              <button class="dropdown-item form-control" type="button" value="AK">Alaska</button>
-              <button class="dropdown-item form-control" type="button" value="AZ">Arizona</button>
-              <button class="dropdown-item form-control" type="button" value="AR">Arkansas</button>
-              <button class="dropdown-item form-control" type="button" value="CA">California</button>
-              <button class="dropdown-item form-control" type="button" value="CO">Colorado</button>
-              <button class="dropdown-item form-control" type="button" value="CT">Connecticut</button>
-              <button class="dropdown-item form-control" type="button" value="DE">Delaware</button>
-              <button class="dropdown-item form-control" type="button" value="DC">District Of Columbia</button>
-              <button class="dropdown-item form-control" type="button" value="FL">Florida</button>
-              <button class="dropdown-item form-control" type="button" value="GA">Georgia</button>
-              <button class="dropdown-item form-control" type="button" value="HI">Hawaii</button>
-              <button class="dropdown-item form-control" type="button" value="ID">Idaho</button>
-              <button class="dropdown-item form-control" type="button" value="IL">Illinois</button>
-              <button class="dropdown-item form-control" type="button" value="IN">Indiana</button>
-              <button class="dropdown-item form-control" type="button" value="IA">Iowa</button>
-              <button class="dropdown-item form-control" type="button" value="KS">Kansas</button>
-              <button class="dropdown-item form-control" type="button" value="KY">Kentucky</button>
-              <button class="dropdown-item form-control" type="button" value="LA">Louisiana</button>
-              <button class="dropdown-item form-control" type="button" value="ME">Maine</button>
-              <button class="dropdown-item form-control" type="button" value="MD">Maryland</button>
-              <button class="dropdown-item form-control" type="button" value="MA">Massachusetts</button>
-              <button class="dropdown-item form-control" type="button" value="MI">Michigan</button>
-              <button class="dropdown-item form-control" type="button" value="MN">Minnesota</button>
-              <button class="dropdown-item form-control" type="button" value="MS">Mississippi</button>
-              <button class="dropdown-item form-control" type="button" value="MO">Missouri</button>
-              <button class="dropdown-item form-control" type="button" value="MT">Montana</button>
-              <button class="dropdown-item form-control" type="button" value="NE">Nebraska</button>
-              <button class="dropdown-item form-control" type="button" value="NV">Nevada</button>
-              <button class="dropdown-item form-control" type="button" value="NH">New Hampshire</button>
-              <button class="dropdown-item form-control" type="button" value="NJ">New Jersey</button>
-              <button class="dropdown-item form-control" type="button" value="NM">New Mexico</button>
-              <button class="dropdown-item form-control" type="button" value="NY">New York</button>
-              <button class="dropdown-item form-control" type="button" value="NC">North Carolina</button>
-              <button class="dropdown-item form-control" type="button" value="ND">North Dakota</button>
-              <button class="dropdown-item form-control" type="button" value="OH">Ohio</button>
-              <button class="dropdown-item form-control" type="button" value="OK">Oklahoma</button>
-              <button class="dropdown-item form-control" type="button" value="OR">Oregon</button>
-              <button class="dropdown-item form-control" type="button" value="PA">Pennsylvania</button>
-              <button class="dropdown-item form-control" type="button" value="RI">Rhode Island</button>
-              <button class="dropdown-item form-control" type="button" value="SC">South Carolina</button>
-              <button class="dropdown-item form-control" type="button" value="TN">Tennessee</button>
-              <button class="dropdown-item form-control" type="button" value="TX">Texas</button>
-              <button class="dropdown-item form-control" type="button" value="UT">Utah</button>
-              <button class="dropdown-item form-control" type="button" value="VT">Vermont</button>
-              <button class="dropdown-item form-control" type="button" value="VA">Virginia</button>
-              <button class="dropdown-item form-control" type="button" value="WA">Washington</button>
-              <button class="dropdown-item form-control" type="button" value="WV">West Virginia</button>
-              <button class="dropdown-item form-control" type="button" value="WI">Wisconsin</button>
-              <button class="dropdown-item form-control" type="button" value="WY">Wyoming</button>
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State</button>
+            <div class="dropdown-menu" [(ngModel)]="state">
+                <button class="dropdown-item" [value]="AL">AL</button>
+                <button class="dropdown-item" [value]="AK">AK</button>
+                <button class="dropdown-item" [value]="AZ">AZ</button>
+                <button class="dropdown-item" [value]="AR">AR</button>
+                <button class="dropdown-item" [value]="CA">CA</button>
+                <button class="dropdown-item" [value]="CO">CO</button>
+                <button class="dropdown-item" [value]="CT">CT</button>
+                <button class="dropdown-item" [value]="DE">DE</button>
+                <button class="dropdown-item" [value]="DC">DC</button>
+                <button class="dropdown-item" [value]="FL">FL</button>
+                <button class="dropdown-item" [value]="GA">GA</button>
+                <button class="dropdown-item" [value]="HI">HI</button>
+                <button class="dropdown-item" [value]="ID">ID</button>
+                <button class="dropdown-item" [value]="IL">IL</button>
+                <button class="dropdown-item" [value]="IN">IN</button>
+                <button class="dropdown-item" [value]="IA">IA</button>
+                <button class="dropdown-item" [value]="KS">KS</button>
+                <button class="dropdown-item" [value]="KY">KY</button>
+                <button class="dropdown-item" [value]="LA">LA</button>
+                <button class="dropdown-item" [value]="ME">ME</button>
+                <button class="dropdown-item" [value]="MD">MD</button>
+                <button class="dropdown-item" [value]="MA">MA</button>
+                <button class="dropdown-item" [value]="MI">MI</button>
+                <button class="dropdown-item" [value]="MN">MN</button>
+                <button class="dropdown-item" [value]="MS">MS</button>
+                <button class="dropdown-item" [value]="MO">MO</button>
+                <button class="dropdown-item" [value]="MT">MT</button>
+                <button class="dropdown-item" [value]="NE">NE</button>
+                <button class="dropdown-item" [value]="NV">NV</button>
+                <button class="dropdown-item" [value]="NH">NH</button>
+                <button class="dropdown-item" [value]="NJ">NJ</button>
+                <button class="dropdown-item" [value]="NM">NM</button>
+                <button class="dropdown-item" [value]="NY">NY</button>
+                <button class="dropdown-item" [value]="NC">NC</button>
+                <button class="dropdown-item" [value]="ND">ND</button>
+                <button class="dropdown-item" [value]="OH">OH</button>
+                <button class="dropdown-item" [value]="OK">OK</button>
+                <button class="dropdown-item" [value]="OR">OR</button>
+                <button class="dropdown-item" [value]="PA">PA</button>
+                <button class="dropdown-item" [value]="RI">RI</button>
+                <button class="dropdown-item" [value]="SC">SC</button>
+                <button class="dropdown-item" [value]="TN">TN</button>
+                <button class="dropdown-item" [value]="TX">TX</button>
+                <button class="dropdown-item" [value]="UT">UT</button>
+                <button class="dropdown-item" [value]="VT">VT</button>
+                <button class="dropdown-item" [value]="VA">VA</button>
+                <button class="dropdown-item" [value]="WA">WA</button>
+                <button class="dropdown-item" [value]="WV">WV</button>
+                <button class="dropdown-item" [value]="WI">WI</button>
+                <button class="dropdown-item" [value]="WY">WY</button>
             </div>
-          </div> -->
+          </div>
         </div>
-
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Zip Code</span>
           </div>
-          <input type="number" class="form-control" [(ngModel)]="zip" required>
+          <input type="text" class="form-control" [(ngModel)]="zip" required>
         </div>
       </div>
     </ng-template>
@@ -195,9 +187,7 @@
         <span>Last Name: {{lastName}}</span> <br>
         <span>Username: {{username}}</span> <br>
         <span>Password: {{password}}</span> <br>
-        <span>Address: {{address1}} <br>
-          {{address2}} <br>
-          {{city}}, {{state}} {{zip}}
+        <span>Address: {{address1}} <br> {{address2}} <br> {{city}}, {{state}} {{zip}}
         </span>
         <br>
         <span>About you: <br>{{bio}}</span> <br>
