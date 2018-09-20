@@ -1,7 +1,7 @@
-import { Link } from "./link.model";
+import { Link } from './link.model';
 import { Office } from './office.model';
-import { Car } from "./car.model";
-import { ContactInfo } from "./contact-info.model";
+import { Car } from './car.model';
+import { ContactInfo } from './contact-info.model';
 
 export interface User {
     /**
@@ -40,5 +40,8 @@ export interface User {
    * The user's role, determining what permissions they have to access data on
    * the server.
    */
-  role: Role;
+  // Remove the question mark later
+  role?: Role;
+
+  photoUrl: string;
 }
