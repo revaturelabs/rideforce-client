@@ -7,4 +7,4 @@ export interface RouteInfo {
      * The total route time, in seconds.
      */
     time: number;
-}
+} 
