@@ -1,3 +1,15 @@
+:host {
+    display: block;
+    overflow: hidden; /* Hide everything that doesn't fit compoennt */
+  }
+  .parent {
+    height: 200%;
+    width: 100%;      /* Make the parent element to take up twice
+                         of the component's width */
+  
+  }
+
+
 .swipe-box {
     display: block;
     width: 100%;
@@ -13,10 +25,13 @@
     display: none;
 }
 
-.revLogo {
-    position: absolute;
-    left: 6%;
-    top: 7%;
+.cardImg {
+    position: relative;
+}
+
+.cardToggleBio {
+    background:url('../../../assets/icons/caret-top.png') no-repeat transparent;
+    background-size: cover;
 }
 
 @media screen and (min-width: 1025px){
@@ -32,5 +47,33 @@
         height: 900px;
         width: 100%
     }
+    .revLogo {
+        position: absolute;
+        top: 10%;
+        left: 6%;
+        width: 100px;
+        height: 50px;
+        z-index: 1;
+      }
+
+    
 
 }
+
+@media screen and (max-width: 480px){
+    .cardImg{
+        height: 400px;
+        width: 100%
+    }
+    .revLogo {
+        position: absolute;
+        top: 12%;
+        left: 6%;
+        width: 50px;
+        height: 25px;
+        z-index: 1;
+      }
+    
+
+}
+
