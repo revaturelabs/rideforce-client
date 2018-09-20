@@ -51,7 +51,7 @@ h2 {
   justify-content: center;
   width: 100%;
   min-height: 100%;
-
+  margin-top: 100px;
 }
 
 #formContent {
@@ -62,9 +62,9 @@ h2 {
   width: 90%;
   max-width: 450px;
   position: relative;
-  padding: 0px;
+  padding: 20px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0.3,0,0,0.3);
   text-align: center;
 }
 

@@ -1,6 +1,7 @@
 .navvy-ber{
     background-color: #474C55;
     font-size: 1.5em;
+    margin-bottom: 0px;
 }
 
 .logo{
@@ -10,4 +11,8 @@
     padding-bottom: 2%; 
     position: relative;
     /* padding-left:2%; */
+}
+
+.nav-link{
+    padding-right:60%;
 }
