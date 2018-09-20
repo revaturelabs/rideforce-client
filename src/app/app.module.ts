@@ -32,7 +32,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule,    
+    AppRoutingModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_KEY'

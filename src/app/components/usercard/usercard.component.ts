@@ -1,76 +1,128 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { User } from '../../models/user.model';
+import { AddressModel } from '../../models/address.model';
+import { SwipecardModel } from '../../models/swipecard.model';
 
-import { trigger, keyframes, animate, transition } from '@angular/animations';
 
 @Component({
-  selector: 'app-usercard',
-  templateUrl: './usercard.component.html',
-  styleUrls: ['./usercard.component.css']
+    selector: 'app-usercard',
+    templateUrl: './usercard.component.html',
+    styleUrls: ['./usercard.component.css']
 })
 export class UsercardComponent implements OnInit {
- // constant for swipe action: left or right
- SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-   // our list of avatars
- avatars = [
-  {
-       name: 'kristy',
-       image: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
-       distance: 50,
-       contact: 'slack',
-       carinfo: 'donkey',
-       visible: true
-   },
-   {
-       name: 'matthew',
-       image: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
-       visible: false
-   },
-   {
-       name: 'chris',
-       image: 'http://semantic-ui.com/images/avatar/large/chris.jpg',
-       visible: false
-   },
-   {
-       name: 'jenny',
-       image: 'http://semantic-ui.com/images/avatar/large/jenny.jpg',
-       visible: false
-   }
-];
+
+    // constant for swipe action: left or right
+    SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+    // our list of swipecards: DUMMY DATA
+    swipecards: SwipecardModel[] = [
+        {
+            user: {
+                id: 1,
+                firstName: 'kristy',
+                lastName: 'Kreme',
+                email: 'email@mail.com',
+                address: '123',
+                office: '1',
+                batchEnd: '1',
+                cars: [],
+                contactInfo: [],
+                active: true,
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
+            },
+            visible: false
+        },
+        {
+            user: {
+                id: 1,
+                firstName: 'Frank',
+                lastName: 'frankse',
+                email: 'email@mail.com',
+                address: '123',
+                office: '2',
+                batchEnd: '1',
+                cars: [],
+                contactInfo: [],
+                active: true,
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
+            },
+            visible: false
+        }, {
+            user: {
+                id: 1,
+                firstName: 'Jimbo',
+                lastName: 'Jank',
+                email: 'email@mail.com',
+                address: '123',
+                office: '1',
+                batchEnd: '1',
+                cars: [],
+                contactInfo: [],
+                active: true,
+                photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
+            },
+            visible: false
+        }
+    ];
 
 
+    public mobile = false;
 
-  animationState: string;
+    currentSwipeCard: SwipecardModel;
+    currentIndex = 0;
 
-  constructor() { }
+    @ViewChild('swipeMain') swipeCardMain: ElementRef;
+    @ViewChild('swipeBio') swipeCardBio: ElementRef;
 
-  ngOnInit() {
-  }
+    constructor() { }
 
-   // action triggered when user swipes
-   swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT, event) {
-       // out of range
-       if (currentIndex > this.avatars.length || currentIndex < 0) {
-          return;
-       }
+    ngOnInit() {
+        if (window.screen.width <= 430) { // 768px portrait
+            this.mobile = true;
+        }
+        // Sets the current swipe card to the first element of the array if the array has something in it.
+        if (this.swipecards.length > 0) {
+            this.currentSwipeCard = this.swipecards[0];
+        }
+    }
 
-       let nextIndex = 0;
+    /**
+     * Hides the card picture
+     *
+     * @param hide
+     */
+    hideImage(hide: boolean) {
+        if (hide) {
+            this.swipeCardMain.nativeElement.classList.add('hidden');
+        } else {
+            this.swipeCardMain.nativeElement.classList.remove('hidden');
+        }
+    }
 
-       // swipe right, next avatar
-       if (action === this.SWIPE_ACTION.RIGHT) {
-           const isLast = currentIndex === this.avatars.length - 1;
-           nextIndex = isLast ? 0 : currentIndex + 1;
-       }
+    // action triggered when user swipes
+    swipe(action = this.SWIPE_ACTION.RIGHT, event) {
 
-       // swipe left, previous avatar
-       if (action === this.SWIPE_ACTION.LEFT) {
-           const isFirst = currentIndex === 0;
-           nextIndex = isFirst ? this.avatars.length - 1 : currentIndex - 1;
-       }
+        // swipe right, next avatar
+        if (action === this.SWIPE_ACTION.RIGHT) {
+            if (this.currentIndex - 1 < 0) {
+                this.currentIndex = this.swipecards.length - 1;
+            } else {
+                this.currentIndex--;
+            }
+        }
 
-       // toggle avatar visibility
-       this.avatars.forEach((x, i) => x.visible = (i === nextIndex));
-   }
+        // swipe left, previous avatar
+        if (action === this.SWIPE_ACTION.LEFT) {
+            if (this.currentIndex + 1 > this.swipecards.length - 1) {
+                this.currentIndex = 0;
+            } else {
+                this.currentIndex++;
+            }
+        }
+
+        // Load currentSwipeCard with the swipecard currentindex
+        this.currentSwipeCard = this.swipecards[this.currentIndex];
+    }
 
 
 }
