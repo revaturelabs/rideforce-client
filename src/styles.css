@@ -38,13 +38,13 @@ li {
 	Revature Colors
 ************************/
 :root {
-	/*** Primary Colors ***/ -
-	-orange: #F26925; -
-	-white: #FFFFF; -
+	/*** Primary Colors ***/ 
+	-orange: #F26925; 
+	-white: #FFFFFF; 
 	-dark-grey: #474C55;
-	/*** Secondary Colors ***/ -
-	-blue: #72A4C2; -
-	-yellow: #FCB414; -
+	/*** Secondary Colors ***/ 
+	-blue: #72A4C2; 
+	-yellow: #FCB414; 
 	-light-grey: #B9B9BA;
 }
 
