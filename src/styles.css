@@ -34,6 +34,18 @@ li {
 	font-family: 'Futura-Std-Heavy';
 }
 
+.foot {
+	margin-right: 100%;
+	margin-top: 10%;
+	margin-bottom: 0px;
+}
+.logo{
+    /* width: 95%;  */
+    height: 60%; 
+    padding-top:15%;
+    position: relative;
+}
+
 /************************
 	Revature Colors
 ************************/
