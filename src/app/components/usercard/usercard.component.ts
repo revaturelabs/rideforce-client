@@ -1,6 +1,6 @@
 
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { UserModel } from '../../models/user.model';
+import { User } from '../../models/user.model';
 import { AddressModel } from '../../models/address.model';
 import { SwipecardModel } from '../../models/swipecard.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -29,37 +29,33 @@ export class UsercardComponent implements OnInit {
     swipecards: SwipecardModel[] = [
         {
             user: {
-                userID: 1,
-                firstname: 'kristy',
-                lastname: 'Kreme',
+                id: 1,
+                firstName: 'kristy',
+                lastName: 'Kreme',
                 email: 'email@mail.com',
-                roleID: 1,
-                officeID: 2,
-                photourl: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
+                address: '123',
+                office: '1',
+                batchEnd: '1',
+                cars: [],
+                contactInfo: [],
+                active: true,
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
             },
             visible: false
         },
         {
             user: {
-                userID: 1,
-                firstname: 'Frank',
-                lastname: 'Frankerson',
-                email: 'f@mail.com',
-                roleID: 1,
-                officeID: 2,
-                photourl: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
-            },
-            visible: false
-        },
-        {
-            user: {
-                userID: 1,
-                firstname: 'Jim',
-                lastname: 'Frankerson',
-                email: 'f@mail.com',
-                roleID: 1,
-                officeID: 2,
-                photourl: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
+                id: 1,
+                firstName: 'Frank',
+                lastName: 'frankse',
+                email: 'email@mail.com',
+                address: '123',
+                office: '2',
+                batchEnd: '1',
+                cars: [],
+                contactInfo: [],
+                active: true,
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
             },
             visible: false
         }

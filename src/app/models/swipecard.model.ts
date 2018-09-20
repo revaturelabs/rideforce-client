@@ -1,6 +1,6 @@
-import { UserModel } from './user.model';
+import { User } from './user.model';
 
 export class SwipecardModel {
-    user: UserModel;
+    user: User;
     visible = false;
 }
