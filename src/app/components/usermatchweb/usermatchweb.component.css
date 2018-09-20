@@ -1,0 +1,20 @@
+.dyn-height {
+    max-height:650px;
+    width: 20%;;
+    overflow-y:auto;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-gap: 50px 50px;
+    grid-template-columns: 22% 22% 22% 22%;
+    padding: 10px;
+  }
+
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
