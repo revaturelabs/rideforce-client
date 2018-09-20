@@ -50,6 +50,18 @@ export class UsercardComponent implements OnInit {
                 photourl: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
             },
             visible: false
+        },
+        {
+            user: {
+                userID: 1,
+                firstname: 'Jim',
+                lastname: 'Frankerson',
+                email: 'f@mail.com',
+                roleID: 1,
+                officeID: 2,
+                photourl: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
+            },
+            visible: false
         }
     ];
 
@@ -71,22 +83,16 @@ export class UsercardComponent implements OnInit {
             this.swipecards[0].visible = true;
         }
     }
-    test(event: any) {
+    hideMain(event: any) {
         if (this.state === 'down') {
+            this.swipeCardBio.nativeElement.classList.remove('hidden');
             this.swipeCardMain.nativeElement.classList.add('hidden');
         } else {
             this.swipeCardMain.nativeElement.classList.remove('hidden');
-        }
-    }
-    test2(event: any) {
-
-        if (this.state === 'up') {
             this.swipeCardBio.nativeElement.classList.add('hidden');
-        } else {
-            console.log(event);
-            this.swipeCardBio.nativeElement.classList.remove('hidden');
         }
     }
+
 
     animateMe() {
         this.state = (this.state === 'up' ? 'down' : 'up');
