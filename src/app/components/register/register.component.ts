@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit {
   @ViewChild(NgbTabset)
   private tabset: NgbTabset;
 
+  mobile: Boolean = false;
+
   username: string;
   firstName: string;
   lastName: string;
@@ -38,9 +40,26 @@ export class RegisterComponent implements OnInit {
   carYear: string;
   optInToDrive: boolean;
 
+  // booleans for car information buttons
+  btnCarInfo: Boolean = false;
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    if (window.screen.width <= 430) { // 768px portrait
+      this.mobile = true;
+    }
+  }
+
+  setCarButtonFalse()
+  {
+    this.btnCarInfo = false;
+  }
+
+  setCarButtonTrue()
+  {
+    this.btnCarInfo = true;
   }
 
 }
