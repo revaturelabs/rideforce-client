@@ -44,14 +44,31 @@ body {
   margin-top: 10px;
 }
 
+.carouselExampleIndicators {
+    
+}
+
 .cover-container {
   max-width: 42em;
 }
 
 .cover-heading {
-    font-family: Futara-Std-Bold;
-    color: orange;
+    font-size: 50px;
+    /* color: black;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #ccc 10px,
+    #ccc 20px
+  ),
+  linear-gradient(
+    to bottom,
+    #eee,
+    #999
+  ) */
 }
+
 
 
 /*
@@ -116,6 +133,14 @@ body {
   color: rgba(255, 255, 255, .5);
 }
 
+.button1 {
+    display: auto;
+    border-radius: 6px;
+    background-color:  #F26925;
+    color: black;
+    border: 2px solid black;
+    width: 30%;
+}
 
 
 
@@ -158,3 +183,46 @@ body {
     margin: -20px;
 }
 
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #F26925;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 27px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  .lead {
+      font-size: 24px;
+  }
