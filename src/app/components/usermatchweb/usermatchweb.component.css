@@ -18,3 +18,40 @@
     font-size: 30px;
     text-align: center;
   }
+
+  .trashButton {
+    background-color: transparent;
+    background-image: url('../../../assets/icons/trash.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* put the height and width of your image here */
+    height: 50px;
+    width: 40px;
+    border: none;
+    background-size: contain;
+  }
+
+  .trashButton:hover {
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+  .undoButton {
+    background-color: transparent;
+    background-image: url('../../../assets/icons/undo.png');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* put the height and width of your image here */
+    height: 50px;
+    width: 50px;
+    border: none;
+    background-size: contain;
+  }
+
+  .undoButton:hover {
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+  img:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+  

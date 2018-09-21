@@ -13,7 +13,7 @@ interface UserCard {
 })
 export class UsermatchwebComponent implements OnInit {
 
-
+  // Dummy data
   users: UserCard[] = [
     {
       user: {
@@ -164,11 +164,20 @@ export class UsermatchwebComponent implements OnInit {
   }
 
   like(index: number, interest: number) {
+    /**
+     * interest:
+     * 0 - dislike
+     * 1 - like
+     * 2 - trash
+     * 3 - clear
+     */
     if (interest !== 2) {
       if (interest === 1) {
         this.users[index].choose = 'liked';
-      } else {
+      } else if (interest === 0) {
         this.users[index].choose = 'disliked';
+      } else {
+        this.users[index].choose = 'none';
       }
     } else {
       if (this.users[index].choose === 'disliked') {
