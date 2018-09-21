@@ -17,6 +17,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LikesComponent } from './components/likes/likes.component';
+import { UsermatchwebComponent } from './components/usermatchweb/usermatchweb.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,11 @@ import { LikesComponent } from './components/likes/likes.component';
     NavbarComponent,
     RegisterComponent,
     LoginComponent,
+<<<<<<< HEAD
     LikesComponent
+=======
+    UsermatchwebComponent
+>>>>>>> dev
   ],
   imports: [
     BrowserModule,

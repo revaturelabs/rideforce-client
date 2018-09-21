@@ -1,4 +1,6 @@
-<p>
-  rideswipe works!
-</p>
-<app-usercard></app-usercard>
+<span *ngIf="mobile">
+  <app-usercard></app-usercard>
+</span>
+<span *ngIf="!mobile">
+  <app-usermatchweb></app-usermatchweb>
+</span>

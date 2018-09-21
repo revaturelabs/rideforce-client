@@ -1,0 +1,44 @@
+.dyn-height {
+    max-height:650px;
+    width: 20%;;
+    overflow-y:auto;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-gap: 50px 50px;
+    grid-template-columns: 22% 22% 22% 22%;
+    padding: 10px;
+  }
+
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .trashButton {
+    background-color: transparent;
+    background-image: url('../../../assets/icons/trash.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* put the height and width of your image here */
+    height: 50px;
+    width: 40px;
+    border: none;
+    background-size: contain;
+  }
+
+  .undoButton {
+    background-color: transparent;
+    background-image: url('../../../assets/icons/undo.png');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* put the height and width of your image here */
+    height: 50px;
+    width: 50px;
+    border: none;
+    background-size: contain;
+  }
