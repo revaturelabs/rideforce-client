@@ -21,8 +21,6 @@ import { UserControllerService } from './services/api/user-controller.service';
 import { MapsControllerService } from './services/api/maps-controller.service';
 import { MatchingControllerService } from './services/api/matching-controller.service';
 import { AuthService } from '../app/services/auth.service';
-// import { HttpClient } from 'selenium-webdriver/http';
-// import { HttpClient, HttpHandler } from '../../node_modules/@angular/common/http';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
 import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
 

@@ -11,6 +11,7 @@ import { AddressModel } from '../../models/address.model';
     NgbTabset
   ]
 })
+
 export class RegisterComponent implements OnInit {
 
   @ViewChild(NgbTabset)
