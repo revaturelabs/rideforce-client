@@ -13,3 +13,16 @@
     /* padding-left:2%; */
 }
 
+.mx-auto.d-sm-flex.d-block.flex-sm-nowrap {
+    text-align: center;
+}
+
+.clearfix-xs:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+

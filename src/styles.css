@@ -44,10 +44,11 @@ li {
 }
 .logo{
     /* width: 95%;  */
-    height: 60%; 
+    height: 20%; 
     padding-top:15%;
     position: relative;
 }
+
 
 /************************
 	Revature Colors
@@ -364,12 +365,26 @@ footer {
 }
 
 .center {
+
+
 	text-align: center;
 }
 
 .contact-info {
 	color: #B9B9BA;
 }
+
+.footerContactStyle {
+	max-width:15%; margin-left:50%
+}
+@media screen and (max-width: 480px) {
+	.footerContactStyle {
+		margin-left:1%;
+		max-width:100%;
+	}
+}
+
+
 
 .fa-copyright {
 	padding-right: .5em;

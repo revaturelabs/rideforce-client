@@ -13,8 +13,8 @@ import { Location } from './../../models/location.model';
 })
 export class MapComponent implements OnInit {
 
-  private start = "herndon";
-  private end = "dc";
+  private start = 'herndon';
+  private end = 'dc';
 
   private dist: number;
   private time: number;
@@ -33,7 +33,7 @@ export class MapComponent implements OnInit {
         console.log(this.dist);
         console.log(this.time);
       }
-    )
+    );
 
   }
 }

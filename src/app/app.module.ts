@@ -23,7 +23,7 @@ import { MatchingControllerService } from './services/api/matching-controller.se
 import { AuthService } from '../app/services/auth.service';
 // import { HttpClient } from 'selenium-webdriver/http';
 // import { HttpClient, HttpHandler } from '../../node_modules/@angular/common/http';
-import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http'; 
+import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
 
 @NgModule({
   declarations: [
