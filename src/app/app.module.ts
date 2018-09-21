@@ -18,6 +18,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LikesComponent } from './components/likes/likes.component';
 import { UsermatchwebComponent } from './components/usermatchweb/usermatchweb.component';
+import { LikesmatchwebComponent } from './components/likesmatchweb/likesmatchweb.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +31,9 @@ import { UsermatchwebComponent } from './components/usermatchweb/usermatchweb.co
     NavbarComponent,
     RegisterComponent,
     LoginComponent,
-<<<<<<< HEAD
-    LikesComponent
-=======
-    UsermatchwebComponent
->>>>>>> dev
+    LikesComponent,
+    UsermatchwebComponent,
+    LikesmatchwebComponent
   ],
   imports: [
     BrowserModule,
