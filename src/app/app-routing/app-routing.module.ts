@@ -8,6 +8,7 @@ import { MapComponent } from '../components/map/map.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { RideswipeComponent } from '../components/rideswipe/rideswipe.component';
 import { UsercardComponent } from '../components/usercard/usercard.component';
+import { FavoritesComponent } from '../components/favorites/favorites.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'landing', pathMatch: 'full'},
@@ -17,7 +18,8 @@ export const routes: Routes = [
   { path: 'map', component: MapComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'rideswipe', component: RideswipeComponent },
-  { path: 'userCard', component: UsercardComponent }
+  { path: 'userCard', component: UsercardComponent },
+  { path: 'favorites', component: FavoritesComponent }
 ];
 @NgModule({
   imports: [

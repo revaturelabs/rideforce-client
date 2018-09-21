@@ -1,0 +1,15 @@
+<div class="container" style="padding-top:40px">
+  <h2>Your Likes</h2>
+  <div class="grid-container">
+    <div *ngFor="let user of swipecards; let i = index" style="background-color: rgba(255, 255, 255, 0.918)">
+      <div class="card grid-item">
+        <img class="card-img-top" src={{user.user.photoUrl}} alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+              <p class="card-text"> {{user.user.email}} </p>
+              <a href="#" class="btn btn-primary">Like</a>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
