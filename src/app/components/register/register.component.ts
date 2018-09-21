@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { AddressModel } from '../../models/address.model';
-import { ContactInfo } from '../../models/Contact-Info.model';
+import { ContactInfo } from '../../models/contact-info.model';
 
 @Component({
   selector: 'app-register',
@@ -26,20 +26,12 @@ export class RegisterComponent implements OnInit {
   email: string;
   password: string;
 
+  searchedAddress: string;
   address1: string;
   address2: string;
-  city: string;
-  state: string;
-  zip: string;
-
-  address: AddressModel = new AddressModel();
-  states: string[] = ["AL", "AK", "AR", "AZ", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS",
-    "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR",
-    "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
 
   bio: string;
   //Array of contact info 
-  
   contactInfoArray: ContactInfo[] = [];
   contactTypeArray: string[] = ['Phone', 'Email', 'Slack', 'Skype', 'Discord', 'GroupMe', 'Other'];
   contactType: string;
@@ -64,16 +56,28 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  autocompleteTest(place) {
+  
+  autocomplete1(place) {
     // address object contains lat/lng to use
     this.zone.run(() => {
-      // this.addr = addrObj;
-      // this.addrKeys = Object.keys(addrObj);
-      console.log(place);
+      this.address1 = place.formatted_address;
+      //place variable has a lot of field combinations to choose from
+      //currently using entire fielld
+      //console.log(place);
+    });
+  }
+
+  autocomplete2(place) {
+    // address object contains lat/lng to use
+    this.zone.run(() => {
+      this.address2 = place.formatted_address;
     });
   }
 
   setCarButtonFalse() {
+    this.carMake = '';
+    this.carModel = '';
+    this.carYear = '';
     this.btnCarInfo = false;
   }
 
