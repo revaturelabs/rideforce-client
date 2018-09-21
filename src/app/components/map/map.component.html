@@ -3,10 +3,74 @@
     <div class="col-2"></div>
     <div class="col-8 text-center">
       <h1>Drivers Near Me</h1>
-      <button (click)="getRoute()">please, work</button>
+      <!-- <button (click)="getRoute()">please, work</button> -->
       <agm-map [latitude]="33" [longitude]="-70">
 
       </agm-map>
+      <!-- -  - - - - - - - - - --    ------- --  - - - - - - - - - - -->
+      <div class="input-container">
+        <br>
+        <div class="input-group input-group-md mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Origin: </span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="origin"
+            appPlacesAutocomplete (addressSelect)="setOrigin($event)" placeholder="Type to search..">
+        </div>
+        <div class="input-group input-group-md mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Destination: </span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="destination"
+            appPlacesAutocomplete (addressSelect)="setDestination($event)" placeholder="Type to search..">
+        </div>
+        <!-- maaaaaaaaaaaaaaaaaaaaap -->
+        <agm-map class="map" id="map" (mapReady)="mapReady($event)" (mapClick)="addWaypoint($event)" (zoomChange)="updateZoomLevel()">
+          <agm-direction *ngIf="origin.location != null && destination.location != null" [origin]="origin.location"
+            [destination]="destination.location" [renderOptions]="renderOptions" [waypoints]="mapWaypoints" (onChange)="directionChanged($event)"
+            (onResponse)="onResponse($event)">
+          </agm-direction>
+          <agm-direction *ngIf="longLeg" [origin]="longLeg.origin" [destination]="longLeg.destination " [renderOptions]="renderOptionsForLongLeg"
+            [visible]="longLeg.visible">
+          </agm-direction>
+          <agm-marker *ngIf="origin.location != null" [latitude]="origin.location.lat" [longitude]="origin.location.lng"
+            [markerDraggable]="origin.draggable" [iconUrl]="origin.icon" [label]="origin.label" (markerClick)="showMarkerPlaces(origin)"
+            (dragEnd)="moveWaypoint(origin, $event)">
+          </agm-marker>
+          <agm-marker *ngIf="destination.location != null" [latitude]="destination.location.lat" [longitude]="destination.location.lng"
+            [markerDraggable]="destination.draggable" [iconUrl]="destination.icon" [label]="destination.label"
+            (markerClick)="showMarkerPlaces(destination)" (dragEnd)="moveWaypoint(destination, $event)">
+          </agm-marker>
+          <agm-marker *ngFor="let m of waypoints; let i = index" [latitude]="m.location.lat" [longitude]="m.location.lng"
+            [markerDraggable]="m.draggable" [iconUrl]="m.icon" [label]="m.label" (markerClick)="showMarkerPlaces(m)"
+            (dragEnd)="moveWaypoint(m, $event)">
+          </agm-marker>
+          <agm-marker *ngFor="let m of currentMarkers; let i = index" [title]="m.label" [openInfoWindow]="m.infoWindow"
+            [latitude]="m.location.lat" [longitude]="m.location.lng" [markerDraggable]="m.markerDraggable" [iconUrl]="m.updateIcon"
+            (markerClick)="getPlaceDetails(m.placeId, m)">
+          </agm-marker>
+          <agm-marker *ngFor="let m of savedMarkers; let i = index" [title]="m.label" [openInfoWindow]="m.infoWindow"
+            [latitude]="m.location.lat" [longitude]="m.location.lng" [markerDraggable]="m.markerDraggable" [iconUrl]="m.updateIcon"
+            (markerClick)="getPlaceDetails(m.placeId, m)">
+          </agm-marker>
+
+          <agm-polyline [strokeColor]="'green'" [strokeWeight]="10">
+            <agm-polyline-point *ngFor="let p of polyPoints, let i = index" [latitude]="p.lat" [longitude]="p.lng">
+            </agm-polyline-point>
+          </agm-polyline>
+
+          <agm-circle *ngIf="circle" [latitude]="circle.lat" [longitude]="circle.lng" [(radius)]="circle.radius"
+            [fillColor]="circle.fillColor" [circleDraggable]="false" [editable]="false" (centerChange)="zoomToCircle(mapCircle)"
+            (radiusChange)="zoomToCircle(mapCircle)">
+          </agm-circle>
+        </agm-map>
+
+
+        <!-- end maaaaaaaaaaaaaaap -->
+
+      </div>
+
+      <!-- -  - - - - - - - - - --    ------- --  - - - - - - - - - - -->
     </div>
     <div class="col-2"></div>
   </div>
