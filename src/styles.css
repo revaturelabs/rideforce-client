@@ -44,11 +44,10 @@ li {
 }
 .logo{
     /* width: 95%;  */
-    height: 20%; 
+    height: 60%; 
     padding-top:15%;
     position: relative;
 }
-
 
 /************************
 	Revature Colors
@@ -335,6 +334,20 @@ textarea {
 /************************
 	Footer
 ************************/
+
+@media ( max-width : 699px) {
+	.footerLinks {
+		margin-left:25%;
+
+	}
+}
+@media ( min-width : 700px) {
+	.footerLinks {
+		max-width:15%; margin-left:50%;
+	}
+}
+
+
 .footer-margin {
 	margin-top: .85em;
 }
@@ -365,26 +378,12 @@ footer {
 }
 
 .center {
-
-
 	text-align: center;
 }
 
 .contact-info {
 	color: #B9B9BA;
 }
-
-.footerContactStyle {
-	max-width:15%; margin-left:50%
-}
-@media screen and (max-width: 480px) {
-	.footerContactStyle {
-		margin-left:1%;
-		max-width:100%;
-	}
-}
-
-
 
 .fa-copyright {
 	padding-right: .5em;
