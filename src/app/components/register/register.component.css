@@ -29,6 +29,12 @@ input, textarea[type="text"]
     font-size:15px;
 }
 
+.input-group-text {
+    max-width:100px;
+    max-height: 34px;
+    text-align:left;
+ }
+
 .dyn-height {
    word-wrap: break-word;
   }
@@ -41,6 +47,3 @@ input, textarea[type="text"]
     background-color: #72A4C2;
 }
 
-.btnBoth{
-    background-color: #B9B9BA;
-}
