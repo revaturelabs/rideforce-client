@@ -26,6 +26,40 @@ a:hover {
   border: .05rem solid #fff;
 }
 
+/* Simple CSS3 Fade-in Animation */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fadeIn {
+  opacity:0;
+  -webkit-animation:fadeIn ease-in 1;
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+
+.fadeIn.first {
+    -webkit-animation-delay: 0.3s;
+    -moz-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+  }
+
+.fadeIn.second {
+ -webkit-animation-delay: 0.5s;
+ -moz-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+ 
+
+
 
 /*
  * Base structure
@@ -98,6 +132,8 @@ body {
   background-color: transparent;
   border-bottom: .25rem solid transparent;
 }
+
+
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
