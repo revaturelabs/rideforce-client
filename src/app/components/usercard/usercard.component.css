@@ -9,6 +9,16 @@
   
   }
 
+.thumb {
+    position: absolute;
+    top: 35%;
+    left: 30%;
+    width: 155px;
+    height: 155px;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+}
 
 .swipe-box {
     display: block;

@@ -1,37 +1,39 @@
-<div class="container parent" >
+<div class="container parent">
+    <img [@pop]="animThumbState" (@pop.done)="thumbAnimDone()" class="thumb" [src]="thumbImg" alt="">
     <div class="swipe-box" (swipeleft)="swipe($event.type, $event)" (swiperight)="swipe($event.type, $event)">
         <div #swipeMain>
             <!-- Displays current card -->
             <div class="text-center cardPic" style="margin: 30px 0px 20px 0px">
                 <!-- <img class="revLogo" src="../../../assets/img/revature_logo_250.png" alt=""> -->
-                <img class="cardImg" [src]="currentSwipeCard.user.photoUrl" [alt]="currentSwipeCard.user.firstname">
+                <img [@slide]="animState" (@slide.done)="swiped()" class="cardImg" [src]="currentSwipeCard.user.photoUrl" [alt]="currentSwipeCard.user.firstname">
             </div>
-         
-                <div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <h1>{{currentSwipeCard.user.firstName}}</h1> <a data-toggle="collapse" data-target="#swipeBio" (click)="hideImage(true)"><img src="../../../assets/icons/caret-top.png"
-                                alt=""></a>
-                    </div>
-                    <h1> duration / distance</h1>
-                    <h1> contacts</h1>
-                    <a><h1>link to bio</h1></a>
+
+            <div>
+                <div style="display: flex; justify-content: space-between;">
+                    <h1>{{currentSwipeCard.user.firstName}}</h1> <a data-toggle="collapse" data-target="#swipeBio" (click)="hideImage(true)"><img
+                            src="../../../assets/icons/caret-top.png" alt=""></a>
                 </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>       
+                <h1> duration / distance</h1>
+                <h1> contacts</h1>
+                <a><h1>link to bio</h1></a>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
         <div class="collapse" id="swipeBio">
             <div class="container-fluid">
                 <div style="display: flex; justify-content: space-between;">
-                    <h1>Name: {{currentSwipeCard.user.firstName}} {{currentSwipeCard.user.lastName}}</h1><a data-toggle="collapse" data-target="#swipeBio" (click)="hideImage(false)"><img src="../../../assets/icons/caret-bottom.png"
+                    <h1>Name: {{currentSwipeCard.user.firstName}} {{currentSwipeCard.user.lastName}}</h1><a data-toggle="collapse"
+                        data-target="#swipeBio" (click)="hideImage(false)"><img src="../../../assets/icons/caret-bottom.png"
                             alt=""></a>
                 </div>
                 <h1>Distance: </h1>
                 <h1>Contact: </h1>
                 <h1>car info: </h1>
-                <h1 >ride info: </h1>
+                <h1>ride info: </h1>
             </div>
         </div>
     </div>
