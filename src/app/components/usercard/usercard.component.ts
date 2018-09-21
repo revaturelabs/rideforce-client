@@ -18,7 +18,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
         ]),
         trigger('pop', [
             state('one', style({ transform: 'scale(1)', opacity: 0 })),
-            state('two', style({ transform: 'scale(1.2)', opacity: .8})),
+            state('two', style({ transform: 'scale(1.2)', opacity: .8 })),
             transition('one => two', animate(200)),
             transition('two => one', animate(100))
         ])
