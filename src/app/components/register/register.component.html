@@ -1,3 +1,4 @@
+<br>
 <div class="form-group row">
   <div class="col-1"></div>
   <div class="col-lg-3 col-xs-12 extend">
@@ -96,8 +97,26 @@
                   <span class="input-group-text" id="basic-addon1">Contact Info</span>
                 </div>
                 <!-- to do: Contact info list -->
-                <input type="text" class="form-control" [(ngModel)]="contactInfo">
+                <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
+                <div style="padding-left: 20px">
+                  <button class="btn" (click)="addContact()">
+                    <span aria-hidden="true">+</span>
+                  </button>
+                </div>
               </div>
+
+              <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="padding-right: 100px">
+                    <select [(ngModel)]="item.type">
+                      <option *ngFor="let contact of contactTypeArray">{{contact}}</option>
+                    </select>
+                  </div>
+                  <input type="text" class="" [(ngModel)]="item.info">
+                  <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
+                </div>
+              </div>
+
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -119,7 +138,6 @@
               <div>
                 <span style="padding-right: 20px;"><button class="btn btnCar" (click)="setCarButtonTrue()">Car</button></span>
                 <span style="padding-right: 20px;"><button class="btn btnPassenger" (click)="setCarButtonFalse()">Passenger</button></span>
-                <span><button class="btn btnBoth" (click)="setCarButtonTrue()">Both</button></span>
               </div>
 
               <br>
@@ -168,11 +186,12 @@
               </span>
               <br>
               <h3><u>Biography</u></h3>
-              <span class="dyn-height">About You: <div class="col-10">{{bio}}</div></span> <br>
-              <span>Contact Info: {{contactInfo}}</span> <br>
-              <span>Batch: {{batch}}</span>
-              <br>
-              <br>
+              <span class="dyn-height">About You: <div class="col-10">{{bio}}</div></span>
+              <span>Contact Info:</span>
+              <div style="margin-left: 20px">
+                <span *ngFor="let item of contactInfoArray"> {{item.type}}: {{item.info}} </span> <br>
+              </div>
+              <span>Batch: {{batch}}</span> <br> <br>
               <h3><u>Car Info</u></h3>
               <span>Make: {{carMake}}</span> <br>
               <span>Model: {{carModel}}</span> <br>
