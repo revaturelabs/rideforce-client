@@ -25,7 +25,7 @@
 
             </div>
         </div>
-        <div #swipeBio [@slide]="state" (@slide.done)="hideMain()">
+    <div #swipeBio [@slide]="state" (@slide.done)="hideMain()">
             <div class="container-fluid">
                 <div style="display: flex; justify-content: space-between;">
                     <h1>Name: {{card.user.firstname}}</h1><a (click)="animateMe()"><img src="../../../assets/icons/caret-bottom.png"
