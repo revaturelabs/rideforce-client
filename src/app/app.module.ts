@@ -37,7 +37,7 @@ import { UsermatchwebComponent } from './components/usermatchweb/usermatchweb.co
     AppRoutingModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCM55oeuc0jODU5BQB-UF7KJLDLKC6j3pE'
+      apiKey: 'APIKEY'
     }),
     NgbModule,
     FormsModule
