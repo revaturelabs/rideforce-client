@@ -44,7 +44,7 @@ import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http'
     AppRoutingModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'YOUR_KEY'
+      apiKey: 'APIKEY'
     }),
     NgbModule,
     FormsModule,

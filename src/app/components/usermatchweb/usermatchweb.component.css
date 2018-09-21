@@ -31,6 +31,10 @@
     background-size: contain;
   }
 
+  .trashButton:hover {
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
   .undoButton {
     background-color: transparent;
     background-image: url('../../../assets/icons/undo.png');
@@ -42,3 +46,12 @@
     border: none;
     background-size: contain;
   }
+
+  .undoButton:hover {
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+  img:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+  

@@ -3,12 +3,26 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { User } from '../../models/user.model';
 import { AddressModel } from '../../models/address.model';
 import { SwipecardModel } from '../../models/swipecard.model';
-
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
     selector: 'app-usercard',
     templateUrl: './usercard.component.html',
-    styleUrls: ['./usercard.component.css']
+    styleUrls: ['./usercard.component.css'],
+    animations: [
+        trigger('slide', [
+            state('center', style({ transform: 'translateX(0)' })),
+            state('left', style({ transform: 'translateX(-200%)' })),
+            state('right', style({ transform: 'translateX(200%)' })),
+            transition('* => *', animate(100))
+        ]),
+        trigger('pop', [
+            state('one', style({ transform: 'scale(1)', opacity: 0 })),
+            state('two', style({ transform: 'scale(1.2)', opacity: .8})),
+            transition('one => two', animate(200)),
+            transition('two => one', animate(100))
+        ])
+    ]
 })
 export class UsercardComponent implements OnInit {
 
@@ -68,6 +82,9 @@ export class UsercardComponent implements OnInit {
 
     currentSwipeCard: SwipecardModel;
     currentIndex = 0;
+    animState = 'center';
+    animThumbState = 'one';
+    thumbImg = '../../../assets/icons/thumbsDown.png';
 
     @ViewChild('swipeMain') swipeCardMain: ElementRef;
     @ViewChild('swipeBio') swipeCardBio: ElementRef;
@@ -96,28 +113,44 @@ export class UsercardComponent implements OnInit {
 
     // action triggered when user swipes
     swipe(action = this.SWIPE_ACTION.RIGHT, event) {
-
+        this.animThumbState = 'two';
         // swipe right, next avatar
         if (action === this.SWIPE_ACTION.RIGHT) {
+            this.animState = 'right';
+            this.thumbImg = '../../../assets/icons/thumbsUp.png';
+        }
+
+        // swipe left, previous avatar
+        if (action === this.SWIPE_ACTION.LEFT) {
+            this.animState = 'left';
+            this.thumbImg = '../../../assets/icons/thumbsDown.png';
+        }
+    }
+
+    swiped() {
+        if (this.animState === 'left') {
+            this.animState = 'center';
+            if (this.currentIndex + 1 > this.swipecards.length - 1) {
+                this.currentIndex = 0;
+            } else {
+                this.currentIndex++;
+            }
+        } else if (this.animState === 'right') {
+            this.animState = 'center';
             if (this.currentIndex - 1 < 0) {
                 this.currentIndex = this.swipecards.length - 1;
             } else {
                 this.currentIndex--;
             }
         }
-
-        // swipe left, previous avatar
-        if (action === this.SWIPE_ACTION.LEFT) {
-            if (this.currentIndex + 1 > this.swipecards.length - 1) {
-                this.currentIndex = 0;
-            } else {
-                this.currentIndex++;
-            }
-        }
-
         // Load currentSwipeCard with the swipecard currentindex
         this.currentSwipeCard = this.swipecards[this.currentIndex];
     }
 
+    thumbAnimDone() {
+        if (this.animThumbState === 'two') {
+            this.animThumbState = 'one';
+        }
+    }
 
 }
