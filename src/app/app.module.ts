@@ -16,6 +16,14 @@ import { AgmCoreModule } from '@agm/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { UsermatchwebComponent } from './components/usermatchweb/usermatchweb.component';
+import { UserControllerService } from './services/api/user-controller.service';
+import { MapsControllerService } from './services/api/maps-controller.service';
+import { MatchingControllerService } from './services/api/matching-controller.service';
+import { AuthService } from '../app/services/auth.service';
+// import { HttpClient } from 'selenium-webdriver/http';
+// import { HttpClient, HttpHandler } from '../../node_modules/@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http'; 
 
 @NgModule({
   declarations: [
@@ -27,7 +35,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MapComponent,
     NavbarComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    UsermatchwebComponent
   ],
   imports: [
     BrowserModule,
@@ -35,12 +44,21 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'YOUR_KEY'
+      apiKey: 'APIKEY'
     }),
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    MapsControllerService,
+    UserControllerService,
+    AuthService,
+    MatchingControllerService,
+    // HttpClientModule,
+    // HttpClient,
+    // HttpHandler
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
