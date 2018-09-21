@@ -16,13 +16,16 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { LikesComponent } from './components/likes/likes.component';
 import { UsermatchwebComponent } from './components/usermatchweb/usermatchweb.component';
+import { LikesmatchwebComponent } from './components/likesmatchweb/likesmatchweb.component';
 import { UserControllerService } from './services/api/user-controller.service';
 import { MapsControllerService } from './services/api/maps-controller.service';
 import { MatchingControllerService } from './services/api/matching-controller.service';
 import { AuthService } from '../app/services/auth.service';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
 import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +38,11 @@ import { PlacesAutocompleteDirective } from './directives/places-autocomplete/pl
     NavbarComponent,
     RegisterComponent,
     LoginComponent,
+    LikesComponent,
     UsermatchwebComponent,
-    PlacesAutocompleteDirective
+    LikesmatchwebComponent,
+    PlacesAutocompleteDirective,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,
