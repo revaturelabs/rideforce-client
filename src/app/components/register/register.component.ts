@@ -54,12 +54,19 @@ export class RegisterComponent implements OnInit {
 
   setCarButtonFalse()
   {
+    this.carMake = "";
+    this.carModel = "";
+    this.carYear = "";
     this.btnCarInfo = false;
   }
 
   setCarButtonTrue()
   {
     this.btnCarInfo = true;
+  }
+
+  addContact(): void {
+    this.contactInfo.push()
   }
 
 }

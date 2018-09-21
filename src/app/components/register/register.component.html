@@ -1,3 +1,4 @@
+<br>
 <div class="form-group row">
   <div class="col-1"></div>
   <div class="col-lg-3 col-xs-12 extend">
@@ -93,7 +94,20 @@
                   <span class="input-group-text" id="basic-addon1">Contact Info</span>
                 </div>
                 <!-- to do: Contact info list -->
-                <input type="text" class="form-control" [(ngModel)]="contactInfo">
+                <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
+                <div style="padding-left: 20px">
+                  <button class="btn" (click)="addContact()">
+                    <span aria-hidden="true">+</span>
+                  </button>
+                </div>
+
+                <div *ngFor="let item of contactInfo" class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <select class="form-control">Stuff</select>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="input-group mb-3">
@@ -116,7 +130,6 @@
               <div>
                 <span style="padding-right: 20px;"><button class="btn btnCar" (click)="setCarButtonTrue()">Car</button></span>
                 <span style="padding-right: 20px;"><button class="btn btnPassenger" (click)="setCarButtonFalse()">Passenger</button></span>
-                <span><button class="btn btnBoth" (click)="setCarButtonTrue()">Both</button></span>
               </div>
 
               <br>
@@ -161,11 +174,11 @@
               <span>Password: {{password}}</span> <br>
               <span>Address: {{address1}} <br>
                 {{address2}}
-                {{city}} {{state}} {{zip}}
+                {{city}}<span *ngIf="state">,</span>{{state}} {{zip}}
               </span>
               <br>
               <h3><u>Biography</u></h3>
-              <span class="dyn-height">About You: <div class="col-10">{{bio}}</div></span> <br>
+              <span class="dyn-height">About You: <div class="col-10">{{bio}}</div></span>
               <span>Contact Info: {{contactInfo}}</span> <br>
               <span>Batch: {{batch}}</span>
               <br>
