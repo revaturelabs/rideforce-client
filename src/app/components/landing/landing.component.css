@@ -6,8 +6,15 @@
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color:black;
 }
+
+.started,
+.started focus,
+.started:hover {
+    color: #fff;
+}
+
 
 /* Custom default button */
 .btn-secondary,
