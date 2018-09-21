@@ -12,7 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UsercardComponent } from './components/usercard/usercard.component';
 import { HowToComponent } from './components/how-to/how-to.component';
 import { MapComponent } from './components/map/map.component';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -21,9 +21,8 @@ import { UserControllerService } from './services/api/user-controller.service';
 import { MapsControllerService } from './services/api/maps-controller.service';
 import { MatchingControllerService } from './services/api/matching-controller.service';
 import { AuthService } from '../app/services/auth.service';
-// import { HttpClient } from 'selenium-webdriver/http';
-// import { HttpClient, HttpHandler } from '../../node_modules/@angular/common/http';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
 
 @NgModule({
   declarations: [
@@ -36,7 +35,8 @@ import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http'
     NavbarComponent,
     RegisterComponent,
     LoginComponent,
-    UsermatchwebComponent
+    UsermatchwebComponent,
+    PlacesAutocompleteDirective
   ],
   imports: [
     BrowserModule,
@@ -44,7 +44,8 @@ import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http'
     AppRoutingModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'APIKEY'
+      apiKey: 'AIzaSyBXWXgWzxhyvz9JyN9SrHgGOzi7VcU5G3g',
+      libraries: ['places'],
     }),
     NgbModule,
     FormsModule,
@@ -55,6 +56,8 @@ import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http'
     UserControllerService,
     AuthService,
     MatchingControllerService,
+    GoogleMapsAPIWrapper,
+
     // HttpClientModule,
     // HttpClient,
     // HttpHandler
