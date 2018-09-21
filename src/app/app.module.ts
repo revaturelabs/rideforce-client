@@ -25,6 +25,7 @@ import { MatchingControllerService } from './services/api/matching-controller.se
 import { AuthService } from '../app/services/auth.service';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
 import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PlacesAutocompleteDirective } from './directives/places-autocomplete/pl
     LikesComponent,
     UsermatchwebComponent,
     LikesmatchwebComponent,
-    PlacesAutocompleteDirective
+    PlacesAutocompleteDirective,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,
