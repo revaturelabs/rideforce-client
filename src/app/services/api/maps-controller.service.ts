@@ -8,7 +8,7 @@ import { RouteInfo } from '../../models/route-info.model';
 @Injectable()
 export class MapsControllerService {
 
-  constructor(private http: HttpClient) { }
+ public constructor(private http: HttpClient) { }
 
   /** 
   * Sends address as string to location endpoint in Map Service. Map Service returns geographic location
@@ -26,9 +26,10 @@ export class MapsControllerService {
    * @param origin string address
    * @param destination string address
    */
-  getRoute(origin: string, destination: string): Observable<RouteInfo> { // gives back latitude and longitude
+  public getRoute(start: string, end: string): Observable<RouteInfo> { // gives back latitude and longitude
+    
     return this.http.get<RouteInfo>(environment.apiUrl + '/route', {
-      params: { origin, destination },
+      params: { start, end },
     });
   }
 }

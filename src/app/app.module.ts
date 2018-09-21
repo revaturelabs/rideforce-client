@@ -12,13 +12,19 @@ import { LoginComponent } from './components/login/login.component';
 import { UsercardComponent } from './components/usercard/usercard.component';
 import { HowToComponent } from './components/how-to/how-to.component';
 import { MapComponent } from './components/map/map.component';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LikesComponent } from './components/likes/likes.component';
 import { UsermatchwebComponent } from './components/usermatchweb/usermatchweb.component';
 import { LikesmatchwebComponent } from './components/likesmatchweb/likesmatchweb.component';
+import { UserControllerService } from './services/api/user-controller.service';
+import { MapsControllerService } from './services/api/maps-controller.service';
+import { MatchingControllerService } from './services/api/matching-controller.service';
+import { AuthService } from '../app/services/auth.service';
+import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,8 @@ import { LikesmatchwebComponent } from './components/likesmatchweb/likesmatchweb
     LoginComponent,
     LikesComponent,
     UsermatchwebComponent,
-    LikesmatchwebComponent
+    LikesmatchwebComponent,
+    PlacesAutocompleteDirective
   ],
   imports: [
     BrowserModule,
@@ -41,12 +48,24 @@ import { LikesmatchwebComponent } from './components/likesmatchweb/likesmatchweb
     AppRoutingModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'YOUR_KEY'
+      apiKey: 'AIzaSyBXWXgWzxhyvz9JyN9SrHgGOzi7VcU5G3g',
+      libraries: ['places'],
     }),
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    MapsControllerService,
+    UserControllerService,
+    AuthService,
+    MatchingControllerService,
+    GoogleMapsAPIWrapper,
+
+    // HttpClientModule,
+    // HttpClient,
+    // HttpHandler
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
