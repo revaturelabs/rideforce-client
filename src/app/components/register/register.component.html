@@ -41,34 +41,37 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Address 1</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="address1" required>
+                <input type="text" class="form-control" [(ngModel)]="address.address" required>
               </div>
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Address 2</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="address2" required>
+                <input type="text" class="form-control" [(ngModel)]="address.address2" required>
               </div>
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">City</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="city" required>
+                <input type="text" class="form-control" [(ngModel)]="address.city" required>
               </div>
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">State</span>
                 </div>
-                <select class="form-control bfh-states" style="padding-bottom: 27px" data-country="US" data-state="CA"></select>
+                <select [(ngModel)]="address.state">
+                  <option *ngFor="let abbr of states">{{abbr}}</option>
+                </select>
               </div>
+
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Zip Code</span>
                 </div>
-                <input type="number" class="form-control" [(ngModel)]="zip" required>
+                <input type="number" class="form-control" [(ngModel)]="address.zip" required>
               </div>
             </div>
           </ng-template>
@@ -159,9 +162,9 @@
               <span>Last Name: {{lastName}}</span> <br>
               <span>Username: {{username}}</span> <br>
               <span>Password: {{password}}</span> <br>
-              <span>Address: {{address1}} <br>
-                {{address2}}
-                {{city}} {{state}} {{zip}}
+              <span>Address: {{address.address}} <br>
+                {{address.address2}}
+                {{address.city}} {{address.state}} {{address.zip}}
               </span>
               <br>
               <h3><u>Biography</u></h3>
