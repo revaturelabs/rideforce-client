@@ -3,7 +3,8 @@
   <div class="grid-container">
     <div *ngFor="let user of users; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
       <div class="enlarge">
-        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item" [ngStyle]="{ 'background-color': user.choose == 'none' ?
+        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item"
+          [ngStyle]="{ 'background-color': user.choose == 'none' ?
       'white' : user.choose == 'liked' ? 'green' : 'red'}">
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <img class="card-img-top" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
