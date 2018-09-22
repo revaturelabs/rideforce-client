@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from "../../../app/models/user.model";
+import { User } from '../../../app/models/user.model';
+import { Register } from '../../../app/models/register.model';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { tap } from 'rxjs/operators';
@@ -34,8 +35,9 @@ export class UserControllerService {
    * @param password the new user's password
    */
   // CREATE
-  createUser(newUser: User): Observable<User> {
-    return this.http.post<User>(environment.apiUrl + '/users', newUser);
+  createUser(newUser: Register): Observable<Register> {
+    console.log('a');
+    return this.http.post<Register>(environment.apiUrl + '/users', newUser);
   }
 
   // READ

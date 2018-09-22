@@ -13,13 +13,186 @@ import { User } from '../../models/user.model';
     NgbTabset
   ]
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, AfterViewInit {
 
   private start = 'herndon';
   private end = 'dc';
 
   private dist: number;
   private time: number;
+
+  // Dummy data
+  users: any[] = [
+    {
+      user: {
+        id: 1,
+        firstName: 'kristy',
+        lastName: 'Kreme',
+        email: 'email@mail.com',
+        address: '123',
+        office: '1',
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
+      },
+      location: {
+        latitude: 38.9586,
+        longitude: -77.3570
+      }
+    },
+    {
+      user: {
+        id: 1,
+        firstName: 'Frank',
+        lastName: 'frankse',
+        email: 'email@mail.com',
+        address: '123',
+        office: '2',
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
+      },
+      location: {
+        latitude: 39.9586,
+        longitude: -77.3470
+      }
+    },
+    {
+      user: {
+        id: 1,
+        firstName: 'Jimbo',
+        lastName: 'Jank',
+        email: 'email@mail.com',
+        address: '123',
+        office: '1',
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
+      },
+      location: {
+        latitude: 38.3586,
+        longitude: -77.1570
+      }
+    }, {
+      user: {
+        id: 1,
+        firstName: 'kristy',
+        lastName: 'Kreme',
+        email: 'email@mail.com',
+        address: '123',
+        office: '1',
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
+      },
+      location: {
+        latitude: 39.9586,
+        longitude: -75.3570
+      }
+    },
+    {
+      user: {
+        id: 1,
+        firstName: 'Frank',
+        lastName: 'frankse',
+        email: 'email@mail.com',
+        address: '123',
+        office: '2',
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
+      },
+      location: {
+        latitude: 38.9486,
+        longitude: -77.3210
+      }
+    },
+    {
+      user: {
+        id: 1,
+        firstName: 'Jimbo',
+        lastName: 'Jank',
+        email: 'email@mail.com',
+        address: '123',
+        office: '1',
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
+      },
+      location: {
+        latitude: 40.9586,
+        longitude: -75.3570
+      }
+    }, {
+      user: {
+        id: 1,
+        firstName: 'kristy',
+        lastName: 'Kreme',
+        email: 'email@mail.com',
+        address: '123',
+        office: '1',
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
+      },
+      location: {
+        latitude: 38.2586,
+        longitude: -77.1570
+      }
+    },
+    {
+      user: {
+        id: 1,
+        firstName: 'Frank',
+        lastName: 'frankse',
+        email: 'email@mail.com',
+        address: '123',
+        office: '2',
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
+      },
+      location: {
+        latitude: 36.9586,
+        longitude: -77.2570
+      }
+    },
+    {
+      user: {
+        id: 1,
+        firstName: 'Jimbo',
+        lastName: 'Jank',
+        email: 'email@mail.com',
+        address: '123',
+        office: '1',
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
+      },
+      location: {
+        latitude: 38.92386,
+        longitude: -77.2170
+      }
+    }
+  ];
 
   latitude: any;
   longitude: any;
@@ -65,6 +238,10 @@ export class MapComponent implements OnInit {
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
     this.findMe();
+  }
+
+  ngAfterViewInit() {
+
   }
 
   public getRoute() {
@@ -163,8 +340,7 @@ export class MapComponent implements OnInit {
         map: this.map,
         title: 'Got you!'
       });
-    }
-    else {
+    } else {
       this.marker.setPosition(location);
     }
   }
