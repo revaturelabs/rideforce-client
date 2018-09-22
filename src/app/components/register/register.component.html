@@ -42,17 +42,21 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Address 1</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="address.address" required>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
+                  appPlacesAutocomplete (addressSelect)="autocomplete1($event)" [(ngModel)]="address1" placeholder="Type to search..">
+                <!-- <input type="text" class="form-control" [(ngModel)]="address.address" required> -->
               </div>
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Address 2</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="address.address2" required>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
+                  appPlacesAutocomplete (addressSelect)="autocomplete2($event)" [(ngModel)]="address2" placeholder="Type to search..">
+                <!-- <input type="text" class="form-control" [(ngModel)]="address.address2" required> -->
               </div>
 
-              <div class="input-group mb-3">
+              <!-- <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">City</span>
                 </div>
@@ -73,7 +77,7 @@
                   <span class="input-group-text" id="basic-addon1">Zip Code</span>
                 </div>
                 <input type="number" class="form-control" [(ngModel)]="address.zip" required>
-              </div>
+              </div> -->
             </div>
           </ng-template>
         </ngb-tab>
@@ -94,7 +98,7 @@
               <br>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Contact Info</span>
+                  <span class="input-group-text" id="basic-addon1" style="padding-right: 95px">Contact Info</span>
                 </div>
                 <!-- to do: Contact info list -->
                 <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
@@ -179,17 +183,14 @@
               <span>First name: {{firstName}}</span> <br>
               <span>Last Name: {{lastName}}</span> <br>
               <span>Username: {{username}}</span> <br>
-              <span>Password: {{password}}</span> <br>
-              <span>Address: {{address.address}} <br>
-                {{address.address2}}
-                {{address.city}} {{address.state}} {{address.zip}}
-              </span>
+              <span class="dyn-height" *ngIf="address1"> Address 1: <div class="col-10">{{address1}}</div><br></span>
+              <span class="dyn-height" *ngIf="address2"> Address 2: <div class="col-10">{{address2}}</div><br></span>                        
               <br>
               <h3><u>Biography</u></h3>
               <span class="dyn-height">About You: <div class="col-10">{{bio}}</div></span>
               <span>Contact Info:</span>
               <div style="margin-left: 20px">
-                <span *ngFor="let item of contactInfoArray"> {{item.type}}: {{item.info}} </span> <br>
+                <span *ngFor="let item of contactInfoArray"> {{item.type}}: {{item.info}} <br> </span> 
               </div>
               <span>Batch: {{batch}}</span> <br> <br>
               <h3><u>Car Info</u></h3>
@@ -202,6 +203,4 @@
       </div>
     </ngb-tabset>
   </div>
-  <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-    appPlacesAutocomplete (addressSelect)="autocompleteTest($event)" placeholder="Type to search..">
 </div>

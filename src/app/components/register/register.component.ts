@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { AddressModel } from '../../models/address.model';
-import { ContactInfo } from '../../models/Contact-Info.model';
+import { ContactInfo } from '../../models/contact-info.model';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
   email: string;
   password: string;
 
+  searchedAddress: string;
   address1: string;
   address2: string;
   city: string;
@@ -39,7 +40,6 @@ export class RegisterComponent implements OnInit {
 
   bio: string;
   //Array of contact info 
-  
   contactInfoArray: ContactInfo[] = [];
   contactTypeArray: string[] = ['Phone', 'Email', 'Slack', 'Skype', 'Discord', 'GroupMe', 'Other'];
   contactType: string;
@@ -63,23 +63,28 @@ export class RegisterComponent implements OnInit {
       this.mobile = true;
     }
   }
-
-  setCarButtonFalse()
-  {
-    this.carMake = '';
-    this.carModel = '';
-    this.carYear = '';
-    
-  autocompleteTest(place) {
+  
+  autocomplete1 (place) {
     // address object contains lat/lng to use
     this.zone.run(() => {
-      // this.addr = addrObj;
-      // this.addrKeys = Object.keys(addrObj);
-      console.log(place);
+      this.address1 = place.formatted_address;
+      //place variable has a lot of field combinations to choose from
+      //currently using entire fielld
+      //console.log(place);
+    });
+  }
+
+  autocomplete2(place) {
+    // address object contains lat/lng to use
+    this.zone.run(() => {
+      this.address2 = place.formatted_address;
     });
   }
 
   setCarButtonFalse() {
+    this.carMake = '';
+    this.carModel = '';
+    this.carYear = '';
     this.btnCarInfo = false;
   }
 

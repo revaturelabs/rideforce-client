@@ -2,17 +2,31 @@
   <h2>Potential Matches </h2>
   <div class="grid-container">
     <div *ngFor="let user of users; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
-      <div class="card grid-item" [ngStyle]="{ 'background-color': user.choose == 'none' ?
+      <div class="enlarge">
+        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item" [ngStyle]="{ 'background-color': user.choose == 'none' ?
       'white' : user.choose == 'liked' ? 'green' : 'red'}">
-        <img class="card-img-top" src={{user.user.photoUrl}} alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
-          <p class="card-text">{{user.user.address}}</p>
-          <div style="display: flex; justify-content: space-between;">
-              <button type="button" *ngIf="user.choose!='disliked'" class="btn-danger" style="width:40px" (click)="like(i, 0)">X</button>
-              <button *ngIf="user.choose=='disliked'"class="trashButton" (click)="like(i, 2)"></button>
-              <button *ngIf="user.choose!='none'"class="undoButton" (click)="like(i, 3)"></button>
-              <button type="button" class="btn-success" style="width:40px" (click)="like(i, 1)">O</button>
+          <div *ngIf="user.face=='front' || user.face=='front-back'">
+            <img class="card-img-top" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
+            <div class="card-body">
+              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+              <p class="card-text">{{user.user.address}}</p>
+              <div style="display: flex; justify-content: space-between;">
+                <button type="button" *ngIf="user.choose!='disliked'" class="btn-danger" style="width:40px" (click)="like(i, 0)">X</button>
+                <button *ngIf="user.choose=='disliked'" class="trashButton" (click)="like(i, 2)"></button>
+                <button *ngIf="user.choose!='none'" class="undoButton" (click)="like(i, 3)"></button>
+                <button type="button" class="btn-success" style="width:40px" (click)="like(i, 1)">O</button>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="user.face=='back' || user.face=='back-front'" (click)="flipCard(user)">
+            <div class="card-body" style="transform: rotateY(180deg)">
+              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+              <p class="card-text">{{user.user.address}}</p>
+              <h5 class="card-text">{{user.user.email}}</h5>
+              <h5 class="card-text">{{user.user.batchEnd}}</h5>
+              <h5 class="card-text">User bio blablablabla</h5>
+            </div>
           </div>
         </div>
       </div>
