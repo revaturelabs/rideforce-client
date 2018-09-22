@@ -14,8 +14,8 @@ import { } from '@types/googlemaps';
 })
 export class MapComponent implements OnInit {
 
-  private start = "herndon";
-  private end = "dc";
+  private start = 'herndon';
+  private end = 'dc';
 
   private dist: number;
   private time: number;
