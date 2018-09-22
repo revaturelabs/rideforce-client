@@ -26,6 +26,7 @@ import { AuthService } from '../app/services/auth.service';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
 import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { AccountinfoComponent } from './components/accountinfo/accountinfo.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
     UsermatchwebComponent,
     LikesmatchwebComponent,
     PlacesAutocompleteDirective,
-    FavoritesComponent
+    FavoritesComponent,
+    AccountinfoComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,7 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBXWXgWzxhyvz9JyN9SrHgGOzi7VcU5G3g',
+      apiKey: 'key',
       libraries: ['places'],
     }),
     NgbModule,

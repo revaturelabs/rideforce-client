@@ -18,7 +18,6 @@
               </div>
             </div>
           </div>
-
           <div *ngIf="user.face=='back' || user.face=='back-front'" (click)="flipCard(user)">
             <div class="card-body" style="transform: rotateY(180deg)">
               <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
