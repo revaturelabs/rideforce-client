@@ -4,9 +4,51 @@
     <div class="col-8 text-center">
       <h1>Drivers Near Me</h1>
       <button (click)="getRoute()">Testing</button>
-      <agm-map [latitude]="33" [longitude]="-70">
+      <div class="row">
 
-      </agm-map>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <form class="form-inline" #form="ngForm">
+            <div class="form-group">
+              <input type="text" class="form-control" name="latitude" [(ngModel)]="latitude" placeholder="Enter latitude"
+                required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="longitude" [(ngModel)]="longitude" placeholder="Enter longitude"
+                required>
+            </div>
+            <button type="button" (click)="setCenter()" class="btn btn-primary" [disabled]="form.invalid"> Go</button>
+
+
+          </form>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
+        <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
+        <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
+        <br>
+        
+      </div>
+      <div class="row">
+          <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>
+        </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="text-center">
+            <h3>
+              <div #gmap style="width:100%;height:400px"></div>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- <agm-map [latitude]="33" [longitude]="-70">
+
+      </agm-map> -->
+      <!-- -  - - - - - - - - - --    ------- --  - - - - - - - - - - -->
     </div>
     <div class="col-2"></div>
   </div>
