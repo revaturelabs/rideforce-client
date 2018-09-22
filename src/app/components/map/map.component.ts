@@ -3,7 +3,8 @@ import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
 import { Location } from './../../models/location.model';
 import { User } from '../../models/user.model';
-import { } from '@types/googlemaps';
+// import { } from '@types/googlemaps';
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
