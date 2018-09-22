@@ -3,7 +3,12 @@
     <div class="col-12 text-center">
       <h1>Drivers Near Me</h1>
       <button (click)="getRoute()">Testing</button>
-      <div #gmap class="gmap"></div>
+      <agm-map [latitude]="38.95" [longitude]="-77">
+        <agm-marker *ngFor="let user of users; let i = index" [iconUrl]="user.user.photoUrl" [latitude]="user.location.latitude" 
+        [longitude]="user.location.longitude">
+
+        </agm-marker>
+      </agm-map>
     </div>
   </div>
 </div>

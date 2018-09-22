@@ -22,12 +22,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   private dist: number;
   private time: number;
-  @ViewChild('gmap') gmapElement: any;
-
-  private map: google.maps.Map;
-
-
-
 
   // Dummy data
   users: any[] = [
@@ -210,30 +204,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const mapProp = {
-      center: new google.maps.LatLng(38.9586, -77.3570),
-      zoom: 10,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
-    for (let i = 0; i < this.users.length; i++) {
-      const user = this.users[i];
-      const icon = {
-        url: user.user.photoUrl,
-        // This marker is 20 pixels wide by 32 pixels high.
-        scaledSize: new google.maps.Size(40, 40),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(20, 0),
-      };
-      const myLatlng = new google.maps.LatLng(user.location.latitude, user.location.longitude);
-      const marker = new google.maps.Marker({
-        icon: icon,
-        position: myLatlng,
-        opacity: .95,
-        title: user.user.firstName + ' ' + user.user.lastName
-      });
-      marker.setMap(this.map);
-    }
+
   }
 
   public getRoute() {

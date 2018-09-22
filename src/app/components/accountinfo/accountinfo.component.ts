@@ -20,11 +20,11 @@ export class AccountinfoComponent implements OnInit {
 
   mobile: Boolean = false;
 
-  username: string;
+
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
+
 
   searchedAddress: string;
   address1: string;
