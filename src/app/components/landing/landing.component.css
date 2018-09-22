@@ -57,8 +57,27 @@ a:hover {
  -moz-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
- 
 
+.fadeIn.third {
+    -webkit-animation-delay: 0.7s;
+    -moz-animation-delay: 0.7s;
+     animation-delay: 0.7s;
+   }
+
+.fadeIn.fourth {
+    -webkit-animation-delay: 0.9s;
+    -moz-animation-delay: 0.9s;
+     animation-delay: 0.9s;
+   }
+    
+   [aos="fade"] {
+    opacity: 0;
+    transition-property: opacity;
+  }
+  
+  [aos="fade"].aos-animate {
+    opacity: 1;
+  }
 
 
 /*
