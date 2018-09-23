@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
 import { Location } from './../../models/location.model';
@@ -13,7 +13,11 @@ import { User } from '../../models/user.model';
     NgbTabset
   ]
 })
+<<<<<<< HEAD
 export class MapComponent implements OnInit{
+=======
+export class MapComponent implements OnInit, AfterContentInit, OnDestroy {
+>>>>>>> dev
 
   private start = 'herndon';
   private end = 'reston';
@@ -40,7 +44,7 @@ export class MapComponent implements OnInit{
       location: {
         latitude: 38.9586,
         longitude: -77.3570
-      }
+      },
     },
     {
       user: {
@@ -194,8 +198,14 @@ export class MapComponent implements OnInit{
     }
   ];
 
+  markers: any[] = [];
+  placedMarkers: any[] = [];
+
   latitude: any;
   longitude: any;
+  mapTypeId = 'roadmap';
+
+  styles: any = null;
 
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
@@ -206,11 +216,11 @@ export class MapComponent implements OnInit{
   currentLong: any;
 
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-  marker: google.maps.Marker; 
+  marker: google.maps.Marker;
 
   markerTypes = [
     {
-      text: "Parking", value: "parking_lot_maps.png"
+      text: 'Parking", value: "parking_lot_maps.png'
     }
     // ,
     // {
@@ -221,28 +231,61 @@ export class MapComponent implements OnInit{
     // }
   ];
 
-  selectedMarkerType: string = "parking_lot_maps.png";
+  // selectedMarkerType = parking_lot_maps.png;
 
   isHidden = false;
 
+  song = new Audio();
+
   constructor(private mapService: MapsControllerService) { }
 
+  protected mapReady(map) {
+    this.map = map;
+  }
+
+
   ngOnInit() {
+    this.getMarkers();
+    this.song.src = '../../../assets/audio/GrimGrinningGhosts.mp3';
+    this.song.loop = true;
+    this.song.load();
   }
 
   ngAfterContentInit() {
-    let mapProp = {
-      center: new google.maps.LatLng(38.9586, -77.3570),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+    /*  const mapProp = {
+       center: new google.maps.LatLng(38.9586, -77.3570),
+       zoom: 15,
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+     };
+     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp); */
     this.findMe();
   }
 
-  ngAfterViewInit() {
-
+  ngOnDestroy() {
+    this.song.pause();
   }
+
+  getMarkers() {
+    for (let i = 0; i < this.users.length; i++) {
+      const marker: any = {
+        user: this.users[i],
+        icon: {
+          url: this.users[i].user.photoUrl,
+          scaledSize: {
+            width: 30,
+            height: 30
+          }
+        },
+        location: {
+          latitude: this.users[i].location.latitude,
+          longitude: this.users[i].location.longitude
+        },
+        opacity: .92
+      };
+      this.markers.push(marker);
+    }
+  }
+
 
   public getRoute() {
     this.mapService.getRoute(this.start, this.end).subscribe(
@@ -252,29 +295,21 @@ export class MapComponent implements OnInit{
         console.log(this.dist);
         console.log(this.time);
       }
-    )
+    );
   }
 
   setMapType(mapTypeId: string) {
-    this.map.setMapTypeId(mapTypeId)
+    this.mapTypeId = mapTypeId;
   }
 
-  setCenter(e:any){
-    this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
-
-    let location = new google.maps.LatLng(this.latitude, this.longitude);
-
-    let marker = new google.maps.Marker({
-      position: location,
-      map: this.map,
-      title: 'Got you!'
-    });
-
-    marker.addListener('click', this.simpleMarkerHandler);
-
-    marker.addListener('click', () => {
-      this.markerHandler(marker);
-    });
+  setCenter() {
+    this.map.setCenter(new google.maps.LatLng(this.currentLat, this.currentLong));
+    const marker = {
+      lat: this.currentLat,
+      lng: this.currentLong,
+      title: 'got you!'
+    };
+    this.placedMarkers.push(marker);
   }
 
   simpleMarkerHandler() {
@@ -285,25 +320,54 @@ export class MapComponent implements OnInit{
     alert('Marker\'s Title: ' + marker.getTitle());
   }
 
+  changeStyle(style: string) {
+    if (this.styles !== null) {
+      this.styles = null;
+      this.song.pause();
+    } else if (this.styles === null) {
+      this.song.play();
+      this.styles = [{
+        'featureType': 'water',
+        'stylers': [{
+          'color': '#000000'
+        }]
+      },
+      {
+        'featureType': 'landscape',
+        'elementType': 'geometry',
+
+        'stylers': [{
+          'color': '#ffa500'
+        }]
+      },
+      {
+        'featureType': 'poi',
+        'elementType': 'geometry',
+        'stylers': [{
+          'color': '#39ff14'
+        }]
+      }
+
+      ];
+    }
+  }
+
   showCustomMarker() {
     this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
 
-    let location = new google.maps.LatLng(this.latitude, this.longitude);
+    const location = new google.maps.LatLng(this.latitude, this.longitude);
 
-    console.log(`selected marker: ${this.selectedMarkerType}`);
+    // console.log(`selected marker: ${this.selectedMarkerType}`);
 
-    let marker = new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: location,
       map: this.map,
-      icon: this.iconBase + this.selectedMarkerType,
+      // icon: this.iconBase + this.selectedMarkerType,
       title: 'Got you!'
     });
   }
-  
   toggleMap() {
     this.isHidden = !this.isHidden;
-
-    this.gmapElement.nativeElement.hidden = this.isHidden;
   }
 
   findMe() {
@@ -312,7 +376,7 @@ export class MapComponent implements OnInit{
         this.showPosition(position);
       });
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert('Geolocation is not supported by this browser.');
     }
   }
 
@@ -323,7 +387,7 @@ export class MapComponent implements OnInit{
         this.showTrackingPosition(position);
       });
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert('Geolocation is not supported by this browser.');
     }
   }
 
@@ -331,7 +395,26 @@ export class MapComponent implements OnInit{
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;
 
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    /*    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+       this.map.panTo(location);
+
+       if (!this.marker) {
+         this.marker = new google.maps.Marker({
+           position: location,
+           map: this.map,
+           title: 'Got you!'
+         });
+       } else {
+         this.marker.setPosition(location);
+       } */
+  }
+
+  showTrackingPosition(position) {
+    console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
+    this.currentLat = position.coords.latitude;
+    this.currentLong = position.coords.longitude;
+
+    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map.panTo(location);
 
     if (!this.marker) {
@@ -341,26 +424,6 @@ export class MapComponent implements OnInit{
         title: 'Got you!'
       });
     } else {
-      this.marker.setPosition(location);
-    }
-  }
-
-  showTrackingPosition(position) {
-    console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
-    this.currentLat = position.coords.latitude;
-    this.currentLong = position.coords.longitude;
-
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    this.map.panTo(location);
-
-    if (!this.marker) {
-      this.marker = new google.maps.Marker({
-        position: location,
-        map: this.map,
-        title: 'Got you!'
-      });
-    }
-    else {
       this.marker.setPosition(location);
     }
   }
