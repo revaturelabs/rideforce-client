@@ -2,6 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { AddressModel } from '../../models/address.model';
+import { User } from '../../models/user.model';
+import { Car } from '../../models/car.model';
 import { ContactInfo } from '../../models/contact-info.model';
 
 @Component({
@@ -25,9 +27,12 @@ export class AccountinfoComponent implements OnInit {
   lastName: string;
   email: string;
 
+  userObject: User;
 
   searchedAddress: string;
+  //Home address
   address1: string;
+  //office Address
   address2: string;
 
   bio: string;
@@ -36,13 +41,14 @@ export class AccountinfoComponent implements OnInit {
   contactTypeArray: string[] = ['Phone', 'Email', 'Slack', 'Skype', 'Discord', 'GroupMe', 'Other'];
   contactType: string;
   contactItem: string;
-  // batch number
-  batch: string;
+  // batch end date
+  batchEnd: string;
 
   // for drivers
+  carObject: Car;
   carMake: string;
   carModel: string;
-  carYear: string;
+  carYear: number;
   optInToDrive: boolean;
 
   // booleans for car information buttons
@@ -77,7 +83,7 @@ export class AccountinfoComponent implements OnInit {
   setCarButtonFalse() {
     this.carMake = '';
     this.carModel = '';
-    this.carYear = '';
+    this.carYear;
     this.btnCarInfo = false;
   }
 
@@ -99,4 +105,23 @@ export class AccountinfoComponent implements OnInit {
     this.contactInfoArray.splice(this.contactInfoArray.indexOf(item), 1);
   }
 
+  createCar()
+  {
+    this.carObject.make = this.carMake;
+    this.carObject.model = this.carModel;
+    this.carObject.year = this.carYear;
+  }
+
+  createUserObject()
+  {
+    this.userObject.firstName = this.firstName;
+    this.userObject.lastName = this.lastName;
+    //this.userObject.contactInfo = this.contactInfoArray;
+    this.userObject.batchEnd = this.batchEnd;
+    this.userObject.email = this.email;
+    this.userObject.active = true;
+    this.userObject.address = this.address1;
+    this.userObject.office = this.address2;
+    
+  }
 }
