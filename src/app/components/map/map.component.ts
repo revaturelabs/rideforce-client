@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgZone, AfterContentInit } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
 import { Location } from './../../models/location.model';
@@ -13,7 +13,7 @@ import { User } from '../../models/user.model';
     NgbTabset
   ]
 })
-export class MapComponent implements OnInit, AfterContentInit {
+export class MapComponent implements OnInit, AfterContentInit, OnDestroy {
 
   private start = 'herndon';
   private end = 'dc';
@@ -255,6 +255,10 @@ export class MapComponent implements OnInit, AfterContentInit {
      };
      this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp); */
     this.findMe();
+  }
+
+  ngOnDestroy() {
+    this.song.pause();
   }
 
   getMarkers() {
