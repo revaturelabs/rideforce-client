@@ -40,17 +40,18 @@
             </div>
             <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required>
         </div>
-        <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
+        <div *ngIf="(pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
             <div *ngIf="pConfirm.errors.required">
                 Password Confirm cannot be empty
             </div>
             <div *ngIf="pConfirm.errors.maxLength">
                 Password Confirm cannot be more than 15 characters
             </div>
+            <div *ngIf="password != passwordConfirm">
+                password does not match.
+            </div>
         </div>
-        <div *ngIf="password != passwordConfirm"  class="alert alert-danger">
-            password does not match.
-        </div>
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Key</span>
@@ -59,7 +60,7 @@
         </div>
         <div *ngIf="tInput.invalid && (tInput.dirty || tInput.touched)" class="alert alert-danger">
             <div *ngIf="tInput.errors.required">
-                You need a Key, dumbass
+                You need a Key
             </div>
             <div *ngIf="tInput.errors.maxLength">
                 Password Confirm cannot be more than 15 characters
