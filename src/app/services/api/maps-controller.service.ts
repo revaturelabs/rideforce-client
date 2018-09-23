@@ -23,8 +23,8 @@ export class MapsControllerService {
   /**
    * Takes in 2 addresses and calculates the distance and travel time between them
    * 
-   * @param origin string address
-   * @param destination string address
+   * @param start string address
+   * @param end string address
    */
   public getRoute(start: string, end: string): Observable<RouteInfo> { // gives back latitude and longitude
     

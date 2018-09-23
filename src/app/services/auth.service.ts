@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from "../../app/models/user.model";
+import { User } from '../../app/models/user.model';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { tap, map } from 'rxjs/operators';
@@ -29,7 +29,7 @@ export class AuthService {
         })
       );
   }
-  
+
   logout() {
     // Make sure we invalidate the currently cached user data in the
     // UserService.
