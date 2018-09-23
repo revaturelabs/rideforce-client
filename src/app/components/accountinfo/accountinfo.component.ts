@@ -116,12 +116,15 @@ export class AccountinfoComponent implements OnInit {
   {
     this.userObject.firstName = this.firstName;
     this.userObject.lastName = this.lastName;
-    //this.userObject.contactInfo = this.contactInfoArray;
+    this.userObject.contactInfo = [];
     this.userObject.batchEnd = this.batchEnd;
     this.userObject.email = this.email;
     this.userObject.active = true;
     this.userObject.address = this.address1;
     this.userObject.office = this.address2;
-    
+    this.userObject.cars = [];
+
+    //get id from user after post and associate with a car object
+    //this.carObject.id = owner from post
   }
 }

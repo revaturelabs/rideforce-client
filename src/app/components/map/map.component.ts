@@ -13,7 +13,7 @@ import { User } from '../../models/user.model';
     NgbTabset
   ]
 })
-export class MapComponent implements OnInit{
+export class MapComponent implements OnInit, AfterContentInit, OnDestroy {
 
   private start = 'herndon';
   private end = 'reston';
