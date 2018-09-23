@@ -3,11 +3,17 @@ import { ViewChild } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { AddressModel } from '../../models/address.model';
 import { ContactInfo } from '../../models/contact-info.model';
+import { UserControllerService } from '../../services/api/user-controller.service';
+import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
+import { Register } from '../../models/register.model';
+
+
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['../accountinfo/accountinfo.component.css'],
   providers: [
     NgbTabset
   ]
@@ -15,89 +21,54 @@ import { ContactInfo } from '../../models/contact-info.model';
 
 export class RegisterComponent implements OnInit {
 
-  @ViewChild(NgbTabset)
-  private tabset: NgbTabset;
-
-  mobile: Boolean = false;
-
   username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
   password: string;
+  passwordConfirm: string;
+  token: string;
 
-  searchedAddress: string;
-  address1: string;
-  address2: string;
+  registerForm: FormGroup;
+  validatorFn: Validators;
 
-  bio: string;
-  //Array of contact info 
-  contactInfoArray: ContactInfo[] = [];
-  contactTypeArray: string[] = ['Phone', 'Email', 'Slack', 'Skype', 'Discord', 'GroupMe', 'Other'];
-  contactType: string;
-  contactItem: string;
-  //batch number
-  batch: string;
+  myForm: FormGroup;
 
-  // for drivers
-  carMake: string;
-  carModel: string;
-  carYear: string;
-  optInToDrive: boolean;
 
-  // booleans for car information buttons
-  btnCarInfo: Boolean = false;
 
-  constructor(private zone: NgZone) { }
+  constructor(private userService: UserControllerService) {
+   }
 
   ngOnInit() {
-    if (window.screen.width <= 430) { // 768px portrait
-      this.mobile = true;
-    }
-  }
-
-  
-  autocomplete1(place) {
-    // address object contains lat/lng to use
-    this.zone.run(() => {
-      this.address1 = place.formatted_address;
-      //place variable has a lot of field combinations to choose from
-      //currently using entire fielld
-      //console.log(place);
+    this.registerForm = new FormGroup({
+      'username': new FormControl(this.username, [
+        Validators.required,
+        Validators.maxLength(15)
+      ]),
+      'password': new FormControl(this.password, [
+        Validators.required,
+        Validators.maxLength(15)
+      ]),
+      'passwordConfirm': new FormControl(this.passwordConfirm, [
+        Validators.required,
+        Validators.maxLength(15)
+      ]),
+      'token': new FormControl(this.token, [
+        Validators.required,
+        Validators.maxLength(15)
+      ]),
     });
+
+
   }
 
-  autocomplete2(place) {
-    // address object contains lat/lng to use
-    this.zone.run(() => {
-      this.address2 = place.formatted_address;
-    });
+  submit() {
+   const account: Register = {
+      username: this.username,
+      password: this.password,
+      token: this.token
+    };
+    this.userService.createUser(account).subscribe();
+
   }
 
-  setCarButtonFalse() {
-    this.carMake = '';
-    this.carModel = '';
-    this.carYear = '';
-    this.btnCarInfo = false;
-  }
 
-  setCarButtonTrue() {
-    this.btnCarInfo = true;
-  }
-
-  addContact(): void {
-    const contact: ContactInfo = {
-      id: null,
-      type: null,
-      info: null
-    }
-    
-    this.contactInfoArray.push(contact)
-  }
-
-  removeContact(item: ContactInfo)
-  {
-    this.contactInfoArray.splice(this.contactInfoArray.indexOf(item), 1)
-  }
 
 }

@@ -1,206 +1,73 @@
 <br>
 <div class="form-group row">
-  <div class="col-1"></div>
-  <div class="col-lg-3 col-xs-12 extend">
-    <ngb-tabset [justify]="currentJustify">
-      <div label="CREATE PROFILE div">
-        <ngb-tab title="1">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-              <br>
-              <h2>Create Profile:</h2>
-              <br>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">First Name</span>
-                </div>
-                <input type="text" class="form-control" [(ngModel)]="firstName" required>
-              </div>
-
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text " id="basic-addon1 ">Last Name</span>
-                </div>
-                <input type="text" class="form-control" [(ngModel)]="lastName" required>
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Username</span>
-                </div>
-                <input type="text" class="form-control" [(ngModel)]="username" required>
-              </div>
-
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text " id="basic-addon1 ">Password</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="password" required>
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Address 1</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-                  appPlacesAutocomplete (addressSelect)="autocomplete1($event)" [(ngModel)]="address1" placeholder="Type to search..">
-                <!-- <input type="text" class="form-control" [(ngModel)]="address.address" required> -->
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Address 2</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-                  appPlacesAutocomplete (addressSelect)="autocomplete2($event)" [(ngModel)]="address2" placeholder="Type to search..">
-                <!-- <input type="text" class="form-control" [(ngModel)]="address.address2" required> -->
-              </div>
-
-              <!-- <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">City</span>
-                </div>
-                <input type="text" class="form-control" [(ngModel)]="address.city" required>
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">State</span>
-                </div>
-                <select [(ngModel)]="address.state">
-                  <option *ngFor="let abbr of states">{{abbr}}</option>
-                </select>
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Zip Code</span>
-                </div>
-                <input type="number" class="form-control" [(ngModel)]="address.zip" required>
-              </div> -->
+    <div class="col-1"></div>
+    <div class="col-lg-3 col-xs-12 extend">
+        <br>
+        <h2>Register: </h2>
+        <br>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Username</span>
             </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-      <div label="BIO div">
-        <ngb-tab title="2">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-              <br>
-              <h2>Biography:</h2>
-              <br>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">About You</span>
-                </div>
-              </div>
-              <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required></textarea>
-              <br>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1" style="padding-right: 95px">Contact Info</span>
-                </div>
-                <!-- to do: Contact info list -->
-                <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
-                <div style="padding-left: 20px">
-                  <button class="btn" (click)="addContact()">
-                    <span aria-hidden="true">+</span>
-                  </button>
-                </div>
-              </div>
-
-              <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <div class="input-group-text" style="padding-right: 100px">
-                    <select [(ngModel)]="item.type">
-                      <option *ngFor="let contact of contactTypeArray">{{contact}}</option>
-                    </select>
-                  </div>
-                  <input type="text" class="" [(ngModel)]="item.info">
-                  <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
-                </div>
-              </div>
-
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Batch</span>
-                </div>
-                <input type="text" class="form-control" [(ngModel)]="batch">
-              </div>
+            <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" required>
+        </div>
+        <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
+            <div *ngIf="uName.errors.required">
+                Username cannot be empty
             </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-      <div label="CAR INFO div">
-        <ngb-tab title="3">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-              <br>
-              <h2>Car Information:</h2>
-              <br>
-              <div>
-                <span style="padding-right: 20px;"><button class="btn btnCar" (click)="setCarButtonTrue()">Car</button></span>
-                <span style="padding-right: 20px;"><button class="btn btnPassenger" (click)="setCarButtonFalse()">Passenger</button></span>
-              </div>
-
-              <br>
-              <br>
-              <div *ngIf="btnCarInfo">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Make</span>
-                  </div>
-                  <input type="text" class="form-control" [(ngModel)]="carMake">
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Model</span>
-                  </div>
-                  <input type="text" class="form-control" [(ngModel)]="carModel">
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Year</span>
-                  </div>
-                  <input type="text" class="form-control" [(ngModel)]="carYear">
-                </div>
-              </div>
+            <div *ngIf="uName.errors.maxLength">
+                Username cannot be more than 15 characters
             </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-      <div label="CONFIRMATION div">
-        <ngb-tab title="4">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-              <br>
-              <h2>Review and submit:</h2>
-              <br>
-              <h3><u>User Information</u></h3>
-              <span>First name: {{firstName}}</span> <br>
-              <span>Last Name: {{lastName}}</span> <br>
-              <span>Username: {{username}}</span> <br>
-              <span class="dyn-height" *ngIf="address1"> Address 1: <div class="col-10">{{address1}}</div><br></span>
-              <span class="dyn-height" *ngIf="address2"> Address 2: <div class="col-10">{{address2}}</div><br></span>                        
-              <br>
-              <h3><u>Biography</u></h3>
-              <span class="dyn-height">About You: <div class="col-10">{{bio}}</div></span>
-              <span>Contact Info:</span>
-              <div style="margin-left: 20px">
-                <span *ngFor="let item of contactInfoArray"> {{item.type}}: {{item.info}} <br> </span> 
-              </div>
-              <span>Batch: {{batch}}</span> <br> <br>
-              <h3><u>Car Info</u></h3>
-              <span>Make: {{carMake}}</span> <br>
-              <span>Model: {{carModel}}</span> <br>
-              <span>Year: {{carYear}}</span>
+        </div>
+
+        <div class="input-group mb-3 ">
+            <div class="input-group-prepend ">
+                <span class="input-group-text" id="basic-addon1 ">Password</span>
             </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-    </ngb-tabset>
-  </div>
+            <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" required>
+        </div>
+        <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
+            <div *ngIf="pWord.errors.required">
+                Password cannot be empty
+            </div>
+            <div *ngIf="pWord.errors.maxLength">
+                Password cannot be more than 15 characters
+            </div>
+        </div>
+        <div class="input-group mb-3 ">
+            <div class="input-group-prepend ">
+                <span class="input-group-text" id="basic-addon1 ">Confirm</span>
+            </div>
+            <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required>
+        </div>
+        <div *ngIf="(pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
+            <div *ngIf="pConfirm.errors.required">
+                Password Confirm cannot be empty
+            </div>
+            <div *ngIf="pConfirm.errors.maxLength">
+                Password Confirm cannot be more than 15 characters
+            </div>
+            <div *ngIf="password != passwordConfirm">
+                password does not match.
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Key</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="token" #tInput="ngModel" required>
+        </div>
+        <div *ngIf="tInput.invalid && (tInput.dirty || tInput.touched)" class="alert alert-danger">
+            <div *ngIf="tInput.errors.required">
+                You need a Key
+            </div>
+            <div *ngIf="tInput.errors.maxLength">
+                Password Confirm cannot be more than 15 characters
+            </div>
+        </div>
+        <input type="submit" (click)="submit()">
+    </div>
+
+
 </div>
