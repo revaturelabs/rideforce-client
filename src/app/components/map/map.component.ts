@@ -13,10 +13,10 @@ import { User } from '../../models/user.model';
     NgbTabset
   ]
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent implements OnInit{
 
   private start = 'herndon';
-  private end = 'dc';
+  private end = 'reston';
 
   private dist: number;
   private time: number;
