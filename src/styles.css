@@ -334,28 +334,11 @@ textarea {
 /************************
 	Footer
 ************************/
-<<<<<<< HEAD
 @media only screen and (max-width:930px){
 	#footer-container{
 		margin-left:-100px;
 	}
 }
-=======
-
-@media ( max-width : 699px) {
-	.footerLinks {
-		margin-left:25%;
-
-	}
-}
-@media ( min-width : 700px) {
-	.footerLinks {
-		max-width:15%; margin-left:50%;
-	}
-}
-
-
->>>>>>> dev
 .footer-margin {
 	margin-top: .85em;
 }
