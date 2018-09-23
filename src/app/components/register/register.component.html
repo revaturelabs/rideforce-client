@@ -33,6 +33,9 @@
             <div *ngIf="pWord.errors.maxLength">
                 Password cannot be more than 15 characters
             </div>
+            <div *ngIf="pWord.errors.pattern">
+                raah
+            </div>
         </div>
         <div class="input-group mb-3 ">
             <div class="input-group-prepend ">
@@ -40,15 +43,15 @@
             </div>
             <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required>
         </div>
-        <div *ngIf="(pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
+        <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
             <div *ngIf="pConfirm.errors.required">
                 Password Confirm cannot be empty
             </div>
             <div *ngIf="pConfirm.errors.maxLength">
                 Password Confirm cannot be more than 15 characters
             </div>
-            <div *ngIf="password != passwordConfirm">
-                password does not match.
+            <div *ngIf="pConfirm.errors.pattern">
+                raah
             </div>
         </div>
 
@@ -66,8 +69,8 @@
                 Password Confirm cannot be more than 15 characters
             </div>
         </div>
-        <input type="submit" (click)="submit()">
+        <div class="form-group">
+            <button class="form-control btn btn-primary" type="submit" (click)="submit()" style="width:75px">Register</button>
+        </div>
     </div>
-
-
 </div>

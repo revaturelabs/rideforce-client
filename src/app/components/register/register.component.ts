@@ -30,10 +30,12 @@ export class RegisterComponent implements OnInit {
   validatorFn: Validators;
 
   myForm: FormGroup;
+  passwordFormGroup: FormGroup;
+  registrationFormGroup: FormGroup;
 
 
+  constructor(private userService: UserControllerService, private formBuilder: FormBuilder) {
 
-  constructor(private userService: UserControllerService) {
    }
 
   ngOnInit() {
@@ -55,8 +57,6 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(15)
       ]),
     });
-
-
   }
 
   submit() {
