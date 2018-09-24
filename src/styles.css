@@ -1,6 +1,13 @@
 html{
 	font-size:15px;
+	height:100%;
 }
+body{
+	min-height: 100%;
+	display: grid;
+	grid-template-rows: 1fr auto;
+}
+
 /* You can add global styles to this file, and also import other style files */
 /************************
 	Revature Fonts
@@ -377,10 +384,11 @@ html, body {
 }
 
 footer {
-	min-height: 17%;
+	/*min-height: 17%;*/
 	background-color: #474C55;
 	font-size: 1.1em;
-	margin-top: 5%;
+	grid-row-start: 2;
+	grid-row-end: 3;
 }
 
 .center {

@@ -4,7 +4,7 @@
     <!-- <a class="navbar-brand" routerLink="/home"><img src="../../../assets/img/rev-footer.png" class="img-fluid logo"></a> -->
     <button class="navbar-toggler ml-auto float-xs-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav"
       aria-expanded="false" aria-label="Toggle navigation" >
-      <span class="navbar-toggler-icon"></span> 
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div class="dropdown">
         <button class="navbar-brand dropdown-toggle" type="button" id="dropdownSettingsButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -31,7 +31,7 @@
       </button>
       <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" routerLink="/howTo">About</a>
-        <a class="dropdown-item" routerLink="/accountInfo">User Settings</a>
+        <a *ngIf="currentUser" class="dropdown-item" routerLink="/accountInfo">User Settings</a>
       </div>
     </div>
 </nav>

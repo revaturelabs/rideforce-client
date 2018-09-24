@@ -2,7 +2,7 @@
 <div class="form-group row">
   <div class="col-1"></div>
   <div class="col-lg-3 col-xs-12 extend">
-    <ngb-tabset [justify]="currentJustify" (tabChange)="tabSelect($event)">
+    <ngb-tabset (tabChange)="tabSelect($event)">
       <div label="CREATE PROFILE div">
         <ngb-tab title="1" id="1">
           <ng-template ngbTabContent>
@@ -109,12 +109,12 @@
                   <span class="input-group-text" id="basic-addon1">Office Address</span>
                 </div>
                 <div class="input-group-text" style="padding-right: 100px">
-                  <!-- <select [(ngModel)]="item.type">
-                    <option *ngFor="let contact of contactTypeArray">{{contact}}</option>
-                  </select> -->
+                  <select [(ngModel)]="officeObject">
+                    <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
+                  </select>
                 </div>
                 <!-- <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-                  appPlacesAutocomplete (addressSelect)="autocomplete1($event)" [(ngModel)]="address1" placeholder="Type to search.."> -->
+                    appPlacesAutocomplete (addressSelect)="autocomplete1($event)" [(ngModel)]="address1" placeholder="Type to search.."> -->
                 <!-- <input type="text" class="form-control" [(ngModel)]="address.address" required> -->
               </div>
 
@@ -271,7 +271,10 @@
               </div>
               <br>
               <div>
-                <span> <button class="btn btnNextPrevious" (click)="reviewPrevious()">previous</button></span>
+
+                <span> <button class="btn btnNextPrevious pr-2" (click)="reviewPrevious()">previous</button></span>
+
+                <span> <button class="btn btnNextPrevious" (click)="createUserObject()">Add User</button></span>
               </div>
             </div>
           </ng-template>
