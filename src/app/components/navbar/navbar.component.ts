@@ -23,9 +23,11 @@ export class NavbarComponent implements OnInit {
     this.userService.getCurrentUserObservable().subscribe(
       data => {
         this.currentUser = data;
+        console.log(this.currentUser);
       }
     )
   }
+
   checkIfLoggedIn(){
     if(this.userService.isLoggedIn){
       this.isLoggedIn = true;

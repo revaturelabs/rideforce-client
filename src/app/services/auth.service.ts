@@ -26,6 +26,7 @@ export class AuthService {
       .pipe(
         map<string, void>(token => {
           this.tokenStorage.saveToken(token);
+          this.userService.getCurrentUser().subscribe();
           return null;
         })
       );      
