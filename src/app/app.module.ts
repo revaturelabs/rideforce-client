@@ -23,12 +23,14 @@ import { UserControllerService } from './services/api/user-controller.service';
 import { MapsControllerService } from './services/api/maps-controller.service';
 import { MatchingControllerService } from './services/api/matching-controller.service';
 import { AuthService } from '../app/services/auth.service';
-import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { AccountinfoComponent } from './components/accountinfo/accountinfo.component';
 // import { MatFormFieldModule } from '@angular/material';
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
+import { JwtInterceptor } from './utils/jwt.interceptor';
+import { ErrorInterceptor } from './utils/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -70,10 +72,16 @@ import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
     AuthService,
     MatchingControllerService,
     GoogleMapsAPIWrapper,
-
-    // HttpClientModule,
-    // HttpClient,
-    // HttpHandler
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

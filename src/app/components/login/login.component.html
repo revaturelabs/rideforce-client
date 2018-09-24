@@ -16,9 +16,9 @@
 
     <!-- Login Form -->
     <div>
-    <form >
-      <input type="text" id="login" class="fadeIn second " name="login" placeholder="Email" required [(ngModel)]= 'email'>
-      <input type="text" id="password" class="fadeIn third " name="login" placeholder="Password" required [(ngModel)]='passLogin'>
+    <form (submit)="login()">
+      <input type="text" id="login" class="fadeIn second " name="login" placeholder="Email" required [(ngModel)]= 'userEmail'>
+      <input type="password" id="password" class="fadeIn third " name="login" placeholder="Password" required [(ngModel)]='userPass'>
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
   </div>
