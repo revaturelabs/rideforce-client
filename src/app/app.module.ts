@@ -28,6 +28,7 @@ import { PlacesAutocompleteDirective } from './directives/places-autocomplete/pl
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { AccountinfoComponent } from './components/accountinfo/accountinfo.component';
 // import { MatFormFieldModule } from '@angular/material';
+import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AccountinfoComponent } from './components/accountinfo/accountinfo.compo
   imports: [
     // MatFormFieldModule,
     BrowserModule,
+    AnimateOnScrollModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,

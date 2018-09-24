@@ -30,7 +30,7 @@ input, textarea[type="text"]
 }
 
 .input-group-text {
-    max-width:100px;
+    max-width: 150px;
     max-height: 34px;
     text-align:left;
  }
@@ -39,11 +39,11 @@ input, textarea[type="text"]
    word-wrap: break-word;
   }
 
-.btnCar{
+.btnNextPrevious{
     background-color: #F26925;
 }
 
-.btnPassenger{
+.btnAddCar{
     background-color: #72A4C2;
 }
 
