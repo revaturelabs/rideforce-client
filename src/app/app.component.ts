@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import * as AOS from 'aos';
+
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,10 @@ export class AppComponent {
 
   onTap(event) {
     console.log(event);
+  }
+
+  ngOnInit() {
+    AOS.init();
   }
 }
 
