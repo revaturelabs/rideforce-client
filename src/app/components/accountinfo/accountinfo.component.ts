@@ -42,10 +42,10 @@ export class AccountinfoComponent implements OnInit {
   searchedAddress: string;
 
   officeObject: Office[] = [];
-  //Home address
+  // Home address
   address1: string;
 
-  //office Address
+  // office Address
   address2: string;
 
 

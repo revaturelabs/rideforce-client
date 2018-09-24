@@ -20,7 +20,7 @@
         <a class="nav-link text-expanded nav-text" routerLink="landing" style="padding-right:30px; padding-left:0%;">Home<span class="sr-only">(current)</span></a>
         <a *ngIf="!currentUser"class="nav-link text-expanded nav-text" routerLink="/login" style="padding-right:30px;">Login</a>
         <a *ngIf="currentUser" class="nav-link text-expanded nav-text" (click)="logout()" style="padding-right:30px;">Logout</a>
-        <a *ngIf="currentUser" class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>
+        <a *ngIf="!currentUser" class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>
         <a *ngIf="currentUser" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
         <a *ngIf="currentUser" class="nav-link text-expanded" routerLink="/favorites" style="padding-right:30px;">Favorites</a>
       </div>

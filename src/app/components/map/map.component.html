@@ -8,7 +8,7 @@
       <agm-map (mapReady)="mapReady($event)" *ngIf="!isHidden" [latitude]="currentLat" [longitude]="currentLong" [styles]="styles"
         [mapTypeId]="mapTypeId" [usePanning]="true">
         <agm-marker *ngFor="let user of markers; let i = index" [iconUrl]="user.icon" [latitude]="user.location.latitude" [longitude]="user.location.longitude"
-          [opacity]="user.opacity">
+          [opacity]="user.opacity" (markerClick)="markerClicked(user)">
         </agm-marker>
         <agm-marker *ngFor="let m of placedMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [title]="m.title">
         </agm-marker>
@@ -132,3 +132,5 @@
 </div>
 <img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background">
 <img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background2 flashit">
+
+<app-user-modal></app-user-modal>

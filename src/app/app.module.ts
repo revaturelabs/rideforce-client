@@ -31,6 +31,7 @@ import { AccountinfoComponent } from './components/accountinfo/accountinfo.compo
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
+import { UserModalComponent } from './components/user-modal/user-modal.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ErrorInterceptor } from './utils/error.interceptor';
     LikesmatchwebComponent,
     PlacesAutocompleteDirective,
     FavoritesComponent,
-    AccountinfoComponent
+    AccountinfoComponent,
+    UserModalComponent
   ],
   imports: [
     // MatFormFieldModule,

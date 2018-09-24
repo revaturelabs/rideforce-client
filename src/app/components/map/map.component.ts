@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
+import { UserModalComponent } from '../../components/user-modal/user-modal.component';
 import { Location } from './../../models/location.model';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
@@ -231,6 +232,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   ];
 
   // selectedMarkerType = parking_lot_maps.png;
+  @ViewChild(UserModalComponent)
+  private userModal: UserModalComponent;
 
   isHidden = false;
 
@@ -349,6 +352,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   markerHandler(marker: google.maps.Marker) {
     alert('Marker\'s Title: ' + marker.getTitle());
+  }
+
+  markerClicked(user: any) {
+    console.log('a');
+    this.userModal.open(user);
   }
 
   changeStyle(style: string) {

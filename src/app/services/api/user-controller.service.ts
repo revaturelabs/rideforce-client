@@ -80,7 +80,6 @@ export class UserControllerService {
           this.currentUser = user;
           this.currentUserSubject.next(user);
         }));
-    
   }
 
   getCurrentUserObservable(): Observable<User> {

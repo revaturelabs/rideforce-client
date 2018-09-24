@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatchingControllerService } from '../../services/api/matching-controller.service';
+import { UserControllerService} from '../../services/api/user-controller.service';
 
 interface UserCard {
   user: User;
@@ -188,10 +190,23 @@ export class UsermatchwebComponent implements OnInit {
       face: 'front'
     }
   ];
-  constructor() { }
+  constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
 
+  currentUser: User;
 
   ngOnInit() {
+    this.userService.getCurrentUserObservable().subscribe(
+      data => {
+        this.currentUser = data;
+        console.log(this.currentUser);
+      }
+    );
+    let us: String[] = null;
+    this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
+      data => {
+        us = data;
+      }
+    );
   }
 
   like(index: number, interest: number) {
