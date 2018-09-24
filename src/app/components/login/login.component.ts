@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
         this.route.navigate(['/landing']);
       }
       // TODO if an error is returned, return the error message to user
-
     );
   }
 
