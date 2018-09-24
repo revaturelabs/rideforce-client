@@ -35,9 +35,11 @@ export class UserControllerService {
    * @param password the new user's password
    */
   // CREATE
-  createUser(newUser: Register): Observable<Register> {
+  createUser(newUser: Register, password: string): Observable<Register> {
     console.log('a');
-    return this.http.post<Register>(environment.apiUrl + '/users', newUser);
+    return this.http.post<Register>(environment.apiUrl + '/users', 
+    {newUser, password}
+    );
   }
 
   // READ
@@ -55,11 +57,11 @@ export class UserControllerService {
     });
   }
 
-  getUsersByOfficeAndRole(office: number, role: string): Observable<User> {
-    return this.http.get<User>(environment.apiUrl + '/users', {
-      params: { offices, role },
-    });
-  }
+  // getUsersByOfficeAndRole(office: number, role: string): Observable<User> {
+  //   return this.http.get<User>(environment.apiUrl + '/users', {
+  //     params: { office, role },
+  //   });
+  // }
 
   /**
    * Gets the currently logged-in user.
