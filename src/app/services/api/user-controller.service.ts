@@ -38,10 +38,9 @@ export class UserControllerService {
    * @param password the new user's password
    */
   // CREATE
-  createUser(newUser: Register, password: string): Observable<Register> {
-    console.log('a');
-    return this.http.post<Register>(environment.apiUrl + '/users',
-      { newUser, password }
+  createUser(user: User, password: string, registrationKey: string): Observable<User> {
+    return this.http.post<User>(environment.apiUrl + '/users',
+      { user, password, registrationKey }
     );
   }
 
@@ -84,6 +83,7 @@ export class UserControllerService {
   }
 
   getCurrentUserObservable(): Observable<User> {
+    this.getCurrentUser().subscribe();
     return this.currentUserSubject;
   }
 

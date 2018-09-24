@@ -5,7 +5,6 @@ import { HowToComponent } from '../components/how-to/how-to.component';
 import { LandingComponent } from '../components/landing/landing.component';
 import { LoginComponent } from '../components/login/login.component';
 import { MapComponent } from '../components/map/map.component';
-import { RegisterComponent } from '../components/register/register.component';
 import { RideswipeComponent } from '../components/rideswipe/rideswipe.component';
 import { UsercardComponent } from '../components/usercard/usercard.component';
 import { FavoritesComponent } from '../components/favorites/favorites.component';
@@ -17,7 +16,6 @@ export const routes: Routes = [
   { path: 'landing', component: LandingComponent},
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
-  { path: 'register', component: RegisterComponent},
   { path: 'accountInfo', component: AccountinfoComponent},
   { path: 'rideswipe', component: RideswipeComponent },
   { path: 'userCard', component: UsercardComponent },

@@ -11,6 +11,14 @@ export class MatchingControllerService {
   constructor(private http: HttpClient) { }
 
   /**
+   * will deserialize the link object. returns the object reference from the link
+   * a link is a reference to the object without having to fetch the object from the database
+   * @param uri 
+   */
+  getFromLink(uri: Link<any>): any{
+    return this.http.get<any>(environment.apiUrl + uri);
+  }
+  /**
    * Returns all drivers who match the rider with the given user ID.
    * 
    * @param riderId 
