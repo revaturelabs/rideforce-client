@@ -74,18 +74,25 @@ a:hover {
     -webkit-animation-delay: 0.12s;
     -moz-animation-delay: 0.12s;
     animation-delay: 0.12s;
+    visibility: visible !important;
    }
 
 .fadeIn.sixth {
     -webkit-animation-delay: 0.14s;
     -moz-animation-delay: 0.14s;
     animation-delay: 0.14s;
+    visibility: visible !important;
 }
 
 .fadeIn.seventh {
   -webkit-animation-delay: 0.16s;
   -moz-animation-delay: 0.16s;
   animation-delay: 0.16s;
+  visibility: visible !important;
+}
+
+.hide-on-init {
+  visibility: hidden;
 }
 
 
