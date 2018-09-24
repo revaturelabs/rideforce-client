@@ -20,6 +20,7 @@ export class AuthService {
 
   authenticate(email: string, password: string) {
     const credentials = { email, password };
+    console.log('in authenticate');
     return this.http
       .post<string>(environment.apiUrl + '/login', credentials)
       .pipe(
@@ -27,7 +28,7 @@ export class AuthService {
           this.tokenStorage.saveToken(token);
           return null;
         })
-      );
+      );      
   }
 
   logout() {
