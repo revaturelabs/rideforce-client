@@ -57,11 +57,11 @@ export class UserControllerService {
     });
   }
 
-  getUsersByOfficeAndRole(office: number, role: string): Observable<User> {
-    return this.http.get<User>(environment.apiUrl + '/users', {
-      params: { office, role },
-    });
-  }
+  // getUsersByOfficeAndRole(office: number, role: string): Observable<User> {
+  //   return this.http.get<User>(environment.apiUrl + '/users', {
+  //     params: { office, role },
+  //   });
+  // }
 
   /**
    * Gets the currently logged-in user.
