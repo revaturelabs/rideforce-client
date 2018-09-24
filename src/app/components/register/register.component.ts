@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
       password: this.password,
       token: this.token
     };
-    this.userService.createUser(account, this.password).subscribe();
+    // this.userService.createUser(account, this.password).subscribe();
 
   }
 
