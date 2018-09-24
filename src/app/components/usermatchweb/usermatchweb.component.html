@@ -5,17 +5,20 @@
       <div class="enlarge">
         <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item"
           [ngStyle]="{ 'background-color': user.choose == 'none' ?
-      'white' : user.choose == 'liked' ? 'green' : 'red'}">
+      'white' : user.choose == 'liked' ? '#e6a756' : 'rgba(128, 128, 128, 0.514)'}">
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <img class="card-img-top" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
             <div class="card-body">
               <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
               <p class="card-text">{{user.user.address}}</p>
               <div style="display: flex; justify-content: space-between;">
-                <button type="button" *ngIf="user.choose!='disliked'" class="btn-danger" style="width:40px" (click)="like(i, 0)">X</button>
+                <!-- <button type="button" *ngIf="user.choose!='disliked'" class="btn-danger" style="width:40px" (click)="like(i, 0)">X</button> -->
+                <button *ngIf="user.choose!='disliked'" class="dislike" (click)="like(i, 0)"></button>
                 <button *ngIf="user.choose=='disliked'" class="trashButton" (click)="like(i, 2)"></button>
                 <button *ngIf="user.choose!='none'" class="undoButton" (click)="like(i, 3)"></button>
-                <button type="button" class="btn-success" style="width:40px" (click)="like(i, 1)">O</button>
+                <!-- <button type="button" class="btn-success" style="width:40px" (click)="like(i, 1)">O</button> -->
+                <button type="button" class="like" (click)="like(i, 1)"></button>
+
               </div>
             </div>
           </div>

@@ -18,7 +18,7 @@ export class UserControllerService {
   constructor(private http: HttpClient) { }
 
   // to be used with the url provided by back end
-  private url: string = "";
+  private url = '';
 
   private currentUser?: User;
   private users: User[] = [];
@@ -35,9 +35,11 @@ export class UserControllerService {
    * @param password the new user's password
    */
   // CREATE
-  createUser(newUser: Register): Observable<Register> {
+  createUser(newUser: Register, password: string): Observable<Register> {
     console.log('a');
-    return this.http.post<Register>(environment.apiUrl + '/users', newUser);
+    return this.http.post<Register>(environment.apiUrl + '/users',
+    {newUser, password}
+    );
   }
 
   // READ
@@ -57,7 +59,7 @@ export class UserControllerService {
 
   getUsersByOfficeAndRole(office: number, role: string): Observable<User> {
     return this.http.get<User>(environment.apiUrl + '/users', {
-      params: { offices, role },
+      params: { office: String(office), role },
     });
   }
 
@@ -148,7 +150,7 @@ export class UserControllerService {
     return this.http.get<Office>(environment.apiUrl + officeUri);
   }
 
-  // UPDATE 
+  // UPDATE
   updateOffice(officeUri: Link<Office>, updatedOffice: Office): Observable<Office> {
     return this.http.put<Office>(environment.apiUrl + officeUri, updatedOffice);
     // maybe implement pipe to verify if the user has authorization to add a location (i.e. a trainer/manager)
@@ -158,7 +160,7 @@ export class UserControllerService {
   // TODO
 
 
-  // CARS CRUD * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+  // CARS CRUD * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
   // CREATE
   createCar(newCar: Car): Observable<Car> {
@@ -184,7 +186,7 @@ export class UserControllerService {
   // DELETE CAR
 
   // CONTACT-INFO CRUD * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  
+
   // CREATE
   createContactInfo(newContactInfo: ContactInfo): Observable<ContactInfo> {
     return this.http.post<ContactInfo>(environment.apiUrl + '/contact-info', newContactInfo);
