@@ -28,7 +28,7 @@ import { PlacesAutocompleteDirective } from './directives/places-autocomplete/pl
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { AccountinfoComponent } from './components/accountinfo/accountinfo.component';
 //import { MatFormFieldModule } from '@angular/material';
-import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
+//import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
 
@@ -53,7 +53,7 @@ import { ErrorInterceptor } from './utils/error.interceptor';
   imports: [
     //MatFormFieldModule,
     BrowserModule,
-    AnimateOnScrollModule.forRoot(),
+    //nimateOnScrollModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
