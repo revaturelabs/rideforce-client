@@ -261,6 +261,11 @@ body {
     cursor: pointer;
     margin: 5px;
   }
+  #rider {
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px;
+  }
   
   .button span {
     cursor: pointer;
@@ -290,3 +295,53 @@ body {
   .lead {
       font-size: 24px;
   }
+
+  @keyframes fadeInLeft {
+    0% {
+       opacity: 0;
+       transform: translateX(-20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+ }   
+
+ .animated {
+  background-image: url(/css/images/logo.png);
+  background-repeat: no-repeat;
+  background-position: left top;
+  padding-top:95px;
+  margin-bottom:60px;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInLeft {
+  0% {
+     opacity: 0;
+     -webkit-transform: translateX(-20px);
+  }
+  100% {
+     opacity: 1;
+     -webkit-transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+     opacity: 0;
+     transform: translateX(-20px);
+  }
+  100% {
+     opacity: 1;
+     transform: translateX(0);
+  }
+}
+
+.fadeInLeft {
+-webkit-animation-name: fadeInLeft;
+animation-name: fadeInLeft;
+} 
