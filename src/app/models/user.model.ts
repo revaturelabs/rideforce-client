@@ -10,6 +10,7 @@ export interface User {
   id: number;
   firstName: string;
   lastName: string;
+  //username
   email: string;
   /**
    * The user's home address (where they currently live).

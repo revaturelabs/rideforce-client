@@ -137,7 +137,7 @@ export class UserControllerService {
   createOffice(newOffice: Office): Observable<Office> {
     return this.http.post<Office>(environment.apiUrl + '/offices',newOffice);
   }
-
+  
   // READ
   getAllOffices(): Observable<Office[]> {
     return this.http.get<Office[]>(environment.apiUrl + '/offices');
