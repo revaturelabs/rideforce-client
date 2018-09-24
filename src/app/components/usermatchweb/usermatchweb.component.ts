@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -35,6 +36,7 @@ export class UsermatchwebComponent implements OnInit {
         address: '123',
         office: '1',
         batchEnd: '1',
+        role: Role.Driver,
         cars: [],
         contactInfo: [],
         active: true,
@@ -51,6 +53,7 @@ export class UsermatchwebComponent implements OnInit {
         email: 'email@mail.com',
         address: '123',
         office: '2',
+        role: Role.Driver,
         batchEnd: '1',
         cars: [],
         contactInfo: [],
@@ -69,6 +72,60 @@ export class UsermatchwebComponent implements OnInit {
         address: '123',
         office: '1',
         batchEnd: '1',
+        role: Role.Driver,
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
+      },
+      choose: 'none',
+      face: 'front'
+    }, {
+      user: {
+        id: 1,
+        firstName: 'kristy',
+        lastName: 'Kreme',
+        email: 'email@mail.com',
+        address: '123',
+        office: '1',
+        role: Role.Driver,
+        batchEnd: '1',
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
+      },
+      choose: 'none',
+      face: 'front'
+    },
+    {
+      user: {
+        id: 1,
+        firstName: 'Frank',
+        lastName: 'frankse',
+        email: 'email@mail.com',
+        address: '123',
+        office: '2',
+        batchEnd: '1',
+        role: Role.Driver,
+        cars: [],
+        contactInfo: [],
+        active: true,
+        photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
+      },
+      choose: 'none',
+      face: 'front'
+    },
+    {
+      user: {
+        id: 1,
+        firstName: 'Jimbo',
+        lastName: 'Jank',
+        email: 'email@mail.com',
+        address: '123',
+        office: '1',
+        batchEnd: '1',
+        role: Role.Driver,
         cars: [],
         contactInfo: [],
         active: true,
@@ -85,6 +142,7 @@ export class UsermatchwebComponent implements OnInit {
         address: '123',
         office: '1',
         batchEnd: '1',
+        role: Role.Driver,
         cars: [],
         contactInfo: [],
         active: true,
@@ -101,6 +159,7 @@ export class UsermatchwebComponent implements OnInit {
         email: 'email@mail.com',
         address: '123',
         office: '2',
+        role: Role.Driver,
         batchEnd: '1',
         cars: [],
         contactInfo: [],
@@ -119,56 +178,7 @@ export class UsermatchwebComponent implements OnInit {
         address: '123',
         office: '1',
         batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
-      },
-      choose: 'none',
-      face: 'front'
-    }, {
-      user: {
-        id: 1,
-        firstName: 'kristy',
-        lastName: 'Kreme',
-        email: 'email@mail.com',
-        address: '123',
-        office: '1',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
-      },
-      choose: 'none',
-      face: 'front'
-    },
-    {
-      user: {
-        id: 1,
-        firstName: 'Frank',
-        lastName: 'frankse',
-        email: 'email@mail.com',
-        address: '123',
-        office: '2',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
-      },
-      choose: 'none',
-      face: 'front'
-    },
-    {
-      user: {
-        id: 1,
-        firstName: 'Jimbo',
-        lastName: 'Jank',
-        email: 'email@mail.com',
-        address: '123',
-        office: '1',
-        batchEnd: '1',
+        role: Role.Driver,
         cars: [],
         contactInfo: [],
         active: true,
