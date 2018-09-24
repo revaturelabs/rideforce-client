@@ -57,12 +57,12 @@ export class UserControllerService {
     });
   }
 
-  getUsersByOfficeAndRole(office: number, role: string): Observable<User> {
+  /* getUsersByOfficeAndRole(office: number, role: string): Observable<User> {
     return this.http.get<User>(environment.apiUrl + '/users', {
       params: { office: String(office), role },
     });
   }
-
+ */
   /**
    * Gets the currently logged-in user.
    */
@@ -139,7 +139,7 @@ export class UserControllerService {
   createOffice(newOffice: Office): Observable<Office> {
     return this.http.post<Office>(environment.apiUrl + '/offices', newOffice);
   }
-
+  
   // READ
   getAllOffices(): Observable<Office[]> {
     return this.http.get<Office[]>(environment.apiUrl + '/offices');
