@@ -20,14 +20,16 @@ export class AuthService {
 
   authenticate(email: string, password: string) {
     const credentials = { email, password };
+    console.log('in authenticate');
     return this.http
       .post<string>(environment.apiUrl + '/login', credentials)
       .pipe(
         map<string, void>(token => {
           this.tokenStorage.saveToken(token);
+          this.userService.getCurrentUser().subscribe();
           return null;
         })
-      );
+      );      
   }
 
   logout() {

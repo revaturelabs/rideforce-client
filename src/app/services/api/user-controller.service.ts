@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../../app/models/user.model';
 import { Register } from '../../../app/models/register.model';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { tap } from 'rxjs/operators';
 import { Office } from '../../models/office.model';
@@ -20,10 +20,13 @@ export class UserControllerService {
   // to be used with the url provided by back end
   private url = '';
 
-  private currentUser?: User;
+  isLoggedIn: boolean;
+  currentUser?: User;
   private users: User[] = [];
 
   private offices: Office[] = [];
+
+  currentUserSubject = new Subject<User>();
 
 
   // CRUD FOR USERS * * * * * * * * * * * * * * * * * * * * *
@@ -38,7 +41,7 @@ export class UserControllerService {
   createUser(newUser: Register, password: string): Observable<Register> {
     console.log('a');
     return this.http.post<Register>(environment.apiUrl + '/users',
-    {newUser, password}
+      { newUser, password }
     );
   }
 
@@ -73,7 +76,23 @@ export class UserControllerService {
       ? of(this.currentUser)
       : this.http
         .get<User>(environment.apiUrl + '/login')
-        .pipe(tap(user => (this.currentUser = user)));
+        .pipe(tap(user => {
+          this.currentUser = user;
+          this.currentUserSubject.next(user);
+        }));
+    
+  }
+
+  getCurrentUserObservable(): Observable<User> {
+    return this.currentUserSubject;
+  }
+
+  checkIfLoggedIn(){
+    if(this.currentUser != undefined){
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
   }
 
   // UPDATE
@@ -132,6 +151,7 @@ export class UserControllerService {
    */
   invalidateCurrentUser(): void {
     this.currentUser = undefined;
+    this.currentUserSubject.next(undefined);
   }
 
 

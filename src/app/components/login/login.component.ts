@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,24 +9,30 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authSrv: AuthService) { }
+  userEmail: string;
+  userPass: string;
+
+  constructor(private authService: AuthService, private route: Router) { }
 
   ngOnInit() {
 
   }
 
-  private email: string;
-  private password: string;
-
-
   login(){
-    this.authSrv.authenticate(this.email, this.password).subscribe(
-     data => {
+    console.log('in login');
+    this.authService.authenticate(this.userEmail, this.userPass).subscribe(
+      () => {
+        this.route.navigate(['/landing']);
         
+      },
+      // TODO if an error is returned, return the error message to user
+      //callback called if there is an error
+      e => {
+        //error coming from the backend
+        e.message;
       }
-    )
-  }
 
-  
+    );
+  }
 
 }

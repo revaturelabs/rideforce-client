@@ -4,7 +4,7 @@
     <!-- <a class="navbar-brand" routerLink="/home"><img src="../../../assets/img/rev-footer.png" class="img-fluid logo"></a> -->
     <button class="navbar-toggler ml-auto float-xs-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav"
       aria-expanded="false" aria-label="Toggle navigation" >
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span> 
     </button>
     <div class="dropdown">
         <button class="navbar-brand dropdown-toggle" type="button" id="dropdownSettingsButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -18,10 +18,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav" style="padding-left:-100px; font-size:14px;">
         <a class="nav-link text-expanded nav-text" routerLink="landing" style="padding-right:30px; padding-left:0%;">Home<span class="sr-only">(current)</span></a>
-        <a class="nav-link text-expanded nav-text" routerLink="/login" style="padding-right:30px;">Login</a>
-        <a class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>
-        <a class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
-        <a class="nav-link text-expanded" routerLink="/favorites" style="padding-right:30px;">Favorites</a>
+        <a *ngIf="!currentUser"class="nav-link text-expanded nav-text" routerLink="/login" style="padding-right:30px;">Login</a>
+        <a *ngIf="currentUser" class="nav-link text-expanded nav-text" (click)="logout()" style="padding-right:30px;">Logout</a>
+        <a *ngIf="currentUser" class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>
+        <a *ngIf="currentUser" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
+        <a *ngIf="currentUser" class="nav-link text-expanded" routerLink="/favorites" style="padding-right:30px;">Favorites</a>
       </div>
   </div>
   <div class="dropdown">

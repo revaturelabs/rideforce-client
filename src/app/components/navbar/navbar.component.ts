@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UserControllerService } from '../../services/api/user-controller.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +11,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn: boolean;
+  currentUser: User;
+
+  constructor(
+    private userService: UserControllerService,
+    private authService: AuthService,
+    private route: Router) { }
 
   ngOnInit() {
+    this.userService.getCurrentUserObservable().subscribe(
+      data => {
+        this.currentUser = data;
+        console.log(this.currentUser);
+      }
+    )
+  }
+
+  checkIfLoggedIn(){
+    if(this.userService.isLoggedIn){
+      this.isLoggedIn = true;
+    } 
+    else if(!this.userService.isLoggedIn) {
+      this.isLoggedIn = false;
+    }
+  }
+
+  // getCurrentUser(){
+  //   this.userService.getCurrentUser().subscribe(
+  //     data => {
+  //       this.currentUser = data;
+  //     }
+  //   )
+  // }
+
+  logout() {
+    this.authService.logout();
+    this.route.navigate['/landing'];
   }
 
 }
