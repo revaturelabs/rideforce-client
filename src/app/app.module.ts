@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -26,6 +26,8 @@ import { AuthService } from '../app/services/auth.service';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
 import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { AccountinfoComponent } from './components/accountinfo/accountinfo.component';
+//import { MatFormFieldModule } from '@angular/material';
 
 
 @NgModule({
@@ -43,11 +45,14 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
     UsermatchwebComponent,
     LikesmatchwebComponent,
     PlacesAutocompleteDirective,
-    FavoritesComponent
+    FavoritesComponent,
+    AccountinfoComponent
   ],
   imports: [
+    //MatFormFieldModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({

@@ -1,13 +1,95 @@
-<div class="container-fluid">
+<div class="container-fluid" [class.spooky-font]="styles!=null">
   <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8 text-center">
+    <div class="col-12 text-center">
       <h1>Drivers Near Me</h1>
       <button (click)="getRoute()">Testing</button>
-      <agm-map [latitude]="33" [longitude]="-70">
-
+      <agm-map (mapReady)="mapReady($event)" *ngIf="!isHidden" [latitude]="currentLat" [longitude]="currentLong" [styles]="styles"
+        [mapTypeId]="mapTypeId" [usePanning]="true">
+        <agm-marker *ngFor="let user of markers; let i = index" [iconUrl]="user.icon" [latitude]="user.location.latitude" [longitude]="user.location.longitude"
+          [opacity]="user.opacity">
+        </agm-marker>
+        <agm-marker *ngFor="let m of placedMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [title]="m.title">
+        </agm-marker>
       </agm-map>
+      <div class="row">
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <form class="form-inline" #form="ngForm">
+            <div class="form-group">
+              <input type="text" class="form-control" name="latitude" [(ngModel)]="currentLat" placeholder="Enter latitude" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="longitude" [(ngModel)]="currentLong" placeholder="Enter longitude" required>
+            </div>
+            <button type="button" (click)="setCenter()" class="btn btn-primary" [disabled]="form.invalid"> Go</button>
+
+
+          </form>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
+        <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
+        <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
+        <button (click)="changeStyle('halloween')" class="pumpkinButton"></button>
+        <br>
+
+      </div>
+      <div class="row">
+        <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="text-center">
+          </div>
+        </div>
+      </div>
+
+      <!-- <agm-map [latitude]="33" [longitude]="-70">
+
+      </agm-map> -->
+      <!-- -  - - - - - - - - - --    ------- --  - - - - - - - - - - -->
     </div>
-    <div class="col-2"></div>
   </div>
+  <div *ngIf="styles != null">
+    <div class="witch-container witch-container-one">
+      <div class="witch witch-one"></div>
+    </div>
+
+    <div class="witch-container witch-container-two">
+      <div class="witch witch-two"></div>
+    </div>
+
+    <div class="witch-container witch-container-three">
+      <div class="witch witch-three"></div>
+    </div>
+
+    <div class="witch-container witch-container-four">
+      <div class="witch witch-four"></div>
+    </div>
+
+
+    <div class="ghost-container ghost-container-one">
+      <div class="ghost ghost-one"></div>
+    </div>
+
+    <div class="ghost-container ghost-container-two">
+      <div class="ghost ghost-two"></div>
+    </div>
+
+    <div class="ghost-container ghost-container-three">
+      <div class="ghost ghost-three"></div>
+    </div>
+
+    <div class="ghost-container ghost-container-four">
+      <div class="ghost ghost-four"></div>
+    </div>
+  </div>
+
+
 </div>
+<img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background">
+<img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background2 flashit">
