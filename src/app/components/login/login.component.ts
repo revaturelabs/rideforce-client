@@ -20,11 +20,11 @@ export class LoginComponent implements OnInit {
   login(){
     this.authService.authenticate(this.userEmail, this.userPass).subscribe(
       () => {
-        this.route.navigate(['/home']);
+        this.route.navigate(['/landing']);
       }
       // TODO if an error is returned, return the error message to user
 
     );
-  }  
+  }
 
 }
