@@ -83,6 +83,7 @@ export class UserControllerService {
   }
 
   getCurrentUserObservable(): Observable<User> {
+    this.getCurrentUser().subscribe();
     return this.currentUserSubject;
   }
 

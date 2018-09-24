@@ -42,7 +42,8 @@ export class AccountinfoComponent implements OnInit {
   token: string;
   searchedAddress: string;
 
-  officeObject: Office[] = [];
+  officeObjectArray: Office[] = [];
+  officeObject: Office;
   //Home address
   address1: string;
 
@@ -98,7 +99,7 @@ export class AccountinfoComponent implements OnInit {
         Validators.maxLength(15)
       ]),
     });
-
+    this.getOffices();
   }
 
 
@@ -176,7 +177,7 @@ export class AccountinfoComponent implements OnInit {
 
   getOffices() {
     this.userService.getAllOffices().subscribe(data => {
-      this.officeObject = data;
+      this.officeObjectArray = data;
     });
   }
 
