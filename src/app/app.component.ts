@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,5 +13,7 @@ export class AppComponent {
   onTap(event) {
     console.log(event);
   }
+
+ 
 }
 

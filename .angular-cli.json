@@ -19,9 +19,12 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/aos/dist/aos.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/aos/dist/aos.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

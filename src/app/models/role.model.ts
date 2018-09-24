@@ -1,4 +1,4 @@
-enum Role {
+export enum Role {
     Driver = 'DRIVER',
     Rider = 'RIDER',
     Trainer = 'TRAINER',

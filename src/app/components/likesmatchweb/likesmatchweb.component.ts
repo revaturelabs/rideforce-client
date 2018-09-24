@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Role } from '../../models/role.model';
 
 interface UserCard {
     user: User;
@@ -36,6 +37,7 @@ export class LikesmatchwebComponent implements OnInit {
                 address: '123',
                 office: '1',
                 batchEnd: '1',
+                role: Role.Driver,
                 cars: [],
                 contactInfo: [],
                 active: true,
@@ -53,6 +55,7 @@ export class LikesmatchwebComponent implements OnInit {
                 address: '123',
                 office: '2',
                 batchEnd: '1',
+                role: Role.Driver,
                 cars: [],
                 contactInfo: [],
                 active: true,
@@ -70,6 +73,7 @@ export class LikesmatchwebComponent implements OnInit {
                 address: '123',
                 office: '1',
                 batchEnd: '1',
+                role: Role.Driver,
                 cars: [],
                 contactInfo: [],
                 active: true,
@@ -87,6 +91,7 @@ export class LikesmatchwebComponent implements OnInit {
                 address: '123',
                 office: '2',
                 batchEnd: '1',
+                role: Role.Driver,
                 cars: [],
                 contactInfo: [],
                 active: true,

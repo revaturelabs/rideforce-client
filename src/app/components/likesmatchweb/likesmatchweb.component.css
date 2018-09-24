@@ -20,3 +20,11 @@
   .card {
     height: 400px;
   }
+  @media screen and (max-width: 1000px) {
+    .grid-container {
+      display: grid;
+      grid-gap: 50px 50px;
+      grid-template-columns: 50% 50%;
+      padding: 10px;
+    }    
+  }

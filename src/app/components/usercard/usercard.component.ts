@@ -4,6 +4,7 @@ import { User } from '../../models/user.model';
 import { AddressModel } from '../../models/address.model';
 import { SwipecardModel } from '../../models/swipecard.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Role } from '../../models/role.model';
 
 @Component({
     selector: 'app-usercard',
@@ -39,6 +40,7 @@ export class UsercardComponent implements OnInit {
                 address: '123',
                 office: '1',
                 batchEnd: '1',
+                role: Role.Driver,
                 cars: [],
                 contactInfo: [],
                 active: true,
@@ -55,6 +57,7 @@ export class UsercardComponent implements OnInit {
                 address: '123',
                 office: '2',
                 batchEnd: '1',
+                role: Role.Driver,
                 cars: [],
                 contactInfo: [],
                 active: true,
@@ -69,6 +72,7 @@ export class UsercardComponent implements OnInit {
                 email: 'email@mail.com',
                 address: '123',
                 office: '1',
+                role: Role.Driver,
                 batchEnd: '1',
                 cars: [],
                 contactInfo: [],
