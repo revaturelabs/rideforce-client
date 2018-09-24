@@ -18,6 +18,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
   { path: 'register', component: RegisterComponent},
+  { path: 'accountInfo', component: AccountinfoComponent},
   { path: 'rideswipe', component: RideswipeComponent },
   { path: 'userCard', component: UsercardComponent },
   { path: 'favorites', component: FavoritesComponent }
