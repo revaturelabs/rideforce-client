@@ -7,6 +7,7 @@ import { Car } from '../../models/car.model';
 import { ContactInfo } from '../../models/contact-info.model';
 import { AuthService } from '../../services/auth.service';
 import { Office } from '../../models/office.model';
+import { Role } from '../../models/role.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 
@@ -151,20 +152,26 @@ export class AccountinfoComponent implements OnInit {
   }
 
   createUserObject() {
-    this.userObject.firstName = this.firstName;
-    this.userObject.lastName = this.lastName;
-    this.userObject.contactInfo = [];
-    this.userObject.batchEnd = this.batchEnd;
-    this.userObject.email = this.username;
-    this.userObject.active = true;
-    this.userObject.address = this.address1;
-    this.userObject.office = this.address2;
-    this.userObject.cars = [];
-    //this wil change when we have offices set up
-    this.userObject.office = '/offices/1';
+    this.userObject = {
+      id: 0,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.username,
+      photoUrl: '',
+      address: this.address2,
+      office: '/offices/1',
+      batchEnd: new Date(this.batchEnd).toISOString(),
+      cars: [],
+      active: true,
+      contactInfo: [],
+      role: Role.Driver
+
+    }
 
     //get id from user after post and associate with a car object
     //this.carObject.id = owner from post
+    this.userService.createUser(this.userObject, this.password, this.token)
+      .subscribe(console.log);
   }
 
   getOffices() {
@@ -173,10 +180,8 @@ export class AccountinfoComponent implements OnInit {
     });
   }
 
-  tabSelect(e: NgbTabChangeEvent)
-  {
-    if(Number(e.nextId) > this.currentTab)
-    {
+  tabSelect(e: NgbTabChangeEvent) {
+    if (Number(e.nextId) > this.currentTab) {
       e.preventDefault();
     }
   }
@@ -194,9 +199,8 @@ export class AccountinfoComponent implements OnInit {
     }
   }
 
-  checkCarInfo()
-  {
-    
+  checkCarInfo() {
+
   }
 
   bioNext() {
