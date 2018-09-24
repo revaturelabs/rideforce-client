@@ -42,7 +42,8 @@ export class UsercardComponent implements OnInit {
                 cars: [],
                 contactInfo: [],
                 active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
+                role: Role.Driver
             },
             visible: false
         },
@@ -58,7 +59,8 @@ export class UsercardComponent implements OnInit {
                 cars: [],
                 contactInfo: [],
                 active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
+                role: Role.Driver
             },
             visible: false
         }, {
@@ -73,7 +75,8 @@ export class UsercardComponent implements OnInit {
                 cars: [],
                 contactInfo: [],
                 active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
+                photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg',
+                role: Role.Driver
             },
             visible: false
         }

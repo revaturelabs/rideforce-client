@@ -22,7 +22,8 @@ export class LikesComponent implements OnInit {
             cars: [],
             contactInfo: [],
             active: true,
-            photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
+            photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
+            role: Role.Driver
         },
         visible: false
     },
@@ -38,7 +39,8 @@ export class LikesComponent implements OnInit {
             cars: [],
             contactInfo: [],
             active: true,
-            photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
+            photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
+            role: Role.Driver
         },
         visible: false
     },
@@ -54,7 +56,8 @@ export class LikesComponent implements OnInit {
           cars: [],
           contactInfo: [],
           active: true,
-          photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
+          photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
+          role: Role.Driver
       },
       visible: false
   },
@@ -70,7 +73,8 @@ export class LikesComponent implements OnInit {
           cars: [],
           contactInfo: [],
           active: true,
-          photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
+          photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
+          role: Role.Driver
       },
       visible: false
   }

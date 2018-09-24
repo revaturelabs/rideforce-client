@@ -137,7 +137,7 @@ export class UserControllerService {
 
   // OFFICE CRUD * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   createOffice(newOffice: Office): Observable<Office> {
-    return this.http.post<Office>(environment.apiUrl + '/offices',newOffice);
+    return this.http.post<Office>(environment.apiUrl + '/offices', newOffice);
   }
 
   // READ
