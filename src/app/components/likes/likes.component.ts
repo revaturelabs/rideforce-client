@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SwipecardModel } from '../../models/swipecard.model';
-
+import { Role } from '../../models/role.model';
 
 @Component({
   selector: 'app-likes',
@@ -19,6 +19,7 @@ export class LikesComponent implements OnInit {
             address: '123',
             office: '1',
             batchEnd: '1',
+            role: Role.Driver,
             cars: [],
             contactInfo: [],
             active: true,
@@ -35,6 +36,7 @@ export class LikesComponent implements OnInit {
             address: '123',
             office: '2',
             batchEnd: '1',
+            role: Role.Driver,
             cars: [],
             contactInfo: [],
             active: true,
@@ -51,6 +53,7 @@ export class LikesComponent implements OnInit {
           address: '123',
           office: '1',
           batchEnd: '1',
+            role: Role.Driver,
           cars: [],
           contactInfo: [],
           active: true,
@@ -67,6 +70,7 @@ export class LikesComponent implements OnInit {
           address: '123',
           office: '2',
           batchEnd: '1',
+            role: Role.Driver,
           cars: [],
           contactInfo: [],
           active: true,
