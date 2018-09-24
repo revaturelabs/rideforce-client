@@ -50,34 +50,46 @@ a:hover {
     -webkit-animation-delay: 0.3s;
     -moz-animation-delay: 0.3s;
     animation-delay: 0.3s;
-  }
+}
 
 .fadeIn.second {
- -webkit-animation-delay: 0.5s;
- -moz-animation-delay: 0.5s;
-  animation-delay: 0.5s;
+   -webkit-animation-delay: 0.5s;
+   -moz-animation-delay: 0.5s;
+   animation-delay: 0.5s;
 }
 
 .fadeIn.third {
     -webkit-animation-delay: 0.7s;
     -moz-animation-delay: 0.7s;
      animation-delay: 0.7s;
-   }
+}
 
 .fadeIn.fourth {
     -webkit-animation-delay: 0.9s;
     -moz-animation-delay: 0.9s;
      animation-delay: 0.9s;
    }
-    
-   [aos="fade"] {
-    opacity: 0;
-    transition-property: opacity;
-  }
-  
-  [aos="fade"].aos-animate {
-    opacity: 1;
-  }
+
+.fadeIn.fifth {
+    -webkit-animation-delay: 0.12s;
+    -moz-animation-delay: 0.12s;
+    animation-delay: 0.12s;
+   }
+
+.fadeIn.sixth {
+    -webkit-animation-delay: 0.14s;
+    -moz-animation-delay: 0.14s;
+    animation-delay: 0.14s;
+}
+
+.fadeIn.seventh {
+  -webkit-animation-delay: 0.16s;
+  -moz-animation-delay: 0.16s;
+  animation-delay: 0.16s;
+}
+
+
+ 
 
 
 /*
@@ -112,6 +124,7 @@ body {
 
 .cover-container {
   max-width: 42em;
+  border: -20px;
 }
 
 .cover-heading {
@@ -262,10 +275,19 @@ body {
     margin: 5px;
   }
   #rider {
+    position: relative;
     border: 1px solid;
     padding: 10px;
     box-shadow: 5px 10px;
+    font-size: 20px;
+    margin-right: 300px;
   }
+
+  .header {
+    width: 100%
+  }
+
+  
   
   .button span {
     cursor: pointer;
@@ -308,7 +330,6 @@ body {
  }   
 
  .animated {
-  background-image: url(/css/images/logo.png);
   background-repeat: no-repeat;
   background-position: left top;
   padding-top:95px;
