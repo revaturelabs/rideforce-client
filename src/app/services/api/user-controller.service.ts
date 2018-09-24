@@ -18,7 +18,7 @@ export class UserControllerService {
   constructor(private http: HttpClient) { }
 
   // to be used with the url provided by back end
-  private url: string = "";
+  private url = '';
 
   private currentUser?: User;
   private users: User[] = [];
