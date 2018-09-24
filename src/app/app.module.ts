@@ -27,6 +27,7 @@ import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http'
 import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
