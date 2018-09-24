@@ -2,6 +2,7 @@ import { Link } from './link.model';
 import { Office } from './office.model';
 import { Car } from './car.model';
 import { ContactInfo } from './contact-info.model';
+import { Role } from './role.model';
 
 export interface User {
   /**
