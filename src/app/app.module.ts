@@ -14,7 +14,6 @@ import { HowToComponent } from './components/how-to/how-to.component';
 import { MapComponent } from './components/map/map.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LikesComponent } from './components/likes/likes.component';
 import { UsermatchwebComponent } from './components/usermatchweb/usermatchweb.component';
@@ -27,8 +26,7 @@ import { HttpClientModule, HttpClient, HttpHandler, HTTP_INTERCEPTORS } from '@a
 import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { AccountinfoComponent } from './components/accountinfo/accountinfo.component';
-//import { MatFormFieldModule } from '@angular/material';
-//import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
+import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
 
@@ -41,7 +39,6 @@ import { ErrorInterceptor } from './utils/error.interceptor';
     HowToComponent,
     MapComponent,
     NavbarComponent,
-    RegisterComponent,
     LoginComponent,
     LikesComponent,
     UsermatchwebComponent,
@@ -51,7 +48,6 @@ import { ErrorInterceptor } from './utils/error.interceptor';
     AccountinfoComponent
   ],
   imports: [
-    //MatFormFieldModule,
     BrowserModule,
     //nimateOnScrollModule.forRoot(),
     FormsModule,
