@@ -41,8 +41,7 @@ export class LikesmatchwebComponent implements OnInit {
                 cars: [],
                 contactInfo: [],
                 active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
-                role: Role.Driver
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
             },
             choose: 'none',
             face: 'front'
@@ -60,8 +59,7 @@ export class LikesmatchwebComponent implements OnInit {
                 cars: [],
                 contactInfo: [],
                 active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
-                role: Role.Driver
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
             },
             choose: 'none',
             face: 'front'
@@ -79,8 +77,7 @@ export class LikesmatchwebComponent implements OnInit {
                 cars: [],
                 contactInfo: [],
                 active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
-                role: Role.Driver
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
             },
             choose: 'none',
             face: 'front'
@@ -98,8 +95,7 @@ export class LikesmatchwebComponent implements OnInit {
                 cars: [],
                 contactInfo: [],
                 active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
-                role: Role.Driver
+                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
             },
             choose: 'none',
             face: 'front'

@@ -1,19 +1,10 @@
-<div class="container-fluid" [class.spooky-font]="styles!=null">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-12 text-center">
-      <h1>Drivers Near Me</h1>
-      <button (click)="getRoute()">Testing</button>
-      <div class="row">
-          <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
-          <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
-          <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
-          <button (click)="changeStyle('halloween')" class="pumpkinButton"></button>
-          <br>
-  
-        </div>
-        <div class="row">
-          <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>
-        </div>
+    <div class="col-1"></div>
+    <div class="col-10">
+      <br>
+      <br>
+      <br>
       <agm-map (mapReady)="mapReady($event)" *ngIf="!isHidden" [latitude]="currentLat" [longitude]="currentLong" [styles]="styles"
         [mapTypeId]="mapTypeId" [usePanning]="true">
         <agm-marker *ngFor="let user of markers; let i = index" [iconUrl]="user.icon" [latitude]="user.location.latitude" [longitude]="user.location.longitude"
@@ -21,26 +12,73 @@
         </agm-marker>
         <agm-marker *ngFor="let m of placedMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [title]="m.title">
         </agm-marker>
+        <agm-circle [visible]="true" [latitude]="circle.latitude" [longitude]="circle.longitude" [radius]="circle.radius" [fillOpacity]=".2"
+          [circleDraggable]="true" [fillColor]="'blue'">
+        </agm-circle>
       </agm-map>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+<div class="container-fluid" [class.spooky-font]="styles!=null">
+
+  <div class="row">
+
+    <div class="col-12 text-center">
+
+      <!--    <button (click)="getRoute()">Testing</button>
       <div class="row">
+        
+        </div> -->
 
-        <div class="col-md-6 col-sm-12 col-xs-12">
-          <form class="form-inline" #form="ngForm">
-            <div class="form-group">
-              <input type="text" class="form-control" name="latitude" [(ngModel)]="currentLat" placeholder="Enter latitude" required>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="longitude" [(ngModel)]="currentLong" placeholder="Enter longitude" required>
-            </div>
-            <button type="button" (click)="setCenter()" class="btn btn-primary" [disabled]="form.invalid"> Go</button>
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Map Style
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" (click)="setMapType('terrain')">Terrain</a>
+            <a class="dropdown-item" (click)="setMapType('satellite')">Satellite</a>
+            <a class="dropdown-item" (click)="setMapType('roadmap')">Road Map</a>
+            <a class="dropdown-item" (click)="changeStyle('halloween')">Halloween</a>
+          </div>
+          <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>
+        </div>
+        <!--  <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
+        <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
+        <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
+        <button (click)="changeStyle('halloween')" class="pumpkinButton"></button> -->
+        <br>
 
+      </div>
 
-          </form>
+      <h1>Drivers Near Me</h1>
+      <br>
+      <div class="row">
+        <div class="col-lg-4 col-lg-offset-4 ">
+          <div class="col-lg-8 col-lg-offset-2 ">
+            <form class="form-inline" #form="ngForm">
+              <div class="form-group">
+                <input type="text" class="form-control" name="myLocation" (addressSelect)="setCenter($event)" placeholder="Enter Your Location"
+                  appPlacesAutocomplete required>
+              </div>
+            </form>
+          </div>
+          <br>
+          <div class="col-lg-8 col-lg-offset-2 ">
+            <form class="form-inline" #form="ngForm">
+              <div class="form-group">
+                <input type="number" class="form-control" name="radius" [(ngModel)]="currentRadius" placeholder="Enter Search Radius">
+              </div>
+              <button type="button" (click)="changeRadius()" class="btn btn-primary" [disabled]="form.invalid"> Find Drivers</button>
+            </form>
+          </div>
         </div>
       </div>
       <br>
 
-      
+
       <br>
       <div class="row">
         <div class="col-md-12">

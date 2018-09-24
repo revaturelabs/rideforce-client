@@ -12,7 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UsercardComponent } from './components/usercard/usercard.component';
 import { HowToComponent } from './components/how-to/how-to.component';
 import { MapComponent } from './components/map/map.component';
-import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper, CircleManager } from '@agm/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -67,7 +67,7 @@ import { AccountinfoComponent } from './components/accountinfo/accountinfo.compo
     UserControllerService,
     AuthService,
     MatchingControllerService,
-    GoogleMapsAPIWrapper,
+    GoogleMapsAPIWrapper
 
     // HttpClientModule,
     // HttpClient,

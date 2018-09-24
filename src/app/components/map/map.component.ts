@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } fro
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
 import { Location } from './../../models/location.model';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { User } from '../../models/user.model';
 // import { } from '@types/googlemaps';
 
@@ -13,7 +15,7 @@ import { User } from '../../models/user.model';
     NgbTabset
   ]
 })
-export class MapComponent implements OnInit{
+export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   private start = 'herndon';
   private end = 'reston';
@@ -210,6 +212,7 @@ export class MapComponent implements OnInit{
 
   currentLat: any;
   currentLong: any;
+  currentRadius = 5000;
 
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
   marker: google.maps.Marker;
@@ -231,9 +234,17 @@ export class MapComponent implements OnInit{
 
   isHidden = false;
 
+  myLocation: any;
+
   song = new Audio();
 
-  constructor(private mapService: MapsControllerService) { }
+  circle: any = {
+    latitude: this.currentLat,
+    longitude: this.currentLong,
+    radius: this.currentRadius
+  };
+
+  constructor(private mapService: MapsControllerService, private zone: NgZone) { }
 
   protected mapReady(map) {
     this.map = map;
@@ -298,14 +309,38 @@ export class MapComponent implements OnInit{
     this.mapTypeId = mapTypeId;
   }
 
-  setCenter() {
+  setCenter(address) {
+    this.zone.run(() => {
+      // this.addr = addrObj;
+      // this.addrKeys = Object.keys(addrObj);
+      this.addOriginFromAddress(address);
+    });
+
     this.map.setCenter(new google.maps.LatLng(this.currentLat, this.currentLong));
     const marker = {
       lat: this.currentLat,
       lng: this.currentLong,
       title: 'got you!'
     };
+    this.circle.latitude = this.currentLat;
+    this.circle.longitude = this.currentLong;
+
+    this.placedMarkers = [];
     this.placedMarkers.push(marker);
+  }
+
+  public addOriginFromAddress(addressObject) {
+    this.currentLat = addressObject.geometry.location.lat();
+    this.currentLong = addressObject.geometry.location.lng();
+  }
+
+  public changeRadius() {
+    setTimeout(() => {
+      console.log(this.circle.radius + ' ' + this.currentRadius);
+      this.circle.radius = this.currentRadius;
+    },
+      100);
+
   }
 
   simpleMarkerHandler() {
@@ -370,10 +405,13 @@ export class MapComponent implements OnInit{
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.showPosition(position);
+        this.circle.latitude = this.currentLat;
+        this.circle.longitude = this.currentLong;
       });
     } else {
       alert('Geolocation is not supported by this browser.');
     }
+
   }
 
   trackMe() {
