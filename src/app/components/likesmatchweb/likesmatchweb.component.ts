@@ -51,7 +51,7 @@ export class LikesmatchwebComponent implements OnInit {
                             this.userService.getUserById(id).subscribe(
                                 data3 => {
                                     if (!data3.photoUrl || data3.photoUrl === 'null') {
-                                        data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
+                                        data3.photoUrl = 'https://s3.us-east-2.amazonaws.com/rydeforce/rydeforce-s3/65600312303b.png';
                                     }
                                     const card: UserCard = {
                                         user: data3,
