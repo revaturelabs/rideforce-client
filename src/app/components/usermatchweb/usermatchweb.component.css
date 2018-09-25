@@ -4,6 +4,14 @@
     overflow-y:auto;
   }
 
+  .cardimg {
+    height:200px;
+  }
+
+  .card-text {
+    font-size: 15px;
+  }
+
   .grid-container {
     display: grid;
     grid-gap: 50px 50px;

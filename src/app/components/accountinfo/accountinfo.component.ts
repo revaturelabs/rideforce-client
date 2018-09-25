@@ -10,6 +10,7 @@ import { Office } from '../../models/office.model';
 import { Role } from '../../models/role.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
+import { UploadService } from '../../services/upload.service';
 
 
 
@@ -29,11 +30,13 @@ export class AccountinfoComponent implements OnInit {
   private tabset: NgbTabset;
 
   mobile: Boolean = false;
-  requiredFields: Boolean = true;
+  requiredInfoFields: Boolean = true;
+  requiredCarFields: Boolean = true;
 
   currentTab: number = 1;
 
   userObject: User;
+  roleObject: Role;
   firstName: string;
   lastName: string;
   username: string;
@@ -47,10 +50,12 @@ export class AccountinfoComponent implements OnInit {
   //Home address
   address1: string;
 
-  //office Address
+  // office Address
   address2: string;
 
-
+  //s3 bucket variable for selecting files
+  selectedFiles: FileList;
+  imageSrc: string;
 
   registerForm: FormGroup;
   validatorFn: Validators;
@@ -59,7 +64,7 @@ export class AccountinfoComponent implements OnInit {
   bio: string;
   // Array of contact info
   contactInfoArray: ContactInfo[] = [];
-  contactTypeArray: string[] = ['Phone', 'Email', 'Slack', 'Skype', 'Discord', 'GroupMe', 'Other'];
+  contactTypeArray: string[] = ['Cell Phone', 'Email', 'Slack', 'Skype', 'Discord', 'Facebook', 'GroupMe', 'Other'];
   contactType: string;
   contactItem: string;
   // batch end date
@@ -73,9 +78,9 @@ export class AccountinfoComponent implements OnInit {
   optInToDrive: boolean;
 
   // booleans for car information buttons
-  btnCarInfo: Boolean = false;
+  btnCarInfo: Number = 0;
 
-  constructor(private zone: NgZone, private auth: AuthService, private userService: UserControllerService) { }
+  constructor(private zone: NgZone, private auth: AuthService, private userService: UserControllerService, private uploadService: UploadService) { }
 
   ngOnInit() {
     if (window.screen.width <= 430) { // 768px portrait
@@ -120,16 +125,17 @@ export class AccountinfoComponent implements OnInit {
     });
   }
 
-  AddCarInfo() {
-    if (this.btnCarInfo) {
-      this.carMake = '';
-      this.carModel = '';
-      this.carYear;
-      this.btnCarInfo = false;
-    }
-    else if (!this.btnCarInfo) {
-      this.btnCarInfo = true;
-    }
+  isDriver() {
+    this.btnCarInfo = 1;
+    this.roleObject = Role.Driver;
+  }
+
+  isRider() {
+    this.carMake = '';
+    this.carModel = '';
+    this.carYear;
+    this.btnCarInfo = 2;
+    this.roleObject = Role.Rider;
   }
 
   addContact(): void {
@@ -152,20 +158,35 @@ export class AccountinfoComponent implements OnInit {
     this.carObject.year = this.carYear;
   }
 
+  updload()
+  {
+    const file = this.selectedFiles.item(0);
+    this.imageSrc = this.uploadService.uploadfile(file);
+  } 
+
+  selectFile(event)
+  {
+    this.selectedFiles = event.target.files;
+    console.log(this.selectedFiles[0].name)
+  }
+
   createUserObject() {
+
+    this.updload();
+
     this.userObject = {
       id: 0,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.username,
-      photoUrl: '',
+      photoUrl: this.imageSrc,
       address: this.address2,
       office: '/offices/1',
       batchEnd: new Date(this.batchEnd).toISOString(),
       cars: [],
       active: true,
       contactInfo: [],
-      role: Role.Driver
+      role: this.roleObject
 
     }
 
@@ -191,17 +212,13 @@ export class AccountinfoComponent implements OnInit {
     if (this.firstName && this.lastName && this.username
       && this.password && this.passwordConfirm && this.token
       && this.address2 && this.batchEnd) {
-      this.requiredFields = true;
+      this.requiredInfoFields = true;
       this.currentTab++;
       this.tabset.select('2');
     }
     else {
-      this.requiredFields = false;
+      this.requiredInfoFields = false;
     }
-  }
-
-  checkCarInfo() {
-
   }
 
   bioNext() {
@@ -214,8 +231,15 @@ export class AccountinfoComponent implements OnInit {
   }
 
   carNext() {
-    this.currentTab++;
-    this.tabset.select('4');
+
+    if (this.btnCarInfo == 0) {
+      this.requiredCarFields = false;
+    }
+    else if (this.btnCarInfo > 0) {
+      this.requiredCarFields = true;
+      this.currentTab++;
+      this.tabset.select('4');
+    }
   }
 
   carPrevious() {

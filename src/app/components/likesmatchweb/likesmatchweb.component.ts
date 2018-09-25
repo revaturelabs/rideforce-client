@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Role } from '../../models/role.model';
+import { Link } from '../../models/link.model';
+import { MatchingControllerService } from '../../services/api/matching-controller.service';
+import { UserControllerService } from '../../services/api/user-controller.service';
 
 interface UserCard {
     user: User;
@@ -27,85 +30,44 @@ interface UserCard {
 
 export class LikesmatchwebComponent implements OnInit {
 
-    likecards: UserCard[] = [
-        {
-            user: {
-                id: 1,
-                firstName: 'kristy',
-                lastName: 'Kreme',
-                email: 'email@mail.com',
-                address: '123',
-                office: '1',
-                batchEnd: '1',
-                role: Role.Driver,
-                cars: [],
-                contactInfo: [],
-                active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
-            },
-            choose: 'none',
-            face: 'front'
-        },
-        {
-            user: {
-                id: 1,
-                firstName: 'Frank',
-                lastName: 'frankse',
-                email: 'email@mail.com',
-                address: '123',
-                office: '2',
-                batchEnd: '1',
-                role: Role.Driver,
-                cars: [],
-                contactInfo: [],
-                active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
-            },
-            choose: 'none',
-            face: 'front'
-        },
-        {
-            user: {
-                id: 1,
-                firstName: 'kristy',
-                lastName: 'Kreme',
-                email: 'email@mail.com',
-                address: '123',
-                office: '1',
-                batchEnd: '1',
-                role: Role.Driver,
-                cars: [],
-                contactInfo: [],
-                active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
-            },
-            choose: 'none',
-            face: 'front'
-        },
-        {
-            user: {
-                id: 1,
-                firstName: 'Frank',
-                lastName: 'frankse',
-                email: 'email@mail.com',
-                address: '123',
-                office: '2',
-                batchEnd: '1',
-                role: Role.Driver,
-                cars: [],
-                contactInfo: [],
-                active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
-            },
-            choose: 'none',
-            face: 'front'
-        }
+    likecards: UserCard[] = [];
 
-    ];
+    constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
 
-    constructor() { }
+    currentUser: User;
 
     ngOnInit() {
+        this.userService.getCurrentUser().subscribe(
+            data => {
+                this.currentUser = data;
+                let userLinks: Link<User>[] = null;
+                this.matchService.getLikedDrivers(this.currentUser.id).subscribe(
+                    data2 => {
+                        console.log(data2);
+                        userLinks = data2;
+                        for (let i = 0; i < userLinks.length; i++) {
+                            console.log(userLinks[i].replace(/\D/g, ''));
+                            const id: number = +userLinks[i].replace(/\D/g, '')[1];
+                            this.userService.getUserById(id).subscribe(
+                                data3 => {
+                                    if (!data3.photoUrl || data3.photoUrl === 'null') {
+                                        data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
+                                    }
+                                    const card: UserCard = {
+                                        user: data3,
+                                        choose: 'none',
+                                        face: 'front'
+                                    };
+                                    this.likecards.push(card);
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+        );
+
+
     }
 
 
