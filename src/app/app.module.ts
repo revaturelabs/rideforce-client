@@ -49,7 +49,7 @@ import { ErrorInterceptor } from './utils/error.interceptor';
   ],
   imports: [
     BrowserModule,
-    //nimateOnScrollModule.forRoot(),
+    AnimateOnScrollModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
