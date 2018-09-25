@@ -10,6 +10,7 @@ import { Office } from '../../models/office.model';
 import { Role } from '../../models/role.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
+import { UploadService } from '../../services/upload.service';
 
 
 
@@ -52,7 +53,9 @@ export class AccountinfoComponent implements OnInit {
   //office Address
   address2: string;
 
-
+  //s3 bucket variable for selecting files
+  selectedFiles: FileList;
+  imageSrc: string;
 
   registerForm: FormGroup;
   validatorFn: Validators;
@@ -61,7 +64,7 @@ export class AccountinfoComponent implements OnInit {
   bio: string;
   // Array of contact info
   contactInfoArray: ContactInfo[] = [];
-  contactTypeArray: string[] = ['Phone', 'Email', 'Slack', 'Skype', 'Discord', 'GroupMe', 'Other'];
+  contactTypeArray: string[] = ['Cell Phone', 'Email', 'Slack', 'Skype', 'Discord', 'Facebook', 'GroupMe', 'Other'];
   contactType: string;
   contactItem: string;
   // batch end date
@@ -77,7 +80,7 @@ export class AccountinfoComponent implements OnInit {
   // booleans for car information buttons
   btnCarInfo: Number = 0;
 
-  constructor(private zone: NgZone, private auth: AuthService, private userService: UserControllerService) { }
+  constructor(private zone: NgZone, private auth: AuthService, private userService: UserControllerService, private uploadService: UploadService) { }
 
   ngOnInit() {
     if (window.screen.width <= 430) { // 768px portrait
@@ -155,13 +158,28 @@ export class AccountinfoComponent implements OnInit {
     this.carObject.year = this.carYear;
   }
 
+  updload()
+  {
+    const file = this.selectedFiles.item(0);
+    this.imageSrc = this.uploadService.uploadfile(file);
+  } 
+
+  selectFile(event)
+  {
+    this.selectedFiles = event.target.files;
+    console.log(this.selectedFiles[0].name)
+  }
+
   createUserObject() {
+
+    this.updload();
+
     this.userObject = {
       id: 0,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.username,
-      photoUrl: '',
+      photoUrl: this.imageSrc,
       address: this.address2,
       office: '/offices/1',
       batchEnd: new Date(this.batchEnd).toISOString(),
