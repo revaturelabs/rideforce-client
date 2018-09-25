@@ -15,15 +15,16 @@ export class MatchingControllerService {
    * a link is a reference to the object without having to fetch the object from the database
    * @param uri 
    */
-  getFromLink(uri: Link<any>): any{
+  getFromLink(uri: Link<any>): Observable<any> {
     return this.http.get<any>(environment.apiUrl + uri);
   }
   /**
    * Returns all drivers who match the rider with the given user ID.
    * 
-   * @param riderId 
+   * @param riderId
    */
   getMatchingDrivers(riderId: number): Observable<Link<User>[]> {
+   
     return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
   }
 
@@ -33,7 +34,8 @@ export class MatchingControllerService {
    * @param riderId 
    */
   getLikedDrivers(riderId: number): Observable<Link<User>[]> {
-    return this.http.get<Link<User>[]>(environment.apiUrl + `/likes/${riderId}`);
+    console.log(environment.apiUrl + `/matches/likes/${riderId}`);
+    return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/likes/${riderId}`);
   }
 
   /**
@@ -42,8 +44,10 @@ export class MatchingControllerService {
    * @param riderId 
    * @param driverId 
    */
-  likeDriver(riderId: string, driverId: string): void {
-    this.http.put<Link<User>[]>(environment.apiUrl + `/likes/${riderId}/${driverId}`, '');
+  likeDriver(riderId: number, driverId: number): Observable<string[]> {
+    
+    return this.http.put<Link<User>[]>(environment.apiUrl + `/matches/likes/${riderId}/${driverId}`, '');
+
   }
 
   /**
@@ -52,8 +56,8 @@ export class MatchingControllerService {
    * @param riderId 
    * @param driverId 
    */
-  unlikeDriver(riderId: string, driverId: string): void {
-    this.http.delete<Link<User>[]>(environment.apiUrl + `/likes/${riderId}/${driverId}`);
+  unlikeDriver(riderId: number, driverId: number): Observable<string[]> {
+    return this.http.delete<Link<User>[]>(environment.apiUrl + `/matches/likes/${riderId}/${driverId}`);
   }
 
   /**
@@ -61,7 +65,7 @@ export class MatchingControllerService {
    * @param riderId 
    */
   getDislikedDrivers(riderId: number): Observable<Link<User>[]> {
-    return this.http.get<Link<User>[]>(environment.apiUrl + `/dislikes/${riderId}`);
+    return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/dislikes/${riderId}`);
   }
 
   /**
@@ -70,8 +74,8 @@ export class MatchingControllerService {
    * @param riderId 
    * @param driverId 
    */
-  dislikeDriver(riderId: string, driverId: string): void {
-    this.http.put<Link<User>[]>(environment.apiUrl + `/dislikes/${riderId}/${driverId}`, '');
+  dislikeDriver(riderId: number, driverId: number): Observable<string[]> {
+    return this.http.put<Link<User>[]>(environment.apiUrl + `/matches/dislikes/${riderId}/${driverId}`, '');
   }
 
   /**
@@ -80,7 +84,7 @@ export class MatchingControllerService {
    * @param riderId 
    * @param driverId 
    */
-  unDislikeDriver(riderId: string, driverId: string): void {
-    this.http.delete<Link<User>[]>(environment.apiUrl + `/dislikes/${riderId}/${driverId}`);
+  unDislikeDriver(riderId: number, driverId: number): Observable<string[]> {
+    return this.http.delete<Link<User>[]>(environment.apiUrl + `/matches/dislikes/${riderId}/${driverId}`);
   }
 }

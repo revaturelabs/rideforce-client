@@ -5,7 +5,7 @@
       <div class="enlarge">
         <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item">
           <div *ngIf="user.face=='front' || user.face=='front-back'">
-            <img class="card-img-top" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
+            <img class="card-img-top cardimg" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
             <div class="card-body">
               <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
               <p class="card-text"> {{user.user.email}} </p>

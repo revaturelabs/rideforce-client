@@ -50,7 +50,7 @@ export class AccountinfoComponent implements OnInit {
   //Home address
   address1: string;
 
-  //office Address
+  // office Address
   address2: string;
 
   //s3 bucket variable for selecting files
