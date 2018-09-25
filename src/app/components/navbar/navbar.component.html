@@ -12,7 +12,7 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right" id="ddMenu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" routerLink="/howTo" style="padding-right:40px;">About</a>
-          <a class="dropdown-item" routerLink="#">User Settings</a>
+          <a *ngIf="currentUser" class="dropdown-item" routerLink="/accountInfo">User Settings</a>
         </div>
       </div>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">

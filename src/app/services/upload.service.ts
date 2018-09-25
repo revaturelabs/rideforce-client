@@ -20,7 +20,7 @@ export class UploadService {
     }
     );
     return bucket;
-  }
+  } 
 
   uploadfile(file) {
    const params = {
@@ -51,4 +51,4 @@ export class UploadService {
     console.log('BEFORE RETURNING, this.url is: ' + this.url);
     return this.url;
   }
-}
+} 
