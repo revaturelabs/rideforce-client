@@ -29,11 +29,13 @@ export class AccountinfoComponent implements OnInit {
   private tabset: NgbTabset;
 
   mobile: Boolean = false;
-  requiredFields: Boolean = true;
+  requiredInfoFields: Boolean = true;
+  requiredCarFields: Boolean = true;
 
   currentTab: number = 1;
 
   userObject: User;
+  roleObject: Role;
   firstName: string;
   lastName: string;
   username: string;
@@ -73,7 +75,7 @@ export class AccountinfoComponent implements OnInit {
   optInToDrive: boolean;
 
   // booleans for car information buttons
-  btnCarInfo: Boolean = false;
+  btnCarInfo: Number = 0;
 
   constructor(private zone: NgZone, private auth: AuthService, private userService: UserControllerService) { }
 
@@ -120,16 +122,17 @@ export class AccountinfoComponent implements OnInit {
     });
   }
 
-  AddCarInfo() {
-    if (this.btnCarInfo) {
-      this.carMake = '';
-      this.carModel = '';
-      this.carYear;
-      this.btnCarInfo = false;
-    }
-    else if (!this.btnCarInfo) {
-      this.btnCarInfo = true;
-    }
+  isDriver() {
+    this.btnCarInfo = 1;
+    this.roleObject = Role.Driver;
+  }
+
+  isRider() {
+    this.carMake = '';
+    this.carModel = '';
+    this.carYear;
+    this.btnCarInfo = 2;
+    this.roleObject = Role.Rider;
   }
 
   addContact(): void {
@@ -165,7 +168,7 @@ export class AccountinfoComponent implements OnInit {
       cars: [],
       active: true,
       contactInfo: [],
-      role: Role.Driver
+      role: this.roleObject
 
     }
 
@@ -191,17 +194,13 @@ export class AccountinfoComponent implements OnInit {
     if (this.firstName && this.lastName && this.username
       && this.password && this.passwordConfirm && this.token
       && this.address2 && this.batchEnd) {
-      this.requiredFields = true;
+      this.requiredInfoFields = true;
       this.currentTab++;
       this.tabset.select('2');
     }
     else {
-      this.requiredFields = false;
+      this.requiredInfoFields = false;
     }
-  }
-
-  checkCarInfo() {
-
   }
 
   bioNext() {
@@ -214,8 +213,15 @@ export class AccountinfoComponent implements OnInit {
   }
 
   carNext() {
-    this.currentTab++;
-    this.tabset.select('4');
+
+    if (this.btnCarInfo == 0) {
+      this.requiredCarFields = false;
+    }
+    else if (this.btnCarInfo > 0) {
+      this.requiredCarFields = true;
+      this.currentTab++;
+      this.tabset.select('4');
+    }
   }
 
   carPrevious() {
