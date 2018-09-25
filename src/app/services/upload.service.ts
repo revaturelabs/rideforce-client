@@ -43,7 +43,7 @@ export class UploadService {
     console.log(upResult.failed);
     if (!upResult.failed) {
       console.log('upload successful');
-      this.url = 'https://s3.us-east-2.amazonaws.com/petpalpictures/' + params.Key;
+      this.url = 'https://s3.us-east-2.amazonaws.com/' + params.Bucket + ' ' + params.Key;
     } else {
       console.log('upload failed');
     }
