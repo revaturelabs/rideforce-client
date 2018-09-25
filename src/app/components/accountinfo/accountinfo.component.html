@@ -250,9 +250,9 @@
               <span>First name: {{firstName}}</span> <br>
               <span>Last Name: {{lastName}}</span> <br>
               <span>Username: {{username}}</span> <br>
-              <span class="dyn-height" *ngIf="address1"> Address 1: <div class="col-10">{{address1}}</div><br></span>
-              <span class="dyn-height" *ngIf="address2"> Address 2: <div class="col-10">{{address2}}</div></span>
-              <span>Batch: {{batch}}</span> <br>
+              <span class="dyn-height" *ngIf="officeObject"> Office Address: <div class="col-10">{{officeObject}}</div><br></span>
+              <span class="dyn-height" *ngIf="address2"> Apartment Address: <div class="col-10">{{address2}}</div></span>
+              <span>Batch: {{batchEnd}}</span> <br>
               <br>
               <div *ngIf="bio || contactInfoArray.length > 0">
                 <h3><u>Biography</u></h3>

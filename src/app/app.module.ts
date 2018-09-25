@@ -26,7 +26,7 @@ import { HttpClientModule, HttpClient, HttpHandler, HTTP_INTERCEPTORS } from '@a
 import { PlacesAutocompleteDirective } from './directives/places-autocomplete/places-autocomplete.directive';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { AccountinfoComponent } from './components/accountinfo/accountinfo.component';
-import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
+//import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
 
