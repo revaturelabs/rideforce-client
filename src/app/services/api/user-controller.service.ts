@@ -82,12 +82,14 @@ export class UserControllerService {
   }
 
   getCurrentUserObservable(): Observable<User> {
-    this.getCurrentUser().subscribe();
+    if (!this.currentUser) {
+      this.getCurrentUser().subscribe();
+    }
     return this.currentUserSubject;
   }
 
-  checkIfLoggedIn(){
-    if(this.currentUser != undefined){
+  checkIfLoggedIn() {
+    if (this.currentUser != undefined) {
       this.isLoggedIn = true;
     } else {
       this.isLoggedIn = false;
@@ -158,7 +160,7 @@ export class UserControllerService {
   createOffice(newOffice: Office): Observable<Office> {
     return this.http.post<Office>(environment.apiUrl + '/offices', newOffice);
   }
-  
+
   // READ
   getAllOffices(): Observable<Office[]> {
     return this.http.get<Office[]>(environment.apiUrl + '/offices');

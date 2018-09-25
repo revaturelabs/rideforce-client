@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppComponent } from './app.component';
@@ -29,7 +29,6 @@ import { AccountinfoComponent } from './components/accountinfo/accountinfo.compo
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
-import { UserModalComponent } from './components/user-modal/user-modal.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +46,6 @@ import { UserModalComponent } from './components/user-modal/user-modal.component
     PlacesAutocompleteDirective,
     FavoritesComponent,
     AccountinfoComponent,
-    UserModalComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +63,7 @@ import { UserModalComponent } from './components/user-modal/user-modal.component
     HttpClientModule
   ],
   providers: [
+    NgbActiveModal,
     MapsControllerService,
     UserControllerService,
     AuthService,

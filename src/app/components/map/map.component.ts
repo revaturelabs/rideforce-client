@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
-import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
-import { UserModalComponent } from '../../components/user-modal/user-modal.component';
 import { Location } from './../../models/location.model';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { User } from '../../models/user.model';
+import { Link } from '../../models/link.model';
+import { MatchingControllerService } from '../../services/api/matching-controller.service';
+import { UserControllerService } from '../../services/api/user-controller.service';
 // import { } from '@types/googlemaps';
 
 @Component({
@@ -24,178 +26,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   private dist: number;
   private time: number;
 
-  // Dummy data
-  users: any[] = [
-    {
-      user: {
-        id: 1,
-        firstName: 'kristy',
-        lastName: 'Kreme',
-        email: 'email@mail.com',
-        address: '123',
-        office: '1',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
-      },
-      location: {
-        latitude: 38.9586,
-        longitude: -77.3570
-      },
-    },
-    {
-      user: {
-        id: 1,
-        firstName: 'Frank',
-        lastName: 'frankse',
-        email: 'email@mail.com',
-        address: '123',
-        office: '2',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
-      },
-      location: {
-        latitude: 39.9586,
-        longitude: -77.3470
-      }
-    },
-    {
-      user: {
-        id: 1,
-        firstName: 'Jimbo',
-        lastName: 'Jank',
-        email: 'email@mail.com',
-        address: '123',
-        office: '1',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
-      },
-      location: {
-        latitude: 38.3586,
-        longitude: -77.1570
-      }
-    }, {
-      user: {
-        id: 1,
-        firstName: 'kristy',
-        lastName: 'Kreme',
-        email: 'email@mail.com',
-        address: '123',
-        office: '1',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
-      },
-      location: {
-        latitude: 39.9586,
-        longitude: -75.3570
-      }
-    },
-    {
-      user: {
-        id: 1,
-        firstName: 'Frank',
-        lastName: 'frankse',
-        email: 'email@mail.com',
-        address: '123',
-        office: '2',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
-      },
-      location: {
-        latitude: 38.9486,
-        longitude: -77.3210
-      }
-    },
-    {
-      user: {
-        id: 1,
-        firstName: 'Jimbo',
-        lastName: 'Jank',
-        email: 'email@mail.com',
-        address: '123',
-        office: '1',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
-      },
-      location: {
-        latitude: 40.9586,
-        longitude: -75.3570
-      }
-    }, {
-      user: {
-        id: 1,
-        firstName: 'kristy',
-        lastName: 'Kreme',
-        email: 'email@mail.com',
-        address: '123',
-        office: '1',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
-      },
-      location: {
-        latitude: 38.2586,
-        longitude: -77.1570
-      }
-    },
-    {
-      user: {
-        id: 1,
-        firstName: 'Frank',
-        lastName: 'frankse',
-        email: 'email@mail.com',
-        address: '123',
-        office: '2',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
-      },
-      location: {
-        latitude: 36.9586,
-        longitude: -77.2570
-      }
-    },
-    {
-      user: {
-        id: 1,
-        firstName: 'Jimbo',
-        lastName: 'Jank',
-        email: 'email@mail.com',
-        address: '123',
-        office: '1',
-        batchEnd: '1',
-        cars: [],
-        contactInfo: [],
-        active: true,
-        photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
-      },
-      location: {
-        latitude: 38.92386,
-        longitude: -77.2170
-      }
-    }
-  ];
+  private selectedUser: User = null;
+
+  users: any[] = [];
 
   markers: any[] = [];
   placedMarkers: any[] = [];
@@ -232,8 +65,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   ];
 
   // selectedMarkerType = parking_lot_maps.png;
-  @ViewChild(UserModalComponent)
-  private userModal: UserModalComponent;
+
 
   isHidden = false;
 
@@ -241,13 +73,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   song = new Audio();
 
+  currentUser: User;
+
   circle: any = {
     latitude: this.currentLat,
     longitude: this.currentLong,
     radius: this.currentRadius
   };
-
-  constructor(private mapService: MapsControllerService, private zone: NgZone) { }
+  closeResult: string;
+  constructor(private matchService: MatchingControllerService, private userService: UserControllerService,
+    private mapService: MapsControllerService, private zone: NgZone) { }
 
   protected mapReady(map) {
     this.map = map;
@@ -255,11 +90,57 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
 
   ngOnInit() {
-    this.getMarkers();
     this.song.src = '../../../assets/audio/GrimGrinningGhosts.mp3';
     this.song.loop = true;
     this.song.load();
+    this.userService.getCurrentUser().subscribe(
+      data => {
+        this.currentUser = data;
+        let userLinks: Link<User>[] = null;
+        this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
+          data2 => {
+            // console.log("data2 is " + data2);
+            userLinks = data2;
+            for (let i = 0; i < userLinks.length; i++) {
+
+              this.matchService.getFromLink(userLinks[i]).subscribe(
+                data3 => {
+                  if (!data3.photoUrl || data3.photoUrl === 'null') {
+                    data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
+                  }
+                  const marker: any = {
+                    user: data3,
+                    icon: {
+                      url: data3.photoUrl,
+                      scaledSize: {
+                        width: 30,
+                        height: 30
+                      }
+                    },
+                    location: {
+                      latitude: 0,
+                      longitude: 0
+                    },
+                    opacity: .92
+                  };
+                  this.mapService.getDistance(data3.address).subscribe(
+                    data4 => {
+                      marker.location.latitude = data4.lat;
+                      marker.location.longitude = data4.lng;
+                      this.markers.push(marker);
+                    }
+                  );
+                  // Sets the current swipe card to the first element of the array if the array has something in it.
+                }
+              );
+            }
+          }
+        );
+      }
+    );
   }
+
+
 
   ngAfterContentInit() {
     /*  const mapProp = {
@@ -269,6 +150,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
      };
      this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp); */
     this.findMe();
+    this.getMarkers();
   }
 
   ngOnDestroy() {
@@ -276,22 +158,26 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   getMarkers() {
-    for (let i = 0; i < this.users.length; i++) {
+    console.log(this.users);
+    for (const user of this.users) {
+      console.log(user);
       const marker: any = {
-        user: this.users[i],
+        user: user,
         icon: {
-          url: this.users[i].user.photoUrl,
+          url: user.user.photoUrl,
           scaledSize: {
             width: 30,
             height: 30
           }
         },
         location: {
-          latitude: this.users[i].location.latitude,
-          longitude: this.users[i].location.longitude
+          latitude: user.location.latitude,
+          longitude: user.location.longitude
         },
         opacity: .92
       };
+
+      console.log(marker);
       this.markers.push(marker);
     }
   }
@@ -354,9 +240,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     alert('Marker\'s Title: ' + marker.getTitle());
   }
 
-  markerClicked(user: any) {
-    console.log('a');
-    this.userModal.open(user);
+  markerClicked(user: any): void {
+    this.selectedUser = user;
   }
 
   changeStyle(style: string) {

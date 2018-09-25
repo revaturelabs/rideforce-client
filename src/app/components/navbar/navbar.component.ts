@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
         console.log(this.currentUser);
       }
     );
-    
+
   }
 
   checkIfLoggedIn(){

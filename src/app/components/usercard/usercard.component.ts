@@ -2,9 +2,12 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { User } from '../../models/user.model';
 import { AddressModel } from '../../models/address.model';
+import { Link } from '../../models/link.model';
 import { SwipecardModel } from '../../models/swipecard.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Role } from '../../models/role.model';
+import { MatchingControllerService } from '../../services/api/matching-controller.service';
+import { UserControllerService } from '../../services/api/user-controller.service';
 
 @Component({
     selector: 'app-usercard',
@@ -31,56 +34,7 @@ export class UsercardComponent implements OnInit {
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
     // our list of swipecards: DUMMY DATA
     swipecards: SwipecardModel[] = [
-        {
-            user: {
-                id: 1,
-                firstName: 'kristy',
-                lastName: 'Kreme',
-                email: 'email@mail.com',
-                address: '123',
-                office: '1',
-                batchEnd: '1',
-                role: Role.Driver,
-                cars: [],
-                contactInfo: [],
-                active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/kristy.png'
-            },
-            visible: false
-        },
-        {
-            user: {
-                id: 1,
-                firstName: 'Frank',
-                lastName: 'frankse',
-                email: 'email@mail.com',
-                address: '123',
-                office: '2',
-                batchEnd: '1',
-                role: Role.Driver,
-                cars: [],
-                contactInfo: [],
-                active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar2/large/matthew.png'
-            },
-            visible: false
-        }, {
-            user: {
-                id: 1,
-                firstName: 'Jimbo',
-                lastName: 'Jank',
-                email: 'email@mail.com',
-                address: '123',
-                office: '1',
-                role: Role.Driver,
-                batchEnd: '1',
-                cars: [],
-                contactInfo: [],
-                active: true,
-                photoUrl: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
-            },
-            visible: false
-        }
+
     ];
 
 
@@ -93,13 +47,51 @@ export class UsercardComponent implements OnInit {
     @ViewChild('swipeMain') swipeCardMain: ElementRef;
     @ViewChild('swipeBio') swipeCardBio: ElementRef;
 
-    constructor() { }
+    constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
+
+    currentUser: User;
 
     ngOnInit() {
-        // Sets the current swipe card to the first element of the array if the array has something in it.
-        if (this.swipecards.length > 0) {
-            this.currentSwipeCard = this.swipecards[0];
-        }
+        this.userService.getCurrentUser().subscribe(
+            data => {
+                console.log('data');
+                this.currentUser = data;
+                console.log(this.currentUser);
+                let userLinks: Link<User>[] = null;
+                this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
+                    data2 => {
+                        // console.log("data2 is " + data2);
+                        userLinks = data2;
+                        console.log(userLinks);
+                        for (let i = 0; i < userLinks.length; i++) {
+                            console.log(userLinks[i]);
+
+                            this.matchService.getFromLink(userLinks[i]).subscribe(
+                                data3 => {
+                                    console.log(data3);
+                                    if (!data3.photoUrl || data3.photoUrl === 'null') {
+                                        data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
+                                    }
+                                    const card: SwipecardModel = {
+                                        user: data3,
+                                        visible: false
+                                    };
+                                    this.swipecards.push(card);
+                                    // Sets the current swipe card to the first element of the array if the array has something in it.
+                                    if (this.swipecards.length > 0) {
+                                        this.currentSwipeCard = this.swipecards[0];
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
+
+            }
+        );
+
+
+
     }
 
     /**
@@ -116,19 +108,32 @@ export class UsercardComponent implements OnInit {
     }
 
     // action triggered when user swipes
-    swipe(action = this.SWIPE_ACTION.RIGHT, event) {
+    swipe(action = this.SWIPE_ACTION.RIGHT, user) {
         this.animThumbState = 'two';
         // swipe right, next avatar
         if (action === this.SWIPE_ACTION.RIGHT) {
             this.animState = 'right';
             this.thumbImg = '../../../assets/icons/thumbsUp.png';
+            this.matchService.unDislikeDriver(this.currentUser.id, this.swipecards[this.currentIndex].user.id).subscribe();
+            this.matchService.likeDriver(this.currentUser.id, this.swipecards[this.currentIndex].user.id).subscribe(
+                data => {
+                }
+            );
         }
 
         // swipe left, previous avatar
         if (action === this.SWIPE_ACTION.LEFT) {
             this.animState = 'left';
             this.thumbImg = '../../../assets/icons/thumbsDown.png';
+            console.log(this.currentUser.id);
+            console.log(this.swipecards[this.currentIndex].user.id);
+            this.matchService.unlikeDriver(this.currentUser.id, this.swipecards[this.currentIndex].user.id).subscribe();
+            this.matchService.dislikeDriver(this.currentUser.id, this.swipecards[this.currentIndex].user.id).subscribe(
+                data => {
+                }
+            );
         }
+        this.swipecards.splice(this.currentIndex, 1);
     }
 
     swiped() {
@@ -147,6 +152,7 @@ export class UsercardComponent implements OnInit {
                 this.currentIndex--;
             }
         }
+
         // Load currentSwipeCard with the swipecard currentindex
         this.currentSwipeCard = this.swipecards[this.currentIndex];
     }
