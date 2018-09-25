@@ -141,11 +141,11 @@
                 <input type="date" class="form-control" [(ngModel)]="batchEnd">
               </div>
               <div>
-                <button class="btn btnNextPrevious" (click)="accountInfoNext()">next</button>
+                <button class="btn btnNextPrevious" (click)="accountInfoNext()">Next</button>
               </div>
               <div style="padding-top: 20px">
-                <div *ngIf="!requiredFields" class="alert alert-danger">
-                  Please fill out All fields
+                <div *ngIf="!requiredInfoFields" class="alert alert-danger">
+                  Please fill out ALL fields
                 </div>
               </div>
             </div>
@@ -166,6 +166,11 @@
               </div>
               <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required></textarea>
               <br>
+
+              <div class="input-group mb-3">
+                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>
+                <input class="profile-pic" type="file" name="pic" accept="image/*">
+              </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1" style="padding-right: 95px">Contact Info</span>
@@ -191,8 +196,8 @@
                 </div>
               </div>
               <div>
-                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="bioPrevious()">previous</button></span>
-                <span> <button class="btn btnNextPrevious" (click)="bioNext()">next</button></span>
+                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="bioPrevious()">Previous</button></span>
+                <span> <button class="btn btnNextPrevious" (click)="bioNext()">Next</button></span>
               </div>
             </div>
           </ng-template>
@@ -205,11 +210,14 @@
               <br>
               <h2>Car Information:</h2>
               <br>
-              <div>
-                <span style="padding-right: 20px;"><button class="btn btnAddCar" (click)="AddCarInfo()">Car Info</button></span>
+              <div class="input-group mb-3">
+                <div class="input-group" id="button-addon3">
+                  <span class="padRight"><button class="btn btnAddCar" type="button" (click)="isDriver()">Driver</button></span>
+                  <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>
+                </div>
               </div>
               <br>
-              <div *ngIf="btnCarInfo">
+              <div *ngIf="btnCarInfo == 1">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Make</span>
@@ -232,8 +240,13 @@
                 </div>
               </div>
               <div>
-                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">previous</button></span>
-                <span> <button class="btn btnNextPrevious" (click)="carNext()">next</button></span>
+                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
+                <span> <button class="btn btnNextPrevious" (click)="carNext()">Next</button></span>
+              </div>
+              <div style="padding-top: 20px">
+                <div *ngIf="!requiredCarFields" class="alert alert-danger">
+                  Please select Driver or Rider
+                </div>
               </div>
             </div>
           </ng-template>
@@ -250,9 +263,9 @@
               <span>First name: {{firstName}}</span> <br>
               <span>Last Name: {{lastName}}</span> <br>
               <span>Username: {{username}}</span> <br>
-              <span class="dyn-height" *ngIf="address1"> Address 1: <div class="col-10">{{address1}}</div><br></span>
-              <span class="dyn-height" *ngIf="address2"> Address 2: <div class="col-10">{{address2}}</div></span>
-              <span>Batch: {{batch}}</span> <br>
+              <span class="dyn-height" *ngIf="officeObject"> Office Address: <div class="col-10">{{officeObject}}</div><br></span>
+              <span class="dyn-height" *ngIf="address2"> Apartment Address: <div class="col-10">{{address2}}</div></span>
+              <span>Batch: {{batchEnd}}</span> <br>
               <br>
               <div *ngIf="bio || contactInfoArray.length > 0">
                 <h3><u>Biography</u></h3>
@@ -272,7 +285,7 @@
               <br>
               <div>
 
-                <span> <button class="btn btnNextPrevious pr-2" (click)="reviewPrevious()">previous</button></span>
+                <span class="padRight"> <button class="btn btnNextPrevious" (click)="reviewPrevious()">Previous</button></span>
 
                 <span> <button class="btn btnNextPrevious" (click)="createUserObject()">Add User</button></span>
               </div>
