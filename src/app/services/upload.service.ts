@@ -6,7 +6,7 @@ import * as S3 from 'aws-sdk/clients/s3';
 })
 export class UploadService {
 
-  FOLDER = 'petpal-s3/';
+  FOLDER = 'rydeforce-s3/';
   url: any;
   
   constructor() { }
@@ -14,20 +14,19 @@ export class UploadService {
   getS3Bucket(): any {
     const bucket = new S3 (
     {
-    accessKeyId: 'AKIAJZ7JSNQQZDUXWI7A',
-    secretAccessKey: '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',
-    region: 'us-east-2'
+    accessKeyId: 'AKIAIRZG4TK6EBLZV7GA',
+    secretAccessKey: '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',
+    region: 'us-east-1'
     }
     );
     return bucket;
-  }
+  } 
 
   uploadfile(file) {
    const params = {
-      Bucket: 'petpalpictures',
-      Key: this.FOLDER + Math.floor(Math.random() * 10000000000) + file.name ,
-      Body: file,
-      ACL: 'public-read'
+      Bucket: 'rydeforce',
+      Key: this.FOLDER + Math.floor(Math.random() * 100000000000) + file.name , //duplicates can be enabled in S3, but we decided to not 
+      Body: file                                                                 //allow that and instead assign numbers on the beginning of the name.
     };
 
     let upResult = this.getS3Bucket().upload(params, function (err, data) {
@@ -40,10 +39,9 @@ export class UploadService {
 
       return true;
     });
-    console.log(upResult.failed);
     if (!upResult.failed) {
       console.log('upload successful');
-      this.url = 'https://s3.us-east-2.amazonaws.com/petpalpictures/' + params.Key;
+      this.url = 'https://s3.us-east-2.amazonaws.com/' + params.Bucket + '/' + params.Key;
     } else {
       console.log('upload failed');
     }
@@ -51,4 +49,4 @@ export class UploadService {
     console.log('BEFORE RETURNING, this.url is: ' + this.url);
     return this.url;
   }
-}
+} 

@@ -2,6 +2,7 @@
     background-color: #474C55;
     font-size: 1.5em;
     margin-bottom: 0px;
+    border-radius: 0%;
 }
 
 .logo{
@@ -28,7 +29,7 @@
     outline:none;
 }
 
-@media only screen and (min-width:768px) {
+@media only screen and (min-width:766px) {
     #dropdownSettingsButton{
         display:none;
     }
@@ -36,7 +37,7 @@
         display:block;
     }
 }
-@media only screen and (max-width:768px) {
+@media only screen and (max-width:766px) {
     #dropdownSettingsButton{
         display:block;
     }
