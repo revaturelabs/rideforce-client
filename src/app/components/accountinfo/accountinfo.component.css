@@ -47,3 +47,7 @@ input, textarea[type="text"]
     background-color: #72A4C2;
 }
 
+.profile-pic{
+    border-radius: 100px;
+}
+
