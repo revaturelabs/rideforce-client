@@ -25,8 +25,8 @@ export class UploadService {
   uploadfile(file) {
    const params = {
       Bucket: 'rydeforce',
-      Key: this.FOLDER + Math.floor(Math.random() * 100000000000) + file.name ,
-      Body: file
+      Key: this.FOLDER + Math.floor(Math.random() * 100000000000) + file.name , //duplicates can be enabled in S3, but we decided to not 
+      Body: file                                                                 //allow that and instead assign numbers on the beginning of the name.
     };
 
     let upResult = this.getS3Bucket().upload(params, function (err, data) {
