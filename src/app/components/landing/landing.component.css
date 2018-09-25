@@ -151,6 +151,7 @@ body {
 .cover-container {
   max-width: 42em;
   border: 20px;
+  top: -400px;
 }
 
 .cover-heading {
@@ -166,7 +167,7 @@ body {
   linear-gradient(
     to bottom,
     #eee,
-    #999
+    #999ro
   ) */
 }
 
@@ -278,13 +279,16 @@ body {
 .page-header img{
     height: 337.3px;
     opacity: .8;
-    text-align: center;
-  
+    text-align: center;  
 } 
 
 .page-header {
     margin: -20px;
 }
+
+/* .header {
+  max-height: 10px;
+} */
 
 .button {
     display: inline-block;
