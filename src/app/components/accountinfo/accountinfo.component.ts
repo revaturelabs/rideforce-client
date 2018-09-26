@@ -11,6 +11,7 @@ import { Role } from '../../models/role.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { UploadService } from '../../services/upload.service';
+import { Router } from '@angular/router';
 
 
 
@@ -80,7 +81,11 @@ export class AccountinfoComponent implements OnInit {
   // booleans for car information buttons
   btnCarInfo: Number = 0;
 
-  constructor(private zone: NgZone, private auth: AuthService, private userService: UserControllerService, private uploadService: UploadService) { }
+  constructor(private zone: NgZone, 
+    private auth: AuthService, 
+    private userService: UserControllerService, 
+    private uploadService: UploadService,
+    private router: Router) { }
 
   ngOnInit() {
     if (window.screen.width <= 430) { // 768px portrait
@@ -193,7 +198,11 @@ export class AccountinfoComponent implements OnInit {
     //get id from user after post and associate with a car object
     //this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token)
-      .subscribe(console.log);
+      .subscribe(user => {
+        this.router.navigate(["/map"]);
+      });
+
+    
   }
 
   getOffices() {
@@ -211,7 +220,7 @@ export class AccountinfoComponent implements OnInit {
   accountInfoNext() {
     if (this.firstName && this.lastName && this.username
       && this.password && this.passwordConfirm && this.token
-      && this.address2 && this.batchEnd) {
+      && this.address2 && this.batchEnd && this.password == this.passwordConfirm) {
       this.requiredInfoFields = true;
       this.currentTab++;
       this.tabset.select('2');
