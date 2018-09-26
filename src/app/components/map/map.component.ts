@@ -138,6 +138,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         );
       }
     );
+    this.findMe();
   }
 
 
