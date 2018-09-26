@@ -1,7 +1,7 @@
 agm-map{
     height: 500px;
 
-    
+
   }
 
 
@@ -21,8 +21,8 @@ agm-map{
    @font-face {
     font-family: 'spooky';
     font-size: 15px;
-    src: url(../../../assets/fonts/GypsyCurse.ttf)  format('truetype')
-       
+    src: url(/assets/fonts/GypsyCurse.ttf)  format('truetype')
+
   }
 
   .spooky-font {
@@ -60,22 +60,22 @@ agm-map{
     animation: flash ease-out 7s infinite;
     animation-delay: 2s;
     }
-    
+
     @-webkit-keyframes flash {
-      from { opacity: 0; } 
+      from { opacity: 0; }
       92% { opacity: 0; }
       93% { opacity: 0.6; }
       94% { opacity: 0.2; }
-      96% { opacity: 0.9; } 
+      96% { opacity: 0.9; }
       to { opacity: 0; }
     }
-    
+
     @keyframes flash {
-      from { opacity: 0; } 
+      from { opacity: 0; }
         92% { opacity: 0; }
       93% { opacity: 0.6; }
         94% { opacity: 0.2; }
-        96% { opacity: 1; } 
+        96% { opacity: 1; }
       to { opacity: 0; }
     }
 
@@ -85,7 +85,7 @@ agm-map{
     width: 150px;
     height: 125px;
     will-change: background-position;
-    
+
     animation-name: fly-cycle;
     animation-timing-function: steps(10);
   }
@@ -96,25 +96,25 @@ agm-map{
     width: 120px;
     height: 125px;
     will-change: background-position;
-    
+
     animation-name: fly-cycle;
     animation-timing-function: steps(10);
   }
     .witch-one {
       animation-duration: 1s;
-      animation-delay: -0.5s;		
+      animation-delay: -0.5s;
     }
-    
+
     .witch-two {
       animation-duration: 0.9s;
       animation-delay: -0.75s;
     }
-    
+
     .witch-three {
       animation-duration: 1.25s;
       animation-delay: -0.25s;
     }
-    
+
     .witch-four {
       animation-duration: 1.1s;
       animation-delay: -0.5s;
@@ -122,33 +122,33 @@ agm-map{
 
     .ghost-one {
       animation-duration: 2s;
-      animation-delay: -0.5s;		
+      animation-delay: -0.5s;
     }
-    
+
     .ghost-two {
       animation-duration: 2.9s;
       animation-delay: -0.75s;
     }
-    
+
     .ghost-three {
       animation-duration: 3.25s;
       animation-delay: -0.25s;
     }
-    
+
     .ghost-four {
       animation-duration: 3.1s;
       animation-delay: -0.5s;
     }
-  
-  
-  
+
+
+
   .witch-container {
     position: absolute;
     top: 20%;
     left: -10%;
     transform: scale(0) translateX(-10vw);
     will-change: transform;
-    
+
     animation-name: fly-right-one;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -161,7 +161,7 @@ agm-map{
     right: -10%;
     transform: scale(0) translateX(-10vw);
     will-change: transform;
-    
+
     animation-name: fly-left-one;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -171,17 +171,17 @@ agm-map{
       animation-duration: 8s;
       animation-delay: 0;
     }
-    
+
     .witch-container-two {
       animation-duration: 9s;
       animation-delay: 1s;
     }
-    
+
     .witch-container-three {
       animation-duration: 7.6s;
       animation-delay: 2.5s;
     }
-    
+
     .witch-container-four {
       animation-duration: 8.5s;
       animation-delay: 3.25s;
@@ -191,101 +191,101 @@ agm-map{
       animation-duration: 15s;
       animation-delay: 0;
     }
-    
+
     .ghost-container-two {
       animation-duration: 16s;
       animation-delay: 1s;
     }
-    
+
     .ghost-container-three {
       animation-duration: 14.6s;
       animation-delay: 2.5s;
     }
-    
+
     .ghost-container-four {
       animation-duration: 16s;
       animation-delay: 3.25s;
     }
-    
-  
+
+
   @keyframes fly-cycle {
-    
+
     100% {
       background-position: -900px 0;
     }
-    
+
   }
-  
+
   @keyframes fly-right-one {
-    
+
     0% {
       transform: scale(0.3) translateX(-10vw);
     }
-    
+
     10% {
       transform: translateY(2vh) translateX(10vw) scale(0.4);
     }
-    
+
     20% {
       transform: translateY(0vh) translateX(30vw) scale(0.5);
     }
-    
+
     30% {
       transform: translateY(4vh) translateX(50vw) scale(0.6);
     }
-    
+
     40% {
       transform: translateY(2vh) translateX(70vw) scale(0.6);
     }
-    
+
     50% {
       transform: translateY(0vh) translateX(90vw) scale(0.6);
     }
-    
+
     60% {
       transform: translateY(0vh) translateX(110vw) scale(0.6);
     }
-    
+
     100% {
       transform: translateY(0vh) translateX(110vw) scale(0.6);
     }
-    
+
   }
-  
+
   @keyframes fly-left-one {
-    
+
     0% {
       transform: translateY(-2vh) translateX(10vw) scale(0.5);
     }
-    
+
     10% {
       transform: translateY(0vh) translateX(-10vw) scale(0.4);
     }
-    
+
     20% {
       transform: translateY(-4vh) translateX(-30vw) scale(0.6);
     }
-    
+
     30% {
       transform: translateY(1vh) translateX(-50vw) scale(0.45);
     }
-    
+
     40% {
       transform: translateY(-2.5vh) translateX(-70vw) scale(0.5);
     }
-    
+
     50% {
       transform: translateY(0vh) translateX(-90vw) scale(0.45);
     }
-    
+
     51% {
       transform: translateY(0vh) translateX(-110vw) scale(0.45);
     }
-    
+
     100% {
       transform: translateY(0vh) translateX(-110vw) scale(0.45);
     }
 
-    
-    
+
+
   }
