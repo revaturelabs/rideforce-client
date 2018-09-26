@@ -145,7 +145,7 @@
               </div>
               <div style="padding-top: 20px">
                 <div *ngIf="!requiredInfoFields" class="alert alert-danger">
-                  Please fill out ALL fields
+                  Please fill out ALL fields and confirm your passwords match
                 </div>
               </div>
             </div>
@@ -287,7 +287,7 @@
 
                 <span class="padRight"> <button class="btn btnNextPrevious" (click)="reviewPrevious()">Previous</button></span>
 
-                <span> <button class="btn btnNextPrevious" (click)="createUserObject()">Finish</button></span>
+                <span> <button class="btn btnNextPrevious" (click)="createUserObject()" >Finish</button></span>
               </div>
             </div>
           </ng-template>
