@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  // url to domain
-  apiUrl: 'IN ENVIRONMENT.PROD.TS: PLEASE, CHANGE ME'
+  apiUrl: 'http://ec2-18-209-24-207.compute-1.amazonaws.com:2222'
 };
