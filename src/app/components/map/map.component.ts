@@ -90,7 +90,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
 
   ngOnInit() {
-    this.song.src = '../../../assets/audio/GrimGrinningGhosts.mp3';
+    this.song.src = 'assets/audio/GrimGrinningGhosts.mp3';
     this.song.loop = true;
     this.song.load();
     this.userService.getCurrentUser().subscribe(
