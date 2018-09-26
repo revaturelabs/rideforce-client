@@ -29,6 +29,7 @@ import { AccountinfoComponent } from './components/accountinfo/accountinfo.compo
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ErrorInterceptor } from './utils/error.interceptor';
     PlacesAutocompleteDirective,
     FavoritesComponent,
     AccountinfoComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

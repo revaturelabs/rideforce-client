@@ -9,6 +9,7 @@ import { RideswipeComponent } from '../components/rideswipe/rideswipe.component'
 import { UsercardComponent } from '../components/usercard/usercard.component';
 import { FavoritesComponent } from '../components/favorites/favorites.component';
 import { AccountinfoComponent } from '../components/accountinfo/accountinfo.component';
+import { AdminComponent } from '../components/admin/admin.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'landing', pathMatch: 'full'},
@@ -19,7 +20,8 @@ export const routes: Routes = [
   { path: 'accountInfo', component: AccountinfoComponent},
   { path: 'rideswipe', component: RideswipeComponent },
   { path: 'userCard', component: UsercardComponent },
-  { path: 'favorites', component: FavoritesComponent }
+  { path: 'favorites', component: FavoritesComponent },
+  { path: 'admin', component: AdminComponent }
 ];
 @NgModule({
   imports: [
