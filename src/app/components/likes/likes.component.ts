@@ -31,7 +31,7 @@ export class LikesComponent implements OnInit {
                         userLinks = data2;
                         for (let i = 0; i < userLinks.length; i++) {
                             console.log(userLinks[i].replace(/\D/g, ''));
-                            const id: number = +userLinks[i].replace(/\D/g, '')[1];
+                            const id: number = +userLinks[i].replace(/\D/g, '');
                             this.userService.getUserById(id).subscribe(
                                 data3 => {
                                     if (!data3.photoUrl || data3.photoUrl === 'null') {

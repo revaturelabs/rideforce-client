@@ -42,7 +42,7 @@ export class UploadService {
     });
     if (!upResult.failed) {
       console.log('upload successful');
-      this.url = 'https://s3.us-east-2.amazonaws.com/' + params.Bucket + '/' + params.Key;
+      this.url = 'https://s3.us-east-1.amazonaws.com/' + params.Bucket + '/' + params.Key;
     } else {
       console.log('upload failed');
     }

@@ -77,7 +77,6 @@ export class UsermatchwebComponent implements OnInit {
     if (interest !== 2) {
       if (interest === 1) {
         this.users[index].choose = 'liked';
-        this.users[index].choose = 'disliked';
         this.matchService.unDislikeDriver(this.currentUser.id, this.users[index].user.id).subscribe();
         this.matchService.likeDriver(this.currentUser.id, this.users[index].user.id).subscribe(
           data => {
