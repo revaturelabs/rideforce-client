@@ -2,15 +2,21 @@ import { Link } from './link.model';
 import { Office } from './office.model';
 import { Car } from './car.model';
 import { ContactInfo } from './contact-info.model';
+import { Role } from './role.model';
 
 export interface User {
-    /**
+  /**
    * The ID of the user in the database.
    */
   id: number;
   firstName: string;
   lastName: string;
+  //username
   email: string;
+  /**
+   * The URL to the user's profile photo.
+   */
+  photoUrl: string;
   /**
    * The user's home address (where they currently live).
    */
@@ -40,8 +46,5 @@ export interface User {
    * The user's role, determining what permissions they have to access data on
    * the server.
    */
-  // Remove the question mark later
-  role?: Role;
-
-  photoUrl: string;
+  role: Role;
 }

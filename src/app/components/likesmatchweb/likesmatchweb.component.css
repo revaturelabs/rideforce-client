@@ -1,0 +1,38 @@
+.grid-container {
+    display: grid;
+    grid-gap: 50px 50px;
+    grid-template-columns: 22% 22% 22% 22%;
+    padding: 10px;
+  }
+
+  
+  .cardimg {
+    height:200px;
+  }
+
+  .card-text {
+    font-size: 15px;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .enlarge:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+  .card {
+    height: 400px;
+  }
+  @media screen and (max-width: 1000px) {
+    .grid-container {
+      display: grid;
+      grid-gap: 50px 50px;
+      grid-template-columns: 50% 50%;
+      padding: 10px;
+    }    
+  }

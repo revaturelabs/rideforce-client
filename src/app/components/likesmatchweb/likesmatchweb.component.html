@@ -1,0 +1,28 @@
+<div class="container" style="padding-top:40px">
+  <h2>Your Likes</h2>
+  <div class="grid-container">
+    <div *ngFor="let user of likecards; let i = index" style="background-color: rgba(255, 255, 255, 0.918)">
+      <div class="enlarge">
+        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item">
+          <div *ngIf="user.face=='front' || user.face=='front-back'">
+            <img class="card-img-top cardimg" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
+            <div class="card-body">
+              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+              <p class="card-text"> {{user.user.email}} </p>
+              <a href="#" class="btn btn-primary">Like</a>
+            </div>
+          </div>
+          <div *ngIf="user.face=='back' || user.face=='back-front'" (click)="flipCard(user)">
+            <div class="card-body" style="transform: rotateY(180deg)">
+              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+              <p class="card-text">{{user.user.address}}</p>
+              <h5 class="card-text">{{user.user.email}}</h5>
+              <h5 class="card-text">{{user.user.batchEnd}}</h5>
+              <h5 class="card-text">User bio blablablabla</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

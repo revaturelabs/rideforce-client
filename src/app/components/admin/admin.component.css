@@ -1,0 +1,24 @@
+.key-text {
+    font-size:16px;
+    word-wrap: break-word;
+}
+
+/* @media ( max-width : 400px) {
+	p{
+       font-size:1.2rem;
+    text-align: center;
+    word-wrap: break-word; 
+    }
+} */
+
+@media ( min-width : 401px) and (max-width: 600px) {
+	.chart-container {
+		min-height: 11.8em;
+	}
+}
+
+@media ( min-width : 601px) {
+	.chart-container {
+		min-height: 25.8em;
+	}
+}
