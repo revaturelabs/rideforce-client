@@ -42,7 +42,7 @@ export class UsercardComponent implements OnInit {
     currentIndex = 0;
     animState = 'center';
     animThumbState = 'one';
-    thumbImg = '../../../assets/icons/thumbsDown.png';
+    thumbImg = 'assets/icons/thumbsDown.png';
 
     @ViewChild('swipeMain') swipeCardMain: ElementRef;
     @ViewChild('swipeBio') swipeCardBio: ElementRef;
@@ -113,7 +113,7 @@ export class UsercardComponent implements OnInit {
         // swipe right, next avatar
         if (action === this.SWIPE_ACTION.RIGHT) {
             this.animState = 'right';
-            this.thumbImg = '../../../assets/icons/thumbsUp.png';
+            this.thumbImg = 'assets/icons/thumbsUp.png';
             this.matchService.unDislikeDriver(this.currentUser.id, this.swipecards[this.currentIndex].user.id).subscribe();
             this.matchService.likeDriver(this.currentUser.id, this.swipecards[this.currentIndex].user.id).subscribe(
                 data => {
@@ -124,7 +124,7 @@ export class UsercardComponent implements OnInit {
         // swipe left, previous avatar
         if (action === this.SWIPE_ACTION.LEFT) {
             this.animState = 'left';
-            this.thumbImg = '../../../assets/icons/thumbsDown.png';
+            this.thumbImg = 'assets/icons/thumbsDown.png';
             console.log(this.currentUser.id);
             console.log(this.swipecards[this.currentIndex].user.id);
             this.matchService.unlikeDriver(this.currentUser.id, this.swipecards[this.currentIndex].user.id).subscribe();
