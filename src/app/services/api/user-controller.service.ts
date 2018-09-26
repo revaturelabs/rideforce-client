@@ -88,12 +88,11 @@ export class UserControllerService {
     return this.currentUserSubject;
   }
 
-  checkIfLoggedIn() {
-    if (this.currentUser != undefined) {
-      this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
-    }
+  /**
+   * generate a key for trainers/managers to register users
+   */
+  getRegistrationKey(){
+    return this.http.get<string>(environment.apiUrl + `/registration-key`);
   }
 
   // UPDATE
