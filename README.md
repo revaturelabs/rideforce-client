@@ -14,6 +14,40 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
+## Information for developers
+
+### Git directions
+
+Here is an overview of the steps you need to take in order to make a
+successful change to the repo. If you do not follow all these steps, there
+may be problems!
+
+```sh
+git checkout -b your-branch # Omit the '-b' if the branch already exists.
+# Make changes to branch...
+git add .  # Assuming you are in the root directory.
+git commit -m 'Descriptive commit message'
+git push -u origin your-branch # You can use just 'git push' if you've already pushed.
+```
+
+Before you make a pull request, it's a good idea to merge any new changes
+from the dev branch, especially if you've spent a decent amount of time on
+your changes (making it more likely that the dev branch has changed). This is
+the best way to detect merge conflicts early.
+
+```sh
+# To merge any new changes from the dev branch:
+git checkout dev
+git pull
+git checkout your-branch
+git merge dev
+```
+
+If you get any merge conflicts, resolve them and then make a new commit (`git add . && git commit -m 'Descriptive commit message`).
+Once you've pushed your branch, make a pull request on GitHub and make sure
+that your PR is based off the dev branch and not master!
+
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
