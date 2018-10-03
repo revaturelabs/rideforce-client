@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
       //callback called if there is an error
       e => {
         //error coming from the backend
-        e.message;
+        document.getElementById("errorMessageLogin").style.display="block";
+        document.getElementById("errorMessageLogin").innerHTML=e.message;
       }
 
     );
