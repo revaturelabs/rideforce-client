@@ -27,13 +27,17 @@ export class CarRegistrationComponent implements OnInit {
     this.carObject = new Car();
   }
 
+  resetUser() {
+    this.userService.getCurrentUser().subscribe(user => {
+      this.userObject = user;
+    });
+  }
+
   addCarToUser() {
     console.log('Adding car to user!');
     console.log(this.carObject);
 
-    this.userService.getCurrentUser().subscribe(user => {
-      this.userObject = user;
-    });
+    this.resetUser();
 
     this.carObject.id = 0;
     this.carObject.make = this.carMake;
