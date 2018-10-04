@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
    * Gets the parameters from the login fields. 
    * If the login fails, displays the error message sent by the server under the password field.
    */
-  login():any{
+  login(){
   console.log('in login');
   console.log(this.currentUser);
     this.authService.authenticate(this.userEmail, this.userPass).subscribe(
