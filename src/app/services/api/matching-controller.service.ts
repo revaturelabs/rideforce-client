@@ -20,6 +20,7 @@ export class MatchingControllerService {
   }
   /**
    * Returns all drivers who match the rider with the given user ID.
+   * "/users/{userid}"
    * 
    * @param riderId
    */
@@ -30,6 +31,7 @@ export class MatchingControllerService {
 
   /**
    * Returns all users liked by the user with the given ID.
+   * Returns this as an array of strings in the format
    * 
    * @param riderId 
    */

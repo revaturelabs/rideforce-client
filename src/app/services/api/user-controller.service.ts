@@ -44,15 +44,15 @@ export class UserControllerService {
     );
   }
 
-  // READ
+  /**Gets an array of users via the given endpoint */
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(environment.apiUrl + '/users');
   }
-
+  /**Gets a single user via the given endpoint and id */
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(environment.apiUrl + `/users/${id}`);
   }
-
+  /**Gets a single user via the given endpoint and email */
   getUserByEmail(email: string): Observable<User> {
     return this.http.get<User>(environment.apiUrl + '/users', {
       params: { email },
@@ -80,7 +80,10 @@ export class UserControllerService {
           this.currentUserSubject.next(user);
         }));
   }
-
+  /**First checks that there is not a user populated in currentUser.
+   * If there isn't, the currentUser is obtained through the
+   * getCurrentUser() function.
+   */
   getCurrentUserObservable(): Observable<User> {
     if (!this.currentUser) {
       this.getCurrentUser().subscribe();
@@ -156,16 +159,23 @@ export class UserControllerService {
 
 
   // OFFICE CRUD * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  /**Creates a new office using a post method. */
   createOffice(newOffice: Office): Observable<Office> {
     return this.http.post<Office>(environment.apiUrl + '/offices', newOffice);
   }
 
   // READ
+  /**Gets a list of current offices using the given endpoint. */
   getAllOffices(): Observable<Office[]> {
     return this.http.get<Office[]>(environment.apiUrl + '/offices');
   }
 
   // may have to replace string with Link<Office>
+  /**Gets, presumably, an office given something.
+   * Not sure what. When trying out the endpoint,
+   * gave access denied.
+   * -Martin
+  */
   getOfficeByLink(officeUri: Link<Office>): Observable<Office> {
     return this.http.get<Office>(environment.apiUrl + officeUri);
   }

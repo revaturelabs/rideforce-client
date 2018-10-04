@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
       data => {
         this.currentUser = data;
         console.log(this.currentUser);
+        document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
       }
     );
 

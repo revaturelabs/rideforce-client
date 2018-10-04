@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-
 import { AppComponent } from './app.component';
 import { RideswipeComponent } from './components/rideswipe/rideswipe.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -31,6 +30,8 @@ import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
 import { AdminComponent } from './components/admin/admin.component';
 import { CarRegistrationComponent } from './components/car-registration/car-registration.component';
+import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { DateFormatPipe } from './pipes/date-format.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,12 @@ import { CarRegistrationComponent } from './components/car-registration/car-regi
     FavoritesComponent,
     AccountinfoComponent,
     AdminComponent,
+<<<<<<< HEAD
     CarRegistrationComponent,
+=======
+    ViewProfileComponent,
+    DateFormatPipe,
+>>>>>>> dev
   ],
   imports: [
     BrowserModule,
