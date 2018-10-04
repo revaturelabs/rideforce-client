@@ -23,4 +23,8 @@ export class AdminComponent implements OnInit {
     )
   }
 
+  dateLocationEncryption(){
+    
+  }
+
 }
