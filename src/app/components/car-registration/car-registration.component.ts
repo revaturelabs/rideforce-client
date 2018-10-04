@@ -17,6 +17,7 @@ export class CarRegistrationComponent implements OnInit {
   carModel: string;
   carYear: number;
   optInToDrive: boolean;
+  cars: Car[];
 
   // booleans for car information buttons
   btnCarInfo: Number = 0;
@@ -27,15 +28,36 @@ export class CarRegistrationComponent implements OnInit {
     this.carObject = new Car();
   }
 
+  resetCars() {
+    
+    if (this.cars !== undefined && this.cars != null && this.cars.length !== 0) {
+      return;
+    }
+    this.resetUser();
+    const userId = this.userObject.id;
+    this.cars = [];
+    this.userService.getAllCars().subscribe(c => {
+      
+      c.forEach(element => {
+        const strNum = element.owner.substring(7);
+        const num = Number.parseInt(strNum);
+        if (num === userId) {
+          this.cars.push(element);
+        }
+      });
+    });
+  }
+
+
+
   resetUser() {
     this.userService.getCurrentUser().subscribe(user => {
       this.userObject = user;
     });
+
   }
 
   addCarToUser() {
-    console.log('Adding car to user!');
-    console.log(this.carObject);
 
     this.resetUser();
 

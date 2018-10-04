@@ -190,6 +190,7 @@ export class UserControllerService {
 
   // READ
   getAllCars(): Observable<Car[]> {
+    console.log('Getting all cars!');
     return this.http.get<Car[]>(environment.apiUrl + '/cars');
   }
 
