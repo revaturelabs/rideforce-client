@@ -48,13 +48,13 @@ export class AccountinfoComponent implements OnInit {
 
   officeObjectArray: Office[] = [];
   officeObject: Office;
-  //Home address
+  /**Home Address */
   address1: string;
 
-  // office Address
+  /**Office Address */
   address2: string;
 
-  //s3 bucket variable for selecting files
+  /**S3 bucket variable for selecting files */
   selectedFiles: FileList;
   imageSrc: string;
 
@@ -63,22 +63,22 @@ export class AccountinfoComponent implements OnInit {
   myForm: FormGroup;
 
   bio: string;
-  // Array of contact info
+  /**Array of contact info*/
   contactInfoArray: ContactInfo[] = [];
   contactTypeArray: string[] = ['Cell Phone', 'Email', 'Slack', 'Skype', 'Discord', 'Facebook', 'GroupMe', 'Other'];
   contactType: string;
   contactItem: string;
-  // batch end date
+  /**batch end date*/
   batchEnd: string;
 
-  // for drivers
+  /**for drivers*/
   carObject: Car;
   carMake: string;
   carModel: string;
   carYear: number;
   optInToDrive: boolean;
 
-  // booleans for car information buttons
+  /**booleans for car information buttons*/
   btnCarInfo: Number = 0;
 
   constructor(private zone: NgZone, 

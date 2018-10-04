@@ -12,6 +12,13 @@ import { AccountinfoComponent } from '../components/accountinfo/accountinfo.comp
 import { AdminComponent } from '../components/admin/admin.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 
+/**
+ * This is where we set our routerLink attribute.
+ * For example...
+ * <a class="dropdown-item" routerLink="/howTo">About</a>
+ * creates an <a> element of class "dropdown-item" that will 
+ * refer to these routes to find which component to route to.
+ */
 export const routes: Routes = [
   {path: '', redirectTo: 'landing', pathMatch: 'full'},
   { path: 'howTo', component: HowToComponent },
