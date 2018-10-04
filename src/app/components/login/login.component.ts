@@ -50,8 +50,9 @@ export class LoginComponent implements OnInit {
         //error coming from the backend
         document.getElementById("errorMessageLogin").style.display="block";
         document.getElementById("errorMessageLogin").innerHTML=e.message;
+        return e.message;
       }
-
+      
     );
   }
 }
