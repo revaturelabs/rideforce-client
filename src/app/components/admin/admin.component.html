@@ -18,16 +18,17 @@
         </div>
         <div class="input-group-text" style="padding-right: 100px">
           <select [(ngModel)]="officeObject">
+            <option value="" selected>Select Office</option>
             <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
           </select>
         </div>
       </div>
-      <button class="btn btn-primary" (click)="getRegistrationKey()">Get Key</button>
+      <button class="btn btn-primary" *ngIf="officeObject && batchEnd" (click)="getRegistrationKey()">Get Key</button>
       <br>
       <br>
       <hr>
       <span class="key-text">
-        <div>{{registrationKey}}</div>
+        <div>{{officeObjectEncrypted}}#{{batchEndEncrypted}}#{{registrationKey}}</div>
       </span>
     </div>
   </div>
