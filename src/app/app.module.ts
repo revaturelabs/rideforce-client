@@ -30,6 +30,8 @@ import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
 import { AdminComponent } from './components/admin/admin.component';
+import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { DateFormatPipe } from './pipes/date-format.pipe';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { AdminComponent } from './components/admin/admin.component';
     FavoritesComponent,
     AccountinfoComponent,
     AdminComponent,
+    ViewProfileComponent,
+    DateFormatPipe,
   ],
   imports: [
     BrowserModule,

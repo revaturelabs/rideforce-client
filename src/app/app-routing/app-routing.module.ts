@@ -10,6 +10,7 @@ import { UsercardComponent } from '../components/usercard/usercard.component';
 import { FavoritesComponent } from '../components/favorites/favorites.component';
 import { AccountinfoComponent } from '../components/accountinfo/accountinfo.component';
 import { AdminComponent } from '../components/admin/admin.component';
+import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 
 /**
  * This is where we set our routerLink attribute.
@@ -28,7 +29,8 @@ export const routes: Routes = [
   { path: 'rideswipe', component: RideswipeComponent },
   { path: 'userCard', component: UsercardComponent },
   { path: 'favorites', component: FavoritesComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent },
+  { path: 'userProfile', component: ViewProfileComponent}
 ];
 @NgModule({
   imports: [
