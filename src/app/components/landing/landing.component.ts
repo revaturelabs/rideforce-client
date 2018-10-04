@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/user.model';
+import { UserControllerService } from '../../services/api/user-controller.service';
 
 @Component({
   selector: 'app-landing',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-
-  constructor() { }
+  currentUser: User;
+  constructor(private userService: UserControllerService) { }
 
   ngOnInit() {
+    this.userService.getCurrentUserObservable().subscribe(
+    data => {
+      this.currentUser = data;
+    }
+  );
   }
 
 
