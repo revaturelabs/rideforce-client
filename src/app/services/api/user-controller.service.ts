@@ -184,6 +184,7 @@ export class UserControllerService {
 
   // CREATE
   createCar(newCar: Car): Observable<Car> {
+    console.log('Creating new Car! ' + environment.apiUrl);
     return this.http.post<Car>(environment.apiUrl + '/cars', newCar);
   }
 

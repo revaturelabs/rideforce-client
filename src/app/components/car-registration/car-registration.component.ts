@@ -24,13 +24,22 @@ export class CarRegistrationComponent implements OnInit {
   constructor(private userService: UserControllerService) { }
 
   ngOnInit() {
+    this.carObject = new Car();
   }
 
   addCarToUser() {
+    console.log('Adding car to user!');
+    console.log(this.carObject);
+
+    this.userService.getCurrentUser().subscribe(user => {
+      this.userObject = user;
+    });
+
     this.carObject.id = 0;
     this.carObject.make = this.carMake;
     this.carObject.model = this.carModel;
-    // this.carObject.owner = this.userObject.;
+
+    this.carObject.owner = '/users/' + this.userObject.id.toString();
     this.carObject.year = this.carYear;
     // this.userObject.cars.push(this.carObject);
 
