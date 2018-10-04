@@ -13,7 +13,7 @@ describe('AuthService', () => {
       expect(authService).toBeTruthy();
   })));
 
-  it('should return error', function(){
+  it('should return Incorrect email or password.', function(){
     const service: AuthService=TestBed.get(AuthService);
     service.authenticate("Garbage","Garbage").subscribe(
       () => {
@@ -21,6 +21,18 @@ describe('AuthService', () => {
       },
       e => {
         expect(e.message).toEqual('Incorrect email or password.');
+      }
+    )
+  });
+
+  it('should return Input validation failed. ', function(){
+    const service: AuthService=TestBed.get(AuthService);
+    service.authenticate("","").subscribe(
+      () => {
+        
+      },
+      e => {
+        expect(e.message).toEqual('Input validation failed.');
       }
     )
   });
