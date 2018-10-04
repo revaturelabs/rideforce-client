@@ -22,4 +22,17 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should return "Incorrect email or password."', function(){
+  //   component.userEmail="Garbage";
+  //   component.userPass="Garbage";
+  //   expect(component.login()).toEqual('string');
+  //   //'Incorrect email or password.'
+  // });
+  // it('should return "Input validation failed."', function(){
+  //   component.userEmail="";
+  //   component.userPass="";
+  //   expect(component.login()).toBe('Input validation failed.');
+  // })
+
 });
