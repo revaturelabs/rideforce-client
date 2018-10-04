@@ -50,12 +50,9 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
     FavoritesComponent,
     AccountinfoComponent,
     AdminComponent,
-<<<<<<< HEAD
     CarRegistrationComponent,
-=======
     ViewProfileComponent,
     DateFormatPipe,
->>>>>>> dev
   ],
   imports: [
     BrowserModule,
