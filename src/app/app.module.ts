@@ -30,6 +30,7 @@ import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
 import { AdminComponent } from './components/admin/admin.component';
+import { CarRegistrationComponent } from './components/car-registration/car-registration.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AdminComponent } from './components/admin/admin.component';
     FavoritesComponent,
     AccountinfoComponent,
     AdminComponent,
+    CarRegistrationComponent,
   ],
   imports: [
     BrowserModule,
