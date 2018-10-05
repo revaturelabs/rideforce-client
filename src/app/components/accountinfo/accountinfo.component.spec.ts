@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountinfoComponent } from './accountinfo.component';
+import { AppModule } from '../../app.module';
+import { AuthService } from '../../services/auth.service';
+import { UserControllerService } from '../../services/api/user-controller.service';
 
 describe('AccountinfoComponent', () => {
   let component: AccountinfoComponent;
@@ -8,7 +11,8 @@ describe('AccountinfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountinfoComponent ]
+      declarations: [ AccountinfoComponent ],
+      providers: [AuthService, UserControllerService],
     })
     .compileComponents();
   }));

@@ -37,8 +37,7 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login(){
-  console.log('in login');
-  console.log(this.currentUser);
+  
     this.authService.authenticate(this.userEmail, this.userPass).subscribe(
       () => {
         this.route.navigate(['/landing']);
@@ -50,8 +49,9 @@ export class LoginComponent implements OnInit {
         //error coming from the backend
         document.getElementById("errorMessageLogin").style.display="block";
         document.getElementById("errorMessageLogin").innerHTML=e.message;
+        return e.message;
       }
-
+      
     );
   }
 }
