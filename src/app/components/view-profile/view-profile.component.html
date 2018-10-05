@@ -3,12 +3,12 @@
   <div class="col-1"></div>
   <div class="col-lg-3 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
-      <div label="CREATE PROFILE div">
+      <div label="VIEW PROFILE div">
         <ngb-tab title="1" id="1">
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>
-              <h2>Create Profile:</h2>
+              <h2>Your Profile:</h2>
               <br>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -18,11 +18,11 @@
               </div>
               <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
                 <div *ngIf="firstname.errors.required">
-                  Firstname cannot be empty
+                  First name cannot be empty
                 </div>
                 <div *ngIf="firstname.errors.maxLength">
                   ;
-                  Firstname cannot be more than 15 characters
+                  First name cannot be more than 15 characters
                 </div>
               </div>
 
@@ -34,11 +34,11 @@
               </div>
               <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
                 <div *ngIf="lastname.errors.required">
-                  Lastname cannot be empty
+                  Last name cannot be empty
                 </div>
                 <div *ngIf="lastname.errors.maxLength">
                   ;
-                  Lastname cannot be more than 15 characters
+                  Last name cannot be more than 15 characters
                 </div>
               </div>
 
@@ -78,18 +78,18 @@
                 <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required>
               </div>
               <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-                <div *ngIf="pConfirm.errors.required">
+                <!-- <div *ngIf="pConfirm.errors.required">
                   Password Confirm cannot be empty
                 </div>
                 <div *ngIf="pConfirm.errors.maxLength">
                   Password Confirm cannot be more than 15 characters
-                </div>
+                </div> -->
                 <div *ngIf="password != passwordConfirm">
-                  password does not match.
+                  Passwords do not match.
                 </div>
               </div>
 
-              <div class="input-group mb-3">
+              <!-- <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Key</span>
                 </div>
@@ -102,7 +102,7 @@
                 <div *ngIf="tInput.errors.maxLength">
                   Password Confirm cannot be more than 15 characters
                 </div>
-              </div>
+              </div> -->
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -138,7 +138,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Batch End</span>
                 </div>
-                <input type="date" class="form-control" [(ngModel)]="batchEnd" data-provide = "datepicker">
+                <input type="date" class="form-control" [(ngModel)]="batchEnd">
               </div>
               <div>
                 <button class="btn btnNextPrevious" (click)="accountInfoNext()">Next</button>
@@ -206,26 +206,53 @@
       <div label="CAR INFO div">
         <ngb-tab title="3" id="3">
           <ng-template ngbTabContent>
-            <div class="input-group mb-3">
-              <div class="input-group" id="button-addon3">
-                <span class="padRight"><button class="btn btnAddCar" type="button" (click)="isDriver()">Driver</button></span>
-                <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>
+            <div class="container-fluid">
+              <br>
+              <h2>Car Information:</h2>
+              <br>
+              <div class="input-group mb-3">
+                <div class="input-group" id="button-addon3">
+                  <span class="padRight"><button class="btn btnAddCar" type="button" (click)="isDriver()">Driver</button></span>
+                  <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>
+                </div>
               </div>
-            </div>
-            <app-car-registration></app-car-registration>
-            <div>
-              <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
-              <span> <button class="btn btnNextPrevious" (click)="carNext()">Next</button></span>
-            </div>
-            <div style="padding-top: 20px">
-              <div *ngIf="!requiredCarFields" class="alert alert-danger">
-                Please select Driver or Rider
+              <br>
+              <div *ngIf="btnCarInfo == 1">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Make</span>
+                  </div>
+                  <input type="text" class="form-control" [(ngModel)]="carMake">
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Model</span>
+                  </div>
+                  <input type="text" class="form-control" [(ngModel)]="carModel">
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Year</span>
+                  </div>
+                  <input type="number" min="1950" max="5000" class="form-control" [(ngModel)]="carYear">
+                </div>
+              </div>
+              <div>
+                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
+                <span> <button class="btn btnNextPrevious" (click)="carNext()">Next</button></span>
+              </div>
+              <div style="padding-top: 20px">
+                <div *ngIf="!requiredCarFields" class="alert alert-danger">
+                  Please select Driver or Rider
+                </div>
               </div>
             </div>
           </ng-template>
         </ngb-tab>
       </div>
-      <div label="CONFIRMATION div">
+      <!-- <div label="CONFIRMATION div">
         <ngb-tab title="4" id="4">
           <ng-template ngbTabContent>
             <div class="container-fluid">
@@ -265,7 +292,7 @@
             </div>
           </ng-template>
         </ngb-tab>
-      </div>
+      </div> -->
     </ngb-tabset>
   </div>
 </div>

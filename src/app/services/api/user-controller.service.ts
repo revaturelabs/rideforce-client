@@ -4,7 +4,7 @@ import { User } from '../../../app/models/user.model';
 import { Register } from '../../../app/models/register.model';
 import { Observable, of, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
@@ -71,11 +71,18 @@ export class UserControllerService {
   getCurrentUser(): Observable<User> {
     // We cache the current user in a local variable to prevent making too many
     // calls to the database.
+    console.log('Getting current User! api is "' + environment.apiUrl + '/login"');
+
     return this.currentUser
       ? of(this.currentUser)
       : this.http
         .get<User>(environment.apiUrl + '/login')
-        .pipe(tap(user => {
+        .pipe(
+          catchError(function<T>(res?: T) {
+            this.currentUser = null;
+            return of(res as T);
+          }),
+          tap(user => {
           this.currentUser = user;
           this.currentUserSubject.next(user);
         }));
@@ -194,11 +201,13 @@ export class UserControllerService {
 
   // CREATE
   createCar(newCar: Car): Observable<Car> {
+    console.log('Creating new Car! ' + environment.apiUrl);
     return this.http.post<Car>(environment.apiUrl + '/cars', newCar);
   }
 
   // READ
   getAllCars(): Observable<Car[]> {
+    console.log('Getting all cars!');
     return this.http.get<Car[]>(environment.apiUrl + '/cars');
   }
 
