@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
     this.userService.getCurrentUserObservable().subscribe(
       data => {
         this.currentUser = data;
-        console.log(this.currentUser);
+        // console.log(this.currentUser);
         document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
       }
     );
