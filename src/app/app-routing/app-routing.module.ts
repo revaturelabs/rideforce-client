@@ -10,6 +10,7 @@ import { UsercardComponent } from '../components/usercard/usercard.component';
 import { FavoritesComponent } from '../components/favorites/favorites.component';
 import { AccountinfoComponent } from '../components/accountinfo/accountinfo.component';
 import { AdminComponent } from '../components/admin/admin.component';
+import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 
 /**
@@ -30,7 +31,11 @@ export const routes: Routes = [
   { path: 'userCard', component: UsercardComponent },
   { path: 'favorites', component: FavoritesComponent },
   { path: 'admin', component: AdminComponent },
+<<<<<<< HEAD
+  { path: 'cars', component: CarRegistrationComponent }
+=======
   { path: 'userProfile', component: ViewProfileComponent}
+>>>>>>> dev
 ];
 @NgModule({
   imports: [
