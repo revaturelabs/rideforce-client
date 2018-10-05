@@ -31,11 +31,8 @@ export const routes: Routes = [
   { path: 'userCard', component: UsercardComponent },
   { path: 'favorites', component: FavoritesComponent },
   { path: 'admin', component: AdminComponent },
-<<<<<<< HEAD
-  { path: 'cars', component: CarRegistrationComponent }
-=======
+  { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent}
->>>>>>> dev
 ];
 @NgModule({
   imports: [
