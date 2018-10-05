@@ -31,7 +31,7 @@ import { ErrorInterceptor } from './utils/error.interceptor';
 import { AdminComponent } from './components/admin/admin.component';
 import { CarRegistrationComponent } from './components/car-registration/car-registration.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
-import { DateFormatPipe } from './pipes/date-format.pipe';
+// import { DateFormatPipe } from './pipes/date-format.pipe';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
     AdminComponent,
     CarRegistrationComponent,
     ViewProfileComponent,
-    DateFormatPipe,
+    // DateFormatPipe,
   ],
   imports: [
     BrowserModule,
