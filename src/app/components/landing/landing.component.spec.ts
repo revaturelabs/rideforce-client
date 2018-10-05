@@ -1,22 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LandingComponent } from './landing.component';
+import { HttpHandler, HttpClient } from '@angular/common/http';
+import { UserControllerService } from '../../services/api/user-controller.service';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
-  let fixture: ComponentFixture<LandingComponent>;
+  // let fixture: ComponentFixture<LandingComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LandingComponent ]
-    })
-    .compileComponents();
-  }));
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     declarations: [ LandingComponent ]
+  //   })
+  //   .compileComponents();
+  // }));
 
+  // beforeEach(() => {
+  //   fixture = TestBed.createComponent(LandingComponent);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  // });
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, UserControllerService, LandingComponent]});
+    component = TestBed.get(LandingComponent);
   });
 
   it('should create', () => {
