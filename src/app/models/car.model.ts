@@ -1,7 +1,7 @@
 import { User } from "./user.model";
 import { Link } from "./link.model";
 
-export interface Car {
+export class Car {
     /**
    * The ID of the car in the database.
    */
