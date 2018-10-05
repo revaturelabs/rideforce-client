@@ -33,7 +33,10 @@ export class AdminComponent implements OnInit {
   }
 
   dateLocationEncryption(){
-    this.encryptedLocationDate = btoa(this.officeObject + "~" + this.batchEnd);
+    let middleEncryption = btoa(this.officeObject + "~" + this.batchEnd);
+    if (middleEncryption.length != 28)
+      middleEncryption = 'XcvF' + middleEncryption;
+    this.encryptedLocationDate = middleEncryption;
   }
 
   getOffices() {
