@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
     this.getOffices();
   }
 
-  getRegistrationKey(){
+  getRegistrationKey() {
     this.userService.getRegistrationKey().subscribe(
       data => {
         this.registrationKey = data;
