@@ -14,7 +14,10 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">First Name</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" required>
+                <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" id="firstName" required disabled>
+                  <!-- <div *ngIf="canEdit">
+                    <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" required>
+                  </div> -->
               </div>
               <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
                 <div *ngIf="firstname.errors.required">
@@ -30,7 +33,7 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text " id="basic-addon1 ">Last Name</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="lastName" #lastname="ngModel" required>
+                <input type="text" class="form-control" [(ngModel)]="lastName" #lastname="ngModel" id="lastName" required disabled>
               </div>
               <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
                 <div *ngIf="lastname.errors.required">
@@ -46,7 +49,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Email</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" required placeholder="Email..">
+                <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."
+                  disabled>
               </div>
               <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
                 <div *ngIf="uName.errors.required">
@@ -61,7 +65,7 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1 ">Password</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" required>
+                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>
               </div>
               <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
                 <div *ngIf="pWord.errors.required">
@@ -75,7 +79,8 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1 ">Confirm</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required>
+                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" id="confirmPassword" required
+                  disabled>
               </div>
               <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
                 <!-- <div *ngIf="pConfirm.errors.required">
@@ -125,7 +130,7 @@
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
                   appPlacesAutocomplete (addressSelect)="autocomplete2($event)" [(ngModel)]="address2" #address="ngModel"
-                  required placeholder="Type to search..">
+                  required id="address" placeholder="Type to search.." disabled>
                 <!-- <input type="text" class="form-control" [(ngModel)]="address.address2" required> -->
               </div>
               <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
@@ -138,11 +143,12 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Batch End</span>
                 </div>
-                <input type="date" class="form-control" [(ngModel)]="batchEnd">
+                <input type="text" id="batchEnd" class="form-control" [(ngModel)]="batchEnd" disabled>
               </div>
               <div>
-                <button class="btn btnNextPrevious" (click)="accountInfoNext()">Next</button>
+                <button class="btn btnEdit" (click)="edit()" id="edit">Edit <i class="fas fa-pencil-alt"></i></button>
               </div>
+              <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i class="fas fa-save"></i></button>
               <div style="padding-top: 20px">
                 <div *ngIf="!requiredInfoFields" class="alert alert-danger">
                   Please fill out ALL fields and confirm your passwords match
@@ -241,7 +247,7 @@
               </div>
               <div>
                 <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
-                <span> <button class="btn btnNextPrevious" (click)="carNext()">Next</button></span>
+                <span> <button class="btn btnNextPrevious" (click)="edit()">Edit</button></span>
               </div>
               <div style="padding-top: 20px">
                 <div *ngIf="!requiredCarFields" class="alert alert-danger">
