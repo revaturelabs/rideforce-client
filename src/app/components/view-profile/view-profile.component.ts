@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
-import { DateFormatPipe } from '../../pipes/date-format.pipe';
+//import { DateFormatPipe } from '../../pipes/date-format.pipe';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
@@ -9,12 +9,14 @@ import { DateFormatPipe } from '../../pipes/date-format.pipe';
 })
 export class ViewProfileComponent implements OnInit {
   currentUser: User;
-  constructor(private dateFormat: DateFormatPipe, private userService:UserControllerService) { }
+  constructor(private userService:UserControllerService) { }
   firstName : string;
   lastName : string;
   username : string;
   address2 : string;
-  batchEnd : Date;
+  batchEnd : any;
+  canEdit : boolean = false;
+  
   ngOnInit() {
     this.userService.getCurrentUserObservable().subscribe(
       data => {
@@ -25,8 +27,21 @@ export class ViewProfileComponent implements OnInit {
         this.lastName = this.currentUser.lastName;
         this.username = this.currentUser.email;
         this.address2 = this.currentUser.address;
-        this.batchEnd = new Date(this.currentUser.batchEnd);
+        this.batchEnd = new Date(this.currentUser.batchEnd).toLocaleDateString();
       }
     );
+  }
+
+  edit() {
+    document.getElementById("firstName").removeAttribute("disabled");
+    document.getElementById("lastName").removeAttribute("disabled");
+    document.getElementById("email").removeAttribute("disabled");
+    document.getElementById("password").removeAttribute("disabled");
+    document.getElementById("confirmPassword").removeAttribute("disabled");
+    document.getElementById("address").removeAttribute("disabled");
+    document.getElementById("batchEnd").removeAttribute("disabled");
+    document.getElementById("batchEnd").setAttribute("type", "date");
+    document.getElementById("edit").style.display = "none";
+    document.getElementById("submit").style.display = "inline";
   }
 }
