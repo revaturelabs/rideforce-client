@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
-  getRegistrationKey(){
+  getRegistrationKey() {
     this.userService.getRegistrationKey().subscribe(
       data => {
         this.registrationKey = data;

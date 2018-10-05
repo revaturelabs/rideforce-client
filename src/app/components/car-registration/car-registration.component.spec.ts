@@ -4,29 +4,19 @@ import { CarRegistrationComponent } from './car-registration.component';
 import { UserControllerService } from '../../services/api/user-controller.service';
 // import { inject } from '@angular/core';
 import { User } from '../../models/user.model';
+import { HttpClient } from '@angular/common/http';
+import { HttpHandler } from '@angular/common/http';
 
 describe('CarRegistrationComponent', () => {
   let component: CarRegistrationComponent;
-  let fixture: ComponentFixture<CarRegistrationComponent>;
-
-
-
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CarRegistrationComponent ]
-    })
-    .compileComponents();
-  }));
+  // let fixture: ComponentFixture<CarRegistrationComponent>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CarRegistrationComponent);
-    component = fixture.componentInstance;
-
-    fixture.detectChanges();
+    TestBed.configureTestingModule({ providers: [HttpHandler, HttpClient, CarRegistrationComponent] });
+    component = TestBed.get(CarRegistrationComponent);
   });
 
-  it('should create', async(inject([UserControllerService],
+  it('should create car component', async(inject([UserControllerService],
     (userServe: UserControllerService) => {
       let user: User;
       userServe.getCurrentUser().subscribe(use => { user = use; } );
@@ -34,5 +24,11 @@ describe('CarRegistrationComponent', () => {
     expect(user).toEqual(component.userObject);
   })));
 
+  it('should refresh the car registration fields', () => {
+    component.refreshFields();
+    expect(component.carMake).toEqual('');
+    expect(component.carModel).toEqual('');
+    // expect(component.carMake).toEqual('');
+  });
 
 });
