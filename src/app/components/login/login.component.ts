@@ -22,34 +22,34 @@ export class LoginComponent implements OnInit {
    * Checking to see if there is a current user, and if there is, redirects to landing.
    */
   ngOnInit() {
-    // this.userService.getCurrentUserObservable().subscribe(
-    //   data => {
-    //     this.currentUser = data;
-    //     if(this.currentUser.email!=null){
-    //       this.route.navigate(['/landing']);
-    //     }
-    //   }
-    // );
-  }
+      if(sessionStorage.length > 0){
+        this.route.navigate(['/landing']);
+      }
+    }
 
   /**
    * Gets the parameters from the login fields. 
    * If the login fails, displays the error message sent by the server under the password field.
    */
-  login(){
-  
+  // getUser(email: string) {
+  //   let user;
+  //   return this.userService.getUserByEmail(email).subscribe();
+  // }
+
+  login() {
     this.authService.authenticate(this.userEmail, this.userPass).subscribe(
       (x) => {
+        this.userService.getUserByEmail(this.userEmail).then((x) => {
+          sessionStorage.setItem("id", x.id.toString());
+          sessionStorage.setItem("firstName", x.firstName);
+          sessionStorage.setItem("lastName", x.lastName);
+          sessionStorage.setItem("active", x.active.toString());
+          sessionStorage.setItem("role", x.role);
+          sessionStorage.setItem("address", x.address);
+          sessionStorage.setItem("batchEnd", x.batchEnd);
+        });
         sessionStorage.setItem("userEmail", this.userEmail);
         sessionStorage.setItem("userPassword", this.userPass);
-        // localStorage.setItem("userRole", this.currentUser.role);
-        // localStorage.setItem("userAddress", this.currentUser.address);
-        // localStorage.setItem("firstName", this.currentUser.firstName);
-        // localStorage.setItem("lastName", this.currentUser.lastName);
-        // localStorage.setItem("batchEnd", this.currentUser.batchEnd);
-        // localStorage.setItem("id", this.currentUser.id.toString());
-        //localStorage.setItem("test", this.currentUser.)
-        //this.route.navigate(['/landing']);
         location.reload(true);
     },
       // TODO if an error is returned, return the error message to user
