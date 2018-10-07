@@ -28,13 +28,13 @@ export class ViewProfileComponent implements OnInit {
       data => {
         this.currentUser = data;
         console.log(this.currentUser);
-        this.firstName = this.currentUser.firstName;
-        this.lastName = this.currentUser.lastName;
-        this.username = this.currentUser.email;
+        this.firstName = sessionStorage.getItem("firstName");
+        this.lastName = sessionStorage.getItem("lastName");
+        this.username = sessionStorage.getItem("email");
         // console.log(this.userService.getOfficeByLink(this.currentUser.office).subscribe().toString());
         // document.getElementById("currentOffice").textContent = this.userService.getOfficeByLink(this.currentUser.office).toString();
-        this.address2 = this.currentUser.address;
-        this.batchEnd = new Date(this.currentUser.batchEnd).toLocaleDateString();
+        this.address2 = sessionStorage.getItem("address");
+        this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
       }
     );
     this.getOffices();
@@ -76,10 +76,10 @@ export class ViewProfileComponent implements OnInit {
   }
 
   switchRole() {
-    if(this.currentUser.role === "DRIVER") {
-      this.currentUser.role = Role.Rider;
-    } else if(this.currentUser.role === "RIDER") {
-      this.currentUser.role = Role.Driver;
+    if(sessionStorage.getItem("role") === "DRIVER") {
+      sessionStorage.setItem("role", "RIDER");
+    } else if(sessionStorage.getItem("role") === "RIDER") {
+      sessionStorage.setItem("role", "DRIVER");
     } else {
       console.log("nope");
     }
@@ -89,6 +89,11 @@ export class ViewProfileComponent implements OnInit {
     this.userService.getAllOffices().subscribe(data => {
       this.officeObjectArray = data;
     });
+  }
+
+  currentRole : string;
+  getRole() {
+    this.currentRole = sessionStorage.getItem("role");
   }
 
   users: any[];
