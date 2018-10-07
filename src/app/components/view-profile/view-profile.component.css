@@ -39,8 +39,16 @@ input, textarea[type="text"]
    word-wrap: break-word;
   }
 
-.btnNextPrevious{
+.btnEdit{
     background-color: #F26925;
+    color: white;
+    display: inline;
+}
+
+.btnSubmit{
+    background-color: #72A4C2;
+    color: white;
+    display: none;
 }
 
 .btnAddCar{

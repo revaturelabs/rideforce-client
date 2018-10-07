@@ -29,8 +29,9 @@ import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
 import { AdminComponent } from './components/admin/admin.component';
+import { CarRegistrationComponent } from './components/car-registration/car-registration.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
-import { DateFormatPipe } from './pipes/date-format.pipe';
+//import { DateFormatPipe } from './pipes/date-format.pipe';
 
 @NgModule({
   declarations: [
@@ -49,8 +50,8 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
     FavoritesComponent,
     AccountinfoComponent,
     AdminComponent,
+    CarRegistrationComponent,
     ViewProfileComponent,
-    DateFormatPipe,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +66,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
     }),
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     NgbActiveModal,

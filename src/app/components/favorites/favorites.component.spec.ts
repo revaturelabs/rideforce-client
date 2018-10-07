@@ -4,19 +4,23 @@ import { FavoritesComponent } from './favorites.component';
 
 describe('FavoritesComponent', () => {
   let component: FavoritesComponent;
-  let fixture: ComponentFixture<FavoritesComponent>;
+  // let fixture: ComponentFixture<FavoritesComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FavoritesComponent ]
-    })
-    .compileComponents();
-  }));
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     declarations: [ FavoritesComponent ]
+  //   })
+  //   .compileComponents();
+  // }));
 
+  // beforeEach(() => {
+  //   fixture = TestBed.createComponent(FavoritesComponent);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  // });
   beforeEach(() => {
-    fixture = TestBed.createComponent(FavoritesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({providers: [FavoritesComponent]});
+    component = TestBed.get(FavoritesComponent);
   });
 
   it('should create', () => {
