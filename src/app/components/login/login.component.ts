@@ -22,14 +22,14 @@ export class LoginComponent implements OnInit {
    * Checking to see if there is a current user, and if there is, redirects to landing.
    */
   ngOnInit() {
-    this.userService.getCurrentUserObservable().subscribe(
-      data => {
-        this.currentUser = data;
-        if(this.currentUser.email!=null){
-          this.route.navigate(['/landing']);
-        }
-      }
-    );
+    // this.userService.getCurrentUserObservable().subscribe(
+    //   data => {
+    //     this.currentUser = data;
+    //     if(this.currentUser.email!=null){
+    //       this.route.navigate(['/landing']);
+    //     }
+    //   }
+    // );
   }
 
   /**
