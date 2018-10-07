@@ -18,11 +18,11 @@
               </div>
               <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
                 <div *ngIf="firstname.errors.required">
-                  Firstname cannot be empty
+                  First name cannot be empty
                 </div>
                 <div *ngIf="firstname.errors.maxLength">
                   ;
-                  Firstname cannot be more than 15 characters
+                  First name cannot be more than 15 characters
                 </div>
               </div>
 
@@ -34,11 +34,11 @@
               </div>
               <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
                 <div *ngIf="lastname.errors.required">
-                  Lastname cannot be empty
+                  Last name cannot be empty
                 </div>
                 <div *ngIf="lastname.errors.maxLength">
                   ;
-                  Lastname cannot be more than 15 characters
+                  Last name cannot be more than 15 characters
                 </div>
               </div>
 
@@ -212,7 +212,7 @@
                 <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>
               </div>
             </div>
-            <app-car-registration></app-car-registration>
+            <app-car-registration *ngIf="roleObject === 'DRIVER'"></app-car-registration>
             <div>
               <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
               <span> <button class="btn btnNextPrevious" (click)="carNext()">Next</button></span>
