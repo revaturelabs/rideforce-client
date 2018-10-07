@@ -13,8 +13,6 @@ import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormB
 import { UploadService } from '../../services/upload.service';
 import { Router } from '@angular/router';
 
-// Comment
-
 
 @Component({
   selector: 'app-accountinfo',
@@ -47,7 +45,7 @@ export class AccountinfoComponent implements OnInit {
   searchedAddress: string;
 
   officeObjectArray: Office[] = [];
-  officeObject: Office;
+  officeObject: string;//Office;
   /**Home Address */
   address1: string;
 
@@ -93,20 +91,20 @@ export class AccountinfoComponent implements OnInit {
     }
     this.registerForm = new FormGroup({
       'username': new FormControl(this.username, [
-        Validators.required,
-        Validators.maxLength(15)
+        Validators.required
+        //,Validators.maxLength(15)
       ]),
       'password': new FormControl(this.password, [
-        Validators.required,
-        Validators.maxLength(15)
+        Validators.required
+        // ,Validators.maxLength(15)
       ]),
       'passwordConfirm': new FormControl(this.passwordConfirm, [
-        Validators.required,
-        Validators.maxLength(15)
+        Validators.required
+        // ,Validators.maxLength(15)
       ]),
       'token': new FormControl(this.token, [
-        Validators.required,
-        Validators.maxLength(15)
+        Validators.required
+        // ,Validators.maxLength(15)
       ]),
     });
     this.getOffices();
@@ -169,6 +167,24 @@ export class AccountinfoComponent implements OnInit {
     this.imageSrc = this.uploadService.uploadfile(file);
   } 
 
+  parseEncryption() {
+    let pref = this.token.substr(0,28);
+    if (pref.startsWith("XcvF"))
+      pref = pref.substr(4);
+    
+    let decrip = atob(pref).split("~");
+    /*
+    this.userService.getAllOffices()
+    1: {id: 1, name: "Reston", address: "11730 Plaza America Dr #205, Reston, VA 20190"}
+    2: {id: 2, name: "Tampa", address: "4202 E Fowler Ave, Tampa, FL 33620"}
+    0: {id: 3, name: "Arlington", address: "701 W Nedderman Dr, Arlington, TX 76019"}
+    3: {id: 4, name: "Flushing", address: "65-30 Kissena Blvd, Flushing, NY 11367"}
+    4: {id: 5, name: "New York", address: "119 W 31st St, New York, NY 10001"}
+    */
+    this.officeObject = decrip[0];//{id: 0, name: decrip[0], address: "701 W Nedderman Dr, Arlington, TX 76019"};
+    this.batchEnd = decrip[1];
+  }
+
   selectFile(event)
   {
     this.selectedFiles = event.target.files;
@@ -178,6 +194,7 @@ export class AccountinfoComponent implements OnInit {
   createUserObject() {
 
     this.updload();
+    this.parseEncryption();
 
     this.userObject = {
       id: 0,
@@ -186,7 +203,7 @@ export class AccountinfoComponent implements OnInit {
       email: this.username,
       photoUrl: this.imageSrc,
       address: this.address2,
-      office: '/offices/1',
+      office: '/offices/1',// + this.officeObject,
       batchEnd: new Date(this.batchEnd).toISOString(),
       cars: [],
       active: true,
@@ -198,7 +215,7 @@ export class AccountinfoComponent implements OnInit {
     //get id from user after post and associate with a car object
     //this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token)
-      .subscribe(user => {
+      .subscribe(() => {
         this.router.navigate(["/map"]);
       });
 

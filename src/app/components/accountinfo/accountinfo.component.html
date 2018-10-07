@@ -93,7 +93,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Key</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="token" #tInput="ngModel" required>
+                <input type="text" class="form-control" [(ngModel)]="token" #tInput="ngModel" required (blur)="parseEncryption()">
               </div>
               <div *ngIf="tInput.invalid && (tInput.dirty || tInput.touched)" class="alert alert-danger">
                 <div *ngIf="tInput.errors.required">
