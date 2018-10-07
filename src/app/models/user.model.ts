@@ -11,7 +11,7 @@ export interface User {
   id: number;
   firstName: string;
   lastName: string;
-  //username
+  // username
   email: string;
   /**
    * The URL to the user's profile photo.
@@ -28,7 +28,7 @@ export interface User {
   /**
    * The end date of the batch, in the format (yyyy-MM-dd'T'HH:mm:ss.SSS'Z').
    */
-  batchEnd: string;
+  batchEnd: any;
   cars: Link<Car>[];
   /**
    * The user's Venmo username.

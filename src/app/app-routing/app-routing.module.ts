@@ -10,6 +10,7 @@ import { UsercardComponent } from '../components/usercard/usercard.component';
 import { FavoritesComponent } from '../components/favorites/favorites.component';
 import { AccountinfoComponent } from '../components/accountinfo/accountinfo.component';
 import { AdminComponent } from '../components/admin/admin.component';
+import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 
 /**
@@ -20,9 +21,9 @@ import { ViewProfileComponent } from '../components/view-profile/view-profile.co
  * refer to these routes to find which component to route to.
  */
 export const routes: Routes = [
-  {path: '', redirectTo: 'landing', pathMatch: 'full'},
+  { path: '',  pathMatch: 'full', redirectTo: 'landing' },
   { path: 'howTo', component: HowToComponent },
-  { path: 'landing', component: LandingComponent},
+  { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
   { path: 'accountInfo', component: AccountinfoComponent},
@@ -30,7 +31,9 @@ export const routes: Routes = [
   { path: 'userCard', component: UsercardComponent },
   { path: 'favorites', component: FavoritesComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'userProfile', component: ViewProfileComponent}
+  { path: 'cars', component: CarRegistrationComponent },
+  { path: 'userProfile', component: ViewProfileComponent},
+  //{ path: 'logout', redirectTo: 'landing' }
 ];
 @NgModule({
   imports: [

@@ -6,12 +6,29 @@
     <div class="container-fluid">
       <h2>Generate Key</h2>
       <h3>This key expires after 2 hours</h3>
-      <button class="btn btn-primary" (click)="getRegistrationKey()">Get Key</button>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Batch End</span>
+        </div>
+        <input type="date" class="form-control" [(ngModel)]="batchEnd">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Office Address</span>
+        </div>
+        <div class="input-group-text" style="padding-right: 100px">
+          <select [(ngModel)]="officeObject">
+            <option value="" selected>Select Office</option>
+            <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" *ngIf="officeObject && batchEnd" (click)="getRegistrationKey()">Get Key</button>
       <br>
       <br>
       <hr>
       <span class="key-text">
-        <div>{{registrationKey}}</div>
+        <div>{{encryptedLocationDate}}{{registrationKey}}</div>
       </span>
     </div>
   </div>
