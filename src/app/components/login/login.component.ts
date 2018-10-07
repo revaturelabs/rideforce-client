@@ -39,10 +39,19 @@ export class LoginComponent implements OnInit {
   login(){
   
     this.authService.authenticate(this.userEmail, this.userPass).subscribe(
-      () => {
-        this.route.navigate(['/landing']);
-        
-      },
+      (x) => {
+        sessionStorage.setItem("userEmail", this.userEmail);
+        sessionStorage.setItem("userPassword", this.userPass);
+        // localStorage.setItem("userRole", this.currentUser.role);
+        // localStorage.setItem("userAddress", this.currentUser.address);
+        // localStorage.setItem("firstName", this.currentUser.firstName);
+        // localStorage.setItem("lastName", this.currentUser.lastName);
+        // localStorage.setItem("batchEnd", this.currentUser.batchEnd);
+        // localStorage.setItem("id", this.currentUser.id.toString());
+        //localStorage.setItem("test", this.currentUser.)
+        //this.route.navigate(['/landing']);
+        location.reload(true);
+    },
       // TODO if an error is returned, return the error message to user
       //callback called if there is an error
       e => {
