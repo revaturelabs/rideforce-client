@@ -11,7 +11,7 @@ export interface User {
   id: number;
   firstName: string;
   lastName: string;
-  //username
+  // username
   email: string;
   /**
    * The URL to the user's profile photo.
