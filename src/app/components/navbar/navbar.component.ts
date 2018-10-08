@@ -11,7 +11,6 @@ import { User } from '../../models/user.model';
 })
 export class NavbarComponent implements OnInit {
 
-  isLoggedIn: boolean;
   currentUser: User;
 
   constructor(
@@ -27,17 +26,40 @@ export class NavbarComponent implements OnInit {
         document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
       }
     );
-
+    // this.userService.getCurrentUserObservable().subscribe(
+    //   data => {
+    //     this.currentUser = data;
+    //     // console.log(this.currentUser);
+    //     document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
+    //   }
+    // );
+    // this.sessionCheck();
   }
 
-  checkIfLoggedIn(){
-    if(this.userService.isLoggedIn){
-      this.isLoggedIn = true;
-    } 
-    else if(!this.userService.isLoggedIn) {
-      this.isLoggedIn = false;
+  session : boolean = sessionStorage.length > 0;
+  sessionCheck() {
+    if(sessionStorage.length > 0) {
+      this.session = true;
+    } else {
+      this.session = false;
     }
   }
+  
+  getCurrentUser(){
+    this.userService.getCurrentUser().subscribe(
+      data => {
+        this.currentUser = data;
+      }
+    )
+  }
+  // checkIfLoggedIn(){
+  //   if(this.userService.isLoggedIn){
+  //     this.isLoggedIn = true;
+  //   } 
+  //   else if(!this.userService.isLoggedIn) {
+  //     this.isLoggedIn = false;
+  //   }
+  // }
 
   // getCurrentUser(){
   //   this.userService.getCurrentUser().subscribe(
@@ -46,10 +68,12 @@ export class NavbarComponent implements OnInit {
   //     }
   //   )
   // }
-
   logout() {
-    this.authService.logout();
-    this.route.navigate(['/landing']);
+    sessionStorage.clear();
+    if(this.route.url === "/landing") {
+      location.reload(true);
+    } else {
+      this.route.navigate(["/landing"]);
+    }
   }
-
 }

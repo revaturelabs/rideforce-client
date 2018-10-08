@@ -1,10 +1,10 @@
 <br>
 <div class="form-group row">
   <div class="col-1"></div>
-  <div class="col-lg-3 col-xs-12 extend">
+  <div class="col-lg-4 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
       <div label="VIEW PROFILE div">
-        <ngb-tab title="1" id="1">
+        <ngb-tab title="Your Profile" id="1">
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>
@@ -113,7 +113,10 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Office Address</span>
                 </div>
-                <div class="input-group-text" style="padding-right: 100px">
+                <div class="input-group-text" style="padding-right: 137px; display: inline" id="currentOffice">
+                  <!-- <input type="text" class="form-control" [(ngModel)]="officeObject" #oObject="ngModel" disabled> -->
+                </div>
+                <div class="input-group-text" style="padding-right: 100px; display: none" id="selectOffice">
                   <select [(ngModel)]="officeObject">
                     <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
                   </select>
@@ -145,12 +148,19 @@
                 </div>
                 <input type="text" id="batchEnd" class="form-control" [(ngModel)]="batchEnd" disabled>
               </div>
+              <div *ngIf="currentUser.role === 'DRIVER'">
+                <button class="btn" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
+              </div>
+              <div *ngIf="currentUser.role === 'RIDER'">
+                <button class="btn" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
+              </div>
+              <br>
               <div>
                 <button class="btn btnEdit" (click)="edit()" id="edit">Edit <i class="fas fa-pencil-alt"></i></button>
               </div>
               <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i class="fas fa-save"></i></button>
               <div style="padding-top: 20px">
-                <div *ngIf="!requiredInfoFields" class="alert alert-danger">
+                <div *ngIf="!requiredInfoFields" class="alert alert-danger" id="errorMessage" hidden>
                   Please fill out ALL fields and confirm your passwords match
                 </div>
               </div>
@@ -159,7 +169,7 @@
         </ngb-tab>
       </div>
       <div label="BIO div">
-        <ngb-tab title="2" id="2">
+        <ngb-tab title="About Me" id="2">
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>
@@ -185,7 +195,7 @@
                 <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
                 <div style="padding-left: 20px">
                   <button class="btn" (click)="addContact()">
-                    <span aria-hidden="true">+</span>
+                    <span aria-hidden="true"></span>
                   </button>
                 </div>
               </div>
@@ -210,7 +220,7 @@
         </ngb-tab>
       </div>
       <div label="CAR INFO div">
-        <ngb-tab title="3" id="3">
+        <ngb-tab title="Car Info" id="3">
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>
@@ -299,6 +309,38 @@
           </ng-template>
         </ngb-tab>
       </div> -->
+      <div *ngIf="currentUser.role === 'ADMIN'" label="CONFIRMATION div">
+        <ngb-tab title="View Users" id="4">
+          <ng-template ngbTabContent>
+            <div class="container-fluid">
+            <br>
+            <h2>View Users</h2>
+            <table class="table table-striped table-bordered table-hover table-sm">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>User's Name</th>
+                  <th>User Email</th>
+                  <th>User Role</th>
+                  <th> </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of users">
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.role }}</td>
+                  <td><button *ngIf="user.role !== 'ADMIN'" class="btn btnEdit">Make Admin</button>
+                    <button *ngIf="user.role === 'DRIVER' || user.role === 'RIDER'" class="btn btn-info">Make Trainer</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </div>
     </ngb-tabset>
   </div>
 </div>

@@ -21,9 +21,9 @@ import { ViewProfileComponent } from '../components/view-profile/view-profile.co
  * refer to these routes to find which component to route to.
  */
 export const routes: Routes = [
-  {path: '', redirectTo: 'landing', pathMatch: 'full'},
+  { path: '',  pathMatch: 'full', redirectTo: 'landing' },
   { path: 'howTo', component: HowToComponent },
-  { path: 'landing', component: LandingComponent},
+  { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
   { path: 'accountInfo', component: AccountinfoComponent},
@@ -32,7 +32,8 @@ export const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'cars', component: CarRegistrationComponent },
-  { path: 'userProfile', component: ViewProfileComponent}
+  { path: 'userProfile', component: ViewProfileComponent},
+  //{ path: 'logout', redirectTo: 'landing' }
 ];
 @NgModule({
   imports: [
