@@ -53,10 +53,10 @@ export class UserControllerService {
     return this.http.get<User>(environment.apiUrl + `/users/${id}`);
   }
   /**Gets a single user via the given endpoint and email */
-  getUserByEmail(email: string): Observable<User> {
+  getUserByEmail(email: string): Promise<User> {
     return this.http.get<User>(environment.apiUrl + '/users', {
       params: { email },
-    });
+    }).toPromise();
   }
 
   /* getUsersByOfficeAndRole(office: number, role: string): Observable<User> {

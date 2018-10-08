@@ -21,8 +21,10 @@ describe('ViewProfileComponent', () => {
   //   component = fixture.componentInstance;
   //   fixture.detectChanges();
   // });
+
+  //Got rid of DateFormatPipe from providers to make code work.
   beforeEach(() => {
-    TestBed.configureTestingModule({providers: [HttpHandler, HttpClient,
+    TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, 
        UserControllerService, ViewProfileComponent]});
     component = TestBed.get(ViewProfileComponent);
   });

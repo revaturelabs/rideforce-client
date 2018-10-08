@@ -52,6 +52,7 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
     AdminComponent,
     CarRegistrationComponent,
     ViewProfileComponent,
+    // DateFormatPipe,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +67,7 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
     }),
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     NgbActiveModal,
