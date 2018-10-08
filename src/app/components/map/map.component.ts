@@ -1,3 +1,4 @@
+/// <reference path="../../../../node_modules/@types/googlemaps/index.d.ts" /> 
 import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
 import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
