@@ -33,41 +33,75 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display Incorrect email or password for nonexistant user', () => {
+  it('should display Incorrect email or password for nonexistant user', (done) => {
 
     component.userEmail = 'notrealuser';
     component.userPass = 'notrealpass';
-    
-    let test = fixture.debugElement.query(By.css('input#login')).nativeElement;
+    fixture.debugElement.injector.get(LoginComponent).login();
+
     fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
-
     fixture.detectChanges();
-    
-    fixture.whenStable().then(() => {
 
-      let test1 = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
-      expect(test1).toBe('Incorrect email or password.');      
-    })
+    fixture.whenStable().then(() => {
+      let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
+      expect(errorMessage).toBe('Incorrect email or password.');
+      done();
+    });
 
   });
 
-  it('should display Input validation failed when fields are submitted empty', () => {
+  it('should display Input validation failed when fields are submitted empty', (done) => {
 
     component.userEmail = '';
     component.userPass = '';
-    
-    let test = fixture.debugElement.query(By.css('input#login')).nativeElement;
-    fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
+    fixture.debugElement.injector.get(LoginComponent).login();
 
+    fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
     fixture.detectChanges();
     
     fixture.whenStable().then(() => {
-
-      let test1 = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
-      expect(test1).toBe('Input validation failed.');      
-    })
+      let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
+      expect(errorMessage).toBe('Input validation failed.');
+      done();    
+    });
 
   });
+
+  //there could be more input validation
+  it('login component should perform input validation to check that email is submitted in the correct format -- currently not implemented', (done) => {
+
+    component.userEmail = '@';
+    component.userPass = 'password';
+    fixture.debugElement.injector.get(LoginComponent).login();
+
+    fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
+    fixture.detectChanges();
+    
+    fixture.whenStable().then(() => {
+      let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
+      expect(errorMessage).toBe('Input validation failed.');
+      done();
+    });
+    
+  });
+
+    //testing password length input validation
+    it('password length input validation -- currently not implemented', (done) => {
+
+      component.userEmail = 'email';
+      component.userPass = 'longstring12345678sdfghjedrfgtyhujsdfghjsdfghjdfgh';
+      fixture.debugElement.injector.get(LoginComponent).login();
+  
+      fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
+      fixture.detectChanges();
+      
+      fixture.whenStable().then(() => {
+        let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
+        expect(errorMessage).toBe('Input validation failed.');
+        done();
+      });
+      
+    });
 
   // it('should return "Incorrect email or password."', function(){
   //   component.userEmail="Garbage";
