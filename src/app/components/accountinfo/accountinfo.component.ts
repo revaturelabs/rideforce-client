@@ -41,11 +41,13 @@ export class AccountinfoComponent implements OnInit {
   username: string;
   password: string;
   passwordConfirm: string;
+  passwordsMatch: boolean;
   token: string;
   searchedAddress: string;
 
   officeObjectArray: Office[] = [];
-  officeObject: string;//Office;
+  officeObject: Office;
+  office: string;
   /**Home Address */
   address1: string;
 
@@ -83,7 +85,8 @@ export class AccountinfoComponent implements OnInit {
     private auth: AuthService, 
     private userService: UserControllerService, 
     private uploadService: UploadService,
-    private router: Router) { }
+    private router: Router
+    ) { }
 
   ngOnInit() {
     if (window.screen.width <= 430) { // 768px portrait
@@ -92,15 +95,15 @@ export class AccountinfoComponent implements OnInit {
     this.registerForm = new FormGroup({
       'username': new FormControl(this.username, [
         Validators.required
-        //,Validators.maxLength(15)
+        ,Validators.maxLength(15)
       ]),
       'password': new FormControl(this.password, [
         Validators.required
-        // ,Validators.maxLength(15)
+        ,Validators.maxLength(15)
       ]),
       'passwordConfirm': new FormControl(this.passwordConfirm, [
         Validators.required
-        // ,Validators.maxLength(15)
+        ,Validators.maxLength(15)
       ]),
       'token': new FormControl(this.token, [
         Validators.required
@@ -110,13 +113,16 @@ export class AccountinfoComponent implements OnInit {
     this.getOffices();
   }
 
+  check() {
+    this.passwordsMatch = this.password != this.passwordConfirm;
+  }
 
   autocomplete1(place) {
     // address object contains lat/lng to use
     this.zone.run(() => {
       this.address1 = place.formatted_address;
       // place variable has a lot of field combinations to choose from
-      // currently using entire fielld
+      // currently using entire field
       // console.log(place);
     });
   }
@@ -129,11 +135,15 @@ export class AccountinfoComponent implements OnInit {
   }
 
   isDriver() {
+    document.getElementById("riderBtn").classList.remove("selectedBtn");
+    document.getElementById("driverBtn").classList.add("selectedBtn");
     this.btnCarInfo = 1;
     this.roleObject = Role.Driver;
   }
 
   isRider() {
+    document.getElementById("riderBtn").classList.add("selectedBtn");
+    document.getElementById("driverBtn").classList.remove("selectedBtn");
     this.carMake = '';
     this.carModel = '';
     this.carYear;
@@ -168,21 +178,18 @@ export class AccountinfoComponent implements OnInit {
   } 
 
   parseEncryption() {
-    let pref = this.token.substr(0,28);
-    if (pref.startsWith("XcvF"))
-      pref = pref.substr(4);
-    
-    let decrip = atob(pref).split("~");
-    /*
-    this.userService.getAllOffices()
-    1: {id: 1, name: "Reston", address: "11730 Plaza America Dr #205, Reston, VA 20190"}
-    2: {id: 2, name: "Tampa", address: "4202 E Fowler Ave, Tampa, FL 33620"}
-    0: {id: 3, name: "Arlington", address: "701 W Nedderman Dr, Arlington, TX 76019"}
-    3: {id: 4, name: "Flushing", address: "65-30 Kissena Blvd, Flushing, NY 11367"}
-    4: {id: 5, name: "New York", address: "119 W 31st St, New York, NY 10001"}
-    */
-    this.officeObject = decrip[0];//{id: 0, name: decrip[0], address: "701 W Nedderman Dr, Arlington, TX 76019"};
-    this.batchEnd = decrip[1];
+    if (this.token){
+      let pref = this.token.substr(0,28);
+      if (pref.startsWith("XcvF"))
+        pref = pref.substr(4);
+      
+      let decrip = atob(pref).split("~");
+      for (let offObj of this.officeObjectArray)
+        if (offObj.name === decrip[0])
+          this.officeObject = offObj;
+      this.batchEnd = decrip[1];
+      this.office = this.officeObject.name;
+    }
   }
 
   selectFile(event)
@@ -194,7 +201,6 @@ export class AccountinfoComponent implements OnInit {
   createUserObject() {
 
     this.updload();
-    this.parseEncryption();
 
     this.userObject = {
       id: 0,
@@ -203,7 +209,7 @@ export class AccountinfoComponent implements OnInit {
       email: this.username,
       photoUrl: this.imageSrc,
       address: this.address2,
-      office: '/offices/1',// + this.officeObject,
+      office: '/offices/' + this.officeObject.id,//I really don't understand what this translates to on the back end, but now it is dynamic
       batchEnd: new Date(this.batchEnd).toISOString(),
       cars: [],
       active: true,

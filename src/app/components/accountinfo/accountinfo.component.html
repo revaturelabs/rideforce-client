@@ -20,10 +20,6 @@
                 <div *ngIf="firstname.errors.required">
                   First name cannot be empty
                 </div>
-                <div *ngIf="firstname.errors.maxLength">
-                  ;
-                  First name cannot be more than 15 characters
-                </div>
               </div>
 
               <div class="input-group mb-3 ">
@@ -35,10 +31,6 @@
               <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
                 <div *ngIf="lastname.errors.required">
                   Last name cannot be empty
-                </div>
-                <div *ngIf="lastname.errors.maxLength">
-                  ;
-                  Last name cannot be more than 15 characters
                 </div>
               </div>
 
@@ -52,9 +44,6 @@
                 <div *ngIf="uName.errors.required">
                   Email cannot be empty
                 </div>
-                <div *ngIf="uName.errors.maxLength">
-                  Email cannot be more than 15 characters
-                </div>
               </div>
 
               <div class="input-group mb-3 ">
@@ -67,9 +56,6 @@
                 <div *ngIf="pWord.errors.required">
                   Password cannot be empty
                 </div>
-                <div *ngIf="pWord.errors.maxLength">
-                  Password cannot be more than 15 characters
-                </div>
               </div>
               <div class="input-group mb-3 ">
                 <div class="input-group-prepend ">
@@ -81,11 +67,8 @@
                 <div *ngIf="pConfirm.errors.required">
                   Password Confirm cannot be empty
                 </div>
-                <div *ngIf="pConfirm.errors.maxLength">
-                  Password Confirm cannot be more than 15 characters
-                </div>
-                <div *ngIf="password != passwordConfirm">
-                  password does not match.
+                <div *ngIf="password != passwordConfirm"> <!--------------------- FOR SOME REASON WON'T WORK --------------------->
+                  Password does not match.
                 </div>
               </div>
 
@@ -99,9 +82,6 @@
                 <div *ngIf="tInput.errors.required">
                   You need a Key
                 </div>
-                <div *ngIf="tInput.errors.maxLength"><!-- -------------Possibly Unnecessary?-------- -->
-                  Password Confirm cannot be more than 15 characters
-                </div>
               </div>
 
               <div class="input-group mb-3">
@@ -109,13 +89,11 @@
                   <span class="input-group-text" id="basic-addon1">Office Address</span>
                 </div>
                 <div class="input-group-text" style="padding-right: 100px">
-                  <select [(ngModel)]="officeObject">
+                  <select [(ngModel)]="office" disabled>
+                    <option>Location Name</option>
                     <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
                   </select>
                 </div>
-                <!-- <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-                    appPlacesAutocomplete (addressSelect)="autocomplete1($event)" [(ngModel)]="address1" placeholder="Type to search.."> -->
-                <!-- <input type="text" class="form-control" [(ngModel)]="address.address" required> -->
               </div>
 
 
@@ -126,7 +104,6 @@
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
                   appPlacesAutocomplete (addressSelect)="autocomplete2($event)" [(ngModel)]="address2" #address="ngModel"
                   required placeholder="Type to search..">
-                <!-- <input type="text" class="form-control" [(ngModel)]="address.address2" required> -->
               </div>
               <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
                 <div *ngIf="address.errors.required">
@@ -138,7 +115,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Batch End</span>
                 </div>
-                <input type="date" class="form-control" [(ngModel)]="batchEnd" data-provide = "datepicker">
+                <input type="date" class="form-control" [(ngModel)]="batchEnd" data-provide="datepicker" disabled>
               </div>
               <div>
                 <button class="btn btnNextPrevious" (click)="accountInfoNext()">Next</button>
@@ -208,8 +185,8 @@
           <ng-template ngbTabContent>
             <div class="input-group mb-3">
               <div class="input-group" id="button-addon3">
-                <span class="padRight"><button class="btn btnAddCar" type="button" (click)="isDriver()">Driver</button></span>
-                <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>
+                <span class="padRight"><button id="driverBtn" class="btn" type="button" (click)="isDriver()">Driver</button></span>
+                <span><button id="riderBtn" class="btn" type="button" (click)="isRider()">Rider</button></span>
               </div>
             </div>
             <app-car-registration *ngIf="roleObject === 'DRIVER'"></app-car-registration>
@@ -236,7 +213,10 @@
               <span>First name: {{firstName}}</span> <br>
               <span>Last Name: {{lastName}}</span> <br>
               <span>Email: {{username}}</span> <br>
-              <span class="dyn-height" *ngIf="officeObject"> Office Address: <div class="col-10">{{officeObject}}</div><br></span>
+              <span class="dyn-height" *ngIf="officeObject"> Office Address: 
+                <div class="col-10">{{officeObject.name}}</div>
+                <div class="col-10">{{officeObject.address}}</div><br>
+              </span>
               <span class="dyn-height" *ngIf="address2"> Apartment Address: <div class="col-10">{{address2}}</div></span>
               <span>Batch: {{batchEnd}}</span> <br>
               <br>
