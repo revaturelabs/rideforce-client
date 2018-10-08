@@ -13,12 +13,9 @@ export class LandingComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getCurrentUserObservable().subscribe(
-    data => {
-      this.currentUser = data;
-    }
-  );
+      data => {
+        this.currentUser = data;
+      }
+    );
   }
-
-
-
 }

@@ -27,7 +27,6 @@ export class NavbarComponent implements OnInit {
         document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
       }
     );
-
   }
 
   checkIfLoggedIn(){
@@ -39,17 +38,16 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  // getCurrentUser(){
-  //   this.userService.getCurrentUser().subscribe(
-  //     data => {
-  //       this.currentUser = data;
-  //     }
-  //   )
-  // }
+  getCurrentUser(){
+    this.userService.getCurrentUser().subscribe(
+      data => {
+        this.currentUser = data;
+      }
+    )
+  }
 
   logout() {
     this.authService.logout();
     this.route.navigate(['/landing']);
   }
-
 }
