@@ -6,7 +6,7 @@ import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 
-interface UserCard {
+export interface UserCard {
     user: User;
     choose: string;
     face: String;
