@@ -19,18 +19,88 @@ export class AuthService {
     private tokenStorage: TokenStorage
   ) { }
 
-  authenticate(email: string, password: string) {
+  authenticator(email: string, password: string) {
     const credentials = { email, password };
     console.log('in authenticate');
     return this.http
       .post<string>(environment.apiUrl + '/login', credentials)
       .pipe(
         map<string, void>(token => {
+          console.log('Saving token'); 
           this.tokenStorage.saveToken(token);
           this.userService.getCurrentUser().subscribe();
           return null;
         })
-      );      
+      );
+  }
+
+  async authenticate(email: string, password: string, usePromise?: boolean) {
+    if (usePromise) {
+      await this.authenticator(email, password).toPromise().then(
+        (x) => {
+          console.log('Got user from Authenticate (Promise mode)');
+          this.userService.getUserByEmail(email).then((x) => {
+            console.log('Gotten email of user');
+            sessionStorage.setItem('id', x.id.toString());
+            sessionStorage.setItem('firstName', x.firstName);
+            sessionStorage.setItem('lastName', x.lastName);
+            sessionStorage.setItem('active', x.active.toString());
+            sessionStorage.setItem('role', x.role);
+            sessionStorage.setItem('address', x.address);
+            sessionStorage.setItem('batchEnd', x.batchEnd);
+          });
+          sessionStorage.setItem('userEmail', email);
+          sessionStorage.setItem('userPassword', password);
+        },
+        (e) => {
+            // error coming from the backend
+            console.log('Printing Login error (Promise Mode)!');
+            console.log(e);
+            if (document) {
+              const messageLogin = document.getElementById('errorMessageLogin');
+              if (messageLogin) {
+                messageLogin.style.display = 'block';
+                messageLogin.innerHTML = e.message;
+              }
+            }
+            return e.message;
+        }
+      );
+    } else {
+    this.authenticator(email, password).subscribe(
+      (x) => {
+        console.log('Got user from Authenticate (Observe mode)');
+        this.userService.getUserByEmail(email).then((x) => {
+          console.log('Gotten email of user');
+          sessionStorage.setItem('id', x.id.toString());
+          sessionStorage.setItem('firstName', x.firstName);
+          sessionStorage.setItem('lastName', x.lastName);
+          sessionStorage.setItem('active', x.active.toString());
+          sessionStorage.setItem('role', x.role);
+          sessionStorage.setItem('address', x.address);
+          sessionStorage.setItem('batchEnd', x.batchEnd);
+        });
+        sessionStorage.setItem('userEmail', email);
+        sessionStorage.setItem('userPassword', password);
+        location.reload(true);
+    },
+      // TODO if an error is returned, return the error message to user
+      // callback called if there is an error
+      e => {
+        // error coming from the backend
+        console.log('Printing Login error (Observe Mode)!');
+        console.log(e);
+        if (document) {
+          const messageLogin = document.getElementById('errorMessageLogin');
+          if (messageLogin) {
+            messageLogin.style.display = 'block';
+            messageLogin.innerHTML = e.message;
+          }
+        }
+        return e.message;
+      }
+    );
+    }
   }
 
   logout() {
