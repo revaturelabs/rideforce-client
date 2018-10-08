@@ -15,19 +15,13 @@ describe('AccountinfoComponent', () => {
   const mockZone = jasmine.createSpyObj('NgZone', ['run']);
   // let fixture: ComponentFixture<AccountinfoComponent>;
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ AccountinfoComponent ],
-  //     providers: [AuthService, UserControllerService],
-  //   })
-  //   .compileComponents();
-  // }));
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(AccountinfoComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ AccountinfoComponent ],
+      providers: [AuthService, UserControllerService],
+    })
+    .compileComponents();
+  }));
 
   beforeEach(() => {
     TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, AuthService, UploadService,

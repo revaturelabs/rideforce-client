@@ -13,8 +13,6 @@ import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormB
 import { UploadService } from '../../services/upload.service';
 import { Router } from '@angular/router';
 
-// Comment
-
 
 @Component({
   selector: 'app-accountinfo',
@@ -43,11 +41,13 @@ export class AccountinfoComponent implements OnInit {
   username: string;
   password: string;
   passwordConfirm: string;
+  passwordsMatch: boolean;
   token: string;
   searchedAddress: string;
 
   officeObjectArray: Office[] = [];
   officeObject: Office;
+  office: string;
   /**Home Address */
   address1: string;
 
@@ -95,32 +95,35 @@ export class AccountinfoComponent implements OnInit {
     }
     this.registerForm = new FormGroup({
       'username': new FormControl(this.username, [
-        Validators.required,
-        Validators.maxLength(15)
+        Validators.required
+        ,Validators.maxLength(15)
       ]),
       'password': new FormControl(this.password, [
-        Validators.required,
-        Validators.maxLength(15)
+        Validators.required
+        ,Validators.maxLength(15)
       ]),
       'passwordConfirm': new FormControl(this.passwordConfirm, [
-        Validators.required,
-        Validators.maxLength(15)
+        Validators.required
+        ,Validators.maxLength(15)
       ]),
       'token': new FormControl(this.token, [
-        Validators.required,
-        Validators.maxLength(15)
+        Validators.required
+        // ,Validators.maxLength(15)
       ]),
     });
     this.getOffices();
   }
 
+  check() {
+    this.passwordsMatch = this.password != this.passwordConfirm;
+  }
 
   autocomplete1(place) {
     // address object contains lat/lng to use
     this.zone.run(() => {
       this.address1 = place.formatted_address;
       // place variable has a lot of field combinations to choose from
-      // currently using entire fielld
+      // currently using entire field
       // console.log(place);
     });
   }
@@ -133,11 +136,15 @@ export class AccountinfoComponent implements OnInit {
   }
 
   isDriver() {
+    document.getElementById("riderBtn").classList.remove("selectedBtn");
+    document.getElementById("driverBtn").classList.add("selectedBtn");
     this.btnCarInfo = 1;
     this.roleObject = Role.Driver;
   }
 
   isRider() {
+    document.getElementById("riderBtn").classList.add("selectedBtn");
+    document.getElementById("driverBtn").classList.remove("selectedBtn");
     this.carMake = '';
     this.carModel = '';
     this.carYear;
@@ -171,6 +178,21 @@ export class AccountinfoComponent implements OnInit {
     this.imageSrc = this.uploadService.uploadfile(file);
   } 
 
+  parseEncryption() {
+    if (this.token){
+      let pref = this.token.substr(0,28);
+      if (pref.startsWith("XcvF"))
+        pref = pref.substr(4);
+      
+      let decrip = atob(pref).split("~");
+      for (let offObj of this.officeObjectArray)
+        if (offObj.name === decrip[0])
+          this.officeObject = offObj;
+      this.batchEnd = decrip[1];
+      this.office = this.officeObject.name;
+    }
+  }
+
   selectFile(event)
   {
     this.selectedFiles = event.target.files;
@@ -188,7 +210,7 @@ export class AccountinfoComponent implements OnInit {
       email: this.username,
       photoUrl: this.imageSrc,
       address: this.address2,
-      office: '/offices/1',
+      office: '/offices/' + this.officeObject.id,//I really don't understand what this translates to on the back end, but now it is dynamic
       batchEnd: new Date(this.batchEnd).toISOString(),
       cars: [],
       active: true,
@@ -200,7 +222,7 @@ export class AccountinfoComponent implements OnInit {
     //get id from user after post and associate with a car object
     //this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token)
-      .subscribe(user => {
+      .subscribe(() => {
         this.router.navigate(["/map"]);
       });
 
