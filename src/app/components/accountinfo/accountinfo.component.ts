@@ -85,8 +85,9 @@ export class AccountinfoComponent implements OnInit {
     private auth: AuthService, 
     private userService: UserControllerService, 
     private uploadService: UploadService,
-    private router: Router
-    ) { }
+    private router: Router) {
+      this.carObject = new Car();
+     }
 
   ngOnInit() {
     if (window.screen.width <= 430) { // 768px portrait
