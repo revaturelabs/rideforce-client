@@ -39,11 +39,15 @@ export class LikesmatchwebComponent implements OnInit {
     ngOnInit() {
         this.userService.getCurrentUser().subscribe(
             data => {
+                console.log("this is put into currentUser");
+                console.log(data);
                 this.currentUser = data;
                 let userLinks: Link<User>[] = null;
                 this.matchService.getLikedDrivers(this.currentUser.id).subscribe(
                     data2 => {
+                        console.log("here?");
                         console.log(data2);
+                        console.log("loggeddata2");
                         userLinks = data2;
                         for (let i = 0; i < userLinks.length; i++) {
                             console.log(userLinks[i].replace(/\D/g, ''));

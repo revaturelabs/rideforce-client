@@ -160,8 +160,8 @@ export class UserControllerService {
    * getCurrentUser to contact the server for new data.
    */
   invalidateCurrentUser(): void {
-    this.currentUser = undefined;
-    this.currentUserSubject.next(undefined);
+    this.currentUser = null;
+    this.currentUserSubject.next(null);
   }
 
 
