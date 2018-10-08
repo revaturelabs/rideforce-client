@@ -19,6 +19,13 @@ export class NavbarComponent implements OnInit {
     private route: Router) { }
 
   ngOnInit() {
+    this.userService.getCurrentUserObservable().subscribe(
+      data => {
+        this.currentUser = data;
+        // console.log(this.currentUser);
+        document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
+      }
+    );
     // this.userService.getCurrentUserObservable().subscribe(
     //   data => {
     //     this.currentUser = data;
@@ -37,7 +44,14 @@ export class NavbarComponent implements OnInit {
       this.session = false;
     }
   }
-
+  
+  getCurrentUser(){
+    this.userService.getCurrentUser().subscribe(
+      data => {
+        this.currentUser = data;
+      }
+    )
+  }
   // checkIfLoggedIn(){
   //   if(this.userService.isLoggedIn){
   //     this.isLoggedIn = true;
@@ -54,7 +68,6 @@ export class NavbarComponent implements OnInit {
   //     }
   //   )
   // }
-
   logout() {
     sessionStorage.clear();
     if(this.route.url === "/landing") {

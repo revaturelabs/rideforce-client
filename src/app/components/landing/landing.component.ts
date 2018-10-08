@@ -13,6 +13,12 @@ export class LandingComponent implements OnInit {
   constructor(private userService: UserControllerService) { }
 
   ngOnInit() {
+    this.userService.getCurrentUserObservable().subscribe(
+      data => {
+        this.currentUser = data;
+      }
+    );
+  }
   //   this.userService.getCurrentUserObservable().subscribe(
   //   data => {
   //     this.currentUser = data;
@@ -30,6 +36,7 @@ export class LandingComponent implements OnInit {
       this.session = false;
     }
   }
+
 
 
 }
