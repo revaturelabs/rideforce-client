@@ -29,7 +29,7 @@ export class CarRegistrationComponent implements OnInit {
   }
 
   resetCars() {
-    
+
     if (this.cars !== undefined && this.cars != null && this.cars.length !== 0) {
       return;
     }
@@ -52,7 +52,11 @@ export class CarRegistrationComponent implements OnInit {
 
   resetUser() {
     this.userService.getCurrentUser().subscribe(user => {
+      console.log('Car reg: Gotten User: ' + user);
       this.userObject = user;
+    },
+    e => {
+      console.log('Car reg: Failed to get user: ' + e);
     });
 
   }

@@ -68,12 +68,14 @@ export class NavbarComponent implements OnInit {
   //     }
   //   )
   // }
-  logout() {
+
+  async logout() {
     sessionStorage.clear();
-    if(this.route.url === "/landing") {
+    if (this.route.url === "/landing") {
       location.reload(true);
     } else {
-      this.route.navigate(["/landing"]);
+      await this.route.navigate(["/landing"]);
+      location.reload(true);
     }
   }
 }
