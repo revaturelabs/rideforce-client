@@ -18,7 +18,6 @@ export class LandingComponent implements OnInit {
         this.currentUser = data;
       }
     );
-  }
   //   this.userService.getCurrentUserObservable().subscribe(
   //   data => {
   //     this.currentUser = data;
