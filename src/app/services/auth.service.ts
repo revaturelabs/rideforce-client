@@ -60,7 +60,12 @@ export class AuthService {
               const messageLogin = document.getElementById('errorMessageLogin');
               if (messageLogin) {
                 messageLogin.style.display = 'block';
-                messageLogin.innerHTML = e.message;
+                console.log(e.message);
+                if(e.message=='GENERAL'){
+                  messageLogin.innerHTML = "Server unavailable";
+                }else{
+                  messageLogin.innerHTML = e.message;
+                }
               }
             }
             return e.message;
@@ -94,7 +99,14 @@ export class AuthService {
           const messageLogin = document.getElementById('errorMessageLogin');
           if (messageLogin) {
             messageLogin.style.display = 'block';
-            messageLogin.innerHTML = e.message;
+            //It is possible that the shortcircuit message means something completely different
+            //from the server being unavailable. I'm not really sure, but it could be
+            //proccing whenever you just click waaaaay too fast trying to log in.
+            if(e.message=='GENERAL' || e.message=='SHORTCIRCUIT'){
+              messageLogin.innerHTML = "Server unavailable";
+            }else{
+              messageLogin.innerHTML = e.message;
+            }
           }
         }
         return e.message;
