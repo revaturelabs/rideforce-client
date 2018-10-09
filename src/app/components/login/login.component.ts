@@ -37,31 +37,6 @@ export class LoginComponent implements OnInit {
   // }
 
   login() {
-    this.authService.authenticate(this.userEmail, this.userPass).subscribe(
-      (x) => {
-        this.userService.getUserByEmail(this.userEmail).then((x) => {
-          sessionStorage.setItem("id", x.id.toString());
-          sessionStorage.setItem("firstName", x.firstName);
-          sessionStorage.setItem("lastName", x.lastName);
-          sessionStorage.setItem("active", x.active.toString());
-          sessionStorage.setItem("role", x.role);
-          sessionStorage.setItem("address", x.address);
-          sessionStorage.setItem("batchEnd", x.batchEnd);
-        });
-        sessionStorage.setItem("userEmail", this.userEmail);
-        sessionStorage.setItem("userPassword", this.userPass);
-        location.reload(true);
-    },
-      // TODO if an error is returned, return the error message to user
-      //callback called if there is an error
-      e => {
-        //error coming from the backend
-        console.log(e);
-        document.getElementById("errorMessageLogin").style.display="block";
-        document.getElementById("errorMessageLogin").innerHTML=e.message;
-        return e.message;
-      }
-      
-    );
+    this.authService.authenticate(this.userEmail, this.userPass);
   }
 }
