@@ -1,0 +1,3056 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>rideshare-client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">rideshare-client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>MapComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/map/map.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                <code><a href="https://angular.io/api/core/AfterContentInit" target="_blank" >AfterContentInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>NgbTabset</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-map</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>map.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./map.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#circle">circle</a>
+                            </li>
+                            <li>
+                                <a href="#closeResult">closeResult</a>
+                            </li>
+                            <li>
+                                <a href="#currentLat">currentLat</a>
+                            </li>
+                            <li>
+                                <a href="#currentLong">currentLong</a>
+                            </li>
+                            <li>
+                                <a href="#currentRadius">currentRadius</a>
+                            </li>
+                            <li>
+                                <a href="#currentUser">currentUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#dist">dist</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#end">end</a>
+                            </li>
+                            <li>
+                                <a href="#gmapElement">gmapElement</a>
+                            </li>
+                            <li>
+                                <a href="#iconBase">iconBase</a>
+                            </li>
+                            <li>
+                                <a href="#isHidden">isHidden</a>
+                            </li>
+                            <li>
+                                <a href="#isTracking">isTracking</a>
+                            </li>
+                            <li>
+                                <a href="#latitude">latitude</a>
+                            </li>
+                            <li>
+                                <a href="#longitude">longitude</a>
+                            </li>
+                            <li>
+                                <a href="#map">map</a>
+                            </li>
+                            <li>
+                                <a href="#mapTypeId">mapTypeId</a>
+                            </li>
+                            <li>
+                                <a href="#marker">marker</a>
+                            </li>
+                            <li>
+                                <a href="#markers">markers</a>
+                            </li>
+                            <li>
+                                <a href="#markerTypes">markerTypes</a>
+                            </li>
+                            <li>
+                                <a href="#myLocation">myLocation</a>
+                            </li>
+                            <li>
+                                <a href="#placedMarkers">placedMarkers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#selectedUser">selectedUser</a>
+                            </li>
+                            <li>
+                                <a href="#song">song</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#start">start</a>
+                            </li>
+                            <li>
+                                <a href="#styles">styles</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#time">time</a>
+                            </li>
+                            <li>
+                                <a href="#users">users</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#addOriginFromAddress">addOriginFromAddress</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#changeRadius">changeRadius</a>
+                            </li>
+                            <li>
+                                <a href="#changeStyle">changeStyle</a>
+                            </li>
+                            <li>
+                                <a href="#findMe">findMe</a>
+                            </li>
+                            <li>
+                                <a href="#getMarkers">getMarkers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getRoute">getRoute</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#mapReady">mapReady</a>
+                            </li>
+                            <li>
+                                <a href="#markerClicked">markerClicked</a>
+                            </li>
+                            <li>
+                                <a href="#markerHandler">markerHandler</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterContentInit">ngAfterContentInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#setCenter">setCenter</a>
+                            </li>
+                            <li>
+                                <a href="#setMapType">setMapType</a>
+                            </li>
+                            <li>
+                                <a href="#showCustomMarker">showCustomMarker</a>
+                            </li>
+                            <li>
+                                <a href="#showPosition">showPosition</a>
+                            </li>
+                            <li>
+                                <a href="#showTrackingPosition">showTrackingPosition</a>
+                            </li>
+                            <li>
+                                <a href="#simpleMarkerHandler">simpleMarkerHandler</a>
+                            </li>
+                            <li>
+                                <a href="#toggleMap">toggleMap</a>
+                            </li>
+                            <li>
+                                <a href="#trackMe">trackMe</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(matchService: <a href="../injectables/MatchingControllerService.html">MatchingControllerService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, mapService: <a href="../injectables/MapsControllerService.html">MapsControllerService</a>, zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/components/map/map.component.ts:84</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>matchService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/MatchingControllerService.html" target="_self" >MatchingControllerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/UserControllerService.html" target="_self" >UserControllerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>mapService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/MapsControllerService.html" target="_self" >MapsControllerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>zone</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/NgZone" target="_blank" >NgZone</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addOriginFromAddress"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            addOriginFromAddress
+                            </b>
+                            <a href="#addOriginFromAddress"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>addOriginFromAddress(addressObject: )</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="223" class="link-to-prism">src/app/components/map/map.component.ts:223</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>addressObject</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="changeRadius"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            changeRadius
+                            </b>
+                            <a href="#changeRadius"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>changeRadius()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="228" class="link-to-prism">src/app/components/map/map.component.ts:228</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="changeStyle"></a>
+                        <span class="name">
+                            <b>
+                            changeStyle
+                            </b>
+                            <a href="#changeStyle"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>changeStyle(style: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="249" class="link-to-prism">src/app/components/map/map.component.ts:249</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>style</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findMe"></a>
+                        <span class="name">
+                            <b>
+                            findMe
+                            </b>
+                            <a href="#findMe"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>findMe()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="299" class="link-to-prism">src/app/components/map/map.component.ts:299</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getMarkers"></a>
+                        <span class="name">
+                            <b>
+                            getMarkers
+                            </b>
+                            <a href="#getMarkers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getMarkers()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/components/map/map.component.ts:162</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getRoute"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getRoute
+                            </b>
+                            <a href="#getRoute"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getRoute()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/components/map/map.component.ts:188</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mapReady"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            mapReady
+                            </b>
+                            <a href="#mapReady"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>mapReady(map: )</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/components/map/map.component.ts:88</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>map</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="markerClicked"></a>
+                        <span class="name">
+                            <b>
+                            markerClicked
+                            </b>
+                            <a href="#markerClicked"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>markerClicked(user: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="245" class="link-to-prism">src/app/components/map/map.component.ts:245</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>user</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="markerHandler"></a>
+                        <span class="name">
+                            <b>
+                            markerHandler
+                            </b>
+                            <a href="#markerHandler"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>markerHandler(marker: <a href="../interfaces/Marker.html">google.maps.Marker</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="241" class="link-to-prism">src/app/components/map/map.component.ts:241</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>marker</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/Marker.html" target="_self" >google.maps.Marker</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngAfterContentInit"></a>
+                        <span class="name">
+                            <b>
+                            ngAfterContentInit
+                            </b>
+                            <a href="#ngAfterContentInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngAfterContentInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/components/map/map.component.ts:147</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnDestroy"></a>
+                        <span class="name">
+                            <b>
+                            ngOnDestroy
+                            </b>
+                            <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">src/app/components/map/map.component.ts:158</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/components/map/map.component.ts:93</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setCenter"></a>
+                        <span class="name">
+                            <b>
+                            setCenter
+                            </b>
+                            <a href="#setCenter"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>setCenter(address: )</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="203" class="link-to-prism">src/app/components/map/map.component.ts:203</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>address</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setMapType"></a>
+                        <span class="name">
+                            <b>
+                            setMapType
+                            </b>
+                            <a href="#setMapType"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>setMapType(mapTypeId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="199" class="link-to-prism">src/app/components/map/map.component.ts:199</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>mapTypeId</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showCustomMarker"></a>
+                        <span class="name">
+                            <b>
+                            showCustomMarker
+                            </b>
+                            <a href="#showCustomMarker"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>showCustomMarker()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="281" class="link-to-prism">src/app/components/map/map.component.ts:281</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showPosition"></a>
+                        <span class="name">
+                            <b>
+                            showPosition
+                            </b>
+                            <a href="#showPosition"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>showPosition(position: )</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="323" class="link-to-prism">src/app/components/map/map.component.ts:323</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>position</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showTrackingPosition"></a>
+                        <span class="name">
+                            <b>
+                            showTrackingPosition
+                            </b>
+                            <a href="#showTrackingPosition"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>showTrackingPosition(position: )</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="341" class="link-to-prism">src/app/components/map/map.component.ts:341</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>position</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="simpleMarkerHandler"></a>
+                        <span class="name">
+                            <b>
+                            simpleMarkerHandler
+                            </b>
+                            <a href="#simpleMarkerHandler"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>simpleMarkerHandler()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="237" class="link-to-prism">src/app/components/map/map.component.ts:237</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toggleMap"></a>
+                        <span class="name">
+                            <b>
+                            toggleMap
+                            </b>
+                            <a href="#toggleMap"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>toggleMap()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="295" class="link-to-prism">src/app/components/map/map.component.ts:295</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="trackMe"></a>
+                        <span class="name">
+                            <b>
+                            trackMe
+                            </b>
+                            <a href="#trackMe"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>trackMe()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="312" class="link-to-prism">src/app/components/map/map.component.ts:312</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="circle"></a>
+                        <span class="name">
+                            <b>
+                            circle
+                            </b>
+                            <a href="#circle"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>circle:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    latitude: this.currentLat,
+    longitude: this.currentLong,
+    radius: this.currentRadius
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/components/map/map.component.ts:79</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeResult"></a>
+                        <span class="name">
+                            <b>
+                            closeResult
+                            </b>
+                            <a href="#closeResult"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>closeResult:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/components/map/map.component.ts:84</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentLat"></a>
+                        <span class="name">
+                            <b>
+                            currentLat
+                            </b>
+                            <a href="#currentLat"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>currentLat:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/map/map.component.ts:48</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentLong"></a>
+                        <span class="name">
+                            <b>
+                            currentLong
+                            </b>
+                            <a href="#currentLong"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>currentLong:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/map/map.component.ts:49</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentRadius"></a>
+                        <span class="name">
+                            <b>
+                            currentRadius
+                            </b>
+                            <a href="#currentRadius"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>currentRadius:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>5000</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/map/map.component.ts:50</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentUser"></a>
+                        <span class="name">
+                            <b>
+                            currentUser
+                            </b>
+                            <a href="#currentUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>currentUser:     <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/components/map/map.component.ts:77</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dist"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            dist
+                            </b>
+                            <a href="#dist"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>dist:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/map/map.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="end"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            end
+                            </b>
+                            <a href="#end"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>end:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;reston&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/map/map.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="gmapElement"></a>
+                        <span class="name">
+                            <b>
+                            gmapElement
+                            </b>
+                            <a href="#gmapElement"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>gmapElement:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Decorators : </i><code>ViewChild</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/map/map.component.ts:43</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="iconBase"></a>
+                        <span class="name">
+                            <b>
+                            iconBase
+                            </b>
+                            <a href="#iconBase"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>iconBase:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;https://maps.google.com/mapfiles/kml/shapes/&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/map/map.component.ts:52</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isHidden"></a>
+                        <span class="name">
+                            <b>
+                            isHidden
+                            </b>
+                            <a href="#isHidden"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>isHidden:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/map/map.component.ts:71</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isTracking"></a>
+                        <span class="name">
+                            <b>
+                            isTracking
+                            </b>
+                            <a href="#isTracking"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>isTracking:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/map/map.component.ts:46</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="latitude"></a>
+                        <span class="name">
+                            <b>
+                            latitude
+                            </b>
+                            <a href="#latitude"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>latitude:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/map/map.component.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="longitude"></a>
+                        <span class="name">
+                            <b>
+                            longitude
+                            </b>
+                            <a href="#longitude"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>longitude:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/map/map.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="map"></a>
+                        <span class="name">
+                            <b>
+                            map
+                            </b>
+                            <a href="#map"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>map:     <code>google.maps.Map</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>google.maps.Map</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/map/map.component.ts:44</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mapTypeId"></a>
+                        <span class="name">
+                            <b>
+                            mapTypeId
+                            </b>
+                            <a href="#mapTypeId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>mapTypeId:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;roadmap&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/map/map.component.ts:39</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="marker"></a>
+                        <span class="name">
+                            <b>
+                            marker
+                            </b>
+                            <a href="#marker"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>marker:     <code><a href="../interfaces/Marker.html" target="_self" >google.maps.Marker</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/Marker.html" target="_self" >google.maps.Marker</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/map/map.component.ts:53</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="markers"></a>
+                        <span class="name">
+                            <b>
+                            markers
+                            </b>
+                            <a href="#markers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>markers:     <code>any[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/map/map.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="markerTypes"></a>
+                        <span class="name">
+                            <b>
+                            markerTypes
+                            </b>
+                            <a href="#markerTypes"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>markerTypes:     <code>[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+    {
+      text: &#x27;Parking&quot;, value: &quot;parking_lot_maps.png&#x27;
+    }
+    // ,
+    // {
+    //   text: &quot;Library&quot;, value: &quot;library_maps.png&quot;
+    // },
+    // {
+    //   text: &quot;Information&quot;, value: &quot;info-i_maps.png&quot;
+    // }
+  ]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/map/map.component.ts:55</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="myLocation"></a>
+                        <span class="name">
+                            <b>
+                            myLocation
+                            </b>
+                            <a href="#myLocation"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>myLocation:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/map/map.component.ts:73</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="placedMarkers"></a>
+                        <span class="name">
+                            <b>
+                            placedMarkers
+                            </b>
+                            <a href="#placedMarkers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>placedMarkers:     <code>any[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/map/map.component.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedUser"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            selectedUser
+                            </b>
+                            <a href="#selectedUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>selectedUser:     <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/map/map.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="song"></a>
+                        <span class="name">
+                            <b>
+                            song
+                            </b>
+                            <a href="#song"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>song:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Audio()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/components/map/map.component.ts:75</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="start"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            start
+                            </b>
+                            <a href="#start"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>start:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;herndon&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/map/map.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="styles"></a>
+                        <span class="name">
+                            <b>
+                            styles
+                            </b>
+                            <a href="#styles"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>styles:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/map/map.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="time"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            time
+                            </b>
+                            <a href="#time"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>time:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/map/map.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="users"></a>
+                        <span class="name">
+                            <b>
+                            users
+                            </b>
+                            <a href="#users"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>users:     <code>any[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/map/map.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from &#x27;@angular/core&#x27;;
+import { NgbTabset, NgbModal } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
+import { MapsControllerService } from &#x27;../../services/api/maps-controller.service&#x27;;
+import { Location } from &#x27;./../../models/location.model&#x27;;
+import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
+import { HttpModule } from &#x27;@angular/http&#x27;;
+import { User } from &#x27;../../models/user.model&#x27;;
+import { Link } from &#x27;../../models/link.model&#x27;;
+import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
+import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
+// import { } from &#x27;@types/googlemaps&#x27;;
+
+@Component({
+  selector: &#x27;app-map&#x27;,
+  templateUrl: &#x27;./map.component.html&#x27;,
+  styleUrls: [&#x27;./map.component.css&#x27;],
+  providers: [
+    NgbTabset
+  ]
+})
+export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
+
+  private start &#x3D; &#x27;herndon&#x27;;
+  private end &#x3D; &#x27;reston&#x27;;
+
+  private dist: number;
+  private time: number;
+
+  private selectedUser: User &#x3D; null;
+
+  users: any[] &#x3D; [];
+
+  markers: any[] &#x3D; [];
+  placedMarkers: any[] &#x3D; [];
+
+  latitude: any;
+  longitude: any;
+  mapTypeId &#x3D; &#x27;roadmap&#x27;;
+
+  styles: any &#x3D; null;
+
+  @ViewChild(&#x27;gmap&#x27;) gmapElement: any;
+  map: google.maps.Map;
+
+  isTracking &#x3D; false;
+
+  currentLat: any;
+  currentLong: any;
+  currentRadius &#x3D; 5000;
+
+  iconBase &#x3D; &#x27;https://maps.google.com/mapfiles/kml/shapes/&#x27;;
+  marker: google.maps.Marker;
+
+  markerTypes &#x3D; [
+    {
+      text: &#x27;Parking&quot;, value: &quot;parking_lot_maps.png&#x27;
+    }
+    // ,
+    // {
+    //   text: &quot;Library&quot;, value: &quot;library_maps.png&quot;
+    // },
+    // {
+    //   text: &quot;Information&quot;, value: &quot;info-i_maps.png&quot;
+    // }
+  ];
+
+  // selectedMarkerType &#x3D; parking_lot_maps.png;
+
+
+  isHidden &#x3D; false;
+
+  myLocation: any;
+
+  song &#x3D; new Audio();
+
+  currentUser: User;
+
+  circle: any &#x3D; {
+    latitude: this.currentLat,
+    longitude: this.currentLong,
+    radius: this.currentRadius
+  };
+  closeResult: string;
+  constructor(private matchService: MatchingControllerService, private userService: UserControllerService,
+    private mapService: MapsControllerService, private zone: NgZone) { }
+
+  protected mapReady(map) {
+    this.map &#x3D; map;
+  }
+
+
+  ngOnInit() {
+    this.song.src &#x3D; &#x27;assets/audio/GrimGrinningGhosts.mp3&#x27;;
+    this.song.loop &#x3D; true;
+    this.song.load();
+    this.userService.getCurrentUser().subscribe(
+      data &#x3D;&gt; {
+        this.currentUser &#x3D; data;
+        let userLinks: Link&lt;User&gt;[] &#x3D; null;
+        this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
+          data2 &#x3D;&gt; {
+            // console.log(&quot;data2 is &quot; + data2);
+            userLinks &#x3D; data2;
+            for (let i &#x3D; 0; i &lt; userLinks.length; i++) {
+
+              this.matchService.getFromLink(userLinks[i]).subscribe(
+                data3 &#x3D;&gt; {
+                  if (!data3.photoUrl || data3.photoUrl &#x3D;&#x3D;&#x3D; &#x27;null&#x27;) {
+                    data3.photoUrl &#x3D; &#x27;http://semantic-ui.com/images/avatar/large/chris.jpg&#x27;;
+                  }
+                  const marker: any &#x3D; {
+                    user: data3,
+                    icon: {
+                      url: data3.photoUrl,
+                      scaledSize: {
+                        width: 30,
+                        height: 30
+                      }
+                    },
+                    location: {
+                      latitude: 0,
+                      longitude: 0
+                    },
+                    opacity: .92
+                  };
+                  this.mapService.getDistance(data3.address).subscribe(
+                    data4 &#x3D;&gt; {
+                      marker.location.latitude &#x3D; data4.lat;
+                      marker.location.longitude &#x3D; data4.lng;
+                      this.markers.push(marker);
+                    }
+                  );
+                  // Sets the current swipe card to the first element of the array if the array has something in it.
+                }
+              );
+            }
+          }
+        );
+      }
+    );
+    this.findMe();
+  }
+
+
+
+  ngAfterContentInit() {
+    /*  const mapProp &#x3D; {
+       center: new google.maps.LatLng(38.9586, -77.3570),
+       zoom: 15,
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+     };
+     this.map &#x3D; new google.maps.Map(this.gmapElement.nativeElement, mapProp); */
+    this.findMe();
+    this.getMarkers();
+  }
+
+  ngOnDestroy() {
+    this.song.pause();
+  }
+
+  getMarkers() {
+    console.log(this.users);
+    for (const user of this.users) {
+      console.log(user);
+      const marker: any &#x3D; {
+        user: user,
+        icon: {
+          url: user.user.photoUrl,
+          scaledSize: {
+            width: 30,
+            height: 30
+          }
+        },
+        location: {
+          latitude: user.location.latitude,
+          longitude: user.location.longitude
+        },
+        opacity: .92
+      };
+
+      console.log(marker);
+      this.markers.push(marker);
+    }
+  }
+
+
+  public getRoute() {
+    this.mapService.getRoute(this.start, this.end).subscribe(
+      data &#x3D;&gt; {
+        this.dist &#x3D; data.distance;
+        this.time &#x3D; data.duration;
+        console.log(this.dist);
+        console.log(this.time);
+      }
+    );
+  }
+
+  setMapType(mapTypeId: string) {
+    this.mapTypeId &#x3D; mapTypeId;
+  }
+
+  setCenter(address) {
+    this.zone.run(() &#x3D;&gt; {
+      // this.addr &#x3D; addrObj;
+      // this.addrKeys &#x3D; Object.keys(addrObj);
+      this.addOriginFromAddress(address);
+    });
+
+    this.map.setCenter(new google.maps.LatLng(this.currentLat, this.currentLong));
+    const marker &#x3D; {
+      lat: this.currentLat,
+      lng: this.currentLong,
+      title: &#x27;got you!&#x27;
+    };
+    this.circle.latitude &#x3D; this.currentLat;
+    this.circle.longitude &#x3D; this.currentLong;
+
+    this.placedMarkers &#x3D; [];
+    this.placedMarkers.push(marker);
+  }
+
+  public addOriginFromAddress(addressObject) {
+    this.currentLat &#x3D; addressObject.geometry.location.lat();
+    this.currentLong &#x3D; addressObject.geometry.location.lng();
+  }
+
+  public changeRadius() {
+    setTimeout(() &#x3D;&gt; {
+      console.log(this.circle.radius + &#x27; &#x27; + this.currentRadius);
+      this.circle.radius &#x3D; this.currentRadius;
+    },
+      100);
+
+  }
+
+  simpleMarkerHandler() {
+    alert(&#x27;Simple Component\&#x27;s function...&#x27;);
+  }
+
+  markerHandler(marker: google.maps.Marker) {
+    alert(&#x27;Marker\&#x27;s Title: &#x27; + marker.getTitle());
+  }
+
+  markerClicked(user: any): void {
+    this.selectedUser &#x3D; user;
+  }
+
+  changeStyle(style: string) {
+    if (this.styles !&#x3D;&#x3D; null) {
+      this.styles &#x3D; null;
+      this.song.pause();
+    } else if (this.styles &#x3D;&#x3D;&#x3D; null) {
+      this.song.play();
+      this.styles &#x3D; [{
+        &#x27;featureType&#x27;: &#x27;water&#x27;,
+        &#x27;stylers&#x27;: [{
+          &#x27;color&#x27;: &#x27;#000000&#x27;
+        }]
+      },
+      {
+        &#x27;featureType&#x27;: &#x27;landscape&#x27;,
+        &#x27;elementType&#x27;: &#x27;geometry&#x27;,
+
+        &#x27;stylers&#x27;: [{
+          &#x27;color&#x27;: &#x27;#ffa500&#x27;
+        }]
+      },
+      {
+        &#x27;featureType&#x27;: &#x27;poi&#x27;,
+        &#x27;elementType&#x27;: &#x27;geometry&#x27;,
+        &#x27;stylers&#x27;: [{
+          &#x27;color&#x27;: &#x27;#39ff14&#x27;
+        }]
+      }
+
+      ];
+    }
+  }
+
+  showCustomMarker() {
+    this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+
+    const location &#x3D; new google.maps.LatLng(this.latitude, this.longitude);
+
+    // console.log(&#x60;selected marker: ${this.selectedMarkerType}&#x60;);
+
+    const marker &#x3D; new google.maps.Marker({
+      position: location,
+      map: this.map,
+      // icon: this.iconBase + this.selectedMarkerType,
+      title: &#x27;Got you!&#x27;
+    });
+  }
+  toggleMap() {
+    this.isHidden &#x3D; !this.isHidden;
+  }
+
+  findMe() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) &#x3D;&gt; {
+        this.showPosition(position);
+        this.circle.latitude &#x3D; this.currentLat;
+        this.circle.longitude &#x3D; this.currentLong;
+      });
+    } else {
+      alert(&#x27;Geolocation is not supported by this browser.&#x27;);
+    }
+
+  }
+
+  trackMe() {
+    if (navigator.geolocation) {
+      this.isTracking &#x3D; true;
+      navigator.geolocation.watchPosition((position) &#x3D;&gt; {
+        this.showTrackingPosition(position);
+      });
+    } else {
+      alert(&#x27;Geolocation is not supported by this browser.&#x27;);
+    }
+  }
+
+  showPosition(position) {
+    this.currentLat &#x3D; position.coords.latitude;
+    this.currentLong &#x3D; position.coords.longitude;
+
+    /*    const location &#x3D; new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+       this.map.panTo(location);
+
+       if (!this.marker) {
+         this.marker &#x3D; new google.maps.Marker({
+           position: location,
+           map: this.map,
+           title: &#x27;Got you!&#x27;
+         });
+       } else {
+         this.marker.setPosition(location);
+       } */
+  }
+
+  showTrackingPosition(position) {
+    console.log(&#x60;tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}&#x60;);
+    this.currentLat &#x3D; position.coords.latitude;
+    this.currentLong &#x3D; position.coords.longitude;
+
+    const location &#x3D; new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    this.map.panTo(location);
+
+    if (!this.marker) {
+      this.marker &#x3D; new google.maps.Marker({
+        position: location,
+        map: this.map,
+        title: &#x27;Got you!&#x27;
+      });
+    } else {
+      this.marker.setPosition(location);
+    }
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container-fluid&quot;&gt;
+  &lt;div class&#x3D;&quot;row&quot;&gt;
+    &lt;div class&#x3D;&quot;col-0&quot;&gt;&lt;/div&gt;
+    &lt;div class&#x3D;&quot;col-12&quot;&gt;
+      &lt;br&gt;
+      &lt;br&gt;
+      &lt;br&gt;
+      &lt;agm-map (mapReady)&#x3D;&quot;mapReady($event)&quot; *ngIf&#x3D;&quot;!isHidden&quot; [latitude]&#x3D;&quot;currentLat&quot; [longitude]&#x3D;&quot;currentLong&quot; [styles]&#x3D;&quot;styles&quot;
+        [mapTypeId]&#x3D;&quot;mapTypeId&quot; [usePanning]&#x3D;&quot;true&quot;&gt;
+        &lt;agm-marker *ngFor&#x3D;&quot;let user of markers; let i &#x3D; index&quot; [iconUrl]&#x3D;&quot;user.icon&quot; [latitude]&#x3D;&quot;user.location.latitude&quot; [longitude]&#x3D;&quot;user.location.longitude&quot;
+          [opacity]&#x3D;&quot;user.opacity&quot; (markerClick)&#x3D;&quot;markerClicked(user)&quot;&gt;
+        &lt;/agm-marker&gt;
+        &lt;agm-marker *ngFor&#x3D;&quot;let m of placedMarkers; let i &#x3D; index&quot; [latitude]&#x3D;&quot;m.lat&quot; [longitude]&#x3D;&quot;m.lng&quot; [title]&#x3D;&quot;m.title&quot;&gt;
+        &lt;/agm-marker&gt;
+&lt;!--         &lt;agm-circle [visible]&#x3D;&quot;true&quot; [latitude]&#x3D;&quot;circle.latitude&quot; [longitude]&#x3D;&quot;circle.longitude&quot; [radius]&#x3D;&quot;circle.radius&quot; [fillOpacity]&#x3D;&quot;.2&quot;
+          [circleDraggable]&#x3D;&quot;true&quot; [fillColor]&#x3D;&quot;&#x27;blue&#x27;&quot;&gt;
+        &lt;/agm-circle&gt; --&gt;
+      &lt;/agm-map&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class&#x3D;&quot;container-fluid&quot; [class.spooky-font]&#x3D;&quot;styles!&#x3D;null&quot;&gt;
+
+  &lt;div class&#x3D;&quot;row&quot;&gt;
+
+    &lt;div class&#x3D;&quot;col-12 text-center&quot;&gt;
+
+      &lt;!--    &lt;button (click)&#x3D;&quot;getRoute()&quot;&gt;Testing&lt;/button&gt;
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+        
+        &lt;/div&gt; --&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+        &lt;div class&#x3D;&quot;col-2&quot;&gt;&lt;/div&gt;
+        &lt;div class&#x3D;&quot;dropdown&quot;&gt;
+          &lt;button class&#x3D;&quot;btn dropdown-toggle&quot; type&#x3D;&quot;button&quot; id&#x3D;&quot;dropdownMenuButton&quot; data-toggle&#x3D;&quot;dropdown&quot; aria-haspopup&#x3D;&quot;true&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
+            Map Style
+          &lt;/button&gt;
+          &lt;div class&#x3D;&quot;dropdown-menu&quot; aria-labelledby&#x3D;&quot;dropdownMenuButton&quot;&gt;
+            &lt;a class&#x3D;&quot;dropdown-item&quot; (click)&#x3D;&quot;setMapType(&#x27;terrain&#x27;)&quot;&gt;Terrain&lt;/a&gt;
+            &lt;a class&#x3D;&quot;dropdown-item&quot; (click)&#x3D;&quot;setMapType(&#x27;satellite&#x27;)&quot;&gt;Satellite&lt;/a&gt;
+            &lt;a class&#x3D;&quot;dropdown-item&quot; (click)&#x3D;&quot;setMapType(&#x27;roadmap&#x27;)&quot;&gt;Road Map&lt;/a&gt;
+            &lt;a class&#x3D;&quot;dropdown-item&quot; (click)&#x3D;&quot;changeStyle(&#x27;halloween&#x27;)&quot;&gt;Halloween&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;toggleMap()&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Toggle Map&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;!--  &lt;button (click)&#x3D;&quot;setMapType(&#x27;terrain&#x27;)&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Terrain&lt;/button&gt;
+        &lt;button (click)&#x3D;&quot;setMapType(&#x27;satellite&#x27;)&quot; class&#x3D;&quot;btn btn-danger&quot;&gt;Satellite&lt;/button&gt;
+        &lt;button (click)&#x3D;&quot;setMapType(&#x27;roadmap&#x27;)&quot; class&#x3D;&quot;btn btn-warning&quot;&gt;Road Map&lt;/button&gt;
+        &lt;button (click)&#x3D;&quot;changeStyle(&#x27;halloween&#x27;)&quot; class&#x3D;&quot;pumpkinButton&quot;&gt;&lt;/button&gt; --&gt;
+        &lt;br&gt;
+
+      &lt;/div&gt;
+
+      &lt;h1&gt;Drivers Near Me&lt;/h1&gt;
+      &lt;br&gt;
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+        &lt;div class&#x3D;&quot;col-lg-4 col-lg-offset-4 &quot;&gt;
+          &lt;div class&#x3D;&quot;col-lg-8 col-lg-offset-2 &quot;&gt;
+            &lt;form class&#x3D;&quot;form-inline&quot; #form&#x3D;&quot;ngForm&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; name&#x3D;&quot;myLocation&quot; (addressSelect)&#x3D;&quot;setCenter($event)&quot; placeholder&#x3D;&quot;Enter Your Location&quot;
+                  appPlacesAutocomplete required&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
+          &lt;br&gt;
+          &lt;div class&#x3D;&quot;col-lg-8 col-lg-offset-2 &quot;&gt;
+            &lt;form class&#x3D;&quot;form-inline&quot; #form&#x3D;&quot;ngForm&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; name&#x3D;&quot;radius&quot; [(ngModel)]&#x3D;&quot;currentRadius&quot; placeholder&#x3D;&quot;Enter Search Radius&quot;&gt;
+              &lt;/div&gt;
+              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;changeRadius()&quot; class&#x3D;&quot;btn btn-primary&quot; [disabled]&#x3D;&quot;form.invalid&quot;&gt; Find Drivers&lt;/button&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;br&gt;
+
+
+      &lt;br&gt;
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+        &lt;div class&#x3D;&quot;col-md-12&quot;&gt;
+          &lt;div class&#x3D;&quot;text-center&quot;&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- &lt;agm-map [latitude]&#x3D;&quot;33&quot; [longitude]&#x3D;&quot;-70&quot;&gt;
+
+      &lt;/agm-map&gt; --&gt;
+      &lt;!-- -  - - - - - - - - - --    ------- --  - - - - - - - - - - --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div *ngIf&#x3D;&quot;styles !&#x3D; null&quot;&gt;
+    &lt;div class&#x3D;&quot;witch-container witch-container-one&quot;&gt;
+      &lt;div class&#x3D;&quot;witch witch-one&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;witch-container witch-container-two&quot;&gt;
+      &lt;div class&#x3D;&quot;witch witch-two&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;witch-container witch-container-three&quot;&gt;
+      &lt;div class&#x3D;&quot;witch witch-three&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;witch-container witch-container-four&quot;&gt;
+      &lt;div class&#x3D;&quot;witch witch-four&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+
+    &lt;div class&#x3D;&quot;ghost-container ghost-container-one&quot;&gt;
+      &lt;div class&#x3D;&quot;ghost ghost-one&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;ghost-container ghost-container-two&quot;&gt;
+      &lt;div class&#x3D;&quot;ghost ghost-two&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;ghost-container ghost-container-three&quot;&gt;
+      &lt;div class&#x3D;&quot;ghost ghost-three&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;ghost-container ghost-container-four&quot;&gt;
+      &lt;div class&#x3D;&quot;ghost ghost-four&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+
+&lt;/div&gt;
+&lt;img *ngIf&#x3D;&quot;styles !&#x3D; null&quot; src&#x3D;&quot;http://pavbca.com/walldb/original/8/e/6/731397.jpg&quot; alt&#x3D;&quot;&quot; class&#x3D;&quot;spooky-background&quot;&gt;
+&lt;img *ngIf&#x3D;&quot;styles !&#x3D; null&quot; src&#x3D;&quot;http://pavbca.com/walldb/original/8/e/6/731397.jpg&quot; alt&#x3D;&quot;&quot; class&#x3D;&quot;spooky-background2 flashit&quot;&gt;
+
+&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#exampleModal&quot;&gt;
+  Launch demo modal
+&lt;/button&gt;
+
+&lt;!-- Modal --&gt;
+&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;exampleModal&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;exampleModalLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
+  &lt;div class&#x3D;&quot;modal-dialog&quot; role&#x3D;&quot;document&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-content&quot;&gt;
+      &lt;div class&#x3D;&quot;modal-header&quot;&gt;
+        &lt;h5 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;exampleModalLabel&quot;&gt;Modal title&lt;/h5&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot;&gt;
+          &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;modal-body&quot;&gt;
+        ...
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; data-dismiss&#x3D;&quot;modal&quot;&gt;Close&lt;/button&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Save changes&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container-fluid">  <div class="row">    <div class="col-0"></div>    <div class="col-12">      <br>      <br>      <br>      <agm-map (mapReady)="mapReady($event)" *ngIf="!isHidden" [latitude]="currentLat" [longitude]="currentLong" [styles]="styles"        [mapTypeId]="mapTypeId" [usePanning]="true">        <agm-marker *ngFor="let user of markers; let i = index" [iconUrl]="user.icon" [latitude]="user.location.latitude" [longitude]="user.location.longitude"          [opacity]="user.opacity" (markerClick)="markerClicked(user)">        </agm-marker>        <agm-marker *ngFor="let m of placedMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [title]="m.title">        </agm-marker><!--         <agm-circle [visible]="true" [latitude]="circle.latitude" [longitude]="circle.longitude" [radius]="circle.radius" [fillOpacity]=".2"          [circleDraggable]="true" [fillColor]="\'blue\'">        </agm-circle> -->      </agm-map>    </div>  </div></div><div class="container-fluid" [class.spooky-font]="styles!=null">  <div class="row">    <div class="col-12 text-center">      <!--    <button (click)="getRoute()">Testing</button>      <div class="row">                </div> -->      <div class="row">        <div class="col-2"></div>        <div class="dropdown">          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">            Map Style          </button>          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">            <a class="dropdown-item" (click)="setMapType(\'terrain\')">Terrain</a>            <a class="dropdown-item" (click)="setMapType(\'satellite\')">Satellite</a>            <a class="dropdown-item" (click)="setMapType(\'roadmap\')">Road Map</a>            <a class="dropdown-item" (click)="changeStyle(\'halloween\')">Halloween</a>          </div>          <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>        </div>        <!--  <button (click)="setMapType(\'terrain\')" class="btn btn-primary">Terrain</button>        <button (click)="setMapType(\'satellite\')" class="btn btn-danger">Satellite</button>        <button (click)="setMapType(\'roadmap\')" class="btn btn-warning">Road Map</button>        <button (click)="changeStyle(\'halloween\')" class="pumpkinButton"></button> -->        <br>      </div>      <h1>Drivers Near Me</h1>      <br>      <div class="row">        <div class="col-lg-4 col-lg-offset-4 ">          <div class="col-lg-8 col-lg-offset-2 ">            <form class="form-inline" #form="ngForm">              <div class="form-group">                <input type="text" class="form-control" name="myLocation" (addressSelect)="setCenter($event)" placeholder="Enter Your Location"                  appPlacesAutocomplete required>              </div>            </form>          </div>          <br>          <div class="col-lg-8 col-lg-offset-2 ">            <form class="form-inline" #form="ngForm">              <div class="form-group">                <input type="number" class="form-control" name="radius" [(ngModel)]="currentRadius" placeholder="Enter Search Radius">              </div>              <button type="button" (click)="changeRadius()" class="btn btn-primary" [disabled]="form.invalid"> Find Drivers</button>            </form>          </div>        </div>      </div>      <br>      <br>      <div class="row">        <div class="col-md-12">          <div class="text-center">          </div>        </div>      </div>      <!-- <agm-map [latitude]="33" [longitude]="-70">      </agm-map> -->      <!-- -  - - - - - - - - - --    ------- --  - - - - - - - - - - -->    </div>  </div>  <div *ngIf="styles != null">    <div class="witch-container witch-container-one">      <div class="witch witch-one"></div>    </div>    <div class="witch-container witch-container-two">      <div class="witch witch-two"></div>    </div>    <div class="witch-container witch-container-three">      <div class="witch witch-three"></div>    </div>    <div class="witch-container witch-container-four">      <div class="witch witch-four"></div>    </div>    <div class="ghost-container ghost-container-one">      <div class="ghost ghost-one"></div>    </div>    <div class="ghost-container ghost-container-two">      <div class="ghost ghost-two"></div>    </div>    <div class="ghost-container ghost-container-three">      <div class="ghost ghost-three"></div>    </div>    <div class="ghost-container ghost-container-four">      <div class="ghost ghost-four"></div>    </div>  </div></div><img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background"><img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background2 flashit"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">  Launch demo modal</button><!-- Modal --><div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  <div class="modal-dialog" role="document">    <div class="modal-content">      <div class="modal-header">        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>        <button type="button" class="close" data-dismiss="modal" aria-label="Close">          <span aria-hidden="true">&times;</span>        </button>      </div>      <div class="modal-body">        ...      </div>      <div class="modal-footer">        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="button" class="btn btn-primary">Save changes</button>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
+    var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
+    var ACTUAL_COMPONENT = {'name': 'MapComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MapComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

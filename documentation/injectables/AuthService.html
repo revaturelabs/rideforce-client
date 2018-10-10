@@ -1,0 +1,600 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>rideshare-client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">rideshare-client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>AuthService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/auth.service.ts</code>
+        </p>
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#authenticate">authenticate</a>
+                            </li>
+                            <li>
+                                <a href="#authenticator">authenticator</a>
+                            </li>
+                            <li>
+                                <a href="#logout">logout</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, tokenStorage: <a href="../injectables/TokenStorage.html">TokenStorage</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/auth.service.ts:14</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/UserControllerService.html" target="_self" >UserControllerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>tokenStorage</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/TokenStorage.html" target="_self" >TokenStorage</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="authenticate"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Async</span>
+                            authenticate
+                            </b>
+                            <a href="#authenticate"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>authenticate(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, usePromise?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/services/auth.service.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>email</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>password</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>usePromise</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="authenticator"></a>
+                        <span class="name">
+                            <b>
+                            authenticator
+                            </b>
+                            <a href="#authenticator"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>authenticator(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/services/auth.service.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>email</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>Corresponds to the email input box</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>password</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>Corresponds to the password input box </p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logout"></a>
+                        <span class="name">
+                            <b>
+                            logout
+                            </b>
+                            <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>logout()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/services/auth.service.ts:122</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
+import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
+import { User } from &#x27;../../app/models/user.model&#x27;;
+import { Observable, of } from &#x27;rxjs&#x27;;
+import { environment } from &#x27;../../environments/environment&#x27;;
+import { tap, map } from &#x27;rxjs/operators&#x27;;
+import { UserControllerService } from &#x27;./api/user-controller.service&#x27;;
+import { TokenStorage } from &#x27;./../utils/token.storage&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class AuthService {
+
+  constructor(
+    private http: HttpClient,
+    private userService: UserControllerService,
+    private tokenStorage: TokenStorage
+  ) { }
+/**
+ * 
+ * @param email Corresponds to the email input box
+ * @param password Corresponds to the password input box 
+ */
+  authenticator(email: string, password: string) {
+    const credentials &#x3D; { email, password };
+    console.log(&#x27;in authenticate&#x27;);
+    return this.http
+      .post&lt;string&gt;(environment.apiUrl + &#x27;/login&#x27;, credentials)
+      .pipe(
+        map&lt;string, void&gt;(token &#x3D;&gt; {
+          console.log(&#x27;Saving token&#x27;); 
+          this.tokenStorage.saveToken(token);
+          this.userService.getCurrentUser().subscribe();
+          return null;
+        })
+      );
+  }
+
+  async authenticate(email: string, password: string, usePromise?: boolean) {
+    if (usePromise) {
+      await this.authenticator(email, password).toPromise().then(
+        (x) &#x3D;&gt; {
+          console.log(&#x27;Got user from Authenticate (Promise mode)&#x27;);
+          this.userService.getUserByEmail(email).then((x) &#x3D;&gt; {
+            console.log(&#x27;Gotten email of user&#x27;);
+            sessionStorage.setItem(&#x27;id&#x27;, x.id.toString());
+            sessionStorage.setItem(&#x27;firstName&#x27;, x.firstName);
+            sessionStorage.setItem(&#x27;lastName&#x27;, x.lastName);
+            sessionStorage.setItem(&#x27;active&#x27;, x.active.toString());
+            sessionStorage.setItem(&#x27;role&#x27;, x.role);
+            sessionStorage.setItem(&#x27;address&#x27;, x.address);
+            sessionStorage.setItem(&#x27;batchEnd&#x27;, x.batchEnd);
+          });
+          sessionStorage.setItem(&#x27;userEmail&#x27;, email);
+          sessionStorage.setItem(&#x27;userPassword&#x27;, password);
+        },
+        (e) &#x3D;&gt; {
+            // error coming from the backend
+            console.log(&#x27;Printing Login error (Promise Mode)!&#x27;);
+            console.log(e);
+            if (document) {
+              const messageLogin &#x3D; document.getElementById(&#x27;errorMessageLogin&#x27;);
+              if (messageLogin) {
+                messageLogin.style.display &#x3D; &#x27;block&#x27;;
+                console.log(e.message);
+                if(e.message&#x3D;&#x3D;&#x27;GENERAL&#x27;){
+                  messageLogin.innerHTML &#x3D; &quot;Server unavailable&quot;;
+                }else{
+                  messageLogin.innerHTML &#x3D; e.message;
+                }
+              }
+            }
+            return e.message;
+        }
+      );
+    } else {
+    this.authenticator(email, password).subscribe(
+      (x) &#x3D;&gt; {
+        console.log(&#x27;Got user from Authenticate (Observe mode)&#x27;);
+        this.userService.getUserByEmail(email).then((x) &#x3D;&gt; {
+          console.log(&#x27;Gotten email of user&#x27;);
+          sessionStorage.setItem(&#x27;id&#x27;, x.id.toString());
+          sessionStorage.setItem(&#x27;firstName&#x27;, x.firstName);
+          sessionStorage.setItem(&#x27;lastName&#x27;, x.lastName);
+          sessionStorage.setItem(&#x27;active&#x27;, x.active.toString());
+          sessionStorage.setItem(&#x27;role&#x27;, x.role);
+          sessionStorage.setItem(&#x27;address&#x27;, x.address);
+          sessionStorage.setItem(&#x27;batchEnd&#x27;, x.batchEnd);
+        });
+        sessionStorage.setItem(&#x27;userEmail&#x27;, email);
+        sessionStorage.setItem(&#x27;userPassword&#x27;, password);
+        location.reload(true);
+    },
+      // TODO if an error is returned, return the error message to user
+      // callback called if there is an error
+      e &#x3D;&gt; {
+        // error coming from the backend
+        console.log(&#x27;Printing Login error (Observe Mode)!&#x27;);
+        console.log(e);
+        if (document) {
+          const messageLogin &#x3D; document.getElementById(&#x27;errorMessageLogin&#x27;);
+          if (messageLogin) {
+            messageLogin.style.display &#x3D; &#x27;block&#x27;;
+            //It is possible that the shortcircuit message means something completely different
+            //from the server being unavailable. I&#x27;m not really sure, but it could be
+            //proccing whenever you just click waaaaay too fast trying to log in.
+            if(e.message&#x3D;&#x3D;&#x27;GENERAL&#x27; || e.message&#x3D;&#x3D;&#x27;SHORTCIRCUIT&#x27;){
+              messageLogin.innerHTML &#x3D; &quot;Server unavailable&quot;;
+            }else{
+              messageLogin.innerHTML &#x3D; e.message;
+            }
+          }
+        }
+        return e.message;
+      }
+    );
+    }
+  }
+
+  logout() {
+    // Make sure we invalidate the currently cached user data in the
+    // UserService.
+    this.userService.invalidateCurrentUser();
+    this.tokenStorage.signOut();
+  }
+
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
