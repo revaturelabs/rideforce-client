@@ -49,6 +49,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    console.log("Cirey is the best ever!<3<3 xoxo");
     this.route.navigate(['/landing']);
   }
 
