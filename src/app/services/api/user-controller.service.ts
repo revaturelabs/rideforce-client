@@ -112,9 +112,18 @@ export class UserControllerService {
     * @param user the user to update. The ID property is required, to identify
     * the user to update.
     */
-  update(user: User): Observable<User> {
+  update(): Observable<User> {
+    var body = {
+      firstName: sessionStorage.getItem("firstName"),
+      lastName: sessionStorage.getItem("lastName"),
+      email: sessionStorage.getItem("userEmail"),
+      password: sessionStorage.getItem("userPassword"),
+      role: sessionStorage.getItem("role"),
+      address: sessionStorage.getItem("address"),
+    }
+
     return this.http
-      .put<User>(environment.apiUrl + `/users/${user.id}`, user)
+      .put<User>(environment.apiUrl + `/users/${sessionStorage.getItem("id")}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the

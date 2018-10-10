@@ -1,0 +1,967 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>rideshare-client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">rideshare-client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>CarRegistrationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/car-registration/car-registration.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-car-registration</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>car-registration.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./car-registration.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#btnCarInfo">btnCarInfo</a>
+                            </li>
+                            <li>
+                                <a href="#carMake">carMake</a>
+                            </li>
+                            <li>
+                                <a href="#carModel">carModel</a>
+                            </li>
+                            <li>
+                                <a href="#carObject">carObject</a>
+                            </li>
+                            <li>
+                                <a href="#cars">cars</a>
+                            </li>
+                            <li>
+                                <a href="#carYear">carYear</a>
+                            </li>
+                            <li>
+                                <a href="#optInToDrive">optInToDrive</a>
+                            </li>
+                            <li>
+                                <a href="#userObject">userObject</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addCarToUser">addCarToUser</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#refreshFields">refreshFields</a>
+                            </li>
+                            <li>
+                                <a href="#resetCars">resetCars</a>
+                            </li>
+                            <li>
+                                <a href="#resetUser">resetUser</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/UserControllerService.html" target="_self" >UserControllerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addCarToUser"></a>
+                        <span class="name">
+                            <b>
+                            addCarToUser
+                            </b>
+                            <a href="#addCarToUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>addCarToUser()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:64</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="refreshFields"></a>
+                        <span class="name">
+                            <b>
+                            refreshFields
+                            </b>
+                            <a href="#refreshFields"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>refreshFields()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:82</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="resetCars"></a>
+                        <span class="name">
+                            <b>
+                            resetCars
+                            </b>
+                            <a href="#resetCars"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>resetCars()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="resetUser"></a>
+                        <span class="name">
+                            <b>
+                            resetUser
+                            </b>
+                            <a href="#resetUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>resetUser()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:53</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="btnCarInfo"></a>
+                        <span class="name">
+                            <b>
+                            btnCarInfo
+                            </b>
+                            <a href="#btnCarInfo"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>btnCarInfo:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank" >Number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank" >Number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>0</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="carMake"></a>
+                        <span class="name">
+                            <b>
+                            carMake
+                            </b>
+                            <a href="#carMake"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>carMake:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="carModel"></a>
+                        <span class="name">
+                            <b>
+                            carModel
+                            </b>
+                            <a href="#carModel"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>carModel:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="carObject"></a>
+                        <span class="name">
+                            <b>
+                            carObject
+                            </b>
+                            <a href="#carObject"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>carObject:     <code><a href="../classes/Car.html" target="_self" >Car</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Car.html" target="_self" >Car</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="cars"></a>
+                        <span class="name">
+                            <b>
+                            cars
+                            </b>
+                            <a href="#cars"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>cars:     <code><a href="../classes/Car.html" target="_self" >Car[]</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Car.html" target="_self" >Car[]</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="carYear"></a>
+                        <span class="name">
+                            <b>
+                            carYear
+                            </b>
+                            <a href="#carYear"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>carYear:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:18</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="optInToDrive"></a>
+                        <span class="name">
+                            <b>
+                            optInToDrive
+                            </b>
+                            <a href="#optInToDrive"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>optInToDrive:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:19</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userObject"></a>
+                        <span class="name">
+                            <b>
+                            userObject
+                            </b>
+                            <a href="#userObject"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>userObject:     <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/car-registration/car-registration.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { Car } from &#x27;../../models/car.model&#x27;;
+import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
+import { User } from &#x27;../../models/user.model&#x27;;
+
+@Component({
+  selector: &#x27;app-car-registration&#x27;,
+  templateUrl: &#x27;./car-registration.component.html&#x27;,
+  styleUrls: [&#x27;./car-registration.component.css&#x27;]
+})
+export class CarRegistrationComponent implements OnInit {
+
+  userObject: User;
+  // for drivers
+  carObject: Car;
+  carMake: string;
+  carModel: string;
+  carYear: number;
+  optInToDrive: boolean;
+  cars: Car[];
+
+  // booleans for car information buttons
+  btnCarInfo: Number &#x3D; 0;
+
+  constructor(private userService: UserControllerService) { }
+
+  ngOnInit() {
+    this.carObject &#x3D; new Car();
+  }
+
+  resetCars() {
+
+    if (this.cars !&#x3D;&#x3D; undefined &amp;&amp; this.cars !&#x3D; null &amp;&amp; this.cars.length !&#x3D;&#x3D; 0) {
+      return;
+    }
+    this.resetUser();
+    const userId &#x3D; this.userObject.id;
+    this.cars &#x3D; [];
+    this.userService.getAllCars().subscribe(c &#x3D;&gt; {
+      
+      c.forEach(element &#x3D;&gt; {
+        const strNum &#x3D; element.owner.substring(7);
+        const num &#x3D; Number.parseInt(strNum);
+        if (num &#x3D;&#x3D;&#x3D; userId) {
+          this.cars.push(element);
+        }
+      });
+    });
+  }
+
+
+
+  resetUser() {
+    this.userService.getCurrentUser().subscribe(user &#x3D;&gt; {
+      console.log(&#x27;Car reg: Gotten User: &#x27; + user);
+      this.userObject &#x3D; user;
+    },
+    e &#x3D;&gt; {
+      console.log(&#x27;Car reg: Failed to get user: &#x27; + e);
+    });
+
+  }
+
+  addCarToUser() {
+
+    this.resetUser();
+
+    this.carObject.id &#x3D; 0;
+    this.carObject.make &#x3D; this.carMake;
+    this.carObject.model &#x3D; this.carModel;
+
+    this.carObject.owner &#x3D; &#x27;/users/&#x27; + this.userObject.id.toString();
+    this.carObject.year &#x3D; this.carYear;
+    // this.userObject.cars.push(this.carObject);
+
+    this.userService.createCar(this.carObject).subscribe(car &#x3D;&gt; {
+      this.carObject &#x3D; car;
+    });
+
+  }
+
+  refreshFields() {
+    this.carMake &#x3D; &#x27;&#x27;;
+    this.carModel &#x3D; &#x27;&#x27;;
+    this.carYear &#x3D; new Date().getFullYear();
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container-fluid&quot;&gt;
+  &lt;br&gt;
+  &lt;h2&gt;Car Information:&lt;/h2&gt;
+  &lt;br&gt;
+  
+  &lt;br&gt;
+  &lt;div &gt;
+    &lt;div class&#x3D;&quot;input-group mb-3&quot;&gt;
+      &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;
+        &lt;span class&#x3D;&quot;input-group-text&quot;&gt;Make&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; (click)&#x3D;&quot;resetCars()&quot; [(ngModel)]&#x3D;&quot;carMake&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;input-group mb-3&quot;&gt;
+      &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;
+        &lt;span class&#x3D;&quot;input-group-text&quot;&gt;Model&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; (click)&#x3D;&quot;resetCars()&quot; [(ngModel)]&#x3D;&quot;carModel&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;input-group mb-3&quot;&gt;
+      &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;
+        &lt;span class&#x3D;&quot;input-group-text&quot;&gt;Year&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type&#x3D;&quot;number&quot; min&#x3D;&quot;1950&quot; max&#x3D;&quot;5000&quot; class&#x3D;&quot;form-control&quot; (click)&#x3D;&quot;resetCars()&quot; [(ngModel)]&#x3D;&quot;carYear&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;input-group mb-3&quot;&gt;
+      &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;
+        &lt;span class&#x3D;&quot;input-group-text&quot;&gt;Submit&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;button class&#x3D;&quot;btn btn-submit&quot; (click)&#x3D;&quot;addCarToUser()&quot;&gt;Add Car&lt;/button&gt;
+      &lt;button class&#x3D;&quot;btn btn-info&quot; (click)&#x3D;&quot;refreshFields()&quot;&gt;Clear Fields&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;input-group mb-3&quot;&gt;
+      &lt;table class&#x3D;&quot;table&quot; *ngIf&#x3D;&quot;cars !&#x3D;&#x3D; undefined &amp;&amp; cars !&#x3D; null &amp;&amp; cars.length &gt; 0&quot;&gt;
+        &lt;tr&gt;
+          &lt;th&gt;ID&lt;/th&gt;
+          &lt;th&gt;Make&lt;/th&gt;
+          &lt;th&gt;Model&lt;/th&gt;
+          &lt;th&gt;Year&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr *ngFor&#x3D;&quot;let c of cars&quot;&gt;
+          &lt;td&gt;{{c.id}}&lt;/td&gt;
+          &lt;td&gt;{{c.make}}&lt;/td&gt;
+          &lt;td&gt;{{c.model}}&lt;/td&gt;
+          &lt;td&gt;{{c.year}}&lt;/td&gt;
+          
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container-fluid">  <br>  <h2>Car Information:</h2>  <br>    <br>  <div >    <div class="input-group mb-3">      <div class="input-group-prepend">        <span class="input-group-text">Make</span>      </div>      <input type="text" class="form-control" (click)="resetCars()" [(ngModel)]="carMake">    </div>    <div class="input-group mb-3">      <div class="input-group-prepend">        <span class="input-group-text">Model</span>      </div>      <input type="text" class="form-control" (click)="resetCars()" [(ngModel)]="carModel">    </div>    <div class="input-group mb-3">      <div class="input-group-prepend">        <span class="input-group-text">Year</span>      </div>      <input type="number" min="1950" max="5000" class="form-control" (click)="resetCars()" [(ngModel)]="carYear">    </div>    <div class="input-group mb-3">      <div class="input-group-prepend">        <span class="input-group-text">Submit</span>      </div>      <button class="btn btn-submit" (click)="addCarToUser()">Add Car</button>      <button class="btn btn-info" (click)="refreshFields()">Clear Fields</button>    </div>    <div class="input-group mb-3">      <table class="table" *ngIf="cars !== undefined && cars != null && cars.length > 0">        <tr>          <th>ID</th>          <th>Make</th>          <th>Model</th>          <th>Year</th>        </tr>        <tr *ngFor="let c of cars">          <td>{{c.id}}</td>          <td>{{c.make}}</td>          <td>{{c.model}}</td>          <td>{{c.year}}</td>                  </tr>      </table>    </div>  </div>  </div></div>'
+    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
+    var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
+    var ACTUAL_COMPONENT = {'name': 'CarRegistrationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CarRegistrationComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
