@@ -6,12 +6,21 @@ import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 
+/**
+ * Used as a more complex data structure for holding info on liked users
+ */
 export interface UserCard {
+    /** The Driver that they like */
     user: User;
+    /** (Unknown) */
     choose: string;
+    /** Status of the User */
     face: String;
 }
 
+/**
+ * Component that shows User Likes on a desktop device
+ */
 @Component({
     selector: 'app-likesmatchweb',
     templateUrl: './likesmatchweb.component.html',
@@ -30,24 +39,38 @@ export interface UserCard {
 
 export class LikesmatchwebComponent implements OnInit {
 
+    /**
+     * Array of data structures that hold list of the User's liked drivers
+     */
     likecards: UserCard[] = [];
 
+    /**
+     * Sets up the Component for Like demonstrations
+     * @param matchService - Access to Rider Driver matching service
+     * @param userService - Access to user services
+     */
     constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
 
+    /**
+     * Hold the current user
+     */
     currentUser: User;
 
+    /**
+     * Initializes the Component by populating the swipcards array with data on liked drivers
+     */
     ngOnInit() {
         this.userService.getCurrentUser().subscribe(
             data => {
-                console.log("this is put into currentUser");
+                console.log('this is put into currentUser');
                 console.log(data);
                 this.currentUser = data;
                 let userLinks: Link<User>[] = null;
                 this.matchService.getLikedDrivers(this.currentUser.id).subscribe(
                     data2 => {
-                        console.log("here?");
+                        console.log('here?');
                         console.log(data2);
-                        console.log("loggeddata2");
+                        console.log('loggeddata2');
                         userLinks = data2;
                         for (let i = 0; i < userLinks.length; i++) {
                             console.log(userLinks[i].replace(/\D/g, ''));
@@ -75,7 +98,9 @@ export class LikesmatchwebComponent implements OnInit {
     }
 
 
-    // Sets the card to rotate 90 degrees
+    /**
+     *  Sets the card to rotate 90 degrees
+     */
     flipCard(card: UserCard) {
         if (card.face === 'front') {
             card.face = 'front-back';
@@ -84,7 +109,9 @@ export class LikesmatchwebComponent implements OnInit {
         }
     }
 
-    // Card goes past 90 degrees and changes face
+    /**
+     * Card goes past 90 degrees and changes face
+     */
     endFlipCard(card: UserCard) {
         if (card.face === 'front-back') {
             card.face = 'back';

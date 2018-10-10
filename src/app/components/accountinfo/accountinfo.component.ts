@@ -156,9 +156,9 @@ export class AccountinfoComponent implements OnInit {
    * @param {UploadService} uploadService - allows User to upload files
    * @param {Router} router - allows page navigation to take place
    */
-  constructor(private zone: NgZone, 
-    private auth: AuthService, 
-    private userService: UserControllerService, 
+  constructor(private zone: NgZone,
+    private auth: AuthService,
+    private userService: UserControllerService,
     private uploadService: UploadService,
     private router: Router) {
       this.carObject = new Car();
@@ -216,16 +216,16 @@ export class AccountinfoComponent implements OnInit {
 
   /** Sets the User as a Driver */
   isDriver() {
-    document.getElementById("riderBtn").classList.remove("selectedBtn");
-    document.getElementById("driverBtn").classList.add("selectedBtn");
+    document.getElementById('riderBtn').classList.remove('selectedBtn');
+    document.getElementById('driverBtn').classList.add('selectedBtn');
     this.btnCarInfo = 1;
     this.roleObject = Role.Driver;
   }
 
   /** Sets the User as a Rider */
   isRider() {
-    document.getElementById("riderBtn").classList.add("selectedBtn");
-    document.getElementById("driverBtn").classList.remove("selectedBtn");
+    document.getElementById('riderBtn').classList.add('selectedBtn');
+    document.getElementById('driverBtn').classList.remove('selectedBtn');
     this.carMake = '';
     this.carModel = '';
     this.carYear;
@@ -276,13 +276,15 @@ export class AccountinfoComponent implements OnInit {
   parseEncryption() {
     if (this.token) {
       let pref = this.token.substr(0, 28);
-      if (pref.startsWith("XcvF")) {
+      if (pref.startsWith('XcvF')) {
         pref = pref.substr(4);
       }
-      let decrip = atob(pref).split("~");
-      for (let offObj of this.officeObjectArray)
-        if (offObj.name === decrip[0])
+      let decrip = atob(pref).split('~');
+      for (let offObj of this.officeObjectArray) {
+        if (offObj.name === decrip[0]) {
           this.officeObject = offObj;
+        }
+      }
       this.batchEnd = decrip[1];
       this.office = this.officeObject.name;
     }
@@ -320,7 +322,7 @@ export class AccountinfoComponent implements OnInit {
     // this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token)
       .subscribe(() => {
-        this.router.navigate(["/map"]);
+        this.router.navigate(['/map']);
       });
 
 

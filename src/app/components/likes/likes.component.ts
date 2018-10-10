@@ -6,7 +6,9 @@ import { User } from '../../models/user.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 
-
+/**
+ * Component that shows User Likes on a mobile device
+ */
 @Component({
     selector: 'app-likes',
     templateUrl: './likes.component.html',
@@ -14,12 +16,26 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 })
 export class LikesComponent implements OnInit {
 
+    /**
+     * Array of data structures that hold list of the User's liked drivers
+     */
     swipecards: SwipecardModel[] = [];
 
+    /**
+     * Sets up the Component for Like demonstrations
+     * @param matchService - Access to Rider Driver matching service
+     * @param userService - Access to user services
+     */
     constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
 
+    /**
+     * Hold current user
+     */
     currentUser: User;
 
+    /**
+     * Initializes the Component by populating the swipcards array with data on liked drivers
+     */
     ngOnInit() {
         this.userService.getCurrentUser().subscribe(
             data => {
