@@ -1,4 +1,4 @@
-/// <reference path="../../../../node_modules/@types/googlemaps/index.d.ts" /> 
+/// <reference path="../../../../node_modules/@types/googlemaps/index.d.ts" />
 import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
 import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
@@ -11,6 +11,9 @@ import { MatchingControllerService } from '../../services/api/matching-controlle
 import { UserControllerService } from '../../services/api/user-controller.service';
 // import { } from '@types/googlemaps';
 
+/**
+ * Component that handles route navigation and displays a map
+ */
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -21,10 +24,16 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 })
 export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
+  /**
+   * Where Users reside
+   */
   private start = 'herndon';
+  /** Where Users work */
   private end = 'reston';
 
+  /** Distance of the route */
   private dist: number;
+  /** Estimated time of the drive */
   private time: number;
 
   private selectedUser: User = null;
@@ -45,8 +54,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   isTracking = false;
 
+  /** Current Latitude, set by the Mapping control */
   currentLat: any;
+  /** Current Longitude, set by the Mapping Control */
   currentLong: any;
+  /** Current radious, set by a number control */
   currentRadius = 5000;
 
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
@@ -82,6 +94,14 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     radius: this.currentRadius
   };
   closeResult: string;
+
+  /**
+   * 
+   * @param matchService - Allows management between 
+   * @param userService 
+   * @param mapService 
+   * @param zone 
+   */
   constructor(private matchService: MatchingControllerService, private userService: UserControllerService,
     private mapService: MapsControllerService, private zone: NgZone) { }
 

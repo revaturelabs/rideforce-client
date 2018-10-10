@@ -9,6 +9,9 @@ import { Role } from '../../models/role.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 
+/**
+ * Allows Views for Other Users in a mobile view
+ */
 @Component({
     selector: 'app-usercard',
     templateUrl: './usercard.component.html',
@@ -30,27 +33,43 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 })
 export class UsercardComponent implements OnInit {
 
-    // constant for swipe action: left or right
+    /** constant for swipe action: left or right */
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-    // our list of swipecards: DUMMY DATA
+    /** our list of swipecards: DUMMY DATA */
     swipecards: SwipecardModel[] = [
 
     ];
 
 
+    /** User currently being looked at */
     currentSwipeCard: SwipecardModel;
+    /** Index of the Current User being viewed */
     currentIndex = 0;
+    /** Keeps track of the Animation state */
     animState = 'center';
+    /** Keeps track of the Thumb animation */
     animThumbState = 'one';
+    /** Location of the thumbnail image files */
     thumbImg = 'assets/icons/thumbsDown.png';
 
+    /** Represents the div element 'swipeMain' */
     @ViewChild('swipeMain') swipeCardMain: ElementRef;
+    /** Represents the div element 'swipeBio' */
     @ViewChild('swipeBio') swipeCardBio: ElementRef;
 
+    /**
+     * Sets up Component with the Matching and User services injected
+     * @param {MatchingControllerService} matchService - Enables the matching service
+     * @param {UserControllerService} userService - Enables access to User management
+     */
     constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
 
+    /** Holds the current user of the system */
     currentUser: User;
 
+    /**
+     * Sets up the component by populating the list of possibel matches for the current user
+     */
     ngOnInit() {
         this.userService.getCurrentUser().subscribe(
             data => {
@@ -107,8 +126,10 @@ export class UsercardComponent implements OnInit {
         }
     }
 
-    // action triggered when user swipes
-    swipe(action = this.SWIPE_ACTION.RIGHT, user) {
+    /**
+     *  action triggered when user swipes
+     */
+     swipe(action = this.SWIPE_ACTION.RIGHT, user) {
         this.animThumbState = 'two';
         // swipe right, next avatar
         if (action === this.SWIPE_ACTION.RIGHT) {
@@ -136,6 +157,9 @@ export class UsercardComponent implements OnInit {
         this.swipecards.splice(this.currentIndex, 1);
     }
 
+    /**
+     * Called when the swipe animation has completed
+     */
     swiped() {
         if (this.animState === 'left') {
             this.animState = 'center';
@@ -157,6 +181,9 @@ export class UsercardComponent implements OnInit {
         this.currentSwipeCard = this.swipecards[this.currentIndex];
     }
 
+    /**
+     * Called when the Thumb Animation is done
+     */
     thumbAnimDone() {
         if (this.animThumbState === 'two') {
             this.animThumbState = 'one';
