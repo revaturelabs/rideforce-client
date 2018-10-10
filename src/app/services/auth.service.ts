@@ -13,12 +13,22 @@ import { TokenStorage } from './../utils/token.storage';
 })
 export class AuthService {
 
+  /**
+   * 
+   * @param http Our http client dependency for making http requests
+   * @param userService Service used to grab any user information from the API 
+   * @param tokenStorage Used to save our generated token locally 
+   */
   constructor(
     private http: HttpClient,
     private userService: UserControllerService,
     private tokenStorage: TokenStorage
   ) { }
-
+/**
+ * 
+ * @param email The email address to be sent from the view to the API
+ * @param password The password to be sent from the view to the API  
+ */
   authenticator(email: string, password: string) {
     const credentials = { email, password };
     console.log('in authenticate');
