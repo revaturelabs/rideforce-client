@@ -32,7 +32,7 @@ export const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'cars', component: CarRegistrationComponent },
-  { path: 'userProfile', component: ViewProfileComponent},
+  { path: 'userProfile', component: ViewProfileComponent}
   //{ path: 'logout', redirectTo: 'landing' }
 ];
 @NgModule({
