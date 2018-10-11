@@ -4,7 +4,7 @@ import { User } from '../../../app/models/user.model';
 import { Register } from '../../../app/models/register.model';
 import { Observable, of, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
@@ -44,19 +44,19 @@ export class UserControllerService {
     );
   }
 
-  // READ
+  /**Gets an array of users via the given endpoint */
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(environment.apiUrl + '/users');
   }
-
+  /**Gets a single user via the given endpoint and id */
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(environment.apiUrl + `/users/${id}`);
   }
-
-  getUserByEmail(email: string): Observable<User> {
+  /**Gets a single user via the given endpoint and email */
+  getUserByEmail(email: string): Promise<User> {
     return this.http.get<User>(environment.apiUrl + '/users', {
       params: { email },
-    });
+    }).toPromise();
   }
 
   /* getUsersByOfficeAndRole(office: number, role: string): Observable<User> {
@@ -71,16 +71,26 @@ export class UserControllerService {
   getCurrentUser(): Observable<User> {
     // We cache the current user in a local variable to prevent making too many
     // calls to the database.
+    console.log('Getting current User! api is "' + environment.apiUrl + '/login"');
+
     return this.currentUser
       ? of(this.currentUser)
       : this.http
         .get<User>(environment.apiUrl + '/login')
-        .pipe(tap(user => {
+        .pipe(
+          catchError(function<T>(res?: T) {
+            this.currentUser = null;
+            return of(res as T);
+          }),
+          tap(user => {
           this.currentUser = user;
           this.currentUserSubject.next(user);
         }));
   }
-
+  /**First checks that there is not a user populated in currentUser.
+   * If there isn't, the currentUser is obtained through the
+   * getCurrentUser() function.
+   */
   getCurrentUserObservable(): Observable<User> {
     if (!this.currentUser) {
       this.getCurrentUser().subscribe();
@@ -102,9 +112,18 @@ export class UserControllerService {
     * @param user the user to update. The ID property is required, to identify
     * the user to update.
     */
-  update(user: User): Observable<User> {
+  update(): Observable<User> {
+    var body = {
+      firstName: sessionStorage.getItem("firstName"),
+      lastName: sessionStorage.getItem("lastName"),
+      email: sessionStorage.getItem("userEmail"),
+      password: sessionStorage.getItem("userPassword"),
+      role: sessionStorage.getItem("role"),
+      address: sessionStorage.getItem("address"),
+    }
+
     return this.http
-      .put<User>(environment.apiUrl + `/users/${user.id}`, user)
+      .put<User>(environment.apiUrl + `/users/${sessionStorage.getItem("id")}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the
@@ -150,22 +169,29 @@ export class UserControllerService {
    * getCurrentUser to contact the server for new data.
    */
   invalidateCurrentUser(): void {
-    this.currentUser = undefined;
-    this.currentUserSubject.next(undefined);
+    this.currentUser = null;
+    this.currentUserSubject.next(null);
   }
 
 
   // OFFICE CRUD * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  /**Creates a new office using a post method. */
   createOffice(newOffice: Office): Observable<Office> {
     return this.http.post<Office>(environment.apiUrl + '/offices', newOffice);
   }
 
   // READ
+  /**Gets a list of current offices using the given endpoint. */
   getAllOffices(): Observable<Office[]> {
     return this.http.get<Office[]>(environment.apiUrl + '/offices');
   }
 
   // may have to replace string with Link<Office>
+  /**Gets, presumably, an office given something.
+   * Not sure what. When trying out the endpoint,
+   * gave access denied.
+   * -Martin
+  */
   getOfficeByLink(officeUri: Link<Office>): Observable<Office> {
     return this.http.get<Office>(environment.apiUrl + officeUri);
   }
@@ -184,11 +210,13 @@ export class UserControllerService {
 
   // CREATE
   createCar(newCar: Car): Observable<Car> {
+    console.log('Creating new Car! ' + environment.apiUrl);
     return this.http.post<Car>(environment.apiUrl + '/cars', newCar);
   }
 
   // READ
   getAllCars(): Observable<Car[]> {
+    console.log('Getting all cars!');
     return this.http.get<Car[]>(environment.apiUrl + '/cars');
   }
 

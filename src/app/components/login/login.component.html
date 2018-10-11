@@ -10,7 +10,7 @@
     <!-- Icon -->
     <div class="fadeIn first">
 
-      <img src="assets/img/large_profile_default.png"  id="fronticon" alt="User Icon" /> <br><br>
+      <img src="assets/img/large_profile_default.png"  onerror='this.onerror=null; this.src="large_profile_default.png"' id="fronticon" alt="User Icon" /> <br><br>
       <!-- <img src="https://i.pinimg.com/originals/aa/0a/70/aa0a70f1bf5dd2dda064461ae786be66.png" id="icon" alt="User Icon" /> -->
     </div>
 
@@ -19,6 +19,7 @@
     <form (submit)="login()">
       <input type="text" id="login" class="fadeIn second " name="login" placeholder="Email" required [(ngModel)]= 'userEmail'>
       <input type="password" id="password" class="fadeIn third " name="login" placeholder="Password" required [(ngModel)]='userPass'>
+      <p id="errorMessageLogin" Style="display: none">Default Message</p>
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
   </div>

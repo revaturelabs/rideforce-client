@@ -16,6 +16,11 @@
 	}
 }
 
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
 span{
     font-size: 16px;
 }
@@ -43,10 +48,6 @@ input, textarea[type="text"]
     background-color: #F26925;
 }
 
-.btnAddCar{
-    background-color: #72A4C2;
-}
-
 .profile-pic{
     border-radius: 100px;
 }
@@ -57,4 +58,8 @@ input, textarea[type="text"]
 
 .padBot{
     padding-bottom: 20px;
+}
+
+.selectedBtn{
+    background-color: #F26925;
 }

@@ -10,18 +10,30 @@ import { UsercardComponent } from '../components/usercard/usercard.component';
 import { FavoritesComponent } from '../components/favorites/favorites.component';
 import { AccountinfoComponent } from '../components/accountinfo/accountinfo.component';
 import { AdminComponent } from '../components/admin/admin.component';
+import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';
+import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 
+/**
+ * This is where we set our routerLink attribute.
+ * For example...
+ * <a class="dropdown-item" routerLink="/howTo">About</a>
+ * creates an <a> element of class "dropdown-item" that will 
+ * refer to these routes to find which component to route to.
+ */
 export const routes: Routes = [
-  {path: '', redirectTo: 'landing', pathMatch: 'full'},
+  { path: '',  pathMatch: 'full', redirectTo: 'landing' },
   { path: 'howTo', component: HowToComponent },
-  { path: 'landing', component: LandingComponent},
+  { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
   { path: 'accountInfo', component: AccountinfoComponent},
   { path: 'rideswipe', component: RideswipeComponent },
   { path: 'userCard', component: UsercardComponent },
   { path: 'favorites', component: FavoritesComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent },
+  { path: 'cars', component: CarRegistrationComponent },
+  { path: 'userProfile', component: ViewProfileComponent}
+  //{ path: 'logout', redirectTo: 'landing' }
 ];
 @NgModule({
   imports: [
