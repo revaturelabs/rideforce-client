@@ -20,26 +20,13 @@ describe('ViewProfileComponent', () => {
   // }));
 
   //Got rid of DateFormatPipe from providers to make code work.
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, 
        UserControllerService, ViewProfileComponent],
       declarations:[ViewProfileComponent],
     imports:[FormsModule, NgbModule]}).compileComponents();
     // component = TestBed.get(ViewProfileComponent);
-  }));
-
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //       //declarations: [ LoginComponent ],
-  //       imports: [
-  //         AppModule
-  //         ],
-  //       providers:[
-  //         {provide: APP_BASE_HREF, useValue : '/' }
-  //       ]
-  //   })
-  //   .compileComponents();
-  // }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewProfileComponent);
@@ -53,12 +40,16 @@ describe('ViewProfileComponent', () => {
 
   it('should make profile editable', () => {
     component.edit();
-    const inputUser: HTMLInputElement = fixture.nativeElement.querySelector("#firstName");
-    const e: Event = document.createEvent("Event");
-    e.initEvent("input", false, false);
-    // inputUser.value = "Bob";
-    // inputUser.dispatchEvent(e);
-    // fixture.detectChanges();
-    // console.log(fixture.debugElement.query(By.css('#firstName')).nativeElement.innerText);
+    fixture.detectChanges();
+    // fixture.whenStable().then((done) => {
+    //   const inputUser: HTMLInputElement = fixture.nativeElement.querySelector("#firstName");
+    //   const e: Event = document.createEvent("Event");
+    //   e.initEvent("input", false, false);
+    //   inputUser.value = "Bob";
+    //   inputUser.dispatchEvent(e);
+    //   fixture.detectChanges();
+    //   done();
+    // });
   })
+
 });
