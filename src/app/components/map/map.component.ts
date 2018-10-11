@@ -1,4 +1,4 @@
-/// <reference path="../../../../node_modules/@types/googlemaps/index.d.ts" /> 
+/// <reference path="../../../../node_modules/@types/googlemaps/index.d.ts" />
 import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
 import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
@@ -9,8 +9,12 @@ import { User } from '../../models/user.model';
 import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { GoogleMap } from '@agm/core/services/google-maps-types';
 // import { } from '@types/googlemaps';
 
+/**
+ * Component that handles route navigation and displays a map
+ */
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -21,14 +25,21 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 })
 export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
+  /**
+   * Where Users reside
+   */
   private start = 'herndon';
+  /** Where Users work */
   private end = 'reston';
 
+  /** Distance of the route */
   private dist: number;
+  /** Estimated time of the drive */
   private time: number;
 
   private selectedUser: User = null;
 
+  /** Holds list of possible drivers to present */
   users: any[] = [];
 
   markers: any[] = [];
@@ -45,8 +56,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   isTracking = false;
 
+  /** Current Latitude, set by the Mapping control */
   currentLat: any;
+  /** Current Longitude, set by the Mapping Control */
   currentLong: any;
+  /** Current radious, set by a number control */
   currentRadius = 5000;
 
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
@@ -82,9 +96,21 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     radius: this.currentRadius
   };
   closeResult: string;
+
+  /**
+   * Sets up the map component with dependency injection
+   * @param {MatchingControllerService} matchService - Allows management between riders and drivers
+   * @param {UserControllerService} userService - Allows management of the Users
+   * @param {MapsControllerService} mapService - Allows a map to be managed
+   * @param {NgZone} zone - Provides location services
+   */
   constructor(private matchService: MatchingControllerService, private userService: UserControllerService,
     private mapService: MapsControllerService, private zone: NgZone) { }
 
+  /**
+   * Sets up the Map
+   * @param {GoogleMap.maps.Map} map - the Google Map to set
+   */
   protected mapReady(map) {
     this.map = map;
   }
@@ -106,6 +132,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
               this.matchService.getFromLink(userLinks[i]).subscribe(
                 data3 => {
+                  console.log('printing user link: ' + i);
+                  console.log(data3);
                   if (!data3.photoUrl || data3.photoUrl === 'null') {
                     data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
                   }
@@ -144,6 +172,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
 
 
+  /**
+   * Final initialization after the content is set up
+   */
   ngAfterContentInit() {
     /*  const mapProp = {
        center: new google.maps.LatLng(38.9586, -77.3570),
@@ -155,10 +186,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.getMarkers();
   }
 
+  /**
+   * Stops any song playing once the component is being terminated
+   */
   ngOnDestroy() {
     this.song.pause();
   }
 
+  /**
+   * Sets up markers of Drivers on the map
+   */
   getMarkers() {
     console.log(this.users);
     for (const user of this.users) {
@@ -184,7 +221,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
-
+  /**
+   * Get the metadata (distance, estimated duration) of a given route
+   */
   public getRoute() {
     this.mapService.getRoute(this.start, this.end).subscribe(
       data => {
@@ -278,6 +317,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
+  /**
+   * Shows the location you are at
+   * (incomplete)
+   */
   showCustomMarker() {
     this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
 
@@ -291,11 +334,17 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       // icon: this.iconBase + this.selectedMarkerType,
       title: 'Got you!'
     });
+    this.markers.push(marker);
   }
+
+  /** Toggles whether or not the map is hidden */
   toggleMap() {
     this.isHidden = !this.isHidden;
   }
 
+  /**
+   * Attempts to determne the location of the current user and zoom in on it
+   */
   findMe() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -309,6 +358,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   }
 
+  /**
+   * Attempts to determne the location of the current user and mark that location
+   */
   trackMe() {
     if (navigator.geolocation) {
       this.isTracking = true;
@@ -320,6 +372,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
+  /**
+   * Zooms the map onto the location of the user
+   * @param position - the position of the user
+   */
   showPosition(position) {
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;
@@ -338,6 +394,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
        } */
   }
 
+  /**
+   * Adds a marker onto the location of the user
+   * @param position - the location of the user
+   */
   showTrackingPosition(position) {
     console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
     this.currentLat = position.coords.latitude;
