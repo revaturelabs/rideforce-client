@@ -67,6 +67,13 @@
             <code>src/app/components/usermatchweb/usermatchweb.component.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Represents the User selection item in the html page </p>
+
+            </p>
 
 
         <section>
@@ -128,6 +135,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The status of the given user </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -157,6 +170,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Link to profile picture of the user </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -186,6 +205,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The User being represented </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -201,9 +226,13 @@ import { animate, state, style, transition, trigger } from &#x27;@angular/animat
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
 
+/** Represents the User selection item in the html page */
 interface UserCard {
+  /** The User being represented */
   user: User;
+  /** The status of the given user */
   choose: string;
+  /** Link to profile picture of the user */
   face: String;
 }
 
