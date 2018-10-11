@@ -183,7 +183,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -279,7 +279,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:138</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:142</a></div>
                             </td>
                         </tr>
 
@@ -357,7 +357,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:126</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:130</a></div>
                             </td>
                         </tr>
 
@@ -435,7 +435,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:87</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:91</a></div>
                             </td>
                         </tr>
 
@@ -531,7 +531,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -583,7 +583,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:45</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:49</a></div>
                             </td>
                         </tr>
 
@@ -628,7 +628,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -649,9 +649,13 @@ import { animate, state, style, transition, trigger } from &#x27;@angular/animat
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
 
+/** Represents the User selection item in the html page */
 interface UserCard {
+  /** The User being represented */
   user: User;
+  /** The status of the given user */
   choose: string;
+  /** Link to profile picture of the user */
   face: String;
 }
 

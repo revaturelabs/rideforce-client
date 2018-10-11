@@ -66,6 +66,13 @@
             <code>src/app/models/car.model.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Represents the Car a User (cheifly a Driver) owns </p>
+
+            </p>
 
 
 
@@ -143,7 +150,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/models/car.model.ts:8</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/models/car.model.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -183,10 +190,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/models/car.model.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/models/car.model.ts:15</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The Producer of the Vehicle </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -217,10 +230,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/models/car.model.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/models/car.model.ts:17</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>THe model of the vehicle </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -251,13 +270,13 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/models/car.model.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/models/car.model.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>The owner of this car.</p>
+                        <div class="io-description"><p>The owner of this car. Represents the URL mapping to the actual user</p>
 </div>
                     </td>
                 </tr>
@@ -291,10 +310,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/models/car.model.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/models/car.model.ts:19</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>THe year the car was produced </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -310,22 +335,27 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { User } from &quot;./user.model&quot;;
-import { Link } from &quot;./link.model&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { User } from &#x27;./user.model&#x27;;
+import { Link } from &#x27;./link.model&#x27;;
 
+/** Represents the Car a User (cheifly a Driver) owns */
 export class Car {
     /**
    * The ID of the car in the database.
    */
   id: number;
   /**
-   * The owner of this car.
+   * The owner of this car. Represents the URL mapping to the actual user
    */
   owner: Link&lt;User&gt;;
+  /** The Producer of the Vehicle */
   make: string;
+  /** THe model of the vehicle */
   model: string;
+  /** THe year the car was produced */
   year: number;
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 
