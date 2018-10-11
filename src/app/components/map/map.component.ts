@@ -42,16 +42,23 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Holds list of possible drivers to present */
   users: any[] = [];
 
+  /** Holds list of markers on map representing Users */
   markers: any[] = [];
   placedMarkers: any[] = [];
 
+  /** placeholder for the latitude value */
   latitude: any;
+  /** placeholder for the longitude value */
   longitude: any;
+  /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
 
   styles: any = null;
 
+  /** Represents an element labeled 'gmap' (currently not used) */
   @ViewChild('gmap') gmapElement: any;
+
+  /** Holds the map in the compnent */
   map: google.maps.Map;
 
   isTracking = false;
@@ -64,11 +71,18 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   currentRadius = 5000;
 
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+  /**
+   * Holds a current map marker that could appear on a Google map
+   */
   marker: google.maps.Marker;
 
+  /**
+   * represents the types of markers that could appear
+   */
   markerTypes = [
     {
-      text: 'Parking", value: "parking_lot_maps.png'
+      text: 'Parking', value: 'parking_lot_maps.png'
     }
     // ,
     // {
@@ -82,19 +96,31 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   // selectedMarkerType = parking_lot_maps.png;
 
 
+  /** Whether the map is hidden or not */
   isHidden = false;
 
+  /**
+   * Likely intended to represent the location of the current user.
+   * Could be deprecated
+   */
   myLocation: any;
 
+  /** Represents a song that is playing in the background */
   song = new Audio();
 
+  /** Holds the User that's logged in */
   currentUser: User;
 
+  /** Sets the range to search */
   circle: any = {
     latitude: this.currentLat,
     longitude: this.currentLong,
     radius: this.currentRadius
   };
+
+  /**
+   * @ignore
+   */
   closeResult: string;
 
   /**
@@ -116,6 +142,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
 
+  /**
+   * Initializes the Map with data
+   */
   ngOnInit() {
     this.song.src = 'assets/audio/GrimGrinningGhosts.mp3';
     this.song.loop = true;
@@ -235,10 +264,18 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     );
   }
 
+  /**
+   * Sets the map to a new style
+   * @param {string} mapTypeId - the new type to set the map as
+   */
   setMapType(mapTypeId: string) {
     this.mapTypeId = mapTypeId;
   }
 
+  /**
+   * Sets the map center to a specific location
+   * @param address - the location to zoom in on
+   */
   setCenter(address) {
     this.zone.run(() => {
       // this.addr = addrObj;
@@ -259,11 +296,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.placedMarkers.push(marker);
   }
 
+  /**
+   * Sets the specific location on a map
+   * @param addressObject - the address to look at
+   */
   public addOriginFromAddress(addressObject) {
     this.currentLat = addressObject.geometry.location.lat();
     this.currentLong = addressObject.geometry.location.lng();
   }
 
+  /** Changes the radius of your search */
   public changeRadius() {
     setTimeout(() => {
       console.log(this.circle.radius + ' ' + this.currentRadius);
@@ -273,18 +315,33 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   }
 
+  /**
+   * (Does not appear to be used)
+   */
   simpleMarkerHandler() {
     alert('Simple Component\'s function...');
   }
 
+  /**
+   * Displays the title of a given marker (does not appear to be used)
+   * @param marker - the marker to display
+   */
   markerHandler(marker: google.maps.Marker) {
     alert('Marker\'s Title: ' + marker.getTitle());
   }
 
+  /**
+   * Sets the selected user to whatever user was just selected
+   * @param user - the user to select
+   */
   markerClicked(user: any): void {
     this.selectedUser = user;
   }
 
+  /**
+   * Sets the component style
+   * @param style - the style to set the component to
+   */
   changeStyle(style: string) {
     if (this.styles !== null) {
       this.styles = null;
