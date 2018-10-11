@@ -36,13 +36,6 @@ export class NavbarComponent implements OnInit {
    * Sets up the Log in Session appearence
    */
   ngOnInit() {
-    this.userService.getCurrentUserObservable().subscribe(
-      data => {
-        this.currentUser = data;
-        // console.log(this.currentUser);
-        document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
-      }
-    );
     // this.userService.getCurrentUserObservable().subscribe(
     //   data => {
     //     this.currentUser = data;
@@ -50,7 +43,14 @@ export class NavbarComponent implements OnInit {
     //     document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
     //   }
     // );
-    // this.sessionCheck();
+    // this.userService.getCurrentUserObservable().subscribe(
+    //   data => {
+    //     this.currentUser = data;
+    //     // console.log(this.currentUser);
+    //     document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
+    //   }
+    // );
+    this.sessionCheck();
   }
 
 
@@ -64,7 +64,6 @@ export class NavbarComponent implements OnInit {
       this.session = false;
     }
   }
-
   /**
    * Sets up the current user
    */

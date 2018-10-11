@@ -148,10 +148,10 @@
                 </div>
                 <input type="text" id="batchEnd" class="form-control" [(ngModel)]="batchEnd" disabled>
               </div>
-              <div *ngIf="currentUser.role === 'DRIVER'">
+              <div *ngIf="currentRole === 'DRIVER'">
                 <button class="btn" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
               </div>
-              <div *ngIf="currentUser.role === 'RIDER'">
+              <div *ngIf="currentRole === 'RIDER'">
                 <button class="btn" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
               </div>
               <br>
@@ -219,7 +219,7 @@
           </ng-template>
         </ngb-tab>
       </div>
-      <div label="CAR INFO div">
+      <div *ngIf="currentRole === 'DRIVER'" label="CAR INFO div">
         <ngb-tab title="Car Info" id="3">
           <ng-template ngbTabContent>
             <div class="container-fluid">
@@ -309,7 +309,7 @@
           </ng-template>
         </ngb-tab>
       </div> -->
-      <div *ngIf="currentUser.role === 'ADMIN'" label="CONFIRMATION div">
+      <div *ngIf="currentRole === 'ADMIN'" label="CONFIRMATION div">
         <ngb-tab title="View Users" id="4">
           <ng-template ngbTabContent>
             <div class="container-fluid">
