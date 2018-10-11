@@ -170,6 +170,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <a href="classes/AddressModel.html" data-type="entity-link">AddressModel</a>
                     </li>
                     <li class="link">
+                        <a href="classes/AppPage.html" data-type="entity-link">AppPage</a>
+                    </li>
+                    <li class="link">
                         <a href="classes/Car.html" data-type="entity-link">Car</a>
                     </li>
                     <li class="link">

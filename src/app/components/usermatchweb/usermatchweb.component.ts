@@ -6,9 +6,13 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 
+/** Represents the User selection item in the html page */
 interface UserCard {
+  /** The User being represented */
   user: User;
+  /** The status of the given user */
   choose: string;
+  /** Link to profile picture of the user */
   face: String;
 }
 
