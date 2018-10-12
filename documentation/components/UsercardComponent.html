@@ -309,8 +309,6 @@
                                     <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/components/usercard/usercard.component.ts:121</a></div>
                             </td>
                         </tr>
-
-
                 <tr>
                     <td class="col-md-4">
                             <div class="io-description"><p>Hides the card picture</p>
@@ -1102,6 +1100,7 @@ export class UsercardComponent implements OnInit {
                                 data3 &#x3D;&gt; {
                                     console.log(data3);
                                     if (!data3.photoUrl || data3.photoUrl &#x3D;&#x3D;&#x3D; &#x27;null&#x27;) {
+                                        console.log(data3.photoUrl);
                                         data3.photoUrl &#x3D; &#x27;http://semantic-ui.com/images/avatar/large/chris.jpg&#x27;;
                                     }
                                     const card: SwipecardModel &#x3D; {
@@ -1241,10 +1240,14 @@ export class UsercardComponent implements OnInit {
                             data-target&#x3D;&quot;#swipeBio&quot; (click)&#x3D;&quot;hideImage(false)&quot;&gt;&lt;img src&#x3D;&quot;assets/icons/caret-bottom.png&quot;
                                 alt&#x3D;&quot;&quot; onerror&#x3D;&quot;this.onerror&#x3D;null;this.src&#x3D;&#x27;caret-bottom.png&#x27;;&quot;&gt;&lt;/a&gt;
                     &lt;/div&gt;
-                    &lt;h1&gt;Distance: &lt;/h1&gt;
-                    &lt;h1&gt;Contact: &lt;/h1&gt;
-                    &lt;h1&gt;car info: &lt;/h1&gt;
-                    &lt;h1&gt;ride info: &lt;/h1&gt;
+                    &lt;h6&gt;Address: {{currentSwipeCard.user.address}}&lt;/h6&gt;
+                    &lt;h6&gt;Contact: {{currentSwipeCard.user.email}}&lt;/h6&gt;
+                    &lt;ng-container *ngIf&#x3D;&quot;currentSwipeCard.user.role&#x3D;&#x3D;&#x27;DRIVER&#x27;&quot; &gt;
+                        &lt;h6 *ngFor&#x3D;&quot;let car of currentSwipeCard.user.cars&quot;&gt;Car info: {{car}}&lt;/h6&gt;
+                    &lt;/ng-container&gt;
+                    
+                    &lt;h6&gt;&lt;/h6&gt;
+                    &lt;h6&gt;ride info: &lt;/h6&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/div&gt;
@@ -1281,7 +1284,7 @@ export class UsercardComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container parent">    <img [@pop]="animThumbState" (@pop.done)="thumbAnimDone()" class="thumb" [src]="thumbImg" alt="">    <div *ngIf="swipecards.length > 0">        <div class="swipe-box" (swipeleft)="swipe($event.type, $event)" (swiperight)="swipe($event.type, $event)">            <div #swipeMain>                <!-- Displays current card -->                <div class="text-center cardPic" style="margin: 30px 0px 20px 0px">                    <!-- <img class="revLogo" src="assets/img/revature_logo_250.png" alt=""> -->                    <img [@slide]="animState" (@slide.done)="swiped()" class="cardImg" [src]="currentSwipeCard.user.photoUrl" [alt]="currentSwipeCard.user.firstName">                </div>                <div>                    <div style="display: flex; justify-content: space-between;">                        <h1>{{currentSwipeCard.user.firstName}}</h1> <a data-toggle="collapse" data-target="#swipeBio" (click)="hideImage(true)"><img                                src="assets/icons/caret-top.png" alt="" onerror="this.onerror=null;this.src=\'caret-top.png\';"></a>                    </div>                    <h1> duration / distance</h1>                    <h1> contacts</h1>                    <a><h1>link to bio</h1></a>                </div>                <br>                <br>                <br>                <br>                <br>            </div>            <div class="collapse" id="swipeBio">                <div class="container-fluid">                    <div style="display: flex; justify-content: space-between;">                        <h1>Name: {{currentSwipeCard.user.firstName}} {{currentSwipeCard.user.lastName}}</h1><a data-toggle="collapse"                            data-target="#swipeBio" (click)="hideImage(false)"><img src="assets/icons/caret-bottom.png"                                alt="" onerror="this.onerror=null;this.src=\'caret-bottom.png\';"></a>                    </div>                    <h1>Distance: </h1>                    <h1>Contact: </h1>                    <h1>car info: </h1>                    <h1>ride info: </h1>                </div>            </div>        </div>    </div>    <div *ngIf="swipecards.length == 0" class="text-center">        <h1>There\'s nobody here.</h1>    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="container parent">    <img [@pop]="animThumbState" (@pop.done)="thumbAnimDone()" class="thumb" [src]="thumbImg" alt="">    <div *ngIf="swipecards.length > 0">        <div class="swipe-box" (swipeleft)="swipe($event.type, $event)" (swiperight)="swipe($event.type, $event)">            <div #swipeMain>                <!-- Displays current card -->                <div class="text-center cardPic" style="margin: 30px 0px 20px 0px">                    <!-- <img class="revLogo" src="assets/img/revature_logo_250.png" alt=""> -->                    <img [@slide]="animState" (@slide.done)="swiped()" class="cardImg" [src]="currentSwipeCard.user.photoUrl" [alt]="currentSwipeCard.user.firstName">                </div>                <div>                    <div style="display: flex; justify-content: space-between;">                        <h1>{{currentSwipeCard.user.firstName}}</h1> <a data-toggle="collapse" data-target="#swipeBio" (click)="hideImage(true)"><img                                src="assets/icons/caret-top.png" alt="" onerror="this.onerror=null;this.src=\'caret-top.png\';"></a>                    </div>                    <h1> duration / distance</h1>                    <h1> contacts</h1>                    <a><h1>link to bio</h1></a>                </div>                <br>                <br>                <br>                <br>                <br>            </div>            <div class="collapse" id="swipeBio">                <div class="container-fluid">                    <div style="display: flex; justify-content: space-between;">                        <h1>Name: {{currentSwipeCard.user.firstName}} {{currentSwipeCard.user.lastName}}</h1><a data-toggle="collapse"                            data-target="#swipeBio" (click)="hideImage(false)"><img src="assets/icons/caret-bottom.png"                                alt="" onerror="this.onerror=null;this.src=\'caret-bottom.png\';"></a>                    </div>                    <h6>Address: {{currentSwipeCard.user.address}}</h6>                    <h6>Contact: {{currentSwipeCard.user.email}}</h6>                    <ng-container *ngIf="currentSwipeCard.user.role==\'DRIVER\'" >                        <h6 *ngFor="let car of currentSwipeCard.user.cars">Car info: {{car}}</h6>                    </ng-container>                                        <h6></h6>                    <h6>ride info: </h6>                </div>            </div>        </div>    </div>    <div *ngIf="swipecards.length == 0" class="text-center">        <h1>There\'s nobody here.</h1>    </div></div></div>'
     var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'UsercardComponent'};
