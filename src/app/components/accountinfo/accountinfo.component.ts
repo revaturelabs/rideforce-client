@@ -58,7 +58,7 @@ export class AccountinfoComponent implements OnInit {
    */
   userObject: User;
   /**
-   * Represents whether the user is a rider, driver, trainor, or admin
+   * Represents whether the user is a rider, driver, trainer, or admin
    */
   roleObject: Role;
   /**
@@ -265,7 +265,7 @@ export class AccountinfoComponent implements OnInit {
   /**
    * Uploads image to the storage
    */
-  updload() {
+  upload() {
     const file = this.selectedFiles.item(0);
     this.imageSrc = this.uploadService.uploadfile(file);
   }
@@ -299,13 +299,14 @@ export class AccountinfoComponent implements OnInit {
   /** Creats a user from all the required fields */
   createUserObject() {
 
-    this.updload();
+    //this.upload();
 
     this.userObject = {
-      id: 0,
+      id: 1,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.username,
+      password: this.password,
       photoUrl: this.imageSrc,
       address: this.address2,
       office: '/offices/' + this.officeObject.id,
@@ -314,14 +315,21 @@ export class AccountinfoComponent implements OnInit {
       cars: [],
       active: true,
       contactInfo: [],
-      role: this.roleObject
-
+      role: this.roleObject,
+      bio: this.bio
     };
-
+    console.log(this.password);
     // get id from user after post and associate with a car object
     // this.carObject.id = owner from post
-    this.userService.createUser(this.userObject, this.password, this.token)
-      .subscribe(() => {
+    this.userService.createUser(this.userObject, this.password, this.token.substring(28))
+      .then((x) => {
+        sessionStorage.setItem("id", x.id.toString());
+        sessionStorage.setItem("firstName", x.firstName);
+        sessionStorage.setItem("lastName", x.lastName);
+        sessionStorage.setItem("userEmail", x.email);
+        sessionStorage.setItem("userPassword", x.password);
+        sessionStorage.setItem("address", x.address);
+        sessionStorage.setItem("role", x.role);
         this.router.navigate(['/map']);
       });
 
