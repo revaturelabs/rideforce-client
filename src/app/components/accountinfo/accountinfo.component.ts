@@ -306,6 +306,7 @@ export class AccountinfoComponent implements OnInit {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.username,
+      password: this.password,
       photoUrl: this.imageSrc,
       address: this.address2,
       office: '/offices/' + this.officeObject.id,
@@ -314,13 +315,21 @@ export class AccountinfoComponent implements OnInit {
       cars: [],
       active: true,
       contactInfo: [],
-      role: this.roleObject
-
+      role: this.roleObject,
+      bio: this.bio
     };
+    console.log(this.password);
     // get id from user after post and associate with a car object
     // this.carObject.id = owner from post
-    this.userService.createUser(this.userObject, this.password, this.token)
-      .then(() => {
+    this.userService.createUser(this.userObject, this.password, this.token.substring(28))
+      .then((x) => {
+        sessionStorage.setItem("id", x.id.toString());
+        sessionStorage.setItem("firstName", x.firstName);
+        sessionStorage.setItem("lastName", x.lastName);
+        sessionStorage.setItem("userEmail", x.email);
+        sessionStorage.setItem("userPassword", x.password);
+        sessionStorage.setItem("address", x.address);
+        sessionStorage.setItem("role", x.role);
         this.router.navigate(['/map']);
       });
 

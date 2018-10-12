@@ -45,6 +45,10 @@ input, textarea[type="text"]
     display: inline;
 }
 
+.btnEdit:hover {
+    background-color: #d14500;
+}
+
 .btnSubmit{
     background-color: #72A4C2;
     color: white;
