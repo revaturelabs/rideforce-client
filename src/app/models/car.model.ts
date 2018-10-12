@@ -3,7 +3,7 @@ import { Link } from './link.model';
 
 /** Represents the Car a User (cheifly a Driver) owns */
 export class Car {
-    /**
+  /**
    * The ID of the car in the database.
    */
   id: number;

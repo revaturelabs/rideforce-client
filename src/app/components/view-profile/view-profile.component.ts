@@ -40,6 +40,8 @@ export class ViewProfileComponent implements OnInit {
   officeObjectArray: Office[] = [];
   /** Current office being examined */
   officeObject: Office;
+  /** User's active state */
+  active: string;
 
    /**
    * Sets up the form with data about the durrent user
@@ -86,6 +88,7 @@ export class ViewProfileComponent implements OnInit {
     sessionStorage.setItem('address', this.address2);
     sessionStorage.setItem('batchEnd', this.batchEnd);
     sessionStorage.setItem('role', this.currentRole);
+    if(document.getElementById("activeState"))
     this.userService.update().subscribe();
     window.location.reload(true);
   }
@@ -93,6 +96,7 @@ export class ViewProfileComponent implements OnInit {
   /**
    * Enables limited ability to modify the User's role in the system
    */
+
   switchRole() {
     if (sessionStorage.getItem('role') === 'DRIVER') {
       sessionStorage.setItem('role', 'RIDER');

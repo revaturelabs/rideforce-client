@@ -50,6 +50,7 @@ export class LikesComponent implements OnInit {
                             const id: number = +userLinks[i].replace(/\D/g, '');
                             this.userService.getUserById(id).subscribe(
                                 data3 => {
+                                    console.log(data3);
                                     if (!data3.photoUrl || data3.photoUrl === 'null') {
                                         data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
                                     }

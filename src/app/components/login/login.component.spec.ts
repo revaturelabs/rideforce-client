@@ -1,15 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppModule } from '../../app.module'; 
+import { AppModule } from '../../app.module';
 import { By } from '@angular/platform-browser';
 
 import { LoginComponent } from '../login/login.component';
 
 import {APP_BASE_HREF} from '@angular/common';
 
-//*********************************************************//
-//Tests currently work 90% of the time                     //
+// *********************************************************//
+// Tests currently work 90% of the time                     //
 //                                                        //
-//********************************************************/
+// ********************************************************/
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -21,7 +21,7 @@ describe('LoginComponent', () => {
         imports: [
           AppModule
           ],
-        providers:[
+        providers: [
           {provide: APP_BASE_HREF, useValue : '/' }
         ]
     })
