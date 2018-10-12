@@ -105,5 +105,18 @@
 
   .card {
     height: 400px;
-}
+  }
 
+  #dropdownSettingsButton2 {
+    text-align: center;
+    width: 10%;
+  }
+
+  #dropdownSettingsButton2:hover {
+    background-color: #e5e5e5;
+    -webkit-transition: background-color 1s;
+    -moz-transition:    background-color 1s;
+    -ms-transition:     background-color 1s;
+    -o-transition:      background-color 1s;
+    transition:         background-color 1s;
+  }

@@ -52,10 +52,10 @@ export class UserControllerService {
    * @returns {Observable<User>} - the user entered into the system
    */
   // CREATE
-  createUser(user: User, password: string, registrationKey: string): Observable<User> {
+  createUser(user: User, password: string, registrationKey: string): Promise<User> {
     return this.http.post<User>(environment.apiUrl + '/users',
       { user, password, registrationKey }
-    );
+    ).toPromise();
   }
 
   /**

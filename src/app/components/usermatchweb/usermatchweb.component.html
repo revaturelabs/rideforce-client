@@ -1,4 +1,16 @@
 <div class="container" style="padding-top:40px">
+  <div class="dropdown">
+    <p class="" id="dropdownSettingsButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Filter <i class="fas fa-filter"></i>
+    </p>
+    <img src="" alt="" id="filter">
+    <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">
+      <input style="margin-left: 20px" type="checkbox" checked/> Batch End Date <br>
+      <input style="margin-left: 20px" type="checkbox" checked/> Day Start Time <br>
+      <input style="margin-left: 20px" type="checkbox" checked/> Distance <br>
+      <button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>
+    </div>
+  </div>
   <h2>Potential Matches </h2>
   <div class="grid-container">
     <div *ngFor="let user of users; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">

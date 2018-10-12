@@ -104,4 +104,8 @@ export class NavbarComponent implements OnInit {
       location.reload(true);
     }
   }
+
+  filter() {
+    
+  }
 }

@@ -46,10 +46,8 @@ export class AuthService {
         map<string, void>(token => {
           console.log('Saving token');
           this.tokenStorage.saveToken(token);
-          this.userService.getCurrentUser().subscribe();
-          return null;
         })
-      );
+      ).toPromise();
   }
 
   /**
@@ -59,7 +57,7 @@ export class AuthService {
    * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
    */
   authenticate(email: string, password: string, usePromise?: boolean) {
-    this.authenticator(email, password).toPromise().then(
+    this.authenticator(email, password).then(
       (x) => {
         console.log('Got user from Authenticate (Promise mode)');
         this.userService.getUserByEmail(email).then((x) => {
