@@ -62,6 +62,13 @@
             <code>src/app/services/auth.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Allows Users to authenticate themselves with the server</p>
+
+            </p>
 
 
             <section>
@@ -109,12 +116,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/services/auth.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/services/auth.service.ts:18</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up the Authentication service with the required dependencies</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -139,7 +148,9 @@
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Our http client dependency for making http requests</p>
+                                                                <code><ul>
+<li>Our http client dependency for making http requests</li>
+</ul>
 </code>
                                                         </td>
                                                 </tr>
@@ -155,7 +166,9 @@
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Service used to grab any user information from the API </p>
+                                                                <code><ul>
+<li>Service used to grab any user information from the API</li>
+</ul>
 </code>
                                                         </td>
                                                 </tr>
@@ -171,7 +184,9 @@
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Used to save our generated token locally </p>
+                                                                <code><ul>
+<li>Used to save our generated token locally</li>
+</ul>
 </code>
                                                         </td>
                                                 </tr>
@@ -187,6 +202,10 @@
                                                     </td>
                                                     
                                                         <td>
+                                                                <code><ul>
+<li>enables navigation between components (does not appear to be used)</li>
+</ul>
+</code>
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -225,13 +244,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/services/auth.service.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/services/auth.service.ts:61</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Attempts to log the user in and if successful, sets the sessionStorage</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -241,6 +262,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -255,6 +277,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the user identifier</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>password</td>
@@ -267,6 +295,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the password of the account</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>usePromise</td>
@@ -279,6 +313,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>(TESTING) whether to use the promise version or stick with observable</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -318,13 +358,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/services/auth.service.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/services/auth.service.ts:40</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Attempts to log the user in</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -366,7 +408,7 @@
                                                     
 
                                                         <td>
-                                                                <code><p>The password to be sent from the view to the API  </p>
+                                                                <code><p>The password to be sent from the view to the API</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -380,7 +422,10 @@
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>User mapped to token storage now</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -408,13 +453,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/services/auth.service.ts:88</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/services/auth.service.ts:103</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Logs the user out of the service</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -442,16 +489,20 @@ import { UserControllerService } from &#x27;./api/user-controller.service&#x27;;
 import { TokenStorage } from &#x27;./../utils/token.storage&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
+/**
+ * Allows Users to authenticate themselves with the server
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class AuthService {
 
   /**
-   * 
-   * @param http Our http client dependency for making http requests
-   * @param userService Service used to grab any user information from the API 
-   * @param tokenStorage Used to save our generated token locally 
+   * Sets up the Authentication service with the required dependencies
+   * @param {HttpClient} http - Our http client dependency for making http requests
+   * @param {UserControllerService} userService - Service used to grab any user information from the API
+   * @param {TokenStorage} tokenStorage - Used to save our generated token locally
+   * @param {Router} route - enables navigation between components (does not appear to be used)
    */
   constructor(
     private http: HttpClient,
@@ -459,10 +510,12 @@ export class AuthService {
     private tokenStorage: TokenStorage,
     private route: Router
   ) { }
+
   /**
-   * 
+   * Attempts to log the user in
    * @param email The email address to be sent from the view to the API
-   * @param password The password to be sent from the view to the API  
+   * @param password The password to be sent from the view to the API
+   * @returns {null} - User mapped to token storage now
    */
   authenticator(email: string, password: string) {
     const credentials &#x3D; { email, password };
@@ -479,6 +532,12 @@ export class AuthService {
       );
   }
 
+  /**
+   * Attempts to log the user in and if successful, sets the sessionStorage
+   * @param email - the user identifier
+   * @param password - the password of the account
+   * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
+   */
   authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).toPromise().then(
       (x) &#x3D;&gt; {
@@ -507,7 +566,7 @@ export class AuthService {
             messageLogin.style.display &#x3D; &#x27;block&#x27;;
             console.log(e.message);
             if (e.message &#x3D;&#x3D; &#x27;GENERAL&#x27;) {
-              messageLogin.innerHTML &#x3D; &quot;Server unavailable&quot;;
+              messageLogin.innerHTML &#x3D; &#x27;Server unavailable&#x27;;
             } else {
               messageLogin.innerHTML &#x3D; e.message;
             }
@@ -518,11 +577,15 @@ export class AuthService {
     );
   }
 
+  /**
+   * Logs the user out of the service
+   */
   logout() {
     sessionStorage.clear();
   }
 
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

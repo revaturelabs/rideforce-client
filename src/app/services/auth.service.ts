@@ -9,16 +9,20 @@ import { UserControllerService } from './api/user-controller.service';
 import { TokenStorage } from './../utils/token.storage';
 import { Router } from '@angular/router';
 
+/**
+ * Allows Users to authenticate themselves with the server
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   /**
-   * 
-   * @param http Our http client dependency for making http requests
-   * @param userService Service used to grab any user information from the API 
-   * @param tokenStorage Used to save our generated token locally 
+   * Sets up the Authentication service with the required dependencies
+   * @param {HttpClient} http - Our http client dependency for making http requests
+   * @param {UserControllerService} userService - Service used to grab any user information from the API
+   * @param {TokenStorage} tokenStorage - Used to save our generated token locally
+   * @param {Router} route - enables navigation between components (does not appear to be used)
    */
   constructor(
     private http: HttpClient,
@@ -26,10 +30,12 @@ export class AuthService {
     private tokenStorage: TokenStorage,
     private route: Router
   ) { }
+
   /**
-   * 
+   * Attempts to log the user in
    * @param email The email address to be sent from the view to the API
-   * @param password The password to be sent from the view to the API  
+   * @param password The password to be sent from the view to the API
+   * @returns {null} - User mapped to token storage now
    */
   authenticator(email: string, password: string) {
     const credentials = { email, password };
@@ -46,6 +52,12 @@ export class AuthService {
       );
   }
 
+  /**
+   * Attempts to log the user in and if successful, sets the sessionStorage
+   * @param email - the user identifier
+   * @param password - the password of the account
+   * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
+   */
   authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).toPromise().then(
       (x) => {
@@ -74,7 +86,7 @@ export class AuthService {
             messageLogin.style.display = 'block';
             console.log(e.message);
             if (e.message == 'GENERAL') {
-              messageLogin.innerHTML = "Server unavailable";
+              messageLogin.innerHTML = 'Server unavailable';
             } else {
               messageLogin.innerHTML = e.message;
             }
@@ -85,6 +97,9 @@ export class AuthService {
     );
   }
 
+  /**
+   * Logs the user out of the service
+   */
   logout() {
     sessionStorage.clear();
   }
