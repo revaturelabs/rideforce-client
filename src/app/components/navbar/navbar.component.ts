@@ -64,21 +64,6 @@ export class NavbarComponent implements OnInit {
       this.session = false;
     }
   }
-<<<<<<< HEAD
-  
-  // async logout() {
-  //   this.authService.logout();
-  //   if(this.route.url === "/landing") {
-  //     location.reload(true);
-  //   } else {
-  //     await this.route.navigate(["/landing"]);
-  //     location.reload(true);
-  //   }
-  
-  logout() {
-    this.authService.logout();
-    this.route.navigate(['/landing']);
-=======
   /**
    * Sets up the current user
    */
@@ -118,7 +103,6 @@ export class NavbarComponent implements OnInit {
       await this.route.navigate(["/landing"]);
       location.reload(true);
     }
->>>>>>> dev
   }
 
   filter() {
