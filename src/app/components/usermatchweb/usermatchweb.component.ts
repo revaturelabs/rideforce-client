@@ -5,10 +5,15 @@ import { Link } from '../../models/link.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { Filter } from '../../models/filter';
 
+/** Represents the User selection item in the html page */
 interface UserCard {
+  /** The User being represented */
   user: User;
+  /** The status of the given user */
   choose: string;
+  /** Link to profile picture of the user */
   face: String;
 }
 
@@ -140,6 +145,12 @@ export class UsermatchwebComponent implements OnInit {
       card.face = 'back';
     } else if (card.face === 'back-front') {
       card.face = 'front';
+    }
+  }
+
+  filter() {
+    for(var i = 0; i < document.getElementsByTagName("input").length; i++) {
+
     }
   }
 
