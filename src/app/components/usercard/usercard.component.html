@@ -14,9 +14,13 @@
                         <h1>{{currentSwipeCard.user.firstName}}</h1> <a data-toggle="collapse" data-target="#swipeBio" (click)="hideImage(true)"><img
                                 src="assets/icons/caret-top.png" alt="" onerror="this.onerror=null;this.src='caret-top.png';"></a>
                     </div>
-                    <h1> duration / distance</h1>
-                    <h1> contacts</h1>
-                    <a><h1>link to bio</h1></a>
+                    <h6>Address: {{currentSwipeCard.user.address}}</h6>
+                    <h6>Email: {{currentSwipeCard.user.email}}</h6>
+                    <!-- {{currentSwipeCard.user.bio}} when bio implemented in model
+                    I think the previous batch wanted to be able to click the bio link to view it.
+                    *I* think we should just have the bio in the card. But what do I know.
+                    -Martin -->
+                    <a><h1>see comment</h1></a>
                 </div>
                 <br>
                 <br>
@@ -31,10 +35,15 @@
                             data-target="#swipeBio" (click)="hideImage(false)"><img src="assets/icons/caret-bottom.png"
                                 alt="" onerror="this.onerror=null;this.src='caret-bottom.png';"></a>
                     </div>
-                    <h1>Distance: </h1>
-                    <h1>Contact: </h1>
-                    <h1>car info: </h1>
-                    <h1>ride info: </h1>
+                    <h6 *ngFor="let contact of currentSwipeCard.user.contacts">{{contact.type}}: {{contact.info}}</h6>
+                    <ng-container *ngIf="currentSwipeCard.user.role=='DRIVER'" >
+                        <div *ngFor="let car of currentSwipeCard.user.cars">
+                            <h6>Car info:</h6>
+                            <p>{{car.make}}, {{car.model}}, {{car.year}}</p>
+                        </div>
+                    </ng-container>
+                    <h6></h6>
+                    <h6 *ngIf="currentSwipeCard.user.role=='RIDER'">RIDER</h6>
                 </div>
             </div>
         </div>
