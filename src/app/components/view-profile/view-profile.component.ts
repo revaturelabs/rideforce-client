@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
-//import { DateFormatPipe } from '../../pipes/date-format.pipe';
-import { Role } from '../../models/role.model';
 import { Office } from '../../models/office.model';
 @Component({
   selector: 'app-view-profile',
@@ -11,32 +9,24 @@ import { Office } from '../../models/office.model';
 })
 export class ViewProfileComponent implements OnInit {
   currentUser: User;
-  constructor(private userService:UserControllerService) { }
-  firstName : string;
-  lastName : string;
-  username : string;
-  password : string;
-  confirmPassword : string;
-  address2 : string;
-  batchEnd : any;
-  canEdit : boolean = false;
+  constructor(private userService: UserControllerService) { }
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+  address2: string;
+  batchEnd: any;
+  canEdit: boolean = false;
   officeObjectArray: Office[] = [];
   officeObject: Office;
-  
+
   ngOnInit() {
-    // this.userService.getCurrentUserObservable().subscribe(
-    //   data => {
-        // this.currentUser = data;
-        // console.log(this.currentUser);
-      this.firstName = sessionStorage.getItem("firstName");
-      this.lastName = sessionStorage.getItem("lastName");
-      this.username = sessionStorage.getItem("userEmail");
-      // console.log(this.userService.getOfficeByLink(this.currentUser.office).subscribe().toString());
-      // document.getElementById("currentOffice").textContent = this.userService.getOfficeByLink(this.currentUser.office).toString();
-      this.address2 = sessionStorage.getItem("address");
-      this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
-    //   }
-    // );
+    this.firstName = sessionStorage.getItem("firstName");
+    this.lastName = sessionStorage.getItem("lastName");
+    this.username = sessionStorage.getItem("userEmail");
+    this.address2 = sessionStorage.getItem("address");
+    this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
     this.getOffices();
     this.getUsers();
     this.getRole();
@@ -50,6 +40,7 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById("confirmPassword").removeAttribute("disabled");
     document.getElementById("address").removeAttribute("disabled");
     document.getElementById("batchEnd").removeAttribute("disabled");
+    document.getElementById("dayStart").removeAttribute("disabled");
     document.getElementById("batchEnd").setAttribute("type", "date");
     document.getElementById("currentOffice").style.display = "none";
     document.getElementById("selectOffice").style.display = "inline";
@@ -67,15 +58,14 @@ export class ViewProfileComponent implements OnInit {
     sessionStorage.setItem("batchEnd", this.batchEnd);
     sessionStorage.setItem("role", this.currentRole);
     this.userService.update().subscribe();
-    //this.userService.updatePassword(this.currentUser.id, "p4ssw0rd", this.password).subscribe();
     window.location.reload(true);
   }
 
   switchRole() {
-    if(sessionStorage.getItem("role") === "DRIVER") {
+    if (sessionStorage.getItem("role") === "DRIVER") {
       sessionStorage.setItem("role", "RIDER");
       this.getRole();
-    } else if(sessionStorage.getItem("role") === "RIDER") {
+    } else if (sessionStorage.getItem("role") === "RIDER") {
       sessionStorage.setItem("role", "DRIVER");
       this.getRole();
     } else {
@@ -89,23 +79,14 @@ export class ViewProfileComponent implements OnInit {
     });
   }
 
-  currentRole : string;
+  currentRole: string;
   getRole() {
     this.currentRole = sessionStorage.getItem("role");
   }
 
   users: any[];
-  getUsers(){
+  getUsers() {
     let data;
-    // this.postService.getPosts().then((allPosts) => {posts = allPosts; console.log(posts.results[0].id)});
-    this.userService.getAllUsers().subscribe((x) => {data = x; this.users = data});
+    this.userService.getAllUsers().subscribe((x) => { data = x; this.users = data });
   }
-
-  // passCheck() {
-  //   if(this.password !== this.confirmPassword) {
-  //     document.getElementById("passwordError").style.display = "inline";
-  //   } else { 
-  //     sessionStorage.setItem("userPassword", this.password);
-  //   }
-  // }
 }

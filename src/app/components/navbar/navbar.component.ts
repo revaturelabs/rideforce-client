@@ -45,32 +45,21 @@ export class NavbarComponent implements OnInit {
     }
   }
   
-  // getCurrentUser(){
-  //   this.userService.getCurrentUser().subscribe(
-  //     data => {
-  //       this.currentUser = data;
-  //     }
-  //   )
-  // }
-  // checkIfLoggedIn(){
-  //   if(this.userService.isLoggedIn){
-  //     this.isLoggedIn = true;
-  //   } 
-  //   else if(!this.userService.isLoggedIn) {
-  //     this.isLoggedIn = false;
+  // async logout() {
+  //   this.authService.logout();
+  //   if(this.route.url === "/landing") {
+  //     location.reload(true);
+  //   } else {
+  //     await this.route.navigate(["/landing"]);
+  //     location.reload(true);
   //   }
-  // }
-
-  // getCurrentUser(){
-  //   this.userService.getCurrentUser().subscribe(
-  //     data => {
-  //       this.currentUser = data;
-  //     }
-  //   )
-  // }
-
+  
   logout() {
     this.authService.logout();
     this.route.navigate(['/landing']);
+  }
+
+  filter() {
+    
   }
 }

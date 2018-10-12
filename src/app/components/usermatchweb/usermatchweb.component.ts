@@ -5,6 +5,7 @@ import { Link } from '../../models/link.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { Filter } from '../../models/filter';
 
 interface UserCard {
   user: User;
@@ -116,6 +117,12 @@ export class UsermatchwebComponent implements OnInit {
       card.face = 'back';
     } else if (card.face === 'back-front') {
       card.face = 'front';
+    }
+  }
+
+  filter() {
+    for(var i = 0; i < document.getElementsByTagName("input").length; i++) {
+
     }
   }
 

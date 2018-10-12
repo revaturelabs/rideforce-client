@@ -40,14 +40,12 @@ export class AuthService {
         map<string, void>(token => {
           console.log('Saving token');
           this.tokenStorage.saveToken(token);
-          this.userService.getCurrentUser().subscribe();
-          return null;
         })
-      );
+      ).toPromise();
   }
 
   authenticate(email: string, password: string, usePromise?: boolean) {
-    this.authenticator(email, password).toPromise().then(
+    this.authenticator(email, password).then(
       (x) => {
         console.log('Got user from Authenticate (Promise mode)');
         this.userService.getUserByEmail(email).then((x) => {

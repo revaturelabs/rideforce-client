@@ -38,10 +38,10 @@ export class UserControllerService {
    * @param password the new user's password
    */
   // CREATE
-  createUser(user: User, password: string, registrationKey: string): Observable<User> {
+  createUser(user: User, password: string, registrationKey: string): Promise<User> {
     return this.http.post<User>(environment.apiUrl + '/users',
       { user, password, registrationKey }
-    );
+    ).toPromise();
   }
 
   /**Gets an array of users via the given endpoint */

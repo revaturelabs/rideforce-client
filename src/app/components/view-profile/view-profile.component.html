@@ -15,9 +15,6 @@
                   <span class="input-group-text" id="basic-addon1">First Name</span>
                 </div>
                 <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" id="firstName" required disabled>
-                  <!-- <div *ngIf="canEdit">
-                    <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" required>
-                  </div> -->
               </div>
               <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
                 <div *ngIf="firstname.errors.required">
@@ -83,47 +80,23 @@
                   disabled>
               </div>
               <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-                <!-- <div *ngIf="pConfirm.errors.required">
-                  Password Confirm cannot be empty
-                </div>
-                <div *ngIf="pConfirm.errors.maxLength">
-                  Password Confirm cannot be more than 15 characters
-                </div> -->
                 <div *ngIf="password != passwordConfirm">
                   Passwords do not match.
                 </div>
               </div>
 
-              <!-- <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Key</span>
-                </div>
-                <input type="text" class="form-control" [(ngModel)]="token" #tInput="ngModel" required>
-              </div>
-              <div *ngIf="tInput.invalid && (tInput.dirty || tInput.touched)" class="alert alert-danger">
-                <div *ngIf="tInput.errors.required">
-                  You need a Key
-                </div>
-                <div *ngIf="tInput.errors.maxLength">
-                  Password Confirm cannot be more than 15 characters
-                </div>
-              </div> -->
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Office Address</span>
                 </div>
                 <div class="input-group-text" style="padding-right: 137px; display: inline" id="currentOffice">
-                  <!-- <input type="text" class="form-control" [(ngModel)]="officeObject" #oObject="ngModel" disabled> -->
                 </div>
                 <div class="input-group-text" style="padding-right: 100px; display: none" id="selectOffice">
                   <select [(ngModel)]="officeObject">
                     <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
                   </select>
                 </div>
-                <!-- <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-                    appPlacesAutocomplete (addressSelect)="autocomplete1($event)" [(ngModel)]="address1" placeholder="Type to search.."> -->
-                <!-- <input type="text" class="form-control" [(ngModel)]="address.address" required> -->
               </div>
 
 
@@ -134,7 +107,6 @@
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
                   appPlacesAutocomplete (addressSelect)="autocomplete2($event)" [(ngModel)]="address2" #address="ngModel"
                   required id="address" placeholder="Type to search.." disabled>
-                <!-- <input type="text" class="form-control" [(ngModel)]="address.address2" required> -->
               </div>
               <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
                 <div *ngIf="address.errors.required">
@@ -148,11 +120,21 @@
                 </div>
                 <input type="text" id="batchEnd" class="form-control" [(ngModel)]="batchEnd" disabled>
               </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Day Start</span>
+                </div>
+                <input type="time" id="dayStart" class="form-control" [(ngModel)]="dayStart" disabled>
+              </div>
               <div *ngIf="currentRole === 'DRIVER'">
                 <button class="btn" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
               </div>
               <div *ngIf="currentRole === 'RIDER'">
                 <button class="btn" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
+              </div>
+              <br>
+              <div>
+                <input type="checkbox" data-toggle="toggle" data-onstyle="info" data-on="Active <i class='fas fa-bell'></i>" data-offstyle="warning" data-height="100%" data-off="Inactive <i class='fas fa-bell-slash'></i>">
               </div>
               <br>
               <div>
@@ -268,47 +250,6 @@
           </ng-template>
         </ngb-tab>
       </div>
-      <!-- <div label="CONFIRMATION div">
-        <ngb-tab title="4" id="4">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-              <br>
-              <h2>Review and submit:</h2>
-              <br>
-              <h3><u>User Information</u></h3>
-              <span>First name: {{firstName}}</span> <br>
-              <span>Last Name: {{lastName}}</span> <br>
-              <span>Email: {{username}}</span> <br>
-              <span class="dyn-height" *ngIf="officeObject"> Office Address: <div class="col-10">{{officeObject}}</div><br></span>
-              <span class="dyn-height" *ngIf="address2"> Apartment Address: <div class="col-10">{{address2}}</div></span>
-              <span>Batch: {{batchEnd}}</span> <br>
-              <br>
-              <div *ngIf="bio || contactInfoArray.length > 0">
-                <h3><u>Biography</u></h3>
-                <span class="dyn-height">About You: <div class="col-10">{{bio}}</div></span>
-                <span>Contact Info:</span>
-                <div style="margin-left: 20px">
-                  <span *ngFor="let item of contactInfoArray"> {{item.type}}: {{item.info}} <br> </span>
-                </div>
-              </div>
-              <br>
-              <div *ngIf="carMake && carModel && carYear">
-                <h3><u>Car Info</u></h3>
-                <span>Make: {{carMake}}</span> <br>
-                <span>Model: {{carModel}}</span> <br>
-                <span>Year: {{carYear}}</span> <br>
-              </div>
-              <br>
-              <div>
-
-                <span class="padRight"> <button class="btn btnNextPrevious" (click)="reviewPrevious()">Previous</button></span>
-
-                <span> <button class="btn btnNextPrevious" (click)="createUserObject()" >Finish</button></span>
-              </div>
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </div> -->
       <div *ngIf="currentRole === 'ADMIN'" label="CONFIRMATION div">
         <ngb-tab title="View Users" id="4">
           <ng-template ngbTabContent>
