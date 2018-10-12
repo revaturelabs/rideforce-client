@@ -152,6 +152,9 @@
                                 <a href="#endFlipCard">endFlipCard</a>
                             </li>
                             <li>
+                                <a href="#filter">filter</a>
+                            </li>
+                            <li>
                                 <a href="#flipCard">flipCard</a>
                             </li>
                             <li>
@@ -183,7 +186,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:40</a></div>
                             </td>
                         </tr>
 
@@ -279,7 +282,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:142</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:143</a></div>
                             </td>
                         </tr>
 
@@ -339,6 +342,44 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="filter"></a>
+                        <span class="name">
+                            <b>
+                            filter
+                            </b>
+                            <a href="#filter"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>filter()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:151</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="flipCard"></a>
                         <span class="name">
                             <b>
@@ -357,7 +398,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:130</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:131</a></div>
                             </td>
                         </tr>
 
@@ -435,7 +476,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:91</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:92</a></div>
                             </td>
                         </tr>
 
@@ -531,7 +572,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -583,7 +624,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:50</a></div>
                             </td>
                         </tr>
 
@@ -628,7 +669,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:40</a></div>
                             </td>
                         </tr>
 
@@ -648,6 +689,7 @@ import { Link } from &#x27;../../models/link.model&#x27;;
 import { animate, state, style, transition, trigger } from &#x27;@angular/animations&#x27;;
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
+import { Filter } from &#x27;../../models/filter&#x27;;
 
 /** Represents the User selection item in the html page */
 interface UserCard {
@@ -790,12 +832,30 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
+  filter() {
+    for(var i &#x3D; 0; i &lt; document.getElementsByTagName(&quot;input&quot;).length; i++) {
+
+    }
+  }
+
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot; style&#x3D;&quot;padding-top:40px&quot;&gt;
+  &lt;div class&#x3D;&quot;dropdown&quot;&gt;
+    &lt;p class&#x3D;&quot;&quot; id&#x3D;&quot;dropdownSettingsButton2&quot; data-toggle&#x3D;&quot;dropdown&quot; aria-haspopup&#x3D;&quot;true&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
+      Filter &lt;i class&#x3D;&quot;fas fa-filter&quot;&gt;&lt;/i&gt;
+    &lt;/p&gt;
+    &lt;img src&#x3D;&quot;&quot; alt&#x3D;&quot;&quot; id&#x3D;&quot;filter&quot;&gt;
+    &lt;div class&#x3D;&quot;dropdown-menu dropdown-menu-right&quot; id&#x3D;&quot;ddMenu2&quot; aria-labelledby&#x3D;&quot;dropdownMenuButton&quot;&gt;
+      &lt;input style&#x3D;&quot;margin-left: 20px&quot; type&#x3D;&quot;checkbox&quot; checked/&gt; Batch End Date &lt;br&gt;
+      &lt;input style&#x3D;&quot;margin-left: 20px&quot; type&#x3D;&quot;checkbox&quot; checked/&gt; Day Start Time &lt;br&gt;
+      &lt;input style&#x3D;&quot;margin-left: 20px&quot; type&#x3D;&quot;checkbox&quot; checked/&gt; Distance &lt;br&gt;
+      &lt;button class&#x3D;&quot;btn&quot; style&#x3D;&quot;margin-left: 20px&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;filter()&quot;&gt;Submit&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
   &lt;h2&gt;Potential Matches &lt;/h2&gt;
   &lt;div class&#x3D;&quot;grid-container&quot;&gt;
     &lt;div *ngFor&#x3D;&quot;let user of users; let i &#x3D; index&quot; style&#x3D;&quot;background-color:rgba(255, 255, 255, 0.918)&quot;&gt;
@@ -860,7 +920,7 @@ export class UsermatchwebComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container" style="padding-top:40px">  <h2>Potential Matches </h2>  <div class="grid-container">    <div *ngFor="let user of users; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">      <div class="enlarge">        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item"          [ngStyle]="{ \'background-color\': user.choose == \'none\' ?      \'white\' : user.choose == \'liked\' ? \'#92badd\' : \'rgba(128, 128, 128, 0.514)\'}">          <div *ngIf="user.face==\'front\' || user.face==\'front-back\'">            <img class="card-img-top cardimg" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">            <div class="card-body">              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>              <p class="card-text">{{user.user.address}}</p>              <div style="display: flex; justify-content: space-between;">                <!-- <button type="button" *ngIf="user.choose!=\'disliked\'" class="btn-danger" style="width:40px" (click)="like(i, 0)">X</button> -->                <button *ngIf="user.choose!=\'disliked\'" class="dislike" (click)="like(i, 0)"></button>                <button *ngIf="user.choose==\'disliked\'" class="trashButton" (click)="like(i, 2)"></button>                <button *ngIf="user.choose!=\'none\'" class="undoButton" (click)="like(i, 3)"></button>                <!-- <button type="button" class="btn-success" style="width:40px" (click)="like(i, 1)">O</button> -->                <button type="button" class="like" (click)="like(i, 1)"></button>               </div>            </div>          </div>          <div *ngIf="user.face==\'back\' || user.face==\'back-front\'" (click)="flipCard(user)">            <div class="card-body" style="transform: rotateY(180deg)">              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>              <p class="card-text">{{user.user.address}}</p>              <h5 class="card-text">{{user.user.email}}</h5>              <h5 class="card-text">{{user.user.batchEnd}}</h5>              <h5 class="card-text">User bio blablablabla</h5>            </div>          </div>        </div>      </div>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="container" style="padding-top:40px">  <div class="dropdown">    <p class="" id="dropdownSettingsButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">      Filter <i class="fas fa-filter"></i>    </p>    <img src="" alt="" id="filter">    <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">      <input style="margin-left: 20px" type="checkbox" checked/> Batch End Date <br>      <input style="margin-left: 20px" type="checkbox" checked/> Day Start Time <br>      <input style="margin-left: 20px" type="checkbox" checked/> Distance <br>      <button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>    </div>  </div>  <h2>Potential Matches </h2>  <div class="grid-container">    <div *ngFor="let user of users; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">      <div class="enlarge">        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item"          [ngStyle]="{ \'background-color\': user.choose == \'none\' ?      \'white\' : user.choose == \'liked\' ? \'#92badd\' : \'rgba(128, 128, 128, 0.514)\'}">          <div *ngIf="user.face==\'front\' || user.face==\'front-back\'">            <img class="card-img-top cardimg" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">            <div class="card-body">              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>              <p class="card-text">{{user.user.address}}</p>              <div style="display: flex; justify-content: space-between;">                <!-- <button type="button" *ngIf="user.choose!=\'disliked\'" class="btn-danger" style="width:40px" (click)="like(i, 0)">X</button> -->                <button *ngIf="user.choose!=\'disliked\'" class="dislike" (click)="like(i, 0)"></button>                <button *ngIf="user.choose==\'disliked\'" class="trashButton" (click)="like(i, 2)"></button>                <button *ngIf="user.choose!=\'none\'" class="undoButton" (click)="like(i, 3)"></button>                <!-- <button type="button" class="btn-success" style="width:40px" (click)="like(i, 1)">O</button> -->                <button type="button" class="like" (click)="like(i, 1)"></button>               </div>            </div>          </div>          <div *ngIf="user.face==\'back\' || user.face==\'back-front\'" (click)="flipCard(user)">            <div class="card-body" style="transform: rotateY(180deg)">              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>              <p class="card-text">{{user.user.address}}</p>              <h5 class="card-text">{{user.user.email}}</h5>              <h5 class="card-text">{{user.user.batchEnd}}</h5>              <h5 class="card-text">User bio blablablabla</h5>            </div>          </div>        </div>      </div>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'UsermatchwebComponent'};

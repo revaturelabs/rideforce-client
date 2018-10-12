@@ -321,7 +321,7 @@
                                 <a href="#tabSelect">tabSelect</a>
                             </li>
                             <li>
-                                <a href="#updload">updload</a>
+                                <a href="#upload">upload</a>
                             </li>
                         </ul>
                     </td>
@@ -496,7 +496,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="348" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:348</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="356" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:356</a></div>
                             </td>
                         </tr>
 
@@ -710,7 +710,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="361" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:361</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="369" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:369</a></div>
                             </td>
                         </tr>
 
@@ -750,7 +750,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="367" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:367</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="375" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:375</a></div>
                             </td>
                         </tr>
 
@@ -790,7 +790,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="372" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:372</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="380" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:380</a></div>
                             </td>
                         </tr>
 
@@ -830,7 +830,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="384" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:384</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="392" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:392</a></div>
                             </td>
                         </tr>
 
@@ -991,7 +991,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="332" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:332</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="340" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:340</a></div>
                             </td>
                         </tr>
 
@@ -1269,7 +1269,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="389" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:389</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="397" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:397</a></div>
                             </td>
                         </tr>
 
@@ -1376,7 +1376,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="339" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:339</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="347" class="link-to-prism">src/app/components/accountinfo/accountinfo.component.ts:347</a></div>
                             </td>
                         </tr>
 
@@ -1429,18 +1429,18 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="updload"></a>
+                        <a name="upload"></a>
                         <span class="name">
                             <b>
-                            updload
+                            upload
                             </b>
-                            <a href="#updload"><span class="icon ion-ios-link"></span></a>
+                            <a href="#upload"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>updload()</code>
+<code>upload()</code>
                     </td>
                 </tr>
 
@@ -2681,7 +2681,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Represents whether the user is a rider, driver, trainor, or admin</p>
+                        <div class="io-description"><p>Represents whether the user is a rider, driver, trainer, or admin</p>
 </div>
                     </td>
                 </tr>
@@ -3040,7 +3040,7 @@ export class AccountinfoComponent implements OnInit {
    */
   userObject: User;
   /**
-   * Represents whether the user is a rider, driver, trainor, or admin
+   * Represents whether the user is a rider, driver, trainer, or admin
    */
   roleObject: Role;
   /**
@@ -3247,7 +3247,7 @@ export class AccountinfoComponent implements OnInit {
   /**
    * Uploads image to the storage
    */
-  updload() {
+  upload() {
     const file &#x3D; this.selectedFiles.item(0);
     this.imageSrc &#x3D; this.uploadService.uploadfile(file);
   }
@@ -3281,13 +3281,14 @@ export class AccountinfoComponent implements OnInit {
   /** Creats a user from all the required fields */
   createUserObject() {
 
-    this.updload();
+    //this.upload();
 
     this.userObject &#x3D; {
-      id: 0,
+      id: 1,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.username,
+      password: this.password,
       photoUrl: this.imageSrc,
       address: this.address2,
       office: &#x27;/offices/&#x27; + this.officeObject.id,
@@ -3296,14 +3297,21 @@ export class AccountinfoComponent implements OnInit {
       cars: [],
       active: true,
       contactInfo: [],
-      role: this.roleObject
-
+      role: this.roleObject,
+      bio: this.bio
     };
-
+    console.log(this.password);
     // get id from user after post and associate with a car object
     // this.carObject.id &#x3D; owner from post
-    this.userService.createUser(this.userObject, this.password, this.token)
-      .subscribe(() &#x3D;&gt; {
+    this.userService.createUser(this.userObject, this.password, this.token.substring(28))
+      .then((x) &#x3D;&gt; {
+        sessionStorage.setItem(&quot;id&quot;, x.id.toString());
+        sessionStorage.setItem(&quot;firstName&quot;, x.firstName);
+        sessionStorage.setItem(&quot;lastName&quot;, x.lastName);
+        sessionStorage.setItem(&quot;userEmail&quot;, x.email);
+        sessionStorage.setItem(&quot;userPassword&quot;, x.password);
+        sessionStorage.setItem(&quot;address&quot;, x.address);
+        sessionStorage.setItem(&quot;role&quot;, x.role);
         this.router.navigate([&#x27;/map&#x27;]);
       });
 
