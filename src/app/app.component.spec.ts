@@ -47,7 +47,7 @@ beforeEach(() => {
     // const app = fixture.debugElement.componentInstance;
     expect(component.title).toEqual('app');
   }));
-  it('should render title in a h1 tag', async(() => {
+  xit('should render title in a h1 tag', async(() => {
     // const fixture = TestBed.createComponent(AppComponent);
     // fixture.detectChanges();
     // fixture.elementRef;
