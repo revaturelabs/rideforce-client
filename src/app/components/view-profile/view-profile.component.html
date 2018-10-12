@@ -274,7 +274,6 @@
                   <td>{{ user.role }}</td>
                   <td><button *ngIf="user.role !== 'ADMIN'" class="btn btnEdit">Make Admin</button>
                     <button *ngIf="user.role === 'DRIVER' || user.role === 'RIDER'" class="btn btn-info">Make Trainer</button>
-                    <input type="checkbox"
                   </td>
                 </tr>
               </tbody>
