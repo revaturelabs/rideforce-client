@@ -264,6 +264,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>List of cars the User might own (holds the URL mapping to those cars) </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -328,6 +334,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The username of a user </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -357,6 +369,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The first name of a user </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -421,6 +439,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The last name of a user </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -585,9 +609,11 @@ export interface User {
    * The ID of the user in the database.
    */
   id: number;
+  /** The first name of a user */
   firstName: string;
+  /** The last name of a user */
   lastName: string;
-  // username
+  /** The username of a user */
   email: string;
   /**
    * The URL to the user&#x27;s profile photo.
@@ -605,6 +631,7 @@ export interface User {
    * The end date of the batch, in the format (yyyy-MM-dd&#x27;T&#x27;HH:mm:ss.SSS&#x27;Z&#x27;).
    */
   batchEnd: any;
+  /** List of cars the User might own (holds the URL mapping to those cars) */
   cars: Link&lt;Car&gt;[];
   /**
    * The user&#x27;s Venmo username.

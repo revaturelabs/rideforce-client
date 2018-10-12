@@ -9,9 +9,11 @@ export interface User {
    * The ID of the user in the database.
    */
   id: number;
+  /** The first name of a user */
   firstName: string;
+  /** The last name of a user */
   lastName: string;
-  // username
+  /** The username of a user */
   email: string;
   /**
    * The URL to the user's profile photo.
@@ -29,6 +31,7 @@ export interface User {
    * The end date of the batch, in the format (yyyy-MM-dd'T'HH:mm:ss.SSS'Z').
    */
   batchEnd: any;
+  /** List of cars the User might own (holds the URL mapping to those cars) */
   cars: Link<Car>[];
   /**
    * The user's Venmo username.

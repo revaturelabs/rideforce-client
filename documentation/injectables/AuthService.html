@@ -62,6 +62,13 @@
             <code>src/app/services/auth.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Allows Users to authenticate themselves with the server</p>
+
+            </p>
 
 
             <section>
@@ -78,7 +85,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Async</span>
                                 <a href="#authenticate">authenticate</a>
                             </li>
                             <li>
@@ -105,17 +111,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, tokenStorage: <a href="../injectables/TokenStorage.html">TokenStorage</a>)</code>
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, tokenStorage: <a href="../injectables/TokenStorage.html">TokenStorage</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/auth.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/services/auth.service.ts:18</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up the Authentication service with the required dependencies</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -124,6 +132,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -138,6 +147,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>Our http client dependency for making http requests</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>userService</td>
@@ -150,6 +165,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>Service used to grab any user information from the API</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>tokenStorage</td>
@@ -162,6 +183,30 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>Used to save our generated token locally</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>enables navigation between components (does not appear to be used)</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -184,7 +229,6 @@
                         <a name="authenticate"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Async</span>
                             authenticate
                             </b>
                             <a href="#authenticate"><span class="icon ion-ios-link"></span></a>
@@ -193,21 +237,22 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>authenticate(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, usePromise?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+<code>authenticate(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, usePromise?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/services/auth.service.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/services/auth.service.ts:61</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Attempts to log the user in and if successful, sets the sessionStorage</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -217,6 +262,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -231,6 +277,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the user identifier</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>password</td>
@@ -243,6 +295,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the password of the account</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>usePromise</td>
@@ -255,6 +313,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>(TESTING) whether to use the promise version or stick with observable</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -262,7 +326,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -294,13 +358,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/services/auth.service.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/services/auth.service.ts:40</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Attempts to log the user in</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -326,7 +392,7 @@
                                                     
 
                                                         <td>
-                                                                <code><p>Corresponds to the email input box</p>
+                                                                <code><p>The email address to be sent from the view to the API</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -342,7 +408,7 @@
                                                     
 
                                                         <td>
-                                                                <code><p>Corresponds to the password input box </p>
+                                                                <code><p>The password to be sent from the view to the API</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -356,7 +422,10 @@
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>User mapped to token storage now</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -384,13 +453,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/services/auth.service.ts:122</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/services/auth.service.ts:103</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Logs the user out of the service</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -416,22 +487,36 @@ import { environment } from &#x27;../../environments/environment&#x27;;
 import { tap, map } from &#x27;rxjs/operators&#x27;;
 import { UserControllerService } from &#x27;./api/user-controller.service&#x27;;
 import { TokenStorage } from &#x27;./../utils/token.storage&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 
+/**
+ * Allows Users to authenticate themselves with the server
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class AuthService {
 
+  /**
+   * Sets up the Authentication service with the required dependencies
+   * @param {HttpClient} http - Our http client dependency for making http requests
+   * @param {UserControllerService} userService - Service used to grab any user information from the API
+   * @param {TokenStorage} tokenStorage - Used to save our generated token locally
+   * @param {Router} route - enables navigation between components (does not appear to be used)
+   */
   constructor(
     private http: HttpClient,
     private userService: UserControllerService,
-    private tokenStorage: TokenStorage
+    private tokenStorage: TokenStorage,
+    private route: Router
   ) { }
-/**
- * 
- * @param email Corresponds to the email input box
- * @param password Corresponds to the password input box 
- */
+  
+  /**
+   * Attempts to log the user in
+   * @param email The email address to be sent from the view to the API
+   * @param password The password to be sent from the view to the API
+   * @returns {null} - User mapped to token storage now
+   */
   authenticator(email: string, password: string) {
     const credentials &#x3D; { email, password };
     console.log(&#x27;in authenticate&#x27;);
@@ -439,7 +524,7 @@ export class AuthService {
       .post&lt;string&gt;(environment.apiUrl + &#x27;/login&#x27;, credentials)
       .pipe(
         map&lt;string, void&gt;(token &#x3D;&gt; {
-          console.log(&#x27;Saving token&#x27;); 
+          console.log(&#x27;Saving token&#x27;);
           this.tokenStorage.saveToken(token);
           this.userService.getCurrentUser().subscribe();
           return null;
@@ -447,47 +532,16 @@ export class AuthService {
       );
   }
 
-  async authenticate(email: string, password: string, usePromise?: boolean) {
-    if (usePromise) {
-      await this.authenticator(email, password).toPromise().then(
-        (x) &#x3D;&gt; {
-          console.log(&#x27;Got user from Authenticate (Promise mode)&#x27;);
-          this.userService.getUserByEmail(email).then((x) &#x3D;&gt; {
-            console.log(&#x27;Gotten email of user&#x27;);
-            sessionStorage.setItem(&#x27;id&#x27;, x.id.toString());
-            sessionStorage.setItem(&#x27;firstName&#x27;, x.firstName);
-            sessionStorage.setItem(&#x27;lastName&#x27;, x.lastName);
-            sessionStorage.setItem(&#x27;active&#x27;, x.active.toString());
-            sessionStorage.setItem(&#x27;role&#x27;, x.role);
-            sessionStorage.setItem(&#x27;address&#x27;, x.address);
-            sessionStorage.setItem(&#x27;batchEnd&#x27;, x.batchEnd);
-          });
-          sessionStorage.setItem(&#x27;userEmail&#x27;, email);
-          sessionStorage.setItem(&#x27;userPassword&#x27;, password);
-        },
-        (e) &#x3D;&gt; {
-            // error coming from the backend
-            console.log(&#x27;Printing Login error (Promise Mode)!&#x27;);
-            console.log(e);
-            if (document) {
-              const messageLogin &#x3D; document.getElementById(&#x27;errorMessageLogin&#x27;);
-              if (messageLogin) {
-                messageLogin.style.display &#x3D; &#x27;block&#x27;;
-                console.log(e.message);
-                if(e.message&#x3D;&#x3D;&#x27;GENERAL&#x27;){
-                  messageLogin.innerHTML &#x3D; &quot;Server unavailable&quot;;
-                }else{
-                  messageLogin.innerHTML &#x3D; e.message;
-                }
-              }
-            }
-            return e.message;
-        }
-      );
-    } else {
-    this.authenticator(email, password).subscribe(
+  /**
+   * Attempts to log the user in and if successful, sets the sessionStorage
+   * @param email - the user identifier
+   * @param password - the password of the account
+   * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
+   */
+  authenticate(email: string, password: string, usePromise?: boolean) {
+    this.authenticator(email, password).toPromise().then(
       (x) &#x3D;&gt; {
-        console.log(&#x27;Got user from Authenticate (Observe mode)&#x27;);
+        console.log(&#x27;Got user from Authenticate (Promise mode)&#x27;);
         this.userService.getUserByEmail(email).then((x) &#x3D;&gt; {
           console.log(&#x27;Gotten email of user&#x27;);
           sessionStorage.setItem(&#x27;id&#x27;, x.id.toString());
@@ -497,27 +551,23 @@ export class AuthService {
           sessionStorage.setItem(&#x27;role&#x27;, x.role);
           sessionStorage.setItem(&#x27;address&#x27;, x.address);
           sessionStorage.setItem(&#x27;batchEnd&#x27;, x.batchEnd);
+          sessionStorage.setItem(&#x27;userEmail&#x27;, email);
+          sessionStorage.setItem(&#x27;userPassword&#x27;, password);
         });
-        sessionStorage.setItem(&#x27;userEmail&#x27;, email);
-        sessionStorage.setItem(&#x27;userPassword&#x27;, password);
         location.reload(true);
-    },
-      // TODO if an error is returned, return the error message to user
-      // callback called if there is an error
-      e &#x3D;&gt; {
+      },
+      (e) &#x3D;&gt; {
         // error coming from the backend
-        console.log(&#x27;Printing Login error (Observe Mode)!&#x27;);
+        console.log(&#x27;Printing Login error (Promise Mode)!&#x27;);
         console.log(e);
         if (document) {
           const messageLogin &#x3D; document.getElementById(&#x27;errorMessageLogin&#x27;);
           if (messageLogin) {
             messageLogin.style.display &#x3D; &#x27;block&#x27;;
-            //It is possible that the shortcircuit message means something completely different
-            //from the server being unavailable. I&#x27;m not really sure, but it could be
-            //proccing whenever you just click waaaaay too fast trying to log in.
-            if(e.message&#x3D;&#x3D;&#x27;GENERAL&#x27; || e.message&#x3D;&#x3D;&#x27;SHORTCIRCUIT&#x27;){
-              messageLogin.innerHTML &#x3D; &quot;Server unavailable&quot;;
-            }else{
+            console.log(e.message);
+            if (e.message &#x3D;&#x3D; &#x27;GENERAL&#x27;) {
+              messageLogin.innerHTML &#x3D; &#x27;Server unavailable&#x27;;
+            } else {
               messageLogin.innerHTML &#x3D; e.message;
             }
           }
@@ -525,14 +575,13 @@ export class AuthService {
         return e.message;
       }
     );
-    }
   }
 
+  /**
+   * Logs the user out of the service
+   */
   logout() {
-    // Make sure we invalidate the currently cached user data in the
-    // UserService.
-    this.userService.invalidateCurrentUser();
-    this.tokenStorage.signOut();
+    sessionStorage.clear();
   }
 
 }

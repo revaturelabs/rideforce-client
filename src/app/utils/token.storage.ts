@@ -8,13 +8,7 @@ const TOKEN_KEY = 'authToken';
 export class TokenStorage {
   constructor() { }
 
-  signOut() {
-    sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.clear();
-  }
-
   public saveToken(token: string) {
-    sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.setItem(TOKEN_KEY, token);
   }
 
