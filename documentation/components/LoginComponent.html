@@ -64,6 +64,13 @@
     <code>src/app/components/login/login.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Responsible for providing a user the ability to log in</p>
+
+    </p>
 
 
     <p class="comment">
@@ -173,12 +180,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/login/login.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/login/login.component.ts:30</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up the Login compoennt with dependency injection</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -187,6 +196,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -201,6 +211,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>Provides the ability to authenticate the user</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>route</td>
@@ -213,6 +229,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>provides the ability to navigate to landing if user is already logged on</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>userService</td>
@@ -225,6 +247,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>(Unused) Provides cUser Functionality</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -266,7 +294,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/login/login.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/login/login.component.ts:59</a></div>
                             </td>
                         </tr>
 
@@ -307,7 +335,7 @@ If the login fails, displays the error message sent by the server under the pass
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/login/login.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/login/login.component.ts:43</a></div>
                             </td>
                         </tr>
 
@@ -359,10 +387,16 @@ If the login fails, displays the error message sent by the server under the pass
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/login/login.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/login/login.component.ts:30</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The User to log on to</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -393,10 +427,16 @@ If the login fails, displays the error message sent by the server under the pass
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/login/login.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/login/login.component.ts:20</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The &quot;username&quot; of the user</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -427,10 +467,16 @@ If the login fails, displays the error message sent by the server under the pass
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/login/login.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/login/login.component.ts:25</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The password associated with the indended account</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -446,7 +492,9 @@ import { Router } from &#x27;@angular/router&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
 import { User } from &#x27;../../models/user.model&#x27;;
 
-
+/**
+ * Responsible for providing a user the ability to log in
+ */
 @Component({
   selector: &#x27;app-login&#x27;,
   templateUrl: &#x27;./login.component.html&#x27;,
@@ -454,30 +502,48 @@ import { User } from &#x27;../../models/user.model&#x27;;
 })
 export class LoginComponent implements OnInit {
 
+  /**
+   * The &quot;username&quot; of the user
+   */
   userEmail: string;
+
+  /**
+   * The password associated with the indended account
+   */
   userPass: string;
+
+  /**
+   * The User to log on to
+   */
   currentUser: User;
 
-  constructor(private authService: AuthService, private route: Router,private userService: UserControllerService) { }
+  /**
+   * Sets up the Login compoennt with dependency injection
+   * @param { AuthService} authService - Provides the ability to authenticate the user
+   * @param {Router} route - provides the ability to navigate to landing if user is already logged on
+   * @param {UserControllerService} userService - (Unused) Provides cUser Functionality
+   */
+  constructor(private authService: AuthService, private route: Router, private userService: UserControllerService) { }
 
   /**
    * Checking to see if there is a current user, and if there is, redirects to landing.
    */
   ngOnInit() {
-      if(sessionStorage.length &gt; 0){
+      if (sessionStorage.length &gt; 0){
         this.route.navigate([&#x27;/landing&#x27;]);
       }
     }
 
-  /**
-   * Gets the parameters from the login fields. 
-   * If the login fails, displays the error message sent by the server under the password field.
-   */
+
   // getUser(email: string) {
   //   let user;
   //   return this.userService.getUserByEmail(email).subscribe();
   // }
 
+  /**
+   * Gets the parameters from the login fields. 
+   * If the login fails, displays the error message sent by the server under the password field.
+   */
   login() {
     this.authService.authenticate(this.userEmail, this.userPass);
   }

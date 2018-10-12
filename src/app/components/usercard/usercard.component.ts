@@ -70,6 +70,7 @@ export class UsercardComponent implements OnInit {
                                 data3 => {
                                     console.log(data3);
                                     if (!data3.photoUrl || data3.photoUrl === 'null') {
+                                        console.log(data3.photoUrl);
                                         data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
                                     }
                                     const card: SwipecardModel = {

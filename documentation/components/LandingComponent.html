@@ -64,6 +64,13 @@
     <code>src/app/components/landing/landing.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Supports the Carousel Appearence as a Site Intro</p>
+
+    </p>
 
 
     <p class="comment">
@@ -170,12 +177,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/landing/landing.component.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/landing/landing.component.ts:18</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates the Landing Component</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -184,6 +193,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -198,6 +208,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>Allows Component to utilize User Functionality</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -239,13 +255,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/landing/landing.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/landing/landing.component.ts:29</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Initializes the component by retrieving the User</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -277,13 +295,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/landing/landing.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/landing/landing.component.ts:48</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Checks to see if there is a session or not</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -327,10 +347,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/landing/landing.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/landing/landing.component.ts:16</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Holds the current user of the program </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -361,10 +387,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/landing/landing.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/landing/landing.component.ts:18</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether a User is, in fact, logged on </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -377,17 +409,31 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { User } from &#x27;../../models/user.model&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
-//import { Router } from &#x27;@angular/router&#x27;;
+// import { Router } from &#x27;@angular/router&#x27;;
 
+/**
+ * Supports the Carousel Appearence as a Site Intro
+ */
 @Component({
   selector: &#x27;app-landing&#x27;,
   templateUrl: &#x27;./landing.component.html&#x27;,
   styleUrls: [&#x27;./landing.component.css&#x27;]
 })
 export class LandingComponent implements OnInit {
+  /** Holds the current user of the program */
   currentUser: User;
+  /** Whether a User is, in fact, logged on */
+  session: boolean;
+
+  /**
+   * Creates the Landing Component
+   * @param {UserControllerService} userService - Allows Component to utilize User Functionality
+   */
   constructor(private userService: UserControllerService) { }
 
+  /**
+   * Initializes the component by retrieving the User
+   */
   ngOnInit() {
     this.userService.getCurrentUserObservable().subscribe(
       data &#x3D;&gt; {
@@ -400,12 +446,15 @@ export class LandingComponent implements OnInit {
   //     console.log(this.currentUser)
   //   }
   // );
-    this.sessionCheck()
+    this.sessionCheck();
   }
 
-  session : boolean
+
+  /**
+   * Checks to see if there is a session or not
+   */
   sessionCheck() {
-    if(sessionStorage.length &gt; 0) {
+    if (sessionStorage.length &gt; 0) {
       this.session &#x3D; true;
     } else {
       this.session &#x3D; false;
