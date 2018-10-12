@@ -2,7 +2,7 @@ import { User } from "./user.model";
 import { Link } from "./link.model";
 
 export class Car {
-    /**
+  /**
    * The ID of the car in the database.
    */
   id: number;
