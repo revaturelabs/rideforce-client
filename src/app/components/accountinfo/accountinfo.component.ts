@@ -58,7 +58,7 @@ export class AccountinfoComponent implements OnInit {
    */
   userObject: User;
   /**
-   * Represents whether the user is a rider, driver, trainor, or admin
+   * Represents whether the user is a rider, driver, trainer, or admin
    */
   roleObject: Role;
   /**
@@ -265,7 +265,7 @@ export class AccountinfoComponent implements OnInit {
   /**
    * Uploads image to the storage
    */
-  updload() {
+  upload() {
     const file = this.selectedFiles.item(0);
     this.imageSrc = this.uploadService.uploadfile(file);
   }
@@ -299,12 +299,13 @@ export class AccountinfoComponent implements OnInit {
   /** Creats a user from all the required fields */
   createUserObject() {
 
-    this.updload();
+    //this.upload();
 
     this.userObject = {
-      id: 0,
+      id: 1,
       firstName: this.firstName,
       lastName: this.lastName,
+      password: this.password,
       email: this.username,
       photoUrl: this.imageSrc,
       address: this.address2,
@@ -317,11 +318,11 @@ export class AccountinfoComponent implements OnInit {
       role: this.roleObject
 
     };
-
+    console.log(this.userObject.password);
     // get id from user after post and associate with a car object
     // this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token)
-      .subscribe(() => {
+      .then(() => {
         this.router.navigate(['/map']);
       });
 
