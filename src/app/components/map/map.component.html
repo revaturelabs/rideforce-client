@@ -79,12 +79,26 @@
 
 
       <br>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-12">
           <div class="text-center">
           </div>
         </div>
-      </div>
+      </div> -->
+      <table *ngIf="users.length > 0" class="table">
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Batch End</th>
+          <th>Email</th>
+        </tr>
+        <tr *ngFor="let user of users">
+          <td>{{user.firstName}} {{user.lastName}}</td>
+          <td>{{user.address}}</td>
+          <td>{{user.batchEnd}}</td>
+          <td>{{user.email}}</td>
+        </tr>
+      </table>
 
       <!-- <agm-map [latitude]="33" [longitude]="-70">
 

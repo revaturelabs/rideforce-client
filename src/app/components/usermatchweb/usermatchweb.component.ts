@@ -7,12 +7,19 @@ import { MatchingControllerService } from '../../services/api/matching-controlle
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Filter } from '../../models/filter';
 
+/** Represents the User selection item in the html page */
 interface UserCard {
+  /** The User being represented */
   user: User;
+  /** The status of the given user */
   choose: string;
+  /** Link to profile picture of the user */
   face: String;
 }
 
+/**
+ * Allows Views for Other Users in a desktop view
+ */
 @Component({
   selector: 'app-usermatchweb',
   templateUrl: './usermatchweb.component.html',
@@ -31,10 +38,20 @@ export class UsermatchwebComponent implements OnInit {
 
   // Dummy data
   users: UserCard[] = [];
+
+  /**
+     * Sets up Component with the Matching and User services injected
+     * @param {MatchingControllerService} matchService - Enables the matching service
+     * @param {UserControllerService} userService - Enables access to User management
+     */
   constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
 
+  /** Holds the current user of the system */
   currentUser: User;
 
+  /**
+   * Sets up the component by populating the list of possibel matches for the current user
+   */
   ngOnInit() {
     this.userService.getCurrentUser().subscribe(
       data => {
@@ -67,6 +84,11 @@ export class UsermatchwebComponent implements OnInit {
     );
   }
 
+  /**
+   * Handles verdict a user gives on a potential match
+   * @param {number} index - The user being evaluated
+   * @param {number} interest - the judgment on the viewed user
+   */
   like(index: number, interest: number) {
     /**
      * interest:
@@ -102,7 +124,10 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
-  // Sets the card to rotate 90 degrees
+  /**
+   * Sets the card to rotate 90 degrees
+   * @param {UserCard} card - the card to operate on
+   */
   flipCard(card: UserCard) {
     if (card.face === 'front') {
       card.face = 'front-back';
@@ -111,7 +136,10 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
-  // Card goes past 90 degrees and changes face
+  /**
+   * Card goes past 90 degrees and changes face
+   * @param {UserCard} card - the card to operate on
+   */
   endFlipCard(card: UserCard) {
     if (card.face === 'front-back') {
       card.face = 'back';
