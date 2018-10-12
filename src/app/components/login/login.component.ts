@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Auth0Service } from '../../services/auth0.service';
 import { Router } from '@angular/router';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
@@ -35,7 +36,12 @@ export class LoginComponent implements OnInit {
    * @param {Router} route - provides the ability to navigate to landing if user is already logged on
    * @param {UserControllerService} userService - (Unused) Provides cUser Functionality
    */
-  constructor(private authService: AuthService, private route: Router, private userService: UserControllerService) { }
+  constructor(
+    private auth0Service: Auth0Service,
+    private authService: AuthService, 
+    private route: Router, 
+    private userService: UserControllerService
+    ) { }
 
   /**
    * Checking to see if there is a current user, and if there is, redirects to landing.
@@ -57,6 +63,7 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
-    this.authService.authenticate(this.userEmail, this.userPass);
+    this.auth0Service.login();
+    // this.authService.authenticate(this.userEmail, this.userPass);
   }
 }
