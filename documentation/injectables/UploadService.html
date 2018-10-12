@@ -62,6 +62,13 @@
             <code>src/app/services/upload.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Enables components to upload files (cheifly images) to the dedicated S3 Bucket on Amazon Web Services</p>
+
+            </p>
 
 
             <section>
@@ -123,10 +130,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/upload.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/services/upload.service.ts:15</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Basic set up of the Service - it uses no dependency injection</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -158,18 +171,28 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/upload.service.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/services/upload.service.ts:26</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Retrieves an S3 bucket object so we can upload files to an actual S3 bucket on Amazon</p>
+</div>
 
+                            <div>
+                            </div>
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                             </div>
+                                <div class="io-description">
+                                    <ul>
+<li>the S3 representation to utillize</li>
+</ul>
+
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -196,13 +219,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/services/upload.service.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/services/upload.service.ts:42</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Attempts to actually upload a file to the S3 Service</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -211,6 +236,7 @@
                                             <tr>
                                                 <td>Name</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -222,6 +248,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the file to upload to the S3 service</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -233,7 +265,10 @@
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>the url used for the file</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -278,10 +313,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/services/upload.service.ts:9</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/services/upload.service.ts:13</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The Root folder name used by this system </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -312,10 +353,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/upload.service.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/services/upload.service.ts:15</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Holds the url where the image will be stored</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -328,16 +375,28 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import * as S3 from &#x27;aws-sdk/clients/s3&#x27;;
 
+/**
+ * Enables components to upload files (cheifly images) to the dedicated S3 Bucket on Amazon Web Services
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class UploadService {
 
+  /** The Root folder name used by this system */
   FOLDER &#x3D; &#x27;rydeforce-s3/&#x27;;
+  /** Holds the url where the image will be stored*/
   url: any;
-  
+
+  /**
+   * Basic set up of the Service - it uses no dependency injection
+   */
   constructor() { }
 
+  /**
+   * Retrieves an S3 bucket object so we can upload files to an actual S3 bucket on Amazon
+   * @returns {S3} - the S3 representation to utillize
+   */
   getS3Bucket(): any {
     const bucket &#x3D; new S3 (
     {
@@ -347,8 +406,13 @@ export class UploadService {
     }
     );
     return bucket;
-  } 
+  }
 
+  /**
+   * Attempts to actually upload a file to the S3 Service
+   * @param file - the file to upload to the S3 service
+   * @returns {string} - the url used for the file
+   */
   uploadfile(file) {
    const params &#x3D; {
       Bucket: &#x27;rydeforce&#x27;,
@@ -357,7 +421,7 @@ export class UploadService {
        // allow that and instead assign numbers on the beginning of the name.
     };
 
-    let upResult &#x3D; this.getS3Bucket().upload(params, function (err, data) {
+    const upResult &#x3D; this.getS3Bucket().upload(params, function (err, data) {
       if (err) {
         console.log(&#x27;There was an error uploading your file: &#x27;, err);
         return false;
@@ -377,7 +441,7 @@ export class UploadService {
     console.log(&#x27;BEFORE RETURNING, this.url is: &#x27; + this.url);
     return this.url;
   }
-} 
+}
 </code></pre>
     </div>
 
