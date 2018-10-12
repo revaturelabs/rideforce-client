@@ -25,7 +25,7 @@ export class AuthService {
     private tokenStorage: TokenStorage
   ) { }
 /**
- * 
+ * The function that calls the login method in the API to check if the user exists and inputted credentials match 
  * @param email The email address to be sent from the view to the API
  * @param password The password to be sent from the view to the API  
  */
@@ -44,6 +44,12 @@ export class AuthService {
       );
   }
 
+  /**
+   * 
+   * @param email 
+   * @param password 
+   * @param usePromise 
+   */
   async authenticate(email: string, password: string, usePromise?: boolean) {
     if (usePromise) {
       await this.authenticator(email, password).toPromise().then(
