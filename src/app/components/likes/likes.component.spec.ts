@@ -7,7 +7,7 @@ import { MatchingControllerService } from '../../services/api/matching-controlle
 
 describe('LikesComponent', () => {
   let component: LikesComponent;
-  // let fixture: ComponentFixture<LikesComponent>;
+  let fixture: ComponentFixture<LikesComponent>;
 
   // beforeEach(async(() => {
   //   TestBed.configureTestingModule({
@@ -16,18 +16,25 @@ describe('LikesComponent', () => {
   //   .compileComponents();
   // }));
 
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(LikesComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, MatchingControllerService,
-       UserControllerService, LikesComponent]});
+       UserControllerService, LikesComponent],
+       declarations:[LikesComponent]});
     component = TestBed.get(LikesComponent);
+  }));
+
+    beforeEach(() => {
+    fixture = TestBed.createComponent(LikesComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('ngOnInit test', () => {
+    //component.ngOnInit();
     expect(component).toBeTruthy();
   });
 });

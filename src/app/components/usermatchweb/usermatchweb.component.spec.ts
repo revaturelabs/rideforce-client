@@ -23,12 +23,28 @@ describe('UsermatchwebComponent', () => {
   // });
   beforeEach(() => {
     TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, MatchingControllerService,
-       UserControllerService, UsermatchwebComponent]});
+       UserControllerService, UsermatchwebComponent],
+       declarations:[UsermatchwebComponent]});
     component = TestBed.get(UsermatchwebComponent);
   });
-
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('ngOnInit() test', () => {
+    component.ngOnInit();
+    expect(component).toBeTruthy();
+  });
+
+  it('like() test', () => {
+    component.like(1,1);
+    expect(component).toBeTruthy();
+  });
+
+  it('flipCard() test', () => {
+    component.like(1,1);
+    expect(component).toBeTruthy();
+  });
+
 });
