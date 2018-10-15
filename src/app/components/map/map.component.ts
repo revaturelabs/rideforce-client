@@ -37,6 +37,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Estimated time of the drive */
   private time: number;
 
+  /** Holds the currently selected user */
   private selectedUser: User = null;
 
   /** Holds list of possible drivers to present */
@@ -69,6 +70,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   currentLong: any;
   /** Current radious, set by a number control */
   currentRadius = 5000;
+
+  /** Stores list of users favorited locations */
+  favoriteLocations: string[];
 
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 
@@ -122,6 +126,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * @ignore
    */
   closeResult: string;
+
+  /** Stores the value of our text box locally*/
+  selectedLocation: string;
 
   /**
    * Sets up the map component with dependency injection
@@ -474,4 +481,17 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
+  /** 
+   * Makes a request to update the user's favorite locations table  
+  */
+  saveLocation(){
+    //TODO: Make a request to update the locations list 
+    console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
+  }
+
+  /** Retrieves the current list of user's favorite locations*/
+  getLocations(){
+    //TODO: Load locations into our local locations object  
+    
+  }
 }
