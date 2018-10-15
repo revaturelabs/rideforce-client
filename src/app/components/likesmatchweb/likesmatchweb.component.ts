@@ -96,6 +96,7 @@ export class LikesmatchwebComponent implements OnInit {
                                             data4=>{
                                                 if(data4.info!=null){
                                                     if(data3.contactInfo!=null && data3.contactInfo!=undefined){
+                                         
                                                         data3.contactInfo[contact]=`${data4.type}: ${data4.info}`;
                                                     }
                                                 }
