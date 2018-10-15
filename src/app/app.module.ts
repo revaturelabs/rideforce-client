@@ -33,6 +33,9 @@ import { CarRegistrationComponent } from './components/car-registration/car-regi
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 // import { DateFormatPipe } from './pipes/date-format.pipe';
 
+/**
+ * Serves as the collection/base for the entire Angular Project
+ */
 @NgModule({
   declarations: [
     AppComponent,

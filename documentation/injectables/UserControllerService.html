@@ -595,7 +595,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User&gt;</a></code>
+                                <b>Returns : </b>    <code><a href="../interfaces/User.html" target="_self" >Promise&lt;User&gt;</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -2176,10 +2176,10 @@ export class UserControllerService {
    * @returns {Observable&lt;User&gt;} - the user entered into the system
    */
   // CREATE
-  createUser(user: User, password: string, registrationKey: string): Observable&lt;User&gt; {
+  createUser(user: User, password: string, registrationKey: string): Promise&lt;User&gt; {
     return this.http.post&lt;User&gt;(environment.apiUrl + &#x27;/users&#x27;,
       { user, password, registrationKey }
-    );
+    ).toPromise();
   }
 
   /**
