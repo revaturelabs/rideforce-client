@@ -7,14 +7,15 @@ import {
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
 
+/** Karma uses this variable to hold the testing context */
 declare const require: any;
 
-// First, initialize the Angular testing environment.
+/** First, initialize the Angular testing environment.*/
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()
 );
-// Then we find all the tests.
+/** used to determine what files are used for testing (in our case, the *.spec.ts files) */ 
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);
