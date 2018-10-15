@@ -7,12 +7,14 @@ import * as auth0 from 'auth0-js';
 })
 export class Auth0Service {
 
+  requestedScopes: string = 'openid profile read:messages write:messages';
+
   auth0 = new auth0.WebAuth({
-    clientID: 'yjM4nefdQefXgzvoduFbx7obae4oZmvv',
+    clientID: '9OlhtIHLjsGJMZ8a4YIEKPwFJ0FoeJbt',
     domain: '11crandall.auth0.com',
     responseType: 'token id_token',
-    redirectUri: 'http://localhost:4200/login',
-    scope: 'openid profile' 
+    redirectUri: 'http://localhost:4200/callback',
+    scope: this.requestedScopes
   });
   userProfile: any;
 
@@ -27,26 +29,24 @@ export class Auth0Service {
       if (authResult && authResult.accessToken && authResult.idToken){
         window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/landing']);
+        this.router.navigate(['/map']);
+        location.reload(true);
       }
       else if (err){
-        this.router.navigate(['/landing']);
+        this.router.navigate(['/map']);
         console.log(err);
+        location.reload(true);
       }
     })
   }
 
   private setSession(authResult):void {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+    const scopes = authResult.scope || this.requestedScopes || '';
     sessionStorage.setItem('acess_token', authResult.accessToken);
     sessionStorage.setItem('id_token', authResult.idToken);
     sessionStorage.setItem('expires_at',expiresAt);
-  }
-
-  public logout(): void {
-    sessionStorage.clear();
-
-    this.router.navigate(['/landing']);
+    sessionStorage.setItem('scopes',JSON.stringify(scopes));
   }
 
   public isAuthenticated(): boolean {
@@ -66,5 +66,10 @@ export class Auth0Service {
       }
       cb(err, profile);
     });
+  }
+
+  public userHasScopes(scopes: Array<string>): boolean {
+    const grantedScopes = JSON.parse(sessionStorage.getItem('scopes')).split(' ');
+    return scopes.every(scope => grantedScopes.includes(scope));
   }
 }

@@ -48,7 +48,7 @@ export class AuthService {
 
   authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).toPromise().then(
-      (x) => {
+      () => {
         console.log('Got user from Authenticate (Promise mode)');
         this.userService.getUserByEmail(email).then((x) => {
           console.log('Gotten email of user');

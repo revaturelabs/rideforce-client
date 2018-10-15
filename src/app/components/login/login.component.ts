@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
-    this.auth0Service.login();
-    // this.authService.authenticate(this.userEmail, this.userPass);
+    this.authService.authenticate(this.userEmail, this.userPass);
   }
 }
