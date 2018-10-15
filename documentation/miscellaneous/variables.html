@@ -108,6 +108,12 @@
                         </td>
                     </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>used to determine what files are used for testing (in our case, the *.spec.ts files) </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -137,6 +143,12 @@
                         </td>
                     </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Karma uses this variable to hold the testing context </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -171,12 +183,20 @@
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>{
+  /** whater instance is in production mode (true in this case) */
   production: true,
+  /** URL for the service we are relying on */
   apiUrl: &#x27;http://ec2-35-174-153-234.compute-1.amazonaws.com:2222&#x27;
 }</code>
                         </td>
                     </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Represents an instance&#39;s environemnt in the event we are in production mode </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -211,7 +231,9 @@
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>{
+  /** Are we in production */
   production: false,
+  /** URL for the service we are relying on */
   apiUrl: &#x27;http://ec2-35-174-153-234.compute-1.amazonaws.com:2222&#x27;
   // apiUrl: &#x27;http://10.0.0.14:2222&#x27;
   //apiUrl: &#x27;http://e5a3040f.ngrok.io/&#x27;
@@ -219,6 +241,12 @@
                         </td>
                     </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Signals what tpye of environment we are running in </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>

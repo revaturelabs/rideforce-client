@@ -27,8 +27,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private userService: UserControllerService,
-    private tokenStorage: TokenStorage,
-    private route: Router
+    private tokenStorage: TokenStorage /*,
+    private route: Router*/
   ) { }
 
   /**
