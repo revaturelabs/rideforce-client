@@ -3,6 +3,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
+import { Auth0Service } from '../../services/auth0.service';
 
 /**
  * Hosts the Component that allows users to navigate between components
@@ -27,8 +28,10 @@ export class NavbarComponent implements OnInit {
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
+    private auth0: Auth0Service,
     private userService: UserControllerService,
-    private route: Router) { }
+    private route: Router
+    ) { }
 
   /**
    * Sets up the Log in Session appearence
@@ -91,7 +94,7 @@ export class NavbarComponent implements OnInit {
    */
 
   logout0() {
-    
+    this.auth0.logout0();
   }
   async logout() {
     sessionStorage.clear();

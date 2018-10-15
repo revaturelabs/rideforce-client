@@ -9,7 +9,7 @@ export class Auth0Service {
 
   requestedScopes: string = 'openid profile read:messages write:messages';
 
-  auth0 = new auth0.WebAuth({
+  auth = new auth0.WebAuth({
     clientID: '9OlhtIHLjsGJMZ8a4YIEKPwFJ0FoeJbt',
     domain: '11crandall.auth0.com',
     responseType: 'token id_token',
@@ -21,11 +21,11 @@ export class Auth0Service {
   constructor(private router: Router) {}
 
   public login(): void{
-    this.auth0.authorize();
+    this.auth.authorize();
   }
 
   public handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) =>{
+    this.auth.parseHash((err, authResult) =>{
       if (authResult && authResult.accessToken && authResult.idToken){
         window.location.hash = '';
         this.setSession(authResult);
@@ -43,8 +43,8 @@ export class Auth0Service {
   private setSession(authResult):void {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     const scopes = authResult.scope || this.requestedScopes || '';
-    sessionStorage.setItem('acess_token', authResult.accessToken);
-    sessionStorage.setItem('id_token', authResult.idToken);
+    sessionStorage.setItem('access_token', authResult.accessToken);
+    sessionStorage.setItem('api_token', authResult.idToken);
     sessionStorage.setItem('expires_at',expiresAt);
     sessionStorage.setItem('scopes',JSON.stringify(scopes));
   }
@@ -60,7 +60,7 @@ export class Auth0Service {
       throw new Error('Access Token must exist to fetch profile');
     }
     const self = this;
-    this.auth0.client.userInfo(accessToken, (err, profile) => {
+    this.auth.client.userInfo(accessToken, (err, profile) => {
       if (profile){
         self.userProfile = profile;
       }
@@ -68,8 +68,16 @@ export class Auth0Service {
     });
   }
 
-  public userHasScopes(scopes: Array<string>): boolean {
+  public userHasScopes(scopes: Array<string>): boolean {  
     const grantedScopes = JSON.parse(sessionStorage.getItem('scopes')).split(' ');
     return scopes.every(scope => grantedScopes.includes(scope));
+  }
+
+  public logout0() {
+    sessionStorage.clear();
+    this.auth.logout({
+      returnTo: "http://localhost:4200/landing",
+      client_id: "9OlhtIHLjsGJMZ8a4YIEKPwFJ0FoeJbt"
+    });
   }
 }
