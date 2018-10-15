@@ -61,6 +61,13 @@
             <code>src/app/directives/places-autocomplete/places-autocomplete.directive.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Adds functionality to an HTML input element </p>
+
+            </p>
 
             <p class="comment">
                 <h3>Implements</h3>
@@ -113,9 +120,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getFormattedAddress">getFormattedAddress</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                         </ul>
@@ -155,12 +159,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/directives/places-autocomplete/places-autocomplete.directive.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/directives/places-autocomplete/places-autocomplete.directive.ts:16</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up the listener with dependency injections</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -169,6 +175,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -183,6 +190,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>the element to listen to</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>mapsAPILoader</td>
@@ -195,6 +208,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>the external api for mapping services</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -216,13 +235,15 @@
                         <code>addressSelect</code>
                     </td>
                     <td class="col-md-10">
+                        <div><p>Manages data for when the user changes the place </p>
+</div>
                         <em><code>$event</code> Type:</em>    <code>EventEmitter&lt;any&gt;</code>
 
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/directives/places-autocomplete/places-autocomplete.directive.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/directives/places-autocomplete/places-autocomplete.directive.ts:16</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -235,71 +256,6 @@
         <h3 id="methods">
             Methods
         </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getFormattedAddress"></a>
-                        <span class="name">
-                            <b>
-                            getFormattedAddress
-                            </b>
-                            <a href="#getFormattedAddress"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>getFormattedAddress(place: )</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/directives/places-autocomplete/places-autocomplete.directive.ts:19</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>place</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -322,13 +278,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/directives/places-autocomplete/places-autocomplete.directive.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/directives/places-autocomplete/places-autocomplete.directive.ts:39</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up the Event listener so that auto-complete is possible</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -373,10 +331,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/directives/places-autocomplete/places-autocomplete.directive.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/directives/places-autocomplete/places-autocomplete.directive.ts:12</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The Input element to focus on </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -391,25 +355,40 @@
 // import { } from &#x27;googlemaps&#x27;;
 import { MapsAPILoader } from &#x27;@agm/core&#x27;;
 
+/** Adds functionality to an HTML input element */
 @Directive({
   selector: &#x27;[appPlacesAutocomplete]&#x27;
 })
 export class PlacesAutocompleteDirective implements OnInit {
 
+  /** The Input element to focus on */
   private element: HTMLInputElement;
 
+  /** Manages data for when the user changes the place */
   @Output()
   addressSelect: EventEmitter&lt;any&gt; &#x3D; new EventEmitter();
 
+  /**
+   * Sets up the listener with dependency injections
+   * @param {ElementRef} elRef - the element to listen to
+   * @param {MapsAPILoader} mapsAPILoader - the external api for mapping services
+   */
   constructor(private elRef: ElementRef, private mapsAPILoader: MapsAPILoader) {
-    this.element &#x3D; elRef.nativeElement;
+    this.element &#x3D; this.elRef.nativeElement;
   }
 
+  /**
+   * @ignore
+   * @param place
+   */
   getFormattedAddress(place) {
     const location_obj &#x3D; {};
     return place;
   }
 
+  /**
+   * Sets up the Event listener so that auto-complete is possible
+   */
   ngOnInit() {
     this.mapsAPILoader.load().then(() &#x3D;&gt; {
       const autocomplete &#x3D; new google.maps.places.Autocomplete(this.element);
