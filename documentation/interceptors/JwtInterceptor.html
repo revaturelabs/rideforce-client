@@ -63,6 +63,13 @@
             <code>src/app/utils/jwt.interceptor.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Ensures that each HTTP request we send has our authentication token</p>
+
+            </p>
 
 
             <section>
@@ -104,12 +111,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/utils/jwt.interceptor.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/utils/jwt.interceptor.ts:15</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up our interceptor for token addition</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -118,6 +127,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -132,6 +142,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>the Service that allows us to access our authentication token</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -169,13 +185,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/utils/jwt.interceptor.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/utils/jwt.interceptor.ts:28</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Catches HTTP requests and adds the authentication token to its header</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -185,6 +203,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -199,6 +218,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the HTTP request to modify</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>next</td>
@@ -211,6 +236,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the means of proceeding with the original request</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -245,10 +276,23 @@ import {
 import { Observable } from &#x27;rxjs&#x27;;
 import { TokenStorage } from &#x27;./token.storage&#x27;;
 
+/**
+ * Ensures that each HTTP request we send has our authentication token
+ */
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
+
+  /**
+   * Sets up our interceptor for token addition
+   * @param tokenStorage - the Service that allows us to access our authentication token
+   */
   constructor(private tokenStorage: TokenStorage) {}
 
+  /**
+   * Catches HTTP requests and adds the authentication token to its header
+   * @param {HttpRequest&lt;any&gt;} request - the HTTP request to modify
+   * @param {HttpHandler} next - the means of proceeding with the original request
+   */
   intercept(
     request: HttpRequest&lt;any&gt;,
     next: HttpHandler
@@ -263,7 +307,8 @@ export class JwtInterceptor implements HttpInterceptor {
     }
     return next.handle(request);
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 

@@ -63,6 +63,13 @@
             <code>src/app/utils/error.interceptor.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Meant to catch any error occuring in an HTTP request</p>
+
+            </p>
 
 
             <section>
@@ -104,12 +111,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/utils/error.interceptor.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/utils/error.interceptor.ts:20</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up our HTTP error handling with the services needed to handle them properly</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -118,6 +127,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -132,6 +142,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>allows us to log out if the servier says we&#39;re not logged on</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -144,6 +160,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>enables component routing</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -181,13 +203,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/utils/error.interceptor.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/utils/error.interceptor.ts:33</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Catches HTTP requests for errors and takes basic steps to inform devs about it (logs out if the servier says to log out)</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -197,6 +221,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -211,6 +236,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the HTTP request to examine</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>next</td>
@@ -223,6 +254,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the means of proceeding with out HTTP request</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -262,10 +299,23 @@ import { catchError } from &#x27;rxjs/operators&#x27;;
 import { ApiError, ApiErrorType } from &#x27;../models/api-error.model&#x27;;
 import { AuthService } from &#x27;./../services/auth.service&#x27;;
 
+/**
+ * Meant to catch any error occuring in an HTTP request
+ */
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+  /**
+   * Sets up our HTTP error handling with the services needed to handle them properly
+   * @param {AuthService} authService - allows us to log out if the servier says we&#x27;re not logged on
+   * @param {Router} router - enables component routing
+   */
   constructor(private authService: AuthService, private router: Router) {}
 
+  /**
+   * Catches HTTP requests for errors and takes basic steps to inform devs about it (logs out if the servier says to log out)
+   * @param request - the HTTP request to examine
+   * @param next - the means of proceeding with out HTTP request
+   */
   intercept(
     request: HttpRequest&lt;any&gt;,
     next: HttpHandler
@@ -290,7 +340,8 @@ export class ErrorInterceptor implements HttpInterceptor {
       })
     );
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 

@@ -282,7 +282,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:143</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:155</a></div>
                             </td>
                         </tr>
 
@@ -360,7 +360,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:151</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="163" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:163</a></div>
                             </td>
                         </tr>
 
@@ -398,7 +398,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:131</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:143</a></div>
                             </td>
                         </tr>
 
@@ -476,7 +476,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:92</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/components/usermatchweb/usermatchweb.component.ts:104</a></div>
                             </td>
                         </tr>
 
@@ -759,12 +759,24 @@ export class UsermatchwebComponent implements OnInit {
                   };
                   this.users.push(card);
                   // Sets the current swipe card to the first element of the array if the array has something in it.
+                },
+                e &#x3D;&gt; {
+                   console.log(&#x27;error getting match user!&#x27;);
+                   console.log(e);
                 }
               );
             }
+          },
+          e &#x3D;&gt; {
+            console.log(&#x27;error getting match Drivers!&#x27;);
+            console.log(e);
           }
         );
-      }
+      },
+      e &#x3D;&gt; {
+        console.log(&#x27;error getting user (matching service)!&#x27;);
+        console.log(e);
+     }
     );
   }
 
