@@ -75,12 +75,24 @@ export class UsermatchwebComponent implements OnInit {
                   };
                   this.users.push(card);
                   // Sets the current swipe card to the first element of the array if the array has something in it.
+                },
+                e => {
+                   console.log('error getting match user!');
+                   console.log(e);
                 }
               );
             }
+          },
+          e => {
+            console.log('error getting match Drivers!');
+            console.log(e);
           }
         );
-      }
+      },
+      e => {
+        console.log('error getting user (matching service)!');
+        console.log(e);
+     }
     );
   }
 

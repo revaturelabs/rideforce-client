@@ -186,14 +186,30 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
                       marker.location.latitude = data4.lat;
                       marker.location.longitude = data4.lng;
                       this.markers.push(marker);
+                    },
+                    e => {
+                      console.log('error getting distance!');
+                      console.log(e);
                     }
                   );
                   // Sets the current swipe card to the first element of the array if the array has something in it.
+                },
+                e => {
+                  console.log('error getting match user (Map component)!');
+                  console.log(e);
                 }
               );
             }
-          }
+          },
+          e => {
+            console.log('error getting match drivers (Map Component)!');
+            console.log(e);
+         }
         );
+      },
+      e => {
+        console.log('error getting current user (Map Component)!');
+        console.log(e);
       }
     );
     this.findMe();
