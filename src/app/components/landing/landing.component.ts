@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { Auth0Service } from '../../services/auth0.service'
 // import { Router } from '@angular/router';
 
 /**
@@ -21,7 +22,10 @@ export class LandingComponent implements OnInit {
    * Creates the Landing Component
    * @param {UserControllerService} userService - Allows Component to utilize User Functionality
    */
-  constructor(private userService: UserControllerService) { }
+  constructor(
+    private auth0Service: Auth0Service,
+    private userService: UserControllerService
+    ) { }
 
   /**
    * Initializes the component by retrieving the User
@@ -53,6 +57,8 @@ export class LandingComponent implements OnInit {
     }
   }
 
-
+  launchAuth0() {
+    this.auth0Service.login();
+  }
 
 }
