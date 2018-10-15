@@ -19,7 +19,6 @@ describe('AccountinfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-        // declarations: [ LoginComponent ],
         imports: [
           AppModule
           ],
