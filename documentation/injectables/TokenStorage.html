@@ -62,6 +62,13 @@
             <code>src/app/utils/token.storage.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Provides basic methods for accessing the session token </p>
+
+            </p>
 
 
             <section>
@@ -85,9 +92,6 @@
                                     <span class="modifier">Public</span>
                                 <a href="#saveToken">saveToken</a>
                             </li>
-                            <li>
-                                <a href="#signOut">signOut</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -100,24 +104,6 @@
     </table>
 </section>
 
-            <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor()</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/utils/token.storage.ts:8</a></div>
-                            </td>
-                        </tr>
-
-            </tbody>
-        </table>
-</section>
 
             <section>
     
@@ -148,18 +134,28 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/utils/token.storage.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/utils/token.storage.ts:28</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Retrieves the current authentication token being used</p>
+</div>
 
+                            <div>
+                            </div>
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                             </div>
+                                <div class="io-description">
+                                    <ul>
+<li>the authentication token of the current session</li>
+</ul>
+
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -188,13 +184,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/utils/token.storage.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/utils/token.storage.ts:20</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Saves the provided authentication token to the session</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -204,6 +202,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -218,6 +217,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the authentication token to save</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -235,44 +240,6 @@
                 </tr>
             </tbody>
         </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="signOut"></a>
-                        <span class="name">
-                            <b>
-                            signOut
-                            </b>
-                            <a href="#signOut"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>signOut()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/utils/token.storage.ts:11</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 </section>
 
 
@@ -282,28 +249,36 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 
+/** Used to access the Authentication token in our session storage */
 const TOKEN_KEY &#x3D; &#x27;authToken&#x27;;
 
+/** Provides basic methods for accessing the session token */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class TokenStorage {
+  /**
+   * @ignore
+   */
   constructor() { }
 
-  signOut() {
-    sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.clear();
-  }
-
+  /**
+   * Saves the provided authentication token to the session
+   * @param {string} token - the authentication token to save
+   */
   public saveToken(token: string) {
-    sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.setItem(TOKEN_KEY, token);
   }
 
+  /**
+   * Retrieves the current authentication token being used
+   * @returns {string} - the authentication token of the current session
+   */
   public getToken(): string {
     return sessionStorage.getItem(TOKEN_KEY);
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

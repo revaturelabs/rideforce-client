@@ -68,6 +68,29 @@
 </div>
 <div class="container-fluid" [class.spooky-font]="styles!=null">
 
+  <table *ngIf="selectedUser" class="table">
+    <tr>
+      <th>Person Info</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>{{selectedUser.firstName}} {{selectedUser.lastName}}</td>
+    </tr>
+    <tr>
+      <td>Address</td>
+      <td>{{selectedUser.address}}</td>
+    </tr>
+    <tr>
+      <td>Batch End</td>
+      <td>{{selectedUser.batchEnd}}</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>{{selectedUser.email}}</td>
+    </tr>
+  </table>
+
   <div class="row">
 
     <div class="col-12 text-center">
