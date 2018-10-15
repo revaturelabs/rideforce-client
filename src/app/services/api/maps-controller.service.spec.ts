@@ -28,7 +28,7 @@ describe('MapsControllerService', () => {
       rInfo = r;
       expect(rInfo).toBeTruthy();
     },
-    () => rInfo = null
+    () => fail()
     );
 
     expect().nothing();
