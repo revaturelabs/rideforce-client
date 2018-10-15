@@ -8,7 +8,7 @@ import { NgbModule } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
-xdescribe('AdminComponent', () => {
+describe('AdminComponent', () => {
   let component: AdminComponent;
   let fixture: ComponentFixture<AdminComponent>;
 
