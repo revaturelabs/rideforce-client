@@ -24,5 +24,4 @@ export class RideswipeComponent implements OnInit {
       this.mobile = true;
     }
   }
-
 }
