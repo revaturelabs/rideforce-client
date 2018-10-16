@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Testability } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
 import { Office } from '../../models/office.model';
@@ -42,7 +42,6 @@ export class ViewProfileComponent implements OnInit {
   officeObject: Office;
   /** User's active state */
   active: string;
-
    /**
    * Sets up the form with data about the durrent user
    */
@@ -55,6 +54,7 @@ export class ViewProfileComponent implements OnInit {
     this.getOffices();
     this.getUsers();
     this.getRole();
+    this.getState();
   }
 
   /**
@@ -69,11 +69,13 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById("address").removeAttribute("disabled");
     document.getElementById("batchEnd").removeAttribute("disabled");
     document.getElementById("dayStart").removeAttribute("disabled");
+    document.getElementById("switchRoles").removeAttribute("hidden");
+    document.getElementById("switchStates").removeAttribute("hidden");
+    document.getElementById("edit").style.display = "none";
+    document.getElementById("submit").style.display = "inline";
     document.getElementById("batchEnd").setAttribute("type", "date");
     document.getElementById("currentOffice").style.display = "none";
     document.getElementById("selectOffice").style.display = "inline";
-    document.getElementById("edit").style.display = "none";
-    document.getElementById("submit").style.display = "inline";
     document.getElementById("errorMessage").removeAttribute("hidden");
   }
 
@@ -88,15 +90,14 @@ export class ViewProfileComponent implements OnInit {
     sessionStorage.setItem('address', this.address2);
     sessionStorage.setItem('batchEnd', this.batchEnd);
     sessionStorage.setItem('role', this.currentRole);
-    if(document.getElementById("activeState"))
-    this.userService.update().subscribe();
+    //if(document.getElementById("activeState")) 
+    this.userService.update().then();
     window.location.reload(true);
   }
 
   /**
    * Enables limited ability to modify the User's role in the system
    */
-
   switchRole() {
     if (sessionStorage.getItem('role') === 'DRIVER') {
       sessionStorage.setItem('role', 'RIDER');
@@ -106,6 +107,18 @@ export class ViewProfileComponent implements OnInit {
       this.getRole();
     } else {
       console.log('nope');
+    }
+  }
+
+  switchState() {
+    if(sessionStorage.getItem('active') === 'ACTIVE') {
+      sessionStorage.setItem('active', 'INACTIVE');
+      this.getState();
+    } else if (sessionStorage.getItem('active') === 'INACTIVE') {
+      sessionStorage.setItem('active', 'ACTIVE');
+      this.getState();
+    } else {
+      console.log("Invalid State");
     }
   }
 
@@ -124,6 +137,10 @@ export class ViewProfileComponent implements OnInit {
    */
   getRole() {
     this.currentRole = sessionStorage.getItem('role');
+  }
+  currentState: string;
+  getState() {
+    this.currentState = sessionStorage.getItem('active');
   }
 
   /** Holds the list of all users in the system */

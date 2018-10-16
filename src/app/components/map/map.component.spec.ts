@@ -76,7 +76,7 @@ import { Role } from '../../models/role.model';
       batchEnd: null,
       cars: [],
       contactInfo: [],
-      active: false,
+      active: 'INACTIVE',
       role: Role.Rider
     }; // = new User();
     component.markerClicked(user);
