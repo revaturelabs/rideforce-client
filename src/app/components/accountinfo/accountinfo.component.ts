@@ -313,7 +313,7 @@ export class AccountinfoComponent implements OnInit {
       // I really don't understand what this translates to on the back end, but now it is dynamic
       batchEnd: new Date(this.batchEnd).toISOString(),
       cars: [],
-      active: true,
+      active: 'ACTIVE',
       contactInfo: [],
       role: this.roleObject,
       bio: this.bio

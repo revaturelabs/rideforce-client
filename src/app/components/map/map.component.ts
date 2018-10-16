@@ -40,6 +40,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Holds the currently selected user */
   private selectedUser: User = null;
 
+
+
   /** Holds list of possible drivers to present */
   users: any[] = [];
 
@@ -141,6 +143,22 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     private mapService: MapsControllerService, private zone: NgZone) { }
 
   /**
+   * Retireves the distance of the current route (set by setRoute)
+   * @returns {number} - the distance of the route
+   */
+  getCurrentDistance(): number {
+    return this.dist;
+  }
+
+  /**
+   * Retireves the estimated time of the current route (set by setRoute)
+   * @returns {number} - the estimated time of the route
+   */
+  getCurrentTime(): number {
+    return this.time;
+  }
+
+  /**
    * Sets up the Map
    * @param {GoogleMap.maps.Map} map - the Google Map to set
    */
@@ -148,6 +166,13 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.map = map;
   }
 
+  /**
+   * retrieves the selected user
+   * @returns {User} - the user currently selected
+   */
+  getSelectedUser(): User {
+    return this.selectedUser;
+  }
 
   /**
    * Initializes the Map with data
@@ -159,6 +184,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
+        console.log('User data from current user (Service) called by Map component');
+        console.log(data);
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 => {
@@ -281,6 +308,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       data => {
         this.dist = data.distance;
         this.time = data.duration;
+        console.log('printing route information...');
         console.log(this.dist);
         console.log(this.time);
       }
@@ -330,11 +358,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   /** Changes the radius of your search */
   public changeRadius() {
-    setTimeout(() => {
+    // setTimeout(() => {
       console.log(this.circle.radius + ' ' + this.currentRadius);
       this.circle.radius = this.currentRadius;
-    },
-      100);
+    // },
+    //   100);
 
   }
 

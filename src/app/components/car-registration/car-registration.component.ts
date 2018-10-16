@@ -55,7 +55,9 @@ export class CarRegistrationComponent implements OnInit {
    * Sets up the Car Registration component with dependencies
    * @param {UserControllerService} userService - the Service that allows us to manager the user AND the cars available on the system
    */
-  constructor(private userService: UserControllerService) { }
+  constructor(private userService: UserControllerService) {
+
+   }
 
   /**
    * Makes sure there is a car object available to operate on
@@ -112,7 +114,11 @@ export class CarRegistrationComponent implements OnInit {
       this.resetUser();
     }
 
-    this.carObject.id = 0;
+    if (!this.carObject) {
+      this.carObject = new Car();
+    }
+
+    this.carObject.id = 1;
     this.carObject.make = this.carMake;
     this.carObject.model = this.carModel;
 

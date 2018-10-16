@@ -16,6 +16,7 @@
                     </div>
                     <h6>Address: {{currentSwipeCard.user.address}}</h6>
                     <h6>Email: {{currentSwipeCard.user.email}}</h6>
+                    <h6>Batch end date: {{currentSwipeCard.user.batchEnd | date}}</h6>
                     <!-- {{currentSwipeCard.user.bio}} when bio implemented in model
                     I think the previous batch wanted to be able to click the bio link to view it.
                     *I* think we should just have the bio in the card. But what do I know.
@@ -35,13 +36,17 @@
                             data-target="#swipeBio" (click)="hideImage(false)"><img src="assets/icons/caret-bottom.png"
                                 alt="" onerror="this.onerror=null;this.src='caret-bottom.png';"></a>
                     </div>
+                    <!-- The contact object currently isn't getting the contact type or info because of the way the 
+                         observable is set up.-->
                     <h6 *ngFor="let contact of currentSwipeCard.user.contacts">{{contact.type}}: {{contact.info}}</h6>
                     <ng-container *ngIf="currentSwipeCard.user.role=='DRIVER'" >
                         <div *ngFor="let car of currentSwipeCard.user.cars">
-                            <h6>Car info:</h6>
+                            <h5>Car info:</h5>
                             <p>{{car.make}}, {{car.model}}, {{car.year}}</p>
                         </div>
                     </ng-container>
+                    <h5>Contact info:</h5>
+                    <h6 *ngFor="let contact of currentSwipeCard.user.contactInfo">{{contact.type}}: {{contact.info}}</h6>
                     <h6></h6>
                     <h6 *ngIf="currentSwipeCard.user.role=='RIDER'">RIDER</h6>
                 </div>
