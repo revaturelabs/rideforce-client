@@ -6,15 +6,13 @@
           <h4 class="card-title">{{card.user.firstName}}</h4>
           <h6 class="card-text">{{card.user.address}}</h6>
           <h6>Role: {{card.user.role}}</h6>
+          <h5 *ngIf="card.user.cars.length==1">Car:</h5>
+          <h5 *ngIf="card.user.cars.length>1">Cars:</h5>
           <div *ngFor="let car of card.user.cars;">
-            <p>user has a car</p>
-              <h6 class="card-text">{{car.id}}</h6>
-              <h6 class="card-text">Make: {{car.make}}</h6>
-              <h6 class="card-text">Model: {{car.model}}</h6>
-              <h6 class="card-text">Year: {{car.year}}</h6>
+              <h6 class="card-text">{{car}}</h6>
           </div>
-          <h6 *ngFor="let contact of card.user.contactInfo;" class="card-text">{{contact.type}}: {{contact.info}}</h6>
-          <p class="card-text">underthings</p>
+          <h5 *ngIf="card.user.contactInfo.length>0" class="card-text">Contact Info:</h5>
+              <h6 *ngFor="let contact of card.user.contactInfo" class="card-text">{{contact}}</h6>
           <a href="#" class="btn btn-primary">Like</a>
         </div>
       </div>
