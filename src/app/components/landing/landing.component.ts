@@ -21,6 +21,7 @@ export class LandingComponent implements OnInit {
   /**
    * Creates the Landing Component
    * @param {UserControllerService} userService - Allows Component to utilize User Functionality
+   * @param {Auth0Service} auth0Service - Provides Auth0 functionality
    */
   constructor(
     private auth0Service: Auth0Service,
@@ -36,12 +37,6 @@ export class LandingComponent implements OnInit {
         this.currentUser = data;
       }
     );
-  //   this.userService.getCurrentUserObservable().subscribe(
-  //   data => {
-  //     this.currentUser = data;
-  //     console.log(this.currentUser)
-  //   }
-  // );
     this.sessionCheck();
   }
 
@@ -57,6 +52,9 @@ export class LandingComponent implements OnInit {
     }
   }
 
+  /**
+   * Calls Auth0 remote login page
+   */
   launchAuth0() {
     this.auth0Service.login();
   }
