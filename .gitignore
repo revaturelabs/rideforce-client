@@ -9,7 +9,7 @@
 # dependencies
 /node_modules
 
-# sonarcloud thing
+#Scannerwork
 /.scannerwork
 
 # IDEs and editors

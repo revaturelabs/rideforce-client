@@ -111,7 +111,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, tokenStorage: <a href="../injectables/TokenStorage.html">TokenStorage</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, tokenStorage: <a href="../injectables/TokenStorage.html">TokenStorage</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -190,24 +190,6 @@
 </code>
                                                         </td>
                                                 </tr>
-                                                <tr>
-                                                        <td>route</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><ul>
-<li>enables navigation between components (does not appear to be used)</li>
-</ul>
-</code>
-                                                        </td>
-                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -244,7 +226,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/services/auth.service.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/services/auth.service.ts:59</a></div>
                             </td>
                         </tr>
 
@@ -453,7 +435,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/services/auth.service.ts:103</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/services/auth.service.ts:101</a></div>
                             </td>
                         </tr>
 
@@ -507,10 +489,10 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private userService: UserControllerService,
-    private tokenStorage: TokenStorage,
-    private route: Router
+    private tokenStorage: TokenStorage /*,
+    private route: Router*/
   ) { }
-  
+
   /**
    * Attempts to log the user in
    * @param email The email address to be sent from the view to the API
@@ -526,10 +508,8 @@ export class AuthService {
         map&lt;string, void&gt;(token &#x3D;&gt; {
           console.log(&#x27;Saving token&#x27;);
           this.tokenStorage.saveToken(token);
-          this.userService.getCurrentUser().subscribe();
-          return null;
         })
-      );
+      ).toPromise();
   }
 
   /**
@@ -539,7 +519,7 @@ export class AuthService {
    * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
    */
   authenticate(email: string, password: string, usePromise?: boolean) {
-    this.authenticator(email, password).toPromise().then(
+    this.authenticator(email, password).then(
       (x) &#x3D;&gt; {
         console.log(&#x27;Got user from Authenticate (Promise mode)&#x27;);
         this.userService.getUserByEmail(email).then((x) &#x3D;&gt; {

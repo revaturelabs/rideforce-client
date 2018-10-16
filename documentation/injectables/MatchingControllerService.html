@@ -62,6 +62,13 @@
             <code>src/app/services/api/matching-controller.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Manages User&#39;s interactions with other users on Rideshare</p>
+
+            </p>
 
 
             <section>
@@ -82,6 +89,9 @@
                             </li>
                             <li>
                                 <a href="#getDislikedDrivers">getDislikedDrivers</a>
+                            </li>
+                            <li>
+                                <a href="#getFilteredDrivers">getFilteredDrivers</a>
                             </li>
                             <li>
                                 <a href="#getFromLink">getFromLink</a>
@@ -124,12 +134,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/services/api/matching-controller.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/services/api/matching-controller.service.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up the Service with an HTTPClient injection</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -138,6 +150,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -152,6 +165,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>provides the means of interacting with the HTTP servier</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -189,7 +208,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/services/api/matching-controller.service.ts:79</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/services/api/matching-controller.service.ts:108</a></div>
                             </td>
                         </tr>
 
@@ -207,6 +226,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -221,6 +241,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the rider making the request</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>driverId</td>
@@ -233,6 +259,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the driver to affect</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -244,7 +276,10 @@
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>Does not actually return anything</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -272,7 +307,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/services/api/matching-controller.service.ts:69</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/services/api/matching-controller.service.ts:97</a></div>
                             </td>
                         </tr>
 
@@ -290,6 +325,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -304,6 +340,12 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the rider making the request</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -315,7 +357,109 @@
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>the list of drivers the user disliked</li>
+</ul>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getFilteredDrivers"></a>
+                        <span class="name">
+                            <b>
+                            getFilteredDrivers
+                            </b>
+                            <a href="#getFilteredDrivers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getFilteredDrivers(riderId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, filter: <a href="../classes/Filter.html">Filter</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/services/api/matching-controller.service.ts:48</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns Users who have passed the given filter and resemble the User enough to be returned</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>riderId</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>the rider making the request</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>filter</td>
+                                                        <td>
+                                                                    <code><a href="../classes/Filter.html" target="_self" >Filter</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>the specific filters to add to the request</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/User.html" target="_self" >Promise&lt;User[]&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <ul>
+<li>the list of Users that pass the filter specifications</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -343,7 +487,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/services/api/matching-controller.service.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/services/api/matching-controller.service.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -362,6 +506,7 @@ a link is a reference to the object without having to fetch the object from the 
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -376,6 +521,12 @@ a link is a reference to the object without having to fetch the object from the 
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the mapping to a specific user</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -387,7 +538,10 @@ a link is a reference to the object without having to fetch the object from the 
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>anthing that might be returned</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -415,7 +569,7 @@ a link is a reference to the object without having to fetch the object from the 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/services/api/matching-controller.service.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/services/api/matching-controller.service.ts:63</a></div>
                             </td>
                         </tr>
 
@@ -434,6 +588,7 @@ Returns this as an array of strings in the format</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -448,6 +603,12 @@ Returns this as an array of strings in the format</p>
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the rider making the request</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -459,7 +620,10 @@ Returns this as an array of strings in the format</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>list of Users the User &#39;liked&#39;</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -487,7 +651,7 @@ Returns this as an array of strings in the format</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/services/api/matching-controller.service.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/services/api/matching-controller.service.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -506,6 +670,7 @@ Returns this as an array of strings in the format</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -520,6 +685,12 @@ Returns this as an array of strings in the format</p>
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the id of the rider making the request</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -531,7 +702,10 @@ Returns this as an array of strings in the format</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>the list of drivers that &quot;match&quot; the user</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -559,7 +733,7 @@ Returns this as an array of strings in the format</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/services/api/matching-controller.service.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/services/api/matching-controller.service.ts:75</a></div>
                             </td>
                         </tr>
 
@@ -577,6 +751,7 @@ Returns this as an array of strings in the format</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -591,6 +766,12 @@ Returns this as an array of strings in the format</p>
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the rider making the request</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>driverId</td>
@@ -603,6 +784,12 @@ Returns this as an array of strings in the format</p>
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the driver the rider now likes</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -614,7 +801,10 @@ Returns this as an array of strings in the format</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>Does not actually return anything</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -642,7 +832,7 @@ Returns this as an array of strings in the format</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/services/api/matching-controller.service.ts:89</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/services/api/matching-controller.service.ts:119</a></div>
                             </td>
                         </tr>
 
@@ -660,6 +850,7 @@ Returns this as an array of strings in the format</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -674,6 +865,12 @@ Returns this as an array of strings in the format</p>
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the rider making the request</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>driverId</td>
@@ -686,6 +883,12 @@ Returns this as an array of strings in the format</p>
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the driver to affect</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -697,7 +900,10 @@ Returns this as an array of strings in the format</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>Does not actually return anything</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -725,7 +931,7 @@ Returns this as an array of strings in the format</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/services/api/matching-controller.service.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/services/api/matching-controller.service.ts:88</a></div>
                             </td>
                         </tr>
 
@@ -743,6 +949,7 @@ Returns this as an array of strings in the format</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -757,6 +964,12 @@ Returns this as an array of strings in the format</p>
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the rider making the request</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>driverId</td>
@@ -769,6 +982,12 @@ Returns this as an array of strings in the format</p>
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><ul>
+<li>the driver the rider now dislikes</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -780,7 +999,10 @@ Returns this as an array of strings in the format</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <ul>
+<li>Does not actually return anything</li>
+</ul>
+
                                 </div>
                     </td>
                 </tr>
@@ -795,20 +1017,29 @@ Returns this as an array of strings in the format</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
-import { User } from &quot;../../../app/models/user.model&quot;;
+import { User } from &#x27;../../../app/models/user.model&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
 import { environment } from &#x27;../../../environments/environment&#x27;;
 import { Link } from &#x27;../../models/link.model&#x27;;
+import { Filter } from &#x27;../../models/filter&#x27;;
 
+/**
+ * Manages User&#x27;s interactions with other users on Rideshare
+ */
 @Injectable()
 export class MatchingControllerService {
 
+  /**
+   * Sets up the Service with an HTTPClient injection
+   * @param http - provides the means of interacting with the HTTP servier
+   */
   constructor(private http: HttpClient) { }
 
   /**
    * will deserialize the link object. returns the object reference from the link
    * a link is a reference to the object without having to fetch the object from the database
-   * @param uri 
+   * @param {Link&lt;any&gt;} uri - the mapping to a specific user
+   * @returns {Observable&lt;any&gt;} - anthing that might be returned
    */
   getFromLink(uri: Link&lt;any&gt;): Observable&lt;any&gt; {
     return this.http.get&lt;any&gt;(environment.apiUrl + uri);
@@ -816,19 +1047,35 @@ export class MatchingControllerService {
   /**
    * Returns all drivers who match the rider with the given user ID.
    * &quot;/users/{userid}&quot;
-   * 
-   * @param riderId
+   *
+   * @param {number} riderId - the id of the rider making the request
+   * @returns {Observable&lt;Link&lt;User&gt;[]&gt;} - the list of drivers that &quot;match&quot; the user
    */
   getMatchingDrivers(riderId: number): Observable&lt;Link&lt;User&gt;[]&gt; {
-   
+
     return this.http.get&lt;Link&lt;User&gt;[]&gt;(environment.apiUrl + &#x60;/matches/${riderId}&#x60;);
+  }
+
+  /**
+   * Returns Users who have passed the given filter and resemble the User enough to be returned
+   * @param riderId - the rider making the request
+   * @param filter - the specific filters to add to the request
+   * @returns {Promise&lt;User[]&gt;} - the list of Users that pass the filter specifications
+   */
+  getFilteredDrivers(riderId: number, filter: Filter): Promise&lt;User[]&gt; {
+    const body &#x3D; {
+      filter,
+      riderId
+    };
+    return this.http.post&lt;User[]&gt;(environment.apiUrl + &#x60;matches/filtered&#x60;, body).toPromise();
   }
 
   /**
    * Returns all users liked by the user with the given ID.
    * Returns this as an array of strings in the format
-   * 
-   * @param riderId 
+   *
+   * @param {number} riderId - the rider making the request
+   * @returns {Observable&lt;Link&lt;User&gt;[]&gt;} - list of Users the User &#x27;liked&#x27;
    */
   getLikedDrivers(riderId: number): Observable&lt;Link&lt;User&gt;[]&gt; {
     console.log(environment.apiUrl + &#x60;/matches/likes/${riderId}&#x60;);
@@ -837,21 +1084,23 @@ export class MatchingControllerService {
 
   /**
    * Indicates that the user with ID :id likes the user with ID :liked.
-   * 
-   * @param riderId 
-   * @param driverId 
+   *
+   * @param {number} riderId - the rider making the request
+   * @param {number} driverId - the driver the rider now likes
+   * @returns {Observable&lt;string[]&gt;} - Does not actually return anything
    */
   likeDriver(riderId: number, driverId: number): Observable&lt;string[]&gt; {
-    
+
     return this.http.put&lt;Link&lt;User&gt;[]&gt;(environment.apiUrl + &#x60;/matches/likes/${riderId}/${driverId}&#x60;, &#x27;&#x27;);
 
   }
 
   /**
    * Removes any indication that the user with ID :id likes the user with ID :liked
-   * 
-   * @param riderId 
-   * @param driverId 
+   *
+   * @param {number} riderId - the rider making the request
+   * @param {number} driverId - the driver the rider now dislikes
+   * @returns {Observable&lt;string[]&gt;} - Does not actually return anything
    */
   unlikeDriver(riderId: number, driverId: number): Observable&lt;string[]&gt; {
     return this.http.delete&lt;Link&lt;User&gt;[]&gt;(environment.apiUrl + &#x60;/matches/likes/${riderId}/${driverId}&#x60;);
@@ -859,7 +1108,8 @@ export class MatchingControllerService {
 
   /**
    * Returns all users disliked by the user with the given ID
-   * @param riderId 
+   * @param {number} riderId - the rider making the request
+   * @returns {Observable&lt;Link&lt;User&gt;[]&gt;} - the list of drivers the user disliked
    */
   getDislikedDrivers(riderId: number): Observable&lt;Link&lt;User&gt;[]&gt; {
     return this.http.get&lt;Link&lt;User&gt;[]&gt;(environment.apiUrl + &#x60;/matches/dislikes/${riderId}&#x60;);
@@ -867,9 +1117,10 @@ export class MatchingControllerService {
 
   /**
    * Indicates that the user with ID :id unliked the user with ID :liked.
-   * 
-   * @param riderId 
-   * @param driverId 
+   *
+   * @param {number} riderId - the rider making the request
+   * @param {number} driverId - the driver to affect
+   * @returns {Observable&lt;string[]&gt;} - Does not actually return anything
    */
   dislikeDriver(riderId: number, driverId: number): Observable&lt;string[]&gt; {
     return this.http.put&lt;Link&lt;User&gt;[]&gt;(environment.apiUrl + &#x60;/matches/dislikes/${riderId}/${driverId}&#x60;, &#x27;&#x27;);
@@ -877,9 +1128,10 @@ export class MatchingControllerService {
 
   /**
    *  Removes any indication that the user with ID :id disliked the user with ID :liked
-   * 
-   * @param riderId 
-   * @param driverId 
+   *
+   * @param {number} riderId - the rider making the request
+   * @param {number} driverId - the driver to affect
+   * @returns {Observable&lt;string[]&gt;} - Does not actually return anything
    */
   unDislikeDriver(riderId: number, driverId: number): Observable&lt;string[]&gt; {
     return this.http.delete&lt;Link&lt;User&gt;[]&gt;(environment.apiUrl + &#x60;/matches/dislikes/${riderId}/${driverId}&#x60;);

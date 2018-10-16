@@ -225,6 +225,7 @@ import { Link } from &#x27;../../models/link.model&#x27;;
 import { animate, state, style, transition, trigger } from &#x27;@angular/animations&#x27;;
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
+import { Filter } from &#x27;../../models/filter&#x27;;
 
 /** Represents the User selection item in the html page */
 interface UserCard {
@@ -294,12 +295,24 @@ export class UsermatchwebComponent implements OnInit {
                   };
                   this.users.push(card);
                   // Sets the current swipe card to the first element of the array if the array has something in it.
+                },
+                e &#x3D;&gt; {
+                   console.log(&#x27;error getting match user!&#x27;);
+                   console.log(e);
                 }
               );
             }
+          },
+          e &#x3D;&gt; {
+            console.log(&#x27;error getting match Drivers!&#x27;);
+            console.log(e);
           }
         );
-      }
+      },
+      e &#x3D;&gt; {
+        console.log(&#x27;error getting user (matching service)!&#x27;);
+        console.log(e);
+     }
     );
   }
 
@@ -364,6 +377,12 @@ export class UsermatchwebComponent implements OnInit {
       card.face &#x3D; &#x27;back&#x27;;
     } else if (card.face &#x3D;&#x3D;&#x3D; &#x27;back-front&#x27;) {
       card.face &#x3D; &#x27;front&#x27;;
+    }
+  }
+
+  filter() {
+    for(var i &#x3D; 0; i &lt; document.getElementsByTagName(&quot;input&quot;).length; i++) {
+
     }
   }
 

@@ -4,13 +4,14 @@ import { LandingComponent } from './landing.component';
 import { HttpHandler, HttpClient } from '@angular/common/http';
 import { UserControllerService } from '../../services/api/user-controller.service';
 
-describe('LandingComponent', () => {
+describe('LandingComponent', async() => {
   let component: LandingComponent;
   // let fixture: ComponentFixture<LandingComponent>;
 
   // beforeEach(async(() => {
   //   TestBed.configureTestingModule({
-  //     declarations: [ LandingComponent ]
+  //     declarations: [ LandingComponent ],
+  //     providers: [HttpHandler, HttpClient, UserControllerService, LandingComponent]
   //   })
   //   .compileComponents();
   // }));
