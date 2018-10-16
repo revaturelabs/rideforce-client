@@ -38,11 +38,6 @@ describe('UsermatchwebComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('like() test', () => {
-    component.like(1,1);
-    expect(component).toBeTruthy();
-  });
-
   it('flipCard() test', () => {
 
         /** Represents the User selection item in the html page */

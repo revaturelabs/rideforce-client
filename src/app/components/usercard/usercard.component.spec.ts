@@ -5,6 +5,8 @@ import { MatchingControllerService } from '../../services/api/matching-controlle
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { UsercardComponent } from './usercard.component';
+import { AppModule } from '../../app.module';
+import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
 describe('UsercardComponent', () => {
   let component: UsercardComponent;
@@ -18,9 +20,16 @@ describe('UsercardComponent', () => {
   // }));
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, MatchingControllerService,
-       UserControllerService, UsercardComponent, animate],
-       declarations: [ UsercardComponent ]}).compileComponents();
+    TestBed.configureTestingModule({
+        //declarations: [ LoginComponent ],
+        imports: [
+          AppModule
+          ],
+        providers: [
+          {provide: APP_BASE_HREF, useValue : '/' }
+        ]
+    })
+    .compileComponents();
   }));
 
     beforeEach(() => {
@@ -32,4 +41,12 @@ describe('UsercardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('hide image tests', () => {
+   component.hideImage(true);
+  });
+
+  it('unhide image tests', () => {
+    component.hideImage(false);
+   });
 });
