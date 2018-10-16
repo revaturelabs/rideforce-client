@@ -56,7 +56,7 @@ export class AuthService {
    * @param password - the password of the account
    * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
    */
-  authenticate(email: string, password: string, usePromise?: boolean) {
+  async authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) => {
         console.log('Got user from Authenticate (Promise mode)');
@@ -65,14 +65,14 @@ export class AuthService {
           sessionStorage.setItem('id', x.id.toString());
           sessionStorage.setItem('firstName', x.firstName);
           sessionStorage.setItem('lastName', x.lastName);
-          sessionStorage.setItem('active', x.active.toString());
           sessionStorage.setItem('role', x.role);
           sessionStorage.setItem('address', x.address);
           sessionStorage.setItem('batchEnd', x.batchEnd);
           sessionStorage.setItem('userEmail', email);
           sessionStorage.setItem('userPassword', password);
+          sessionStorage.setItem('active', x.active);
+          location.reload(true);
         });
-        location.reload(true);
       },
       (e) => {
         // error coming from the backend

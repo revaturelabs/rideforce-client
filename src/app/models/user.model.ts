@@ -49,7 +49,7 @@ export interface User {
   /**
    * Whether the user's account is active.
    */
-  active: boolean;
+  active: string;
   /**
    * The user's role, determining what permissions they have to access data on
    * the server.

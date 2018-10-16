@@ -4,7 +4,6 @@ import { User } from "../../../app/models/user.model";
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Link } from '../../models/link.model';
-import { Filter } from '../../models/filter';
 
 @Injectable()
 export class MatchingControllerService {
@@ -28,14 +27,6 @@ export class MatchingControllerService {
   getMatchingDrivers(riderId: number): Observable<Link<User>[]> {
    
     return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
-  }
-
-  getFilteredDrivers(riderId: number, filter: Filter): Promise<User[]> {
-    let body = {
-      filter,
-      riderId
-    }
-    return this.http.post<User[]>(environment.apiUrl + `matches/filtered`, body).toPromise();
   }
 
   /**

@@ -9,6 +9,7 @@ import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
+import { Role } from '../../models/role.model';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -140,14 +141,18 @@ export class UserControllerService {
     * the user to update.
     * @returns {Observable<User>} - the user being updated
     */
-  update(): Observable<User> {
+  update(): Promise<User> {
     const body = {
       firstName: sessionStorage.getItem('firstName'),
       lastName: sessionStorage.getItem('lastName'),
       email: sessionStorage.getItem('userEmail'),
+      photoUrl: null,
       password: sessionStorage.getItem('userPassword'),
       role: sessionStorage.getItem('role'),
       address: sessionStorage.getItem('address'),
+      batchEnd: new Date(sessionStorage.getItem('batchEnd')),
+      startTime: null,
+      active: sessionStorage.getItem('active')
     };
 
     return this.http
@@ -160,7 +165,7 @@ export class UserControllerService {
             this.currentUser = updated;
           }
         })
-      );
+      ).toPromise();
   }
 
   /**

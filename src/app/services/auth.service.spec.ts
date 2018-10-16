@@ -15,7 +15,7 @@ describe('AuthService', () => {
 
   it('should return Incorrect email or password.', function(){
     const service: AuthService=TestBed.get(AuthService);
-    service.authenticator("Garbage","Garbage").subscribe(
+    service.authenticator("Garbage","Garbage").then(
       () => {
         
       },
@@ -27,7 +27,7 @@ describe('AuthService', () => {
 
   it('should return Input validation failed. ', function(){
     const service: AuthService=TestBed.get(AuthService);
-    service.authenticator("","").subscribe(
+    service.authenticator("","").then(
       () => {
         
       },
