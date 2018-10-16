@@ -8,8 +8,10 @@ import { HttpHandler, HttpClient } from '@angular/common/http';
 import { NgZone } from '@angular/core';
 import { UploadService } from '../../services/upload.service';
 import { Router } from '@angular/router';
-
+import { User } from '../../models/user.model';
 import {APP_BASE_HREF} from '@angular/common';
+import { userInfo } from 'os';
+import { Role } from '../../models/role.model';
 
 describe('AccountinfoComponent', () => {
   let component: AccountinfoComponent;
@@ -60,4 +62,25 @@ describe('AccountinfoComponent', () => {
     expect(component.carObject.model).toEqual('Corolla');
     expect(component.carObject.year).toEqual(2008);
   });
+  it('user object should create', () => {
+    component.userObject = {
+      id:1,
+      firstName: "John",
+      lastName: "Doe",
+      email: "jdoe@gmail.com",
+      password: "jdopass",
+      photoUrl: "imgprofile",
+      address: "12345 Pine Street, VA",
+      office: '/offices/' + 1,
+      batchEnd: new Date().toISOString(),
+      cars: [],
+      active: 'ACTIVE',
+      contactInfo: [],
+      role: Role.Rider,
+      bio: "My Bio"
+    }
+    expect(component.userObject).toBeTruthy();
+  });
+
+
 });
