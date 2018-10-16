@@ -7,6 +7,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { UsercardComponent } from './usercard.component';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '../../../../node_modules/@angular/platform-browser-dynamic/testing';
 
 describe('UsercardComponent', () => {
   let component: UsercardComponent;
@@ -21,12 +22,12 @@ describe('UsercardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-        //declarations: [ LoginComponent ],
         imports: [
           AppModule
           ],
         providers: [
-          {provide: APP_BASE_HREF, useValue : '/' }
+          {provide: APP_BASE_HREF, useValue : '/' ,
+          UsercardComponent}
         ]
     })
     .compileComponents();
@@ -43,10 +44,18 @@ describe('UsercardComponent', () => {
   });
 
   it('hide image tests', () => {
-   component.hideImage(true);
+    component.hideImage(true);
   });
 
   it('unhide image tests', () => {
     component.hideImage(false);
    });
+
+   it('swipe action right',() => {
+     component.swipe(component.SWIPE_ACTION.RIGHT,null);
+   })
+
+   it('swipe action left',() => {
+    component.swipe(component.SWIPE_ACTION.LEFT,null);
+  })
 });
