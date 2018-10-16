@@ -30,9 +30,13 @@
 <div class="text-center" style="max-height: 460x;">
     <div class="subheader ">
         <h2 class="cover-heading fadeIn first">RideForce</h2>
-        <p class="lead fadeIn second">Looking for a ride? Sign up today to be a driver or a rider</p>
+        <p *ngIf="!session" class="lead fadeIn second">Looking for a ride? Sign up today to be a driver or a rider</p>
+        <p *ngIf="session" class="lead fadeIn second">Start browsing for your perfect match here!</p>
         <a *ngIf="!session" class="button nav-link started fadeIn third" routerLink="/login" style="vertical-align:middle"><span>Get
             Started</span></a>
+            <!-- this call will run the Auth0 login page, essentially redirecting to a private sign in -->
+        <!-- <a *ngIf="!session" class="button nav-link started fadeIn third" (click)="launchAuth0()" style="vertical-align:middle"><span>Get
+          Started</span></a> -->
         <a *ngIf="session" class="button nav-link started fadeIn third" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
         <div class="fadeIn fourth">
           For more information,

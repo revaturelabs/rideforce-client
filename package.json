@@ -26,6 +26,7 @@
     "@angular/platform-browser-dynamic": "^6.1.8",
     "@angular/router": "^6.1.8",
     "@ng-bootstrap/ng-bootstrap": "^3.2.2",
+    "auth0-lock": "^11.10.0",
     "aws-sdk": "^2.321.0",
     "core-js": "^2.4.1",
     "googlemaps": "^1.12.0",

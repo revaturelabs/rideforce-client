@@ -6,6 +6,7 @@ import { User } from '../../models/user.model';
 
 /**
  * Responsible for providing a user the ability to log in
+ * Only uses back end authentication, should be removed once Auth0 is fully implemented
  */
 @Component({
   selector: 'app-login',
@@ -33,9 +34,11 @@ export class LoginComponent implements OnInit {
    * Sets up the Login compoennt with dependency injection
    * @param { AuthService} authService - Provides the ability to authenticate the user
    * @param {Router} route - provides the ability to navigate to landing if user is already logged on
-   * @param {UserControllerService} userService - (Unused) Provides cUser Functionality
    */
-  constructor(private authService: AuthService, private route: Router, private userService: UserControllerService) { }
+  constructor(
+    private authService: AuthService, 
+    private route: Router
+    ) { }
 
   /**
    * Checking to see if there is a current user, and if there is, redirects to landing.
@@ -45,12 +48,6 @@ export class LoginComponent implements OnInit {
         this.route.navigate(['/landing']);
       }
     }
-
-
-  // getUser(email: string) {
-  //   let user;
-  //   return this.userService.getUserByEmail(email).subscribe();
-  // }
 
   /**
    * Gets the parameters from the login fields.
