@@ -25,6 +25,9 @@
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/favorites" style="padding-right:30px;">Favorites</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/cars" style="padding-right:30px;">Car</a>
+                                                          <!-- change to (click)="logout0()" or just change the implementation of logout() -->
+        <a *ngIf="session" class="nav-link text-expanded btn" (click)="logout()" style="padding-right:30px;">Logout</a>
+        <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/howTo" style="padding-right:30px;">How To</a>
       </div>
   </div>
   <div class="dropdown">
