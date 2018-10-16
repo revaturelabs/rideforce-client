@@ -82,11 +82,5 @@ describe('AccountinfoComponent', () => {
     expect(component.userObject).toBeTruthy();
   });
 
-  it('user object should create 1', () => {
-    
-    component.createUserObject();
-    expect(component.userObject).toBeTruthy();
-  });
-
 
 });
