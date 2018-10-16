@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     }
 
   /**
-   * Gets the parameters from the login fields. 
+   * Gets the parameters from the login fields.
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {

@@ -32,8 +32,12 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CarRegistrationComponent } from './components/car-registration/car-registration.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { CallbackComponent } from './callback/callback/callback.component';
+import { Login0Component } from './components/login0/login0.component';
 // import { DateFormatPipe } from './pipes/date-format.pipe';
 
+/**
+ * Serves as the collection/base for the entire Angular Project
+ */
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +58,7 @@ import { CallbackComponent } from './callback/callback/callback.component';
     CarRegistrationComponent,
     ViewProfileComponent,
     CallbackComponent,
+    Login0Component,
     // DateFormatPipe,
   ],
   imports: [

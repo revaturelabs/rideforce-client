@@ -67,6 +67,13 @@
             <code>src/app/components/usermatchweb/usermatchweb.component.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Represents the User selection item in the html page </p>
+
+            </p>
 
 
         <section>
@@ -128,6 +135,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The status of the given user </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -157,6 +170,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Link to profile picture of the user </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -186,6 +205,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The User being represented </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -200,13 +225,21 @@ import { Link } from &#x27;../../models/link.model&#x27;;
 import { animate, state, style, transition, trigger } from &#x27;@angular/animations&#x27;;
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
+import { Filter } from &#x27;../../models/filter&#x27;;
 
+/** Represents the User selection item in the html page */
 interface UserCard {
+  /** The User being represented */
   user: User;
+  /** The status of the given user */
   choose: string;
+  /** Link to profile picture of the user */
   face: String;
 }
 
+/**
+ * Allows Views for Other Users in a desktop view
+ */
 @Component({
   selector: &#x27;app-usermatchweb&#x27;,
   templateUrl: &#x27;./usermatchweb.component.html&#x27;,
@@ -225,10 +258,20 @@ export class UsermatchwebComponent implements OnInit {
 
   // Dummy data
   users: UserCard[] &#x3D; [];
+
+  /**
+     * Sets up Component with the Matching and User services injected
+     * @param {MatchingControllerService} matchService - Enables the matching service
+     * @param {UserControllerService} userService - Enables access to User management
+     */
   constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
 
+  /** Holds the current user of the system */
   currentUser: User;
 
+  /**
+   * Sets up the component by populating the list of possibel matches for the current user
+   */
   ngOnInit() {
     this.userService.getCurrentUser().subscribe(
       data &#x3D;&gt; {
@@ -252,15 +295,32 @@ export class UsermatchwebComponent implements OnInit {
                   };
                   this.users.push(card);
                   // Sets the current swipe card to the first element of the array if the array has something in it.
+                },
+                e &#x3D;&gt; {
+                   console.log(&#x27;error getting match user!&#x27;);
+                   console.log(e);
                 }
               );
             }
+          },
+          e &#x3D;&gt; {
+            console.log(&#x27;error getting match Drivers!&#x27;);
+            console.log(e);
           }
         );
-      }
+      },
+      e &#x3D;&gt; {
+        console.log(&#x27;error getting user (matching service)!&#x27;);
+        console.log(e);
+     }
     );
   }
 
+  /**
+   * Handles verdict a user gives on a potential match
+   * @param {number} index - The user being evaluated
+   * @param {number} interest - the judgment on the viewed user
+   */
   like(index: number, interest: number) {
     /**
      * interest:
@@ -296,7 +356,10 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
-  // Sets the card to rotate 90 degrees
+  /**
+   * Sets the card to rotate 90 degrees
+   * @param {UserCard} card - the card to operate on
+   */
   flipCard(card: UserCard) {
     if (card.face &#x3D;&#x3D;&#x3D; &#x27;front&#x27;) {
       card.face &#x3D; &#x27;front-back&#x27;;
@@ -305,12 +368,21 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
-  // Card goes past 90 degrees and changes face
+  /**
+   * Card goes past 90 degrees and changes face
+   * @param {UserCard} card - the card to operate on
+   */
   endFlipCard(card: UserCard) {
     if (card.face &#x3D;&#x3D;&#x3D; &#x27;front-back&#x27;) {
       card.face &#x3D; &#x27;back&#x27;;
     } else if (card.face &#x3D;&#x3D;&#x3D; &#x27;back-front&#x27;) {
       card.face &#x3D; &#x27;front&#x27;;
+    }
+  }
+
+  filter() {
+    for(var i &#x3D; 0; i &lt; document.getElementsByTagName(&quot;input&quot;).length; i++) {
+
     }
   }
 

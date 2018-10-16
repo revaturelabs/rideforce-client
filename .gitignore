@@ -9,6 +9,9 @@
 # dependencies
 /node_modules
 
+#Scannerwork
+/.scannerwork
+
 # IDEs and editors
 /.idea
 .project

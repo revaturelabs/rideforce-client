@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapComponent } from './map.component';
+import { AppModule } from '../../app.module';
+import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
   xdescribe('MapComponent', () => {
   let component: MapComponent;
@@ -8,7 +10,12 @@ import { MapComponent } from './map.component';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapComponent ]
+      //declarations: [ MapComponent ]
+      imports: [
+        AppModule
+        ],
+      providers: [ {provide: APP_BASE_HREF, useValue : '/' }
+      ]
     })
     .compileComponents();
   }));

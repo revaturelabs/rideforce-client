@@ -64,6 +64,13 @@
     <code>src/app/components/favorites/favorites.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Provides an over view of User Likes, distinguishing between the mobile view and desktop view </p>
+
+    </p>
 
 
     <p class="comment">
@@ -165,10 +172,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/components/favorites/favorites.component.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/favorites/favorites.component.ts:12</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Simply sets up the Favorites component. Dependencies are not used here but are used in the likes and likesmatchweb component</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -204,13 +217,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/favorites/favorites.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/favorites/favorites.component.ts:20</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Checks to see if the device is amobile device and sets view accordingly </p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -254,10 +269,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/components/favorites/favorites.component.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/favorites/favorites.component.ts:12</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether or not the Device is a mobile device </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -269,6 +290,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 
+/** Provides an over view of User Likes, distinguishing between the mobile view and desktop view */
 @Component({
   selector: &#x27;app-favorites&#x27;,
   templateUrl: &#x27;./favorites.component.html&#x27;,
@@ -276,10 +298,15 @@
 })
 export class FavoritesComponent implements OnInit {
 
+  /** Whether or not the Device is a mobile device */
   public mobile &#x3D; false;
 
+  /**
+   * Simply sets up the Favorites component. Dependencies are not used here but are used in the likes and likesmatchweb component
+   */
   constructor() { }
 
+  /** Checks to see if the device is amobile device and sets view accordingly */
   ngOnInit() {
     if (window.screen.width &lt;&#x3D; 430) { // 768px portrait
       this.mobile &#x3D; true;

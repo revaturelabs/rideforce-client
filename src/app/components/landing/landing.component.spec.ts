@@ -10,7 +10,8 @@ describe('LandingComponent', () => {
 
   // beforeEach(async(() => {
   //   TestBed.configureTestingModule({
-  //     declarations: [ LandingComponent ]
+  //     declarations: [ LandingComponent ],
+  //     providers: [HttpHandler, HttpClient, UserControllerService, LandingComponent]
   //   })
   //   .compileComponents();
   // }));
@@ -20,7 +21,7 @@ describe('LandingComponent', () => {
   //   component = fixture.componentInstance;
   //   fixture.detectChanges();
   // });
-  beforeEach(() => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, UserControllerService, LandingComponent]});
     component = TestBed.get(LandingComponent);
   });

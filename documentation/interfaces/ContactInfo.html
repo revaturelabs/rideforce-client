@@ -67,6 +67,13 @@
             <code>src/app/models/contact-info.model.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Holds a means of contacting a user </p>
+
+            </p>
 
 
         <section>
@@ -199,6 +206,12 @@ service.</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Represente the type of contact info available </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -211,13 +224,15 @@ service.</p>
      * The ID of this contact info entry in the database.
      */
     id: Number;
+    /** Represente the type of contact info available */
     type: String;
     /**
      * The details specifying the user&#x27;s username/phone number/etc. on the
      * service.
      */
     info: String;
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 

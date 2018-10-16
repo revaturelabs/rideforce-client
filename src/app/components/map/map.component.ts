@@ -37,21 +37,29 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Estimated time of the drive */
   private time: number;
 
+  /** Holds the currently selected user */
   private selectedUser: User = null;
 
   /** Holds list of possible drivers to present */
   users: any[] = [];
 
+  /** Holds list of markers on map representing Users */
   markers: any[] = [];
   placedMarkers: any[] = [];
 
+  /** placeholder for the latitude value */
   latitude: any;
+  /** placeholder for the longitude value */
   longitude: any;
+  /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
 
   styles: any = null;
 
+  /** Represents an element labeled 'gmap' (currently not used) */
   @ViewChild('gmap') gmapElement: any;
+
+  /** Holds the map in the compnent */
   map: google.maps.Map;
 
   isTracking = false;
@@ -63,12 +71,22 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Current radious, set by a number control */
   currentRadius = 5000;
 
+  /** Stores list of users favorited locations */
+  favoriteLocations: string[];
+
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+  /**
+   * Holds a current map marker that could appear on a Google map
+   */
   marker: google.maps.Marker;
 
+  /**
+   * represents the types of markers that could appear
+   */
   markerTypes = [
     {
-      text: 'Parking", value: "parking_lot_maps.png'
+      text: 'Parking', value: 'parking_lot_maps.png'
     }
     // ,
     // {
@@ -82,20 +100,35 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   // selectedMarkerType = parking_lot_maps.png;
 
 
+  /** Whether the map is hidden or not */
   isHidden = false;
 
+  /**
+   * Likely intended to represent the location of the current user.
+   * Could be deprecated
+   */
   myLocation: any;
 
+  /** Represents a song that is playing in the background */
   song = new Audio();
 
+  /** Holds the User that's logged in */
   currentUser: User;
 
+  /** Sets the range to search */
   circle: any = {
     latitude: this.currentLat,
     longitude: this.currentLong,
     radius: this.currentRadius
   };
+
+  /**
+   * @ignore
+   */
   closeResult: string;
+
+  /** Stores the value of our text box locally*/
+  selectedLocation: string;
 
   /**
    * Sets up the map component with dependency injection
@@ -116,6 +149,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
 
+  /**
+   * Initializes the Map with data
+   */
   ngOnInit() {
     this.song.src = 'assets/audio/GrimGrinningGhosts.mp3';
     this.song.loop = true;
@@ -157,14 +193,30 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
                       marker.location.latitude = data4.lat;
                       marker.location.longitude = data4.lng;
                       this.markers.push(marker);
+                    },
+                    e => {
+                      console.log('error getting distance!');
+                      console.log(e);
                     }
                   );
                   // Sets the current swipe card to the first element of the array if the array has something in it.
+                },
+                e => {
+                  console.log('error getting match user (Map component)!');
+                  console.log(e);
                 }
               );
             }
-          }
+          },
+          e => {
+            console.log('error getting match drivers (Map Component)!');
+            console.log(e);
+         }
         );
+      },
+      e => {
+        console.log('error getting current user (Map Component)!');
+        console.log(e);
       }
     );
     this.findMe();
@@ -235,10 +287,18 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     );
   }
 
+  /**
+   * Sets the map to a new style
+   * @param {string} mapTypeId - the new type to set the map as
+   */
   setMapType(mapTypeId: string) {
     this.mapTypeId = mapTypeId;
   }
 
+  /**
+   * Sets the map center to a specific location
+   * @param address - the location to zoom in on
+   */
   setCenter(address) {
     this.zone.run(() => {
       // this.addr = addrObj;
@@ -259,11 +319,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.placedMarkers.push(marker);
   }
 
+  /**
+   * Sets the specific location on a map
+   * @param addressObject - the address to look at
+   */
   public addOriginFromAddress(addressObject) {
     this.currentLat = addressObject.geometry.location.lat();
     this.currentLong = addressObject.geometry.location.lng();
   }
 
+  /** Changes the radius of your search */
   public changeRadius() {
     setTimeout(() => {
       console.log(this.circle.radius + ' ' + this.currentRadius);
@@ -273,18 +338,33 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   }
 
+  /**
+   * (Does not appear to be used)
+   */
   simpleMarkerHandler() {
     alert('Simple Component\'s function...');
   }
 
+  /**
+   * Displays the title of a given marker (does not appear to be used)
+   * @param marker - the marker to display
+   */
   markerHandler(marker: google.maps.Marker) {
     alert('Marker\'s Title: ' + marker.getTitle());
   }
 
+  /**
+   * Sets the selected user to whatever user was just selected
+   * @param user - the user to select
+   */
   markerClicked(user: any): void {
     this.selectedUser = user;
   }
 
+  /**
+   * Sets the component style
+   * @param style - the style to set the component to
+   */
   changeStyle(style: string) {
     if (this.styles !== null) {
       this.styles = null;
@@ -417,4 +497,17 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
+  /** 
+   * Makes a request to update the user's favorite locations table  
+  */
+  saveLocation(){
+    //TODO: Make a request to update the locations list 
+    console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
+  }
+
+  /** Retrieves the current list of user's favorite locations*/
+  getLocations(){
+    //TODO: Load locations into our local locations object  
+    
+  }
 }

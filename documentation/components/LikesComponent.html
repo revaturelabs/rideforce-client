@@ -64,6 +64,13 @@
     <code>src/app/components/likes/likes.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component that shows User Likes on a mobile device</p>
+
+    </p>
 
 
     <p class="comment">
@@ -167,12 +174,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/likes/likes.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/likes/likes.component.ts:22</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up the Component for Like demonstrations</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -181,6 +190,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -195,6 +205,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>Access to Rider Driver matching service</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>userService</td>
@@ -207,6 +223,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><ul>
+<li>Access to user services</li>
+</ul>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -248,13 +270,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/likes/likes.component.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/likes/likes.component.ts:39</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Initializes the Component by populating the swipcards array with data on liked drivers</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -298,10 +322,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/likes/likes.component.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/likes/likes.component.ts:34</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Hold current user</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -337,10 +367,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/likes/likes.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/likes/likes.component.ts:22</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Array of data structures that hold list of the User&#39;s liked drivers</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -358,7 +394,9 @@ import { User } from &#x27;../../models/user.model&#x27;;
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
 
-
+/**
+ * Component that shows User Likes on a mobile device
+ */
 @Component({
     selector: &#x27;app-likes&#x27;,
     templateUrl: &#x27;./likes.component.html&#x27;,
@@ -366,12 +404,26 @@ import { UserControllerService } from &#x27;../../services/api/user-controller.s
 })
 export class LikesComponent implements OnInit {
 
+    /**
+     * Array of data structures that hold list of the User&#x27;s liked drivers
+     */
     swipecards: SwipecardModel[] &#x3D; [];
 
+    /**
+     * Sets up the Component for Like demonstrations
+     * @param matchService - Access to Rider Driver matching service
+     * @param userService - Access to user services
+     */
     constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
 
+    /**
+     * Hold current user
+     */
     currentUser: User;
 
+    /**
+     * Initializes the Component by populating the swipcards array with data on liked drivers
+     */
     ngOnInit() {
         this.userService.getCurrentUser().subscribe(
             data &#x3D;&gt; {
@@ -386,6 +438,7 @@ export class LikesComponent implements OnInit {
                             const id: number &#x3D; +userLinks[i].replace(/\D/g, &#x27;&#x27;);
                             this.userService.getUserById(id).subscribe(
                                 data3 &#x3D;&gt; {
+                                    console.log(data3);
                                     if (!data3.photoUrl || data3.photoUrl &#x3D;&#x3D;&#x3D; &#x27;null&#x27;) {
                                         data3.photoUrl &#x3D; &#x27;http://semantic-ui.com/images/avatar/large/chris.jpg&#x27;;
                                     }
@@ -413,7 +466,17 @@ export class LikesComponent implements OnInit {
         &lt;img class&#x3D;&quot;card-img-top&quot; src&#x3D;{{card.user.photoUrl}} alt&#x3D;&quot;Card image&quot;&gt;
         &lt;div class&#x3D;&quot;card-body&quot;&gt;
           &lt;h4 class&#x3D;&quot;card-title&quot;&gt;{{card.user.firstName}}&lt;/h4&gt;
-          &lt;p class&#x3D;&quot;card-text&quot;&gt;Some example text.&lt;/p&gt;
+          &lt;h6 class&#x3D;&quot;card-text&quot;&gt;{{card.user.address}}&lt;/h6&gt;
+          &lt;h6&gt;Role: {{card.user.role}}&lt;/h6&gt;
+          &lt;div *ngFor&#x3D;&quot;let car of card.user.cars;&quot;&gt;
+            &lt;p&gt;user has a car&lt;/p&gt;
+              &lt;h6 class&#x3D;&quot;card-text&quot;&gt;{{car.id}}&lt;/h6&gt;
+              &lt;h6 class&#x3D;&quot;card-text&quot;&gt;Make: {{car.make}}&lt;/h6&gt;
+              &lt;h6 class&#x3D;&quot;card-text&quot;&gt;Model: {{car.model}}&lt;/h6&gt;
+              &lt;h6 class&#x3D;&quot;card-text&quot;&gt;Year: {{car.year}}&lt;/h6&gt;
+          &lt;/div&gt;
+          &lt;h6 *ngFor&#x3D;&quot;let contact of card.user.contactInfo;&quot; class&#x3D;&quot;card-text&quot;&gt;{{contact.type}}: {{contact.info}}&lt;/h6&gt;
+          &lt;p class&#x3D;&quot;card-text&quot;&gt;underthings&lt;/p&gt;
           &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Like&lt;/a&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -450,7 +513,7 @@ export class LikesComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container parent">  <div *ngFor="let card of swipecards;" style ="margin: 30px 0px 20px 0px;" id="likeContainer">       <div class="card">        <img class="card-img-top" src={{card.user.photoUrl}} alt="Card image">        <div class="card-body">          <h4 class="card-title">{{card.user.firstName}}</h4>          <p class="card-text">Some example text.</p>          <a href="#" class="btn btn-primary">Like</a>        </div>      </div>    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="container parent">  <div *ngFor="let card of swipecards;" style ="margin: 30px 0px 20px 0px;" id="likeContainer">       <div class="card">        <img class="card-img-top" src={{card.user.photoUrl}} alt="Card image">        <div class="card-body">          <h4 class="card-title">{{card.user.firstName}}</h4>          <h6 class="card-text">{{card.user.address}}</h6>          <h6>Role: {{card.user.role}}</h6>          <div *ngFor="let car of card.user.cars;">            <p>user has a car</p>              <h6 class="card-text">{{car.id}}</h6>              <h6 class="card-text">Make: {{car.make}}</h6>              <h6 class="card-text">Model: {{car.model}}</h6>              <h6 class="card-text">Year: {{car.year}}</h6>          </div>          <h6 *ngFor="let contact of card.user.contactInfo;" class="card-text">{{contact.type}}: {{contact.info}}</h6>          <p class="card-text">underthings</p>          <a href="#" class="btn btn-primary">Like</a>        </div>      </div>    </div></div></div>'
     var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'LikesComponent'};

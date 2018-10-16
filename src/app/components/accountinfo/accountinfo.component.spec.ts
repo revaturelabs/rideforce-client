@@ -9,25 +9,44 @@ import { NgZone } from '@angular/core';
 import { UploadService } from '../../services/upload.service';
 import { Router } from '@angular/router';
 
+import {APP_BASE_HREF} from '@angular/common';
+
 describe('AccountinfoComponent', () => {
   let component: AccountinfoComponent;
-  const mockRouter = jasmine.createSpyObj('Router', ['navigate']);
-  const mockZone = jasmine.createSpyObj('NgZone', ['run']);
-  // let fixture: ComponentFixture<AccountinfoComponent>;
+  // const mockRouter = jasmine.createSpyObj('Router', ['navigate']);
+  // const mockZone = jasmine.createSpyObj('NgZone', ['run']);
+  let fixture: ComponentFixture<AccountinfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountinfoComponent ],
-      providers: [AuthService, UserControllerService],
+        imports: [
+          AppModule
+          ],
+        providers: [ {provide: APP_BASE_HREF, useValue : '/' }
+        ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, AuthService, UploadService,
-      {provide: NgZone, useValue: mockZone}, UserControllerService, AccountinfoComponent, {provide: Router, useValue: mockRouter}]});
-    component = TestBed.get(AccountinfoComponent);
+    fixture = TestBed.createComponent(AccountinfoComponent);
+    component = fixture.componentInstance;
+    // auth = TestBed.get(AuthService);
+    fixture.detectChanges();
   });
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     declarations: [ AccountinfoComponent ],
+  //     providers: [AuthService, UserControllerService],
+  //   })
+  //   .compileComponents();
+  // }));
+
+  // beforeEach(() => {
+  //   TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, AuthService, UploadService,
+  //     {provide: NgZone, useValue: mockZone}, UserControllerService, AccountinfoComponent, {provide: Router, useValue: mockRouter}]});
+  //   component = TestBed.get(AccountinfoComponent);
+  // });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -40,5 +59,5 @@ describe('AccountinfoComponent', () => {
     expect(component.carObject.make).toEqual('Toyoda');
     expect(component.carObject.model).toEqual('Corolla');
     expect(component.carObject.year).toEqual(2008);
-  }); 
+  });
 });
