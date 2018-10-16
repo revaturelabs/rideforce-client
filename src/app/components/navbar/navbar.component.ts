@@ -23,6 +23,11 @@ export class NavbarComponent implements OnInit {
   session: boolean;
 
   /**
+   * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
+   */
+  role: String;
+
+  /**
    * Sets up the component with relevent services
    * @param {Auth0Service} auth0 - Provides Auth0 functionality
    * @param {UserControllerService} userService - allows User Services to be utilized
@@ -39,6 +44,7 @@ export class NavbarComponent implements OnInit {
    */
   ngOnInit() {
     this.sessionCheck();
+    this.setCurrentRole();
   }
 
   /**
@@ -58,6 +64,25 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
+  setCurrentRole(){
+    this.role=sessionStorage.getItem('role');
+  }
+  // checkIfLoggedIn(){
+  //   if(this.userService.isLoggedIn){
+  //     this.isLoggedIn = true;
+  //   } 
+  //   else if(!this.userService.isLoggedIn) {
+  //     this.isLoggedIn = false;
+  //   }
+  // }
+
+  // getCurrentUser(){
+  //   this.userService.getCurrentUser().subscribe(
+  //     data => {
+  //       this.currentUser = data;
+  //     }
+  //   )
+  // }
 
   /** 
    * Allows User to log out of their session, informing
