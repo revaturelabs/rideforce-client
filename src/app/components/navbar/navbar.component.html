@@ -20,12 +20,14 @@
       <div class="navbar-nav" style="padding-left:-100px; font-size:14px;">
         <a class="nav-link text-expanded nav-text" routerLink="landing" style="padding-right:30px; padding-left:0%;">Home<span class="sr-only">(current)</span></a>
         <a *ngIf="!session"class="nav-link text-expanded nav-text" routerLink="/login" style="padding-right:30px;">Login</a>
-        <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/admin" style="padding-right:30px;">Get Key</a>
+        <a *ngIf="role!='DRIVER'&&role!='RIDER'&&role!=null" class="nav-link text-expanded nav-text" routerLink="/admin" style="padding-right:30px;">Get Key</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/favorites" style="padding-right:30px;">Favorites</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/cars" style="padding-right:30px;">Car</a>
-        <a *ngIf="session" class="nav-link text-expanded nav-text" (click)="logout()" style="padding-right:30px;">Logout</a>
+                                                          <!-- change to (click)="logout0()" or just change the implementation of logout() -->
+        <a *ngIf="session" class="nav-link text-expanded btn" (click)="logout()" style="padding-right:30px;">Logout</a>
+        <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/howTo" style="padding-right:30px;">How To</a>
       </div>
   </div>
   <div class="dropdown">
@@ -36,6 +38,8 @@
       <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" routerLink="/howTo">About</a>
         <a *ngIf="session" class="dropdown-item" routerLink="/userProfile">User Settings</a>
+        <div class="dropdown-divider"></div>
+        <a *ngIf="session" class="dropdown-item" (click)="logout()">Logout</a>
       </div>
     </div>
 </nav>

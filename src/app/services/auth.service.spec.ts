@@ -24,25 +24,15 @@ describe('AuthService', () => {
     })
     .compileComponents();
   }));
+  
+  it('should be created', async(inject([HttpClientTestingModule, AuthService],
+    (httpClient: HttpClientTestingModule, authService: AuthService) => {
+      expect(authService).toBeTruthy();
+  })));
 
-  beforeEach(() => {
-    // fixture = TestBed.createComponent(AuthService);
-    // auth = fixture.componentInstance;
-    auth = TestBed.get(AuthService);
-    // fixture.detectChanges();
-  });
-
-  // it('should be created', async(inject([HttpClientTestingModule, AuthService],
-  //   (httpClient: HttpClientTestingModule, authService: AuthService) => {
-  //     expect(authService).toBeTruthy();
-  // })));
-  it ('should be created', function() {
-    expect(auth).toBeTruthy();
-  });
-
-  it('should return Incorrect email or password.', function() {
-    // const service: AuthService = TestBed.get(AuthService);
-    auth.authenticator('Garbage', 'Garbage').then(
+  it('should return Incorrect email or password.', function(){
+    const service: AuthService=TestBed.get(AuthService);
+    service.authenticator("Garbage","Garbage").then(
       () => {
         expect().nothing();
       },
@@ -52,9 +42,9 @@ describe('AuthService', () => {
     );
   });
 
-  it('should return Input validation failed. ', function() {
-    // const service: AuthService = TestBed.get(AuthService);
-    auth.authenticator('', '').then(
+  it('should return Input validation failed. ', function(){
+    const service: AuthService=TestBed.get(AuthService);
+    service.authenticator("","").then(
       () => {
         expect().nothing();
       },

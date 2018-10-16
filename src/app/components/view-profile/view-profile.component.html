@@ -120,27 +120,29 @@
                 </div>
                 <input type="text" id="batchEnd" class="form-control" [(ngModel)]="batchEnd" disabled>
               </div>
+
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Day Start</span>
                 </div>
                 <input type="time" id="dayStart" class="form-control" [(ngModel)]="dayStart" disabled>
               </div>
-              <div *ngIf="currentRole === 'DRIVER'">
-                <button class="btn" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
-              </div>
-              <div *ngIf="currentRole === 'RIDER'">
-                <button class="btn" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
+
+              <div id="switchRoles" hidden>
+                <button *ngIf="currentRole === 'DRIVER'" class="btn" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
+                <button *ngIf="currentRole === 'RIDER'" class="btn" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
               </div>
               <br>
-              <div>
-                <input type="checkbox" id="activeState" data-toggle="toggle" data-onstyle="success" data-on="Active <i class='fas fa-bell'></i>" data-offstyle="danger" data-height="100%" data-off="Inactive <i class='fas fa-bell-slash'></i>" checked>
+              <div id="switchStates" hidden>
+                <!-- <input type="checkbox" id="activeState" disabled data-toggle="toggle" data-onstyle="success" data-on="Active <i class='fas fa-bell'></i>" data-offstyle="danger" data-height="100%" data-off="Inactive <i class='fas fa-bell-slash'></i>"> -->
+                <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Inactive <i class='fas fa-bell-slash'></i></button>
+                <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Active <i class='fas fa-bell'></i></button>
               </div>
               <br>
               <div>
                 <button class="btn btnEdit" (click)="edit()" id="edit">Edit <i class="fas fa-pencil-alt"></i></button>
+                <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i class="fas fa-save"></i></button>
               </div>
-              <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i class="fas fa-save"></i></button>
               <div style="padding-top: 20px">
                 <div *ngIf="!requiredInfoFields" class="alert alert-danger" id="errorMessage" hidden>
                   Please fill out ALL fields and confirm your passwords match
