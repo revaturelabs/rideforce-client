@@ -6,9 +6,11 @@ import { environment } from './environments/environment';
 
 import 'hammerjs';
 
+/** Deduce what type of environment the app is running in */
 if (environment.production) {
   enableProdMode();
 }
 
+/** Plays the fole of Main in Angular by collecting the Rideshare Module and setting it up (System generated function) */
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));

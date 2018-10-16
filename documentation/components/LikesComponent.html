@@ -438,6 +438,7 @@ export class LikesComponent implements OnInit {
                             const id: number &#x3D; +userLinks[i].replace(/\D/g, &#x27;&#x27;);
                             this.userService.getUserById(id).subscribe(
                                 data3 &#x3D;&gt; {
+                                    console.log(data3);
                                     if (!data3.photoUrl || data3.photoUrl &#x3D;&#x3D;&#x3D; &#x27;null&#x27;) {
                                         data3.photoUrl &#x3D; &#x27;http://semantic-ui.com/images/avatar/large/chris.jpg&#x27;;
                                     }
@@ -465,7 +466,17 @@ export class LikesComponent implements OnInit {
         &lt;img class&#x3D;&quot;card-img-top&quot; src&#x3D;{{card.user.photoUrl}} alt&#x3D;&quot;Card image&quot;&gt;
         &lt;div class&#x3D;&quot;card-body&quot;&gt;
           &lt;h4 class&#x3D;&quot;card-title&quot;&gt;{{card.user.firstName}}&lt;/h4&gt;
-          &lt;p class&#x3D;&quot;card-text&quot;&gt;Some example text.&lt;/p&gt;
+          &lt;h6 class&#x3D;&quot;card-text&quot;&gt;{{card.user.address}}&lt;/h6&gt;
+          &lt;h6&gt;Role: {{card.user.role}}&lt;/h6&gt;
+          &lt;div *ngFor&#x3D;&quot;let car of card.user.cars;&quot;&gt;
+            &lt;p&gt;user has a car&lt;/p&gt;
+              &lt;h6 class&#x3D;&quot;card-text&quot;&gt;{{car.id}}&lt;/h6&gt;
+              &lt;h6 class&#x3D;&quot;card-text&quot;&gt;Make: {{car.make}}&lt;/h6&gt;
+              &lt;h6 class&#x3D;&quot;card-text&quot;&gt;Model: {{car.model}}&lt;/h6&gt;
+              &lt;h6 class&#x3D;&quot;card-text&quot;&gt;Year: {{car.year}}&lt;/h6&gt;
+          &lt;/div&gt;
+          &lt;h6 *ngFor&#x3D;&quot;let contact of card.user.contactInfo;&quot; class&#x3D;&quot;card-text&quot;&gt;{{contact.type}}: {{contact.info}}&lt;/h6&gt;
+          &lt;p class&#x3D;&quot;card-text&quot;&gt;underthings&lt;/p&gt;
           &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Like&lt;/a&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -502,7 +513,7 @@ export class LikesComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container parent">  <div *ngFor="let card of swipecards;" style ="margin: 30px 0px 20px 0px;" id="likeContainer">       <div class="card">        <img class="card-img-top" src={{card.user.photoUrl}} alt="Card image">        <div class="card-body">          <h4 class="card-title">{{card.user.firstName}}</h4>          <p class="card-text">Some example text.</p>          <a href="#" class="btn btn-primary">Like</a>        </div>      </div>    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="container parent">  <div *ngFor="let card of swipecards;" style ="margin: 30px 0px 20px 0px;" id="likeContainer">       <div class="card">        <img class="card-img-top" src={{card.user.photoUrl}} alt="Card image">        <div class="card-body">          <h4 class="card-title">{{card.user.firstName}}</h4>          <h6 class="card-text">{{card.user.address}}</h6>          <h6>Role: {{card.user.role}}</h6>          <div *ngFor="let car of card.user.cars;">            <p>user has a car</p>              <h6 class="card-text">{{car.id}}</h6>              <h6 class="card-text">Make: {{car.make}}</h6>              <h6 class="card-text">Model: {{car.model}}</h6>              <h6 class="card-text">Year: {{car.year}}</h6>          </div>          <h6 *ngFor="let contact of card.user.contactInfo;" class="card-text">{{contact.type}}: {{contact.info}}</h6>          <p class="card-text">underthings</p>          <a href="#" class="btn btn-primary">Like</a>        </div>      </div>    </div></div></div>'
     var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'LikesComponent'};

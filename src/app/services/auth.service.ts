@@ -27,8 +27,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private userService: UserControllerService,
-    private tokenStorage: TokenStorage,
-    private route: Router
+    private tokenStorage: TokenStorage /*,
+    private route: Router*/
   ) { }
 
   /**
@@ -85,7 +85,9 @@ export class AuthService {
             console.log(e.message);
             if (e.message == 'GENERAL') {
               messageLogin.innerHTML = 'Server unavailable';
-            } else {
+            } else if(e.message == 'undefined') {
+              messageLogin.innerHTML = 'GATEWAY unavailable';
+            }else{
               messageLogin.innerHTML = e.message;
             }
           }

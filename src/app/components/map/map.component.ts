@@ -37,7 +37,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Estimated time of the drive */
   private time: number;
 
+  /** Holds the currently selected user */
   private selectedUser: User = null;
+
+
 
   /** Holds list of possible drivers to present */
   users: any[] = [];
@@ -69,6 +72,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   currentLong: any;
   /** Current radious, set by a number control */
   currentRadius = 5000;
+
+  /** Stores list of users favorited locations */
+  favoriteLocations: string[];
 
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 
@@ -123,6 +129,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    */
   closeResult: string;
 
+  /** Stores the value of our text box locally*/
+  selectedLocation: string;
+
   /**
    * Sets up the map component with dependency injection
    * @param {MatchingControllerService} matchService - Allows management between riders and drivers
@@ -141,6 +150,13 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.map = map;
   }
 
+  /**
+   * retrieves the selected user
+   * @returns {User} - the user currently selected
+   */
+  getSelectedUser(): User {
+    return this.selectedUser;
+  }
 
   /**
    * Initializes the Map with data
@@ -152,6 +168,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
+        console.log('User data from current user (Service) called by Map component');
+        console.log(data);
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 => {
@@ -490,4 +508,17 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
+  /** 
+   * Makes a request to update the user's favorite locations table  
+  */
+  saveLocation(){
+    //TODO: Make a request to update the locations list 
+    console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
+  }
+
+  /** Retrieves the current list of user's favorite locations*/
+  getLocations(){
+    //TODO: Load locations into our local locations object  
+    
+  }
 }

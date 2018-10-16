@@ -55,7 +55,9 @@ export class CarRegistrationComponent implements OnInit {
    * Sets up the Car Registration component with dependencies
    * @param {UserControllerService} userService - the Service that allows us to manager the user AND the cars available on the system
    */
-  constructor(private userService: UserControllerService) { }
+  constructor(private userService: UserControllerService) {
+
+   }
 
   /**
    * Makes sure there is a car object available to operate on
@@ -93,29 +95,39 @@ export class CarRegistrationComponent implements OnInit {
    */
   resetUser() {
     this.userService.getCurrentUser().subscribe(user => {
-      console.log('Car reg: Gotten User: ' + user);
+      // console.log('Car reg: Gotten User: ' + user);
       this.userObject = user;
     },
     e => {
-      console.log('Car reg: Failed to get user: ' + e);
+      // console.log('Car reg: Failed to get user: ');
+      // console.log(e);
     });
 
   }
-
+ 
   /**
    * Sets the car with appropriate values and sends it to the server using the User Service
    */
-  addCarToUser() {
+  addCarToUser(inTesting?: boolean) {
 
-    this.resetUser();
+    if (!inTesting) {
+      this.resetUser();
+    }
 
-    this.carObject.id = 0;
+    if (!this.carObject) {
+      this.carObject = new Car();
+    }
+
+    this.carObject.id = 1;
     this.carObject.make = this.carMake;
     this.carObject.model = this.carModel;
 
-    this.carObject.owner = '/users/' + this.userObject.id.toString();
+    this.carObject.owner = '/users/' + this.userObject.id;
     this.carObject.year = this.carYear;
     // this.userObject.cars.push(this.carObject);
+
+    console.log('Owner prop (car reg):');
+    console.log(this.carObject.owner);
 
     this.userService.createCar(this.carObject).subscribe(car => {
       this.carObject = car;
