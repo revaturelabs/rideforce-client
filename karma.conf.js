@@ -26,6 +26,6 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['PhantomJS', 'Chrome'],
-    singleRun: false
+    singleRun: true
   });
 };
