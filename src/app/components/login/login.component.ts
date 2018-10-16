@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
    * @param {UserControllerService} userService - (Unused) Provides cUser Functionality
    */
   constructor(
-    private auth0Service: Auth0Service,
+    //private auth0Service: Auth0Service,
     private authService: AuthService, 
     private route: Router, 
     private userService: UserControllerService

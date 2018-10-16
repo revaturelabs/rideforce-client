@@ -87,15 +87,16 @@ export class NavbarComponent implements OnInit {
   //     }
   //   )
   // }
+  
+    logout0() {
+      this.auth0.logout0();
+    }
+    
 
   /**
    * Allows User to log out of their session
    * uses await/async to avoid forcing User to reload manually to see the "log in" button after log out
    */
-
-  logout0() {
-    this.auth0.logout0();
-  }
   async logout() {
     sessionStorage.clear();
     if (this.route.url === "/landing") {
