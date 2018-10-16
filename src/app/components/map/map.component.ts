@@ -40,6 +40,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Holds the currently selected user */
   private selectedUser: User = null;
 
+
+
   /** Holds list of possible drivers to present */
   users: any[] = [];
 
@@ -148,6 +150,13 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.map = map;
   }
 
+  /**
+   * retrieves the selected user
+   * @returns {User} - the user currently selected
+   */
+  getSelectedUser(): User {
+    return this.selectedUser;
+  }
 
   /**
    * Initializes the Map with data
@@ -159,6 +168,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
+        console.log('User data from current user (Service) called by Map component');
+        console.log(data);
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 => {

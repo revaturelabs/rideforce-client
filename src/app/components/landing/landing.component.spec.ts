@@ -4,7 +4,7 @@ import { LandingComponent } from './landing.component';
 import { HttpHandler, HttpClient } from '@angular/common/http';
 import { UserControllerService } from '../../services/api/user-controller.service';
 
-describe('LandingComponent', () => {
+describe('LandingComponent', async() => {
   let component: LandingComponent;
   // let fixture: ComponentFixture<LandingComponent>;
 
@@ -21,7 +21,7 @@ describe('LandingComponent', () => {
   //   component = fixture.componentInstance;
   //   fixture.detectChanges();
   // });
-  beforeEach(async() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, UserControllerService, LandingComponent]});
     component = TestBed.get(LandingComponent);
   });
