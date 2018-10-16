@@ -74,7 +74,7 @@ describe('AccountinfoComponent', () => {
       office: '/offices/' + 1,
       batchEnd: new Date().toISOString(),
       cars: [],
-      active: true,
+      active: 'ACTIVE',
       contactInfo: [],
       role: Role.Rider,
       bio: "My Bio"
