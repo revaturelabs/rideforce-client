@@ -3,13 +3,16 @@ import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } fro
 import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
 import { Location } from './../../models/location.model';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { User } from '../../models/user.model';
 import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { GoogleMap } from '@agm/core/services/google-maps-types';
+import { environment } from '../../../environments/environment.prod';
+import { map } from '../../../../node_modules/rxjs/operators';
+
 // import { } from '@types/googlemaps';
 
 /**
@@ -74,7 +77,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   currentRadius = 5000;
 
   /** Stores list of users favorited locations */
-  favoriteLocations: string[];
+  favoriteLocations: any[] = [];
+
+  showFavorites: boolean = true;
 
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 
@@ -132,6 +137,12 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Stores the value of our text box locally*/
   selectedLocation: string;
 
+  /**Store name of saved location into textbox locally **/
+  favoriteName: string;
+
+   /**Store name location to delete into textbox locally **/
+   deleteFavorite: string;
+
   /**
    * Sets up the map component with dependency injection
    * @param {MatchingControllerService} matchService - Allows management between riders and drivers
@@ -140,7 +151,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * @param {NgZone} zone - Provides location services
    */
   constructor(private matchService: MatchingControllerService, private userService: UserControllerService,
-    private mapService: MapsControllerService, private zone: NgZone) { }
+    private mapService: MapsControllerService, private zone: NgZone,
+    private http: HttpClient) { }
 
   /**
    * Retireves the distance of the current route (set by setRoute)
@@ -529,13 +541,45 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Makes a request to update the user's favorite locations table  
   */
   saveLocation(){
-    //TODO: Make a request to update the locations list 
+    this.http.post<any>('http://localhost:3333/favoritelocations?address=' +
+     +'&name='
+    +this.favoriteName + '&userId='
+    +sessionStorage.getItem('id'),{}).subscribe(message =>
+    console.log(message));
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
   }
 
   /** Retrieves the current list of user's favorite locations*/
   getLocations(){
-    //TODO: Load locations into our local locations object  
-    
+    this.showFavorites = !this.showFavorites;
+    this.http.get<any>('http://localhost:3333/favoritelocations/users/'+sessionStorage.getItem('id')).subscribe(favorites => {
+      //this.tokenStorage.saveToken(token);)
+      let marker:any;
+      for(let favorite of favorites){
+        let fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
+         marker = new google.maps.Marker({
+            position: fav_location,
+            map: this.map,
+            title: favorite.name
+          });
+          this.favoriteLocations.push(marker);
+      }
+    }
+    )
+  }
+
+  hideLocations(){
+    this.showFavorites = !this.showFavorites;
+    for(let favorite of this.favoriteLocations){
+      favorite.setMap(null);
+    }
+  }
+
+  deleteLocation(){
+    this.http.delete<any>('http://localhost:3333/favoritelocations?name='
+    +this.deleteFavorite + '&userId='
+    +sessionStorage.getItem('id'),{}).subscribe(message =>
+    console.log(message));
+    console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
   }
 }
