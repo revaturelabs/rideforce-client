@@ -1,16 +1,12 @@
 /// <reference path="../../../../node_modules/@types/googlemaps/index.d.ts" />
 import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
-import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
-import { Location } from './../../models/location.model';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 import { User } from '../../models/user.model';
 import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
-import { GoogleMap } from '@agm/core/services/google-maps-types';
-// import { } from '@types/googlemaps';
+import { Router } from '@angular/router';
 
 /**
  * Component that handles route navigation and displays a map
@@ -25,9 +21,7 @@ import { GoogleMap } from '@agm/core/services/google-maps-types';
 })
 export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
-  /**
-   * Where Users reside
-   */
+  /** Where Users reside */
   private start = 'herndon';
   /** Where Users work */
   private end = 'reston';
@@ -90,17 +84,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     {
       text: 'Parking', value: 'parking_lot_maps.png'
     }
-    // ,
-    // {
-    //   text: "Library", value: "library_maps.png"
-    // },
-    // {
-    //   text: "Information", value: "info-i_maps.png"
-    // }
+
   ];
-
-  // selectedMarkerType = parking_lot_maps.png;
-
 
   /** Whether the map is hidden or not */
   isHidden = false;
@@ -138,9 +123,15 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * @param {UserControllerService} userService - Allows management of the Users
    * @param {MapsControllerService} mapService - Allows a map to be managed
    * @param {NgZone} zone - Provides location services
+   * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
-  constructor(private matchService: MatchingControllerService, private userService: UserControllerService,
-    private mapService: MapsControllerService, private zone: NgZone) { }
+  constructor(
+    private matchService: MatchingControllerService, 
+    private userService: UserControllerService,
+    private mapService: MapsControllerService, 
+    private zone: NgZone,
+    private route: Router
+    ) { }
 
   /**
    * Retireves the distance of the current route (set by setRoute)
@@ -178,6 +169,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Initializes the Map with data
    */
   ngOnInit() {
+    if (sessionStorage.length == 0)
+      this.route.navigate(["/landing"]);
     this.song.src = 'assets/audio/GrimGrinningGhosts.mp3';
     this.song.loop = true;
     this.song.load();

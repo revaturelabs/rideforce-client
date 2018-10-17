@@ -30,11 +30,13 @@ export class NavbarComponent implements OnInit {
   /**
    * Sets up the component with relevent services
    * @param {Auth0Service} auth0 - Provides Auth0 functionality
-   * @param {UserControllerService} userService - allows User Services to be utilized
+   * @param {AuthService} authService - Allows Authentication Services to be utilized
+   * @param {UserControllerService} userService - Allows User Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
     private auth0: Auth0Service,
+    private authService: AuthService,
     private userService: UserControllerService,
     private route: Router
     ) { }
@@ -67,22 +69,6 @@ export class NavbarComponent implements OnInit {
   setCurrentRole(){
     this.role=sessionStorage.getItem('role');
   }
-  // checkIfLoggedIn(){
-  //   if(this.userService.isLoggedIn){
-  //     this.isLoggedIn = true;
-  //   } 
-  //   else if(!this.userService.isLoggedIn) {
-  //     this.isLoggedIn = false;
-  //   }
-  // }
-
-  // getCurrentUser(){
-  //   this.userService.getCurrentUser().subscribe(
-  //     data => {
-  //       this.currentUser = data;
-  //     }
-  //   )
-  // }
 
   /** 
    * Allows User to log out of their session, informing
