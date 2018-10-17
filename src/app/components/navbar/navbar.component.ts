@@ -26,6 +26,10 @@ export class NavbarComponent implements OnInit {
    * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
    */
   role: String;
+  /**
+   * Just a boolean stating whether the dropdown has been toggled.
+   */
+  dropped: boolean=false;
 
   /**
    * Sets up the component with relevent services
@@ -103,6 +107,16 @@ export class NavbarComponent implements OnInit {
     } else {
       await this.route.navigate(["/landing"]);
       location.reload(true);
+    }
+  }
+  drop(){
+    // this.dropped= !this.dropped;
+    if(this.dropped==true){
+      setTimeout(()=>{
+        this.dropped= !this.dropped;
+      },390);
+    }else{
+      this.dropped=!this.dropped;
     }
   }
 }
