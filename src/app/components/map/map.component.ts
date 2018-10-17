@@ -542,7 +542,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   */
   saveLocation(){
     this.http.post<any>('http://localhost:3333/favoritelocations?address=' +
-     +'&name='
+    this.selectedLocation +'&name='
     +this.favoriteName + '&userId='
     +sessionStorage.getItem('id'),{}).subscribe(message =>
     console.log(message));
