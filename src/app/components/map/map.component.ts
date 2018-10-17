@@ -143,6 +143,22 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     private mapService: MapsControllerService, private zone: NgZone) { }
 
   /**
+   * Retireves the distance of the current route (set by setRoute)
+   * @returns {number} - the distance of the route
+   */
+  getCurrentDistance(): number {
+    return this.dist;
+  }
+
+  /**
+   * Retireves the estimated time of the current route (set by setRoute)
+   * @returns {number} - the estimated time of the route
+   */
+  getCurrentTime(): number {
+    return this.time;
+  }
+
+  /**
    * Sets up the Map
    * @param {GoogleMap.maps.Map} map - the Google Map to set
    */
@@ -292,6 +308,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       data => {
         this.dist = data.distance;
         this.time = data.duration;
+        console.log('printing route information...');
         console.log(this.dist);
         console.log(this.time);
       }
@@ -341,11 +358,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   /** Changes the radius of your search */
   public changeRadius() {
-    setTimeout(() => {
+    // setTimeout(() => {
       console.log(this.circle.radius + ' ' + this.currentRadius);
       this.circle.radius = this.currentRadius;
-    },
-      100);
+    // },
+    //   100);
 
   }
 

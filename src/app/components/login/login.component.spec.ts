@@ -11,7 +11,7 @@ import {APP_BASE_HREF} from '@angular/common';
 //                                                        //
 // ********************************************************/
 
-describe('LoginComponent', () => {
+xdescribe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
