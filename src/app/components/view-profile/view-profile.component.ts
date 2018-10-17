@@ -2,6 +2,8 @@ import { Component, OnInit, Testability } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
 import { Office } from '../../models/office.model';
+import { AuthService } from '../../services/auth.service';
+
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -17,8 +19,9 @@ export class ViewProfileComponent implements OnInit {
   /**
    * Sets up the component with the User Service injected
    * @param userService - Allows the component to work with the user service (for updating)
+   * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService) { }
+  constructor(private userService: UserControllerService, private authService: AuthService) { }
   /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -165,7 +168,7 @@ export class ViewProfileComponent implements OnInit {
       active = 'ACTIVE';
     }
     if(this.result) {
-      this.userService.updateStatusAndRole(id, active).then()
+      this.userService.updateStatusAndRole(id, active).then();
     } else {
       alert('No changes will be made');
     }

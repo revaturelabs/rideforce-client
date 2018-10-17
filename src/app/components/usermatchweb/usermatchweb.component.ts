@@ -71,10 +71,11 @@ export class UsermatchwebComponent implements OnInit {
       data => {
         this.currentUser = data;
         let userLinks: Link<User>[] = null;
-        this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
+        this.matchService.getMatchingDrivers(+(sessionStorage.getItem("id"))).subscribe(
           data2 => {
             // console.log("data2 is " + data2);
             userLinks = data2;
+            console.log(userLinks);
             for (let i = 0; i < userLinks.length; i++) {
 
               this.matchService.getFromLink(userLinks[i]).subscribe(

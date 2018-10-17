@@ -137,7 +137,8 @@ export class AccountinfoComponent implements OnInit {
   contactItem: string;
   /**batch end date*/
   batchEnd: string;
-
+  /**time day starts */
+  dayStart: number;
   /**for drivers*/
   carObject: Car;
   carMake: string;
@@ -312,6 +313,7 @@ export class AccountinfoComponent implements OnInit {
       office: '/offices/' + this.officeObject.id,
       // I really don't understand what this translates to on the back end, but now it is dynamic
       batchEnd: new Date(this.batchEnd).toISOString(),
+      dayStart: this.dayStart,
       cars: [],
       active: 'ACTIVE',
       contactInfo: [],
