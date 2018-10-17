@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Role } from '../../models/role.model';
 import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { Router } from '@angular/router';
 
 /**
  * Used as a more complex data structure for holding info on liked users
@@ -46,10 +46,15 @@ export class LikesmatchwebComponent implements OnInit {
 
     /**
      * Sets up the Component for Like demonstrations
-     * @param matchService - Access to Rider Driver matching service
-     * @param userService - Access to user services
+     * @param {MatchingControllerService} matchService - Access to Rider Driver matching service
+     * @param {UserControllerService} userService - Access to user services
+     * @param {Router} route - Allows Nav compnent to switch between sub-components
      */
-    constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
+    constructor(
+        private matchService: MatchingControllerService, 
+        private userService: UserControllerService,
+        private route: Router
+        ) { }
 
     /**
      * Hold the current user
@@ -60,6 +65,8 @@ export class LikesmatchwebComponent implements OnInit {
      * Initializes the Component by populating the swipcards array with data on liked drivers
      */
     ngOnInit() {
+        if (sessionStorage.length == 0)
+          this.route.navigate(["/landing"]);
         this.userService.getCurrentUser().subscribe(
             data => {
                 console.log('this is put into currentUser');

@@ -252,7 +252,7 @@
           </ng-template>
         </ngb-tab>
       </div>
-      <div *ngIf="currentRole === 'ADMIN'" label="ADMIN div">
+      <div *ngIf="authService.isAdmin()" label="CONFIRMATION div">
         <ngb-tab title="View Users" id="4">
           <ng-template ngbTabContent>
             <div class="container-fluid">

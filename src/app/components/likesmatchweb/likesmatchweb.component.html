@@ -22,7 +22,7 @@
               <h5 class="card-text">{{user.user.batchEnd | date}}</h5>
               <h5 *ngIf="user.user.contactInfo.length>0" class="card-text">Contact Info:</h5>
               <h5 *ngFor="let contact of user.user.contactInfo" class="card-text">{{contact}}</h5>
-              <h5 class="card-text">User bio blablablabla</h5>
+              <h5 class="card-text">User bio: {{user.user.bio}}</h5>
             </div>
             <!--I'm sorry but if I did it a reasonable way with transform: rotateY(180deg) the button only works halfway
             -Martin -->
