@@ -356,19 +356,22 @@ export class UserControllerService {
       batchEnd: null,
       startTime: null,
       active: status
-  }
+    };
 
-  return this.http
-  .put<User>(environment.apiUrl + `/users/${id}`, body)
-  .pipe(
-    tap(updated => {
-      // We need to make sure that we refresh the current user if that's the
-      // one that was updated.
-      if (this.currentUser && this.currentUser.id === updated.id) {
-        this.currentUser = updated;
-      }
-    })
-  ).toPromise();
+
+    return this.http
+    .put<User>(environment.apiUrl + `/users/${id}`, body)
+    .pipe(
+      tap(updated => {
+        // We need to make sure that we refresh the current user if that's the
+        // one that was updated.
+        if (this.currentUser && this.currentUser.id === updated.id) {
+          this.currentUser = updated;
+        }
+      })
+    ).toPromise();
+
+  }
 
   // TODO
   // DELETE CONTACT-INFO

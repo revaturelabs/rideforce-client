@@ -5,9 +5,9 @@
     </p>
     <img src="" alt="" id="filter">
     <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">
-      <input style="margin-left: 20px" type="checkbox" [(mgModel)]="filterBatchEnd" (change)="updateFilter()" checked/> Batch End Date <br>
-      <input style="margin-left: 20px" type="checkbox" [(mgModel)]="filterStartTime" (change)="updateFilter()" checked/> Day Start Time <br>
-      <input style="margin-left: 20px" type="checkbox" [(mgModel)]="filterDistance" (change)="updateFilter()" checked/> Distance <br>
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterBatchEnd" (change)="updateFilter()" checked/> Batch End Date <br>
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterStartTime" (change)="updateFilter()" checked/> Day Start Time <br>
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterDistance" (change)="updateFilter()" checked/> Distance <br>
       <!--button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>-->
     </div>
   </div>
