@@ -25,14 +25,12 @@ describe('AuthService', () => {
     .compileComponents();
   }));
   
-  it('should be created', async(inject([HttpClientTestingModule, AuthService],
-    (httpClient: HttpClientTestingModule, authService: AuthService) => {
-      expect(authService).toBeTruthy();
-  })));
-
-  it('should return Incorrect email or password.', function(){
-    const service: AuthService=TestBed.get(AuthService);
-    service.authenticator("Garbage","Garbage").then(
+  it ('should be created', function() {
+    expect(auth).toBeTruthy();
+  });
+   it('should return Incorrect email or password.', function() {
+    // const service: AuthService = TestBed.get(AuthService);
+    auth.authenticator('Garbage', 'Garbage').then(
       () => {
         expect().nothing();
       },
