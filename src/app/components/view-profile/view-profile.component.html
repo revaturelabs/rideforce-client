@@ -135,8 +135,8 @@
               <br>
               <div id="switchStates" hidden>
                 <!-- <input type="checkbox" id="activeState" disabled data-toggle="toggle" data-onstyle="success" data-on="Active <i class='fas fa-bell'></i>" data-offstyle="danger" data-height="100%" data-off="Inactive <i class='fas fa-bell-slash'></i>"> -->
-                <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Inactive <i class='fas fa-bell-slash'></i></button>
-                <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Active <i class='fas fa-bell'></i></button>
+                <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Switch to Inactive <i class='fas fa-bell-slash'></i></button>
+                <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
               </div>
               <br>
               <div>

@@ -32,6 +32,8 @@ export interface User {
    * The end date of the batch, in the format (yyyy-MM-dd'T'HH:mm:ss.SSS'Z').
    */
   batchEnd: any;
+  
+  dayStart: number;
   /**
    *  The user's about me that has a character limit of 255
    */
