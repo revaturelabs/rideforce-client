@@ -59,9 +59,6 @@
         </agm-marker>
         <agm-marker *ngFor="let m of placedMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [title]="m.title">
         </agm-marker>
-        <!--         <agm-circle [visible]="true" [latitude]="circle.latitude" [longitude]="circle.longitude" [radius]="circle.radius" [fillOpacity]=".2"
-          [circleDraggable]="true" [fillColor]="'blue'">
-        </agm-circle> -->
       </agm-map>
     </div>
   </div>
@@ -95,10 +92,6 @@
 
     <div class="col-12 text-center">
 
-      <!--    <button (click)="getRoute()">Testing</button>
-      <div class="row">
-        
-        </div> -->
 
       <div class="row" style="display: flex; justify-content:flex-end; margin-right: 50px; margin-top: 25px">
         <div class="col-2"></div>
@@ -114,10 +107,6 @@
           </div>
           <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>
         </div>
-        <!--  <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
-        <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
-        <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
-        <button (click)="changeStyle('halloween')" class="pumpkinButton"></button> -->
         <br>
       </div>
 
@@ -142,9 +131,6 @@
         </tr>
       </table>
 
-      <!-- <agm-map [latitude]="33" [longitude]="-70">
-
-      </agm-map> -->
     </div>
   </div>
   <div *ngIf="styles != null">
@@ -186,29 +172,3 @@
 </div>
 <img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background">
 <img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background2 flashit">
-
-<!--
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
- Modal
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> -->

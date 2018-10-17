@@ -40,16 +40,11 @@ export class LandingComponent implements OnInit {
     this.sessionCheck();
   }
 
-
   /**
    * Checks to see if there is a session or not
    */
   sessionCheck() {
-    if (sessionStorage.length > 0) {
-      this.session = true;
-    } else {
-      this.session = false;
-    }
+    this.session = sessionStorage.length > 0;
   }
 
   /**
@@ -58,5 +53,4 @@ export class LandingComponent implements OnInit {
   launchAuth0() {
     this.auth0Service.login();
   }
-
 }
