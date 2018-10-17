@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
 import { Link } from '../../models/link.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
-import { Filter } from '../../models/filter';
+import { Router } from '@angular/router';
 
 /** Represents the User selection item in the html page */
 interface UserCard {
@@ -44,7 +43,11 @@ export class UsermatchwebComponent implements OnInit {
      * @param {MatchingControllerService} matchService - Enables the matching service
      * @param {UserControllerService} userService - Enables access to User management
      */
-  constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
+  constructor(
+    private matchService: MatchingControllerService, 
+    private userService: UserControllerService,
+    private route: Router
+    ) { }
 
   /** Holds the current user of the system */
   currentUser: User;
@@ -53,6 +56,8 @@ export class UsermatchwebComponent implements OnInit {
    * Sets up the component by populating the list of possibel matches for the current user
    */
   ngOnInit() {
+    if (sessionStorage.length == 0)
+      this.route.navigate(["/landing"]);
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;

@@ -97,6 +97,24 @@ export class AuthService {
     );
   }
 
+
+  
+  /**
+   * Returns whether the current user is logged in as a Trainer
+   */
+  isTrainer(): boolean {
+    return sessionStorage.getItem('role') == "TRAINER" || this.isAdmin();
+  }
+
+  
+  /**
+   * Returns whether the current user is logged in as an Admin
+   */
+  isAdmin(): boolean {
+    return sessionStorage.getItem('role') == "ADMIN";
+  }
+
+  
   /**
    * Logs the user out of the service
    */

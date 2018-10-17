@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Office } from '../../models/office.model';
-import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 /**
  * Allows extra features reserved for Administrators
@@ -28,11 +29,19 @@ export class AdminComponent implements OnInit {
   /**
    * Sets up Component with User Service
    * @param {UserControllerService} userService - Allows User Services to be utilized
+   * @param {AuthService} authService - Allows Authentication Services to be utilized
+   * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
-  constructor(private userService: UserControllerService) { }
+  constructor(
+    private userService: UserControllerService,
+    private authService: AuthService,
+    private route: Router
+    ) { }
 
   /** Initilaizes the Component with the offices */
   ngOnInit() {
+    if (!this.authService.isTrainer())
+      this.route.navigate(["/landing"]);
     this.getOffices();
   }
 
