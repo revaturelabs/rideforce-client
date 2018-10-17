@@ -26,15 +26,21 @@ export class NavbarComponent implements OnInit {
    * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
    */
   role: String;
+  /**
+   * Just a boolean stating whether the dropdown has been toggled.
+   */
+  dropped: boolean=false;
 
   /**
    * Sets up the component with relevent services
    * @param {Auth0Service} auth0 - Provides Auth0 functionality
-   * @param {UserControllerService} userService - allows User Services to be utilized
+   * @param {AuthService} authService - Allows Authentication Services to be utilized
+   * @param {UserControllerService} userService - Allows User Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
     private auth0: Auth0Service,
+    private authService: AuthService,
     private userService: UserControllerService,
     private route: Router
     ) { }
@@ -67,22 +73,6 @@ export class NavbarComponent implements OnInit {
   setCurrentRole(){
     this.role=sessionStorage.getItem('role');
   }
-  // checkIfLoggedIn(){
-  //   if(this.userService.isLoggedIn){
-  //     this.isLoggedIn = true;
-  //   } 
-  //   else if(!this.userService.isLoggedIn) {
-  //     this.isLoggedIn = false;
-  //   }
-  // }
-
-  // getCurrentUser(){
-  //   this.userService.getCurrentUser().subscribe(
-  //     data => {
-  //       this.currentUser = data;
-  //     }
-  //   )
-  // }
 
   /** 
    * Allows User to log out of their session, informing
@@ -103,6 +93,16 @@ export class NavbarComponent implements OnInit {
     } else {
       await this.route.navigate(["/landing"]);
       location.reload(true);
+    }
+  }
+  drop(){
+    // this.dropped= !this.dropped;
+    if(this.dropped==true){
+      setTimeout(()=>{
+        this.dropped= !this.dropped;
+      },390);
+    }else{
+      this.dropped=!this.dropped;
     }
   }
 }

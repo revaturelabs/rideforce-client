@@ -9,6 +9,6 @@ export const environment = {
   production: false,
   /** URL for the service we are relying on */
   apiUrl: 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222'
-  // apiUrl: 'http://10.0.0.14:2222'
+  // apiUrl: 'http://192.168.60.54:2222'
   //apiUrl: 'http://e5a3040f.ngrok.io/'
 };

@@ -63,8 +63,8 @@ export class UserControllerService {
    * Gets an array of users via the given endpoint
    * @returns {Observable<User[]>} - the list of Users on the system
    */
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(environment.apiUrl + '/users');
+  getAllUsers(): Promise<User[]> {
+    return this.http.get<User[]>(environment.apiUrl + '/users').toPromise();
   }
   /** Gets a single user via the given endpoint and id
    * @param {number} id - the id of the user to retrieve
@@ -104,14 +104,14 @@ export class UserControllerService {
       : this.http
         .get<User>(environment.apiUrl + '/login')
         .pipe(
-          catchError(function<T>(res?: T) {
+          catchError(function <T>(res?: T) {
             this.currentUser = null;
             return of(res as T);
           }),
           tap(user => {
-          this.currentUser = user;
-          this.currentUserSubject.next(user);
-        }));
+            this.currentUser = user;
+            this.currentUserSubject.next(user);
+          }));
   }
   /**First checks that there is not a user populated in currentUser.
    * If there isn't, the currentUser is obtained through the
@@ -344,8 +344,34 @@ export class UserControllerService {
       .put<ContactInfo>(environment.apiUrl + contactInfoUri, newContactInfo);
   }
 
-  // TODO
-  // DELETE CONTACT-INFO
+  updateStatusAndRole(id: number, active?: string, role?: string) {
+    const body = {
+      firstName: null,
+      lastName: null,
+      email: null,
+      photoUrl: null,
+      password: null,
+      role: role,
+      address: null,
+      batchEnd: null,
+      startTime: null,
+      active: active
+    }
 
+    return this.http
+      .put<User>(environment.apiUrl + `/users/${id}`, body)
+      .pipe(
+        tap(updated => {
+          // We need to make sure that we refresh the current user if that's the
+          // one that was updated.
+          if (this.currentUser && this.currentUser.id === updated.id) {
+            this.currentUser = updated;
+          }
+        })
+      ).toPromise();
+
+    // TODO
+    // DELETE CONTACT-INFO
+  }
 
 }

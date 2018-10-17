@@ -148,6 +148,41 @@ export class ViewProfileComponent implements OnInit {
   /** Sets up all users in the system */
   getUsers() {
     let data;
-    this.userService.getAllUsers().subscribe((x) => { data = x; this.users = data });
+    if(sessionStorage.getItem('role') === 'ADMIN') {
+      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); this.users = data });
+    } else if (sessionStorage.getItem('role') === 'TRAINER') {
+      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER')})
+    }
+  }
+
+  result : boolean;
+  updateUserStatus(id : number, active: string) {
+    if(active !== 'DISABLED') {
+      this.result = window.confirm("Are you sure you want to disable this account?");
+      active = 'DISABLED';
+    } else {
+      this.result = window.confirm("Are you sure you want to enable this account?");
+      active = 'ACTIVE';
+    }
+    if(this.result) {
+      this.userService.updateStatusAndRole(id, active).then()
+    } else {
+      alert('No changes will be made');
+    }
+  }
+
+  updateUserRole(id: number, role: string) {
+    if(role === 'TRAINER') {
+      this.result = window.confirm("Are you sure you want to make this user a trainer?");
+      role = 'TRAINER';
+    } else {
+      this.result = window.confirm("Are you sure you want to make this user an admin?");
+      role = 'ADMIN';
+    }
+    if(this.result) {
+      this.userService.updateStatusAndRole(id, role).then();
+    } else {
+      alert('No changes will be made');
+    }
   }
 }

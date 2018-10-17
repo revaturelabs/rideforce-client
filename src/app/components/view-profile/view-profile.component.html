@@ -135,8 +135,8 @@
               <br>
               <div id="switchStates" hidden>
                 <!-- <input type="checkbox" id="activeState" disabled data-toggle="toggle" data-onstyle="success" data-on="Active <i class='fas fa-bell'></i>" data-offstyle="danger" data-height="100%" data-off="Inactive <i class='fas fa-bell-slash'></i>"> -->
-                <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Inactive <i class='fas fa-bell-slash'></i></button>
-                <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Active <i class='fas fa-bell'></i></button>
+                <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Switch to Inactive <i class='fas fa-bell-slash'></i></button>
+                <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
               </div>
               <br>
               <div>
@@ -195,29 +195,29 @@
                   <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
                 </div>
               </div>
-              <div>
+              <!-- <div>
                 <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="bioPrevious()">Previous</button></span>
                 <span> <button class="btn btnNextPrevious" (click)="bioNext()">Next</button></span>
-              </div>
+              </div> -->
             </div>
           </ng-template>
         </ngb-tab>
       </div>
       <div *ngIf="currentRole === 'DRIVER'" label="CAR INFO div">
-        <ngb-tab title="Car Info" id="3">
+        <ngb-tab title="Your Garage" id="3">
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>
               <h2>Car Information:</h2>
               <br>
-              <div class="input-group mb-3">
+              <!-- <div class="input-group mb-3">
                 <div class="input-group" id="button-addon3">
                   <span class="padRight"><button class="btn btnAddCar" type="button" (click)="isDriver()">Driver</button></span>
                   <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>
                 </div>
-              </div>
+              </div> -->
               <br>
-              <div *ngIf="btnCarInfo == 1">
+              <div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Make</span>
@@ -239,20 +239,20 @@
                   <input type="number" min="1950" max="5000" class="form-control" [(ngModel)]="carYear">
                 </div>
               </div>
-              <div>
+              <!-- <div>
                 <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
                 <span> <button class="btn btnNextPrevious" (click)="edit()">Edit</button></span>
-              </div>
-              <div style="padding-top: 20px">
+              </div> -->
+              <!-- <div style="padding-top: 20px">
                 <div *ngIf="!requiredCarFields" class="alert alert-danger">
                   Please select Driver or Rider
                 </div>
-              </div>
+              </div> -->
             </div>
           </ng-template>
         </ngb-tab>
       </div>
-      <div *ngIf="currentRole === 'ADMIN'" label="CONFIRMATION div">
+      <div *ngIf="authService.isAdmin()" label="CONFIRMATION div">
         <ngb-tab title="View Users" id="4">
           <ng-template ngbTabContent>
             <div class="container-fluid">
@@ -266,6 +266,7 @@
                   <th>User Email</th>
                   <th>User Role</th>
                   <th> </th>
+                  <th> </th>
                 </tr>
               </thead>
               <tbody>
@@ -277,6 +278,10 @@
                   <td><button *ngIf="user.role !== 'ADMIN'" class="btn btnEdit">Make Admin</button>
                     <button *ngIf="user.role === 'DRIVER' || user.role === 'RIDER'" class="btn btn-info">Make Trainer</button>
                   </td>
+                  <td>
+                    <button *ngIf="user.active === 'DISABLED'" class="btn btn-success">Enable Account <i class="fas fa-user-check"></i></button>
+                    <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -284,6 +289,39 @@
           </ng-template>
         </ngb-tab>
       </div>
+      <div *ngIf="currentRole === 'TRAINER'" label="TRAINER div">
+          <ngb-tab title="View Associates" id="5">
+            <ng-template ngbTabContent>
+              <div class="container-fluid">
+              <br>
+              <h2>View Associates</h2>
+              <table class="table table-striped table-bordered table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>User's Name</th>
+                    <th>User Email</th>
+                    <th>User Role</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of users">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                      <button *ngIf="user.active === 'DISABLED'" class="btn btn-success">Enable Account <i class="fas fa-user-check"></i></button>
+                      <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </div>
     </ngb-tabset>
   </div>
 </div>

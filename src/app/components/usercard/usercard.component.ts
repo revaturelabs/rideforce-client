@@ -1,13 +1,12 @@
 
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { User } from '../../models/user.model';
-import { AddressModel } from '../../models/address.model';
 import { Link } from '../../models/link.model';
 import { SwipecardModel } from '../../models/swipecard.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Role } from '../../models/role.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { Router } from '@angular/router';
 
 /**
  * Allows Views for Other Users in a mobile view
@@ -61,8 +60,13 @@ export class UsercardComponent implements OnInit {
      * Sets up Component with the Matching and User services injected
      * @param {MatchingControllerService} matchService - Enables the matching service
      * @param {UserControllerService} userService - Enables access to User management
+     * @param {Router} route - Allows Nav compnent to switch between sub-components
      */
-    constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
+    constructor(
+        private matchService: MatchingControllerService, 
+        private userService: UserControllerService,
+        private route: Router
+        ) { }
 
     /** Holds the current user of the system */
     currentUser: User;
@@ -71,6 +75,8 @@ export class UsercardComponent implements OnInit {
      * Sets up the component by populating the list of possibel matches for the current user
      */
     ngOnInit() {
+        if (sessionStorage.length == 0)
+          this.route.navigate(["/landing"]);
         this.userService.getCurrentUser().subscribe(
             data => {
                 console.log('data');

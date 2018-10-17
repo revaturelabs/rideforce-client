@@ -67,7 +67,7 @@ import { CallbackComponent } from './callback/callback/callback.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBXWXgWzxhyvz9JyN9SrHgGOzi7VcU5G3g',
+      apiKey: 'AIzaSyDxGFZzCVmm1PxV8C0KvG6EG6Tt3S_HeXw',
       libraries: ['places'],
     }),
     NgbModule,

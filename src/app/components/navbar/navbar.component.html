@@ -1,45 +1,26 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark navvy-ber" style="justify-content:initial;">
   <!--<div class="container" style="justify-content:center"> -->
-    <a class="navbar-brand" routerLink="landing"><img src="assets/img/rev-footer.png" class="img-fluid logo" 
+    <a class="navbar-brand" routerLink="landing"><img src="assets/img/rev-footer.png" class=" logo" 
       onerror="this.onerror=null;this.src='rev-footer.png';"></a>
     <!-- <a class="navbar-brand" routerLink="/home"><img src="assets/img/rev-footer.png" class="img-fluid logo"></a> -->
     <button class="navbar-toggler ml-auto float-xs-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav"
-      aria-expanded="false" aria-label="Toggle navigation" >
+      aria-expanded="false" aria-label="Toggle navigation" style="margin-right: 30px" (click)="drop()">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="dropdown">
-        <button class="navbar-brand dropdown-toggle" type="button" id="dropdownSettingsButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img src="assets/img/settings_button.png" class="img-fluid logo" onerror="this.onerror=null;this.src='settings_button.png';">
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" id="ddMenu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" routerLink="/howTo" style="padding-right:40px;">About</a>
-          <a *ngIf="currentUser" class="dropdown-item" routerLink="/accountInfo">User Settings</a>
-        </div>
-      </div>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <button *ngIf="session&&dropped" class="btn btn-secondary" (click)="logout()">Logout</button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
       <div class="navbar-nav" style="padding-left:-100px; font-size:14px;">
         <a class="nav-link text-expanded nav-text" routerLink="landing" style="padding-right:30px; padding-left:0%;">Home<span class="sr-only">(current)</span></a>
         <a *ngIf="!session"class="nav-link text-expanded nav-text" routerLink="/login" style="padding-right:30px;">Login</a>
-        <a *ngIf="role!='DRIVER'&&role!='RIDER'&&role!=null" class="nav-link text-expanded nav-text" routerLink="/admin" style="padding-right:30px;">Get Key</a>
+        <a *ngIf="role!=null&&authService.isTrainer()" class="nav-link text-expanded nav-text" routerLink="/admin" style="padding-right:30px;">Get Key</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/favorites" style="padding-right:30px;">Favorites</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/cars" style="padding-right:30px;">Car</a>
-                                                          <!-- change to (click)="logout0()" or just change the implementation of logout() -->
-        <a *ngIf="session" class="nav-link text-expanded btn" (click)="logout()" style="padding-right:30px;">Logout</a>
-        <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/howTo" style="padding-right:30px;">How To</a>
+        <a *ngIf="session" class="nav-link text-expanded" routerLink="/userProfile">Profile</a>
+        <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/howTo" style="padding-right:30px;">About</a>
       </div>
   </div>
-  <div class="dropdown">
-      <button class="navbar-brand dropdown-toggle" type="button" id="dropdownSettingsButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img src="assets/img/settings_button.png" class="img-fluid logo" onerror="this.onerror=null;this.src='settings_button.png';">
-      </button>
-      <img src="" alt="" id="profilePic">
-      <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" routerLink="/howTo">About</a>
-        <a *ngIf="session" class="dropdown-item" routerLink="/userProfile">User Settings</a>
-        <div class="dropdown-divider"></div>
-        <a *ngIf="session" class="dropdown-item" (click)="logout()">Logout</a>
-      </div>
-    </div>
+  <!-- replace this with logout0() eventually when auth0 is set up -->
+  <button *ngIf="session&&!dropped" class="btn btn-secondary" (click)="logout()">Logout</button>
 </nav>
