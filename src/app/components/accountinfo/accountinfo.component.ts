@@ -318,7 +318,6 @@ export class AccountinfoComponent implements OnInit {
       role: this.roleObject,
       bio: this.bio
     };
-    console.log(this.password);
     // get id from user after post and associate with a car object
     // this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token.substring(28))
