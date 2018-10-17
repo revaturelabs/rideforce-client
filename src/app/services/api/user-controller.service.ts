@@ -104,14 +104,14 @@ export class UserControllerService {
       : this.http
         .get<User>(environment.apiUrl + '/login')
         .pipe(
-          catchError(function<T>(res?: T) {
+          catchError(function <T>(res?: T) {
             this.currentUser = null;
             return of(res as T);
           }),
           tap(user => {
-          this.currentUser = user;
-          this.currentUserSubject.next(user);
-        }));
+            this.currentUser = user;
+            this.currentUserSubject.next(user);
+          }));
   }
   /**First checks that there is not a user populated in currentUser.
    * If there isn't, the currentUser is obtained through the
@@ -344,7 +344,7 @@ export class UserControllerService {
       .put<ContactInfo>(environment.apiUrl + contactInfoUri, newContactInfo);
   }
 
-  updateStatusAndRole(id: number, status?: string, role?: string) {
+  updateStatusAndRole(id: number, active?: string, role?: string) {
     const body = {
       firstName: null,
       lastName: null,
@@ -355,23 +355,23 @@ export class UserControllerService {
       address: null,
       batchEnd: null,
       startTime: null,
-      active: status
+      active: active
+    }
+
+    return this.http
+      .put<User>(environment.apiUrl + `/users/${id}`, body)
+      .pipe(
+        tap(updated => {
+          // We need to make sure that we refresh the current user if that's the
+          // one that was updated.
+          if (this.currentUser && this.currentUser.id === updated.id) {
+            this.currentUser = updated;
+          }
+        })
+      ).toPromise();
+
+    // TODO
+    // DELETE CONTACT-INFO
   }
-
-  return this.http
-  .put<User>(environment.apiUrl + `/users/${id}`, body)
-  .pipe(
-    tap(updated => {
-      // We need to make sure that we refresh the current user if that's the
-      // one that was updated.
-      if (this.currentUser && this.currentUser.id === updated.id) {
-        this.currentUser = updated;
-      }
-    })
-  ).toPromise();
-
-  // TODO
-  // DELETE CONTACT-INFO
-
 
 }
