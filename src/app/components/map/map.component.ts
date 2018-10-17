@@ -541,18 +541,20 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Makes a request to update the user's favorite locations table  
   */
   saveLocation(){
-    this.http.post<any>('http://localhost:3333/favoritelocations?address=' +
-    this.selectedLocation +'&name='
+    let selectedLocation: string = (document.getElementById("currentLocation") as HTMLInputElement).value;
+    this.http.post<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?address=' +
+    selectedLocation +'&name='
     +this.favoriteName + '&userId='
     +sessionStorage.getItem('id'),{}).subscribe(message =>
     console.log(message));
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
+    //this.refresh();
   }
 
   /** Retrieves the current list of user's favorite locations*/
   getLocations(){
     this.showFavorites = !this.showFavorites;
-    this.http.get<any>('http://localhost:3333/favoritelocations/users/'+sessionStorage.getItem('id')).subscribe(favorites => {
+    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/'+sessionStorage.getItem('id')).subscribe(favorites => {
       //this.tokenStorage.saveToken(token);)
       let marker:any;
       for(let favorite of favorites){
@@ -568,18 +570,46 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     )
   }
 
+  //**Hides user's saved locations **/
   hideLocations(){
     this.showFavorites = !this.showFavorites;
     for(let favorite of this.favoriteLocations){
       favorite.setMap(null);
     }
+    if(this.marker){
+      this.marker.setMap(null);
+    }
+  }
+/**TODO: Should refresh map once a location is either saved or deleted.**/
+  refresh(){
+    for(let favorite of this.favoriteLocations){
+      favorite.setMap(null);
+    }
+    if(this.marker){
+      this.marker.setMap(null);
+    } 
+    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/'+sessionStorage.getItem('id')).subscribe(favorites => {
+      let marker:any;
+      for(let favorite of favorites){
+        let fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
+         marker = new google.maps.Marker({
+            position: fav_location,
+            map: this.map,
+            title: favorite.name
+          });
+          this.favoriteLocations.push(marker);
+      }
+    }
+    )
   }
 
+/**Delete a saved location by name */
   deleteLocation(){
-    this.http.delete<any>('http://localhost:3333/favoritelocations?name='
+    this.http.delete<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?name='
     +this.deleteFavorite + '&userId='
     +sessionStorage.getItem('id'),{}).subscribe(message =>
     console.log(message));
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
+    //this.refresh();
   }
 }

@@ -29,6 +29,9 @@
     <ngb-tab title = "Favorite Locations">
       <ng-template ngbTabContent>
         <div style = "margin-top: 20px; margin-left: 25px;">
+          <b>Address:</b>
+          <span style="display:inline-block; width: 125px;"></span>
+          <b>Name:</b>
           <form class="form-inline" #form="ngForm">
               <div class="form-group">
                 <input type="text" class="form-control" id="currentLocation" name="currentLocation" (addressSelect)="setCenter($event)" placeholder="Enter Your Location"
@@ -40,12 +43,15 @@
               </div>
           </form>
           <br>
-          <form *ngIf="!showFavorites" class="form-inline">  
-              <div class="form-group">
-                <input type="text" class="form-control" id="deleteLocation" name="deleteLocation"[(ngModel)] = "deleteFavorite"  placeholder="Enter Name"/>
-                <button  type = "submit" name = "delete-location" (click) = "deleteLocation()"  class = "btn btn-primary">Delete Location</button>
-              </div>
-          </form>
+          <div *ngIf="!showFavorites">
+            <b>Name:</b>
+            <form class="form-inline">  
+                <div class="form-group">
+                  <input type="text" class="form-control" id="deleteLocation" name="deleteLocation"[(ngModel)] = "deleteFavorite"  placeholder="Enter Name"/>
+                  <button  type = "submit" name = "delete-location" (click) = "deleteLocation()"  class = "btn btn-primary">Delete Location</button>
+                </div>
+            </form>
+          </div>
         </div>
       </ng-template>
     </ngb-tab>
