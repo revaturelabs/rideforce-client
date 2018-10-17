@@ -49,6 +49,13 @@ export class UsermatchwebComponent implements OnInit {
   /** Holds the current user of the system */
   currentUser: User;
 
+  /** Whether or not to filter users by batch-end date */
+  filterBatchEnd: boolean;
+  /** Whether or not to filter users by day start-time */
+  filterStartTime: boolean;
+  /** Whether or not to filter users by Distance */
+  filterDistance: boolean;
+
   /**
    * Sets up the component by populating the list of possibel matches for the current user
    */
@@ -160,10 +167,37 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
-  filter() {
-    for(var i = 0; i < document.getElementsByTagName("input").length; i++) {
+  // filter() {
+  //   for(var i = 0; i < document.getElementsByTagName("input").length; i++) {
 
-    }
+  //   }
+  // }
+
+  updateFilter() {
+    const userFilter: Filter = {
+      batchEndChange: this.filterBatchEnd,
+      dayStartChange: this.filterStartTime,
+      distanceChange: this.filterDistance
+    };
+
+    this.matchService.getFilteredDrivers(this.currentUser.id, userFilter).then(
+      (users) => {
+        this.users = [];
+        for (const u of users) {
+          if (!u.photoUrl || u.photoUrl === 'null') {
+            u.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
+          }
+          const card: UserCard = {
+            user: u,
+            choose: 'none',
+            face: 'front'
+          };
+          this.users.push(card);
+        }
+
+
+      },
+      (e) => console.log(e)
+    );
   }
-
 }
