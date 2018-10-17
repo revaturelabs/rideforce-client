@@ -5,6 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
+import { Filter } from '../../models/filter';
 
 /** Represents the User selection item in the html page */
 interface UserCard {
@@ -44,7 +45,7 @@ export class UsermatchwebComponent implements OnInit {
      * @param {UserControllerService} userService - Enables access to User management
      */
   constructor(
-    private matchService: MatchingControllerService, 
+    private matchService: MatchingControllerService,
     private userService: UserControllerService,
     private route: Router
     ) { }
@@ -52,12 +53,20 @@ export class UsermatchwebComponent implements OnInit {
   /** Holds the current user of the system */
   currentUser: User;
 
+  /** Whether or not to filter users by batch-end date */
+  filterBatchEnd: boolean;
+  /** Whether or not to filter users by day start-time */
+  filterStartTime: boolean;
+  /** Whether or not to filter users by Distance */
+  filterDistance: boolean;
+
   /**
    * Sets up the component by populating the list of possibel matches for the current user
    */
   ngOnInit() {
-    if (sessionStorage.length == 0)
-      this.route.navigate(["/landing"]);
+    if (sessionStorage.length == 0) {
+      this.route.navigate(['/landing']);
+    }
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
@@ -165,10 +174,40 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
-  filter() {
-    for(var i = 0; i < document.getElementsByTagName("input").length; i++) {
+  // filter() {
+  //   for(var i = 0; i < document.getElementsByTagName("input").length; i++) {
 
-    }
+  //   }
+  // }
+
+  /**
+   * Updates the filter each time a filter checkbox is clicked
+   */
+  updateFilter() {
+    const userFilter: Filter = {
+      batchEndChange: this.filterBatchEnd,
+      dayStartChange: this.filterStartTime,
+      distanceChange: this.filterDistance
+    };
+
+    this.matchService.getFilteredDrivers(this.currentUser.id, userFilter).then(
+      (users) => {
+        this.users = [];
+        for (const u of users) {
+          if (!u.photoUrl || u.photoUrl === 'null') {
+            u.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
+          }
+          const card: UserCard = {
+            user: u,
+            choose: 'none',
+            face: 'front'
+          };
+          this.users.push(card);
+        }
+
+
+      },
+      (e) => console.log(e)
+    );
   }
-
 }
