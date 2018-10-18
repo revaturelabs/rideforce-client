@@ -344,7 +344,37 @@ export class UserControllerService {
       .put<ContactInfo>(environment.apiUrl + contactInfoUri, newContactInfo);
   }
 
-  updateStatusAndRole(id: number, active?: string, role?: string) {
+  updateStatus(id: number, active: string) {
+    const body = {
+      firstName: null,
+      lastName: null,
+      email: null,
+      photoUrl: null,
+      password: null,
+      role: null,
+      address: null,
+      batchEnd: null,
+      startTime: null,
+      active: active
+    }
+
+    return this.http
+      .put<User>(environment.apiUrl + `/users/${id}`, body)
+      .pipe(
+        tap(updated => {
+          // We need to make sure that we refresh the current user if that's the
+          // one that was updated.
+          if (this.currentUser && this.currentUser.id === updated.id) {
+            this.currentUser = updated;
+          }
+        })
+      ).toPromise();
+
+    // TODO
+    // DELETE CONTACT-INFO
+  }
+
+  updateRole(id: number, role: string) {
     const body = {
       firstName: null,
       lastName: null,
@@ -355,7 +385,7 @@ export class UserControllerService {
       address: null,
       batchEnd: null,
       startTime: null,
-      active: active
+      active: null
     }
 
     return this.http

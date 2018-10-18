@@ -137,6 +137,7 @@ export class AccountinfoComponent implements OnInit {
   contactItem: string;
   /**batch end date*/
   batchEnd: string;
+  timeSelect: number;
   /**time day starts */
   dayStart: number;
   /**for drivers*/
@@ -313,13 +314,14 @@ export class AccountinfoComponent implements OnInit {
       office: '/offices/' + this.officeObject.id,
       // I really don't understand what this translates to on the back end, but now it is dynamic
       batchEnd: new Date(this.batchEnd).toISOString(),
-      dayStart: this.dayStart,
+      startTime: this.timeSelect,
       cars: [],
       active: 'ACTIVE',
       contactInfo: [],
       role: this.roleObject,
       bio: this.bio
     };
+    console.log(this.userObject);
     // get id from user after post and associate with a car object
     // this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token.substring(28))
@@ -397,5 +399,9 @@ export class AccountinfoComponent implements OnInit {
     /** Moves Registration to the Car Tab */
   reviewPrevious() {
     this.tabset.select('3');
+  }
+
+  test() {
+    console.log(this.timeSelect);
   }
 }
