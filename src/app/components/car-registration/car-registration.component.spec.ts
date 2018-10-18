@@ -7,17 +7,28 @@ import { User } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { HttpHandler } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
+import { AppModule } from '../../app.module';
+import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
 xdescribe('CarRegistrationComponent', () => {
   let component: CarRegistrationComponent;
   let authService: AuthService;
   let useServe: UserControllerService;
   let user: User;
-  // let fixture: ComponentFixture<CarRegistrationComponent>;
+  let fixture: ComponentFixture<CarRegistrationComponent>;
 
-  beforeEach(async() => {
-    TestBed.configureTestingModule({ providers: [HttpHandler, HttpClient, UserControllerService, AuthService, CarRegistrationComponent] });
-    component = TestBed.get(CarRegistrationComponent);
+    beforeEach(async() => {
+      TestBed.configureTestingModule({
+        imports: [
+          AppModule
+          ],
+        providers: [
+          {provide: APP_BASE_HREF, useValue : '/' }
+        ]
+    })
+    .compileComponents();    
+    fixture = TestBed.createComponent(CarRegistrationComponent);
+    component = fixture.componentInstance;    
     authService = TestBed.get(AuthService);
     await authService.authenticate('jljacko@outlook.com', 'johnPass');
     useServe = TestBed.get(UserControllerService);

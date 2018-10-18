@@ -4,6 +4,9 @@ import { Car } from './car.model';
 import { ContactInfo } from './contact-info.model';
 import { Role } from './role.model';
 
+/**
+ * Represents a user of the ride-share system on our front-end
+ */
 export interface User {
   /**
    * The ID of the user in the database.
@@ -19,6 +22,7 @@ export interface User {
    * The URL to the user's profile photo.
    */
   password: string;
+  /** The url to find the user's profile */
   photoUrl: string;
   /**
    * The user's home address (where they currently live).

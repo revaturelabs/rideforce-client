@@ -17,12 +17,18 @@ export class AppComponent {
   /** Confirms the user password */
   confirmPassword: string;
 
-  constructor(public auth0: Auth0Service){
+  /**
+   * Creates the Root component of the Ride-share front-end
+   * @param auth0 - the updated authentication service to use
+   */
+  constructor(public auth0: Auth0Service) {
     auth0.handleAuthentication();
   }
 
-    /** Log any tap that the system detects */
-
+  /**
+   *  Log any tap that the system detects
+   * @param event - what ever tap that occurs
+   */
   onTap(event) {
     console.log(event);
   }

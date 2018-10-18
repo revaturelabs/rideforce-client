@@ -175,7 +175,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(matchService: <a href="../injectables/MatchingControllerService.html">MatchingControllerService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>)</code>
+<code>constructor(matchService: <a href="../injectables/MatchingControllerService.html">MatchingControllerService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -236,6 +236,24 @@
 </code>
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Allows Nav compnent to switch between sub-components</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -276,7 +294,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/components/likesmatchweb/likesmatchweb.component.ts:115</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/components/likesmatchweb/likesmatchweb.component.ts:146</a></div>
                             </td>
                         </tr>
 
@@ -347,7 +365,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/components/likesmatchweb/likesmatchweb.component.ts:104</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/components/likesmatchweb/likesmatchweb.component.ts:135</a></div>
                             </td>
                         </tr>
 
@@ -418,7 +436,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/likesmatchweb/likesmatchweb.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/likesmatchweb/likesmatchweb.component.ts:67</a></div>
                             </td>
                         </tr>
 
@@ -470,7 +488,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/likesmatchweb/likesmatchweb.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/likesmatchweb/likesmatchweb.component.ts:62</a></div>
                             </td>
                         </tr>
 
@@ -537,10 +555,10 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { User } from &#x27;../../models/user.model&#x27;;
 import { animate, state, style, transition, trigger } from &#x27;@angular/animations&#x27;;
-import { Role } from &#x27;../../models/role.model&#x27;;
 import { Link } from &#x27;../../models/link.model&#x27;;
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 
 /**
  * Used as a more complex data structure for holding info on liked users
@@ -582,10 +600,15 @@ export class LikesmatchwebComponent implements OnInit {
 
     /**
      * Sets up the Component for Like demonstrations
-     * @param matchService - Access to Rider Driver matching service
-     * @param userService - Access to user services
+     * @param {MatchingControllerService} matchService - Access to Rider Driver matching service
+     * @param {UserControllerService} userService - Access to user services
+     * @param {Router} route - Allows Nav compnent to switch between sub-components
      */
-    constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
+    constructor(
+        private matchService: MatchingControllerService, 
+        private userService: UserControllerService,
+        private route: Router
+        ) { }
 
     /**
      * Hold the current user
@@ -596,6 +619,8 @@ export class LikesmatchwebComponent implements OnInit {
      * Initializes the Component by populating the swipcards array with data on liked drivers
      */
     ngOnInit() {
+        if (sessionStorage.length &#x3D;&#x3D; 0)
+          this.route.navigate([&quot;/landing&quot;]);
         this.userService.getCurrentUser().subscribe(
             data &#x3D;&gt; {
                 console.log(&#x27;this is put into currentUser&#x27;);
@@ -614,13 +639,37 @@ export class LikesmatchwebComponent implements OnInit {
                             this.userService.getUserById(id).subscribe(
                                 data3 &#x3D;&gt; {
                                     if (!data3.photoUrl || data3.photoUrl &#x3D;&#x3D;&#x3D; &#x27;null&#x27;) {
+                                        console.log(data3.contactInfo[0]);
                                         data3.photoUrl &#x3D; &#x27;https://s3.us-east-1.amazonaws.com/rydeforce/rydeforce-s3/65600312303b.png&#x27;;
+                                    }
+                                    // This does very bad things.
+                                    // So, for each contact in data3.contactInfo (which is a list of 
+                                    // Link&lt;ContactInfo&gt;), it gets the ContactInfo data by using
+                                    // the function defined in the user service as getContactInfoById().
+                                    // This is an observable. I&#x27;m sorry.
+                                    // It basically replaces what is in the Link[] with what is in the actual
+                                    // ContactInfo object. 
+                                    // We should probably refactor the User Model object to have a ContactInfo[]
+                                    // instead of a Link&lt;ContactInfo&gt;[].
+                                    for(let contact in data3.contactInfo){
+                                        let num &#x3D; +data3.contactInfo[contact].substring(14);
+                                        this.userService.getContactInfoById(num).subscribe(
+                                            data4&#x3D;&gt;{
+                                                if(data4.info!&#x3D;null){
+                                                    if(data3.contactInfo!&#x3D;null &amp;&amp; data3.contactInfo!&#x3D;undefined){
+                                                        console.log(&quot;adding at... data3.contactInfo[&quot;+contact+&quot;]&quot;);
+                                                        data3.contactInfo[contact]&#x3D;&#x60;${data4.type}: ${data4.info}&#x60;;
+                                                    }
+                                                }
+                                            }
+                                        )
                                     }
                                     const card: UserCard &#x3D; {
                                         user: data3,
                                         choose: &#x27;none&#x27;,
                                         face: &#x27;front&#x27;
                                     };
+                                    
                                     this.likecards.push(card);
                                 }
                             );
@@ -669,21 +718,27 @@ export class LikesmatchwebComponent implements OnInit {
         &lt;div [@flip]&#x3D;&quot;user.face&quot; (@flip.done)&#x3D;&quot;endFlipCard(user)&quot; style&#x3D;&quot;transform-style: preserve-3d&quot; class&#x3D;&quot;card grid-item&quot;&gt;
           &lt;div *ngIf&#x3D;&quot;user.face&#x3D;&#x3D;&#x27;front&#x27; || user.face&#x3D;&#x3D;&#x27;front-back&#x27;&quot;&gt;
             &lt;!-- user image is hardcoded for now. need to replace with [src]&#x3D;&quot;user.user.photourl&quot; or something like that --&gt;
-            &lt;img class&#x3D;&quot;card-img-top cardimg&quot; src&#x3D;&quot;http://semantic-ui.com/images/avatar/large/chris.jpg&quot; alt&#x3D;&quot;Card image cap&quot; (click)&#x3D;&quot;flipCard(user)&quot;&gt;
+            &lt;img class&#x3D;&quot;card-img-top cardimg&quot; src&#x3D;&quot;http://semantic-ui.com/images/avatar/large/chris.jpg&quot; alt&#x3D;&quot;Card image cap&quot; &gt;
             &lt;div class&#x3D;&quot;card-body&quot;&gt;
               &lt;h5 class&#x3D;&quot;card-title&quot;&gt;{{user.user.firstName}} {{user.user.lastName}}&lt;/h5&gt;
               &lt;p class&#x3D;&quot;card-text&quot;&gt; {{user.user.email}} &lt;/p&gt;
               &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Like&lt;/a&gt;
+              &lt;button class&#x3D;&quot;btn btn-info&quot; (click)&#x3D;&quot;flipCard(user)&quot;&gt;Ϝlip&lt;/button&gt;
             &lt;/div&gt;
           &lt;/div&gt;
-          &lt;div *ngIf&#x3D;&quot;user.face&#x3D;&#x3D;&#x27;back&#x27; || user.face&#x3D;&#x3D;&#x27;back-front&#x27;&quot; (click)&#x3D;&quot;flipCard(user)&quot;&gt;
-            &lt;div class&#x3D;&quot;card-body&quot; style&#x3D;&quot;transform: rotateY(180deg)&quot;&gt;
+          &lt;div *ngIf&#x3D;&quot;user.face&#x3D;&#x3D;&#x27;back&#x27; || user.face&#x3D;&#x3D;&#x27;back-front&#x27;&quot;&gt;
+            &lt;div class&#x3D;&quot;card-body pre-scrollable&quot; style&#x3D;&quot;transform: rotateY(180deg)&quot;&gt;
               &lt;h5 class&#x3D;&quot;card-title&quot;&gt;{{user.user.firstName}} {{user.user.lastName}}&lt;/h5&gt;
               &lt;p class&#x3D;&quot;card-text&quot;&gt;{{user.user.address}}&lt;/p&gt;
               &lt;h5 class&#x3D;&quot;card-text&quot;&gt;{{user.user.email}}&lt;/h5&gt;
               &lt;h5 class&#x3D;&quot;card-text&quot;&gt;{{user.user.batchEnd | date}}&lt;/h5&gt;
-              &lt;h5 class&#x3D;&quot;card-text&quot;&gt;User bio blablablabla&lt;/h5&gt;
+              &lt;h5 *ngIf&#x3D;&quot;user.user.contactInfo.length&gt;0&quot; class&#x3D;&quot;card-text&quot;&gt;Contact Info:&lt;/h5&gt;
+              &lt;h5 *ngFor&#x3D;&quot;let contact of user.user.contactInfo&quot; class&#x3D;&quot;card-text&quot;&gt;{{contact}}&lt;/h5&gt;
+              &lt;h5 class&#x3D;&quot;card-text&quot;&gt;User bio: {{user.user.bio}}&lt;/h5&gt;
             &lt;/div&gt;
+            &lt;!--I&#x27;m sorry but if I did it a reasonable way with transform: rotateY(180deg) the button only works halfway
+            -Martin --&gt;
+            &lt;button class&#x3D;&quot;btn btn-info&quot; (click)&#x3D;&quot;flipCard(user)&quot; style&#x3D;&quot;margin-bottom: 10px;&quot;&gt;qilꟻ&lt;/button&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -717,8 +772,8 @@ export class LikesmatchwebComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container" style="padding-top:40px">  <h2>Your Likes</h2>  <div class="grid-container">    <div *ngFor="let user of likecards; let i = index" style="background-color: rgba(255, 255, 255, 0.918)">      <div class="enlarge">        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item">          <div *ngIf="user.face==\'front\' || user.face==\'front-back\'">            <!-- user image is hardcoded for now. need to replace with [src]="user.user.photourl" or something like that -->            <img class="card-img-top cardimg" src="http://semantic-ui.com/images/avatar/large/chris.jpg" alt="Card image cap" (click)="flipCard(user)">            <div class="card-body">              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>              <p class="card-text"> {{user.user.email}} </p>              <a href="#" class="btn btn-primary">Like</a>            </div>          </div>          <div *ngIf="user.face==\'back\' || user.face==\'back-front\'" (click)="flipCard(user)">            <div class="card-body" style="transform: rotateY(180deg)">              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>              <p class="card-text">{{user.user.address}}</p>              <h5 class="card-text">{{user.user.email}}</h5>              <h5 class="card-text">{{user.user.batchEnd | date}}</h5>              <h5 class="card-text">User bio blablablabla</h5>            </div>          </div>        </div>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container" style="padding-top:40px">  <h2>Your Likes</h2>  <div class="grid-container">    <div *ngFor="let user of likecards; let i = index" style="background-color: rgba(255, 255, 255, 0.918)">      <div class="enlarge">        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item">          <div *ngIf="user.face==\'front\' || user.face==\'front-back\'">            <!-- user image is hardcoded for now. need to replace with [src]="user.user.photourl" or something like that -->            <img class="card-img-top cardimg" src="http://semantic-ui.com/images/avatar/large/chris.jpg" alt="Card image cap" >            <div class="card-body">              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>              <p class="card-text"> {{user.user.email}} </p>              <a href="#" class="btn btn-primary">Like</a>              <button class="btn btn-info" (click)="flipCard(user)">Ϝlip</button>            </div>          </div>          <div *ngIf="user.face==\'back\' || user.face==\'back-front\'">            <div class="card-body pre-scrollable" style="transform: rotateY(180deg)">              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>              <p class="card-text">{{user.user.address}}</p>              <h5 class="card-text">{{user.user.email}}</h5>              <h5 class="card-text">{{user.user.batchEnd | date}}</h5>              <h5 *ngIf="user.user.contactInfo.length>0" class="card-text">Contact Info:</h5>              <h5 *ngFor="let contact of user.user.contactInfo" class="card-text">{{contact}}</h5>              <h5 class="card-text">User bio: {{user.user.bio}}</h5>            </div>            <!--I\'m sorry but if I did it a reasonable way with transform: rotateY(180deg) the button only works halfway            -Martin -->            <button class="btn btn-info" (click)="flipCard(user)" style="margin-bottom: 10px;">qilꟻ</button>          </div>        </div>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CallbackComponent', 'selector': 'app-callback'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'LikesmatchwebComponent'};
 </script>

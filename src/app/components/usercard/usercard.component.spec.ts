@@ -2,10 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpHandler, HttpClient } from '@angular/common/http';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
-import { AppModule } from '../../app.module';
-import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
+import { ElementRef } from '@angular/core';
 
 import { UsercardComponent } from './usercard.component';
+import { AppModule } from '../../app.module';
+import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
 describe('UsercardComponent', () => {
   let component: UsercardComponent;
@@ -19,15 +20,10 @@ describe('UsercardComponent', () => {
   // }));
 
   // beforeEach(() => {
-  //   fixture = TestBed.createComponent(UsercardComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
+  //   TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, MatchingControllerService,
+  //      UserControllerService, UsercardComponent]});
+  //   component = TestBed.get(UsercardComponent);
   // });
-  beforeEach(() => {
-    TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, MatchingControllerService,
-       UserControllerService, UsercardComponent]});
-    component = TestBed.get(UsercardComponent);
-  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,6 +37,13 @@ describe('UsercardComponent', () => {
     })
     .compileComponents();
   }));
+
+     beforeEach(() => {
+    fixture = TestBed.createComponent(UsercardComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
      beforeEach(() => {
     fixture = TestBed.createComponent(UsercardComponent);
     component = fixture.componentInstance;
@@ -52,7 +55,11 @@ describe('UsercardComponent', () => {
   });
 
   it('hide image tests', () => {
+    const spyObj = jasmine.createSpy('nativeElement');
+    // let elRef: ElementRef;
+    // component.swipeCardMain = elRef;
     component.hideImage(true);
+    //expect(component.swipeCardMain).toBeTruthy();
   });
    it('unhide image tests', () => {
     component.hideImage(false);

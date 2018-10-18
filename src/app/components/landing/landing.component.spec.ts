@@ -3,10 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LandingComponent } from './landing.component';
 import { HttpHandler, HttpClient } from '@angular/common/http';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { AppModule } from '../../app.module';
+import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
 describe('LandingComponent', async() => {
   let component: LandingComponent;
-  // let fixture: ComponentFixture<LandingComponent>;
+  let fixture: ComponentFixture<LandingComponent>;
 
   // beforeEach(async(() => {
   //   TestBed.configureTestingModule({
@@ -21,9 +23,23 @@ describe('LandingComponent', async() => {
   //   component = fixture.componentInstance;
   //   fixture.detectChanges();
   // });
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+        imports: [
+          AppModule
+          ],
+        providers: [
+          {provide: APP_BASE_HREF, useValue : '/',
+          LandingComponent}
+        ]
+    })
+    .compileComponents();
+  }));
+
   beforeEach(() => {
-    TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, UserControllerService, LandingComponent]});
-    component = TestBed.get(LandingComponent);
+    fixture = TestBed.createComponent(LandingComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {

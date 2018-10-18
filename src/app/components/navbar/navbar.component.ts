@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
   /**
    * Just a boolean stating whether the dropdown has been toggled.
    */
-  dropped: boolean=false;
+  dropped: boolean = false;
 
   /**
    * Sets up the component with relevent services
@@ -70,39 +70,45 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
-  setCurrentRole(){
-    this.role=sessionStorage.getItem('role');
+
+  /**
+   * Sets the role of the Current user to determine what functionality should be available
+   */
+  setCurrentRole() {
+    this.role = sessionStorage.getItem('role');
   }
 
-  /** 
+  /**
    * Allows User to log out of their session, informing
    * Auth0 API that a logout has occured
-   */ 
+   */
   logout0() {
     this.auth0.logout0();
   }
-    
+
   /**
    * Allows User to log out of their session
-   * uses await/async to avoid forcing User to reload manually to see the "log in" button after log out
+   * uses await/async to avoid forcing User to reload manually to see the 'log in' button after log out
    */
   async logout() {
     sessionStorage.clear();
-    if (this.route.url === "/landing") {
+    if (this.route.url === '/landing') {
       location.reload(true);
     } else {
-      await this.route.navigate(["/landing"]);
+      await this.route.navigate(['/landing']);
       location.reload(true);
     }
   }
-  drop(){
+
+  /** Toggles a drop-down menu close to the log-out option */
+  drop() {
     // this.dropped= !this.dropped;
-    if(this.dropped==true){
-      setTimeout(()=>{
-        this.dropped= !this.dropped;
-      },390);
-    }else{
-      this.dropped=!this.dropped;
+    if (this.dropped == true) {
+      setTimeout(() => {
+        this.dropped = !this.dropped;
+      }, 390);
+    } else {
+      this.dropped = !this.dropped;
     }
   }
 }
