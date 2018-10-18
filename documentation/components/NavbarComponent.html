@@ -134,6 +134,12 @@
                                 <a href="#currentUser">currentUser</a>
                             </li>
                             <li>
+                                <a href="#dropped">dropped</a>
+                            </li>
+                            <li>
+                                <a href="#role">role</a>
+                            </li>
+                            <li>
                                 <a href="#session">session</a>
                             </li>
                         </ul>
@@ -149,6 +155,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#drop">drop</a>
+                            </li>
+                            <li>
                                 <a href="#getCurrentUser">getCurrentUser</a>
                             </li>
                             <li>
@@ -156,10 +165,16 @@
                                 <a href="#logout">logout</a>
                             </li>
                             <li>
+                                <a href="#logout0">logout0</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
                                 <a href="#sessionCheck">sessionCheck</a>
+                            </li>
+                            <li>
+                                <a href="#setCurrentRole">setCurrentRole</a>
                             </li>
                         </ul>
                     </td>
@@ -179,12 +194,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, authService: <a href="../injectables/AuthService.html">AuthService</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(auth0: <a href="../injectables/Auth0Service.html">Auth0Service</a>, authService: <a href="../injectables/AuthService.html">AuthService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/navbar/navbar.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/navbar/navbar.component.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -205,10 +220,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userService</td>
+                                                        <td>auth0</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/UserControllerService.html" target="_self" >UserControllerService</a></code>
+                                                                    <code><a href="../injectables/Auth0Service.html" target="_self" >Auth0Service</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -217,7 +232,7 @@
                                                     
                                                         <td>
                                                                 <code><ul>
-<li>allows User Services to be utilized</li>
+<li>Provides Auth0 functionality</li>
 </ul>
 </code>
                                                         </td>
@@ -235,7 +250,25 @@
                                                     
                                                         <td>
                                                                 <code><ul>
-<li>(unused, should be used by Login component) Enables component to authenticate user</li>
+<li>Allows Authentication Services to be utilized</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/UserControllerService.html" target="_self" >UserControllerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Allows User Services to be utilized</li>
 </ul>
 </code>
                                                         </td>
@@ -280,6 +313,46 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="drop"></a>
+                        <span class="name">
+                            <b>
+                            drop
+                            </b>
+                            <a href="#drop"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>drop()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/components/navbar/navbar.component.ts:104</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Toggles a drop-down menu close to the log-out option </p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="getCurrentUser"></a>
                         <span class="name">
                             <b>
@@ -298,7 +371,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/navbar/navbar.component.ts:70</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/navbar/navbar.component.ts:66</a></div>
                             </td>
                         </tr>
 
@@ -340,7 +413,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/components/navbar/navbar.component.ts:98</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/components/navbar/navbar.component.ts:93</a></div>
                             </td>
                         </tr>
 
@@ -348,11 +421,52 @@
                 <tr>
                     <td class="col-md-4">
                             <div class="io-description"><p>Allows User to log out of their session
-uses await/async to avoid forcing User to reload manually to see the &quot;log in&quot; button after log out</p>
+uses await/async to avoid forcing User to reload manually to see the &#39;log in&#39; button after log out</p>
 </div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logout0"></a>
+                        <span class="name">
+                            <b>
+                            logout0
+                            </b>
+                            <a href="#logout0"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>logout0()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/components/navbar/navbar.component.ts:85</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Allows User to log out of their session, informing
+Auth0 API that a logout has occured</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
                     </td>
@@ -381,7 +495,7 @@ uses await/async to avoid forcing User to reload manually to see the &quot;log i
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/navbar/navbar.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/navbar/navbar.component.ts:51</a></div>
                             </td>
                         </tr>
 
@@ -421,14 +535,54 @@ uses await/async to avoid forcing User to reload manually to see the &quot;log i
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/navbar/navbar.component.ts:60</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/navbar/navbar.component.ts:59</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Updates the status of our session ( is the user currently logged on?)</p>
+                            <div class="io-description"><p>Updates session, telling if the user is logged in or not</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setCurrentRole"></a>
+                        <span class="name">
+                            <b>
+                            setCurrentRole
+                            </b>
+                            <a href="#setCurrentRole"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>setCurrentRole()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/components/navbar/navbar.component.ts:77</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Sets the role of the Current user to determine what functionality should be available</p>
 </div>
 
                             <div class="io-description">
@@ -473,13 +627,98 @@ uses await/async to avoid forcing User to reload manually to see the &quot;log i
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/navbar/navbar.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/navbar/navbar.component.ts:19</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Holds the current user of the app </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dropped"></a>
+                        <span class="name">
+                            <b>
+                            dropped
+                            </b>
+                            <a href="#dropped"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>dropped:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/navbar/navbar.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Just a boolean stating whether the dropdown has been toggled.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="role"></a>
+                        <span class="name">
+                            <b>
+                            role
+                            </b>
+                            <a href="#role"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>role:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/navbar/navbar.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar</p>
 </div>
                     </td>
                 </tr>
@@ -501,18 +740,19 @@ uses await/async to avoid forcing User to reload manually to see the &quot;log i
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>session:     <code></code>
+                        <code>session:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>sessionStorage.length &gt; 0</code>
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/navbar/navbar.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/navbar/navbar.component.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -536,6 +776,7 @@ import { UserControllerService } from &#x27;../../services/api/user-controller.s
 import { AuthService } from &#x27;../../services/auth.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { User } from &#x27;../../models/user.model&#x27;;
+import { Auth0Service } from &#x27;../../services/auth0.service&#x27;;
 
 /**
  * Hosts the Component that allows users to navigate between components
@@ -552,50 +793,45 @@ export class NavbarComponent implements OnInit {
   /**
    * Whether the User is logged on or not
    */
-  session &#x3D; sessionStorage.length &gt; 0;
+  session: boolean;
+
+  /**
+   * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
+   */
+  role: String;
+  /**
+   * Just a boolean stating whether the dropdown has been toggled.
+   */
+  dropped: boolean&#x3D;false;
 
   /**
    * Sets up the component with relevent services
-   * @param {UserControllerService} userService - allows User Services to be utilized
-   * @param {AuthService} authService - (unused, should be used by Login component) Enables component to authenticate user
+   * @param {Auth0Service} auth0 - Provides Auth0 functionality
+   * @param {AuthService} authService - Allows Authentication Services to be utilized
+   * @param {UserControllerService} userService - Allows User Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
-    private userService: UserControllerService,
+    private auth0: Auth0Service,
     private authService: AuthService,
-    private route: Router) { }
+    private userService: UserControllerService,
+    private route: Router
+    ) { }
 
   /**
    * Sets up the Log in Session appearence
    */
   ngOnInit() {
-    // this.userService.getCurrentUserObservable().subscribe(
-    //   data &#x3D;&gt; {
-    //     this.currentUser &#x3D; data;
-    //     // console.log(this.currentUser);
-    //     document.getElementById(&quot;profilePic&quot;).setAttribute(&quot;src&quot;,this.currentUser.photoUrl);
-    //   }
-    // );
-    // this.userService.getCurrentUserObservable().subscribe(
-    //   data &#x3D;&gt; {
-    //     this.currentUser &#x3D; data;
-    //     // console.log(this.currentUser);
-    //     document.getElementById(&quot;profilePic&quot;).setAttribute(&quot;src&quot;,this.currentUser.photoUrl);
-    //   }
-    // );
     this.sessionCheck();
+    this.setCurrentRole();
   }
 
-
   /**
-   * Updates the status of our session ( is the user currently logged on?)
+   * Updates session, telling if the user is logged in or not
    */
   sessionCheck() {
-    if (sessionStorage.length &gt; 0) {
-      this.session &#x3D; true;
-    } else {
-      this.session &#x3D; false;
-    }
+    console.log(sessionStorage);
+    this.session &#x3D; sessionStorage.length &gt; 0;
   }
   /**
    * Sets up the current user
@@ -607,83 +843,77 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
-  // checkIfLoggedIn(){
-  //   if(this.userService.isLoggedIn){
-  //     this.isLoggedIn &#x3D; true;
-  //   } 
-  //   else if(!this.userService.isLoggedIn) {
-  //     this.isLoggedIn &#x3D; false;
-  //   }
-  // }
 
-  // getCurrentUser(){
-  //   this.userService.getCurrentUser().subscribe(
-  //     data &#x3D;&gt; {
-  //       this.currentUser &#x3D; data;
-  //     }
-  //   )
-  // }
+  /**
+   * Sets the role of the Current user to determine what functionality should be available
+   */
+  setCurrentRole() {
+    this.role &#x3D; sessionStorage.getItem(&#x27;role&#x27;);
+  }
+
+  /**
+   * Allows User to log out of their session, informing
+   * Auth0 API that a logout has occured
+   */
+  logout0() {
+    this.auth0.logout0();
+  }
 
   /**
    * Allows User to log out of their session
-   * uses await/async to avoid forcing User to reload manually to see the &quot;log in&quot; button after log out
+   * uses await/async to avoid forcing User to reload manually to see the &#x27;log in&#x27; button after log out
    */
   async logout() {
     sessionStorage.clear();
-    if (this.route.url &#x3D;&#x3D;&#x3D; &quot;/landing&quot;) {
+    if (this.route.url &#x3D;&#x3D;&#x3D; &#x27;/landing&#x27;) {
       location.reload(true);
     } else {
-      await this.route.navigate([&quot;/landing&quot;]);
+      await this.route.navigate([&#x27;/landing&#x27;]);
       location.reload(true);
     }
   }
-}
-</code></pre>
+
+  /** Toggles a drop-down menu close to the log-out option */
+  drop() {
+    // this.dropped&#x3D; !this.dropped;
+    if (this.dropped &#x3D;&#x3D; true) {
+      setTimeout(() &#x3D;&gt; {
+        this.dropped &#x3D; !this.dropped;
+      }, 390);
+    } else {
+      this.dropped &#x3D; !this.dropped;
+    }
+  }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;nav class&#x3D;&quot;navbar navbar-expand-md navbar-dark bg-dark navvy-ber&quot; style&#x3D;&quot;justify-content:initial;&quot;&gt;
   &lt;!--&lt;div class&#x3D;&quot;container&quot; style&#x3D;&quot;justify-content:center&quot;&gt; --&gt;
-    &lt;a class&#x3D;&quot;navbar-brand&quot; routerLink&#x3D;&quot;landing&quot;&gt;&lt;img src&#x3D;&quot;assets/img/rev-footer.png&quot; class&#x3D;&quot;img-fluid logo&quot; 
+    &lt;a class&#x3D;&quot;navbar-brand&quot; routerLink&#x3D;&quot;landing&quot;&gt;&lt;img src&#x3D;&quot;assets/img/rev-footer.png&quot; class&#x3D;&quot; logo&quot; 
       onerror&#x3D;&quot;this.onerror&#x3D;null;this.src&#x3D;&#x27;rev-footer.png&#x27;;&quot;&gt;&lt;/a&gt;
     &lt;!-- &lt;a class&#x3D;&quot;navbar-brand&quot; routerLink&#x3D;&quot;/home&quot;&gt;&lt;img src&#x3D;&quot;assets/img/rev-footer.png&quot; class&#x3D;&quot;img-fluid logo&quot;&gt;&lt;/a&gt; --&gt;
     &lt;button class&#x3D;&quot;navbar-toggler ml-auto float-xs-right&quot; type&#x3D;&quot;button&quot; data-toggle&#x3D;&quot;collapse&quot; data-target&#x3D;&quot;#navbarNavAltMarkup&quot; aria-controls&#x3D;&quot;navbarNav&quot;
-      aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot; &gt;
+      aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot; style&#x3D;&quot;margin-right: 30px&quot; (click)&#x3D;&quot;drop()&quot;&gt;
       &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;/span&gt;
     &lt;/button&gt;
-    &lt;div class&#x3D;&quot;dropdown&quot;&gt;
-        &lt;button class&#x3D;&quot;navbar-brand dropdown-toggle&quot; type&#x3D;&quot;button&quot; id&#x3D;&quot;dropdownSettingsButton&quot; data-toggle&#x3D;&quot;dropdown&quot; aria-haspopup&#x3D;&quot;true&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
-          &lt;img src&#x3D;&quot;assets/img/settings_button.png&quot; class&#x3D;&quot;img-fluid logo&quot; onerror&#x3D;&quot;this.onerror&#x3D;null;this.src&#x3D;&#x27;settings_button.png&#x27;;&quot;&gt;
-        &lt;/button&gt;
-        &lt;div class&#x3D;&quot;dropdown-menu dropdown-menu-right&quot; id&#x3D;&quot;ddMenu&quot; aria-labelledby&#x3D;&quot;dropdownMenuButton&quot;&gt;
-          &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/howTo&quot; style&#x3D;&quot;padding-right:40px;&quot;&gt;About&lt;/a&gt;
-          &lt;a *ngIf&#x3D;&quot;currentUser&quot; class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/accountInfo&quot;&gt;User Settings&lt;/a&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;navbarNavAltMarkup&quot;&gt;
+    &lt;button *ngIf&#x3D;&quot;session&amp;&amp;dropped&quot; class&#x3D;&quot;btn btn-secondary&quot; (click)&#x3D;&quot;logout()&quot;&gt;Logout&lt;/button&gt;
+    &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;navbarNavAltMarkup&quot; &gt;
       &lt;div class&#x3D;&quot;navbar-nav&quot; style&#x3D;&quot;padding-left:-100px; font-size:14px;&quot;&gt;
         &lt;a class&#x3D;&quot;nav-link text-expanded nav-text&quot; routerLink&#x3D;&quot;landing&quot; style&#x3D;&quot;padding-right:30px; padding-left:0%;&quot;&gt;Home&lt;span class&#x3D;&quot;sr-only&quot;&gt;(current)&lt;/span&gt;&lt;/a&gt;
         &lt;a *ngIf&#x3D;&quot;!session&quot;class&#x3D;&quot;nav-link text-expanded nav-text&quot; routerLink&#x3D;&quot;/login&quot; style&#x3D;&quot;padding-right:30px;&quot;&gt;Login&lt;/a&gt;
-        &lt;a *ngIf&#x3D;&quot;session&quot; class&#x3D;&quot;nav-link text-expanded nav-text&quot; routerLink&#x3D;&quot;/admin&quot; style&#x3D;&quot;padding-right:30px;&quot;&gt;Get Key&lt;/a&gt;
+        &lt;a *ngIf&#x3D;&quot;role!&#x3D;null&amp;&amp;authService.isTrainer()&quot; class&#x3D;&quot;nav-link text-expanded nav-text&quot; routerLink&#x3D;&quot;/admin&quot; style&#x3D;&quot;padding-right:30px;&quot;&gt;Get Key&lt;/a&gt;
         &lt;a *ngIf&#x3D;&quot;session&quot; class&#x3D;&quot;nav-link text-expanded&quot; routerLink&#x3D;&quot;/map&quot; style&#x3D;&quot;padding-right:30px;&quot;&gt;Map&lt;/a&gt;
         &lt;a *ngIf&#x3D;&quot;session&quot; class&#x3D;&quot;nav-link text-expanded&quot; routerLink&#x3D;&quot;/rideswipe&quot; style&#x3D;&quot;padding-right:30px;&quot;&gt;Browse&lt;/a&gt;
         &lt;a *ngIf&#x3D;&quot;session&quot; class&#x3D;&quot;nav-link text-expanded&quot; routerLink&#x3D;&quot;/favorites&quot; style&#x3D;&quot;padding-right:30px;&quot;&gt;Favorites&lt;/a&gt;
         &lt;a *ngIf&#x3D;&quot;session&quot; class&#x3D;&quot;nav-link text-expanded&quot; routerLink&#x3D;&quot;/cars&quot; style&#x3D;&quot;padding-right:30px;&quot;&gt;Car&lt;/a&gt;
-        &lt;a *ngIf&#x3D;&quot;session&quot; class&#x3D;&quot;nav-link text-expanded nav-text&quot; (click)&#x3D;&quot;logout()&quot; style&#x3D;&quot;padding-right:30px;&quot;&gt;Logout&lt;/a&gt;
+        &lt;a *ngIf&#x3D;&quot;session&quot; class&#x3D;&quot;nav-link text-expanded&quot; routerLink&#x3D;&quot;/userProfile&quot; style&#x3D;&quot;padding-right: 30px;&quot;&gt;Profile&lt;/a&gt;
+        &lt;a *ngIf&#x3D;&quot;session&quot; class&#x3D;&quot;nav-link text-expanded nav-text&quot; routerLink&#x3D;&quot;/howTo&quot; style&#x3D;&quot;padding-right:30px;&quot;&gt;About&lt;/a&gt;
       &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class&#x3D;&quot;dropdown&quot;&gt;
-      &lt;button class&#x3D;&quot;navbar-brand dropdown-toggle&quot; type&#x3D;&quot;button&quot; id&#x3D;&quot;dropdownSettingsButton2&quot; data-toggle&#x3D;&quot;dropdown&quot; aria-haspopup&#x3D;&quot;true&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
-        &lt;img src&#x3D;&quot;assets/img/settings_button.png&quot; class&#x3D;&quot;img-fluid logo&quot; onerror&#x3D;&quot;this.onerror&#x3D;null;this.src&#x3D;&#x27;settings_button.png&#x27;;&quot;&gt;
-      &lt;/button&gt;
-      &lt;img src&#x3D;&quot;&quot; alt&#x3D;&quot;&quot; id&#x3D;&quot;profilePic&quot;&gt;
-      &lt;div class&#x3D;&quot;dropdown-menu dropdown-menu-right&quot; id&#x3D;&quot;ddMenu2&quot; aria-labelledby&#x3D;&quot;dropdownMenuButton&quot;&gt;
-        &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/howTo&quot;&gt;About&lt;/a&gt;
-        &lt;a *ngIf&#x3D;&quot;session&quot; class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/userProfile&quot;&gt;User Settings&lt;/a&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;
-</code></pre>
+  &lt;!-- replace this with logout0() eventually when auth0 is set up --&gt;
+  &lt;button *ngIf&#x3D;&quot;session&amp;&amp;!dropped&quot; class&#x3D;&quot;btn btn-secondary&quot; (click)&#x3D;&quot;logout()&quot;&gt;Logout&lt;/button&gt;
+&lt;/nav&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -711,8 +941,8 @@ export class NavbarComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-expand-md navbar-dark bg-dark navvy-ber" style="justify-content:initial;">  <!--<div class="container" style="justify-content:center"> -->    <a class="navbar-brand" routerLink="landing"><img src="assets/img/rev-footer.png" class="img-fluid logo"       onerror="this.onerror=null;this.src=\'rev-footer.png\';"></a>    <!-- <a class="navbar-brand" routerLink="/home"><img src="assets/img/rev-footer.png" class="img-fluid logo"></a> -->    <button class="navbar-toggler ml-auto float-xs-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav"      aria-expanded="false" aria-label="Toggle navigation" >      <span class="navbar-toggler-icon"></span>    </button>    <div class="dropdown">        <button class="navbar-brand dropdown-toggle" type="button" id="dropdownSettingsButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">          <img src="assets/img/settings_button.png" class="img-fluid logo" onerror="this.onerror=null;this.src=\'settings_button.png\';">        </button>        <div class="dropdown-menu dropdown-menu-right" id="ddMenu" aria-labelledby="dropdownMenuButton">          <a class="dropdown-item" routerLink="/howTo" style="padding-right:40px;">About</a>          <a *ngIf="currentUser" class="dropdown-item" routerLink="/accountInfo">User Settings</a>        </div>      </div>    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">      <div class="navbar-nav" style="padding-left:-100px; font-size:14px;">        <a class="nav-link text-expanded nav-text" routerLink="landing" style="padding-right:30px; padding-left:0%;">Home<span class="sr-only">(current)</span></a>        <a *ngIf="!session"class="nav-link text-expanded nav-text" routerLink="/login" style="padding-right:30px;">Login</a>        <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/admin" style="padding-right:30px;">Get Key</a>        <a *ngIf="session" class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>        <a *ngIf="session" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>        <a *ngIf="session" class="nav-link text-expanded" routerLink="/favorites" style="padding-right:30px;">Favorites</a>        <a *ngIf="session" class="nav-link text-expanded" routerLink="/cars" style="padding-right:30px;">Car</a>        <a *ngIf="session" class="nav-link text-expanded nav-text" (click)="logout()" style="padding-right:30px;">Logout</a>      </div>  </div>  <div class="dropdown">      <button class="navbar-brand dropdown-toggle" type="button" id="dropdownSettingsButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        <img src="assets/img/settings_button.png" class="img-fluid logo" onerror="this.onerror=null;this.src=\'settings_button.png\';">      </button>      <img src="" alt="" id="profilePic">      <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">        <a class="dropdown-item" routerLink="/howTo">About</a>        <a *ngIf="session" class="dropdown-item" routerLink="/userProfile">User Settings</a>      </div>    </div></nav></div>'
-    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
+        var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-expand-md navbar-dark bg-dark navvy-ber" style="justify-content:initial;">  <!--<div class="container" style="justify-content:center"> -->    <a class="navbar-brand" routerLink="landing"><img src="assets/img/rev-footer.png" class=" logo"       onerror="this.onerror=null;this.src=\'rev-footer.png\';"></a>    <!-- <a class="navbar-brand" routerLink="/home"><img src="assets/img/rev-footer.png" class="img-fluid logo"></a> -->    <button class="navbar-toggler ml-auto float-xs-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav"      aria-expanded="false" aria-label="Toggle navigation" style="margin-right: 30px" (click)="drop()">      <span class="navbar-toggler-icon"></span>    </button>    <button *ngIf="session&&dropped" class="btn btn-secondary" (click)="logout()">Logout</button>    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >      <div class="navbar-nav" style="padding-left:-100px; font-size:14px;">        <a class="nav-link text-expanded nav-text" routerLink="landing" style="padding-right:30px; padding-left:0%;">Home<span class="sr-only">(current)</span></a>        <a *ngIf="!session"class="nav-link text-expanded nav-text" routerLink="/login" style="padding-right:30px;">Login</a>        <a *ngIf="role!=null&&authService.isTrainer()" class="nav-link text-expanded nav-text" routerLink="/admin" style="padding-right:30px;">Get Key</a>        <a *ngIf="session" class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>        <a *ngIf="session" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>        <a *ngIf="session" class="nav-link text-expanded" routerLink="/favorites" style="padding-right:30px;">Favorites</a>        <a *ngIf="session" class="nav-link text-expanded" routerLink="/cars" style="padding-right:30px;">Car</a>        <a *ngIf="session" class="nav-link text-expanded" routerLink="/userProfile" style="padding-right: 30px;">Profile</a>        <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/howTo" style="padding-right:30px;">About</a>      </div>  </div>  <!-- replace this with logout0() eventually when auth0 is set up -->  <button *ngIf="session&&!dropped" class="btn btn-secondary" (click)="logout()">Logout</button></nav></div>'
+    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CallbackComponent', 'selector': 'app-callback'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};
 </script>

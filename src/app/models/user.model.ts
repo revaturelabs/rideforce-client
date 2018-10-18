@@ -4,6 +4,9 @@ import { Car } from './car.model';
 import { ContactInfo } from './contact-info.model';
 import { Role } from './role.model';
 
+/**
+ * Represents a user of the ride-share system on our front-end
+ */
 export interface User {
   /**
    * The ID of the user in the database.
@@ -19,6 +22,7 @@ export interface User {
    * The URL to the user's profile photo.
    */
   password: string;
+  /** The url to find the user's profile */
   photoUrl: string;
   /**
    * The user's home address (where they currently live).
@@ -32,7 +36,7 @@ export interface User {
    * The end date of the batch, in the format (yyyy-MM-dd'T'HH:mm:ss.SSS'Z').
    */
   batchEnd: any;
-  
+  /** The time of day the users batch starts daily sessions */
   dayStart: number;
   /**
    *  The user's about me that has a character limit of 255

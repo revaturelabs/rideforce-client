@@ -13,6 +13,7 @@ export class RideswipeComponent implements OnInit {
   public mobile = false;
 
   /**
+   * Sets up a router for managing the Desktop vs mobile component
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
@@ -23,8 +24,9 @@ export class RideswipeComponent implements OnInit {
    * Decides whether to set the view to mobile or not
    */
   ngOnInit() {
-    if (sessionStorage.length == 0)
-      this.route.navigate(["/landing"]);
+    if (sessionStorage.length == 0) {
+      this.route.navigate(['/landing']);
+    }
     if (window.screen.width <= 430) { // 768px portrait
       this.mobile = true;
     }

@@ -68,7 +68,8 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Responsible for providing a user the ability to log in</p>
+        <p>Responsible for providing a user the ability to log in
+Only uses back end authentication, should be removed once Auth0 is fully implemented</p>
 
     </p>
 
@@ -175,12 +176,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html">AuthService</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>)</code>
+<code>constructor(authService: <a href="../injectables/AuthService.html">AuthService</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/login/login.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/login/login.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -236,24 +237,6 @@
 </code>
                                                         </td>
                                                 </tr>
-                                                <tr>
-                                                        <td>userService</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/UserControllerService.html" target="_self" >UserControllerService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><ul>
-<li>(Unused) Provides cUser Functionality</li>
-</ul>
-</code>
-                                                        </td>
-                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -294,7 +277,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/login/login.component.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/login/login.component.ts:56</a></div>
                             </td>
                         </tr>
 
@@ -335,7 +318,7 @@ If the login fails, displays the error message sent by the server under the pass
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/login/login.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/login/login.component.ts:46</a></div>
                             </td>
                         </tr>
 
@@ -387,7 +370,7 @@ If the login fails, displays the error message sent by the server under the pass
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/login/login.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/login/login.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -427,7 +410,7 @@ If the login fails, displays the error message sent by the server under the pass
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/login/login.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/login/login.component.ts:21</a></div>
                             </td>
                         </tr>
 
@@ -467,7 +450,7 @@ If the login fails, displays the error message sent by the server under the pass
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/login/login.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/login/login.component.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -494,6 +477,7 @@ import { User } from &#x27;../../models/user.model&#x27;;
 
 /**
  * Responsible for providing a user the ability to log in
+ * Only uses back end authentication, should be removed once Auth0 is fully implemented
  */
 @Component({
   selector: &#x27;app-login&#x27;,
@@ -521,9 +505,11 @@ export class LoginComponent implements OnInit {
    * Sets up the Login compoennt with dependency injection
    * @param { AuthService} authService - Provides the ability to authenticate the user
    * @param {Router} route - provides the ability to navigate to landing if user is already logged on
-   * @param {UserControllerService} userService - (Unused) Provides cUser Functionality
    */
-  constructor(private authService: AuthService, private route: Router, private userService: UserControllerService) { }
+  constructor(
+    private authService: AuthService, 
+    private route: Router
+    ) { }
 
   /**
    * Checking to see if there is a current user, and if there is, redirects to landing.
@@ -533,12 +519,6 @@ export class LoginComponent implements OnInit {
         this.route.navigate([&#x27;/landing&#x27;]);
       }
     }
-
-
-  // getUser(email: string) {
-  //   let user;
-  //   return this.userService.getUserByEmail(email).subscribe();
-  // }
 
   /**
    * Gets the parameters from the login fields.
@@ -616,7 +596,7 @@ export class LoginComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><!-- <img src="assets/img/rev-brand.png"  id="frontrevicon" alt="Rev Icon" /><br><br> --><div class="wrapper fadeInDown float-top">  <div id="formContent">    <!-- Tabs Titles -->    <!-- <div id="sign">    <h2 class="active"> Sign In </h2>    <h2 class="inactive underlineHover">Sign Up </h2>  </div> -->    <!-- Icon -->    <div class="fadeIn first">      <img src="assets/img/large_profile_default.png"  onerror=\'this.onerror=null; this.src="large_profile_default.png"\' id="fronticon" alt="User Icon" /> <br><br>      <!-- <img src="https://i.pinimg.com/originals/aa/0a/70/aa0a70f1bf5dd2dda064461ae786be66.png" id="icon" alt="User Icon" /> -->    </div>    <!-- Login Form -->    <div>    <form (submit)="login()">      <input type="text" id="login" class="fadeIn second " name="login" placeholder="Email" required [(ngModel)]= \'userEmail\'>      <input type="password" id="password" class="fadeIn third " name="login" placeholder="Password" required [(ngModel)]=\'userPass\'>      <p id="errorMessageLogin" Style="display: none">Default Message</p>      <input type="submit" class="fadeIn fourth" value="Log In">    </form>  </div>    <!-- Forgot Password for later if wanted -->    <div id="formFooter">      <a class="inactive underlineHover" routerLink="/accountInfo" id=sign style="padding-right:30px;">Register</a>      <a style="padding-right:30px;">|</a>      <a class="underlineHover" href="#">Forgot Password?</a> <br>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
+    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CallbackComponent', 'selector': 'app-callback'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
 </script>
