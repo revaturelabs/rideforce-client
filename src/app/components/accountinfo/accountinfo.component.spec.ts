@@ -9,7 +9,6 @@ import { NgZone } from '@angular/core';
 import { UploadService } from '../../services/upload.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
-import { userInfo } from 'os';
 import { Role } from '../../models/role.model';
 import {APP_BASE_HREF} from '@angular/common';
 
@@ -73,6 +72,7 @@ describe('AccountinfoComponent', () => {
       photoUrl: "imgprofile",
       address: "12345 Pine Street, VA",
       office: '/offices/' + 1,
+      dayStart: 0,
       batchEnd: new Date().toISOString(),
       cars: [],
       active: 'ACTIVE',

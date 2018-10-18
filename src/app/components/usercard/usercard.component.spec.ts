@@ -44,6 +44,24 @@ describe('UsercardComponent', () => {
     fixture.detectChanges();
   });
 
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+        imports: [
+          AppModule
+          ],
+        providers: [
+          {provide: APP_BASE_HREF, useValue : '/' ,
+          UsercardComponent}
+        ]
+    })
+    .compileComponents();
+  }));
+     beforeEach(() => {
+    fixture = TestBed.createComponent(UsercardComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -64,5 +82,4 @@ describe('UsercardComponent', () => {
     it('swipe action left',() => {
     component.swipe(component.SWIPE_ACTION.LEFT,null);
   })
-
 });

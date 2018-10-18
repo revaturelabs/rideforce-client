@@ -117,6 +117,19 @@
                 </div>
                 <input type="date" class="form-control" [(ngModel)]="batchEnd" data-provide="datepicker" disabled>
               </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Day Start</span>
+                </div>
+                <select class="form-control" [(ngModel)]="dayStart">
+                  <option id="time1">7:30 AM</option>
+                  <option id="time2">8:00 AM</option>
+                  <option id="time3">8:30 AM</option>
+                  <option id="time4">9:00 AM</option>
+                  <option id="time5">9:30 AM</option>
+                  <option id="time6">10:00 AM</option>
+                </select>
+              </div>
               <div>
                 <button class="btn btnNextPrevious" (click)="accountInfoNext()">Next</button>
               </div>
