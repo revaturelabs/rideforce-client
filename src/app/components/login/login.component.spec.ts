@@ -6,12 +6,7 @@ import { LoginComponent } from '../login/login.component';
 
 import {APP_BASE_HREF} from '@angular/common';
 
-// *********************************************************//
-// Tests currently work 90% of the time                     //
-//                                                        //
-// ********************************************************/
-
-xdescribe('LoginComponent', () => {
+describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 

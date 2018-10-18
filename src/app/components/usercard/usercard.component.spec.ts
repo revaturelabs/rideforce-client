@@ -4,7 +4,6 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { ElementRef } from '@angular/core';
 
-
 import { UsercardComponent } from './usercard.component';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
@@ -38,24 +37,13 @@ describe('UsercardComponent', () => {
     })
     .compileComponents();
   }));
+
      beforeEach(() => {
     fixture = TestBed.createComponent(UsercardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-        imports: [
-          AppModule
-          ],
-        providers: [
-          {provide: APP_BASE_HREF, useValue : '/' ,
-          UsercardComponent}
-        ]
-    })
-    .compileComponents();
-  }));
      beforeEach(() => {
     fixture = TestBed.createComponent(UsercardComponent);
     component = fixture.componentInstance;
@@ -67,7 +55,7 @@ describe('UsercardComponent', () => {
   });
 
   it('hide image tests', () => {
-    const spyObj = jasmine.createSpyObj('component', ['nativeElement']);
+    const spyObj = jasmine.createSpy('nativeElement');
     // let elRef: ElementRef;
     // component.swipeCardMain = elRef;
     component.hideImage(true);
