@@ -275,8 +275,8 @@
                   <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
                   <td>{{ user.email }}</td>
                   <td>{{ user.role }}</td>
-                  <td><button *ngIf="user.role !== 'ADMIN'" class="btn btnEdit" (click)="updateUserRole(user.id, user.role)">Make Admin</button>
-                    <button *ngIf="user.role === 'DRIVER' || user.role === 'RIDER'" class="btn btn-info" (click)="updateUserRole(user.id, user.role)">Make Trainer</button>
+                  <td><button *ngIf="user.role !== 'ADMIN'" class="btn btnEdit" (click)="makeAdmin(user.id)">Make Admin</button>
+                    <button *ngIf="user.role === 'DRIVER' || user.role === 'RIDER'" class="btn btn-info" (click)="makeTrainer(user.id)">Make Trainer</button>
                   </td>
                   <td>
                     <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable Account <i class="fas fa-user-check"></i></button>
@@ -312,7 +312,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.role }}</td>
                     <td>
-                      <button *ngIf="user.active === 'DISABLED'" class="btn btn-success">Enable Account <i class="fas fa-user-check"></i></button>
+                      <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable Account <i class="fas fa-user-check"></i></button>
                       <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>
                     </td>
                   </tr>

@@ -45,9 +45,9 @@ export class ViewProfileComponent implements OnInit {
   officeObject: Office;
   /** User's active state */
   active: string;
-   /**
-   * Sets up the form with data about the durrent user
-   */
+  /**
+  * Sets up the form with data about the durrent user
+  */
   ngOnInit() {
     this.firstName = sessionStorage.getItem("firstName");
     this.lastName = sessionStorage.getItem("lastName");
@@ -114,7 +114,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   switchState() {
-    if(sessionStorage.getItem('active') === 'ACTIVE') {
+    if (sessionStorage.getItem('active') === 'ACTIVE') {
       sessionStorage.setItem('active', 'INACTIVE');
       this.getState();
     } else if (sessionStorage.getItem('active') === 'INACTIVE') {
@@ -151,39 +151,47 @@ export class ViewProfileComponent implements OnInit {
   /** Sets up all users in the system */
   getUsers() {
     let data;
-    if(sessionStorage.getItem('role') === 'ADMIN') {
+    if (sessionStorage.getItem('role') === 'ADMIN') {
       this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); this.users = data });
     } else if (sessionStorage.getItem('role') === 'TRAINER') {
-      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER')})
+      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER'); this.users = data });
     }
   }
 
-  result : boolean;
-  updateUserStatus(id : number, active: string) {
-    if(active !== 'DISABLED') {
+  result: boolean;
+  updateUserStatus(id: number, active: string) {
+    if (active !== 'DISABLED') {
       this.result = window.confirm("Are you sure you want to disable this account?");
       active = 'DISABLED';
     } else {
       this.result = window.confirm("Are you sure you want to enable this account?");
       active = 'ACTIVE';
     }
-    if(this.result) {
-      this.userService.updateStatusAndRole(id, active).then();
+    if (this.result) {
+      this.userService.updateStatus(id, active).then();
+      location.reload(true);
     } else {
       alert('No changes will be made');
     }
   }
 
-  updateUserRole(id: number, role: string) {
-    if(role === 'TRAINER') {
-      this.result = window.confirm("Are you sure you want to make this user a trainer?");
-      role = 'TRAINER';
+  makeTrainer(id: number) {
+    this.result = window.confirm("Are you sure you want to make this user a trainer?");
+    let role = 'TRAINER';
+    if (this.result) {
+      this.userService.updateRole(id, role).then();
+      location.reload(true);
     } else {
-      this.result = window.confirm("Are you sure you want to make this user an admin?");
-      role = 'ADMIN';
+      alert('No changes will be made');
     }
-    if(this.result) {
-      this.userService.updateStatusAndRole(id, role).then();
+  }
+
+  makeAdmin(id: number) {
+    this.result = window.confirm("Are you sure you want to make this user an admin?");
+    let role = 'ADMIN';
+    if (this.result) {
+      this.userService.updateRole(id, role).then();
+      location.reload(true);
     } else {
       alert('No changes will be made');
     }
