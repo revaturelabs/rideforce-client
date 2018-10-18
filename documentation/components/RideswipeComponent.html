@@ -161,6 +161,63 @@
     </table>
 </section>
 
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/rideswipe/rideswipe.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Sets up a router for managing the Desktop vs mobile component</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Allows Nav compnent to switch between sub-components</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
 
 
@@ -193,7 +250,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/rideswipe/rideswipe.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/rideswipe/rideswipe.component.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -245,7 +302,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/rideswipe/rideswipe.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/rideswipe/rideswipe.component.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -265,6 +322,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 
 /** Holds the two components for user matching and selects which to display based on whether view is desktop or mobile */
 @Component({
@@ -278,19 +336,24 @@ export class RideswipeComponent implements OnInit {
   public mobile &#x3D; false;
 
   /**
-   * @ignore
+   * Sets up a router for managing the Desktop vs mobile component
+   * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
-  constructor() { }
+  constructor(
+    private route: Router
+    ) { }
 
   /**
    * Decides whether to set the view to mobile or not
    */
   ngOnInit() {
+    if (sessionStorage.length &#x3D;&#x3D; 0) {
+      this.route.navigate([&#x27;/landing&#x27;]);
+    }
     if (window.screen.width &lt;&#x3D; 430) { // 768px portrait
       this.mobile &#x3D; true;
     }
   }
-
 }
 </code></pre>
     </div>
@@ -330,7 +393,7 @@ export class RideswipeComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><span *ngIf="mobile">  <app-usercard></app-usercard></span><span *ngIf="!mobile">  <app-usermatchweb></app-usermatchweb></span></div>'
-    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
+    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CallbackComponent', 'selector': 'app-callback'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'RideswipeComponent'};
 </script>

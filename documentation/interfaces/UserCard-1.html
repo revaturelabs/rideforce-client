@@ -219,12 +219,12 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import { Role } from &#x27;../../models/role.model&#x27;;
 import { User } from &#x27;../../models/user.model&#x27;;
 import { Link } from &#x27;../../models/link.model&#x27;;
 import { animate, state, style, transition, trigger } from &#x27;@angular/animations&#x27;;
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 import { Filter } from &#x27;../../models/filter&#x27;;
 
 /** Represents the User selection item in the html page */
@@ -264,23 +264,38 @@ export class UsermatchwebComponent implements OnInit {
      * @param {MatchingControllerService} matchService - Enables the matching service
      * @param {UserControllerService} userService - Enables access to User management
      */
-  constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
+  constructor(
+    private matchService: MatchingControllerService,
+    private userService: UserControllerService,
+    private route: Router
+    ) { }
 
   /** Holds the current user of the system */
   currentUser: User;
+
+  /** Whether or not to filter users by batch-end date */
+  filterBatchEnd: boolean;
+  /** Whether or not to filter users by day start-time */
+  filterStartTime: boolean;
+  /** Whether or not to filter users by Distance */
+  filterDistance: boolean;
 
   /**
    * Sets up the component by populating the list of possibel matches for the current user
    */
   ngOnInit() {
+    if (sessionStorage.length &#x3D;&#x3D; 0) {
+      this.route.navigate([&#x27;/landing&#x27;]);
+    }
     this.userService.getCurrentUser().subscribe(
       data &#x3D;&gt; {
         this.currentUser &#x3D; data;
         let userLinks: Link&lt;User&gt;[] &#x3D; null;
-        this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
+        this.matchService.getMatchingDrivers(+(sessionStorage.getItem(&quot;id&quot;))).subscribe(
           data2 &#x3D;&gt; {
             // console.log(&quot;data2 is &quot; + data2);
             userLinks &#x3D; data2;
+            console.log(userLinks);
             for (let i &#x3D; 0; i &lt; userLinks.length; i++) {
 
               this.matchService.getFromLink(userLinks[i]).subscribe(
@@ -380,12 +395,42 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
-  filter() {
-    for(var i &#x3D; 0; i &lt; document.getElementsByTagName(&quot;input&quot;).length; i++) {
+  // filter() {
+  //   for(var i &#x3D; 0; i &lt; document.getElementsByTagName(&quot;input&quot;).length; i++) {
 
-    }
+  //   }
+  // }
+
+  /**
+   * Updates the filter each time a filter checkbox is clicked
+   */
+  updateFilter() {
+    const userFilter: Filter &#x3D; {
+      batchEndChange: this.filterBatchEnd,
+      dayStartChange: this.filterStartTime,
+      distanceChange: this.filterDistance
+    };
+
+    this.matchService.getFilteredDrivers(this.currentUser.id, userFilter).then(
+      (users) &#x3D;&gt; {
+        this.users &#x3D; [];
+        for (const u of users) {
+          if (!u.photoUrl || u.photoUrl &#x3D;&#x3D;&#x3D; &#x27;null&#x27;) {
+            u.photoUrl &#x3D; &#x27;http://semantic-ui.com/images/avatar/large/chris.jpg&#x27;;
+          }
+          const card: UserCard &#x3D; {
+            user: u,
+            choose: &#x27;none&#x27;,
+            face: &#x27;front&#x27;
+          };
+          this.users.push(card);
+        }
+
+
+      },
+      (e) &#x3D;&gt; console.log(e)
+    );
   }
-
 }
 </code></pre>
     </div>

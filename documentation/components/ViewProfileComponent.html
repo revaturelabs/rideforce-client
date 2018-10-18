@@ -149,6 +149,9 @@
                                 <a href="#currentRole">currentRole</a>
                             </li>
                             <li>
+                                <a href="#currentState">currentState</a>
+                            </li>
+                            <li>
                                 <a href="#currentUser">currentUser</a>
                             </li>
                             <li>
@@ -165,6 +168,9 @@
                             </li>
                             <li>
                                 <a href="#password">password</a>
+                            </li>
+                            <li>
+                                <a href="#result">result</a>
                             </li>
                             <li>
                                 <a href="#username">username</a>
@@ -194,6 +200,9 @@
                                 <a href="#getRole">getRole</a>
                             </li>
                             <li>
+                                <a href="#getState">getState</a>
+                            </li>
+                            <li>
                                 <a href="#getUsers">getUsers</a>
                             </li>
                             <li>
@@ -204,6 +213,15 @@
                             </li>
                             <li>
                                 <a href="#switchRole">switchRole</a>
+                            </li>
+                            <li>
+                                <a href="#switchState">switchState</a>
+                            </li>
+                            <li>
+                                <a href="#updateUserRole">updateUserRole</a>
+                            </li>
+                            <li>
+                                <a href="#updateUserStatus">updateUserStatus</a>
                             </li>
                         </ul>
                     </td>
@@ -223,12 +241,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>)</code>
+<code>constructor(userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, authService: <a href="../injectables/AuthService.html">AuthService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -262,6 +280,24 @@
                                                         <td>
                                                                 <code><ul>
 <li>Allows the component to work with the user service (for updating)</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Allows Authentication Services to be utilized</li>
 </ul>
 </code>
                                                         </td>
@@ -306,7 +342,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:63</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:66</a></div>
                             </td>
                         </tr>
 
@@ -346,7 +382,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:115</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:131</a></div>
                             </td>
                         </tr>
 
@@ -386,7 +422,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:125</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:141</a></div>
                             </td>
                         </tr>
 
@@ -395,6 +431,44 @@
                     <td class="col-md-4">
                             <div class="io-description"><p>Sets up the User&#39;s current role in the system</p>
 </div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getState"></a>
+                        <span class="name">
+                            <b>
+                            getState
+                            </b>
+                            <a href="#getState"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getState()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:145</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -426,7 +500,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:132</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:152</a></div>
                             </td>
                         </tr>
 
@@ -466,7 +540,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:51</a></div>
                             </td>
                         </tr>
 
@@ -506,7 +580,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:83</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:88</a></div>
                             </td>
                         </tr>
 
@@ -546,7 +620,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:100</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:104</a></div>
                             </td>
                         </tr>
 
@@ -560,6 +634,206 @@
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="switchState"></a>
+                        <span class="name">
+                            <b>
+                            switchState
+                            </b>
+                            <a href="#switchState"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>switchState()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:116</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="updateUserRole"></a>
+                        <span class="name">
+                            <b>
+                            updateUserRole
+                            </b>
+                            <a href="#updateUserRole"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>updateUserRole(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, role: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:177</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>id</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>role</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="updateUserStatus"></a>
+                        <span class="name">
+                            <b>
+                            updateUserStatus
+                            </b>
+                            <a href="#updateUserStatus"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>updateUserStatus(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, active: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:162</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>id</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>active</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -598,7 +872,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:44</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:47</a></div>
                             </td>
                         </tr>
 
@@ -638,7 +912,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:36</a></div>
                             </td>
                         </tr>
 
@@ -678,7 +952,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:38</a></div>
                             </td>
                         </tr>
 
@@ -717,7 +991,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:41</a></div>
                             </td>
                         </tr>
 
@@ -757,7 +1031,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -797,7 +1071,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:121</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:137</a></div>
                             </td>
                         </tr>
 
@@ -807,6 +1081,40 @@
 </div>
                     </td>
                 </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentState"></a>
+                        <span class="name">
+                            <b>
+                            currentState
+                            </b>
+                            <a href="#currentState"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>currentState:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:144</a></div>
+                            </td>
+                        </tr>
+
 
             </tbody>
         </table>
@@ -837,7 +1145,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -877,7 +1185,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -917,7 +1225,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -957,7 +1265,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -1002,7 +1310,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:43</a></div>
                             </td>
                         </tr>
 
@@ -1042,7 +1350,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -1052,6 +1360,40 @@
 </div>
                     </td>
                 </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="result"></a>
+                        <span class="name">
+                            <b>
+                            result
+                            </b>
+                            <a href="#result"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>result:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:161</a></div>
+                            </td>
+                        </tr>
+
 
             </tbody>
         </table>
@@ -1082,7 +1424,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -1122,7 +1464,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:130</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/app/components/view-profile/view-profile.component.ts:150</a></div>
                             </td>
                         </tr>
 
@@ -1141,10 +1483,12 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Testability } from &#x27;@angular/core&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
 import { User } from &#x27;../../models/user.model&#x27;;
 import { Office } from &#x27;../../models/office.model&#x27;;
+import { AuthService } from &#x27;../../services/auth.service&#x27;;
+
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -1160,8 +1504,9 @@ export class ViewProfileComponent implements OnInit {
   /**
    * Sets up the component with the User Service injected
    * @param userService - Allows the component to work with the user service (for updating)
+   * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService) { }
+  constructor(private userService: UserControllerService, private authService: AuthService) { }
   /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -1185,7 +1530,6 @@ export class ViewProfileComponent implements OnInit {
   officeObject: Office;
   /** User&#x27;s active state */
   active: string;
-
    /**
    * Sets up the form with data about the durrent user
    */
@@ -1198,6 +1542,7 @@ export class ViewProfileComponent implements OnInit {
     this.getOffices();
     this.getUsers();
     this.getRole();
+    this.getState();
   }
 
   /**
@@ -1212,11 +1557,13 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById(&quot;address&quot;).removeAttribute(&quot;disabled&quot;);
     document.getElementById(&quot;batchEnd&quot;).removeAttribute(&quot;disabled&quot;);
     document.getElementById(&quot;dayStart&quot;).removeAttribute(&quot;disabled&quot;);
+    document.getElementById(&quot;switchRoles&quot;).removeAttribute(&quot;hidden&quot;);
+    document.getElementById(&quot;switchStates&quot;).removeAttribute(&quot;hidden&quot;);
+    document.getElementById(&quot;edit&quot;).style.display &#x3D; &quot;none&quot;;
+    document.getElementById(&quot;submit&quot;).style.display &#x3D; &quot;inline&quot;;
     document.getElementById(&quot;batchEnd&quot;).setAttribute(&quot;type&quot;, &quot;date&quot;);
     document.getElementById(&quot;currentOffice&quot;).style.display &#x3D; &quot;none&quot;;
     document.getElementById(&quot;selectOffice&quot;).style.display &#x3D; &quot;inline&quot;;
-    document.getElementById(&quot;edit&quot;).style.display &#x3D; &quot;none&quot;;
-    document.getElementById(&quot;submit&quot;).style.display &#x3D; &quot;inline&quot;;
     document.getElementById(&quot;errorMessage&quot;).removeAttribute(&quot;hidden&quot;);
   }
 
@@ -1231,15 +1578,14 @@ export class ViewProfileComponent implements OnInit {
     sessionStorage.setItem(&#x27;address&#x27;, this.address2);
     sessionStorage.setItem(&#x27;batchEnd&#x27;, this.batchEnd);
     sessionStorage.setItem(&#x27;role&#x27;, this.currentRole);
-    if(document.getElementById(&quot;activeState&quot;))
-    this.userService.update().subscribe();
+    //if(document.getElementById(&quot;activeState&quot;)) 
+    this.userService.update().then();
     window.location.reload(true);
   }
 
   /**
    * Enables limited ability to modify the User&#x27;s role in the system
    */
-
   switchRole() {
     if (sessionStorage.getItem(&#x27;role&#x27;) &#x3D;&#x3D;&#x3D; &#x27;DRIVER&#x27;) {
       sessionStorage.setItem(&#x27;role&#x27;, &#x27;RIDER&#x27;);
@@ -1249,6 +1595,18 @@ export class ViewProfileComponent implements OnInit {
       this.getRole();
     } else {
       console.log(&#x27;nope&#x27;);
+    }
+  }
+
+  switchState() {
+    if(sessionStorage.getItem(&#x27;active&#x27;) &#x3D;&#x3D;&#x3D; &#x27;ACTIVE&#x27;) {
+      sessionStorage.setItem(&#x27;active&#x27;, &#x27;INACTIVE&#x27;);
+      this.getState();
+    } else if (sessionStorage.getItem(&#x27;active&#x27;) &#x3D;&#x3D;&#x3D; &#x27;INACTIVE&#x27;) {
+      sessionStorage.setItem(&#x27;active&#x27;, &#x27;ACTIVE&#x27;);
+      this.getState();
+    } else {
+      console.log(&quot;Invalid State&quot;);
     }
   }
 
@@ -1268,13 +1626,52 @@ export class ViewProfileComponent implements OnInit {
   getRole() {
     this.currentRole &#x3D; sessionStorage.getItem(&#x27;role&#x27;);
   }
+  currentState: string;
+  getState() {
+    this.currentState &#x3D; sessionStorage.getItem(&#x27;active&#x27;);
+  }
 
   /** Holds the list of all users in the system */
   users: any[];
   /** Sets up all users in the system */
   getUsers() {
     let data;
-    this.userService.getAllUsers().subscribe((x) &#x3D;&gt; { data &#x3D; x; this.users &#x3D; data });
+    if(sessionStorage.getItem(&#x27;role&#x27;) &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;) {
+      this.userService.getAllUsers().then((x) &#x3D;&gt; { data &#x3D; x.filter(x &#x3D;&gt; x.role &#x3D;&#x3D;&#x3D; &#x27;DRIVER&#x27; || x.role &#x3D;&#x3D;&#x3D; &#x27;RIDER&#x27; || x.role &#x3D;&#x3D;&#x3D; &#x27;TRAINER&#x27;); this.users &#x3D; data });
+    } else if (sessionStorage.getItem(&#x27;role&#x27;) &#x3D;&#x3D;&#x3D; &#x27;TRAINER&#x27;) {
+      this.userService.getAllUsers().then((x) &#x3D;&gt; { data &#x3D; x.filter(x &#x3D;&gt; x.role &#x3D;&#x3D;&#x3D; &#x27;DRIVER&#x27; || x.role &#x3D;&#x3D;&#x3D; &#x27;RIDER&#x27;)})
+    }
+  }
+
+  result : boolean;
+  updateUserStatus(id : number, active: string) {
+    if(active !&#x3D;&#x3D; &#x27;DISABLED&#x27;) {
+      this.result &#x3D; window.confirm(&quot;Are you sure you want to disable this account?&quot;);
+      active &#x3D; &#x27;DISABLED&#x27;;
+    } else {
+      this.result &#x3D; window.confirm(&quot;Are you sure you want to enable this account?&quot;);
+      active &#x3D; &#x27;ACTIVE&#x27;;
+    }
+    if(this.result) {
+      this.userService.updateStatusAndRole(id, active).then();
+    } else {
+      alert(&#x27;No changes will be made&#x27;);
+    }
+  }
+
+  updateUserRole(id: number, role: string) {
+    if(role &#x3D;&#x3D;&#x3D; &#x27;TRAINER&#x27;) {
+      this.result &#x3D; window.confirm(&quot;Are you sure you want to make this user a trainer?&quot;);
+      role &#x3D; &#x27;TRAINER&#x27;;
+    } else {
+      this.result &#x3D; window.confirm(&quot;Are you sure you want to make this user an admin?&quot;);
+      role &#x3D; &#x27;ADMIN&#x27;;
+    }
+    if(this.result) {
+      this.userService.updateStatusAndRole(id, role).then();
+    } else {
+      alert(&#x27;No changes will be made&#x27;);
+    }
   }
 }
 </code></pre>
@@ -1403,27 +1800,29 @@ export class ViewProfileComponent implements OnInit {
                 &lt;/div&gt;
                 &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;batchEnd&quot; class&#x3D;&quot;form-control&quot; [(ngModel)]&#x3D;&quot;batchEnd&quot; disabled&gt;
               &lt;/div&gt;
+
               &lt;div class&#x3D;&quot;input-group mb-3&quot;&gt;
                 &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;
                   &lt;span class&#x3D;&quot;input-group-text&quot; id&#x3D;&quot;basic-addon1&quot;&gt;Day Start&lt;/span&gt;
                 &lt;/div&gt;
                 &lt;input type&#x3D;&quot;time&quot; id&#x3D;&quot;dayStart&quot; class&#x3D;&quot;form-control&quot; [(ngModel)]&#x3D;&quot;dayStart&quot; disabled&gt;
               &lt;/div&gt;
-              &lt;div *ngIf&#x3D;&quot;currentRole &#x3D;&#x3D;&#x3D; &#x27;DRIVER&#x27;&quot;&gt;
-                &lt;button class&#x3D;&quot;btn&quot; id&#x3D;&quot;switchRider&quot; (click)&#x3D;&quot;switchRole()&quot;&gt;Switch to Rider &lt;i class&#x3D;&quot;fas fa-walking&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-              &lt;/div&gt;
-              &lt;div *ngIf&#x3D;&quot;currentRole &#x3D;&#x3D;&#x3D; &#x27;RIDER&#x27;&quot;&gt;
-                &lt;button class&#x3D;&quot;btn&quot; id&#x3D;&quot;switchDriver&quot; (click)&#x3D;&quot;switchRole()&quot;&gt;Switch to Driver &lt;i class&#x3D;&quot;fas fa-car&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+
+              &lt;div id&#x3D;&quot;switchRoles&quot; hidden&gt;
+                &lt;button *ngIf&#x3D;&quot;currentRole &#x3D;&#x3D;&#x3D; &#x27;DRIVER&#x27;&quot; class&#x3D;&quot;btn&quot; id&#x3D;&quot;switchRider&quot; (click)&#x3D;&quot;switchRole()&quot;&gt;Switch to Rider &lt;i class&#x3D;&quot;fas fa-walking&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+                &lt;button *ngIf&#x3D;&quot;currentRole &#x3D;&#x3D;&#x3D; &#x27;RIDER&#x27;&quot; class&#x3D;&quot;btn&quot; id&#x3D;&quot;switchDriver&quot; (click)&#x3D;&quot;switchRole()&quot;&gt;Switch to Driver &lt;i class&#x3D;&quot;fas fa-car&quot;&gt;&lt;/i&gt;&lt;/button&gt;
               &lt;/div&gt;
               &lt;br&gt;
-              &lt;div&gt;
-                &lt;input type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;activeState&quot; data-toggle&#x3D;&quot;toggle&quot; data-onstyle&#x3D;&quot;success&quot; data-on&#x3D;&quot;Active &lt;i class&#x3D;&#x27;fas fa-bell&#x27;&gt;&lt;/i&gt;&quot; data-offstyle&#x3D;&quot;danger&quot; data-height&#x3D;&quot;100%&quot; data-off&#x3D;&quot;Inactive &lt;i class&#x3D;&#x27;fas fa-bell-slash&#x27;&gt;&lt;/i&gt;&quot; checked&gt;
+              &lt;div id&#x3D;&quot;switchStates&quot; hidden&gt;
+                &lt;!-- &lt;input type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;activeState&quot; disabled data-toggle&#x3D;&quot;toggle&quot; data-onstyle&#x3D;&quot;success&quot; data-on&#x3D;&quot;Active &lt;i class&#x3D;&#x27;fas fa-bell&#x27;&gt;&lt;/i&gt;&quot; data-offstyle&#x3D;&quot;danger&quot; data-height&#x3D;&quot;100%&quot; data-off&#x3D;&quot;Inactive &lt;i class&#x3D;&#x27;fas fa-bell-slash&#x27;&gt;&lt;/i&gt;&quot;&gt; --&gt;
+                &lt;button *ngIf&#x3D;&quot;currentState &#x3D;&#x3D;&#x3D; &#x27;ACTIVE&#x27;&quot; class&#x3D;&quot;btn btn-danger&quot; id&#x3D;&quot;switchInactive&quot; (click)&#x3D;&quot;switchState()&quot;&gt;Switch to Inactive &lt;i class&#x3D;&#x27;fas fa-bell-slash&#x27;&gt;&lt;/i&gt;&lt;/button&gt;
+                &lt;button *ngIf&#x3D;&quot;currentState &#x3D;&#x3D;&#x3D; &#x27;INACTIVE&#x27;&quot; class&#x3D;&quot;btn btn-success&quot; id&#x3D;&quot;switchActive&quot; (click)&#x3D;&quot;switchState()&quot;&gt;Switch to Active &lt;i class&#x3D;&#x27;fas fa-bell&#x27;&gt;&lt;/i&gt;&lt;/button&gt;
               &lt;/div&gt;
               &lt;br&gt;
               &lt;div&gt;
                 &lt;button class&#x3D;&quot;btn btnEdit&quot; (click)&#x3D;&quot;edit()&quot; id&#x3D;&quot;edit&quot;&gt;Edit &lt;i class&#x3D;&quot;fas fa-pencil-alt&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+                &lt;button class&#x3D;&quot;btn btnSubmit&quot; (click)&#x3D;&quot;submitChanges()&quot; id&#x3D;&quot;submit&quot;&gt;Save Changes &lt;i class&#x3D;&quot;fas fa-save&quot;&gt;&lt;/i&gt;&lt;/button&gt;
               &lt;/div&gt;
-              &lt;button class&#x3D;&quot;btn btnSubmit&quot; (click)&#x3D;&quot;submitChanges()&quot; id&#x3D;&quot;submit&quot;&gt;Save Changes &lt;i class&#x3D;&quot;fas fa-save&quot;&gt;&lt;/i&gt;&lt;/button&gt;
               &lt;div style&#x3D;&quot;padding-top: 20px&quot;&gt;
                 &lt;div *ngIf&#x3D;&quot;!requiredInfoFields&quot; class&#x3D;&quot;alert alert-danger&quot; id&#x3D;&quot;errorMessage&quot; hidden&gt;
                   Please fill out ALL fields and confirm your passwords match
@@ -1476,29 +1875,29 @@ export class ViewProfileComponent implements OnInit {
                   &lt;button aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;btn&quot; (click)&#x3D;&quot;removeContact(item)&quot;&gt;-&lt;/button&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
-              &lt;div&gt;
+              &lt;!-- &lt;div&gt;
                 &lt;span style&#x3D;&quot;padding-right: 20px&quot;&gt;&lt;button class&#x3D;&quot;btn btnNextPrevious&quot; (click)&#x3D;&quot;bioPrevious()&quot;&gt;Previous&lt;/button&gt;&lt;/span&gt;
                 &lt;span&gt; &lt;button class&#x3D;&quot;btn btnNextPrevious&quot; (click)&#x3D;&quot;bioNext()&quot;&gt;Next&lt;/button&gt;&lt;/span&gt;
-              &lt;/div&gt;
+              &lt;/div&gt; --&gt;
             &lt;/div&gt;
           &lt;/ng-template&gt;
         &lt;/ngb-tab&gt;
       &lt;/div&gt;
       &lt;div *ngIf&#x3D;&quot;currentRole &#x3D;&#x3D;&#x3D; &#x27;DRIVER&#x27;&quot; label&#x3D;&quot;CAR INFO div&quot;&gt;
-        &lt;ngb-tab title&#x3D;&quot;Car Info&quot; id&#x3D;&quot;3&quot;&gt;
+        &lt;ngb-tab title&#x3D;&quot;Your Garage&quot; id&#x3D;&quot;3&quot;&gt;
           &lt;ng-template ngbTabContent&gt;
             &lt;div class&#x3D;&quot;container-fluid&quot;&gt;
               &lt;br&gt;
               &lt;h2&gt;Car Information:&lt;/h2&gt;
               &lt;br&gt;
-              &lt;div class&#x3D;&quot;input-group mb-3&quot;&gt;
+              &lt;!-- &lt;div class&#x3D;&quot;input-group mb-3&quot;&gt;
                 &lt;div class&#x3D;&quot;input-group&quot; id&#x3D;&quot;button-addon3&quot;&gt;
                   &lt;span class&#x3D;&quot;padRight&quot;&gt;&lt;button class&#x3D;&quot;btn btnAddCar&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;isDriver()&quot;&gt;Driver&lt;/button&gt;&lt;/span&gt;
                   &lt;span&gt;&lt;button class&#x3D;&quot;btn btnAddCar&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;isRider()&quot;&gt;Rider&lt;/button&gt;&lt;/span&gt;
                 &lt;/div&gt;
-              &lt;/div&gt;
+              &lt;/div&gt; --&gt;
               &lt;br&gt;
-              &lt;div *ngIf&#x3D;&quot;btnCarInfo &#x3D;&#x3D; 1&quot;&gt;
+              &lt;div&gt;
                 &lt;div class&#x3D;&quot;input-group mb-3&quot;&gt;
                   &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;
                     &lt;span class&#x3D;&quot;input-group-text&quot;&gt;Make&lt;/span&gt;
@@ -1520,20 +1919,20 @@ export class ViewProfileComponent implements OnInit {
                   &lt;input type&#x3D;&quot;number&quot; min&#x3D;&quot;1950&quot; max&#x3D;&quot;5000&quot; class&#x3D;&quot;form-control&quot; [(ngModel)]&#x3D;&quot;carYear&quot;&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
-              &lt;div&gt;
+              &lt;!-- &lt;div&gt;
                 &lt;span style&#x3D;&quot;padding-right: 20px&quot;&gt;&lt;button class&#x3D;&quot;btn btnNextPrevious&quot; (click)&#x3D;&quot;carPrevious()&quot;&gt;Previous&lt;/button&gt;&lt;/span&gt;
                 &lt;span&gt; &lt;button class&#x3D;&quot;btn btnNextPrevious&quot; (click)&#x3D;&quot;edit()&quot;&gt;Edit&lt;/button&gt;&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;div style&#x3D;&quot;padding-top: 20px&quot;&gt;
+              &lt;/div&gt; --&gt;
+              &lt;!-- &lt;div style&#x3D;&quot;padding-top: 20px&quot;&gt;
                 &lt;div *ngIf&#x3D;&quot;!requiredCarFields&quot; class&#x3D;&quot;alert alert-danger&quot;&gt;
                   Please select Driver or Rider
                 &lt;/div&gt;
-              &lt;/div&gt;
+              &lt;/div&gt; --&gt;
             &lt;/div&gt;
           &lt;/ng-template&gt;
         &lt;/ngb-tab&gt;
       &lt;/div&gt;
-      &lt;div *ngIf&#x3D;&quot;currentRole &#x3D;&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot; label&#x3D;&quot;CONFIRMATION div&quot;&gt;
+      &lt;div *ngIf&#x3D;&quot;authService.isAdmin()&quot; label&#x3D;&quot;CONFIRMATION div&quot;&gt;
         &lt;ngb-tab title&#x3D;&quot;View Users&quot; id&#x3D;&quot;4&quot;&gt;
           &lt;ng-template ngbTabContent&gt;
             &lt;div class&#x3D;&quot;container-fluid&quot;&gt;
@@ -1547,6 +1946,7 @@ export class ViewProfileComponent implements OnInit {
                   &lt;th&gt;User Email&lt;/th&gt;
                   &lt;th&gt;User Role&lt;/th&gt;
                   &lt;th&gt; &lt;/th&gt;
+                  &lt;th&gt; &lt;/th&gt;
                 &lt;/tr&gt;
               &lt;/thead&gt;
               &lt;tbody&gt;
@@ -1555,8 +1955,12 @@ export class ViewProfileComponent implements OnInit {
                   &lt;td&gt;{{ user.firstName }}&amp;nbsp;{{ user.lastName }}&lt;/td&gt;
                   &lt;td&gt;{{ user.email }}&lt;/td&gt;
                   &lt;td&gt;{{ user.role }}&lt;/td&gt;
-                  &lt;td&gt;&lt;button *ngIf&#x3D;&quot;user.role !&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot; class&#x3D;&quot;btn btnEdit&quot;&gt;Make Admin&lt;/button&gt;
-                    &lt;button *ngIf&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;DRIVER&#x27; || user.role &#x3D;&#x3D;&#x3D; &#x27;RIDER&#x27;&quot; class&#x3D;&quot;btn btn-info&quot;&gt;Make Trainer&lt;/button&gt;
+                  &lt;td&gt;&lt;button *ngIf&#x3D;&quot;user.role !&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot; class&#x3D;&quot;btn btnEdit&quot; (click)&#x3D;&quot;updateUserRole(user.id, user.role)&quot;&gt;Make Admin&lt;/button&gt;
+                    &lt;button *ngIf&#x3D;&quot;user.role &#x3D;&#x3D;&#x3D; &#x27;DRIVER&#x27; || user.role &#x3D;&#x3D;&#x3D; &#x27;RIDER&#x27;&quot; class&#x3D;&quot;btn btn-info&quot; (click)&#x3D;&quot;updateUserRole(user.id, user.role)&quot;&gt;Make Trainer&lt;/button&gt;
+                  &lt;/td&gt;
+                  &lt;td&gt;
+                    &lt;button *ngIf&#x3D;&quot;user.active &#x3D;&#x3D;&#x3D; &#x27;DISABLED&#x27;&quot; class&#x3D;&quot;btn btn-success&quot; (click)&#x3D;&quot;updateUserStatus(user.id, user.active)&quot;&gt;Enable Account &lt;i class&#x3D;&quot;fas fa-user-check&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+                    &lt;button *ngIf&#x3D;&quot;user.active !&#x3D;&#x3D; &#x27;DISABLED&#x27;&quot; class&#x3D;&quot;btn btn-danger&quot; (click)&#x3D;&quot;updateUserStatus(user.id, user.active)&quot;&gt;Disable Account &lt;i class&#x3D;&quot;fas fa-user-times&quot;&gt;&lt;/i&gt;&lt;/button&gt;
                   &lt;/td&gt;
                 &lt;/tr&gt;
               &lt;/tbody&gt;
@@ -1565,6 +1969,39 @@ export class ViewProfileComponent implements OnInit {
           &lt;/ng-template&gt;
         &lt;/ngb-tab&gt;
       &lt;/div&gt;
+      &lt;div *ngIf&#x3D;&quot;currentRole &#x3D;&#x3D;&#x3D; &#x27;TRAINER&#x27;&quot; label&#x3D;&quot;TRAINER div&quot;&gt;
+          &lt;ngb-tab title&#x3D;&quot;View Associates&quot; id&#x3D;&quot;5&quot;&gt;
+            &lt;ng-template ngbTabContent&gt;
+              &lt;div class&#x3D;&quot;container-fluid&quot;&gt;
+              &lt;br&gt;
+              &lt;h2&gt;View Associates&lt;/h2&gt;
+              &lt;table class&#x3D;&quot;table table-striped table-bordered table-hover table-sm&quot;&gt;
+                &lt;thead&gt;
+                  &lt;tr&gt;
+                    &lt;th&gt;User ID&lt;/th&gt;
+                    &lt;th&gt;User&#x27;s Name&lt;/th&gt;
+                    &lt;th&gt;User Email&lt;/th&gt;
+                    &lt;th&gt;User Role&lt;/th&gt;
+                    &lt;th&gt; &lt;/th&gt;
+                  &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                  &lt;tr *ngFor&#x3D;&quot;let user of users&quot;&gt;
+                    &lt;td&gt;{{ user.id }}&lt;/td&gt;
+                    &lt;td&gt;{{ user.firstName }}&amp;nbsp;{{ user.lastName }}&lt;/td&gt;
+                    &lt;td&gt;{{ user.email }}&lt;/td&gt;
+                    &lt;td&gt;{{ user.role }}&lt;/td&gt;
+                    &lt;td&gt;
+                      &lt;button *ngIf&#x3D;&quot;user.active &#x3D;&#x3D;&#x3D; &#x27;DISABLED&#x27;&quot; class&#x3D;&quot;btn btn-success&quot;&gt;Enable Account &lt;i class&#x3D;&quot;fas fa-user-check&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+                      &lt;button *ngIf&#x3D;&quot;user.active !&#x3D;&#x3D; &#x27;DISABLED&#x27;&quot; class&#x3D;&quot;btn btn-danger&quot; (click)&#x3D;&quot;updateUserStatus(user.id, user.active)&quot;&gt;Disable Account &lt;i class&#x3D;&quot;fas fa-user-times&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/tbody&gt;
+              &lt;/table&gt;
+              &lt;/div&gt;
+            &lt;/ng-template&gt;
+          &lt;/ngb-tab&gt;
+        &lt;/div&gt;
     &lt;/ngb-tabset&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -1595,8 +2032,8 @@ export class ViewProfileComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><br><div class="form-group row">  <div class="col-1"></div>  <div class="col-lg-4 col-xs-12 extend">    <ngb-tabset (tabChange)="tabSelect($event)">      <div label="VIEW PROFILE div">        <ngb-tab title="Your Profile" id="1">          <ng-template ngbTabContent>            <div class="container-fluid">              <br>              <h2>Your Profile:</h2>              <br>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">First Name</span>                </div>                <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" id="firstName" required disabled>              </div>              <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">                <div *ngIf="firstname.errors.required">                  First name cannot be empty                </div>                <div *ngIf="firstname.errors.maxLength">                  ;                  First name cannot be more than 15 characters                </div>              </div>              <div class="input-group mb-3 ">                <div class="input-group-prepend ">                  <span class="input-group-text " id="basic-addon1 ">Last Name</span>                </div>                <input type="text" class="form-control" [(ngModel)]="lastName" #lastname="ngModel" id="lastName" required disabled>              </div>              <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">                <div *ngIf="lastname.errors.required">                  Last name cannot be empty                </div>                <div *ngIf="lastname.errors.maxLength">                  ;                  Last name cannot be more than 15 characters                </div>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Email</span>                </div>                <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."                  disabled>              </div>              <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">                <div *ngIf="uName.errors.required">                  Email cannot be empty                </div>                <div *ngIf="uName.errors.maxLength">                  Email cannot be more than 15 characters                </div>              </div>              <div class="input-group mb-3 ">                <div class="input-group-prepend ">                  <span class="input-group-text" id="basic-addon1 ">Password</span>                </div>                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>              </div>              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">                <div *ngIf="pWord.errors.required">                  Password cannot be empty                </div>                <div *ngIf="pWord.errors.maxLength">                  Password cannot be more than 15 characters                </div>              </div>              <div class="input-group mb-3 ">                <div class="input-group-prepend ">                  <span class="input-group-text" id="basic-addon1 ">Confirm</span>                </div>                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" id="confirmPassword" required                  disabled>              </div>              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">                <div *ngIf="password != passwordConfirm">                  Passwords do not match.                </div>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Office Address</span>                </div>                <div class="input-group-text" style="padding-right: 137px; display: inline" id="currentOffice">                </div>                <div class="input-group-text" style="padding-right: 100px; display: none" id="selectOffice">                  <select [(ngModel)]="officeObject">                    <option *ngFor="let office of officeObjectArray">{{office.name}}</option>                  </select>                </div>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Address</span>                </div>                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"                  appPlacesAutocomplete (addressSelect)="autocomplete2($event)" [(ngModel)]="address2" #address="ngModel"                  required id="address" placeholder="Type to search.." disabled>              </div>              <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">                <div *ngIf="address.errors.required">                  Address cannot be empty                </div>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Batch End</span>                </div>                <input type="text" id="batchEnd" class="form-control" [(ngModel)]="batchEnd" disabled>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Day Start</span>                </div>                <input type="time" id="dayStart" class="form-control" [(ngModel)]="dayStart" disabled>              </div>              <div *ngIf="currentRole === \'DRIVER\'">                <button class="btn" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>              </div>              <div *ngIf="currentRole === \'RIDER\'">                <button class="btn" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>              </div>              <br>              <div>                <input type="checkbox" id="activeState" data-toggle="toggle" data-onstyle="success" data-on="Active <i class=\'fas fa-bell\'></i>" data-offstyle="danger" data-height="100%" data-off="Inactive <i class=\'fas fa-bell-slash\'></i>" checked>              </div>              <br>              <div>                <button class="btn btnEdit" (click)="edit()" id="edit">Edit <i class="fas fa-pencil-alt"></i></button>              </div>              <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i class="fas fa-save"></i></button>              <div style="padding-top: 20px">                <div *ngIf="!requiredInfoFields" class="alert alert-danger" id="errorMessage" hidden>                  Please fill out ALL fields and confirm your passwords match                </div>              </div>            </div>          </ng-template>        </ngb-tab>      </div>      <div label="BIO div">        <ngb-tab title="About Me" id="2">          <ng-template ngbTabContent>            <div class="container-fluid">              <br>              <h2>Biography:</h2>              <br>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">About You</span>                </div>              </div>              <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required></textarea>              <br>              <div class="input-group mb-3">                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>                <input class="profile-pic" type="file" name="pic" accept="image/*" (change)="selectFile($event)">              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1" style="padding-right: 95px">Contact Info</span>                </div>                <!-- to do: Contact info list -->                <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->                <div style="padding-left: 20px">                  <button class="btn" (click)="addContact()">                    <span aria-hidden="true"></span>                  </button>                </div>              </div>              <div *ngFor="let item of contactInfoArray" class="input-group mb-3">                <div class="input-group-prepend">                  <div class="input-group-text" style="padding-right: 100px">                    <select [(ngModel)]="item.type">                      <option *ngFor="let contact of contactTypeArray">{{contact}}</option>                    </select>                  </div>                  <input type="text" class="" [(ngModel)]="item.info">                  <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>                </div>              </div>              <div>                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="bioPrevious()">Previous</button></span>                <span> <button class="btn btnNextPrevious" (click)="bioNext()">Next</button></span>              </div>            </div>          </ng-template>        </ngb-tab>      </div>      <div *ngIf="currentRole === \'DRIVER\'" label="CAR INFO div">        <ngb-tab title="Car Info" id="3">          <ng-template ngbTabContent>            <div class="container-fluid">              <br>              <h2>Car Information:</h2>              <br>              <div class="input-group mb-3">                <div class="input-group" id="button-addon3">                  <span class="padRight"><button class="btn btnAddCar" type="button" (click)="isDriver()">Driver</button></span>                  <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>                </div>              </div>              <br>              <div *ngIf="btnCarInfo == 1">                <div class="input-group mb-3">                  <div class="input-group-prepend">                    <span class="input-group-text">Make</span>                  </div>                  <input type="text" class="form-control" [(ngModel)]="carMake">                </div>                <div class="input-group mb-3">                  <div class="input-group-prepend">                    <span class="input-group-text">Model</span>                  </div>                  <input type="text" class="form-control" [(ngModel)]="carModel">                </div>                <div class="input-group mb-3">                  <div class="input-group-prepend">                    <span class="input-group-text">Year</span>                  </div>                  <input type="number" min="1950" max="5000" class="form-control" [(ngModel)]="carYear">                </div>              </div>              <div>                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>                <span> <button class="btn btnNextPrevious" (click)="edit()">Edit</button></span>              </div>              <div style="padding-top: 20px">                <div *ngIf="!requiredCarFields" class="alert alert-danger">                  Please select Driver or Rider                </div>              </div>            </div>          </ng-template>        </ngb-tab>      </div>      <div *ngIf="currentRole === \'ADMIN\'" label="CONFIRMATION div">        <ngb-tab title="View Users" id="4">          <ng-template ngbTabContent>            <div class="container-fluid">            <br>            <h2>View Users</h2>            <table class="table table-striped table-bordered table-hover table-sm">              <thead>                <tr>                  <th>User ID</th>                  <th>User\'s Name</th>                  <th>User Email</th>                  <th>User Role</th>                  <th> </th>                </tr>              </thead>              <tbody>                <tr *ngFor="let user of users">                  <td>{{ user.id }}</td>                  <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>                  <td>{{ user.email }}</td>                  <td>{{ user.role }}</td>                  <td><button *ngIf="user.role !== \'ADMIN\'" class="btn btnEdit">Make Admin</button>                    <button *ngIf="user.role === \'DRIVER\' || user.role === \'RIDER\'" class="btn btn-info">Make Trainer</button>                  </td>                </tr>              </tbody>            </table>            </div>          </ng-template>        </ngb-tab>      </div>    </ngb-tabset>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
+        var COMPONENT_TEMPLATE = '<div><br><div class="form-group row">  <div class="col-1"></div>  <div class="col-lg-4 col-xs-12 extend">    <ngb-tabset (tabChange)="tabSelect($event)">      <div label="VIEW PROFILE div">        <ngb-tab title="Your Profile" id="1">          <ng-template ngbTabContent>            <div class="container-fluid">              <br>              <h2>Your Profile:</h2>              <br>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">First Name</span>                </div>                <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" id="firstName" required disabled>              </div>              <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">                <div *ngIf="firstname.errors.required">                  First name cannot be empty                </div>                <div *ngIf="firstname.errors.maxLength">                  ;                  First name cannot be more than 15 characters                </div>              </div>              <div class="input-group mb-3 ">                <div class="input-group-prepend ">                  <span class="input-group-text " id="basic-addon1 ">Last Name</span>                </div>                <input type="text" class="form-control" [(ngModel)]="lastName" #lastname="ngModel" id="lastName" required disabled>              </div>              <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">                <div *ngIf="lastname.errors.required">                  Last name cannot be empty                </div>                <div *ngIf="lastname.errors.maxLength">                  ;                  Last name cannot be more than 15 characters                </div>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Email</span>                </div>                <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."                  disabled>              </div>              <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">                <div *ngIf="uName.errors.required">                  Email cannot be empty                </div>                <div *ngIf="uName.errors.maxLength">                  Email cannot be more than 15 characters                </div>              </div>              <div class="input-group mb-3 ">                <div class="input-group-prepend ">                  <span class="input-group-text" id="basic-addon1 ">Password</span>                </div>                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>              </div>              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">                <div *ngIf="pWord.errors.required">                  Password cannot be empty                </div>                <div *ngIf="pWord.errors.maxLength">                  Password cannot be more than 15 characters                </div>              </div>              <div class="input-group mb-3 ">                <div class="input-group-prepend ">                  <span class="input-group-text" id="basic-addon1 ">Confirm</span>                </div>                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" id="confirmPassword" required                  disabled>              </div>              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">                <div *ngIf="password != passwordConfirm">                  Passwords do not match.                </div>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Office Address</span>                </div>                <div class="input-group-text" style="padding-right: 137px; display: inline" id="currentOffice">                </div>                <div class="input-group-text" style="padding-right: 100px; display: none" id="selectOffice">                  <select [(ngModel)]="officeObject">                    <option *ngFor="let office of officeObjectArray">{{office.name}}</option>                  </select>                </div>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Address</span>                </div>                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"                  appPlacesAutocomplete (addressSelect)="autocomplete2($event)" [(ngModel)]="address2" #address="ngModel"                  required id="address" placeholder="Type to search.." disabled>              </div>              <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">                <div *ngIf="address.errors.required">                  Address cannot be empty                </div>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Batch End</span>                </div>                <input type="text" id="batchEnd" class="form-control" [(ngModel)]="batchEnd" disabled>              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">Day Start</span>                </div>                <input type="time" id="dayStart" class="form-control" [(ngModel)]="dayStart" disabled>              </div>              <div id="switchRoles" hidden>                <button *ngIf="currentRole === \'DRIVER\'" class="btn" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>                <button *ngIf="currentRole === \'RIDER\'" class="btn" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>              </div>              <br>              <div id="switchStates" hidden>                <!-- <input type="checkbox" id="activeState" disabled data-toggle="toggle" data-onstyle="success" data-on="Active <i class=\'fas fa-bell\'></i>" data-offstyle="danger" data-height="100%" data-off="Inactive <i class=\'fas fa-bell-slash\'></i>"> -->                <button *ngIf="currentState === \'ACTIVE\'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Switch to Inactive <i class=\'fas fa-bell-slash\'></i></button>                <button *ngIf="currentState === \'INACTIVE\'" class="btn btn-success" id="switchActive" (click)="switchState()">Switch to Active <i class=\'fas fa-bell\'></i></button>              </div>              <br>              <div>                <button class="btn btnEdit" (click)="edit()" id="edit">Edit <i class="fas fa-pencil-alt"></i></button>                <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i class="fas fa-save"></i></button>              </div>              <div style="padding-top: 20px">                <div *ngIf="!requiredInfoFields" class="alert alert-danger" id="errorMessage" hidden>                  Please fill out ALL fields and confirm your passwords match                </div>              </div>            </div>          </ng-template>        </ngb-tab>      </div>      <div label="BIO div">        <ngb-tab title="About Me" id="2">          <ng-template ngbTabContent>            <div class="container-fluid">              <br>              <h2>Biography:</h2>              <br>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1">About You</span>                </div>              </div>              <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required></textarea>              <br>              <div class="input-group mb-3">                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>                <input class="profile-pic" type="file" name="pic" accept="image/*" (change)="selectFile($event)">              </div>              <div class="input-group mb-3">                <div class="input-group-prepend">                  <span class="input-group-text" id="basic-addon1" style="padding-right: 95px">Contact Info</span>                </div>                <!-- to do: Contact info list -->                <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->                <div style="padding-left: 20px">                  <button class="btn" (click)="addContact()">                    <span aria-hidden="true"></span>                  </button>                </div>              </div>              <div *ngFor="let item of contactInfoArray" class="input-group mb-3">                <div class="input-group-prepend">                  <div class="input-group-text" style="padding-right: 100px">                    <select [(ngModel)]="item.type">                      <option *ngFor="let contact of contactTypeArray">{{contact}}</option>                    </select>                  </div>                  <input type="text" class="" [(ngModel)]="item.info">                  <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>                </div>              </div>              <!-- <div>                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="bioPrevious()">Previous</button></span>                <span> <button class="btn btnNextPrevious" (click)="bioNext()">Next</button></span>              </div> -->            </div>          </ng-template>        </ngb-tab>      </div>      <div *ngIf="currentRole === \'DRIVER\'" label="CAR INFO div">        <ngb-tab title="Your Garage" id="3">          <ng-template ngbTabContent>            <div class="container-fluid">              <br>              <h2>Car Information:</h2>              <br>              <!-- <div class="input-group mb-3">                <div class="input-group" id="button-addon3">                  <span class="padRight"><button class="btn btnAddCar" type="button" (click)="isDriver()">Driver</button></span>                  <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>                </div>              </div> -->              <br>              <div>                <div class="input-group mb-3">                  <div class="input-group-prepend">                    <span class="input-group-text">Make</span>                  </div>                  <input type="text" class="form-control" [(ngModel)]="carMake">                </div>                <div class="input-group mb-3">                  <div class="input-group-prepend">                    <span class="input-group-text">Model</span>                  </div>                  <input type="text" class="form-control" [(ngModel)]="carModel">                </div>                <div class="input-group mb-3">                  <div class="input-group-prepend">                    <span class="input-group-text">Year</span>                  </div>                  <input type="number" min="1950" max="5000" class="form-control" [(ngModel)]="carYear">                </div>              </div>              <!-- <div>                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>                <span> <button class="btn btnNextPrevious" (click)="edit()">Edit</button></span>              </div> -->              <!-- <div style="padding-top: 20px">                <div *ngIf="!requiredCarFields" class="alert alert-danger">                  Please select Driver or Rider                </div>              </div> -->            </div>          </ng-template>        </ngb-tab>      </div>      <div *ngIf="authService.isAdmin()" label="CONFIRMATION div">        <ngb-tab title="View Users" id="4">          <ng-template ngbTabContent>            <div class="container-fluid">            <br>            <h2>View Users</h2>            <table class="table table-striped table-bordered table-hover table-sm">              <thead>                <tr>                  <th>User ID</th>                  <th>User\'s Name</th>                  <th>User Email</th>                  <th>User Role</th>                  <th> </th>                  <th> </th>                </tr>              </thead>              <tbody>                <tr *ngFor="let user of users">                  <td>{{ user.id }}</td>                  <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>                  <td>{{ user.email }}</td>                  <td>{{ user.role }}</td>                  <td><button *ngIf="user.role !== \'ADMIN\'" class="btn btnEdit" (click)="updateUserRole(user.id, user.role)">Make Admin</button>                    <button *ngIf="user.role === \'DRIVER\' || user.role === \'RIDER\'" class="btn btn-info" (click)="updateUserRole(user.id, user.role)">Make Trainer</button>                  </td>                  <td>                    <button *ngIf="user.active === \'DISABLED\'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable Account <i class="fas fa-user-check"></i></button>                    <button *ngIf="user.active !== \'DISABLED\'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>                  </td>                </tr>              </tbody>            </table>            </div>          </ng-template>        </ngb-tab>      </div>      <div *ngIf="currentRole === \'TRAINER\'" label="TRAINER div">          <ngb-tab title="View Associates" id="5">            <ng-template ngbTabContent>              <div class="container-fluid">              <br>              <h2>View Associates</h2>              <table class="table table-striped table-bordered table-hover table-sm">                <thead>                  <tr>                    <th>User ID</th>                    <th>User\'s Name</th>                    <th>User Email</th>                    <th>User Role</th>                    <th> </th>                  </tr>                </thead>                <tbody>                  <tr *ngFor="let user of users">                    <td>{{ user.id }}</td>                    <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>                    <td>{{ user.email }}</td>                    <td>{{ user.role }}</td>                    <td>                      <button *ngIf="user.active === \'DISABLED\'" class="btn btn-success">Enable Account <i class="fas fa-user-check"></i></button>                      <button *ngIf="user.active !== \'DISABLED\'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>                    </td>                  </tr>                </tbody>              </table>              </div>            </ng-template>          </ngb-tab>        </div>    </ngb-tabset>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CallbackComponent', 'selector': 'app-callback'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'ViewProfileComponent'};
 </script>

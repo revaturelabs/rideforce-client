@@ -221,10 +221,10 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { User } from &#x27;../../models/user.model&#x27;;
 import { animate, state, style, transition, trigger } from &#x27;@angular/animations&#x27;;
-import { Role } from &#x27;../../models/role.model&#x27;;
 import { Link } from &#x27;../../models/link.model&#x27;;
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 
 /**
  * Used as a more complex data structure for holding info on liked users
@@ -266,10 +266,15 @@ export class LikesmatchwebComponent implements OnInit {
 
     /**
      * Sets up the Component for Like demonstrations
-     * @param matchService - Access to Rider Driver matching service
-     * @param userService - Access to user services
+     * @param {MatchingControllerService} matchService - Access to Rider Driver matching service
+     * @param {UserControllerService} userService - Access to user services
+     * @param {Router} route - Allows Nav compnent to switch between sub-components
      */
-    constructor(private matchService: MatchingControllerService, private userService: UserControllerService) { }
+    constructor(
+        private matchService: MatchingControllerService, 
+        private userService: UserControllerService,
+        private route: Router
+        ) { }
 
     /**
      * Hold the current user
@@ -280,6 +285,8 @@ export class LikesmatchwebComponent implements OnInit {
      * Initializes the Component by populating the swipcards array with data on liked drivers
      */
     ngOnInit() {
+        if (sessionStorage.length &#x3D;&#x3D; 0)
+          this.route.navigate([&quot;/landing&quot;]);
         this.userService.getCurrentUser().subscribe(
             data &#x3D;&gt; {
                 console.log(&#x27;this is put into currentUser&#x27;);
@@ -298,13 +305,37 @@ export class LikesmatchwebComponent implements OnInit {
                             this.userService.getUserById(id).subscribe(
                                 data3 &#x3D;&gt; {
                                     if (!data3.photoUrl || data3.photoUrl &#x3D;&#x3D;&#x3D; &#x27;null&#x27;) {
+                                        console.log(data3.contactInfo[0]);
                                         data3.photoUrl &#x3D; &#x27;https://s3.us-east-1.amazonaws.com/rydeforce/rydeforce-s3/65600312303b.png&#x27;;
+                                    }
+                                    // This does very bad things.
+                                    // So, for each contact in data3.contactInfo (which is a list of 
+                                    // Link&lt;ContactInfo&gt;), it gets the ContactInfo data by using
+                                    // the function defined in the user service as getContactInfoById().
+                                    // This is an observable. I&#x27;m sorry.
+                                    // It basically replaces what is in the Link[] with what is in the actual
+                                    // ContactInfo object. 
+                                    // We should probably refactor the User Model object to have a ContactInfo[]
+                                    // instead of a Link&lt;ContactInfo&gt;[].
+                                    for(let contact in data3.contactInfo){
+                                        let num &#x3D; +data3.contactInfo[contact].substring(14);
+                                        this.userService.getContactInfoById(num).subscribe(
+                                            data4&#x3D;&gt;{
+                                                if(data4.info!&#x3D;null){
+                                                    if(data3.contactInfo!&#x3D;null &amp;&amp; data3.contactInfo!&#x3D;undefined){
+                                                        console.log(&quot;adding at... data3.contactInfo[&quot;+contact+&quot;]&quot;);
+                                                        data3.contactInfo[contact]&#x3D;&#x60;${data4.type}: ${data4.info}&#x60;;
+                                                    }
+                                                }
+                                            }
+                                        )
                                     }
                                     const card: UserCard &#x3D; {
                                         user: data3,
                                         choose: &#x27;none&#x27;,
                                         face: &#x27;front&#x27;
                                     };
+                                    
                                     this.likecards.push(card);
                                 }
                             );
