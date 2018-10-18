@@ -56,7 +56,7 @@ export class AuthService {
    * @param password - the password of the account
    * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
    */
-  authenticate(email: string, password: string, usePromise?: boolean) {
+  async authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) => {
         console.log('Got user from Authenticate (Promise mode)');
@@ -65,14 +65,14 @@ export class AuthService {
           sessionStorage.setItem('id', x.id.toString());
           sessionStorage.setItem('firstName', x.firstName);
           sessionStorage.setItem('lastName', x.lastName);
-          sessionStorage.setItem('active', x.active.toString());
           sessionStorage.setItem('role', x.role);
           sessionStorage.setItem('address', x.address);
           sessionStorage.setItem('batchEnd', x.batchEnd);
           sessionStorage.setItem('userEmail', email);
           sessionStorage.setItem('userPassword', password);
+          sessionStorage.setItem('active', x.active);
+          location.reload(true);
         });
-        location.reload(true);
       },
       (e) => {
         // error coming from the backend
@@ -85,7 +85,9 @@ export class AuthService {
             console.log(e.message);
             if (e.message == 'GENERAL') {
               messageLogin.innerHTML = 'Server unavailable';
-            } else {
+            } else if(e.message == 'undefined') {
+              messageLogin.innerHTML = 'GATEWAY unavailable';
+            }else{
               messageLogin.innerHTML = e.message;
             }
           }
@@ -95,6 +97,24 @@ export class AuthService {
     );
   }
 
+
+  
+  /**
+   * Returns whether the current user is logged in as a Trainer
+   */
+  isTrainer(): boolean {
+    return sessionStorage.getItem('role') == "TRAINER" || this.isAdmin();
+  }
+
+  
+  /**
+   * Returns whether the current user is logged in as an Admin
+   */
+  isAdmin(): boolean {
+    return sessionStorage.getItem('role') == "ADMIN";
+  }
+
+  
   /**
    * Logs the user out of the service
    */

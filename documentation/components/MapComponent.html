@@ -154,12 +154,21 @@
                                 <a href="#currentUser">currentUser</a>
                             </li>
                             <li>
+                                <a href="#deleteFavorite">deleteFavorite</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#dist">dist</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#end">end</a>
+                            </li>
+                            <li>
+                                <a href="#favoriteLocations">favoriteLocations</a>
+                            </li>
+                            <li>
+                                <a href="#favoriteName">favoriteName</a>
                             </li>
                             <li>
                                 <a href="#gmapElement">gmapElement</a>
@@ -201,8 +210,14 @@
                                 <a href="#placedMarkers">placedMarkers</a>
                             </li>
                             <li>
+                                <a href="#selectedLocation">selectedLocation</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#selectedUser">selectedUser</a>
+                            </li>
+                            <li>
+                                <a href="#showFavorites">showFavorites</a>
                             </li>
                             <li>
                                 <a href="#song">song</a>
@@ -245,7 +260,19 @@
                                 <a href="#changeStyle">changeStyle</a>
                             </li>
                             <li>
+                                <a href="#deleteLocation">deleteLocation</a>
+                            </li>
+                            <li>
                                 <a href="#findMe">findMe</a>
+                            </li>
+                            <li>
+                                <a href="#getCurrentDistance">getCurrentDistance</a>
+                            </li>
+                            <li>
+                                <a href="#getCurrentTime">getCurrentTime</a>
+                            </li>
+                            <li>
+                                <a href="#getLocations">getLocations</a>
                             </li>
                             <li>
                                 <a href="#getMarkers">getMarkers</a>
@@ -253,6 +280,12 @@
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#getRoute">getRoute</a>
+                            </li>
+                            <li>
+                                <a href="#getSelectedUser">getSelectedUser</a>
+                            </li>
+                            <li>
+                                <a href="#hideLocations">hideLocations</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
@@ -272,6 +305,12 @@
                             </li>
                             <li>
                                 <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#refresh">refresh</a>
+                            </li>
+                            <li>
+                                <a href="#saveLocation">saveLocation</a>
                             </li>
                             <li>
                                 <a href="#setCenter">setCenter</a>
@@ -315,12 +354,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(matchService: <a href="../injectables/MatchingControllerService.html">MatchingControllerService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, mapService: <a href="../injectables/MapsControllerService.html">MapsControllerService</a>, zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>)</code>
+<code>constructor(matchService: <a href="../injectables/MatchingControllerService.html">MatchingControllerService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, mapService: <a href="../injectables/MapsControllerService.html">MapsControllerService</a>, zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/components/map/map.component.ts:124</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/components/map/map.component.ts:127</a></div>
                             </td>
                         </tr>
 
@@ -412,6 +451,38 @@
 </code>
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Allows Nav compnent to switch between sub-components</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -454,7 +525,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="319" class="link-to-prism">src/app/components/map/map.component.ts:319</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="357" class="link-to-prism">src/app/components/map/map.component.ts:357</a></div>
                             </td>
                         </tr>
 
@@ -530,7 +601,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="325" class="link-to-prism">src/app/components/map/map.component.ts:325</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="363" class="link-to-prism">src/app/components/map/map.component.ts:363</a></div>
                             </td>
                         </tr>
 
@@ -570,7 +641,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="361" class="link-to-prism">src/app/components/map/map.component.ts:361</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="399" class="link-to-prism">src/app/components/map/map.component.ts:399</a></div>
                             </td>
                         </tr>
 
@@ -630,6 +701,46 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="deleteLocation"></a>
+                        <span class="name">
+                            <b>
+                            deleteLocation
+                            </b>
+                            <a href="#deleteLocation"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>deleteLocation()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="598" class="link-to-prism">src/app/components/map/map.component.ts:598</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Delete a saved location by name </p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="findMe"></a>
                         <span class="name">
                             <b>
@@ -648,7 +759,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="421" class="link-to-prism">src/app/components/map/map.component.ts:421</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="459" class="link-to-prism">src/app/components/map/map.component.ts:459</a></div>
                             </td>
                         </tr>
 
@@ -656,6 +767,142 @@
                 <tr>
                     <td class="col-md-4">
                             <div class="io-description"><p>Attempts to determne the location of the current user and zoom in on it</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getCurrentDistance"></a>
+                        <span class="name">
+                            <b>
+                            getCurrentDistance
+                            </b>
+                            <a href="#getCurrentDistance"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getCurrentDistance()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/app/components/map/map.component.ts:150</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Retireves the distance of the current route (set by setRoute)</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <ul>
+<li>the distance of the route</li>
+</ul>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getCurrentTime"></a>
+                        <span class="name">
+                            <b>
+                            getCurrentTime
+                            </b>
+                            <a href="#getCurrentTime"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getCurrentTime()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">src/app/components/map/map.component.ts:158</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Retireves the estimated time of the current route (set by setRoute)</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <ul>
+<li>the estimated time of the route</li>
+</ul>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getLocations"></a>
+                        <span class="name">
+                            <b>
+                            getLocations
+                            </b>
+                            <a href="#getLocations"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getLocations()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="546" class="link-to-prism">src/app/components/map/map.component.ts:546</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Retrieves the current list of user&#39;s favorite locations</p>
 </div>
 
                             <div class="io-description">
@@ -688,7 +935,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="244" class="link-to-prism">src/app/components/map/map.component.ts:244</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="281" class="link-to-prism">src/app/components/map/map.component.ts:281</a></div>
                             </td>
                         </tr>
 
@@ -730,7 +977,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="272" class="link-to-prism">src/app/components/map/map.component.ts:272</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="309" class="link-to-prism">src/app/components/map/map.component.ts:309</a></div>
                             </td>
                         </tr>
 
@@ -739,6 +986,92 @@
                     <td class="col-md-4">
                             <div class="io-description"><p>Get the metadata (distance, estimated duration) of a given route</p>
 </div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getSelectedUser"></a>
+                        <span class="name">
+                            <b>
+                            getSelectedUser
+                            </b>
+                            <a href="#getSelectedUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getSelectedUser()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="174" class="link-to-prism">src/app/components/map/map.component.ts:174</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>retrieves the selected user</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <ul>
+<li>the user currently selected</li>
+</ul>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hideLocations"></a>
+                        <span class="name">
+                            <b>
+                            hideLocations
+                            </b>
+                            <a href="#hideLocations"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>hideLocations()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="565" class="link-to-prism">src/app/components/map/map.component.ts:565</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -772,7 +1105,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/components/map/map.component.ts:140</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/components/map/map.component.ts:166</a></div>
                             </td>
                         </tr>
 
@@ -846,7 +1179,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="353" class="link-to-prism">src/app/components/map/map.component.ts:353</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="391" class="link-to-prism">src/app/components/map/map.component.ts:391</a></div>
                             </td>
                         </tr>
 
@@ -924,7 +1257,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="345" class="link-to-prism">src/app/components/map/map.component.ts:345</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="383" class="link-to-prism">src/app/components/map/map.component.ts:383</a></div>
                             </td>
                         </tr>
 
@@ -1002,7 +1335,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="223" class="link-to-prism">src/app/components/map/map.component.ts:223</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="260" class="link-to-prism">src/app/components/map/map.component.ts:260</a></div>
                             </td>
                         </tr>
 
@@ -1042,7 +1375,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="237" class="link-to-prism">src/app/components/map/map.component.ts:237</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="274" class="link-to-prism">src/app/components/map/map.component.ts:274</a></div>
                             </td>
                         </tr>
 
@@ -1082,7 +1415,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">src/app/components/map/map.component.ts:148</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/app/components/map/map.component.ts:181</a></div>
                             </td>
                         </tr>
 
@@ -1090,6 +1423,86 @@
                 <tr>
                     <td class="col-md-4">
                             <div class="io-description"><p>Initializes the Map with data</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="refresh"></a>
+                        <span class="name">
+                            <b>
+                            refresh
+                            </b>
+                            <a href="#refresh"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>refresh()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="575" class="link-to-prism">src/app/components/map/map.component.ts:575</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>TODO: Should refresh map once a location is either saved or deleted.*</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="saveLocation"></a>
+                        <span class="name">
+                            <b>
+                            saveLocation
+                            </b>
+                            <a href="#saveLocation"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>saveLocation()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="534" class="link-to-prism">src/app/components/map/map.component.ts:534</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Makes a request to update the user&#39;s favorite locations table  </p>
 </div>
 
                             <div class="io-description">
@@ -1122,7 +1535,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="295" class="link-to-prism">src/app/components/map/map.component.ts:295</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="333" class="link-to-prism">src/app/components/map/map.component.ts:333</a></div>
                             </td>
                         </tr>
 
@@ -1196,7 +1609,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="287" class="link-to-prism">src/app/components/map/map.component.ts:287</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="325" class="link-to-prism">src/app/components/map/map.component.ts:325</a></div>
                             </td>
                         </tr>
 
@@ -1274,7 +1687,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="397" class="link-to-prism">src/app/components/map/map.component.ts:397</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="435" class="link-to-prism">src/app/components/map/map.component.ts:435</a></div>
                             </td>
                         </tr>
 
@@ -1315,7 +1728,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="452" class="link-to-prism">src/app/components/map/map.component.ts:452</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="490" class="link-to-prism">src/app/components/map/map.component.ts:490</a></div>
                             </td>
                         </tr>
 
@@ -1389,7 +1802,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="474" class="link-to-prism">src/app/components/map/map.component.ts:474</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="512" class="link-to-prism">src/app/components/map/map.component.ts:512</a></div>
                             </td>
                         </tr>
 
@@ -1463,7 +1876,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="337" class="link-to-prism">src/app/components/map/map.component.ts:337</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="375" class="link-to-prism">src/app/components/map/map.component.ts:375</a></div>
                             </td>
                         </tr>
 
@@ -1503,7 +1916,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="414" class="link-to-prism">src/app/components/map/map.component.ts:414</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="452" class="link-to-prism">src/app/components/map/map.component.ts:452</a></div>
                             </td>
                         </tr>
 
@@ -1543,7 +1956,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="437" class="link-to-prism">src/app/components/map/map.component.ts:437</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="475" class="link-to-prism">src/app/components/map/map.component.ts:475</a></div>
                             </td>
                         </tr>
 
@@ -1604,7 +2017,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/components/map/map.component.ts:115</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/components/map/map.component.ts:109</a></div>
                             </td>
                         </tr>
 
@@ -1644,7 +2057,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/map/map.component.ts:67</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/map/map.component.ts:65</a></div>
                             </td>
                         </tr>
 
@@ -1684,7 +2097,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/map/map.component.ts:69</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/map/map.component.ts:67</a></div>
                             </td>
                         </tr>
 
@@ -1729,7 +2142,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/map/map.component.ts:71</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/map/map.component.ts:69</a></div>
                             </td>
                         </tr>
 
@@ -1769,13 +2182,53 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/components/map/map.component.ts:112</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/components/map/map.component.ts:106</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Holds the User that&#39;s logged in </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="deleteFavorite"></a>
+                        <span class="name">
+                            <b>
+                            deleteFavorite
+                            </b>
+                            <a href="#deleteFavorite"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>deleteFavorite:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/components/map/map.component.ts:127</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Store name location to delete into textbox locally *</p>
 </div>
                     </td>
                 </tr>
@@ -1810,7 +2263,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/map/map.component.ts:36</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/map/map.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -1856,13 +2309,98 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/map/map.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/map/map.component.ts:28</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Where Users work </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="favoriteLocations"></a>
+                        <span class="name">
+                            <b>
+                            favoriteLocations
+                            </b>
+                            <a href="#favoriteLocations"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>favoriteLocations:     <code>any[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/components/map/map.component.ts:72</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Stores list of users favorited locations </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="favoriteName"></a>
+                        <span class="name">
+                            <b>
+                            favoriteName
+                            </b>
+                            <a href="#favoriteName"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>favoriteName:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/components/map/map.component.ts:124</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Store name of saved location into textbox locally *</p>
 </div>
                     </td>
                 </tr>
@@ -1901,7 +2439,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/map/map.component.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/map/map.component.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -1946,7 +2484,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/map/map.component.ts:73</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/components/map/map.component.ts:76</a></div>
                             </td>
                         </tr>
 
@@ -1979,7 +2517,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/components/map/map.component.ts:100</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/components/map/map.component.ts:94</a></div>
                             </td>
                         </tr>
 
@@ -2018,7 +2556,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/map/map.component.ts:64</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/map/map.component.ts:62</a></div>
                             </td>
                         </tr>
 
@@ -2052,7 +2590,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/map/map.component.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/map/map.component.ts:48</a></div>
                             </td>
                         </tr>
 
@@ -2092,7 +2630,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/map/map.component.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/map/map.component.ts:50</a></div>
                             </td>
                         </tr>
 
@@ -2132,7 +2670,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/map/map.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/map/map.component.ts:60</a></div>
                             </td>
                         </tr>
 
@@ -2177,7 +2715,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/map/map.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/map/map.component.ts:52</a></div>
                             </td>
                         </tr>
 
@@ -2217,7 +2755,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/map/map.component.ts:78</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/components/map/map.component.ts:81</a></div>
                             </td>
                         </tr>
 
@@ -2262,7 +2800,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/map/map.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/map/map.component.ts:44</a></div>
                             </td>
                         </tr>
 
@@ -2306,19 +2844,13 @@
     {
       text: &#x27;Parking&#x27;, value: &#x27;parking_lot_maps.png&#x27;
     }
-    // ,
-    // {
-    //   text: &quot;Library&quot;, value: &quot;library_maps.png&quot;
-    // },
-    // {
-    //   text: &quot;Information&quot;, value: &quot;info-i_maps.png&quot;
-    // }
+
   ]</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/components/map/map.component.ts:83</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/components/map/map.component.ts:86</a></div>
                             </td>
                         </tr>
 
@@ -2358,7 +2890,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/components/map/map.component.ts:106</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/components/map/map.component.ts:100</a></div>
                             </td>
                         </tr>
 
@@ -2404,10 +2936,50 @@ Could be deprecated</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/map/map.component.ts:47</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/map/map.component.ts:45</a></div>
                             </td>
                         </tr>
 
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedLocation"></a>
+                        <span class="name">
+                            <b>
+                            selectedLocation
+                            </b>
+                            <a href="#selectedLocation"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>selectedLocation:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/components/map/map.component.ts:121</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Stores the value of our text box locally</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -2444,7 +3016,52 @@ Could be deprecated</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/map/map.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/map/map.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Holds the currently selected user </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showFavorites"></a>
+                        <span class="name">
+                            <b>
+                            showFavorites
+                            </b>
+                            <a href="#showFavorites"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>showFavorites:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>true</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/components/map/map.component.ts:74</a></div>
                             </td>
                         </tr>
 
@@ -2477,7 +3094,7 @@ Could be deprecated</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/components/map/map.component.ts:109</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/components/map/map.component.ts:103</a></div>
                             </td>
                         </tr>
 
@@ -2523,13 +3140,13 @@ Could be deprecated</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/map/map.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/map/map.component.ts:26</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Where Users reside</p>
+                        <div class="io-description"><p>Where Users reside </p>
 </div>
                     </td>
                 </tr>
@@ -2568,7 +3185,7 @@ Could be deprecated</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/map/map.component.ts:56</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/map/map.component.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -2603,7 +3220,7 @@ Could be deprecated</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/map/map.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/map/map.component.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -2648,7 +3265,7 @@ Could be deprecated</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/map/map.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/map/map.component.ts:41</a></div>
                             </td>
                         </tr>
 
@@ -2668,17 +3285,14 @@ Could be deprecated</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from &#x27;@angular/core&#x27;;
-import { NgbTabset, NgbModal } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
+import { NgbTabset } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
 import { MapsControllerService } from &#x27;../../services/api/maps-controller.service&#x27;;
-import { Location } from &#x27;./../../models/location.model&#x27;;
-import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
-import { HttpModule } from &#x27;@angular/http&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { User } from &#x27;../../models/user.model&#x27;;
 import { Link } from &#x27;../../models/link.model&#x27;;
 import { MatchingControllerService } from &#x27;../../services/api/matching-controller.service&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
-import { GoogleMap } from &#x27;@agm/core/services/google-maps-types&#x27;;
-// import { } from &#x27;@types/googlemaps&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 
 /**
  * Component that handles route navigation and displays a map
@@ -2693,9 +3307,7 @@ import { GoogleMap } from &#x27;@agm/core/services/google-maps-types&#x27;;
 })
 export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
-  /**
-   * Where Users reside
-   */
+  /** Where Users reside */
   private start &#x3D; &#x27;herndon&#x27;;
   /** Where Users work */
   private end &#x3D; &#x27;reston&#x27;;
@@ -2705,7 +3317,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Estimated time of the drive */
   private time: number;
 
+  /** Holds the currently selected user */
   private selectedUser: User &#x3D; null;
+
+
 
   /** Holds list of possible drivers to present */
   users: any[] &#x3D; [];
@@ -2738,6 +3353,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Current radious, set by a number control */
   currentRadius &#x3D; 5000;
 
+  /** Stores list of users favorited locations */
+  favoriteLocations: any[] &#x3D; [];
+
+  showFavorites: boolean &#x3D; true;
+
   iconBase &#x3D; &#x27;https://maps.google.com/mapfiles/kml/shapes/&#x27;;
 
   /**
@@ -2752,17 +3372,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     {
       text: &#x27;Parking&#x27;, value: &#x27;parking_lot_maps.png&#x27;
     }
-    // ,
-    // {
-    //   text: &quot;Library&quot;, value: &quot;library_maps.png&quot;
-    // },
-    // {
-    //   text: &quot;Information&quot;, value: &quot;info-i_maps.png&quot;
-    // }
+
   ];
-
-  // selectedMarkerType &#x3D; parking_lot_maps.png;
-
 
   /** Whether the map is hidden or not */
   isHidden &#x3D; false;
@@ -2791,15 +3402,47 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    */
   closeResult: string;
 
+  /** Stores the value of our text box locally*/
+  selectedLocation: string;
+
+  /**Store name of saved location into textbox locally **/
+  favoriteName: string;
+
+   /**Store name location to delete into textbox locally **/
+   deleteFavorite: string;
+
   /**
    * Sets up the map component with dependency injection
    * @param {MatchingControllerService} matchService - Allows management between riders and drivers
    * @param {UserControllerService} userService - Allows management of the Users
    * @param {MapsControllerService} mapService - Allows a map to be managed
    * @param {NgZone} zone - Provides location services
+   * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
-  constructor(private matchService: MatchingControllerService, private userService: UserControllerService,
-    private mapService: MapsControllerService, private zone: NgZone) { }
+  constructor(
+    private matchService: MatchingControllerService, 
+    private userService: UserControllerService,
+    private mapService: MapsControllerService, 
+    private zone: NgZone,
+    private route: Router,
+    private http: HttpClient
+    ) { }
+
+  /**
+   * Retireves the distance of the current route (set by setRoute)
+   * @returns {number} - the distance of the route
+   */
+  getCurrentDistance(): number {
+    return this.dist;
+  }
+
+  /**
+   * Retireves the estimated time of the current route (set by setRoute)
+   * @returns {number} - the estimated time of the route
+   */
+  getCurrentTime(): number {
+    return this.time;
+  }
 
   /**
    * Sets up the Map
@@ -2809,17 +3452,28 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.map &#x3D; map;
   }
 
+  /**
+   * retrieves the selected user
+   * @returns {User} - the user currently selected
+   */
+  getSelectedUser(): User {
+    return this.selectedUser;
+  }
 
   /**
    * Initializes the Map with data
    */
   ngOnInit() {
+    if (sessionStorage.length &#x3D;&#x3D; 0)
+      this.route.navigate([&quot;/landing&quot;]);
     this.song.src &#x3D; &#x27;assets/audio/GrimGrinningGhosts.mp3&#x27;;
     this.song.loop &#x3D; true;
     this.song.load();
     this.userService.getCurrentUser().subscribe(
       data &#x3D;&gt; {
         this.currentUser &#x3D; data;
+        console.log(&#x27;User data from current user (Service) called by Map component&#x27;);
+        console.log(data);
         let userLinks: Link&lt;User&gt;[] &#x3D; null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 &#x3D;&gt; {
@@ -2942,6 +3596,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       data &#x3D;&gt; {
         this.dist &#x3D; data.distance;
         this.time &#x3D; data.duration;
+        console.log(&#x27;printing route information...&#x27;);
         console.log(this.dist);
         console.log(this.time);
       }
@@ -2991,11 +3646,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   /** Changes the radius of your search */
   public changeRadius() {
-    setTimeout(() &#x3D;&gt; {
+    // setTimeout(() &#x3D;&gt; {
       console.log(this.circle.radius + &#x27; &#x27; + this.currentRadius);
       this.circle.radius &#x3D; this.currentRadius;
-    },
-      100);
+    // },
+    //   100);
 
   }
 
@@ -3158,12 +3813,151 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
+  /** 
+   * Makes a request to update the user&#x27;s favorite locations table  
+  */
+  saveLocation(){
+    let selectedLocation: string &#x3D; (document.getElementById(&quot;currentLocation&quot;) as HTMLInputElement).value;
+    this.http.post&lt;any&gt;(&#x27;http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?address&#x3D;&#x27; +
+    selectedLocation +&#x27;&amp;name&#x3D;&#x27;
+    +this.favoriteName + &#x27;&amp;userId&#x3D;&#x27;
+    +sessionStorage.getItem(&#x27;id&#x27;),{}).subscribe(message &#x3D;&gt;
+    console.log(message));
+    console.log((document.getElementById(&quot;currentLocation&quot;) as HTMLInputElement).value);
+    //this.refresh();
+  }
+
+  /** Retrieves the current list of user&#x27;s favorite locations*/
+  getLocations(){
+    this.showFavorites &#x3D; !this.showFavorites;
+    this.http.get&lt;any&gt;(&#x27;http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/&#x27;+sessionStorage.getItem(&#x27;id&#x27;)).subscribe(favorites &#x3D;&gt; {
+      //this.tokenStorage.saveToken(token);)
+      let marker:any;
+      for(let favorite of favorites){
+        let fav_location &#x3D; new google.maps.LatLng(favorite.latitude, favorite.longitude);
+         marker &#x3D; new google.maps.Marker({
+            position: fav_location,
+            map: this.map,
+            title: favorite.name
+          });
+          this.favoriteLocations.push(marker);
+      }
+    }
+    )
+  }
+
+  //**Hides user&#x27;s saved locations **/
+  hideLocations(){
+    this.showFavorites &#x3D; !this.showFavorites;
+    for(let favorite of this.favoriteLocations){
+      favorite.setMap(null);
+    }
+    if(this.marker){
+      this.marker.setMap(null);
+    }
+  }
+/**TODO: Should refresh map once a location is either saved or deleted.**/
+  refresh(){
+    for(let favorite of this.favoriteLocations){
+      favorite.setMap(null);
+    }
+    if(this.marker){
+      this.marker.setMap(null);
+    } 
+    this.http.get&lt;any&gt;(&#x27;http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/&#x27;+sessionStorage.getItem(&#x27;id&#x27;)).subscribe(favorites &#x3D;&gt; {
+      let marker:any;
+      for(let favorite of favorites){
+        let fav_location &#x3D; new google.maps.LatLng(favorite.latitude, favorite.longitude);
+         marker &#x3D; new google.maps.Marker({
+            position: fav_location,
+            map: this.map,
+            title: favorite.name
+          });
+          this.favoriteLocations.push(marker);
+      }
+    }
+    )
+  }
+
+/**Delete a saved location by name */
+  deleteLocation(){
+    this.http.delete&lt;any&gt;(&#x27;http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?name&#x3D;&#x27;
+    +this.deleteFavorite + &#x27;&amp;userId&#x3D;&#x27;
+    +sessionStorage.getItem(&#x27;id&#x27;),{}).subscribe(message &#x3D;&gt;
+    console.log(message));
+    console.log((document.getElementById(&quot;currentLocation&quot;) as HTMLInputElement).value);
+    //this.refresh();
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container-fluid&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;ngb-tabset (tabChange)&#x3D;&quot;tabSelect($event)&quot;&gt;
+    &lt;ngb-tab title&#x3D;&quot;Drivers Near Me&quot;&gt;
+      &lt;ng-template ngbTabContent&gt;
+        &lt;br&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;&quot;&gt; &lt;!--col-lg-4 col-lg-offset-4 --&gt;
+            &lt;div class&#x3D;&quot;&quot; style &#x3D; &quot;margin-left: 25px&quot;&gt;&lt;!--col-lg-8 col-lg-offset-2 --&gt;
+              &lt;form class&#x3D;&quot;form-inline&quot; #form&#x3D;&quot;ngForm&quot;&gt;
+                &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; name&#x3D;&quot;myLocation&quot; (addressSelect)&#x3D;&quot;setCenter($event)&quot; placeholder&#x3D;&quot;Enter Your Location&quot;
+                    appPlacesAutocomplete required&gt;
+                &lt;/div&gt;
+              &lt;/form&gt;
+            &lt;/div&gt;
+            &lt;br&gt;
+            &lt;div class&#x3D;&quot;&quot; style &#x3D; &quot;margin-left: 25px&quot;&gt;&lt;!--col-lg-8 col-lg-offset-2 --&gt;
+              &lt;form class&#x3D;&quot;form-inline&quot; #form&#x3D;&quot;ngForm&quot;&gt;
+                &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                  &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; name&#x3D;&quot;radius&quot; [(ngModel)]&#x3D;&quot;currentRadius&quot; placeholder&#x3D;&quot;Enter Search Radius&quot;&gt;
+                &lt;/div&gt;
+              &lt;/form&gt;
+              &lt;br&gt;
+              &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;changeRadius()&quot; class&#x3D;&quot;btn btn-primary&quot; [disabled]&#x3D;&quot;form.invalid&quot;&gt; Find Drivers&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ng-template&gt;
+    &lt;/ngb-tab&gt;
+    &lt;ngb-tab title &#x3D; &quot;Favorite Locations&quot;&gt;
+      &lt;ng-template ngbTabContent&gt;
+        &lt;div style &#x3D; &quot;margin-top: 20px; margin-left: 25px;&quot;&gt;
+          &lt;b&gt;Address:&lt;/b&gt;
+          &lt;span style&#x3D;&quot;display:inline-block; width: 125px;&quot;&gt;&lt;/span&gt;
+          &lt;b&gt;Name:&lt;/b&gt;
+          &lt;form class&#x3D;&quot;form-inline&quot; #form&#x3D;&quot;ngForm&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;currentLocation&quot; name&#x3D;&quot;currentLocation&quot; (addressSelect)&#x3D;&quot;setCenter($event)&quot; placeholder&#x3D;&quot;Enter Your Location&quot;
+                  appPlacesAutocomplete required [(ngModel)] &#x3D; &quot;selectedLocation&quot;/&gt;
+                  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;nameLocation&quot; name&#x3D;&quot;nameLocation&quot; [(ngModel)] &#x3D; &quot;favoriteName&quot; placeholder&#x3D;&quot;Set Name&quot;/&gt;
+                  &lt;button type &#x3D; &quot;submit&quot; name &#x3D; &quot;favorite-location&quot; (click) &#x3D; &quot;saveLocation()&quot; class &#x3D; &quot;btn btn-primary&quot; [disabled]&#x3D;&quot;form.invalid&quot;&gt;Save Location&lt;/button&gt;
+                  &lt;button *ngIf&#x3D;&quot;showFavorites&quot; type &#x3D; &quot;submit&quot; name &#x3D; &quot;get-favorite-locations&quot; (click) &#x3D; &quot;getLocations()&quot; class &#x3D; &quot;btn btn-primary&quot; &gt;My Locations&lt;/button&gt;
+                  &lt;button *ngIf&#x3D;&quot;!showFavorites&quot; type &#x3D; &quot;submit&quot; name &#x3D; &quot;hide-favorite-locations&quot; (click) &#x3D; &quot;hideLocations()&quot; class &#x3D; &quot;btn btn-primary&quot; &gt;Hide Locations&lt;/button&gt;
+              &lt;/div&gt;
+          &lt;/form&gt;
+          &lt;br&gt;
+          &lt;div *ngIf&#x3D;&quot;!showFavorites&quot;&gt;
+            &lt;b&gt;Name:&lt;/b&gt;
+            &lt;form class&#x3D;&quot;form-inline&quot;&gt;  
+                &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;deleteLocation&quot; name&#x3D;&quot;deleteLocation&quot;[(ngModel)] &#x3D; &quot;deleteFavorite&quot;  placeholder&#x3D;&quot;Enter Name&quot;/&gt;
+                  &lt;button  type &#x3D; &quot;submit&quot; name &#x3D; &quot;delete-location&quot; (click) &#x3D; &quot;deleteLocation()&quot;  class &#x3D; &quot;btn btn-primary&quot;&gt;Delete Location&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+            &lt;p&gt;&lt;b&gt;Tip:&lt;/b&gt; Hover over marker to display that saved location&#x27;s name.&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ng-template&gt;
+    &lt;/ngb-tab&gt;
+  &lt;/ngb-tabset&gt;
+  &lt;br&gt;
+
+
+  &lt;br&gt;
+
+&lt;div class&#x3D;&quot;container-fluid&quot;&gt;
   &lt;div class&#x3D;&quot;row&quot;&gt;
     &lt;div class&#x3D;&quot;col-0&quot;&gt;&lt;/div&gt;
     &lt;div class&#x3D;&quot;col-12&quot;&gt;
@@ -3177,9 +3971,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         &lt;/agm-marker&gt;
         &lt;agm-marker *ngFor&#x3D;&quot;let m of placedMarkers; let i &#x3D; index&quot; [latitude]&#x3D;&quot;m.lat&quot; [longitude]&#x3D;&quot;m.lng&quot; [title]&#x3D;&quot;m.title&quot;&gt;
         &lt;/agm-marker&gt;
-        &lt;!--         &lt;agm-circle [visible]&#x3D;&quot;true&quot; [latitude]&#x3D;&quot;circle.latitude&quot; [longitude]&#x3D;&quot;circle.longitude&quot; [radius]&#x3D;&quot;circle.radius&quot; [fillOpacity]&#x3D;&quot;.2&quot;
-          [circleDraggable]&#x3D;&quot;true&quot; [fillColor]&#x3D;&quot;&#x27;blue&#x27;&quot;&gt;
-        &lt;/agm-circle&gt; --&gt;
       &lt;/agm-map&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -3213,10 +4004,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
     &lt;div class&#x3D;&quot;col-12 text-center&quot;&gt;
 
-      &lt;!--    &lt;button (click)&#x3D;&quot;getRoute()&quot;&gt;Testing&lt;/button&gt;
-      &lt;div class&#x3D;&quot;row&quot;&gt;
-        
-        &lt;/div&gt; --&gt;
 
       &lt;div class&#x3D;&quot;row&quot; style&#x3D;&quot;display: flex; justify-content:flex-end; margin-right: 50px; margin-top: 25px&quot;&gt;
         &lt;div class&#x3D;&quot;col-2&quot;&gt;&lt;/div&gt;
@@ -3232,46 +4019,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
           &lt;/div&gt;
           &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;toggleMap()&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Toggle Map&lt;/button&gt;
         &lt;/div&gt;
-        &lt;!--  &lt;button (click)&#x3D;&quot;setMapType(&#x27;terrain&#x27;)&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Terrain&lt;/button&gt;
-        &lt;button (click)&#x3D;&quot;setMapType(&#x27;satellite&#x27;)&quot; class&#x3D;&quot;btn btn-danger&quot;&gt;Satellite&lt;/button&gt;
-        &lt;button (click)&#x3D;&quot;setMapType(&#x27;roadmap&#x27;)&quot; class&#x3D;&quot;btn btn-warning&quot;&gt;Road Map&lt;/button&gt;
-        &lt;button (click)&#x3D;&quot;changeStyle(&#x27;halloween&#x27;)&quot; class&#x3D;&quot;pumpkinButton&quot;&gt;&lt;/button&gt; --&gt;
         &lt;br&gt;
       &lt;/div&gt;
 
-      &lt;ngb-tabset (tabChange)&#x3D;&quot;tabSelect($event)&quot;&gt;
-        &lt;ngb-tab title&#x3D;&quot;Drivers Near Me&quot;&gt;
-          &lt;ng-template ngbTabContent&gt;
-            &lt;br&gt;
-            &lt;div class&#x3D;&quot;row&quot;&gt;
-              &lt;div class&#x3D;&quot;&quot;&gt; &lt;!--col-lg-4 col-lg-offset-4 --&gt;
-                &lt;div class&#x3D;&quot;&quot; style &#x3D; &quot;margin-left: 25px&quot;&gt;&lt;!--col-lg-8 col-lg-offset-2 --&gt;
-                  &lt;form class&#x3D;&quot;form-inline&quot; #form&#x3D;&quot;ngForm&quot;&gt;
-                    &lt;div class&#x3D;&quot;form-group&quot;&gt;
-                      &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; name&#x3D;&quot;myLocation&quot; (addressSelect)&#x3D;&quot;setCenter($event)&quot; placeholder&#x3D;&quot;Enter Your Location&quot;
-                        appPlacesAutocomplete required&gt;
-                    &lt;/div&gt;
-                  &lt;/form&gt;
-                &lt;/div&gt;
-                &lt;br&gt;
-                &lt;div class&#x3D;&quot;&quot; style &#x3D; &quot;margin-left: 25px&quot;&gt;&lt;!--col-lg-8 col-lg-offset-2 --&gt;
-                  &lt;form class&#x3D;&quot;form-inline&quot; #form&#x3D;&quot;ngForm&quot;&gt;
-                    &lt;div class&#x3D;&quot;form-group&quot;&gt;
-                      &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; name&#x3D;&quot;radius&quot; [(ngModel)]&#x3D;&quot;currentRadius&quot; placeholder&#x3D;&quot;Enter Search Radius&quot;&gt;
-                    &lt;/div&gt;
-                  &lt;/form&gt;
-                  &lt;br&gt;
-                  &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;changeRadius()&quot; class&#x3D;&quot;btn btn-primary&quot; [disabled]&#x3D;&quot;form.invalid&quot;&gt; Find Drivers&lt;/button&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/ng-template&gt;
-        &lt;/ngb-tab&gt;
-      &lt;/ngb-tabset&gt;
-      &lt;br&gt;
-
-
-      &lt;br&gt;
       &lt;!-- &lt;div class&#x3D;&quot;row&quot;&gt;
         &lt;div class&#x3D;&quot;col-md-12&quot;&gt;
           &lt;div class&#x3D;&quot;text-center&quot;&gt;
@@ -3293,10 +4043,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         &lt;/tr&gt;
       &lt;/table&gt;
 
-      &lt;!-- &lt;agm-map [latitude]&#x3D;&quot;33&quot; [longitude]&#x3D;&quot;-70&quot;&gt;
-
-      &lt;/agm-map&gt; --&gt;
-      &lt;!-- -  - - - - - - - - - --    ------- --  - - - - - - - - - - --&gt;
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div *ngIf&#x3D;&quot;styles !&#x3D; null&quot;&gt;
@@ -3338,32 +4084,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 &lt;/div&gt;
 &lt;img *ngIf&#x3D;&quot;styles !&#x3D; null&quot; src&#x3D;&quot;http://pavbca.com/walldb/original/8/e/6/731397.jpg&quot; alt&#x3D;&quot;&quot; class&#x3D;&quot;spooky-background&quot;&gt;
 &lt;img *ngIf&#x3D;&quot;styles !&#x3D; null&quot; src&#x3D;&quot;http://pavbca.com/walldb/original/8/e/6/731397.jpg&quot; alt&#x3D;&quot;&quot; class&#x3D;&quot;spooky-background2 flashit&quot;&gt;
-
-&lt;!--
-&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#exampleModal&quot;&gt;
-  Launch demo modal
-&lt;/button&gt;
-
- Modal
-&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;exampleModal&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;exampleModalLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
-  &lt;div class&#x3D;&quot;modal-dialog&quot; role&#x3D;&quot;document&quot;&gt;
-    &lt;div class&#x3D;&quot;modal-content&quot;&gt;
-      &lt;div class&#x3D;&quot;modal-header&quot;&gt;
-        &lt;h5 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;exampleModalLabel&quot;&gt;Modal title&lt;/h5&gt;
-        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot;&gt;
-          &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;/span&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;modal-body&quot;&gt;
-        ...
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
-        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; data-dismiss&#x3D;&quot;modal&quot;&gt;Close&lt;/button&gt;
-        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Save changes&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt; --&gt;</code></pre>
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -3391,8 +4112,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container-fluid">  <div class="row">    <div class="col-0"></div>    <div class="col-12">      <br>      <br>      <br>      <agm-map (mapReady)="mapReady($event)" *ngIf="!isHidden" [latitude]="currentLat" [longitude]="currentLong" [styles]="styles"        [mapTypeId]="mapTypeId" [usePanning]="true">        <agm-marker *ngFor="let user of markers; let i = index" [iconUrl]="user.icon" [latitude]="user.location.latitude" [longitude]="user.location.longitude"          [opacity]="user.opacity" (markerClick)="markerClicked(user)">        </agm-marker>        <agm-marker *ngFor="let m of placedMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [title]="m.title">        </agm-marker>        <!--         <agm-circle [visible]="true" [latitude]="circle.latitude" [longitude]="circle.longitude" [radius]="circle.radius" [fillOpacity]=".2"          [circleDraggable]="true" [fillColor]="\'blue\'">        </agm-circle> -->      </agm-map>    </div>  </div></div><div class="container-fluid" [class.spooky-font]="styles!=null">  <table *ngIf="selectedUser" class="table">    <tr>      <th>Person Info</th>      <th>Value</th>    </tr>    <tr>      <td>Name</td>      <td>{{selectedUser.firstName}} {{selectedUser.lastName}}</td>    </tr>    <tr>      <td>Address</td>      <td>{{selectedUser.address}}</td>    </tr>    <tr>      <td>Batch End</td>      <td>{{selectedUser.batchEnd}}</td>    </tr>    <tr>      <td>Email</td>      <td>{{selectedUser.email}}</td>    </tr>  </table>  <div class="row">    <div class="col-12 text-center">      <!--    <button (click)="getRoute()">Testing</button>      <div class="row">                </div> -->      <div class="row" style="display: flex; justify-content:flex-end; margin-right: 50px; margin-top: 25px">        <div class="col-2"></div>        <div class="dropdown">          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">            Map Style          </button>          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">            <a class="dropdown-item" (click)="setMapType(\'terrain\')">Terrain</a>            <a class="dropdown-item" (click)="setMapType(\'satellite\')">Satellite</a>            <a class="dropdown-item" (click)="setMapType(\'roadmap\')">Road Map</a>            <a class="dropdown-item" (click)="changeStyle(\'halloween\')">Halloween</a>          </div>          <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>        </div>        <!--  <button (click)="setMapType(\'terrain\')" class="btn btn-primary">Terrain</button>        <button (click)="setMapType(\'satellite\')" class="btn btn-danger">Satellite</button>        <button (click)="setMapType(\'roadmap\')" class="btn btn-warning">Road Map</button>        <button (click)="changeStyle(\'halloween\')" class="pumpkinButton"></button> -->        <br>      </div>      <ngb-tabset (tabChange)="tabSelect($event)">        <ngb-tab title="Drivers Near Me">          <ng-template ngbTabContent>            <br>            <div class="row">              <div class=""> <!--col-lg-4 col-lg-offset-4 -->                <div class="" style = "margin-left: 25px"><!--col-lg-8 col-lg-offset-2 -->                  <form class="form-inline" #form="ngForm">                    <div class="form-group">                      <input type="text" class="form-control" name="myLocation" (addressSelect)="setCenter($event)" placeholder="Enter Your Location"                        appPlacesAutocomplete required>                    </div>                  </form>                </div>                <br>                <div class="" style = "margin-left: 25px"><!--col-lg-8 col-lg-offset-2 -->                  <form class="form-inline" #form="ngForm">                    <div class="form-group">                      <input type="number" class="form-control" name="radius" [(ngModel)]="currentRadius" placeholder="Enter Search Radius">                    </div>                  </form>                  <br>                  <button type="button" (click)="changeRadius()" class="btn btn-primary" [disabled]="form.invalid"> Find Drivers</button>                </div>              </div>            </div>          </ng-template>        </ngb-tab>      </ngb-tabset>      <br>      <br>      <!-- <div class="row">        <div class="col-md-12">          <div class="text-center">          </div>        </div>      </div> -->      <table *ngIf="users.length > 0" class="table">        <tr>          <th>Name</th>          <th>Address</th>          <th>Batch End</th>          <th>Email</th>        </tr>        <tr *ngFor="let user of users">          <td>{{user.firstName}} {{user.lastName}}</td>          <td>{{user.address}}</td>          <td>{{user.batchEnd}}</td>          <td>{{user.email}}</td>        </tr>      </table>      <!-- <agm-map [latitude]="33" [longitude]="-70">      </agm-map> -->      <!-- -  - - - - - - - - - --    ------- --  - - - - - - - - - - -->    </div>  </div>  <div *ngIf="styles != null">    <div class="witch-container witch-container-one">      <div class="witch witch-one"></div>    </div>    <div class="witch-container witch-container-two">      <div class="witch witch-two"></div>    </div>    <div class="witch-container witch-container-three">      <div class="witch witch-three"></div>    </div>    <div class="witch-container witch-container-four">      <div class="witch witch-four"></div>    </div>    <div class="ghost-container ghost-container-one">      <div class="ghost ghost-one"></div>    </div>    <div class="ghost-container ghost-container-two">      <div class="ghost ghost-two"></div>    </div>    <div class="ghost-container ghost-container-three">      <div class="ghost ghost-three"></div>    </div>    <div class="ghost-container ghost-container-four">      <div class="ghost ghost-four"></div>    </div>  </div></div><img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background"><img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background2 flashit"><!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">  Launch demo modal</button> Modal<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  <div class="modal-dialog" role="document">    <div class="modal-content">      <div class="modal-header">        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>        <button type="button" class="close" data-dismiss="modal" aria-label="Close">          <span aria-hidden="true">&times;</span>        </button>      </div>      <div class="modal-body">        ...      </div>      <div class="modal-footer">        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>        <button type="button" class="btn btn-primary">Save changes</button>      </div>    </div>  </div></div> --></div>'
-    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
+        var COMPONENT_TEMPLATE = '<div><ngb-tabset (tabChange)="tabSelect($event)">    <ngb-tab title="Drivers Near Me">      <ng-template ngbTabContent>        <br>        <div class="row">          <div class=""> <!--col-lg-4 col-lg-offset-4 -->            <div class="" style = "margin-left: 25px"><!--col-lg-8 col-lg-offset-2 -->              <form class="form-inline" #form="ngForm">                <div class="form-group">                  <input type="text" class="form-control" name="myLocation" (addressSelect)="setCenter($event)" placeholder="Enter Your Location"                    appPlacesAutocomplete required>                </div>              </form>            </div>            <br>            <div class="" style = "margin-left: 25px"><!--col-lg-8 col-lg-offset-2 -->              <form class="form-inline" #form="ngForm">                <div class="form-group">                  <input type="number" class="form-control" name="radius" [(ngModel)]="currentRadius" placeholder="Enter Search Radius">                </div>              </form>              <br>              <button type="button" (click)="changeRadius()" class="btn btn-primary" [disabled]="form.invalid"> Find Drivers</button>            </div>          </div>        </div>      </ng-template>    </ngb-tab>    <ngb-tab title = "Favorite Locations">      <ng-template ngbTabContent>        <div style = "margin-top: 20px; margin-left: 25px;">          <b>Address:</b>          <span style="display:inline-block; width: 125px;"></span>          <b>Name:</b>          <form class="form-inline" #form="ngForm">              <div class="form-group">                <input type="text" class="form-control" id="currentLocation" name="currentLocation" (addressSelect)="setCenter($event)" placeholder="Enter Your Location"                  appPlacesAutocomplete required [(ngModel)] = "selectedLocation"/>                  <input type="text" class="form-control" id="nameLocation" name="nameLocation" [(ngModel)] = "favoriteName" placeholder="Set Name"/>                  <button type = "submit" name = "favorite-location" (click) = "saveLocation()" class = "btn btn-primary" [disabled]="form.invalid">Save Location</button>                  <button *ngIf="showFavorites" type = "submit" name = "get-favorite-locations" (click) = "getLocations()" class = "btn btn-primary" >My Locations</button>                  <button *ngIf="!showFavorites" type = "submit" name = "hide-favorite-locations" (click) = "hideLocations()" class = "btn btn-primary" >Hide Locations</button>              </div>          </form>          <br>          <div *ngIf="!showFavorites">            <b>Name:</b>            <form class="form-inline">                  <div class="form-group">                  <input type="text" class="form-control" id="deleteLocation" name="deleteLocation"[(ngModel)] = "deleteFavorite"  placeholder="Enter Name"/>                  <button  type = "submit" name = "delete-location" (click) = "deleteLocation()"  class = "btn btn-primary">Delete Location</button>                </div>            </form>            <p><b>Tip:</b> Hover over marker to display that saved location\'s name.</p>          </div>        </div>      </ng-template>    </ngb-tab>  </ngb-tabset>  <br>  <br><div class="container-fluid">  <div class="row">    <div class="col-0"></div>    <div class="col-12">      <br>      <br>      <br>      <agm-map (mapReady)="mapReady($event)" *ngIf="!isHidden" [latitude]="currentLat" [longitude]="currentLong" [styles]="styles"        [mapTypeId]="mapTypeId" [usePanning]="true">        <agm-marker *ngFor="let user of markers; let i = index" [iconUrl]="user.icon" [latitude]="user.location.latitude" [longitude]="user.location.longitude"          [opacity]="user.opacity" (markerClick)="markerClicked(user)">        </agm-marker>        <agm-marker *ngFor="let m of placedMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [title]="m.title">        </agm-marker>      </agm-map>    </div>  </div></div><div class="container-fluid" [class.spooky-font]="styles!=null">  <table *ngIf="selectedUser" class="table">    <tr>      <th>Person Info</th>      <th>Value</th>    </tr>    <tr>      <td>Name</td>      <td>{{selectedUser.firstName}} {{selectedUser.lastName}}</td>    </tr>    <tr>      <td>Address</td>      <td>{{selectedUser.address}}</td>    </tr>    <tr>      <td>Batch End</td>      <td>{{selectedUser.batchEnd}}</td>    </tr>    <tr>      <td>Email</td>      <td>{{selectedUser.email}}</td>    </tr>  </table>  <div class="row">    <div class="col-12 text-center">      <div class="row" style="display: flex; justify-content:flex-end; margin-right: 50px; margin-top: 25px">        <div class="col-2"></div>        <div class="dropdown">          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">            Map Style          </button>          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">            <a class="dropdown-item" (click)="setMapType(\'terrain\')">Terrain</a>            <a class="dropdown-item" (click)="setMapType(\'satellite\')">Satellite</a>            <a class="dropdown-item" (click)="setMapType(\'roadmap\')">Road Map</a>            <a class="dropdown-item" (click)="changeStyle(\'halloween\')">Halloween</a>          </div>          <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>        </div>        <br>      </div>      <!-- <div class="row">        <div class="col-md-12">          <div class="text-center">          </div>        </div>      </div> -->      <table *ngIf="users.length > 0" class="table">        <tr>          <th>Name</th>          <th>Address</th>          <th>Batch End</th>          <th>Email</th>        </tr>        <tr *ngFor="let user of users">          <td>{{user.firstName}} {{user.lastName}}</td>          <td>{{user.address}}</td>          <td>{{user.batchEnd}}</td>          <td>{{user.email}}</td>        </tr>      </table>    </div>  </div>  <div *ngIf="styles != null">    <div class="witch-container witch-container-one">      <div class="witch witch-one"></div>    </div>    <div class="witch-container witch-container-two">      <div class="witch witch-two"></div>    </div>    <div class="witch-container witch-container-three">      <div class="witch witch-three"></div>    </div>    <div class="witch-container witch-container-four">      <div class="witch witch-four"></div>    </div>    <div class="ghost-container ghost-container-one">      <div class="ghost ghost-one"></div>    </div>    <div class="ghost-container ghost-container-two">      <div class="ghost ghost-two"></div>    </div>    <div class="ghost-container ghost-container-three">      <div class="ghost ghost-three"></div>    </div>    <div class="ghost-container ghost-container-four">      <div class="ghost ghost-four"></div>    </div>  </div></div><img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background"><img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background2 flashit"></div>'
+    var COMPONENTS = [{'name': 'AccountinfoComponent', 'selector': 'app-accountinfo'},{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CallbackComponent', 'selector': 'app-callback'},{'name': 'CarRegistrationComponent', 'selector': 'app-car-registration'},{'name': 'FavoritesComponent', 'selector': 'app-favorites'},{'name': 'HowToComponent', 'selector': 'app-how-to'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LikesComponent', 'selector': 'app-likes'},{'name': 'LikesmatchwebComponent', 'selector': 'app-likesmatchweb'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RideswipeComponent', 'selector': 'app-rideswipe'},{'name': 'UsercardComponent', 'selector': 'app-usercard'},{'name': 'UsermatchwebComponent', 'selector': 'app-usermatchweb'},{'name': 'ViewProfileComponent', 'selector': 'app-view-profile'}];
     var DIRECTIVES = [{'name': 'PlacesAutocompleteDirective', 'selector': '[appPlacesAutocomplete]'}];
     var ACTUAL_COMPONENT = {'name': 'MapComponent'};
 </script>

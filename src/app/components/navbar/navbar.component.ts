@@ -3,6 +3,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
+import { Auth0Service } from '../../services/auth0.service';
 
 /**
  * Hosts the Component that allows users to navigate between components
@@ -19,50 +20,45 @@ export class NavbarComponent implements OnInit {
   /**
    * Whether the User is logged on or not
    */
-  session = sessionStorage.length > 0;
+  session: boolean;
+
+  /**
+   * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
+   */
+  role: String;
+  /**
+   * Just a boolean stating whether the dropdown has been toggled.
+   */
+  dropped: boolean = false;
 
   /**
    * Sets up the component with relevent services
-   * @param {UserControllerService} userService - allows User Services to be utilized
-   * @param {AuthService} authService - (unused, should be used by Login component) Enables component to authenticate user
+   * @param {Auth0Service} auth0 - Provides Auth0 functionality
+   * @param {AuthService} authService - Allows Authentication Services to be utilized
+   * @param {UserControllerService} userService - Allows User Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
-    private userService: UserControllerService,
+    private auth0: Auth0Service,
     private authService: AuthService,
-    private route: Router) { }
+    private userService: UserControllerService,
+    private route: Router
+    ) { }
 
   /**
    * Sets up the Log in Session appearence
    */
   ngOnInit() {
-    // this.userService.getCurrentUserObservable().subscribe(
-    //   data => {
-    //     this.currentUser = data;
-    //     // console.log(this.currentUser);
-    //     document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
-    //   }
-    // );
-    // this.userService.getCurrentUserObservable().subscribe(
-    //   data => {
-    //     this.currentUser = data;
-    //     // console.log(this.currentUser);
-    //     document.getElementById("profilePic").setAttribute("src",this.currentUser.photoUrl);
-    //   }
-    // );
     this.sessionCheck();
+    this.setCurrentRole();
   }
 
-
   /**
-   * Updates the status of our session ( is the user currently logged on?)
+   * Updates session, telling if the user is logged in or not
    */
   sessionCheck() {
-    if (sessionStorage.length > 0) {
-      this.session = true;
-    } else {
-      this.session = false;
-    }
+    console.log(sessionStorage);
+    this.session = sessionStorage.length > 0;
   }
   /**
    * Sets up the current user
@@ -74,34 +70,45 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
-  // checkIfLoggedIn(){
-  //   if(this.userService.isLoggedIn){
-  //     this.isLoggedIn = true;
-  //   } 
-  //   else if(!this.userService.isLoggedIn) {
-  //     this.isLoggedIn = false;
-  //   }
-  // }
 
-  // getCurrentUser(){
-  //   this.userService.getCurrentUser().subscribe(
-  //     data => {
-  //       this.currentUser = data;
-  //     }
-  //   )
-  // }
+  /**
+   * Sets the role of the Current user to determine what functionality should be available
+   */
+  setCurrentRole() {
+    this.role = sessionStorage.getItem('role');
+  }
+
+  /**
+   * Allows User to log out of their session, informing
+   * Auth0 API that a logout has occured
+   */
+  logout0() {
+    this.auth0.logout0();
+  }
 
   /**
    * Allows User to log out of their session
-   * uses await/async to avoid forcing User to reload manually to see the "log in" button after log out
+   * uses await/async to avoid forcing User to reload manually to see the 'log in' button after log out
    */
   async logout() {
     sessionStorage.clear();
-    if (this.route.url === "/landing") {
+    if (this.route.url === '/landing') {
       location.reload(true);
     } else {
-      await this.route.navigate(["/landing"]);
+      await this.route.navigate(['/landing']);
       location.reload(true);
+    }
+  }
+
+  /** Toggles a drop-down menu close to the log-out option */
+  drop() {
+    // this.dropped= !this.dropped;
+    if (this.dropped == true) {
+      setTimeout(() => {
+        this.dropped = !this.dropped;
+      }, 390);
+    } else {
+      this.dropped = !this.dropped;
     }
   }
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Testability } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
 import { Office } from '../../models/office.model';
+import { AuthService } from '../../services/auth.service';
+
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -17,8 +19,9 @@ export class ViewProfileComponent implements OnInit {
   /**
    * Sets up the component with the User Service injected
    * @param userService - Allows the component to work with the user service (for updating)
+   * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService) { }
+  constructor(private userService: UserControllerService, private authService: AuthService) { }
   /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -42,10 +45,9 @@ export class ViewProfileComponent implements OnInit {
   officeObject: Office;
   /** User's active state */
   active: string;
-
-   /**
-   * Sets up the form with data about the durrent user
-   */
+  /**
+  * Sets up the form with data about the durrent user
+  */
   ngOnInit() {
     this.firstName = sessionStorage.getItem("firstName");
     this.lastName = sessionStorage.getItem("lastName");
@@ -55,6 +57,7 @@ export class ViewProfileComponent implements OnInit {
     this.getOffices();
     this.getUsers();
     this.getRole();
+    this.getState();
   }
 
   /**
@@ -69,11 +72,13 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById("address").removeAttribute("disabled");
     document.getElementById("batchEnd").removeAttribute("disabled");
     document.getElementById("dayStart").removeAttribute("disabled");
+    document.getElementById("switchRoles").removeAttribute("hidden");
+    document.getElementById("switchStates").removeAttribute("hidden");
+    document.getElementById("edit").style.display = "none";
+    document.getElementById("submit").style.display = "inline";
     document.getElementById("batchEnd").setAttribute("type", "date");
     document.getElementById("currentOffice").style.display = "none";
     document.getElementById("selectOffice").style.display = "inline";
-    document.getElementById("edit").style.display = "none";
-    document.getElementById("submit").style.display = "inline";
     document.getElementById("errorMessage").removeAttribute("hidden");
   }
 
@@ -88,15 +93,14 @@ export class ViewProfileComponent implements OnInit {
     sessionStorage.setItem('address', this.address2);
     sessionStorage.setItem('batchEnd', this.batchEnd);
     sessionStorage.setItem('role', this.currentRole);
-    if(document.getElementById("activeState"))
-    this.userService.update().subscribe();
+    //if(document.getElementById("activeState")) 
+    this.userService.update().then();
     window.location.reload(true);
   }
 
   /**
    * Enables limited ability to modify the User's role in the system
    */
-
   switchRole() {
     if (sessionStorage.getItem('role') === 'DRIVER') {
       sessionStorage.setItem('role', 'RIDER');
@@ -106,6 +110,18 @@ export class ViewProfileComponent implements OnInit {
       this.getRole();
     } else {
       console.log('nope');
+    }
+  }
+
+  switchState() {
+    if (sessionStorage.getItem('active') === 'ACTIVE') {
+      sessionStorage.setItem('active', 'INACTIVE');
+      this.getState();
+    } else if (sessionStorage.getItem('active') === 'INACTIVE') {
+      sessionStorage.setItem('active', 'ACTIVE');
+      this.getState();
+    } else {
+      console.log("Invalid State");
     }
   }
 
@@ -125,12 +141,59 @@ export class ViewProfileComponent implements OnInit {
   getRole() {
     this.currentRole = sessionStorage.getItem('role');
   }
+  currentState: string;
+  getState() {
+    this.currentState = sessionStorage.getItem('active');
+  }
 
   /** Holds the list of all users in the system */
   users: any[];
   /** Sets up all users in the system */
   getUsers() {
     let data;
-    this.userService.getAllUsers().subscribe((x) => { data = x; this.users = data });
+    if (sessionStorage.getItem('role') === 'ADMIN') {
+      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); this.users = data });
+    } else if (sessionStorage.getItem('role') === 'TRAINER') {
+      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER'); this.users = data });
+    }
+  }
+
+  result: boolean;
+  updateUserStatus(id: number, active: string) {
+    if (active !== 'DISABLED') {
+      this.result = window.confirm("Are you sure you want to disable this account?");
+      active = 'DISABLED';
+    } else {
+      this.result = window.confirm("Are you sure you want to enable this account?");
+      active = 'ACTIVE';
+    }
+    if (this.result) {
+      this.userService.updateStatus(id, active).then();
+      location.reload(true);
+    } else {
+      alert('No changes will be made');
+    }
+  }
+
+  makeTrainer(id: number) {
+    this.result = window.confirm("Are you sure you want to make this user a trainer?");
+    let role = 'TRAINER';
+    if (this.result) {
+      this.userService.updateRole(id, role).then();
+      location.reload(true);
+    } else {
+      alert('No changes will be made');
+    }
+  }
+
+  makeAdmin(id: number) {
+    this.result = window.confirm("Are you sure you want to make this user an admin?");
+    let role = 'ADMIN';
+    if (this.result) {
+      this.userService.updateRole(id, role).then();
+      location.reload(true);
+    } else {
+      alert('No changes will be made');
+    }
   }
 }

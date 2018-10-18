@@ -36,7 +36,7 @@ export class MatchingControllerService {
    */
   getMatchingDrivers(riderId: number): Observable<Link<User>[]> {
 
-    return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
+    return this.http.get<Link<User>[]>('http://ec2-35-174-153-234.compute-1.amazonaws.com:4444' + `/matches/${riderId}`);
   }
 
   /**

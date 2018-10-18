@@ -85,10 +85,17 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#authenticate">authenticate</a>
                             </li>
                             <li>
                                 <a href="#authenticator">authenticator</a>
+                            </li>
+                            <li>
+                                <a href="#isAdmin">isAdmin</a>
+                            </li>
+                            <li>
+                                <a href="#isTrainer">isTrainer</a>
                             </li>
                             <li>
                                 <a href="#logout">logout</a>
@@ -211,6 +218,7 @@
                         <a name="authenticate"></a>
                         <span class="name">
                             <b>
+                                <span class="modifier">Async</span>
                             authenticate
                             </b>
                             <a href="#authenticate"><span class="icon ion-ios-link"></span></a>
@@ -219,7 +227,8 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>authenticate(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, usePromise?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>authenticate(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, usePromise?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                     </td>
                 </tr>
 
@@ -308,7 +317,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -417,6 +426,86 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="isAdmin"></a>
+                        <span class="name">
+                            <b>
+                            isAdmin
+                            </b>
+                            <a href="#isAdmin"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>isAdmin()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/services/auth.service.ts:113</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns whether the current user is logged in as an Admin</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isTrainer"></a>
+                        <span class="name">
+                            <b>
+                            isTrainer
+                            </b>
+                            <a href="#isTrainer"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>isTrainer()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/services/auth.service.ts:105</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns whether the current user is logged in as a Trainer</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="logout"></a>
                         <span class="name">
                             <b>
@@ -435,7 +524,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/services/auth.service.ts:101</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/services/auth.service.ts:121</a></div>
                             </td>
                         </tr>
 
@@ -518,7 +607,7 @@ export class AuthService {
    * @param password - the password of the account
    * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
    */
-  authenticate(email: string, password: string, usePromise?: boolean) {
+  async authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) &#x3D;&gt; {
         console.log(&#x27;Got user from Authenticate (Promise mode)&#x27;);
@@ -527,14 +616,14 @@ export class AuthService {
           sessionStorage.setItem(&#x27;id&#x27;, x.id.toString());
           sessionStorage.setItem(&#x27;firstName&#x27;, x.firstName);
           sessionStorage.setItem(&#x27;lastName&#x27;, x.lastName);
-          sessionStorage.setItem(&#x27;active&#x27;, x.active.toString());
           sessionStorage.setItem(&#x27;role&#x27;, x.role);
           sessionStorage.setItem(&#x27;address&#x27;, x.address);
           sessionStorage.setItem(&#x27;batchEnd&#x27;, x.batchEnd);
           sessionStorage.setItem(&#x27;userEmail&#x27;, email);
           sessionStorage.setItem(&#x27;userPassword&#x27;, password);
+          sessionStorage.setItem(&#x27;active&#x27;, x.active);
+          location.reload(true);
         });
-        location.reload(true);
       },
       (e) &#x3D;&gt; {
         // error coming from the backend
@@ -547,7 +636,9 @@ export class AuthService {
             console.log(e.message);
             if (e.message &#x3D;&#x3D; &#x27;GENERAL&#x27;) {
               messageLogin.innerHTML &#x3D; &#x27;Server unavailable&#x27;;
-            } else {
+            } else if(e.message &#x3D;&#x3D; &#x27;undefined&#x27;) {
+              messageLogin.innerHTML &#x3D; &#x27;GATEWAY unavailable&#x27;;
+            }else{
               messageLogin.innerHTML &#x3D; e.message;
             }
           }
@@ -557,6 +648,24 @@ export class AuthService {
     );
   }
 
+
+  
+  /**
+   * Returns whether the current user is logged in as a Trainer
+   */
+  isTrainer(): boolean {
+    return sessionStorage.getItem(&#x27;role&#x27;) &#x3D;&#x3D; &quot;TRAINER&quot; || this.isAdmin();
+  }
+
+  
+  /**
+   * Returns whether the current user is logged in as an Admin
+   */
+  isAdmin(): boolean {
+    return sessionStorage.getItem(&#x27;role&#x27;) &#x3D;&#x3D; &quot;ADMIN&quot;;
+  }
+
+  
   /**
    * Logs the user out of the service
    */

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Auth0Service} from './services/auth0.service';
 
 /**
  * Serves as the root component for the entire page
@@ -17,7 +17,18 @@ export class AppComponent {
   /** Confirms the user password */
   confirmPassword: string;
 
-  /** Log any tap that the system detects */
+  /**
+   * Creates the Root component of the Ride-share front-end
+   * @param auth0 - the updated authentication service to use
+   */
+  constructor(public auth0: Auth0Service) {
+    auth0.handleAuthentication();
+  }
+
+  /**
+   *  Log any tap that the system detects
+   * @param event - what ever tap that occurs
+   */
   onTap(event) {
     console.log(event);
   }

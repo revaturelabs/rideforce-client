@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../../models/car.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 /**
  * Supports the functionality of car registration and management
@@ -54,13 +55,21 @@ export class CarRegistrationComponent implements OnInit {
   /**
    * Sets up the Car Registration component with dependencies
    * @param {UserControllerService} userService - the Service that allows us to manager the user AND the cars available on the system
+   * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
-  constructor(private userService: UserControllerService) { }
+  constructor(
+    private userService: UserControllerService,
+    private route: Router
+    ) {
+
+   }
 
   /**
    * Makes sure there is a car object available to operate on
    */
   ngOnInit() {
+    if (sessionStorage.length == 0)
+      this.route.navigate(["/landing"]);
     this.carObject = new Car();
   }
 
@@ -112,7 +121,11 @@ export class CarRegistrationComponent implements OnInit {
       this.resetUser();
     }
 
-    this.carObject.id = 0;
+    if (!this.carObject) {
+      this.carObject = new Car();
+    }
+
+    this.carObject.id = 1;
     this.carObject.make = this.carMake;
     this.carObject.model = this.carModel;
 

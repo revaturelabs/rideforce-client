@@ -9,6 +9,7 @@ import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
+import { Role } from '../../models/role.model';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -62,8 +63,8 @@ export class UserControllerService {
    * Gets an array of users via the given endpoint
    * @returns {Observable<User[]>} - the list of Users on the system
    */
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(environment.apiUrl + '/users');
+  getAllUsers(): Promise<User[]> {
+    return this.http.get<User[]>(environment.apiUrl + '/users').toPromise();
   }
   /** Gets a single user via the given endpoint and id
    * @param {number} id - the id of the user to retrieve
@@ -103,14 +104,14 @@ export class UserControllerService {
       : this.http
         .get<User>(environment.apiUrl + '/login')
         .pipe(
-          catchError(function<T>(res?: T) {
+          catchError(function <T>(res?: T) {
             this.currentUser = null;
             return of(res as T);
           }),
           tap(user => {
-          this.currentUser = user;
-          this.currentUserSubject.next(user);
-        }));
+            this.currentUser = user;
+            this.currentUserSubject.next(user);
+          }));
   }
   /**First checks that there is not a user populated in currentUser.
    * If there isn't, the currentUser is obtained through the
@@ -140,14 +141,18 @@ export class UserControllerService {
     * the user to update.
     * @returns {Observable<User>} - the user being updated
     */
-  update(): Observable<User> {
+  update(): Promise<User> {
     const body = {
       firstName: sessionStorage.getItem('firstName'),
       lastName: sessionStorage.getItem('lastName'),
       email: sessionStorage.getItem('userEmail'),
+      photoUrl: null,
       password: sessionStorage.getItem('userPassword'),
       role: sessionStorage.getItem('role'),
       address: sessionStorage.getItem('address'),
+      batchEnd: new Date(sessionStorage.getItem('batchEnd')),
+      startTime: null,
+      active: sessionStorage.getItem('active')
     };
 
     return this.http
@@ -160,7 +165,7 @@ export class UserControllerService {
             this.currentUser = updated;
           }
         })
-      );
+      ).toPromise();
   }
 
   /**
@@ -339,8 +344,64 @@ export class UserControllerService {
       .put<ContactInfo>(environment.apiUrl + contactInfoUri, newContactInfo);
   }
 
-  // TODO
-  // DELETE CONTACT-INFO
+  updateStatus(id: number, active: string) {
+    const body = {
+      firstName: null,
+      lastName: null,
+      email: null,
+      photoUrl: null,
+      password: null,
+      role: null,
+      address: null,
+      batchEnd: null,
+      startTime: null,
+      active: active
+    }
 
+    return this.http
+      .put<User>(environment.apiUrl + `/users/${id}`, body)
+      .pipe(
+        tap(updated => {
+          // We need to make sure that we refresh the current user if that's the
+          // one that was updated.
+          if (this.currentUser && this.currentUser.id === updated.id) {
+            this.currentUser = updated;
+          }
+        })
+      ).toPromise();
+
+    // TODO
+    // DELETE CONTACT-INFO
+  }
+
+  updateRole(id: number, role: string) {
+    const body = {
+      firstName: null,
+      lastName: null,
+      email: null,
+      photoUrl: null,
+      password: null,
+      role: role,
+      address: null,
+      batchEnd: null,
+      startTime: null,
+      active: null
+    }
+
+    return this.http
+      .put<User>(environment.apiUrl + `/users/${id}`, body)
+      .pipe(
+        tap(updated => {
+          // We need to make sure that we refresh the current user if that's the
+          // one that was updated.
+          if (this.currentUser && this.currentUser.id === updated.id) {
+            this.currentUser = updated;
+          }
+        })
+      ).toPromise();
+
+    // TODO
+    // DELETE CONTACT-INFO
+  }
 
 }

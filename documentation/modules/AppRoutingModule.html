@@ -85,6 +85,7 @@ import { AccountinfoComponent } from &#x27;../components/accountinfo/accountinfo
 import { AdminComponent } from &#x27;../components/admin/admin.component&#x27;;
 import { CarRegistrationComponent } from &#x27;../components/car-registration/car-registration.component&#x27;;
 import { ViewProfileComponent } from &#x27;../components/view-profile/view-profile.component&#x27;;
+import { CallbackComponent } from &#x27;../callback/callback/callback.component&#x27;;
 
 /**
  * This is where we set our routerLink attribute.
@@ -105,7 +106,8 @@ export const routes: Routes &#x3D; [
   { path: &#x27;favorites&#x27;, component: FavoritesComponent },
   { path: &#x27;admin&#x27;, component: AdminComponent },
   { path: &#x27;cars&#x27;, component: CarRegistrationComponent },
-  { path: &#x27;userProfile&#x27;, component: ViewProfileComponent}
+  { path: &#x27;userProfile&#x27;, component: ViewProfileComponent},
+  { path: &#x27;callback&#x27;, component: CallbackComponent}
   //{ path: &#x27;logout&#x27;, redirectTo: &#x27;landing&#x27; }
 ];
 @NgModule({
