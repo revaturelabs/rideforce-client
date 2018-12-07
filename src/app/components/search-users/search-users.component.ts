@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { query } from '@angular/core/src/render3/query';
 
 @Component({
   selector: 'app-search-users',
@@ -12,6 +13,11 @@ export class SearchUsersComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public filterUsers(e) {
+    console.log(e.target.value);
+    console.log("query: ", this.query);
   }
 
 }
