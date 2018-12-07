@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { query } from '@angular/core/src/render3/query';
+import { ViewProfileComponent } from '../view-profile/view-profile.component';
 
 @Component({
   selector: 'app-search-users',
@@ -10,14 +11,14 @@ export class SearchUsersComponent implements OnInit {
 
   query: string = "";
 
-  constructor() { }
+  constructor(private viewProfile: ViewProfileComponent) { }
 
   ngOnInit() {
   }
 
-  public filterUsers(e) {
-    console.log(e.target.value);
+  public getQuery(e) {
     console.log("query: ", this.query);
+    this.viewProfile.filterUsers(this.query);
   }
 
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit, Testability } from '@angular/core';
+import { Component, OnInit, Testability, Injectable } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
 import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
+import { constants } from 'fs';
 
 
 /**
@@ -13,6 +14,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './view-profile.component.html',
   styleUrls: ['./view-profile.component.css']
 })
+@Injectable()
 export class ViewProfileComponent implements OnInit {
   /** The User being selected */
   currentUser: User;
@@ -148,6 +150,8 @@ export class ViewProfileComponent implements OnInit {
 
   /** Holds the list of all users in the system */
   users: any[];
+  /** Holds the list of users filtered with search query */
+  filteredUsers: any[];
   /** Sets up all users in the system */
   getUsers() {
     let data;
@@ -156,6 +160,33 @@ export class ViewProfileComponent implements OnInit {
     } else if (sessionStorage.getItem('role') === 'TRAINER') {
       this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER'); this.users = data });
     }
+    this.filterUsers("");
+  }
+
+  public filterUsers(query = "") {
+    let searchUsers = this.users;
+    if (query.length < 1) {
+      console.log("returning all users")
+      return this.users;
+    }
+    const queryStrings = query.split(" ");
+    this.filteredUsers = searchUsers.filter(user => {
+      for (let key in user) {
+        let data = user[key];
+        if (typeof data === "string") {
+          data = data.toLowerCase();
+          for (let searchTerm of queryStrings) {
+            searchTerm = searchTerm.toLocaleLowerCase();
+            let found = data.search(searchTerm);
+            if (found > -1) {
+              console.log("user object ===== ", JSON.stringify(user))
+              return user;
+            }
+          }
+
+        }
+      }
+    });
   }
 
   result: boolean;
