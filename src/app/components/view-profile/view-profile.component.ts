@@ -60,6 +60,7 @@ export class ViewProfileComponent implements OnInit {
     this.getUsers();
     this.getRole();
     this.getState();
+    this.filteredUsers = this.users;
   }
 
   /**
@@ -156,11 +157,11 @@ export class ViewProfileComponent implements OnInit {
   getUsers() {
     let data;
     if (sessionStorage.getItem('role') === 'ADMIN') {
-      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); this.users = data });
+      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); this.users = data; this.filteredUsers = data; });
     } else if (sessionStorage.getItem('role') === 'TRAINER') {
       this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER'); this.users = data });
     }
-    this.filterUsers("");
+    this.filterUsers(" ");
   }
 
   public filterUsers(query = "") {
@@ -169,6 +170,7 @@ export class ViewProfileComponent implements OnInit {
       console.log("returning all users")
       return this.users;
     }
+    query = query.trim();
     const queryStrings = query.split(" ");
     this.filteredUsers = searchUsers.filter(user => {
       for (let key in user) {
@@ -179,7 +181,6 @@ export class ViewProfileComponent implements OnInit {
             searchTerm = searchTerm.toLocaleLowerCase();
             let found = data.search(searchTerm);
             if (found > -1) {
-              console.log("user object ===== ", JSON.stringify(user))
               return user;
             }
           }
