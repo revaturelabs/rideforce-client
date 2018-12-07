@@ -30,7 +30,6 @@ export const routes: Routes = [
   { path: 'accountInfo', component: AccountinfoComponent},
   { path: 'rideswipe', component: RideswipeComponent },
   { path: 'userCard', component: UsercardComponent },
-  { path: 'favorites', component: FavoritesComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent},
