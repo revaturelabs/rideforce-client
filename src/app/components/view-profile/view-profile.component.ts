@@ -166,9 +166,11 @@ export class ViewProfileComponent implements OnInit {
 
   public filterUsers(query = "") {
     let searchUsers = this.users;
+    console.log("how many users: " + this.users.length)
     if (query.length < 1) {
-      console.log("returning all users")
-      return this.users;
+      console.log("returning all users: ", this.users.length)
+      this.filteredUsers = this.users;
+      return;
     }
     query = query.trim();
     const queryStrings = query.split(" ");
