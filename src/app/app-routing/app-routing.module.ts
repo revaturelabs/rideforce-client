@@ -22,7 +22,7 @@ import { CallbackComponent } from '../callback/callback/callback.component';
  * refer to these routes to find which component to route to.
  */
 export const routes: Routes = [
-  { path: '',  pathMatch: 'full', redirectTo: 'landing' },
+  { path: '',  component: LandingComponent},
   { path: 'howTo', component: HowToComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
@@ -35,7 +35,21 @@ export const routes: Routes = [
   { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent},
   { path: 'callback', component: CallbackComponent}
-  //{ path: 'logout', redirectTo: 'landing' }
+  
+  // { path: '',  pathMatch: 'full', redirectTo: 'landing' },
+  // { path: 'howTo', component: HowToComponent },
+  // { path: 'landing', component: LandingComponent },
+  // { path: 'login', component: LoginComponent },
+  // { path: 'map', component: MapComponent },
+  // { path: 'accountInfo', component: AccountinfoComponent},
+  // { path: 'rideswipe', component: RideswipeComponent },
+  // { path: 'userCard', component: UsercardComponent },
+  // { path: 'favorites', component: FavoritesComponent },
+  // { path: 'admin', component: AdminComponent },
+  // { path: 'cars', component: CarRegistrationComponent },
+  // { path: 'userProfile', component: ViewProfileComponent},
+  // { path: 'callback', component: CallbackComponent}
+  // //{ path: 'logout', redirectTo: 'landing' }
 ];
 @NgModule({
   imports: [
