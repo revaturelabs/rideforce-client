@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of filteredUsers">
+          <tr *ngFor="let user of paginatedUsers">
             <td>{{ user.id }}</td>
             <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
             <td>{{ user.email }}</td>
@@ -53,7 +53,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of filteredUsers">
+          <tr *ngFor="let user of paginatedUsers">
             <td>{{ user.id }}</td>
             <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
             <td>{{ user.email }}</td>

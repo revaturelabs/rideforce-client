@@ -54,9 +54,9 @@ export class ViewUsersComponent implements OnInit {
     console.log("getting users");
     this.getUsers().then(data=> 
       {
-        this.paginate(data, 10, 1);
-        this.dividePages(data, 10);
+        this.users = data;
         this.filterUsers("");
+        
       });
     this.getRole();
     this.getState();
@@ -122,7 +122,8 @@ export class ViewUsersComponent implements OnInit {
       console.log(pageNumber, pageSize);
       console.log("Page number: " + this.numPages);
       this.paginatedUsers = result;
-      this.filterUsers("");
+      console.log("how many paginated users?  ", this.paginatedUsers)
+      // this.filterUsers("");
       return this.paginatedUsers;
     }
   
@@ -185,7 +186,9 @@ export class ViewUsersComponent implements OnInit {
     console.log("how many users: " + this.users.length)
     if (query.length < 1) {
       console.log("returning all users: ", this.users.length)
-      this.filteredUsers = this.paginatedUsers;
+      this.filteredUsers = this.users;
+      this.paginate(this.filteredUsers, 10, 1);
+      this.dividePages(this.filteredUsers, 10);
       return;
     }
     query = query.trim();
@@ -206,6 +209,8 @@ export class ViewUsersComponent implements OnInit {
         }
       }
     });
+    this.paginate(this.filteredUsers, 10, 1);
+    this.dividePages(this.filteredUsers, 10);
   }
 
 
