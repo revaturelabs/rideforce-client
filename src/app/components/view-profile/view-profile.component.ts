@@ -196,7 +196,7 @@ export class ViewProfileComponent implements OnInit {
       alert('No changes will be made');
     }
   }
-
+  // added because the dummies added stupid stuff that breaks the code
   tabSelect($event){
     console.log($event);
   }

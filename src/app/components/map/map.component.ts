@@ -33,7 +33,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   private time: number;
 
   /** Holds the currently selected user */
-  public selectedUser: User = null; //made public from private for prod build
+  public selectedUser: User = null;// made public so it can build. was private
 
 
 
@@ -560,7 +560,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
     )
   }
-
+  // added because the dumbies added stupid stuff that breaks the code
+  tabSelect($event){
+    console.log($event);
+  }
   //**Hides user's saved locations **/
   hideLocations(){
     this.showFavorites = !this.showFavorites;
@@ -604,8 +607,5 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     //this.refresh();
   }
 
-  tabSelect($event){
-    console.log($event);
-  }
 
 }
