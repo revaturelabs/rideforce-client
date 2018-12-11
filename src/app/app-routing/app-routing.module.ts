@@ -13,6 +13,7 @@ import { AdminComponent } from '../components/admin/admin.component';
 import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 import { CallbackComponent } from '../callback/callback/callback.component';
+import { ViewUsersComponent } from '../components/view-users/view-users.component';
 
 /**
  * This is where we set our routerLink attribute.
@@ -33,7 +34,8 @@ export const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent},
-  { path: 'callback', component: CallbackComponent}
+  { path: 'callback', component: CallbackComponent},
+  { path: 'viewUsers', component: ViewUsersComponent },
   //{ path: 'logout', redirectTo: 'landing' }
 ];
 @NgModule({

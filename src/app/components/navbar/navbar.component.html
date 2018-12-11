@@ -16,7 +16,9 @@
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/userProfile" style="padding-right: 30px;">Profile</a>
+        <a *ngIf="role!=null&&authService.isTrainer()" class="nav-link" routerLink="/viewUsers" style="padding-right:30px;">View Users</a>
         <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/howTo" style="padding-right:30px;">About</a>
+        
       </div>
   </div>
   <!-- replace this with logout0() eventually when auth0 is set up -->
