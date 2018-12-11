@@ -56,6 +56,7 @@ export class ViewUsersComponent implements OnInit {
       {
         this.paginate(data, 10, 1);
         this.dividePages(data, 10);
+        this.filterUsers("");
       });
     this.getRole();
     this.getState();
@@ -121,6 +122,7 @@ export class ViewUsersComponent implements OnInit {
       console.log(pageNumber, pageSize);
       console.log("Page number: " + this.numPages);
       this.paginatedUsers = result;
+      this.filterUsers("");
       return this.paginatedUsers;
     }
   
@@ -183,7 +185,7 @@ export class ViewUsersComponent implements OnInit {
     console.log("how many users: " + this.users.length)
     if (query.length < 1) {
       console.log("returning all users: ", this.users.length)
-      this.filteredUsers = this.users;
+      this.filteredUsers = this.paginatedUsers;
       return;
     }
     query = query.trim();
