@@ -33,6 +33,8 @@ export class ViewUsersComponent implements OnInit {
   batchEnd: any;
   /** Holds the list of all users in the system */
   users: any[];
+  /** Holds the list of users filtered with search query */
+  filteredUsers: any[];
   /** Holds list of all users that you are paginating*/
   paginatedUsers: any[];
   /**Number of pages */
