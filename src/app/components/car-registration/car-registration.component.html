@@ -1,54 +1,57 @@
-<div class="container-fluid">
-  <br>
-  <h2>Car Information:</h2>
-  <br>
-  
-  <br>
-  <div >
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Make</span>
+<div class="container col-lg-4">
+    <div class="container-fluid">
+        <br>
+        <h2>Car Information:</h2>
+        <br>
+        
+        <br>
+        <div >
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Make</span>
+            </div>
+            <input type="text" class="form-control" (click)="resetCars()" [(ngModel)]="carMake">
+          </div>
+      
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Model</span>
+            </div>
+            <input type="text" class="form-control" (click)="resetCars()" [(ngModel)]="carModel">
+          </div>
+      
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Year</span>
+            </div>
+            <input type="number" min="1950" max="5000" class="form-control" (click)="resetCars()" [(ngModel)]="carYear">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Submit</span>
+            </div>
+            <button class="btn btn-submit" (click)="addCarToUser()">Add Car</button>
+            <button class="btn btn-info" (click)="refreshFields()">Clear Fields</button>
+          </div>
+          <div class="input-group mb-3">
+            <table class="table" *ngIf="cars !== undefined && cars != null && cars.length > 0">
+              <tr>
+                <th>ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+              </tr>
+              <tr *ngFor="let c of cars">
+                <td>{{c.id}}</td>
+                <td>{{c.make}}</td>
+                <td>{{c.model}}</td>
+                <td>{{c.year}}</td>
+                
+              </tr>
+            </table>
+          </div>
+        </div>
+        
       </div>
-      <input type="text" class="form-control" (click)="resetCars()" [(ngModel)]="carMake">
-    </div>
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Model</span>
-      </div>
-      <input type="text" class="form-control" (click)="resetCars()" [(ngModel)]="carModel">
-    </div>
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Year</span>
-      </div>
-      <input type="number" min="1950" max="5000" class="form-control" (click)="resetCars()" [(ngModel)]="carYear">
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Submit</span>
-      </div>
-      <button class="btn btn-submit" (click)="addCarToUser()">Add Car</button>
-      <button class="btn btn-info" (click)="refreshFields()">Clear Fields</button>
-    </div>
-    <div class="input-group mb-3">
-      <table class="table" *ngIf="cars !== undefined && cars != null && cars.length > 0">
-        <tr>
-          <th>ID</th>
-          <th>Make</th>
-          <th>Model</th>
-          <th>Year</th>
-        </tr>
-        <tr *ngFor="let c of cars">
-          <td>{{c.id}}</td>
-          <td>{{c.make}}</td>
-          <td>{{c.model}}</td>
-          <td>{{c.year}}</td>
-          
-        </tr>
-      </table>
-    </div>
-  </div>
-  
+      
 </div>
