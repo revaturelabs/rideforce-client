@@ -32,11 +32,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CarRegistrationComponent } from './components/car-registration/car-registration.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { CallbackComponent } from './callback/callback/callback.component';
-<<<<<<< HEAD
 import { SearchUsersComponent } from './components/search-users/search-users.component';
-=======
 import { ViewUsersComponent } from './components/view-users/view-users.component';
->>>>>>> 0490a269211f3eae6b8ab6374c76ee5dd886a9d9
 // import { DateFormatPipe } from './pipes/date-format.pipe';
 
 /**
@@ -62,11 +59,8 @@ import { ViewUsersComponent } from './components/view-users/view-users.component
     CarRegistrationComponent,
     ViewProfileComponent,
     CallbackComponent,
-<<<<<<< HEAD
     SearchUsersComponent,
-=======
     ViewUsersComponent,
->>>>>>> 0490a269211f3eae6b8ab6374c76ee5dd886a9d9
     // DateFormatPipe,
   ],
   imports: [

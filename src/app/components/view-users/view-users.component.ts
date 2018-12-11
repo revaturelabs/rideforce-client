@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './view-users.component.html',
   styleUrls: ['./view-users.component.css']
 })
+@Injectable()
 export class ViewUsersComponent implements OnInit {
 
   currentUser: User;
@@ -176,7 +177,8 @@ export class ViewUsersComponent implements OnInit {
     }
   }
 
-  public filterUsers(query = "") {
+  public filterUsers(query) {
+    console.log("query: " + query)
     let searchUsers = this.users;
     console.log("how many users: " + this.users.length)
     if (query.length < 1) {

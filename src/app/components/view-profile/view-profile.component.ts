@@ -14,7 +14,6 @@ import { constants } from 'fs';
   templateUrl: './view-profile.component.html',
   styleUrls: ['./view-profile.component.css']
 })
-@Injectable()
 export class ViewProfileComponent implements OnInit {
   /** The User being selected */
   currentUser: User;
