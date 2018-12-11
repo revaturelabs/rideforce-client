@@ -174,5 +174,34 @@ export class ViewUsersComponent implements OnInit {
     }
   }
 
+  public filterUsers(query = "") {
+    let searchUsers = this.users;
+    console.log("how many users: " + this.users.length)
+    if (query.length < 1) {
+      console.log("returning all users: ", this.users.length)
+      this.filteredUsers = this.users;
+      return;
+    }
+    query = query.trim();
+    const queryStrings = query.split(" ");
+    this.filteredUsers = searchUsers.filter(user => {
+      for (let key in user) {
+        let data = user[key];
+        if (typeof data === "string") {
+          data = data.toLowerCase();
+          for (let searchTerm of queryStrings) {
+            searchTerm = searchTerm.toLocaleLowerCase();
+            let found = data.search(searchTerm);
+            if (found > -1) {
+              return user;
+            }
+          }
+
+        }
+      }
+    });
+  }
+
+
 }
 
