@@ -32,6 +32,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CarRegistrationComponent } from './components/car-registration/car-registration.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { CallbackComponent } from './callback/callback/callback.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 // import { DateFormatPipe } from './pipes/date-format.pipe';
 
 /**
@@ -73,6 +75,7 @@ import { CallbackComponent } from './callback/callback/callback.component';
     NgbModule,
     FormsModule,
     HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     NgbActiveModal,

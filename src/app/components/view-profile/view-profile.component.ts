@@ -21,7 +21,7 @@ export class ViewProfileComponent implements OnInit {
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService, private authService: AuthService) { }
+  constructor(private userService: UserControllerService, public authService: AuthService) { }
   /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -195,5 +195,9 @@ export class ViewProfileComponent implements OnInit {
     } else {
       alert('No changes will be made');
     }
+  }
+
+  tabSelect($event){
+    console.log($event);
   }
 }

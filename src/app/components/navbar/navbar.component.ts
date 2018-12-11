@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
    */
   constructor(
     private auth0: Auth0Service,
-    private authService: AuthService,
+    public authService: AuthService,
     private userService: UserControllerService,
     private route: Router
     ) { }
@@ -111,4 +111,6 @@ export class NavbarComponent implements OnInit {
       this.dropped = !this.dropped;
     }
   }
+
+  
 }

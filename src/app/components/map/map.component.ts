@@ -33,7 +33,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   private time: number;
 
   /** Holds the currently selected user */
-  private selectedUser: User = null;
+  public selectedUser: User = null; //made public from private for prod build
 
 
 
@@ -603,4 +603,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
     //this.refresh();
   }
+
+  tabSelect($event){
+    console.log($event);
+  }
+
 }
