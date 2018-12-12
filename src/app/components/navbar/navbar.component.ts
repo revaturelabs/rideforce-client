@@ -52,6 +52,8 @@ export class NavbarComponent implements OnInit {
     ) { 
       console.log("test");
       //checks if criteria for being installable are met
+      //Note this will never be triggerable if the app is currently installed
+      //To uninstall a PWA go to chrome://apps/ right click on the app (rideshare-client) and select remove from chrome
       window.addEventListener('beforeinstallprompt', (event) => {
         this.deferredInstall = event;
         this.isInstallable = true;
@@ -130,10 +132,16 @@ export class NavbarComponent implements OnInit {
    
     if (this.deferredInstall) {
       this.deferredInstall.prompt();
+      this.deferredInstall = null;
+      this.isInstallable = false;
       console.log("Should install");
     }
     else
       console.log("Failure to install!");
   }
+
   
-}
+ 
+  
+} 
+
