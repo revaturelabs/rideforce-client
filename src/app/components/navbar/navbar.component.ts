@@ -30,6 +30,11 @@ export class NavbarComponent implements OnInit {
    * Just a boolean stating whether the dropdown has been toggled.
    */
   dropped: boolean = false;
+  /*
+  * Used for PWA install 
+  */
+  deferredInstall = null;
+  isInstallable: boolean = false;
 
   /**
    * Sets up the component with relevent services
@@ -43,7 +48,16 @@ export class NavbarComponent implements OnInit {
     public authService: AuthService,//made public so it can build
     private userService: UserControllerService,
     private route: Router
-    ) { }
+    
+    ) { 
+      console.log("test");
+      //checks if criteria for being installable are met
+      window.addEventListener('beforeinstallprompt', (event) => {
+        this.deferredInstall = event;
+        this.isInstallable = true;
+        console.log("Is installable now");
+      });
+    }
 
   /**
    * Sets up the Log in Session appearence
@@ -111,6 +125,15 @@ export class NavbarComponent implements OnInit {
       this.dropped = !this.dropped;
     }
   }
-
+  /*Allows installation of PWA */
+  install(){
+   
+    if (this.deferredInstall) {
+      this.deferredInstall.prompt();
+      console.log("Should install");
+    }
+    else
+      console.log("Failure to install!");
+  }
   
 }
