@@ -130,6 +130,7 @@ export class NavbarComponent implements OnInit {
    
     if (this.deferredInstall) {
       this.deferredInstall.prompt();
+      this.deferredInstall = null;
       console.log("Should install");
     }
     else
