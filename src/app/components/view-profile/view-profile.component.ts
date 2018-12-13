@@ -175,6 +175,18 @@ export class ViewProfileComponent implements OnInit {
     }
   }
 
+  /** Revert a trainer to a user */
+  makeRider(id: number){
+    this.result = window.confirm("Are you sure you want to make this trainer a rider?");
+    let role = "RIDER";
+    if (this.result) {
+      this.userService.updateRole(id, role).then();
+      location.reload(true);
+    } else {
+      alert('No changes will be made');
+    }
+  }
+
   makeTrainer(id: number) {
     this.result = window.confirm("Are you sure you want to make this user a trainer?");
     let role = 'TRAINER';
