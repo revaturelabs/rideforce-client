@@ -32,9 +32,9 @@ body{
 	src: url('assets/fonts/Futura-Std-Bold.otf') format('opentype');
 }
 
-body {
+/* body {
 	font-family: 'Futura-Std-Book';
-}
+} */
 
 th {
 	font-family: 'Futura-Std-Bold';
