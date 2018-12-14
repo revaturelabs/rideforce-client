@@ -75,6 +75,7 @@ import { Role } from '../../models/role.model';
       office: '',
       batchEnd: null,
       dayStart: 0,
+      startTime: 0,
       cars: [],
       contactInfo: [],
       active: 'INACTIVE',

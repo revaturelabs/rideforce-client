@@ -73,6 +73,7 @@ describe('AccountinfoComponent', () => {
       address: "12345 Pine Street, VA",
       office: '/offices/' + 1,
       dayStart: 0,
+      startTime: 0, //adding non-existent element
       batchEnd: new Date().toISOString(),
       cars: [],
       active: 'ACTIVE',

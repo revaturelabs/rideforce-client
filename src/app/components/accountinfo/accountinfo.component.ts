@@ -315,6 +315,7 @@ export class AccountinfoComponent implements OnInit {
       // I really don't understand what this translates to on the back end, but now it is dynamic
       batchEnd: new Date(this.batchEnd).toISOString(),
       startTime: this.timeSelect,
+      dayStart : this.dayStart,
       cars: [],
       active: 'ACTIVE',
       contactInfo: [],
@@ -333,7 +334,7 @@ export class AccountinfoComponent implements OnInit {
         sessionStorage.setItem("userPassword", x.password);
         sessionStorage.setItem("address", x.address);
         sessionStorage.setItem("role", x.role);
-        this.router.navigate(['/map']);
+        this.router.navigate(['/landing']);
       });
 
 
