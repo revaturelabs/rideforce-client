@@ -36,6 +36,7 @@ export const routes: Routes = [
   // { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent},
   { path: 'callback', component: CallbackComponent},
+  { path: 'viewUsers', component: ViewUsersComponent}
   // { path: 'logout', redirectTo: 'landing' }
 ];
 @NgModule({
