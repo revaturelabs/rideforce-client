@@ -197,12 +197,12 @@
         <ngb-tab title="3" id="3">
           <ng-template ngbTabContent>
             <div class="input-group mb-3">
-              <div class="input-group" id="button-addon3">
-                <span class="padRight"><button id="driverBtn" class="btn" type="button" (click)="isDriver()">Driver</button></span>
-                <span><button id="riderBtn" class="btn" type="button" (click)="isRider()">Rider</button></span>
+              <div class="btn-group" role="group" aria-label="btn groups">
+                <button type="button" class="btn" id="riderBtn" (click)="isRider()">Rider</button>
+                <button type="button" class="btn" id="driverBtn" (click)="isDriver()">Driver</button>
               </div>
             </div>
-            <app-car-registration *ngIf="roleObject === 'DRIVER'"></app-car-registration>
+
             <div>
               <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
               <span> <button class="btn btnNextPrevious" (click)="carNext()">Next</button></span>
