@@ -72,7 +72,7 @@ describe('AccountinfoComponent', () => {
       photoUrl: "imgprofile",
       address: "12345 Pine Street, VA",
       office: '/offices/' + 1,
-      startTime: 0,
+      dayStart: 0,
       batchEnd: new Date().toISOString(),
       cars: [],
       active: 'ACTIVE',

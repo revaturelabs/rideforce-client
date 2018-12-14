@@ -68,10 +68,9 @@ export class CarRegistrationComponent implements OnInit {
    * Makes sure there is a car object available to operate on
    */
   ngOnInit() {
-    if (sessionStorage.length === 0) {
-      this.route.navigate(['/landing']);
+    if (sessionStorage.length == 0)
+      this.route.navigate(["/landing"]);
     this.carObject = new Car();
-    }
   }
 
   /**
@@ -112,7 +111,7 @@ export class CarRegistrationComponent implements OnInit {
     });
 
   }
-
+ 
   /**
    * Sets the car with appropriate values and sends it to the server using the User Service
    */

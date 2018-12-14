@@ -74,7 +74,7 @@ import { Role } from '../../models/role.model';
       photoUrl: '****',
       office: '',
       batchEnd: null,
-      startTime: 0,
+      dayStart: 0,
       cars: [],
       contactInfo: [],
       active: 'INACTIVE',
