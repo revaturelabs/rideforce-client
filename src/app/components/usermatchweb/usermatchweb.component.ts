@@ -6,8 +6,6 @@ import { MatchingControllerService } from '../../services/api/matching-controlle
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
 import { Filter } from '../../models/filter';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ThrowStmt } from '@angular/compiler';
 
 /** Represents the User selection item in the html page */
 interface UserCard {
@@ -49,9 +47,8 @@ export class UsermatchwebComponent implements OnInit {
   constructor(
     private matchService: MatchingControllerService,
     private userService: UserControllerService,
-    private route: Router,
-    private spinner: NgxSpinnerService
-  ) { }
+    private route: Router
+    ) { }
 
   /** Holds the current user of the system */
   currentUser: User;
@@ -62,8 +59,6 @@ export class UsermatchwebComponent implements OnInit {
   filterStartTime: boolean;
   /** Whether or not to filter users by Distance */
   filterDistance: boolean;
-  /**If page is loading */
-  loading: boolean;
 
   /**
    * Sets up the component by populating the list of possibel matches for the current user
@@ -72,13 +67,9 @@ export class UsermatchwebComponent implements OnInit {
     if (sessionStorage.length == 0) {
       this.route.navigate(['/landing']);
     }
-    this.spinner.show();
-    this.loading = true;
-    console.log("Loading: " + this.loading);
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
-        
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(+(sessionStorage.getItem("id"))).subscribe(
           data2 => {
@@ -97,16 +88,12 @@ export class UsermatchwebComponent implements OnInit {
                     choose: 'none',
                     face: 'front'
                   };
-                  // Sets the current swipe card to the first element of the array if the array has something in it.
                   this.users.push(card);
-                  // sets loading to false
-                  this.loading = false;
-                  //hides the spinner
-                  this.spinner.hide();
+                  // Sets the current swipe card to the first element of the array if the array has something in it.
                 },
                 e => {
-                  console.log('error getting match user!');
-                  console.log(e);
+                   console.log('error getting match user!');
+                   console.log(e);
                 }
               );
             }
@@ -120,7 +107,7 @@ export class UsermatchwebComponent implements OnInit {
       e => {
         console.log('error getting user (matching service)!');
         console.log(e);
-      }
+     }
     );
   }
 

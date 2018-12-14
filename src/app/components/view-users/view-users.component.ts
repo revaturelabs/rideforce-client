@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './view-users.component.html',
   styleUrls: ['./view-users.component.css']
 })
+@Injectable()
 export class ViewUsersComponent implements OnInit {
 
   currentUser: User;
@@ -33,8 +34,8 @@ export class ViewUsersComponent implements OnInit {
   batchEnd: any;
   /** Holds the list of all users in the system */
   users: any[];
-   /** Holds the list of users filtered with search query */
-   filteredUsers: any[];
+  /** Holds the list of users filtered with search query */
+  filteredUsers: any[];
   /** Holds list of all users that you are paginating*/
   paginatedUsers: any[];
   /**Number of pages */
@@ -54,9 +55,8 @@ export class ViewUsersComponent implements OnInit {
     this.getUsers().then(data=> 
       {
         this.users = data;
-        this.paginate(data, 10, 1);
-        this.dividePages(data, 10);
         this.filterUsers("");
+        
       });
     this.getRole();
     this.getState();
@@ -122,6 +122,8 @@ export class ViewUsersComponent implements OnInit {
       console.log(pageNumber, pageSize);
       console.log("Page number: " + this.numPages);
       this.paginatedUsers = result;
+      console.log("how many paginated users?  ", this.paginatedUsers)
+      // this.filterUsers("");
       return this.paginatedUsers;
     }
   
@@ -210,6 +212,7 @@ export class ViewUsersComponent implements OnInit {
     this.paginate(this.filteredUsers, 10, 1);
     this.dividePages(this.filteredUsers, 10);
   }
+
 
 }
 
