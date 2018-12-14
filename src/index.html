@@ -10,10 +10,20 @@
     <link rel="preload" href="/app/components/landing/" as="script">
     <link rel="preload" href="/assets/fonts/Futura-Std-Book.otf" as="font">
     <src url="assets/fonts/Futura-Std-Book.otf"></src>
+    <link rel="stylesheet" href="./assets/fonts/Futura-Std-Book.otf" as="font">
+    <link rel="preload" href="./assets/fonts/Futura-Std-Book.otf" as="font" crossorigin="anonymous" />
+    <link rel="stylesheet" href="styles.css">
   -->
-  <link rel="preload" href="./styles.css" as="style">
+  <!-- Preload the font -->
+  <!-- <body>hi</body> -->
+  <!-- <link rel="prefetch" href="assets/fonts/Futura-Std-Book.otf" as="font"> -->
+  <!-- <link rel="preload" href="assets/fonts/Futura-Std-Book.otf" as="font"> -->
   
-  
+  <link rel="prefetch" href="fonts.css" as="style">
+  <link rel="preload" href="fonts.css" as="style">
+
+
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
@@ -48,12 +58,12 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
 
-  <!-- Auth0 -->
-  <script type="text/javascript" src="node_modules/auth0-js/build/auth0.js"></script>
-
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1976d2">
-</head>
+  <!-- Auth0
+    <script type="text/javascript" src="node_modules/auth0-js/build/auth0.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1976d2">
+  -->
+  </head>
 
 <body>
   <app-root></app-root>
