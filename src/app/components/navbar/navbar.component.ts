@@ -51,11 +51,11 @@ export class NavbarComponent implements OnInit {
     private route: Router
 
   ) {
+
     route.events.pipe(
       filter(e => e instanceof NavigationStart)
     ).subscribe(e => {
       this.sessionCheck();
-      console.log("test");
     });
     
     //checks if criteria for being installable are met
@@ -66,6 +66,7 @@ export class NavbarComponent implements OnInit {
       this.isInstallable = true;
       console.log("Is installable now");
     });
+
   }
 
   /**
