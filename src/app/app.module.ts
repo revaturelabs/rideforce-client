@@ -34,6 +34,7 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
 import { CallbackComponent } from './callback/callback/callback.component';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { ViewUsersComponent } from './components/view-users/view-users.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 // import { DateFormatPipe } from './pipes/date-format.pipe';
 
 /**
@@ -77,6 +78,7 @@ import { ViewUsersComponent } from './components/view-users/view-users.component
     NgbModule,
     FormsModule,
     HttpClientModule,
+    NgxSpinnerModule
   ],
   providers: [
     NgbActiveModal,
