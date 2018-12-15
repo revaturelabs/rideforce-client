@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { Role } from '../../models/role.model';
 import {APP_BASE_HREF} from '@angular/common';
+import { ContactInfo } from 'src/app/models/contact-info.model';
 
 describe('AccountinfoComponent', () => {
   let component: AccountinfoComponent;
@@ -52,6 +53,7 @@ describe('AccountinfoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
   it('should "Create a Car"!', () => {
     component.carMake = 'Toyoda';
     component.carModel = 'Corolla';
@@ -82,4 +84,37 @@ describe('AccountinfoComponent', () => {
     }
     expect(component.userObject).toBeTruthy();
   });
+
+  // should same spec test both add and removeContact?
+  it('addContact should push ContactInfo object into array', () => { 
+    component.addContact();
+    const contact: ContactInfo = {
+      id: null,
+      type: null,
+      info: null
+    }
+    expect(component.contactInfoArray.pop()).toEqual(contact);
+  })
+
+  it('removeContact should splice ContactInfo object from array', () => {
+    const contact: ContactInfo = {
+      id: null,
+      type: null,
+      info: null
+    }
+    component.contactInfoArray.push(contact);
+    expect(component.contactInfoArray).toContain(contact);
+    component.removeContact(contact);
+    expect(component.contactInfoArray).not.toContain(contact);
+  })
+
+  xit('isRider should set role as rider', () => {
+    component.isRider(); // will throw without a DOM
+    expect(component.roleObject).toBe(Role.Rider);
+  })
+
+  xit('invalid password should display a message', () => {
+    // Can Jasmine test DOM manipulation?
+    expect(false).toBe(true);
+  })
 });
