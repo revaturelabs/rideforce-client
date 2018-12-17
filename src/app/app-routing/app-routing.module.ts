@@ -15,11 +15,12 @@ import { ViewProfileComponent } from '../components/view-profile/view-profile.co
 import { CallbackComponent } from '../callback/callback/callback.component';
 import { ViewUsersComponent } from '../components/view-users/view-users.component';
 
+
 /**
  * This is where we set our routerLink attribute.
  * For example...
  * <a class="dropdown-item" routerLink="/howTo">About</a>
- * creates an <a> element of class "dropdown-item" that will 
+ * creates an <a> element of class "dropdown-item" that will
  * refer to these routes to find which component to route to.
  */
 export const routes: Routes = [
@@ -35,8 +36,8 @@ export const routes: Routes = [
   { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent},
   { path: 'callback', component: CallbackComponent},
-  { path: 'viewUsers', component: ViewUsersComponent },
-  //{ path: 'logout', redirectTo: 'landing' }
+  { path: 'viewUsers', component: ViewUsersComponent}
+  // { path: 'logout', redirectTo: 'landing' }
 ];
 @NgModule({
   imports: [
