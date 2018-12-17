@@ -50,7 +50,7 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1">Password</span>
                 </div>
-                <input type="password" class="form-control" [(ngModel)]="password" #pWord="ngModel" required placeholder="8-16 characters" minlength="8" maxlength="16">
+                <input type="password" class="form-control" [(ngModel)]="password" #pWord="ngModel" required placeholder="8-16 characters" pattern="[0-9a-zA-Z!@#]{8,16}" title="Between 8 - 16 character, !@# accepted">
               </div>
               <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
                 <div *ngIf="pWord.errors.required">
