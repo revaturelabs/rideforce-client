@@ -1,6 +1,6 @@
 <br>
 <div class="form-group row">
-  <div class="col-1"></div>
+  <div class="col-5"></div>
   <div class="col-lg-3 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
       <div label="CREATE PROFILE div">
@@ -8,7 +8,7 @@
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>
-              <h2>Create Profile:</h2>
+              <h2>Create Profile</h2>
               <br>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -38,7 +38,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Email</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" required placeholder="Email..">
+                <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" required placeholder="Enter your email">
               </div>
               <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
                 <div *ngIf="uName.errors.required">
@@ -48,21 +48,23 @@
 
               <div class="input-group mb-3 ">
                 <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Password</span>
+                  <span class="input-group-text" id="basic-addon1">Password</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" required>
+                <input type="password" class="form-control" [(ngModel)]="password" #pWord="ngModel" required placeholder="8-16 characters">
               </div>
               <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
                 <div *ngIf="pWord.errors.required">
                   Password cannot be empty
                 </div>
+                
               </div>
               <div class="input-group mb-3 ">
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1 ">Confirm</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required>
+                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required placeholder="Confirm password">
               </div>
+              
               <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
                 <div *ngIf="pConfirm.errors.required">
                   Password Confirm cannot be empty
