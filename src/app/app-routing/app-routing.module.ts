@@ -33,7 +33,7 @@ export const routes: Routes = [
   { path: 'rideswipe', component: RideswipeComponent },
   { path: 'userCard', component: UsercardComponent },
   { path: 'admin', component: AdminComponent },
-  // { path: 'cars', component: CarRegistrationComponent },
+  { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent},
   { path: 'callback', component: CallbackComponent},
   { path: 'viewUsers', component: ViewUsersComponent}
