@@ -33,7 +33,7 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should display Incorrect email or password for nonexistant user', (done) => {
+  it('should display Incorrect email or password for nonexistant user', (done) => {
 
     component.userEmail = 'notrealuser';
     component.userPass = 'notrealpass';
@@ -50,7 +50,7 @@ describe('LoginComponent', () => {
 
   });
 
-  xit('should display Input validation failed when fields are submitted empty', (done) => {
+  it('should display Input validation failed when fields are submitted empty', (done) => {
 
     component.userEmail = '';
     component.userPass = '';
