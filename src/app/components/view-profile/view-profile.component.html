@@ -1,6 +1,6 @@
 <br>
 <div class="form-group row">
-  <div class="col-1"></div>
+  <div class="col-5"></div>
   <div class="col-lg-4 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
       <div label="VIEW PROFILE div">
@@ -163,7 +163,7 @@
                   <span class="input-group-text" id="basic-addon1">About You</span>
                 </div>
               </div>
-              <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required></textarea>
+              <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required maxlength="225"></textarea>
               <br>
 
               <div class="input-group mb-3">
