@@ -4,7 +4,8 @@ import { User } from '../../models/user.model';
 import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
 import { constants } from 'fs';
-
+// import { UploadService } from 'src/app/services/upload.service';
+import { UploadService } from '../../services/upload.service';
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -22,7 +23,11 @@ export class ViewProfileComponent implements OnInit {
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService, private authService: AuthService) { }
+  constructor(
+    private userService: UserControllerService, 
+    private authService: AuthService,
+    private uploadService: UploadService
+    ) { }
   /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -228,5 +233,9 @@ export class ViewProfileComponent implements OnInit {
     } else {
       alert('No changes will be made');
     }
+  }
+
+  selectFile(e) {
+    return this.uploadService.uploadfile(e.target.files[0]);
   }
 }
