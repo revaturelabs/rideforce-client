@@ -33,8 +33,4 @@ export class AppComponent {
     console.log(event);
   }
 
-  // comment
-
 }
-
-
