@@ -160,27 +160,32 @@
               <br>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">About You</span>
+                  <span id="basic-addon1"><h3>About You</h3></span>
                 </div>
               </div>
+              <!-- back-end can only handle 225 characters -->
               <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required maxlength="225"></textarea>
               <br>
 
               <div class="input-group mb-3">
-                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>
-                <input class="profile-pic" type="file" name="pic" accept="image/*" (change)="selectFile($event)">
+                <div class="padBot">
+                <span id="basic-addon1">Profile Picture</span>
+                <input type="file" name="pic" accept="image/*" (change)="selectFile($event)">
+              	</div>
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1" style="padding-right: 95px">Contact Info</span>
+                  <span id="basic-addon1" style="padding-right: 95px"><h3>Contact Info</h3></span>
+                  
                 </div>
                 <!-- to do: Contact info list -->
                 <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
-                <div style="padding-left: 20px">
+             <!--     <div style="padding-left: 20px">
                   <button class="btn" (click)="addContact()">
                     <span aria-hidden="true"></span>
-                  </button>
+                  </button>   
                 </div>
+                -->
               </div>
 
               <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
