@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { Role } from '../../models/role.model';
 import {APP_BASE_HREF} from '@angular/common';
-import { ContactInfo } from 'src/app/models/contact-info.model';
+import { ContactInfo } from '../../models/contact-info.model';
 
 describe('AccountinfoComponent', () => {
   let component: AccountinfoComponent;
@@ -109,9 +109,24 @@ describe('AccountinfoComponent', () => {
   })
 
   xit('isRider should set role as rider', () => {
+    
+    /* from login.component.spec
+    component.userEmail = 'notrealuser';
+    component.userPass = 'notrealpass';
+    fixture.debugElement.injector.get(LoginComponent).login();
+
+    fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
+      expect(errorMessage).toBe('Incorrect email or password.');
+      done();
+    });
+    */
     component.isRider(); // will throw without a DOM
     expect(component.roleObject).toBe(Role.Rider);
-  })
+  });
 
   xit('invalid password should display a message', () => {
     // Can Jasmine test DOM manipulation?

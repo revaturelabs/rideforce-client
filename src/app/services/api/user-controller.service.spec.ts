@@ -58,6 +58,7 @@ describe('UserControllerService', () => {
       }
     );
     expect(service.createUser(userObj, userObj.password, this.regKey)).toThrowError;
+    // but is it the expected error?
   }));
 
 });
