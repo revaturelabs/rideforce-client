@@ -178,11 +178,11 @@ export class AccountinfoComponent implements OnInit {
       ]),
       'password': new FormControl(this.password, [
         Validators.required
-        , Validators.maxLength(15)
+        , Validators.maxLength(15) // should match requirements (8-16) in backend
       ]),
       'passwordConfirm': new FormControl(this.passwordConfirm, [
         Validators.required
-        , Validators.maxLength(15)
+        , Validators.maxLength(15) // should match requirements (8-16) in backend
       ]),
       'token': new FormControl(this.token, [
         Validators.required
@@ -356,7 +356,7 @@ export class AccountinfoComponent implements OnInit {
   }
 
   /**
-   * Validates the User input and if valid moved to the second tab
+   * Validates the User input and if valid moves to the second tab
    */
   accountInfoNext() {
     if (this.firstName && this.lastName && this.username
@@ -376,12 +376,12 @@ export class AccountinfoComponent implements OnInit {
     this.tabset.select('3');
   }
 
-  /** Moves Registration tot he first page */
+  /** Moves Registration to the first page */
   bioPrevious() {
     this.tabset.select('1');
   }
 
-  /** Moves Registration tothe Final page */
+  /** Moves Registration to the Final page */
   carNext() {
 
     if (this.btnCarInfo === 0) {
