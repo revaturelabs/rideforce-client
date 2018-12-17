@@ -1,7 +1,7 @@
 <br>
-<div class="form-group row">
-  <div class="col-5"></div>
-  <div class="col-lg-3 col-xs-12 extend">
+<div class="form-group row"
+  <div class="col-3"></div>
+  <div class="col-lg-6 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
       <div label="CREATE PROFILE div">
         <ngb-tab title="1" id="1">
@@ -46,10 +46,11 @@
                 </div>
               </div>
 
+              <div>
+                <p>Password cannot be empty and must be between 8-16 characters long.</p>
+              </div>
+
               <div class="input-group mb-3 ">
-                  <div>
-                     <p>Password cannot be empty and must be between 8-16 characters long.</p>
-                  </div>
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1">Password</span>
                 </div>
