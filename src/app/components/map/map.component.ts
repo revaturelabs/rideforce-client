@@ -8,6 +8,7 @@ import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
+import { bool } from 'aws-sdk/clients/signer';
 
 /**
  * Component that handles route navigation and displays a map
@@ -51,7 +52,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
 
+  //Styles
   styles: any = null;
+  halloweenStyle: any = null;
+  christmasStyle: any = null;
 
   /** Represents an element labeled 'gmap' (currently not used) */
   @ViewChild('gmap') gmapElement: any;
@@ -100,8 +104,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   myLocation: any;
 
   /** Represents a song that is playing in the background */
-  song = new Audio();
-
+  hsong = new Audio();
+  csong = new Audio();
   /** Holds the User that's logged in */
   currentUser: User;
 
@@ -181,9 +185,12 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   ngOnInit() {
     if (sessionStorage.length == 0)
       this.route.navigate(["/landing"]);
-    this.song.src = 'assets/audio/GrimGrinningGhosts.mp3';
-    this.song.loop = true;
-    this.song.load();
+    this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
+    this.hsong.loop = true;
+    this.hsong.load();
+    this.csong.src = 'assets/audio/EndTitle.mp3';
+    this.csong.loop = true;
+    this.csong.load();
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
@@ -272,7 +279,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Stops any song playing once the component is being terminated
    */
   ngOnDestroy() {
-    this.song.pause();
+    this.hsong.pause();
+    this.csong.pause();
   }
 
   /**
@@ -396,13 +404,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Sets the component style
    * @param style - the style to set the component to
    */
-  changeStyle(style: string) {
-    if (this.styles !== null) {
-      this.styles = null;
-      this.song.pause();
-    } else if (this.styles === null) {
-      this.song.play();
-      this.styles = [{
+  //Halloween overlay for maps
+  halloween(halloweenStyle: string) {
+    if (this.halloweenStyle !== null) {
+      this.halloweenStyle = null;
+      this.hsong.pause();
+    } else if (this.halloweenStyle === null) {
+      this.hsong.play();
+      this.csong.pause();
+      this.christmasStyle = null;
+      this.halloweenStyle = [{
         'featureType': 'water',
         'stylers': [{
           'color': '#000000'
@@ -427,7 +438,43 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       ];
     }
   }
+  
+  //Christmas overlay for Map
+  christmas(christmasStyle: string) {
+    if (this.christmasStyle !== null) {
+      this.christmasStyle = null;
+      this.csong.pause();
+    } else if (this.christmasStyle === null) {
+      this.csong.play();
+      this.hsong.pause();
+      this.halloweenStyle = null;
+      this.christmasStyle = [{
+        'featureType': 'water',
+        'stylers': [{
+          'color': '#5897fc'
+        }]
+      },
+      {
+        'featureType': 'landscape',
+        'elementType': 'geometry',
 
+        'stylers': [{
+          'color': '#dbffdb'
+        }]
+      },
+      {
+        'featureType': 'poi',
+        'elementType': 'geometry',
+        'stylers': [{
+          'color': '##ffd8e1'
+        }]
+      }
+
+      ];
+    }
+  }
+
+  
   /**
    * Shows the location you are at
    * (incomplete)
