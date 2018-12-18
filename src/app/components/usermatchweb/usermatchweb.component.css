@@ -13,6 +13,11 @@
     font-size: 15px;
   }
 
+  h6
+  {
+    font-size:17px;
+  }
+
   .grid-container {
     display: grid;
     grid-gap: 50px 50px;
