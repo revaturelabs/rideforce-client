@@ -37,7 +37,8 @@
             <!-- this call will run the Auth0 login page, essentially redirecting to a private sign in -->
         <!-- <a *ngIf="!session" class="button nav-link started fadeIn third" (click)="launchAuth0()" style="vertical-align:middle"><span>Get
           Started</span></a> -->
-        <a *ngIf="session" class="button nav-link started fadeIn third" routerLink="/rideswipe" style="padding-right:30px;"><span>Browse</span></a>
+        <a *ngIf="role != 'ADMIN' && session" class="button nav-link started fadeIn third" routerLink="/rideswipe" style="padding-right:30px;"><span>Browse</span></a>
+        <a *ngIf="role == 'ADMIN' && session" class="button nav-link started fadeIn third" routerLink="/viewUsers" style="padding-right:30px;"><span>View Users</span></a>
         <div class="fadeIn fourth">
           For more information,
           <a href="/howTo">click here</a>
