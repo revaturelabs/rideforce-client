@@ -65,7 +65,7 @@ export class AdminComponent implements OnInit {
   }
 
   tempMethod(){
-    
+
   }
 
   /**

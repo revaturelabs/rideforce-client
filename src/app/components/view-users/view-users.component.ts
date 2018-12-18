@@ -45,6 +45,11 @@ export class ViewUsersComponent implements OnInit {
   canEdit = false;
   /** User's active state */
   active: string;
+  
+  userId: number;
+  userStatus: string;
+  
+  
   /**
   * Sets up the form with data about the durrent user
   */
@@ -141,21 +146,26 @@ export class ViewUsersComponent implements OnInit {
     return this.numPages;
   }
 
+  confirmUserStatus(id: number, active: string) {
+    this.userId = id;
+    this.userStatus = active;
+    console.log(this.userId);
+    console.log(this.userStatus);
+  }
+
   result: boolean;
-  updateUserStatus(id: number, active: string) {
-    if (active !== 'DISABLED') {
-      this.result = window.confirm("Are you sure you want to disable this account?");
-      active = 'DISABLED';
+  updateUserStatus() {
+    if (this.userStatus !== 'DISABLED') {
+      //this.result = window.confirm("Are you sure you want to disable this account?");
+      this.userStatus = 'DISABLED';
     } else {
-      this.result = window.confirm("Are you sure you want to enable this account?");
-      active = 'ACTIVE';
+      //this.result = window.confirm("Are you sure you want to enable this account?");
+      this.userStatus = 'ACTIVE';
     }
-    if (this.result) {
-      this.userService.updateStatus(id, active).then();
+    
+      this.userService.updateStatus(this.userId, this.userStatus).then();
       location.reload(true);
-    } else {
-      alert('No changes will be made');
-    }
+    
   }
 
   makeTrainer(id: number) {
