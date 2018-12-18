@@ -218,19 +218,10 @@ export class UsermatchwebComponent implements OnInit {
         console.log('sorting by batch end');
         this.sortedUsers = this.users.sort((a, b) => new Date(b.user.batchEnd).getTime() - new Date(a.user.batchEnd).getTime())
       },
-      // Schwartzian transform
+      //TODO: Schwartzian transform to optimize...
       "distance": () => {
         console.log('sorting by distance');
         this.sortedUsers = this.users.sort((a, b) => b.distance - a.distance).reverse();
-        // this.sortedUsers = this.users.sort((a, b) => {
-        //   return this.getLngLat(a.user.address).then(d1 => {
-        //     return this.getLngLat(b.user.address).then(d2 => {
-        //       const result = d2 - d1;
-        //       console.log("difference:  " + result);
-        //       return result;
-        //     }).then(r => this.sortedUsers)
-        //   })
-        // })
       }
 
     }
