@@ -29,8 +29,8 @@
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <img class="card-img-top cardimg" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
             <div class="card-body">
-              <h6 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h6>
-              <br>
+              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+              <p class="card-text">{{user.user.address}}</p>
               <div style="display: flex; justify-content: space-between;">
                 <button *ngIf="user.choose!='disliked'" class="dislike" (click)="like(i, 0)"></button>
                 <button *ngIf="user.choose=='disliked'" class="trashButton" (click)="like(i, 2)"></button>
@@ -45,7 +45,7 @@
               <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
               <p class="card-text">{{user.user.address}}</p>
               <h5 class="card-text">{{user.user.email}}</h5>
-              <h5 class="card-text">Batch End: <br> {{user.user.batchEnd | date}}</h5>
+              <h5 class="card-text">{{user.user.batchEnd | date}}</h5>
               <!-- Later should be made into a dropdown menu for better viewing -->
               <!-- <ul>
                 <li *ngFor="let contact of user.user.contactInfo"><a class="dropdown">{{contact.type}}: {{contact.info}}</a></li>
