@@ -9,7 +9,7 @@
       Batch End Date <br>
       <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterStartTime" (change)="sortDrivers('startTime')" checked />
       Day Start Time <br>
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterDistance" (change)="updateFilter()" checked />
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterDistance" (change)="sortDrivers('distance')" checked />
       Distance <br>
       <!--button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>-->
     </div>
