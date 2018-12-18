@@ -5,9 +5,9 @@
     </p>
     <img src="" alt="" id="filter">
     <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterBatchEnd" (change)="updateFilter()" checked />
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterBatchEnd" (change)="sortDrivers('batchEnd')" checked />
       Batch End Date <br>
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterStartTime" (change)="updateFilter()" checked />
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterStartTime" (change)="sortDrivers('startTime')" checked />
       Day Start Time <br>
       <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterDistance" (change)="updateFilter()" checked />
       Distance <br>
@@ -21,7 +21,7 @@
     <ngx-spinner bdColor="rgba(51,51,51,0)" size="large" color="#fa971a" type="square-jelly-box"></ngx-spinner>
   </div>
   <div class="grid-container">
-    <div *ngFor="let user of users; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
+    <div *ngFor="let user of sortedUsers; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
       <div class="enlarge">
         <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item"
           [ngStyle]="{ 'background-color': user.choose == 'none' ?
