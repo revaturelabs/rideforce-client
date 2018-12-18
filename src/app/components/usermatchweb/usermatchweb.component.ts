@@ -242,6 +242,7 @@ export class UsermatchwebComponent implements OnInit {
       [this.filterDistance, 'distance'], 
       [this.filterStartTime, 'starttime']
     ];
+
     this.sortedUsers = this.shuffle(this.users);
 
     const filterMap = {
@@ -255,14 +256,18 @@ export class UsermatchwebComponent implements OnInit {
       },
       "distance": () => {
         console.log('sorting by distance');
-        this.sortedUsers = this.users.sort(async (a, b) => {
-          const d1 = await this.calculateDistance(a.user.address);
-          const d2 = await this.calculateDistance(b.user.address);
-          return d2 - d1;
+        this.sortedUsers = this.users.sort((a, b) => {
+          return this.getLngLat(a.user.address).then(d1 => {
+            return this.getLngLat(b.user.address).then(d2 => {
+              const result = d2 - d1;
+              console.log("difference:  " + result);
+              return result;
+            }).then(r => this.sortedUsers)
+          })
         })
       }
 
-      }
+    }
     if (this.filterStartTime || this.filterDistance || this.filterBatchEnd) {
         console.log('going to filter')
         options.forEach(tuple => {
@@ -278,30 +283,32 @@ export class UsermatchwebComponent implements OnInit {
       }
     }
 
-    async calculateDistance(address: string): Promise<number> {
-      console.log('hit: ' + this.getLngLat(address));
-      const myAddress = sessionStorage.address;
-      let myLocation = this.myLocation ? this.myLocation : await this.getLngLat(myAddress);
-      this.myLocation = myLocation;
-      console.log("my location: " + this.myLocation.longitude);
-      const x1 = myLocation.longitude ? myLocation.longitude : 0;
-      const y1 = myLocation.latitude ? myLocation.latitude : 0;
-      let otherLocation = await this.getLngLat(address);
-      const x2 = otherLocation.longitude ? otherLocation.longitude : 0;
-      const y2 = otherLocation.latitude ?  otherLocation.latitude : 0;
+    calculateDistance(x1: number, x2: number, y1: number, y2: number): number {
       const distance: number = Math.sqrt(Math.pow((x2 - x1), 2)/Math.pow((y2 - y1), 2));
       return distance;
 
     }
 
-    getLngLat(address: string): object {
-      let longitude: number, latitude: number;
-      return this.geocodeService.geocode(address).subscribe(res => {
-        longitude = res["longitude"];
-        latitude = res["latitude"];
-        console.log('longitude: ' + longitude)
-        return {longitude, latitude};
-      });
+    async getLngLat(address: string): Promise<number> {
+      let uLongitude: number, uLatitude: number;
+      // return this.geocodeService.geocode(address).subscribe(res => {
+      //   uLongitude = res["longitude"];
+      //   uLatitude = res["latitude"];
+      //   this.geocodeService.geocode(sessionStorage.address).subscribe(res => {
+      //     let mLongitude = res["longitude"];
+      //     let mLatitude = res["latitude"];
+      //     return this.calculateDistance(mLongitude, uLongitude, mLatitude, uLatitude);
+
+      //   })
+      //   // return {longitude, latitude};
+      // });
+      const otherLocation = await this.geocodeService.geocode(address).toPromise();
+      const myLocation = await this.geocodeService.geocode(sessionStorage.address).toPromise();
+      const x1 = myLocation["longitude"];
+      const x2 = otherLocation["longitude"];
+      const y1 = myLocation["latitude"];
+      const y2 = otherLocation["latitude"];
+      return this.calculateDistance(x1, x2, y1, y2);
     }
    
     getMyLocation() {
