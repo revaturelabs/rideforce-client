@@ -6,6 +6,7 @@ import { LatLngLiteral } from '@agm/core';
 import { RouteInfo } from '../../models/route-info.model';
 import { Location } from '../../models/location.model'
 
+
 /**
  * Enables Components to work with the Mapping Service on the backend
  */
@@ -33,6 +34,8 @@ export class MapsControllerService {
       params: { address },
     });
   }
+
+  
 
   /**
    * Takes in 2 addresses and calculates the distance and travel time between them

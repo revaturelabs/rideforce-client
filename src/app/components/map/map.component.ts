@@ -291,7 +291,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
     console.log("Map getMarkers() ");
     console.log(this.users);
-    console.log("Latitude " + this.markers[0].location.latitude);
+    //console.log("Latitude " + this.markers[0].location.latitude);
     for (const user of this.users) {
       console.log("Works?");
       console.log(this.users);
