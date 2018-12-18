@@ -71,11 +71,13 @@
       <br>
       <agm-map (mapReady)="mapReady($event)" *ngIf="!isHidden" [latitude]="currentLat" [longitude]="currentLong" [styles]="styles"
         [mapTypeId]="mapTypeId" [usePanning]="true">
+        <!--
         <agm-marker *ngFor="let user of markers; let i = index" [iconUrl]="user.icon" [latitude]="user.location.latitude" [longitude]="user.location.longitude"
           [opacity]="user.opacity" (markerClick)="markerClicked(user)">
         </agm-marker> 
         <agm-marker *ngFor="let m of placedMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [title]="m.title">
         </agm-marker>
+      -->
       </agm-map>
     </div>
   </div>
