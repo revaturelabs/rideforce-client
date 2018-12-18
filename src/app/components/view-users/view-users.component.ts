@@ -51,6 +51,7 @@ export class ViewUsersComponent implements OnInit {
   userStatus: string;
   
   
+  
   /**
   * Sets up the form with data about the durrent user
   */
@@ -169,47 +170,42 @@ export class ViewUsersComponent implements OnInit {
     
   }
 
-  makeTrainer(id: number) {
-    this.result = window.confirm("Are you sure you want to make this user a trainer?");
+  setUserId(id: number) {
+      this.userId = id;
+  }
+
+  
+  makeTrainer() {
+    //this.result = window.confirm("Are you sure you want to make this user a trainer?");
     let role = 'TRAINER';
-    if (this.result) {
-      this.userService.updateRole(id, role).then();
+      this.userService.updateRole(this.userId, role).then();
       location.reload(true);
-    } else {
-      alert('No changes will be made');
-    }
-  }
+    } 
+  
 
-  makeAdmin(id: number) {
-    this.result = window.confirm("Are you sure you want to make this user an admin?");
+  makeAdmin() {
+    //this.result = window.confirm("Are you sure you want to make this user an admin?");
     let role = 'ADMIN';
-    if (this.result) {
-      this.userService.updateRole(id, role).then();
+      this.userService.updateRole(this.userId, role).then();
       location.reload(true);
-    } else {
-      alert('No changes will be made');
-    }
   }
 
-  makeDriver(id: number) {
-    this.result = window.confirm("This user is now a Driver");
+  makeDriver() {
+    //this.result = window.confirm("This user is now a Driver");
     let role = 'DRIVER';
-    
-    if (this.result) {
-      this.userService.updateRole(id, role).then();
+      this.userService.updateRole(this.userId, role).then();
       location.reload(true);
     }
-  }
 
-  makeRider(id: number) {
-    this.result = window.confirm("This user is now a Rider.");
+  makeRider() {
+   //this.result = window.confirm("This user is now a Rider.");
     let role = 'RIDER';
-    console.log("Called makeRider");
-    if (this.result) {
-      this.userService.updateRole(id, role).then();
+    //console.log("Called makeRider");
+   
+      this.userService.updateRole(this.userId, role).then();
       location.reload(true);
     }
-  }
+  
 
   public filterUsers(query) {
     console.log("query: " + query)
@@ -242,6 +238,10 @@ export class ViewUsersComponent implements OnInit {
     });
     this.paginate(this.filteredUsers, 10, 1);
     this.dividePages(this.filteredUsers, 10);
+  }
+
+  reload() {
+    location.reload(true);
   }
 
 

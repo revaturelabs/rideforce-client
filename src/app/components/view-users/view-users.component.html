@@ -23,61 +23,61 @@
             <td>{{ user.role }}</td>
             <td>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'ADMIN'">
-                    <label class="btn btn-outline-info active" (click)="makeAdmin(user.id)">
+                    <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeAdmin" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
                     </label>
-                    <label class="btn btn-outline-info" (click)="makeTrainer(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeTrainer" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
                     </label>
-                    <label class="btn btn-outline-info" (click)="makeDriver(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeDriver" (click)="setUserId(user.id)">
                         <input type="radio" name="options" id="driver" autocomplete="off"> Driver
                       </label>
-                    <label class="btn btn-outline-info" (click)="makeRider(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeRider" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="rider" autocomplete="off"> Rider
                     </label>
                 </div>
 
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'TRAINER'">
-                    <label class="btn btn-outline-info" (click)="makeAdmin(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeAdmin" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="admin" autocomplete="off"> Admin
                     </label>
-                    <label class="btn btn-outline-info active" (click)="makeTrainer(user.id)">
+                    <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeTrainer" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="trainer" autocomplete="off" checked> Trainer
                     </label>
-                    <label class="btn btn-outline-info" (click)="makeDriver(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeDriver" (click)="setUserId(user.id)">
                         <input type="radio" name="options" id="driver" autocomplete="off"> Driver
                       </label>
-                    <label class="btn btn-outline-info" (click)="makeRider(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeRider" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="rider" autocomplete="off"> Rider
                     </label>
                 </div>
 
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'DRIVER'">
-                    <label class="btn btn-outline-info" (click)="makeAdmin(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeAdmin" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="admin" autocomplete="off"> Admin
                     </label>
-                    <label class="btn btn-outline-info" (click)="makeTrainer(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeTrainer" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
                     </label>
-                    <label class="btn btn-outline-info active" (click)="makeDriver(user.id)">
+                    <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeDriver" (click)="setUserId(user.id)">
                         <input type="radio" name="options" id="driver" autocomplete="off" checked> Driver
                       </label>
-                    <label class="btn btn-outline-info" (click)="makeRider(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeRider" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="rider" autocomplete="off"> Rider
                     </label>
                 </div>
 
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'RIDER'">
-                    <label class="btn btn-outline-info" (click)="makeAdmin(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeAdmin" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="admin" autocomplete="off"> Admin
                     </label>
-                    <label class="btn btn-outline-info" (click)="makeTrainer(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeTrainer" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
                     </label>
-                    <label class="btn btn-outline-info" (click)="makeDriver(user.id)">
+                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeDriver" (click)="setUserId(user.id)">
                         <input type="radio" name="options" id="driver" autocomplete="off"> Driver
                       </label>
-                    <label class="btn btn-outline-info active" (click)="makeRider(user.id)">
+                    <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeRider" (click)="setUserId(user.id)">
                       <input type="radio" name="options" id="rider" autocomplete="off" checked> Rider
                     </label>
                 </div>
@@ -155,7 +155,87 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="updateUserStatus()">Yes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="makeAdmin">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Please Confirm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to submit the changes?.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="makeAdmin()">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="makeTrainer">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Please Confirm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to submit the changes?.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="makeTrainer()">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="makeDriver">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Please Confirm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to submit the changes?.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="makeDriver()">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="makeRider">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Please Confirm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to submit the changes?.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="makeRider()">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
       </div>
     </div>
   </div>
