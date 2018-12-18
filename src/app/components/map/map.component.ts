@@ -232,12 +232,12 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
                     opacity: .92
                   };
 
-                  // this.mapService.getDistance(data3.address).subscribe(
-                  this.mapService.getDistance(this.addresses[i]).subscribe(
+                    this.mapService.getDistance(data3.address).subscribe(
                     data4 => {
-                      marker.location.latitude = data4.latitude;
-                      marker.location.longitude = data4.longitude;
-                      this.markers.push(marker);
+                      // marker.location.latitude = data4.latitude;
+                      // marker.location.longitude = data4.longitude;
+                      // this.markers.push(marker);
+                      this.addDriverMarkers(data4);
                     },
                     e => {
                       console.log('error getting distance!');
@@ -484,13 +484,12 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     Renders locations of given markers: In Progress
   */
 
-  addDriverMarkers(newLocation: Location[]) {
+  addDriverMarkers(newLocation: Location) {
 
     console.log(newLocation);
     //console.log("Marker: " + location);
     // console.log(`selected marker: ${this.selectedMarkerType}`);
-    for (let x = 0; x < newLocation.length; x++) {
-      const location = new google.maps.LatLng(newLocation[x].latitude, newLocation[x].longitude);
+      const location = new google.maps.LatLng(newLocation.latitude, newLocation.longitude);
       const marker = new google.maps.Marker({
         position: location,
         map: this.map,
@@ -499,7 +498,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         title: 'Got you!'
       });
       this.markers.push(marker);
-    }
   }
 
   /** Toggles whether or not the map is hidden */
