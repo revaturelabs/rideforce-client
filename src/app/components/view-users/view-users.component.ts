@@ -40,7 +40,8 @@ export class ViewUsersComponent implements OnInit {
   paginatedUsers: any[];
   /**Number of pages */
   numPages: any[];
-
+  /**save the current page for next and back buttons */
+  currPage: number;
   /** Whether the user can make changes (Currently not used) */
   canEdit = false;
   /** User's active state */
@@ -117,6 +118,7 @@ export class ViewUsersComponent implements OnInit {
   
   paginate(users: any[], pageSize: number, pageNumber: number)
     {
+      this.currPage = pageNumber;
       --pageNumber;
       const result = users.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
       console.log(pageNumber, pageSize);

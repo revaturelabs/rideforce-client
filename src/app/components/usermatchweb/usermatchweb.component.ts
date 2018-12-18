@@ -279,10 +279,11 @@ export class UsermatchwebComponent implements OnInit {
     }
 
     async calculateDistance(address: string): Promise<number> {
+      console.log('hit: ' + this.getLngLat(address));
       const myAddress = sessionStorage.address;
       let myLocation = this.myLocation ? this.myLocation : await this.getLngLat(myAddress);
       this.myLocation = myLocation;
-      console.log("my location: " + myLocation);
+      console.log("my location: " + this.myLocation.longitude);
       const x1 = myLocation.longitude ? myLocation.longitude : 0;
       const y1 = myLocation.latitude ? myLocation.latitude : 0;
       let otherLocation = await this.getLngLat(address);
@@ -295,11 +296,12 @@ export class UsermatchwebComponent implements OnInit {
 
     getLngLat(address: string): object {
       let longitude: number, latitude: number;
-      this.geocodeService.geocode(address).subscribe(res => {
+      return this.geocodeService.geocode(address).subscribe(res => {
         longitude = res["longitude"];
         latitude = res["latitude"];
+        console.log('longitude: ' + longitude)
+        return {longitude, latitude};
       });
-      return {longitude, latitude};
     }
    
     getMyLocation() {

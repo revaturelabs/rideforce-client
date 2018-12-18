@@ -26,6 +26,7 @@ export class GeocodeService {
    * @returns {Observable<google.maps.GeocoderResult[]>} - information about your given location
    */
   geocode(address: string): Observable<object> {
-    return this.http.get(this.endpoint);
+    address = address.substr(0, address.length - 3);
+    return this.http.get(this.endpoint + address);
   }
 }
