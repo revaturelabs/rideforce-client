@@ -14,4 +14,5 @@ export interface Location {
     latitude: number;
     /** The East/West value of the location */
     longitude: number;
+
 }

@@ -9,6 +9,8 @@ import { MatchingControllerService } from '../../services/api/matching-controlle
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
 import { Marker } from 'aws-sdk/clients/storagegateway';
+import { Location } from '../../models/location.model';
+import { LOCATIONS } from '../../models/mock-locations';
 
 /**
  * Component that handles route navigation and displays a map
@@ -28,6 +30,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Where Users work */
   private end = 'reston';
 
+  locs = LOCATIONS;
+  /* Mock Data */
+  
   /** Distance of the route */
   private dist: number;
   /** Estimated time of the drive */
@@ -125,8 +130,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /**Store name of saved location into textbox locally **/
   favoriteName: string;
 
-   /**Store name location to delete into textbox locally **/
-   deleteFavorite: string;
+  /**Store name location to delete into textbox locally **/
+  deleteFavorite: string;
 
   /**
    * Sets up the map component with dependency injection
@@ -137,20 +142,20 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
-    private matchService: MatchingControllerService, 
+    private matchService: MatchingControllerService,
     private userService: UserControllerService,
-    private mapService: MapsControllerService, 
+    private mapService: MapsControllerService,
     private zone: NgZone,
     private route: Router,
     private http: HttpClient
-    ) { }
+  ) { }
 
   /**
    * Retireves the distance of the current route (set by setRoute)
    * @returns {number} - the distance of the route
    */
   getCurrentDistance(): number {
-    
+
     return this.dist;
   }
 
@@ -182,7 +187,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Initializes the Map with data
    */
 
-   addresses: string [] = ["9416 wooded glen avenue", "1099 godfrey road"];
+  addresses: string[] = ["9416 wooded glen avenue", "1099 godfrey road", "11740 Plaza America Dr", "829 East Sage Road"];
+
   ngOnInit() {
 
     if (sessionStorage.length == 0)
@@ -198,7 +204,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 => {
-             console.log("data2 is " + data2);
+            console.log("data2 is " + data2);
             userLinks = data2;
             for (let i = 0; i < userLinks.length; i++) {
 
@@ -225,8 +231,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
                     },
                     opacity: .92
                   };
-                  
-                  this.mapService.getDistance(data3.address).subscribe(
+
+                  // this.mapService.getDistance(data3.address).subscribe(
+                  this.mapService.getDistance(this.addresses[i]).subscribe(
                     data4 => {
                       marker.location.latitude = data4.latitude;
                       marker.location.longitude = data4.longitude;
@@ -237,7 +244,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
                       console.log(e);
                     }
                   );
-                 console.log("Data4 " + JSON.stringify(marker));
+                  console.log("Data4 " + JSON.stringify(marker));
                   // Sets the current swipe card to the first element of the array if the array has something in it.
                 },
                 e => {
@@ -250,7 +257,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
           e => {
             console.log('error getting match drivers (Map Component)!');
             console.log(e);
-         }
+          }
         );
       },
       e => {
@@ -261,7 +268,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.findMe();
   }
 
-  
+
 
   /**
    * Final initialization after the content is set up
@@ -284,7 +291,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.song.pause();
   }
 
-  
+
   /**
    * Sets up markers of Drivers on the map
    */
@@ -311,14 +318,14 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         },
         opacity: .92
       };
-       console.log("Marker");
-       console.log("Marker " + marker); 
-       //this.markers.push(marker);
-       console.log("Marker object" + marker.location.latitude + " long " + marker.location.longitude + "Marker Object " + marker);
+      console.log("Marker");
+      console.log("Marker " + marker);
+      //this.markers.push(marker);
+      console.log("Marker object" + marker.location.latitude + " long " + marker.location.longitude + "Marker Object " + marker);
       const newLocation = new google.maps.LatLng(marker.location.latitude, marker.location.longitude);
-      this.addDriverMarker(newLocation);
+      //this.addDriverMarkers(newLocation);
     }
-    
+
   }
 
   /**
@@ -377,15 +384,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.currentLong = addressObject.geometry.location.lng();
   }
 
+
+  
   /** Changes the radius of your search */
   public changeRadius() {
     // setTimeout(() => {
-      console.log(this.circle.radius + ' ' + this.currentRadius);
-      this.circle.radius = this.currentRadius;
-      
+    console.log(this.circle.radius + ' ' + this.currentRadius);
+    this.circle.radius = this.currentRadius;
+    //this.addDriverMarkers(this.locs);
     // },
     //   100);
-    this.getMarkers();
   }
 
   /**
@@ -475,21 +483,23 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /*
     Renders locations of given markers: In Progress
   */
-  addDriverMarker(newLocation : google.maps.LatLng) {
+
+  addDriverMarkers(newLocation: Location[]) {
 
     console.log(newLocation);
-    const location = newLocation;
     //console.log("Marker: " + location);
     // console.log(`selected marker: ${this.selectedMarkerType}`);
-
-    const marker = new google.maps.Marker({
-      position: location,
-      map: this.map,
-      // icon: this.iconBase + this.selectedMarkerType,
-      label: this.labels[this.labelIndex++ % this.labels.length],
-      title: 'Got you!'
-    });
-    this.markers.push(marker);
+    for (var x = 0; x < newLocation.length; x++) {
+      const location = new google.maps.LatLng(newLocation[x].latitude, newLocation[x].longitude);
+      const marker = new google.maps.Marker({
+        position: location,
+        map: this.map,
+        // icon: this.iconBase + this.selectedMarkerType,
+        label: this.labels[this.labelIndex++ % this.labels.length],
+        title: 'Got you!'
+      });
+      this.markers.push(marker);
+    }
   }
 
   /** Toggles whether or not the map is hidden */
@@ -508,7 +518,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         this.showPosition(position);
         this.circle.latitude = this.currentLat;
         this.circle.longitude = this.currentLong;
-        if(!this.showingUser) //makes it so it doesn't render twice due to multiple calls
+        if (!this.showingUser) //makes it so it doesn't render twice due to multiple calls
           this.showCustomMarker();
       });
     } else {
@@ -517,7 +527,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   }
 
-  setLocation(){
+  setLocation() {
 
   }
   /**
@@ -582,78 +592,78 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** 
    * Makes a request to update the user's favorite locations table  
   */
-  saveLocation(){
+  saveLocation() {
     let selectedLocation: string = (document.getElementById("currentLocation") as HTMLInputElement).value;
     this.http.post<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?address=' +
-    selectedLocation +'&name='
-    +this.favoriteName + '&userId='
-    +sessionStorage.getItem('id'),{}).subscribe(message =>
-    console.log(message));
+      selectedLocation + '&name='
+      + this.favoriteName + '&userId='
+      + sessionStorage.getItem('id'), {}).subscribe(message =>
+        console.log(message));
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
     //this.refresh();
   }
 
   /** Retrieves the current list of user's favorite locations*/
-  getLocations(){
+  getLocations() {
     this.showFavorites = !this.showFavorites;
-    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/'+sessionStorage.getItem('id')).subscribe(favorites => {
+    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/' + sessionStorage.getItem('id')).subscribe(favorites => {
       //this.tokenStorage.saveToken(token);)
-      let marker:any;
-      for(let favorite of favorites){
+      let marker: any;
+      for (let favorite of favorites) {
         let fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
-         marker = new google.maps.Marker({
-            position: fav_location,
-            map: this.map,
-            title: favorite.name
-          });
-          this.favoriteLocations.push(marker);
+        marker = new google.maps.Marker({
+          position: fav_location,
+          map: this.map,
+          title: favorite.name
+        });
+        this.favoriteLocations.push(marker);
       }
     }
     )
   }
   // added because the dumbies added stupid stuff that breaks the code
-  tabSelect($event){
+  tabSelect($event) {
     console.log($event);
   }
   //**Hides user's saved locations **/
-  hideLocations(){
+  hideLocations() {
     this.showFavorites = !this.showFavorites;
-    for(let favorite of this.favoriteLocations){
+    for (let favorite of this.favoriteLocations) {
       favorite.setMap(null);
     }
-    if(this.marker){
+    if (this.marker) {
       this.marker.setMap(null);
     }
   }
-/**TODO: Should refresh map once a location is either saved or deleted.**/
-  refresh(){
-    for(let favorite of this.favoriteLocations){
+  /**TODO: Should refresh map once a location is either saved or deleted.**/
+  refresh() {
+    for (let favorite of this.favoriteLocations) {
       favorite.setMap(null);
     }
-    if(this.marker){
+    if (this.marker) {
       this.marker.setMap(null);
-    } 
-    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/'+sessionStorage.getItem('id')).subscribe(favorites => {
-      let marker:any;
-      for(let favorite of favorites){
+    }
+    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/' + sessionStorage.getItem('id')).subscribe(favorites => {
+      let marker: any;
+      for (let favorite of favorites) {
         let fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
-         marker = new google.maps.Marker({
-            position: fav_location,
-            map: this.map,
-            title: favorite.name
-          });
-          this.favoriteLocations.push(marker);
+        marker = new google.maps.Marker({
+          position: fav_location,
+          map: this.map,
+          title: favorite.name
+        });
+        this.favoriteLocations.push(marker);
       }
     }
     )
   }
 
-/**Delete a saved location by name */
-  deleteLocation(){
+  /**Delete a saved location by name */
+  deleteLocation() {
     this.http.delete<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?name='
-    +this.deleteFavorite + '&userId='
-    +sessionStorage.getItem('id'),{}).subscribe(message =>
-    console.log(message));
+      + this.deleteFavorite + '&userId='
+      + sessionStorage.getItem('id'), {}).subscribe(message =>
+        console.log(message));
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
     //this.refresh();
   }
