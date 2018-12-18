@@ -43,6 +43,9 @@ export class UsermatchwebComponent implements OnInit {
   users: UserCard[] = [];
   // initialize empty array for sorted users / drivers
   sortedUsers: UserCard[] = [];
+
+  /** to select a checkbox */
+  selected: string = 'none';
   /**
      * Sets up Component with the Matching and User services injected
      * @param {MatchingControllerService} matchService - Enables the matching service

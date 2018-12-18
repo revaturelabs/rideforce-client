@@ -1,17 +1,17 @@
 /*Cards css*/
 .dyn-height {
-    max-height:650px;
-    width: 20%;
-    overflow-y:auto;
-  }
+  max-height: 650px;
+  width: 20%;
+  overflow-y: auto;
+}
 
-  .cardimg {
-    height:200px;
-  }
+.cardimg {
+  height: 200px;
+}
 
-  .card-text {
-    font-size: 15px;
-  }
+.card-text {
+  font-size: 15px;
+}
 
   h6
   {
@@ -21,108 +21,144 @@
   .grid-container {
     display: grid;
     grid-gap: 50px 50px;
-    grid-template-columns: 22% 22% 22% 22%;
+    grid-template-columns: 50% 50%;
     padding: 10px;
   }
-  @media screen and (max-width: 1000px) {
-    .grid-container {
-      display: grid;
-      grid-gap: 50px 50px;
-      grid-template-columns: 50% 50%;
-      padding: 10px;
-    }
+
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.dislike {
+  background-color: transparent;
+  background-image: url('/assets/icons/cross.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  /* put the height and width of your image here */
+  height: 50px;
+  width: 40px;
+  border: none;
+  background-size: contain;
+}
+
+.dislike:hover {
+  /* transition-duration: 0.1s; */
+  transform: scale(1.3);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.like {
+  background-color: transparent;
+  background-image: url('/assets/icons/check.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  /* put the height and width of your image here */
+  height: 50px;
+  width: 40px;
+  border: none;
+  background-size: contain;
+}
+
+.like:hover {
+  transform: scale(1.3);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.trashButton {
+  background-color: transparent;
+  background-image: url('/assets/icons/trash.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  /* put the height and width of your image here */
+  height: 50px;
+  width: 40px;
+  border: none;
+  background-size: contain;
+}
+
+.trashButton:hover {
+  transform: scale(1.3);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.undoButton {
+  background-color: transparent;
+  background-image: url('/assets/icons/undo1.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  /* put the height and width of your image here */
+  height: 50px;
+  width: 50px;
+  border: none;
+  background-size: contain;
+}
+
+.undoButton:hover {
+  transform: scale(1.3);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.enlarge:hover {
+  transform: scale(1.1);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.card {
+  height: 400px;
+}
+
+#dropdownSettingsButton2 {
+  text-align: center;
+  width: 10%;
+}
+
+#dropdownSettingsButton2:hover {
+  background-color: #e5e5e5;
+  -webkit-transition: background-color 1s;
+  -moz-transition: background-color 1s;
+  -ms-transition: background-color 1s;
+  -o-transition: background-color 1s;
+  transition: background-color 1s;
+}
+
+.sliding-card {
+  animation: slideleft 300;
+}
+
+@-webkit-keyframes slideleft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px)
   }
 
-  .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
+  100% {
+    -webkit-transform: translateX(0px)
+  }
+}
+
+@-moz-keyframes slideleft {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-300px)
   }
 
-  .dislike{
-    background-color: transparent;
-    background-image: url('/assets/icons/cross.png');
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    /* put the height and width of your image here */
-    height: 50px;
-    width: 40px;
-    border: none;
-    background-size: contain;
+  100% {
+    -moz-transform: translateX(0px)
+  }
+}
+
+@keyframes slideleft {
+  0% {
+    opacity: 0;
+    transform: translateX(-300px)
   }
 
-  .dislike:hover {
-    /* transition-duration: 0.1s; */
-    transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  100% {
+    transform: translateX(0px)
   }
-
-  .like{
-    background-color: transparent;
-    background-image: url('/assets/icons/check.png');
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    /* put the height and width of your image here */
-    height: 50px;
-    width: 40px;
-    border: none;
-    background-size: contain;
-  }
-  .like:hover {
-    transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-  }
-
-  .trashButton {
-    background-color: transparent;
-    background-image: url('/assets/icons/trash.png');
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    /* put the height and width of your image here */
-    height: 50px;
-    width: 40px;
-    border: none;
-    background-size: contain;
-  }
-
-  .trashButton:hover {
-    transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-  }
-
-  .undoButton {
-    background-color: transparent;
-    background-image: url('/assets/icons/undo1.png');
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    /* put the height and width of your image here */
-    height: 50px;
-    width: 50px;
-    border: none;
-    background-size: contain;
-  }
-
-  .undoButton:hover {
-    transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-  }
-
-  .enlarge:hover {
-    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-  }
-
-  .card {
-    height: 400px;
-  }
-
-  #dropdownSettingsButton2 {
-    text-align: center;
-    width: 10%;
-  }
-
-  #dropdownSettingsButton2:hover {
-    background-color: #e5e5e5;
-    -webkit-transition: background-color 1s;
-    -moz-transition:    background-color 1s;
-    -ms-transition:     background-color 1s;
-    -o-transition:      background-color 1s;
-    transition:         background-color 1s;
-  }
+}

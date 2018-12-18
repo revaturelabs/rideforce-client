@@ -23,7 +23,7 @@
   <div class="grid-container">
     <div *ngFor="let user of sortedUsers; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
       <div class="enlarge">
-        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item"
+        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item sliding-card"
           [ngStyle]="{ 'background-color': user.choose == 'none' ?
       'white' : user.choose == 'liked' ? '#92badd' : 'rgba(128, 128, 128, 0.514)'}">
           <div *ngIf="user.face=='front' || user.face=='front-back'">
