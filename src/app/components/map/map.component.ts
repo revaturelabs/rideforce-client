@@ -8,6 +8,7 @@ import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
+import { Marker } from 'aws-sdk/clients/storagegateway';
 
 /**
  * Component that handles route navigation and displays a map
@@ -43,7 +44,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Holds list of markers on map representing Users */
   markers: any[] = [];
   placedMarkers: any[] = [];
-
+  labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  labelIndex = 0;
   /** placeholder for the latitude value */
   latitude: any;
   /** placeholder for the longitude value */
@@ -67,7 +69,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   currentLong: any;
   /** Current radious, set by a number control */
   currentRadius = 5000;
-
+  showingUser: boolean = false;
   /** Stores list of users favorited locations */
   favoriteLocations: any[] = [];
 
@@ -148,6 +150,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * @returns {number} - the distance of the route
    */
   getCurrentDistance(): number {
+    
     return this.dist;
   }
 
@@ -192,13 +195,14 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 => {
-            // console.log("data2 is " + data2);
+             //console.log("data2 is " + data2);
             userLinks = data2;
             for (let i = 0; i < userLinks.length; i++) {
 
               this.matchService.getFromLink(userLinks[i]).subscribe(
                 data3 => {
                   console.log('printing user link: ' + i);
+                  console.log(userLinks[i]);
                   console.log(data3);
                   if (!data3.photoUrl || data3.photoUrl === 'null') {
                     data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
@@ -218,17 +222,20 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
                     },
                     opacity: .92
                   };
+                  
                   this.mapService.getDistance(data3.address).subscribe(
                     data4 => {
                       marker.location.latitude = data4.latitude;
                       marker.location.longitude = data4.longitude;
                       this.markers.push(marker);
+                      
                     },
                     e => {
                       console.log('error getting distance!');
                       console.log(e);
                     }
                   );
+                 console.log("Data4 " + JSON.stringify(marker));
                   // Sets the current swipe card to the first element of the array if the array has something in it.
                 },
                 e => {
@@ -250,13 +257,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       }
     );
     this.findMe();
+    console.log("Markerlist " + JSON.stringify(this.marker[0]));
   }
 
-  // setLocation(){
-  //   this.currentUser.address
-  // }
-
-
+  
 
   /**
    * Final initialization after the content is set up
@@ -279,13 +283,18 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.song.pause();
   }
 
+  
   /**
    * Sets up markers of Drivers on the map
    */
   getMarkers() {
+
+    console.log("Map getMarkers() ");
     console.log(this.users);
+    console.log("Latitude " + this.markers[0].location.latitude);
     for (const user of this.users) {
-      console.log(user);
+      console.log("Works?");
+      console.log(this.users);
       const marker: any = {
         user: user,
         icon: {
@@ -301,9 +310,14 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         },
         opacity: .92
       };
-      console.log(marker);
-      this.markers.push(marker);
+       console.log("Marker");
+       console.log("Marker " + marker); 
+       this.markers.push(marker);
+       console.log("Marker object" + marker.location.latitude + " long " + marker.location.longitude + "Marker Object " + marker);
+      const newLocation = new google.maps.LatLng(marker.location.latitude, marker.location.longitude);
+      this.addDriverMarker(newLocation);
     }
+    
   }
 
   /**
@@ -367,9 +381,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     // setTimeout(() => {
       console.log(this.circle.radius + ' ' + this.currentRadius);
       this.circle.radius = this.currentRadius;
+      
     // },
     //   100);
-
+    this.getMarkers();
   }
 
   /**
@@ -436,9 +451,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * (incomplete)
    */
   showCustomMarker() {
-    this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+    //console.log("Location " + this.currentLat + "," + this.currentLong);
 
-    const location = new google.maps.LatLng(this.latitude, this.longitude);
+    this.map.setCenter(new google.maps.LatLng(this.currentLat, this.currentLong));
+
+    const location = new google.maps.LatLng(this.currentLat, this.currentLong);
 
     // console.log(`selected marker: ${this.selectedMarkerType}`);
 
@@ -446,6 +463,28 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       position: location,
       map: this.map,
       // icon: this.iconBase + this.selectedMarkerType,
+      label: this.labels[this.labelIndex++ % this.labels.length],
+      title: 'Got you!'
+    });
+    this.markers.push(marker);
+    this.showingUser = true;
+  }
+
+  /*
+    Renders locations of given markers: In Progress
+  */
+  addDriverMarker(newLocation : google.maps.LatLng) {
+
+    console.log(newLocation);
+    const location = newLocation;
+    //console.log("Marker: " + location);
+    // console.log(`selected marker: ${this.selectedMarkerType}`);
+
+    const marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+      // icon: this.iconBase + this.selectedMarkerType,
+      label: this.labels[this.labelIndex++ % this.labels.length],
       title: 'Got you!'
     });
     this.markers.push(marker);
@@ -456,15 +495,19 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.isHidden = !this.isHidden;
   }
 
+
   /**
-   * Attempts to determne the location of the current user and zoom in on it
+   * Attempts to determine the location of the current user and zoom in on it
    */
   findMe() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log("Position: " + JSON.stringify(position));
         this.showPosition(position);
         this.circle.latitude = this.currentLat;
         this.circle.longitude = this.currentLong;
+        if(!this.showingUser)
+          this.showCustomMarker();
       });
     } else {
       alert('Geolocation is not supported by this browser.');
@@ -472,6 +515,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   }
 
+  setLocation(){
+
+  }
   /**
    * Attempts to determne the location of the current user and mark that location
    */
