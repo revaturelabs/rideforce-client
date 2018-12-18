@@ -174,7 +174,7 @@ export class AccountinfoComponent implements OnInit {
     this.registerForm = new FormGroup({
       'username': new FormControl(this.username, [
         Validators.required
-        , Validators.maxLength(15)
+        , Validators.maxLength(40)
       ]),
       'password': new FormControl(this.password, [
         Validators.required

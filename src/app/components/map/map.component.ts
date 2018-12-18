@@ -516,8 +516,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   setLocation(){
-    console.log("Setlocation");
-    console.log(this.mapService.getDistance(this.currentUser.address));
+
   }
   /**
    * Attempts to determne the location of the current user and mark that location
