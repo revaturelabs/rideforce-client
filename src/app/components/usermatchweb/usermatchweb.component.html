@@ -29,7 +29,7 @@
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <img class="card-img-top cardimg" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
             <div class="card-body">
-              <h6 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+              <h6 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h6>
               <br>
               <div style="display: flex; justify-content: space-between;">
                 <button *ngIf="user.choose!='disliked'" class="dislike" (click)="like(i, 0)"></button>
