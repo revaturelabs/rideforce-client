@@ -220,8 +220,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
                   };
                   this.mapService.getDistance(data3.address).subscribe(
                     data4 => {
-                      marker.location.latitude = data4.lat;
-                      marker.location.longitude = data4.lng;
+                      marker.location.latitude = data4.latitude;
+                      marker.location.longitude = data4.longitude;
                       this.markers.push(marker);
                     },
                     e => {
@@ -301,7 +301,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         },
         opacity: .92
       };
-
       console.log(marker);
       this.markers.push(marker);
     }
