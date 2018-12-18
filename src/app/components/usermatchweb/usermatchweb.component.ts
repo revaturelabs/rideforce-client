@@ -235,64 +235,64 @@ export class UsermatchwebComponent implements OnInit {
     );
   }
 
-  sortDrivers(filter: string): void {
+  // sortDrivers(filter: string): void {
 
-    const options = [
-      [this.filterBatchEnd, 'batchend'], 
-      [this.filterDistance, 'distance'], 
-      [this.filterStartTime, 'starttime']
-    ];
-    this.sortedUsers = this.shuffle(this.users);
+  //   const options = [
+  //     [this.filterBatchEnd, 'batchend'], 
+  //     [this.filterDistance, 'distance'], 
+  //     [this.filterStartTime, 'starttime']
+  //   ];
+  //   this.sortedUsers = this.shuffle(this.users);
 
-    const filterMap = {
-      "starttime": () => { 
-        console.log('sorting by start time')
-        this.sortedUsers = this.users.sort((a, b) => a.user.startTime - b.user.startTime)
-      },
-      "batchend": () => {
-        console.log('sorting by batch end');
-        this.sortedUsers = this.users.sort((a, b) => new Date(b.user.batchEnd).getTime() - new Date(a.user.batchEnd).getTime())
-      },
-      "distance": () => {
-        console.log('sorting by distance');
-        this.sortedUsers = this.users.sort(async (a, b) => {
-          const d1 = await this.calculateDistance(a.user.address);
-          const d2 = await this.calculateDistance(b.user.address);
-          return d2 - d1;
-        })
-      }
+  //   const filterMap = {
+  //     "starttime": () => { 
+  //       console.log('sorting by start time')
+  //       this.sortedUsers = this.users.sort((a, b) => a.user.startTime - b.user.startTime)
+  //     },
+  //     "batchend": () => {
+  //       console.log('sorting by batch end');
+  //       this.sortedUsers = this.users.sort((a, b) => new Date(b.user.batchEnd).getTime() - new Date(a.user.batchEnd).getTime())
+  //     },
+  //     "distance": () => {
+  //       console.log('sorting by distance');
+  //       this.sortedUsers = this.users.sort(async (a, b) => {
+  //         const d1 = await this.calculateDistance(a.user.address);
+  //         const d2 = await this.calculateDistance(b.user.address);
+  //         return d2 - d1;
+  //       })
+  //     }
 
-      }
-    if (this.filterStartTime || this.filterDistance || this.filterBatchEnd) {
-        console.log('going to filter')
-        options.forEach(tuple => {
-          if (tuple[0] === true) {
-            console.log('sorting by ' + tuple[1])
-            const value = tuple[1]
-            filterMap[value]();
-          }
-        })
-        console.log("after sorting: ", this.sortedUsers)
-      } else {
-        this.sortedUsers = this.users;
-      }
-    }
+  //     }
+  //   if (this.filterStartTime || this.filterDistance || this.filterBatchEnd) {
+  //       console.log('going to filter')
+  //       options.forEach(tuple => {
+  //         if (tuple[0] === true) {
+  //           console.log('sorting by ' + tuple[1])
+  //           const value = tuple[1]
+  //           filterMap[value]();
+  //         }
+  //       })
+  //       console.log("after sorting: ", this.sortedUsers)
+  //     } else {
+  //       this.sortedUsers = this.users;
+  //     }
+  //   }
 
-    async calculateDistance(address: string): Promise<number> {
-      console.log('hit: ' + this.getLngLat(address));
-      const myAddress = sessionStorage.address;
-      let myLocation = this.myLocation ? this.myLocation : await this.getLngLat(myAddress);
-      this.myLocation = myLocation;
-      console.log("my location: " + this.myLocation.longitude);
-      const x1 = myLocation.longitude ? myLocation.longitude : 0;
-      const y1 = myLocation.latitude ? myLocation.latitude : 0;
-      let otherLocation = await this.getLngLat(address);
-      const x2 = otherLocation.longitude ? otherLocation.longitude : 0;
-      const y2 = otherLocation.latitude ?  otherLocation.latitude : 0;
-      const distance: number = Math.sqrt(Math.pow((x2 - x1), 2)/Math.pow((y2 - y1), 2));
-      return distance;
+  //   async calculateDistance(address: string): Promise<number> {
+  //     console.log('hit: ' + this.getLngLat(address));
+  //     const myAddress = sessionStorage.address;
+  //     let myLocation = this.myLocation ? this.myLocation : await this.getLngLat(myAddress);
+  //     this.myLocation = myLocation;
+  //     console.log("my location: " + this.myLocation.longitude);
+  //     const x1 = myLocation.longitude ? myLocation.longitude : 0;
+  //     const y1 = myLocation.latitude ? myLocation.latitude : 0;
+  //     let otherLocation = await this.getLngLat(address);
+  //     const x2 = otherLocation.longitude ? otherLocation.longitude : 0;
+  //     const y2 = otherLocation.latitude ?  otherLocation.latitude : 0;
+  //     const distance: number = Math.sqrt(Math.pow((x2 - x1), 2)/Math.pow((y2 - y1), 2));
+  //     return distance;
 
-    }
+  //   }
 
     getLngLat(address: string): object {
       let longitude: number, latitude: number;

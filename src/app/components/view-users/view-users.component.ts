@@ -102,7 +102,7 @@ export class ViewUsersComponent implements OnInit {
     console.log("hitting users");
     if (sessionStorage.getItem('role') === 'ADMIN') {
         return this.userService.getAllUsers().then((x) => { 
-        data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); 
+        data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER' || x.role === 'ADMIN'); 
         this.users = data;
         return data;
       });
@@ -179,6 +179,26 @@ export class ViewUsersComponent implements OnInit {
       location.reload(true);
     } else {
       alert('No changes will be made');
+    }
+  }
+
+  makeDriver(id: number) {
+    this.result = window.confirm("This user is now a Driver");
+    let role = 'DRIVER';
+    
+    if (this.result) {
+      this.userService.updateRole(id, role).then();
+      location.reload(true);
+    }
+  }
+
+  makeRider(id: number) {
+    this.result = window.confirm("This user is now a Rider.");
+    let role = 'RIDER';
+    console.log("Called makeRider");
+    if (this.result) {
+      this.userService.updateRole(id, role).then();
+      location.reload(true);
     }
   }
 

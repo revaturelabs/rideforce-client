@@ -21,10 +21,66 @@
             <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role }}</td>
-            <td><button *ngIf="user.role !== 'ADMIN'" class="btn btnEdit" (click)="makeAdmin(user.id)">Make
-                Admin</button>
-              <button *ngIf="user.role === 'DRIVER' || user.role === 'RIDER'" class="btn btn-info" (click)="makeTrainer(user.id)">Make
-                Trainer</button>
+            <td>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'ADMIN'">
+                    <label class="btn btn-outline-info active" (click)="makeAdmin(user.id)">
+                      <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
+                    </label>
+                    <label class="btn btn-outline-info" (click)="makeTrainer(user.id)">
+                      <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
+                    </label>
+                    <label class="btn btn-outline-info" (click)="makeDriver(user.id)">
+                        <input type="radio" name="options" id="driver" autocomplete="off"> Driver
+                      </label>
+                    <label class="btn btn-outline-info" (click)="makeRider(user.id)">
+                      <input type="radio" name="options" id="rider" autocomplete="off"> Rider
+                    </label>
+                </div>
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'TRAINER'">
+                    <label class="btn btn-outline-info" (click)="makeAdmin(user.id)">
+                      <input type="radio" name="options" id="admin" autocomplete="off"> Admin
+                    </label>
+                    <label class="btn btn-outline-info active" (click)="makeTrainer(user.id)">
+                      <input type="radio" name="options" id="trainer" autocomplete="off" checked> Trainer
+                    </label>
+                    <label class="btn btn-outline-info" (click)="makeDriver(user.id)">
+                        <input type="radio" name="options" id="driver" autocomplete="off"> Driver
+                      </label>
+                    <label class="btn btn-outline-info" (click)="makeRider(user.id)">
+                      <input type="radio" name="options" id="rider" autocomplete="off"> Rider
+                    </label>
+                </div>
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'DRIVER'">
+                    <label class="btn btn-outline-info" (click)="makeAdmin(user.id)">
+                      <input type="radio" name="options" id="admin" autocomplete="off"> Admin
+                    </label>
+                    <label class="btn btn-outline-info" (click)="makeTrainer(user.id)">
+                      <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
+                    </label>
+                    <label class="btn btn-outline-info active" (click)="makeDriver(user.id)">
+                        <input type="radio" name="options" id="driver" autocomplete="off" checked> Driver
+                      </label>
+                    <label class="btn btn-outline-info" (click)="makeRider(user.id)">
+                      <input type="radio" name="options" id="rider" autocomplete="off"> Rider
+                    </label>
+                </div>
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'RIDER'">
+                    <label class="btn btn-outline-info" (click)="makeAdmin(user.id)">
+                      <input type="radio" name="options" id="admin" autocomplete="off"> Admin
+                    </label>
+                    <label class="btn btn-outline-info" (click)="makeTrainer(user.id)">
+                      <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
+                    </label>
+                    <label class="btn btn-outline-info" (click)="makeDriver(user.id)">
+                        <input type="radio" name="options" id="driver" autocomplete="off"> Driver
+                      </label>
+                    <label class="btn btn-outline-info active" (click)="makeRider(user.id)">
+                      <input type="radio" name="options" id="rider" autocomplete="off" checked> Rider
+                    </label>
+                </div>
             </td>
             <td>
               <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable
