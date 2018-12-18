@@ -110,6 +110,7 @@ export class UsermatchwebComponent implements OnInit {
                   // assign drivers to the list to render and shuffle
                   this.sortedUsers = this.users;
                   // sets loading to false
+                  this.users.forEach(user => this.appendLocation(user));
                   this.loading = false;
                   //hides the spinner
                   this.spinner.hide();
@@ -198,45 +199,8 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
-  // filter() {
-  //   for(var i = 0; i < document.getElementsByTagName("input").length; i++) {
-
-  //   }
-  // }
-
-  /**
-   * Updates the filter each time a filter checkbox is clicked
-   */
-  updateFilter() {
-    const userFilter: Filter = {
-      batchEndChange: this.filterBatchEnd,
-      dayStartChange: this.filterStartTime,
-      distanceChange: this.filterDistance
-    };
-
-    this.matchService.getFilteredDrivers(this.currentUser.id, userFilter).then(
-      (users) => {
-        this.users = [];
-        for (const u of users) {
-          if (!u.photoUrl || u.photoUrl === 'null') {
-            u.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
-          }
-          const card: UserCard = {
-            user: u,
-            choose: 'none',
-            face: 'front'
-          };
-          this.users.push(card);
-        }
-
-
-      },
-      (e) => console.log(e)
-    );
-  }
-
-  sortDrivers(filter: string): void {
-
+  sortDrivers(filter: string): void { 
+  
     const options = [
       [this.filterBatchEnd, 'batchend'], 
       [this.filterDistance, 'distance'], 
@@ -254,17 +218,19 @@ export class UsermatchwebComponent implements OnInit {
         console.log('sorting by batch end');
         this.sortedUsers = this.users.sort((a, b) => new Date(b.user.batchEnd).getTime() - new Date(a.user.batchEnd).getTime())
       },
+      // Schwartzian transform
       "distance": () => {
         console.log('sorting by distance');
-        this.sortedUsers = this.users.sort((a, b) => {
-          return this.getLngLat(a.user.address).then(d1 => {
-            return this.getLngLat(b.user.address).then(d2 => {
-              const result = d2 - d1;
-              console.log("difference:  " + result);
-              return result;
-            }).then(r => this.sortedUsers)
-          })
-        })
+        this.sortedUsers = this.users.sort((a, b) => b.distance - a.distance).reverse();
+        // this.sortedUsers = this.users.sort((a, b) => {
+        //   return this.getLngLat(a.user.address).then(d1 => {
+        //     return this.getLngLat(b.user.address).then(d2 => {
+        //       const result = d2 - d1;
+        //       console.log("difference:  " + result);
+        //       return result;
+        //     }).then(r => this.sortedUsers)
+        //   })
+        // })
       }
 
     }
@@ -284,24 +250,38 @@ export class UsermatchwebComponent implements OnInit {
     }
 
     calculateDistance(x1: number, x2: number, y1: number, y2: number): number {
-      const distance: number = Math.sqrt(Math.pow((x2 - x1), 2)/Math.pow((y2 - y1), 2));
+      // const distance: number = Math.sqrt(Math.pow((x2 - x1), 2)/Math.pow((y2 - y1), 2));
+      
+      const radlat1 = Math.PI * y1/180;
+      const radlat2 = Math.PI * y2/180;
+      const radlong1 = Math.PI * x1/180;
+      const radlong2 = Math.PI * x2/180;
+      const theta = x1 - x2;
+      const radtheta = Math.PI * theta/180;
+      var distance = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      distance = Math.acos(distance);
+      distance = distance * 180/Math.PI;
+      distance = distance * 60 * 1.1515;
       return distance;
 
     }
 
+    // get the address and append it
+    async appendLocation(user) {
+      const myLocation = await this.geocodeService.geocode(sessionStorage.address).toPromise();
+      const location = await this.geocodeService.geocode(user.user.address).toPromise();
+      user["distance"] = this.calculateDistance(
+        myLocation["longitude"], 
+        location["longitude"], 
+        myLocation["latitude"], 
+        location["latitude"]
+        );
+        console.log('usre with appended distance: ' + user);
+        return user;
+    }
+
     async getLngLat(address: string): Promise<number> {
       let uLongitude: number, uLatitude: number;
-      // return this.geocodeService.geocode(address).subscribe(res => {
-      //   uLongitude = res["longitude"];
-      //   uLatitude = res["latitude"];
-      //   this.geocodeService.geocode(sessionStorage.address).subscribe(res => {
-      //     let mLongitude = res["longitude"];
-      //     let mLatitude = res["latitude"];
-      //     return this.calculateDistance(mLongitude, uLongitude, mLatitude, uLatitude);
-
-      //   })
-      //   // return {longitude, latitude};
-      // });
       const otherLocation = await this.geocodeService.geocode(address).toPromise();
       const myLocation = await this.geocodeService.geocode(sessionStorage.address).toPromise();
       const x1 = myLocation["longitude"];
@@ -312,23 +292,12 @@ export class UsermatchwebComponent implements OnInit {
     }
    
     getMyLocation() {
-      // return navigator.geolocation.getCurrentPosition(position => {
-      //   let pos = {
-      //     lat: position.coords.latitude,
-      //     lng: position.coords.longitude
-      //   }
-      // })
       const address = sessionStorage.address;
       if (!this.myLocation) { 
         this.myLocation = this.getLngLat(address);
       }
       return this.myLocation;
     }
-
-    // async getLonLatFromAddress(address: string): Promise<object> {
-    //   const result = await this.geocodeService.geocode(address).toPromise().then(res => {console.log(res); return res});
-    //   return result;
-    // }
 
     shuffle(list: UserCard[]): Array<UserCard> {
       var m = list.length, t: UserCard, i: number;
