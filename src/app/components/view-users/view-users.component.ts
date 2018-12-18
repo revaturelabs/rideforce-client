@@ -153,7 +153,6 @@ export class ViewUsersComponent implements OnInit {
     console.log(this.userStatus);
   }
 
-  result: boolean;
   updateUserStatus() {
     if (this.userStatus !== 'DISABLED') {
       //this.result = window.confirm("Are you sure you want to disable this account?");
