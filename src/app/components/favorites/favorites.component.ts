@@ -32,8 +32,4 @@ export class FavoritesComponent implements OnInit {
     }
   }
 
-  testMethod(){
-    
-  }
-
 }
