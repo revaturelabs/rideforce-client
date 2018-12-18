@@ -30,6 +30,7 @@ import { FirstModule } from './first/first.module';
     CallbackComponent,
   ],
   imports: [
+    FirstModule,
     BrowserModule,
     FormsModule,
     //ReactiveFormsModule,
@@ -38,7 +39,7 @@ import { FirstModule } from './first/first.module';
     //NgbModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    FirstModule,
+    
   ],
   providers: [
     //NgbActiveModal,
