@@ -64,6 +64,10 @@ export class AdminComponent implements OnInit {
     this.encryptedLocationDate = middleEncryption;
   }
 
+  tempMethod(){
+    
+  }
+
   /**
    * Retrieves all offices, called on component initialization
    */
