@@ -29,8 +29,8 @@
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <img class="card-img-top cardimg" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
             <div class="card-body">
-              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
-              <p class="card-text">{{user.user.address}}</p>
+              <h6 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+              <br>
               <div style="display: flex; justify-content: space-between;">
                 <button *ngIf="user.choose!='disliked'" class="dislike" (click)="like(i, 0)"></button>
                 <button *ngIf="user.choose=='disliked'" class="trashButton" (click)="like(i, 2)"></button>
