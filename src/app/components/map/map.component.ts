@@ -467,6 +467,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       title: 'Got you!'
     });
     this.markers.push(marker);
+    //adds Marker for the current user 
     this.showingUser = true;
   }
 
@@ -506,7 +507,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         this.showPosition(position);
         this.circle.latitude = this.currentLat;
         this.circle.longitude = this.currentLong;
-        if(!this.showingUser)
+        if(!this.showingUser) //makes it so it doesn't render twice due to multiple calls
           this.showCustomMarker();
       });
     } else {
