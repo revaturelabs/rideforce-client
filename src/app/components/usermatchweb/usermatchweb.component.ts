@@ -106,7 +106,7 @@ export class UsermatchwebComponent implements OnInit {
                   // Sets the current swipe card to the first element of the array if the array has something in it.
                   this.users.push(card);
                   // assign drivers to the list to render and shuffle
-                  this.sortedUsers = this.shuffle(this.users);
+                  this.sortedUsers = this.users;
                   // sets loading to false
                   this.loading = false;
                   //hides the spinner
@@ -234,12 +234,20 @@ export class UsermatchwebComponent implements OnInit {
   }
 
   sortDrivers(filter: string): void {
-    let filterMap = {
-      "startTime": () => { 
+
+    const options = [
+      [this.filterBatchEnd, "batchend"], 
+      [this.filterDistance, "distance"], 
+      [this.filterStartTime, "starttime"]
+    ];
+    this.sortedUsers = this.shuffle(this.users);
+
+    const filterMap = {
+      "starttime": () => { 
         console.log('sorting by start time')
         this.sortedUsers = this.users.sort((a, b) => a.user.startTime - b.user.startTime)
       },
-      "batchEnd": () => {
+      "batchend": () => {
         console.log('sorting by batch end');
         this.sortedUsers = this.users.sort((a, b) => b.user.batchEnd - a.user.batchEnd)
       } 
@@ -247,7 +255,12 @@ export class UsermatchwebComponent implements OnInit {
       }
     if (this.filterStartTime || this.filterDistance || this.filterBatchEnd) {
         console.log('going to filter')
-        filterMap[filter]();
+        options.forEach(tuple => {
+          if (tuple[1] === true) {
+            const value = tuple[0]
+            filterMap[value[0]]();
+          }
+        })
         console.log("after sorting: ", this.sortedUsers)
       } else {
         this.sortedUsers = this.users;
@@ -287,4 +300,6 @@ export class UsermatchwebComponent implements OnInit {
       }
       return list;
     }
+
+
   }
