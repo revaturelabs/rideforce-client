@@ -181,7 +181,15 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /**
    * Initializes the Map with data
    */
+
+   addresses: string [] = ["9416 wooded glen avenue", "1099 godfrey road"];
   ngOnInit() {
+    //TESTING GETDISTANCE METHOD
+    for (var i=0;i<this.addresses.length;i++){
+      console.log(this.addresses[i]+" get distance method called")
+      this.mapService.getDistance(this.addresses[i]);
+    }
+
     if (sessionStorage.length == 0)
       this.route.navigate(["/landing"]);
     this.song.src = 'assets/audio/GrimGrinningGhosts.mp3';
