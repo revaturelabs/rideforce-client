@@ -65,11 +65,11 @@ export class UsermatchwebComponent implements OnInit {
   currentUser: User;
 
   /** Whether or not to filter users by batch-end date */
-  filterBatchEnd: boolean;
+  filterBatchEnd: boolean = false;
   /** Whether or not to filter users by day start-time */
-  filterStartTime: boolean;
+  filterStartTime: boolean = false;
   /** Whether or not to filter users by Distance */
-  filterDistance: boolean;
+  filterDistance: boolean = false;
   /**If page is loading */
   loading: boolean;
 
@@ -238,9 +238,9 @@ export class UsermatchwebComponent implements OnInit {
   sortDrivers(filter: string): void {
 
     const options = [
-      [this.filterBatchEnd, "batchend"], 
-      [this.filterDistance, "distance"], 
-      [this.filterStartTime, "starttime"]
+      [this.filterBatchEnd, 'batchend'], 
+      [this.filterDistance, 'distance'], 
+      [this.filterStartTime, 'starttime']
     ];
     this.sortedUsers = this.shuffle(this.users);
 
@@ -251,7 +251,7 @@ export class UsermatchwebComponent implements OnInit {
       },
       "batchend": () => {
         console.log('sorting by batch end');
-        this.sortedUsers = this.users.sort((a, b) => b.user.batchEnd - a.user.batchEnd)
+        this.sortedUsers = this.users.sort((a, b) => new Date(b.user.batchEnd).getTime() - new Date(a.user.batchEnd).getTime())
       },
       "distance": () => {
         console.log('sorting by distance');
@@ -266,9 +266,10 @@ export class UsermatchwebComponent implements OnInit {
     if (this.filterStartTime || this.filterDistance || this.filterBatchEnd) {
         console.log('going to filter')
         options.forEach(tuple => {
-          if (tuple[1] === true) {
-            const value = tuple[0]
-            filterMap[value[0]]();
+          if (tuple[0] === true) {
+            console.log('sorting by ' + tuple[1])
+            const value = tuple[1]
+            filterMap[value]();
           }
         })
         console.log("after sorting: ", this.sortedUsers)
