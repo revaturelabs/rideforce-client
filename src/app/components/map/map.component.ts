@@ -181,7 +181,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /**
    * Initializes the Map with data
    */
+
+   addresses: string [] = ["9416 wooded glen avenue", "1099 godfrey road"];
   ngOnInit() {
+
     if (sessionStorage.length == 0)
       this.route.navigate(["/landing"]);
     this.song.src = 'assets/audio/GrimGrinningGhosts.mp3';
@@ -195,7 +198,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 => {
-             //console.log("data2 is " + data2);
+             console.log("data2 is " + data2);
             userLinks = data2;
             for (let i = 0; i < userLinks.length; i++) {
 
@@ -228,7 +231,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
                       marker.location.latitude = data4.latitude;
                       marker.location.longitude = data4.longitude;
                       this.markers.push(marker);
-                      
                     },
                     e => {
                       console.log('error getting distance!');
@@ -257,7 +259,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       }
     );
     this.findMe();
-    console.log("Markerlist " + JSON.stringify(this.marker[0]));
   }
 
   
@@ -273,7 +274,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
      };
      this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp); */
     this.findMe();
-    this.getMarkers();
+    //this.getMarkers();
   }
 
   /**
@@ -312,7 +313,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       };
        console.log("Marker");
        console.log("Marker " + marker); 
-       this.markers.push(marker);
+       //this.markers.push(marker);
        console.log("Marker object" + marker.location.latitude + " long " + marker.location.longitude + "Marker Object " + marker);
       const newLocation = new google.maps.LatLng(marker.location.latitude, marker.location.longitude);
       this.addDriverMarker(newLocation);
