@@ -38,7 +38,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Email</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" required pattern="[a-zA-z0-9\.]+@[a-zA-z0-9]+\.[a-zA-z0-9.]+" maxlength="40" placeholder="Email..">
+                <input type="text" pattern="[a-zA-z0-9\.]+@[a-zA-z0-9]+\.[a-zA-z0-9.]+" class="form-control" [(ngModel)]="username" #uName="ngModel" required maxlength="40" placeholder="Email..">
               </div>
               <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
                 <div *ngIf="uName.errors.required">

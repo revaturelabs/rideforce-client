@@ -15,9 +15,10 @@ import { HttpClientModule, HttpClient, HttpHandler, HTTP_INTERCEPTORS } from '@a
 import { CallbackComponent } from './callback/callback/callback.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { FirstModule } from './first/first.module';
 
 /**
- * Loads all nessesary modules for the first contentful paint
+ * Loads all necessary modules for the first contentful paint
  * - Team PWA
  */
 @NgModule({
@@ -37,6 +38,7 @@ import { environment } from '../environments/environment';
     //NgbModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    FirstModule,
   ],
   providers: [
     //NgbActiveModal,

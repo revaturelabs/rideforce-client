@@ -67,7 +67,7 @@ import { environment } from '../../environments/environment';
       libraries: ['places'],
     }),
     NgbModule,
-    // HttpClientModule,
+    HttpClientModule,
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
