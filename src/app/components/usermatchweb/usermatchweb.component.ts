@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Filter } from '../../models/filter';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ThrowStmt } from '@angular/compiler';
+import { GeocodeService } from '../../services/geocode.service';
 
 /** Represents the User selection item in the html page */
 interface UserCard {
@@ -40,7 +41,13 @@ export class UsermatchwebComponent implements OnInit {
 
   // Dummy data
   users: UserCard[] = [];
+  // initialize empty array for sorted users / drivers
+  sortedUsers: UserCard[] = [];
 
+  /** to select a checkbox */
+  selected: string = 'none';
+  /** to store user location */
+  myLocation: object = null;
   /**
      * Sets up Component with the Matching and User services injected
      * @param {MatchingControllerService} matchService - Enables the matching service
@@ -50,18 +57,19 @@ export class UsermatchwebComponent implements OnInit {
     private matchService: MatchingControllerService,
     private userService: UserControllerService,
     private route: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private geocodeService: GeocodeService
   ) { }
 
   /** Holds the current user of the system */
   currentUser: User;
 
   /** Whether or not to filter users by batch-end date */
-  filterBatchEnd: boolean;
+  filterBatchEnd: boolean = false;
   /** Whether or not to filter users by day start-time */
-  filterStartTime: boolean;
+  filterStartTime: boolean = false;
   /** Whether or not to filter users by Distance */
-  filterDistance: boolean;
+  filterDistance: boolean = false;
   /**If page is loading */
   loading: boolean;
 
@@ -99,6 +107,8 @@ export class UsermatchwebComponent implements OnInit {
                   };
                   // Sets the current swipe card to the first element of the array if the array has something in it.
                   this.users.push(card);
+                  // assign drivers to the list to render and shuffle
+                  this.sortedUsers = this.users;
                   // sets loading to false
                   this.loading = false;
                   //hides the spinner
@@ -224,4 +234,106 @@ export class UsermatchwebComponent implements OnInit {
       (e) => console.log(e)
     );
   }
-}
+
+  sortDrivers(filter: string): void {
+
+    const options = [
+      [this.filterBatchEnd, 'batchend'], 
+      [this.filterDistance, 'distance'], 
+      [this.filterStartTime, 'starttime']
+    ];
+    this.sortedUsers = this.shuffle(this.users);
+
+    const filterMap = {
+      "starttime": () => { 
+        console.log('sorting by start time')
+        this.sortedUsers = this.users.sort((a, b) => a.user.startTime - b.user.startTime)
+      },
+      "batchend": () => {
+        console.log('sorting by batch end');
+        this.sortedUsers = this.users.sort((a, b) => new Date(b.user.batchEnd).getTime() - new Date(a.user.batchEnd).getTime())
+      },
+      "distance": () => {
+        console.log('sorting by distance');
+        this.sortedUsers = this.users.sort(async (a, b) => {
+          const d1 = await this.calculateDistance(a.user.address);
+          const d2 = await this.calculateDistance(b.user.address);
+          return d2 - d1;
+        })
+      }
+
+      }
+    if (this.filterStartTime || this.filterDistance || this.filterBatchEnd) {
+        console.log('going to filter')
+        options.forEach(tuple => {
+          if (tuple[0] === true) {
+            console.log('sorting by ' + tuple[1])
+            const value = tuple[1]
+            filterMap[value]();
+          }
+        })
+        console.log("after sorting: ", this.sortedUsers)
+      } else {
+        this.sortedUsers = this.users;
+      }
+    }
+
+    async calculateDistance(address: string): Promise<number> {
+      console.log('hit: ' + this.getLngLat(address));
+      const myAddress = sessionStorage.address;
+      let myLocation = this.myLocation ? this.myLocation : await this.getLngLat(myAddress);
+      this.myLocation = myLocation;
+      console.log("my location: " + this.myLocation.longitude);
+      const x1 = myLocation.longitude ? myLocation.longitude : 0;
+      const y1 = myLocation.latitude ? myLocation.latitude : 0;
+      let otherLocation = await this.getLngLat(address);
+      const x2 = otherLocation.longitude ? otherLocation.longitude : 0;
+      const y2 = otherLocation.latitude ?  otherLocation.latitude : 0;
+      const distance: number = Math.sqrt(Math.pow((x2 - x1), 2)/Math.pow((y2 - y1), 2));
+      return distance;
+
+    }
+
+    getLngLat(address: string): object {
+      let longitude: number, latitude: number;
+      return this.geocodeService.geocode(address).subscribe(res => {
+        longitude = res["longitude"];
+        latitude = res["latitude"];
+        console.log('longitude: ' + longitude)
+        return {longitude, latitude};
+      });
+    }
+   
+    getMyLocation() {
+      // return navigator.geolocation.getCurrentPosition(position => {
+      //   let pos = {
+      //     lat: position.coords.latitude,
+      //     lng: position.coords.longitude
+      //   }
+      // })
+      const address = sessionStorage.address;
+      if (!this.myLocation) { 
+        this.myLocation = this.getLngLat(address);
+      }
+      return this.myLocation;
+    }
+
+    // async getLonLatFromAddress(address: string): Promise<object> {
+    //   const result = await this.geocodeService.geocode(address).toPromise().then(res => {console.log(res); return res});
+    //   return result;
+    // }
+
+    shuffle(list: UserCard[]): Array<UserCard> {
+      var m = list.length, t: UserCard, i: number;
+      while (m) {
+        i = Math.floor(Math.random() * m--);
+
+        t = list[m];
+        list[m] = list[i];
+        list[i] = t;
+      }
+      return list;
+    }
+
+
+  }

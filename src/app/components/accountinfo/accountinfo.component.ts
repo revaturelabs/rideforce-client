@@ -49,7 +49,7 @@ export class AccountinfoComponent implements OnInit {
   /**
    * Keeps track of which tab the new user is on
    */
-  currentTab: number = 1;
+  currentTab = 1;
 
 
 
@@ -178,11 +178,11 @@ export class AccountinfoComponent implements OnInit {
       ]),
       'password': new FormControl(this.password, [
         Validators.required
-        , Validators.maxLength(15)
+        , Validators.maxLength(15) // should match requirements (8-16) in backend
       ]),
       'passwordConfirm': new FormControl(this.passwordConfirm, [
         Validators.required
-        , Validators.maxLength(15)
+        , Validators.maxLength(15) // should match requirements (8-16) in backend
       ]),
       'token': new FormControl(this.token, [
         Validators.required
@@ -194,7 +194,7 @@ export class AccountinfoComponent implements OnInit {
 
   /** Checks to see if the passwords match */
   check() {
-    this.passwordsMatch = this.password != this.passwordConfirm;
+    this.passwordsMatch = this.password !== this.passwordConfirm;
   }
 
   /** Allows first address to be deduced */
@@ -218,8 +218,8 @@ export class AccountinfoComponent implements OnInit {
 
   /** Sets the User as a Driver */
   isDriver() {
-    document.getElementById('riderBtn').classList.remove('selectedBtn');
     document.getElementById('driverBtn').classList.add('selectedBtn');
+    document.getElementById('riderBtn').classList.remove('selectedBtn');
     this.btnCarInfo = 1;
     this.roleObject = Role.Driver;
   }
@@ -230,10 +230,12 @@ export class AccountinfoComponent implements OnInit {
     document.getElementById('driverBtn').classList.remove('selectedBtn');
     this.carMake = '';
     this.carModel = '';
-    this.carYear;
+    this.carYear = 0;
     this.btnCarInfo = 2;
     this.roleObject = Role.Rider;
   }
+
+
 
   /** Sets up contact information */
   addContact(): void {
@@ -301,7 +303,7 @@ export class AccountinfoComponent implements OnInit {
   /** Creats a user from all the required fields */
   createUserObject() {
 
-    //this.upload();
+    // this.upload();
 
     this.userObject = {
       id: 1,
@@ -326,13 +328,13 @@ export class AccountinfoComponent implements OnInit {
     // this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token.substring(28))
       .then((x) => {
-        sessionStorage.setItem("id", x.id.toString());
-        sessionStorage.setItem("firstName", x.firstName);
-        sessionStorage.setItem("lastName", x.lastName);
-        sessionStorage.setItem("userEmail", x.email);
-        sessionStorage.setItem("userPassword", x.password);
-        sessionStorage.setItem("address", x.address);
-        sessionStorage.setItem("role", x.role);
+        sessionStorage.setItem('id', x.id.toString());
+        sessionStorage.setItem('firstName', x.firstName);
+        sessionStorage.setItem('lastName', x.lastName);
+        sessionStorage.setItem('userEmail', x.email);
+        sessionStorage.setItem('userPassword', x.password);
+        sessionStorage.setItem('address', x.address);
+        sessionStorage.setItem('role', x.role);
         this.router.navigate(['/map']);
       });
 
@@ -354,12 +356,12 @@ export class AccountinfoComponent implements OnInit {
   }
 
   /**
-   * Validates the User input and if valid moved to the second tab
+   * Validates the User input and if valid moves to the second tab
    */
   accountInfoNext() {
     if (this.firstName && this.lastName && this.username
       && this.password && this.passwordConfirm && this.token
-      && this.address2 && this.batchEnd && this.password == this.passwordConfirm) {
+      && this.address2 && this.batchEnd && this.password === this.passwordConfirm) {
       this.requiredInfoFields = true;
       this.currentTab++;
       this.tabset.select('2');
@@ -374,15 +376,15 @@ export class AccountinfoComponent implements OnInit {
     this.tabset.select('3');
   }
 
-  /** Moves Registration tot he first page */
+  /** Moves Registration to the first page */
   bioPrevious() {
     this.tabset.select('1');
   }
 
-  /** Moves Registration tothe Final page */
+  /** Moves Registration to the Final page */
   carNext() {
 
-    if (this.btnCarInfo == 0) {
+    if (this.btnCarInfo === 0) {
       this.requiredCarFields = false;
     } else if (this.btnCarInfo > 0) {
       this.requiredCarFields = true;

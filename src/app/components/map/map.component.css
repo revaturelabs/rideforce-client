@@ -30,6 +30,11 @@ agm-map{
     color: orange;
   }
 
+  .frosty-font {
+    font-family: 'frosty';
+    color: green;
+  }
+
   .spooky-background {
     position: absolute;
     height: 130% !important;
@@ -100,6 +105,29 @@ agm-map{
     animation-name: fly-cycle;
     animation-timing-function: steps(10);
   }
+
+  .snowflake
+  {
+    background-image: url(https://thumbs.gfycat.com/EasyDopeyLeafbird-max-1mb.gif);
+    background-size: cover;
+    width:100px;
+    height:100px;
+    will-change: background-position;
+    animation-name: fly-cycle;
+    animation-timing-function: steps(10);
+  }
+  
+  /* Santa sleigh gif*/
+  .sleigh
+  {
+    background-image: url(https://www.softcat.com/assets/uploads/campaigns/softcat-christmas-2017/Santa-Sleigh_V2.gif);
+    width:1800px;
+    height:371px;
+    will-change: background-position;
+    animation-name: fly-cycle;
+    animation-timing-function: steps(10);
+  }
+  
     .witch-one {
       animation-duration: 1s;
       animation-delay: -0.5s;
