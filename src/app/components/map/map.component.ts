@@ -10,7 +10,6 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { Router } from '@angular/router';
 import { Marker } from 'aws-sdk/clients/storagegateway';
 import { Location } from '../../models/location.model';
-import { LOCATIONS } from '../../models/mock-locations';
 
 /**
  * Component that handles route navigation and displays a map
@@ -29,10 +28,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   private start = 'herndon';
   /** Where Users work */
   private end = 'reston';
-
-  locs = LOCATIONS;
-  /* Mock Data */
-
   /** Distance of the route */
   private dist: number;
   /** Estimated time of the drive */
@@ -199,20 +194,14 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
-        console.log('User data from current user (Service) called by Map component');
-        console.log(data);
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 => {
-            console.log("data2 is " + data2);
             userLinks = data2;
             for (let i = 0; i < userLinks.length; i++) {
 
               this.matchService.getFromLink(userLinks[i]).subscribe(
                 data3 => {
-                  console.log('printing user link: ' + i);
-                  console.log(userLinks[i]);
-                  console.log(data3);
                   if (!data3.photoUrl || data3.photoUrl === 'null') {
                     data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
                   }
@@ -244,7 +233,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
                       console.log(e);
                     }
                   );
-                  console.log("Data4 " + JSON.stringify(marker));
                   // Sets the current swipe card to the first element of the array if the array has something in it.
                 },
                 e => {
@@ -281,7 +269,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
      };
      this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp); */
     this.findMe();
-    //this.getMarkers();
   }
 
   /**
@@ -294,15 +281,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   /**
    * Sets up markers of Drivers on the map
+   * Does not appear to serve a purpose this may be removable?
    */
   getMarkers() {
-
-    console.log("Map getMarkers() ");
-    console.log(this.users);
     //console.log("Latitude " + this.markers[0].location.latitude);
     for (const user of this.users) {
-      console.log("Works?");
-      console.log(this.users);
       const marker: any = {
         user: user,
         icon: {
@@ -318,12 +301,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         },
         opacity: .92
       };
-      console.log("Marker");
-      console.log("Marker " + marker);
       //this.markers.push(marker);
-      console.log("Marker object" + marker.location.latitude + " long " + marker.location.longitude + "Marker Object " + marker);
       const newLocation = new google.maps.LatLng(marker.location.latitude, marker.location.longitude);
-      //this.addDriverMarkers(newLocation);
     }
 
   }
@@ -389,9 +368,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Changes the radius of your search */
   public changeRadius() {
     // setTimeout(() => {
-    console.log(this.circle.radius + ' ' + this.currentRadius);
     this.circle.radius = this.currentRadius;
-    //this.addDriverMarkers(this.locs);
     // },
     //   100);
   }
@@ -481,14 +458,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   /*
-    Renders locations of given markers: In Progress
+    addDriverMarkers
+    Renders location of a drivers provided a location
   */
 
   addDriverMarkers(newLocation: Location) {
-
-    console.log(newLocation);
-    //console.log("Marker: " + location);
-    // console.log(`selected marker: ${this.selectedMarkerType}`);
       const location = new google.maps.LatLng(newLocation.latitude, newLocation.longitude);
       const marker = new google.maps.Marker({
         position: location,
@@ -512,7 +486,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   findMe() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log("Position: " + JSON.stringify(position));
         this.showPosition(position);
         this.circle.latitude = this.currentLat;
         this.circle.longitude = this.currentLong;
