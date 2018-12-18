@@ -32,7 +32,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   locs = LOCATIONS;
   /* Mock Data */
-  
+
   /** Distance of the route */
   private dist: number;
   /** Estimated time of the drive */
@@ -489,7 +489,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     console.log(newLocation);
     //console.log("Marker: " + location);
     // console.log(`selected marker: ${this.selectedMarkerType}`);
-    for (var x = 0; x < newLocation.length; x++) {
+    for (let x = 0; x < newLocation.length; x++) {
       const location = new google.maps.LatLng(newLocation[x].latitude, newLocation[x].longitude);
       const marker = new google.maps.Marker({
         position: location,
