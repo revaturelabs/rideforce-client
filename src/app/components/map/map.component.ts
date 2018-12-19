@@ -201,6 +201,14 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
+        this.mapService.getDistance(data.address).subscribe(
+          coordinates => {
+            console.log("setting center good sir");
+            this.currentLat = coordinates.latitude;
+            this.currentLong = coordinates.longitude;
+          });
+        console.log('User data from current user (Service) called by Map component');
+        console.log(data);
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 => {
@@ -230,9 +238,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
                     this.mapService.getDistance(data3.address).subscribe(
                     data4 => {
-                      // marker.location.latitude = data4.latitude;
-                      // marker.location.longitude = data4.longitude;
-                      // this.markers.push(marker);
                       this.addDriverMarkers(data4);
                     },
                     e => {
@@ -260,22 +265,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         console.log(e);
       }
     );
-    this.findMe();
+        this.findMe();
   }
-
-
 
   /**
    * Final initialization after the content is set up
    */
   ngAfterContentInit() {
-    /*  const mapProp = {
-       center: new google.maps.LatLng(38.9586, -77.3570),
-       zoom: 15,
-       mapTypeId: google.maps.MapTypeId.ROADMAP
-     };
-     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp); */
-    this.findMe();
+    
+    //this.findMe();
+    //this.getMarkers();
   }
 
   /**
@@ -285,6 +284,13 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.hsong.pause();
     this.csong.pause();
   }
+
+  initMap(latitude, longitude){
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: latitude, lng: longitude},
+      zoom: 8
+    });
+    }
 
 
   /**
@@ -343,6 +349,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * @param address - the location to zoom in on
    */
   setCenter(address) {
+    console.log("setCenter");
     this.zone.run(() => {
       // this.addr = addrObj;
       // this.addrKeys = Object.keys(addrObj);
@@ -540,14 +547,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
           this.showCustomMarker();
       });
     } else {
-      alert('Geolocation is not supported by this browser.');
+      alert("Location can not be accessed")
     }
 
   }
 
-  setLocation() {
-
-  }
   /**
    * Attempts to determne the location of the current user and mark that location
    */
@@ -685,6 +689,4 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
     //this.refresh();
   }
-
-
 }

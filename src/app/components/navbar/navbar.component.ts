@@ -57,7 +57,7 @@ export class NavbarComponent implements OnInit {
     ).subscribe(e => {
       this.sessionCheck();
     });
-    
+
     //checks if criteria for being installable are met
     //Note this will never be triggerable if the app is currently installed
     //To uninstall a PWA go to chrome://apps/ right click on the app (rideshare-client) and select remove from chrome
@@ -138,14 +138,23 @@ export class NavbarComponent implements OnInit {
 
     if (this.deferredInstall) {
       this.deferredInstall.prompt();
-      this.deferredInstall = null;
-      this.isInstallable = false;
+      this.deferredInstall.userChoice
+        .then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+        this.isInstallable = false;
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+          this.deferredInstall = null;
+        });
+     
     }//brings up install prompt and if installed button disappears
 
   }
 
 
-  
+
 
 }
 
