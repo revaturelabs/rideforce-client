@@ -7,7 +7,8 @@ import { UsercardComponent } from '../usercard/usercard.component';
 import { User } from '../../models/user.model';
 import { Role } from '../../models/role.model';
 
-  xdescribe('MapComponent', () => {
+//  x
+  describe('MapComponent', () => {
   let component: MapComponent;
   let fixture: ComponentFixture<MapComponent>;
 
