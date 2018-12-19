@@ -1,10 +1,7 @@
-<ngb-tabset (tabChange)="tabSelect($event)">
-    <ngb-tab title="Drivers Near Me">
-      <ng-template ngbTabContent>
-        <br>
-        <div class="row">
+        <br>        <div class="row">
           <div class=""> <!--col-lg-4 col-lg-offset-4 -->
             <div class="" style = "margin-left: 25px"><!--col-lg-8 col-lg-offset-2 -->
+              <h2>Drives near me</h2>
               <form class="form-inline" #form="ngForm">
                 <div class="form-group">
                   <input type="text" class="form-control" name="myLocation" (addressSelect)="setCenter($event)" placeholder="Enter Your Location"
@@ -24,39 +21,6 @@
             </div>
           </div>
         </div>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab title = "Favorite Locations">
-      <ng-template ngbTabContent>
-        <div style = "margin-top: 20px; margin-left: 25px;">
-          <b>Address:</b>
-          <span style="display:inline-block; width: 125px;"></span>
-          <b>Name:</b>
-          <form class="form-inline" #form="ngForm">
-              <div class="form-group">
-                <input type="text" class="form-control" id="currentLocation" name="currentLocation" (addressSelect)="setCenter($event)" placeholder="Enter Your Location"
-                  appPlacesAutocomplete required [(ngModel)] = "selectedLocation"/>
-                  <input type="text" class="form-control" id="nameLocation" name="nameLocation" [(ngModel)] = "favoriteName" placeholder="Set Name"/>
-                  <button type = "submit" name = "favorite-location" (click) = "saveLocation()" class = "btn btn-primary" [disabled]="form.invalid">Save Location</button>
-                  <button *ngIf="showFavorites" type = "submit" name = "get-favorite-locations" (click) = "getLocations()" class = "btn btn-primary" >My Locations</button>
-                  <button *ngIf="!showFavorites" type = "submit" name = "hide-favorite-locations" (click) = "hideLocations()" class = "btn btn-primary" >Hide Locations</button>
-              </div>
-          </form>
-          <br>
-          <div *ngIf="!showFavorites">
-            <b>Name:</b>
-            <form class="form-inline">  
-                <div class="form-group">
-                  <input type="text" class="form-control" id="deleteLocation" name="deleteLocation"[(ngModel)] = "deleteFavorite"  placeholder="Enter Name"/>
-                  <button  type = "submit" name = "delete-location" (click) = "deleteLocation()"  class = "btn btn-primary">Delete Location</button>
-                </div>
-            </form>
-            <p><b>Tip:</b> Hover over marker to display that saved location's name.</p>
-          </div>
-        </div>
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
   <br>
 
 
@@ -82,7 +46,7 @@
     </div>
   </div>
 </div>
-<div class="container-fluid" [class.spooky-font]="styles!=null">
+<div class="container-fluid" [class.spooky-font]="halloweenStyle!=null" [class.frosty-font]="christmasStyle!=null">
 
   <table *ngIf="selectedUser" class="table">
     <tr>
@@ -122,7 +86,8 @@
             <a class="dropdown-item" (click)="setMapType('terrain')">Terrain</a>
             <a class="dropdown-item" (click)="setMapType('satellite')">Satellite</a>
             <a class="dropdown-item" (click)="setMapType('roadmap')">Road Map</a>
-            <a class="dropdown-item" (click)="changeStyle('halloween')">Halloween</a>
+            <a class="dropdown-item" (click)="halloween()">Halloween</a>
+            <a class="dropdown-item" (click)="christmas()">Christmas</a>
           </div>
           <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>
         </div>
@@ -152,7 +117,8 @@
 
     </div>
   </div>
-  <div *ngIf="styles != null">
+
+  <div *ngIf = "halloweenStyle != null">
     <div class="witch-container witch-container-one">
       <div class="witch witch-one"></div>
     </div>
@@ -185,9 +151,35 @@
     <div class="ghost-container ghost-container-four">
       <div class="ghost ghost-four"></div>
     </div>
+  </div>  
+
+  <div *ngIf="christmasStyle != null">
+    
+    <!-- Santa's container -->
+    <div class="witch-container witch-container-one">
+      <div class="sleigh witch-one"></div>
+    </div>
+  
+    <!-- Snowflake -->
+    <div class="ghost-container ghost-container-one">
+      <div class="snowflake ghost-container-one"></div>
+    </div>
+
+    <div class="ghost-container ghost-container-two">
+      <div class="snowflake ghost-container-two"></div>
+    </div>
+
+    <div class="ghost-container ghost-container-three">
+      <div class="snowflake ghost-container-three"></div>
+    </div>
+
+    <div class="ghost-container ghost-container-four">
+      <div class="snowflake ghost-container-four"></div>
+    </div>
   </div>
-
-
 </div>
-<img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background">
-<img *ngIf="styles != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background2 flashit">
+
+<img id="spooky" *ngIf="halloweenStyle != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background">
+<!-- <img *ngIf="styles != null" src="/src/assets/img/christmas.jpg" class="jolly-background"> -->
+<img *ngIf="christmasStyle != null" src="/src/assets/img/christmas.jpg" alt="" class="spooky-background">
+<!--  -->

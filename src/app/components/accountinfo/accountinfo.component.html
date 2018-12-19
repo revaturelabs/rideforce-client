@@ -1,14 +1,14 @@
 <br>
 <div class="form-group row">
-  <div class="col-1"></div>
-  <div class="col-lg-3 col-xs-12 extend">
+  <div class="col-3"></div>
+  <div class="col-lg-6 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
       <div label="CREATE PROFILE div">
         <ngb-tab title="1" id="1">
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>
-              <h2>Create Profile:</h2>
+              <h2>Create Profile</h2>
               <br>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -49,23 +49,29 @@
                 </div>
               </div>
 
+              <div>
+                <p>Password cannot be empty and must be between 8-16 characters long.</p>
+              </div>
+
               <div class="input-group mb-3 ">
                 <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Password</span>
+                  <span class="input-group-text" id="basic-addon1">Password</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" required>
+                <input type="password" class="form-control" [(ngModel)]="password" #pWord="ngModel" required placeholder="8-16 characters" pattern="[0-9a-zA-Z!@#]{8,16}" title="Between 8 - 16 character, !@# accepted">
               </div>
               <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
                 <div *ngIf="pWord.errors.required">
                   Password cannot be empty
                 </div>
+                
               </div>
               <div class="input-group mb-3 ">
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1 ">Confirm</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required>
+                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required placeholder="Confirm password">
               </div>
+              
               <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
                 <div *ngIf="pConfirm.errors.required">
                   Password Confirm cannot be empty
@@ -200,12 +206,12 @@
         <ngb-tab title="3" id="3">
           <ng-template ngbTabContent>
             <div class="input-group mb-3">
-              <div class="input-group" id="button-addon3">
-                <span class="padRight"><button id="driverBtn" class="btn" type="button" (click)="isDriver()">Driver</button></span>
-                <span><button id="riderBtn" class="btn" type="button" (click)="isRider()">Rider</button></span>
+              <div class="btn-group" role="group" aria-label="btn groups">
+                <button type="button" class="btn" id="riderBtn" (click)="isRider()">Rider</button>
+                <button type="button" class="btn" id="driverBtn" (click)="isDriver()">Driver</button>
               </div>
             </div>
-            <app-car-registration *ngIf="roleObject === 'DRIVER'"></app-car-registration>
+
             <div>
               <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
               <span> <button class="btn btnNextPrevious" (click)="carNext()">Next</button></span>

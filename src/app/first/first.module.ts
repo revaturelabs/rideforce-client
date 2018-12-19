@@ -37,6 +37,10 @@ import { CallbackComponent } from '../callback/callback/callback.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../../environments/environment';
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ViewUsersComponent } from '../components/view-users/view-users.component';
+import { SearchUsersComponent } from '../components/search-users/search-users.component';
+
 @NgModule({
   declarations: [
     RideswipeComponent,
@@ -52,6 +56,8 @@ import { environment } from '../../environments/environment';
     AdminComponent,
     CarRegistrationComponent,
     ViewProfileComponent,
+    SearchUsersComponent,
+    ViewUsersComponent
     // DateFormatPipe,
   ],
   imports: [
@@ -69,6 +75,7 @@ import { environment } from '../../environments/environment';
     NgbModule,
     HttpClientModule,
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    NgxSpinnerModule
   ],
   providers: [
     NgbActiveModal,
