@@ -53,23 +53,26 @@ describe('UsermatchwebComponent', () => {
   });
   it('flipCard() test', () => {
     /** Represents the User selection item in the html page */
-    interface UserCard {
+    interface DriverCard {
       /** The User being represented */
       user: User;
       /** The status of the given user */
       choose: string;
       /** Link to profile picture of the user */
       face: String;
+      distance: number;
     }
-    const card1: UserCard = {
+    const card1: DriverCard = {
       user: null,
       choose: 'none',
-      face: 'front'
+      face: 'front',
+      distance: 1
     };
-    const card2: UserCard = {
+    const card2: DriverCard = {
       user: null,
       choose: 'none',
-      face: 'back'
+      face: 'back',
+      distance: 5
     };
     component.flipCard(card1);
     component.flipCard(card2);
