@@ -13,12 +13,14 @@ import { AdminComponent } from '../components/admin/admin.component';
 import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 import { CallbackComponent } from '../callback/callback/callback.component';
+import { ViewUsersComponent } from '../components/view-users/view-users.component';
+
 
 /**
  * This is where we set our routerLink attribute.
  * For example...
  * <a class="dropdown-item" routerLink="/howTo">About</a>
- * creates an <a> element of class "dropdown-item" that will 
+ * creates an <a> element of class "dropdown-item" that will
  * refer to these routes to find which component to route to.
  */
 export const routes: Routes = [
@@ -30,26 +32,12 @@ export const routes: Routes = [
   { path: 'accountInfo', component: AccountinfoComponent},
   { path: 'rideswipe', component: RideswipeComponent },
   { path: 'userCard', component: UsercardComponent },
-  { path: 'favorites', component: FavoritesComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent},
-  { path: 'callback', component: CallbackComponent}
-  
-  // { path: '',  pathMatch: 'full', redirectTo: 'landing' },
-  // { path: 'howTo', component: HowToComponent },
-  // { path: 'landing', component: LandingComponent },
-  // { path: 'login', component: LoginComponent },
-  // { path: 'map', component: MapComponent },
-  // { path: 'accountInfo', component: AccountinfoComponent},
-  // { path: 'rideswipe', component: RideswipeComponent },
-  // { path: 'userCard', component: UsercardComponent },
-  // { path: 'favorites', component: FavoritesComponent },
-  // { path: 'admin', component: AdminComponent },
-  // { path: 'cars', component: CarRegistrationComponent },
-  // { path: 'userProfile', component: ViewProfileComponent},
-  // { path: 'callback', component: CallbackComponent}
-  // //{ path: 'logout', redirectTo: 'landing' }
+  { path: 'callback', component: CallbackComponent},
+  { path: 'viewUsers', component: ViewUsersComponent}
+  // { path: 'logout', redirectTo: 'landing' }
 ];
 @NgModule({
   imports: [

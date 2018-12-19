@@ -10,6 +10,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { Router } from '@angular/router';
 import { Marker } from 'aws-sdk/clients/storagegateway';
 import { Location } from '../../models/location.model';
+import { bool } from 'aws-sdk/clients/signer';
 
 /**
  * Component that handles route navigation and displays a map
@@ -53,7 +54,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
 
+  //Styles
   styles: any = null;
+  halloweenStyle: any = null;
+  christmasStyle: any = null;
 
   /** Represents an element labeled 'gmap' (currently not used) */
   @ViewChild('gmap') gmapElement: any;
@@ -102,8 +106,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   myLocation: any;
 
   /** Represents a song that is playing in the background */
-  song = new Audio();
-
+  hsong = new Audio();
+  csong = new Audio();
   /** Holds the User that's logged in */
   currentUser: User;
 
@@ -188,12 +192,23 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
     if (sessionStorage.length == 0)
       this.route.navigate(["/landing"]);
-    this.song.src = 'assets/audio/GrimGrinningGhosts.mp3';
-    this.song.loop = true;
-    this.song.load();
+    this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
+    this.hsong.loop = true;
+    this.hsong.load();
+    this.csong.src = 'assets/audio/EndTitle.mp3';
+    this.csong.loop = true;
+    this.csong.load();
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
+        this.mapService.getDistance(data.address).subscribe(
+          coordinates => {
+            console.log("setting center good sir");
+            this.currentLat = coordinates.latitude;
+            this.currentLong = coordinates.longitude;
+          });
+        console.log('User data from current user (Service) called by Map component');
+        console.log(data);
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
           data2 => {
@@ -223,9 +238,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
                     this.mapService.getDistance(data3.address).subscribe(
                     data4 => {
-                      // marker.location.latitude = data4.latitude;
-                      // marker.location.longitude = data4.longitude;
-                      // this.markers.push(marker);
                       this.addDriverMarkers(data4);
                     },
                     e => {
@@ -253,31 +265,32 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         console.log(e);
       }
     );
-    this.findMe();
-    
+        this.findMe();
   }
-
-
 
   /**
    * Final initialization after the content is set up
    */
   ngAfterContentInit() {
-    /*  const mapProp = {
-       center: new google.maps.LatLng(38.9586, -77.3570),
-       zoom: 15,
-       mapTypeId: google.maps.MapTypeId.ROADMAP
-     };
-     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp); */
-    this.findMe();
+    
+    //this.findMe();
+    //this.getMarkers();
   }
 
   /**
    * Stops any song playing once the component is being terminated
    */
   ngOnDestroy() {
-    this.song.pause();
+    this.hsong.pause();
+    this.csong.pause();
   }
+
+  initMap(latitude, longitude){
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: latitude, lng: longitude},
+      zoom: 8
+    });
+    }
 
 
   /**
@@ -336,6 +349,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * @param address - the location to zoom in on
    */
   setCenter(address) {
+    console.log("setCenter");
     this.zone.run(() => {
       // this.addr = addrObj;
       // this.addrKeys = Object.keys(addrObj);
@@ -401,13 +415,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Sets the component style
    * @param style - the style to set the component to
    */
-  changeStyle(style: string) {
-    if (this.styles !== null) {
-      this.styles = null;
-      this.song.pause();
-    } else if (this.styles === null) {
-      this.song.play();
-      this.styles = [{
+  //Halloween overlay for maps
+  halloween() {
+    if (this.halloweenStyle !== null) {
+      this.halloweenStyle = null;
+      this.hsong.pause();
+    } else if (this.halloweenStyle === null) {
+      this.hsong.play();
+      this.csong.pause();
+      this.christmasStyle = null;
+      this.halloweenStyle = [{
         'featureType': 'water',
         'stylers': [{
           'color': '#000000'
@@ -432,7 +449,43 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       ];
     }
   }
+  
+  //Christmas overlay for Map
+  christmas() {
+    if (this.christmasStyle !== null) {
+      this.christmasStyle = null;
+      this.csong.pause();
+    } else if (this.christmasStyle === null) {
+      this.csong.play();
+      this.hsong.pause();
+      this.halloweenStyle = null;
+      this.christmasStyle = [{
+        'featureType': 'water',
+        'stylers': [{
+          'color': '#5897fc'
+        }]
+      },
+      {
+        'featureType': 'landscape',
+        'elementType': 'geometry',
 
+        'stylers': [{
+          'color': '#dbffdb'
+        }]
+      },
+      {
+        'featureType': 'poi',
+        'elementType': 'geometry',
+        'stylers': [{
+          'color': '##ffd8e1'
+        }]
+      }
+
+      ];
+    }
+  }
+
+  
   /**
    * Shows the location you are at
    * (incomplete)
@@ -494,14 +547,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
           this.showCustomMarker();
       });
     } else {
-      alert('Geolocation is not supported by this browser.');
+      alert("Location can not be accessed")
     }
 
   }
 
-  setLocation() {
-
-  }
   /**
    * Attempts to determne the location of the current user and mark that location
    */
@@ -639,6 +689,4 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
     //this.refresh();
   }
-
-
 }
