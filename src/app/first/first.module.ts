@@ -38,6 +38,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../../environments/environment';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ViewUsersComponent } from '../components/view-users/view-users.component';
+import { SearchUsersComponent } from '../components/search-users/search-users.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AdminComponent,
     CarRegistrationComponent,
     ViewProfileComponent,
+    SearchUsersComponent,
+    ViewUsersComponent
     // DateFormatPipe,
   ],
   imports: [

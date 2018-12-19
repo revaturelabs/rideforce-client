@@ -32,8 +32,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NavbarComponent,
     LoginComponent,
     CallbackComponent,
-    SearchUsersComponent,
-    ViewUsersComponent,
+    // SearchUsersComponent,
+    // ViewUsersComponent,
     // DateFormatPipe,
   ],
   imports: [
@@ -47,7 +47,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     
-    NgxSpinnerModule
+    // NgxSpinnerModule
   ],
   providers: [
     //NgbActiveModal,
