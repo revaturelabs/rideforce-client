@@ -11,13 +11,15 @@ import { ThrowStmt } from '@angular/compiler';
 import { GeocodeService } from '../../services/geocode.service';
 
 /** Represents the User selection item in the html page */
-interface UserCard {
+interface DriverCard {
   /** The User being represented */
   user: User;
   /** The status of the given user */
   choose: string;
   /** Link to profile picture of the user */
   face: String;
+  /**The calculated distance for sorting with geolocation */
+  distance: number;
 }
 
 /**
@@ -40,9 +42,9 @@ interface UserCard {
 export class UsermatchwebComponent implements OnInit {
 
   // Dummy data
-  users: UserCard[] = [];
+  users: DriverCard[] = [];
   // initialize empty array for sorted users / drivers
-  sortedUsers: UserCard[] = [];
+  sortedUsers: DriverCard[] = [];
 
   /** to select a checkbox */
   selected: string = 'none';
@@ -100,10 +102,11 @@ export class UsermatchwebComponent implements OnInit {
                   if (!data3.photoUrl || data3.photoUrl === 'null') {
                     data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
                   }
-                  const card: UserCard = {
+                  const card: DriverCard = {
                     user: data3,
                     choose: 'none',
-                    face: 'front'
+                    face: 'front',
+                    distance: null
                   };
                   // Sets the current swipe card to the first element of the array if the array has something in it.
                   this.users.push(card);
@@ -177,9 +180,9 @@ export class UsermatchwebComponent implements OnInit {
 
   /**
    * Sets the card to rotate 90 degrees
-   * @param {UserCard} card - the card to operate on
+   * @param {DriverCard} card - the card to operate on
    */
-  flipCard(card: UserCard) {
+  flipCard(card: DriverCard) {
     if (card.face === 'front') {
       card.face = 'front-back';
     } else if (card.face === 'back') {
@@ -189,9 +192,9 @@ export class UsermatchwebComponent implements OnInit {
 
   /**
    * Card goes past 90 degrees and changes face
-   * @param {UserCard} card - the card to operate on
+   * @param {DriverCard} card - the card to operate on
    */
-  endFlipCard(card: UserCard) {
+  endFlipCard(card: DriverCard) {
     if (card.face === 'front-back') {
       card.face = 'back';
     } else if (card.face === 'back-front') {
@@ -231,7 +234,7 @@ export class UsermatchwebComponent implements OnInit {
           if (tuple[0] === true) {
             console.log('sorting by ' + tuple[1])
             const value = tuple[1]
-            filterMap[value]();
+            filterMap[value.toString()]();
           }
         })
         console.log("after sorting: ", this.sortedUsers)
@@ -262,10 +265,10 @@ export class UsermatchwebComponent implements OnInit {
       const myLocation = await this.geocodeService.geocode(sessionStorage.address).toPromise();
       const location = await this.geocodeService.geocode(user.user.address).toPromise();
       user["distance"] = this.calculateDistance(
-        myLocation["longitude"], 
-        location["longitude"], 
-        myLocation["latitude"], 
-        location["latitude"]
+        myLocation["lng"], 
+        location["lng"], 
+        myLocation["lat"], 
+        location["lat"]
         );
         console.log('usre with appended distance: ' + user);
         return user;
@@ -275,10 +278,10 @@ export class UsermatchwebComponent implements OnInit {
       let uLongitude: number, uLatitude: number;
       const otherLocation = await this.geocodeService.geocode(address).toPromise();
       const myLocation = await this.geocodeService.geocode(sessionStorage.address).toPromise();
-      const x1 = myLocation["longitude"];
-      const x2 = otherLocation["longitude"];
-      const y1 = myLocation["latitude"];
-      const y2 = otherLocation["latitude"];
+      const x1 = myLocation["lng"];
+      const x2 = otherLocation["lng"];
+      const y1 = myLocation["lat"];
+      const y2 = otherLocation["lat"];
       return this.calculateDistance(x1, x2, y1, y2);
     }
    
@@ -290,8 +293,8 @@ export class UsermatchwebComponent implements OnInit {
       return this.myLocation;
     }
 
-    shuffle(list: UserCard[]): Array<UserCard> {
-      var m = list.length, t: UserCard, i: number;
+    shuffle(list: DriverCard[]): Array<DriverCard> {
+      var m = list.length, t: DriverCard, i: number;
       while (m) {
         i = Math.floor(Math.random() * m--);
 

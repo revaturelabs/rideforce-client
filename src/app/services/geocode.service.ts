@@ -10,8 +10,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GeocodeService {
 
-  dev: boolean = true;
-  endpoint: string = this.dev ? 'http://localhost:3333/location/?address=' : 'http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/location/?address=';
+  dev: boolean = false;
+  endpoint: string = this.dev ? 'http://localhost:3333/location/?address=' : 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222/location/?address=';
 
   /**
    * Sets up the Service with a Google Maps object
