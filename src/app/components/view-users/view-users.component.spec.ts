@@ -1,6 +1,9 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { ViewUsersComponent } from './view-users.component';
+import { SearchUsersComponent } from '../search-users/search-users.component';
+import { from } from 'rxjs';
 
 describe('ViewUsersComponent', () => {
   let component: ViewUsersComponent;
@@ -8,7 +11,15 @@ describe('ViewUsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewUsersComponent ]
+      declarations: [
+        SearchUsersComponent,
+        ViewUsersComponent ],
+        imports: [
+          FormsModule
+        ],
+        providers: [
+          HttpClient, HttpHandler
+        ]
     })
     .compileComponents();
   }));
