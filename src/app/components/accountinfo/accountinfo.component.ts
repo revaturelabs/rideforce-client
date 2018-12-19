@@ -179,10 +179,12 @@ export class AccountinfoComponent implements OnInit {
       'password': new FormControl(this.password, [
         Validators.required
         , Validators.maxLength(15) // should match requirements (8-16) in backend
+        , Validators.minLength(9)
       ]),
       'passwordConfirm': new FormControl(this.passwordConfirm, [
         Validators.required
         , Validators.maxLength(15) // should match requirements (8-16) in backend
+        , Validators.minLength(9)
       ]),
       'token': new FormControl(this.token, [
         Validators.required

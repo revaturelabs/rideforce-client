@@ -14,11 +14,14 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">First Name</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" required>
+                <input type="text" class="form-control" pattern="[a-zA-Z ]*" [(ngModel)]="firstName" #firstname="ngModel" required>
               </div>
               <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
                 <div *ngIf="firstname.errors.required">
                   First name cannot be empty
+                </div>
+                <div *ngIf="firstname.errors.pattern">
+                  First name cannot have any symbols or numbers
                 </div>
               </div>
 
@@ -26,11 +29,14 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text " id="basic-addon1 ">Last Name</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="lastName" #lastname="ngModel" required>
+                <input type="text" class="form-control" pattern="[a-zA-Z]" [(ngModel)]="lastName" #lastname="ngModel" required>
               </div>
               <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
                 <div *ngIf="lastname.errors.required">
                   Last name cannot be empty
+                </div>
+                <div *ngIf="lastname.errors.pattern">
+                  Last name cannot have any symbols or numbers
                 </div>
               </div>
 
@@ -44,9 +50,13 @@
                 <div *ngIf="uName.errors.required">
                   Email cannot be empty
                 </div>
-                <div *ngIf="uName.errors.pattern">
-                  Email is invalid
+                <div *ngIf="uName.errors?.email">
+                  Email must be a valid email
                 </div>
+              </div>
+
+              <div *ngIf="uName.valid" class="alert alert-success">
+                Email is valid!
               </div>
 
               <div>
@@ -63,8 +73,8 @@
                 <div *ngIf="pWord.errors.required">
                   Password cannot be empty
                 </div>
-                
               </div>
+
               <div class="input-group mb-3 ">
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1 ">Confirm</span>
