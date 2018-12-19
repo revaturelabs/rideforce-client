@@ -5,35 +5,43 @@
     </p>
     <img src="" alt="" id="filter">
     <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterBatchEnd" (change)="updateFilter()" checked/> Batch End Date <br>
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterStartTime" (change)="updateFilter()" checked/> Day Start Time <br>
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterDistance" (change)="updateFilter()" checked/> Distance <br>
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterBatchEnd" (change)="sortDrivers('batchEnd')" checked />
+      Batch End Date <br>
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterStartTime" (change)="sortDrivers('startTime')" checked />
+      Day Start Time <br>
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterDistance" (change)="sortDrivers('distance')" checked />
+      Distance <br>
       <!--button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>-->
     </div>
   </div>
+
+
   <h2>Potential Matches </h2>
+  <div>
+    <ngx-spinner bdColor="rgba(51,51,51,0)" size="large" color="#fa971a" type="square-jelly-box"></ngx-spinner>
+  </div>
   <div class="grid-container">
-    <div *ngFor="let user of users; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
-      <div class="enlarge" >
-        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item"
+    <div *ngFor="let user of sortedUsers; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
+      <div class="enlarge">
+        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item sliding-card"
           [ngStyle]="{ 'background-color': user.choose == 'none' ?
       'white' : user.choose == 'liked' ? '#92badd' : 'rgba(128, 128, 128, 0.514)'}">
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <img class="card-img-top cardimg" src={{user.user.photoUrl}} alt="Card image cap" (click)="flipCard(user)">
             <div class="card-body">
-              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
-              <p class="card-text">{{user.user.address}}</p>
+              <h6 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h6>
+              <br>
               <div style="display: flex; justify-content: space-between;">
                 <button *ngIf="user.choose!='disliked'" class="dislike" (click)="like(i, 0)"></button>
                 <button *ngIf="user.choose=='disliked'" class="trashButton" (click)="like(i, 2)"></button>
                 <button *ngIf="user.choose!='none'" class="undoButton" (click)="like(i, 3)"></button>
-                <button type="button" class="like" (click)="like(i, 1)"></button> 
+                <button type="button" class="like" (click)="like(i, 1)"></button>
 
               </div>
             </div>
           </div>
           <div *ngIf="user.face=='back' || user.face=='back-front'" (click)="flipCard(user)">
-            <div class="card-body" style="transform: rotateY(180deg)">
+            <div class="card-body" style="transform: rotateY(180deg); overflow:auto">
               <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
               <p class="card-text">{{user.user.address}}</p>
               <h5 class="card-text">{{user.user.email}}</h5>

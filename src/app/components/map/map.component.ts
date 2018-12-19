@@ -10,7 +10,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { Router } from '@angular/router';
 import { Marker } from 'aws-sdk/clients/storagegateway';
 import { Location } from '../../models/location.model';
-import { LOCATIONS } from '../../models/mock-locations';
+import { bool } from 'aws-sdk/clients/signer';
 
 /**
  * Component that handles route navigation and displays a map
@@ -29,10 +29,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   private start = 'herndon';
   /** Where Users work */
   private end = 'reston';
-
-  locs = LOCATIONS;
-  /* Mock Data */
-
   /** Distance of the route */
   private dist: number;
   /** Estimated time of the drive */
@@ -58,7 +54,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
 
+  //Styles
   styles: any = null;
+  halloweenStyle: any = null;
+  christmasStyle: any = null;
 
   /** Represents an element labeled 'gmap' (currently not used) */
   @ViewChild('gmap') gmapElement: any;
@@ -107,8 +106,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   myLocation: any;
 
   /** Represents a song that is playing in the background */
-  song = new Audio();
-
+  hsong = new Audio();
+  csong = new Audio();
   /** Holds the User that's logged in */
   currentUser: User;
 
@@ -193,9 +192,12 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
     if (sessionStorage.length == 0)
       this.route.navigate(["/landing"]);
-    this.song.src = 'assets/audio/GrimGrinningGhosts.mp3';
-    this.song.loop = true;
-    this.song.load();
+    this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
+    this.hsong.loop = true;
+    this.hsong.load();
+    this.csong.src = 'assets/audio/EndTitle.mp3';
+    this.csong.loop = true;
+    this.csong.load();
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
@@ -282,7 +284,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Stops any song playing once the component is being terminated
    */
   ngOnDestroy() {
-    this.song.pause();
+    this.hsong.pause();
+    this.csong.pause();
   }
 
   initMap(latitude, longitude){
@@ -295,15 +298,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   /**
    * Sets up markers of Drivers on the map
+   * Does not appear to serve a purpose this may be removable?
    */
   getMarkers() {
-
-    console.log("Map getMarkers() ");
-    console.log(this.users);
     //console.log("Latitude " + this.markers[0].location.latitude);
     for (const user of this.users) {
-      console.log("Works?");
-      console.log(this.users);
       const marker: any = {
         user: user,
         icon: {
@@ -319,12 +318,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         },
         opacity: .92
       };
-      console.log("Marker");
-      console.log("Marker " + marker);
       //this.markers.push(marker);
-      console.log("Marker object" + marker.location.latitude + " long " + marker.location.longitude + "Marker Object " + marker);
       const newLocation = new google.maps.LatLng(marker.location.latitude, marker.location.longitude);
-      //this.addDriverMarkers(newLocation);
     }
 
   }
@@ -391,9 +386,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Changes the radius of your search */
   public changeRadius() {
     // setTimeout(() => {
-    console.log(this.circle.radius + ' ' + this.currentRadius);
     this.circle.radius = this.currentRadius;
-    //this.addDriverMarkers(this.locs);
     // },
     //   100);
   }
@@ -425,13 +418,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Sets the component style
    * @param style - the style to set the component to
    */
-  changeStyle(style: string) {
-    if (this.styles !== null) {
-      this.styles = null;
-      this.song.pause();
-    } else if (this.styles === null) {
-      this.song.play();
-      this.styles = [{
+  //Halloween overlay for maps
+  halloween() {
+    if (this.halloweenStyle !== null) {
+      this.halloweenStyle = null;
+      this.hsong.pause();
+    } else if (this.halloweenStyle === null) {
+      this.hsong.play();
+      this.csong.pause();
+      this.christmasStyle = null;
+      this.halloweenStyle = [{
         'featureType': 'water',
         'stylers': [{
           'color': '#000000'
@@ -456,7 +452,43 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       ];
     }
   }
+  
+  //Christmas overlay for Map
+  christmas() {
+    if (this.christmasStyle !== null) {
+      this.christmasStyle = null;
+      this.csong.pause();
+    } else if (this.christmasStyle === null) {
+      this.csong.play();
+      this.hsong.pause();
+      this.halloweenStyle = null;
+      this.christmasStyle = [{
+        'featureType': 'water',
+        'stylers': [{
+          'color': '#5897fc'
+        }]
+      },
+      {
+        'featureType': 'landscape',
+        'elementType': 'geometry',
 
+        'stylers': [{
+          'color': '#dbffdb'
+        }]
+      },
+      {
+        'featureType': 'poi',
+        'elementType': 'geometry',
+        'stylers': [{
+          'color': '##ffd8e1'
+        }]
+      }
+
+      ];
+    }
+  }
+
+  
   /**
    * Shows the location you are at
    * (incomplete)
@@ -483,14 +515,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   /*
-    Renders locations of given markers: In Progress
+    addDriverMarkers
+    Renders location of a drivers provided a location
   */
 
   addDriverMarkers(newLocation: Location) {
-
-    console.log(newLocation);
-    //console.log("Marker: " + location);
-    // console.log(`selected marker: ${this.selectedMarkerType}`);
       const location = new google.maps.LatLng(newLocation.latitude, newLocation.longitude);
       const marker = new google.maps.Marker({
         position: location,
@@ -514,7 +543,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   findMe() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log("Position: " + JSON.stringify(position));
         this.showPosition(position);
         this.circle.latitude = this.currentLat;
         this.circle.longitude = this.currentLong;
@@ -664,6 +692,4 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
     //this.refresh();
   }
-
-
 }

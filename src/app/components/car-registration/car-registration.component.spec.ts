@@ -65,13 +65,14 @@ xdescribe('CarRegistrationComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  /* functions no longer exist
   it('should refresh the car registration fields', () => {
     component.refreshFields();
     expect(component.carMake).toEqual('');
     expect(component.carModel).toEqual('');
     // expect(component.carMake).toEqual('');
   });
-
+  
   it('should add a car to the system', () => {
     component.carMake = ('testComp');
     component.carModel = ('testMod');
@@ -90,5 +91,5 @@ xdescribe('CarRegistrationComponent', () => {
     console.log('passed expect 3');
     expect(component.carObject.id).toBeTruthy();
   });
-
+  */
 });

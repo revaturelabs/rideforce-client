@@ -64,7 +64,6 @@ export class NavbarComponent implements OnInit {
     window.addEventListener('beforeinstallprompt', (event) => {
       this.deferredInstall = event;
       this.isInstallable = true;
-      console.log("Is installable now");
     });
 
   }
@@ -81,7 +80,6 @@ export class NavbarComponent implements OnInit {
    * Updates session, telling if the user is logged in or not
    */
   sessionCheck() {
-    console.log(sessionStorage);
     this.session = sessionStorage.length > 0;
   }
   /**
@@ -142,10 +140,8 @@ export class NavbarComponent implements OnInit {
       this.deferredInstall.prompt();
       this.deferredInstall = null;
       this.isInstallable = false;
-      console.log("Should install");
-    }
-    else
-      console.log("Failure to install!");
+    }//brings up install prompt and if installed button disappears
+
   }
 
 

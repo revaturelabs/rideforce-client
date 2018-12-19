@@ -16,6 +16,10 @@ import { CallbackComponent } from './callback/callback/callback.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FirstModule } from './first/first.module';
+import { SearchUsersComponent } from './components/search-users/search-users.component';
+import { ViewUsersComponent } from './components/view-users/view-users.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+// import { DateFormatPipe } from './pipes/date-format.pipe';
 
 /**
  * Loads all necessary modules for the first contentful paint
@@ -28,6 +32,9 @@ import { FirstModule } from './first/first.module';
     NavbarComponent,
     LoginComponent,
     CallbackComponent,
+    SearchUsersComponent,
+    ViewUsersComponent,
+    // DateFormatPipe,
   ],
   imports: [
     FirstModule,
@@ -40,6 +47,7 @@ import { FirstModule } from './first/first.module';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     
+    NgxSpinnerModule
   ],
   providers: [
     //NgbActiveModal,
