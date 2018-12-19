@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { User } from '../../models/user.model';
 import { Auth0Service } from '../../services/auth0.service';
-
+import { filter } from 'rxjs/operators';
 /**
  * Hosts the Component that allows users to navigate between components
  */
@@ -13,6 +13,7 @@ import { Auth0Service } from '../../services/auth0.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent implements OnInit {
 
   /** Holds the current user of the app */
@@ -30,6 +31,11 @@ export class NavbarComponent implements OnInit {
    * Just a boolean stating whether the dropdown has been toggled.
    */
   dropped: boolean = false;
+  /*
+  * Used for PWA install 
+  */
+  deferredInstall = null;
+  isInstallable: boolean = false;
 
   /**
    * Sets up the component with relevent services
@@ -40,10 +46,27 @@ export class NavbarComponent implements OnInit {
    */
   constructor(
     private auth0: Auth0Service,
-    private authService: AuthService,
+    public authService: AuthService,//made public so it can build
     private userService: UserControllerService,
     private route: Router
-    ) { }
+
+  ) {
+
+    route.events.pipe(
+      filter(e => e instanceof NavigationStart)
+    ).subscribe(e => {
+      this.sessionCheck();
+    });
+
+    //checks if criteria for being installable are met
+    //Note this will never be triggerable if the app is currently installed
+    //To uninstall a PWA go to chrome://apps/ right click on the app (rideshare-client) and select remove from chrome
+    window.addEventListener('beforeinstallprompt', (event) => {
+      this.deferredInstall = event;
+      this.isInstallable = true;
+    });
+
+  }
 
   /**
    * Sets up the Log in Session appearence
@@ -57,7 +80,6 @@ export class NavbarComponent implements OnInit {
    * Updates session, telling if the user is logged in or not
    */
   sessionCheck() {
-    console.log(sessionStorage);
     this.session = sessionStorage.length > 0;
   }
   /**
@@ -111,4 +133,28 @@ export class NavbarComponent implements OnInit {
       this.dropped = !this.dropped;
     }
   }
+  /*Allows installation of PWA */
+  install() {
+
+    if (this.deferredInstall) {
+      this.deferredInstall.prompt();
+      this.deferredInstall.userChoice
+        .then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+        this.isInstallable = false;
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+          this.deferredInstall = null;
+        });
+     
+    }//brings up install prompt and if installed button disappears
+
+  }
+
+
+
+
 }
+

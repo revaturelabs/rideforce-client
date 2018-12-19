@@ -24,7 +24,7 @@ import { ViewUsersComponent } from '../components/view-users/view-users.componen
  * refer to these routes to find which component to route to.
  */
 export const routes: Routes = [
-  { path: '',  pathMatch: 'full', redirectTo: 'landing' },
+  { path: '',  component: LandingComponent},
   { path: 'howTo', component: HowToComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },

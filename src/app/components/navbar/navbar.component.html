@@ -22,6 +22,12 @@
         
       </div>
   </div>
+
   <!-- replace this with logout0() eventually when auth0 is set up -->
   <button *ngIf="session&&!dropped" class="btn btn-secondary" (click)="logout()">Logout</button>
+
+  <div style="padding-left: 30px;">
+    <button *ngIf = "session&&isInstallable" class="btn btn-secondary" (click)="install()">Install</button>
+  </div>
+  
 </nav>

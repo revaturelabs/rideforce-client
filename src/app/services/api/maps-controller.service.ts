@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { LatLngLiteral } from '@agm/core';
 import { RouteInfo } from '../../models/route-info.model';
+import { Location } from '../../models/location.model'
+
 
 /**
  * Enables Components to work with the Mapping Service on the backend
@@ -22,11 +24,18 @@ export class MapsControllerService {
   * in latitude and longitude as a LatLngLiteral. This can be used to create map markers.
   * @returns {Observable<LatLngLiteral>} - Location info with latitude and longitude information
   */
-  getDistance(address: string): Observable<LatLngLiteral> { // gives back latitude and longitude
-    return this.http.get<LatLngLiteral>(environment.apiUrl + '/location', {
+
+ /**
+  * new address object 
+  */
+
+  getDistance(address: string): Observable<Location> { // gives back latitude and longitude
+    return this.http.get<Location>(environment.apiUrl + '/location', {
       params: { address },
     });
   }
+
+  
 
   /**
    * Takes in 2 addresses and calculates the distance and travel time between them

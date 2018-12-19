@@ -174,7 +174,7 @@ export class AccountinfoComponent implements OnInit {
     this.registerForm = new FormGroup({
       'username': new FormControl(this.username, [
         Validators.required
-        , Validators.email
+        , Validators.maxLength(40)
       ]),
       'password': new FormControl(this.password, [
         Validators.required
@@ -330,14 +330,14 @@ export class AccountinfoComponent implements OnInit {
     // this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token.substring(28))
       .then((x) => {
-        sessionStorage.setItem('id', x.id.toString());
-        sessionStorage.setItem('firstName', x.firstName);
-        sessionStorage.setItem('lastName', x.lastName);
-        sessionStorage.setItem('userEmail', x.email);
-        sessionStorage.setItem('userPassword', x.password);
-        sessionStorage.setItem('address', x.address);
-        sessionStorage.setItem('role', x.role);
-        this.router.navigate(['/map']);
+        sessionStorage.setItem("id", x.id.toString());
+        sessionStorage.setItem("firstName", x.firstName);
+        sessionStorage.setItem("lastName", x.lastName);
+        sessionStorage.setItem("userEmail", x.email);
+        sessionStorage.setItem("userPassword", x.password);
+        sessionStorage.setItem("address", x.address);
+        sessionStorage.setItem("role", x.role);
+        this.router.navigate(['/landing']);
       });
 
 
