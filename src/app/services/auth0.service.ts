@@ -11,7 +11,7 @@ export class Auth0Service {
   requestedScopes: string = 'openid profile read:messages write:messages';
 
   /** Auth0 API client ID */
-  client_id: string = '9OlhtIHLjsGJMZ8a4YIEKPwFJ0FoeJbt';
+  client_id: string = 'THlcZ6pPcaaX4DkUF0qSRErkOQfZ1Xln';
 
   /** Object that will hold the decompiled Auth0 profile */
   userProfile: any;
@@ -19,7 +19,7 @@ export class Auth0Service {
   /** An Auth0 controller object, used to call functionality with the Auth0 API */
   auth = new auth0.WebAuth({
     //this is a personal account, set up a new one at https://auth0.com/signup and put the new domain here
-    domain: '11crandall.auth0.com',
+    domain: 'rideforce.auth0.com',
     //this will need to be replaced too
     clientID: this.client_id,
     responseType: 'token id_token',

@@ -18,7 +18,7 @@ import { environment } from '../environments/environment';
 import { FirstModule } from './first/first.module';
 
 /**
- * Loads all nessesary modules for the first contentful paint
+ * Loads all necessary modules for the first contentful paint
  * - Team PWA
  */
 @NgModule({
