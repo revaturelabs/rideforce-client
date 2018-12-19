@@ -123,4 +123,24 @@ import { Role } from '../../models/role.model';
     component.toggleMap();
     expect(component.isHidden).toBe(curTog);
   });
+
+  it('should set given coordinates as the center', () => {
+    const coordObj = {
+      geometry: {
+        location: new google.maps.LatLng(39, -77)
+      }
+    };
+    let div = document.createElement('div');
+    component.map = new google.maps.Map(div);
+    component.setCenter(coordObj);
+    const marker = {
+      lat: component.currentLat,
+      lng: component.currentLong,
+      title: 'got you!'
+    };
+    // expect new center to match given location
+    expect(component.map.getCenter().lat()).toBe(39);
+    expect(component.map.getCenter().lng()).toBe(-77);
+    expect(component.placedMarkers).toContain(marker); // expect markers array to contain new marker of the center
+  });
 });
