@@ -1,7 +1,8 @@
         <br>        <div class="row">
           <div class=""> <!--col-lg-4 col-lg-offset-4 -->
-            <div class="" style = "margin-left: 25px"><!--col-lg-8 col-lg-offset-2 -->
-              <h2>Drives near me</h2>
+            <div class="" style = "margin-left: 25px;"><!--col-lg-8 col-lg-offset-2 -->
+              <h2 *ngIf="!christmasStyle && !halloweenStyle">Drivers near me</h2>
+              <h2 *ngIf="styles==null" style = "color:white;">Drives near me</h2>
               <form class="form-inline" #form="ngForm">
                 <div class="form-group">
                   <input type="text" class="form-control" name="myLocation" (addressSelect)="setCenter($event)" placeholder="Enter Your Location"
