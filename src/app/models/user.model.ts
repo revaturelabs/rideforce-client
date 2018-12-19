@@ -37,7 +37,7 @@ export interface User {
    */
   batchEnd: any;
   
-  dayStart: number;
+  // dayStart: number;
   
   startTime: number;
   /**

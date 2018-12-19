@@ -61,13 +61,13 @@ describe('UsercardComponent', () => {
     component.hideImage(true);
     //expect(component.swipeCardMain).toBeTruthy();
   });
-   it('unhide image tests', () => {
+  it('unhide image tests', () => {
     component.hideImage(false);
-   });
-    it('swipe action right',() => {
-     component.swipe(component.SWIPE_ACTION.RIGHT,null);
-   })
-    it('swipe action left',() => {
-    component.swipe(component.SWIPE_ACTION.LEFT,null);
+  });
+  it('swipe action right',() => {
+    component.swipe(component.SWIPE_ACTION.RIGHT,null);
+  })
+  it('swipe action left',() => {
+  component.swipe(component.SWIPE_ACTION.LEFT,null);
   })
 });

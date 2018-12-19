@@ -37,6 +37,8 @@ import { CallbackComponent } from '../callback/callback/callback.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../../environments/environment';
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
   declarations: [
     RideswipeComponent,
@@ -69,6 +71,7 @@ import { environment } from '../../environments/environment';
     NgbModule,
     HttpClientModule,
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    NgxSpinnerModule
   ],
   providers: [
     NgbActiveModal,

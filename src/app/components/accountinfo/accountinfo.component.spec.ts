@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { Role } from '../../models/role.model';
 import {APP_BASE_HREF} from '@angular/common';
+import { ContactInfo } from '../../models/contact-info.model';
 
 describe('AccountinfoComponent', () => {
   let component: AccountinfoComponent;
@@ -52,6 +53,7 @@ describe('AccountinfoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
   it('should "Create a Car"!', () => {
     component.carMake = 'Toyoda';
     component.carModel = 'Corolla';
@@ -72,8 +74,7 @@ describe('AccountinfoComponent', () => {
       photoUrl: "imgprofile",
       address: "12345 Pine Street, VA",
       office: '/offices/' + 1,
-      dayStart: 0,
-      startTime: 0, //adding non-existent element
+      startTime: 0,
       batchEnd: new Date().toISOString(),
       cars: [],
       active: 'ACTIVE',
@@ -83,4 +84,52 @@ describe('AccountinfoComponent', () => {
     }
     expect(component.userObject).toBeTruthy();
   });
+
+  // should same spec test both add and removeContact?
+  it('addContact should push ContactInfo object into array', () => { 
+    component.addContact();
+    const contact: ContactInfo = {
+      id: null,
+      type: null,
+      info: null
+    }
+    expect(component.contactInfoArray.pop()).toEqual(contact);
+  })
+
+  it('removeContact should splice ContactInfo object from array', () => {
+    const contact: ContactInfo = {
+      id: null,
+      type: null,
+      info: null
+    }
+    component.contactInfoArray.push(contact);
+    expect(component.contactInfoArray).toContain(contact);
+    component.removeContact(contact);
+    expect(component.contactInfoArray).not.toContain(contact);
+  })
+
+  xit('isRider should set role as rider', () => {
+    
+    /* from login.component.spec
+    component.userEmail = 'notrealuser';
+    component.userPass = 'notrealpass';
+    fixture.debugElement.injector.get(LoginComponent).login();
+
+    fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
+      expect(errorMessage).toBe('Incorrect email or password.');
+      done();
+    });
+    */
+    component.isRider(); // will throw without a DOM
+    expect(component.roleObject).toBe(Role.Rider);
+  });
+
+  xit('invalid password should display a message', () => {
+    // Can Jasmine test DOM manipulation?
+    expect(false).toBe(true);
+  })
 });
