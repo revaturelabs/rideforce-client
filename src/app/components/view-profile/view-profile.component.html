@@ -164,7 +164,13 @@
                 </div>
               </div>
               <!-- back-end can only handle 225 characters -->
-              <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required maxlength="225"></textarea>
+              <div>
+              <div *ngIf="existingBioStatus">
+                <textarea type="text" class="form-control" rows="4" #bioInput required maxlength="225">No Biography Added.</textarea>
+              </div>
+              <div *ngIf="!existingBioStatus">
+                <textarea type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
+              </div>              
               <br>
 
               <div class="input-group mb-3">
@@ -174,10 +180,7 @@
               	</div>
               </div>
               <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span id="basic-addon1" style="padding-right: 95px"><h3>Contact Info</h3></span>
                   
-                </div>
                 <!-- to do: Contact info list -->
                 <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
              <!--     <div style="padding-left: 20px">
@@ -187,7 +190,8 @@
                 </div>
                 -->
               </div>
-
+              <button type="button" class="btn btn-success" (click)="updateBio(bioInput.value)">Submit</button>
+            </div>
               <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
                 <div class="input-group-prepend">
                   <div class="input-group-text" style="padding-right: 100px">
@@ -256,77 +260,8 @@
           </ng-template>
         </ngb-tab>
       </div>
-      <div *ngIf="authService.isAdmin()" label="CONFIRMATION div">
-        <ngb-tab title="View Users" id="4">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-            <br>
-            <h2>View Users</h2>
-            <table class="table table-striped table-bordered table-hover table-sm">
-              <thead>
-                <tr>
-                  <th>User ID</th>
-                  <th>User's Name</th>
-                  <th>User Email</th>
-                  <th>User Role</th>
-                  <th> </th>
-                  <th> </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let user of users">
-                  <td>{{ user.id }}</td>
-                  <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-                  <td>{{ user.email }}</td>
-                  <td>{{ user.role }}</td>
-                  <td><button *ngIf="user.role !== 'ADMIN'" class="btn btnEdit" (click)="makeAdmin(user.id)">Make Admin</button>
-                    <button *ngIf="user.role === 'DRIVER' || user.role === 'RIDER'" class="btn btn-info" (click)="makeTrainer(user.id)">Make Trainer</button>
-                    <button *ngIf="user.role === 'TRAINER'" class="btn btn-info" (click)="makeRider(user.id)">Make Rider</button>
-                  </td>
-                  <td>
-                    <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable Account <i class="fas fa-user-check"></i></button>
-                    <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-      <div *ngIf="currentRole === 'TRAINER'" label="TRAINER div">
-          <ngb-tab title="View Associates" id="5">
-            <ng-template ngbTabContent>
-              <div class="container-fluid">
-              <br>
-              <h2>View Associates</h2>
-              <table class="table table-striped table-bordered table-hover table-sm">
-                <thead>
-                  <tr>
-                    <th>User ID</th>
-                    <th>User's Name</th>
-                    <th>User Email</th>
-                    <th>User Role</th>
-                    <th> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let user of users">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.role }}</td>
-                    <td>
-                      <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable Account <i class="fas fa-user-check"></i></button>
-                      <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              </div>
-            </ng-template>
-          </ngb-tab>
-        </div>
+      
+      
     </ngb-tabset>
   </div>
 </div>

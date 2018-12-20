@@ -168,6 +168,34 @@ export class UserControllerService {
       ).toPromise();
   }
 
+  updateBio(bioInput: string): Promise<User> {
+    const body = {
+      firstName: sessionStorage.getItem('firstName'),
+      lastName: sessionStorage.getItem('lastName'),
+      email: sessionStorage.getItem('userEmail'),
+      photoUrl: null,
+      password: sessionStorage.getItem('userPassword'),
+      role: sessionStorage.getItem('role'),
+      address: sessionStorage.getItem('address'),
+      batchEnd: new Date(sessionStorage.getItem('batchEnd')),
+      startTime: null,
+      active: sessionStorage.getItem('active'),
+      bio: bioInput
+    };
+
+    return this.http
+      .put<User>(environment.apiUrl + `/users/${sessionStorage.getItem('id')}`, body)
+      .pipe(
+        tap(updated => {
+          // We need to make sure that we refresh the current user if that's the
+          // one that was updated.
+          if (this.currentUser && this.currentUser.id === updated.id) {
+            this.currentUser = updated;
+          }
+        })
+      ).toPromise();
+  }
+
   /**
    * Updates the password of the user with the given ID.
    *

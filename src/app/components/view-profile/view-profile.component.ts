@@ -4,6 +4,7 @@ import { User } from '../../models/user.model';
 import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
 import { constants } from 'fs';
+import { ContactInfo } from '../../models/contact-info.model';
 
 
 /**
@@ -38,6 +39,8 @@ export class ViewProfileComponent implements OnInit {
   /** The day the User's batch ends*/
   batchEnd: any;
 
+  contactInfoArray: ContactInfo[] = [];
+
   /** Whether the user can make changes (Currently not used) */
   canEdit = false;
   /** List of offices held by the user */
@@ -46,10 +49,14 @@ export class ViewProfileComponent implements OnInit {
   officeObject: Office;
   /** User's active state */
   active: string;
+  existingBio: string;
+  existingBioStatus: boolean = false;
   /**
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
+    this.existingBio = sessionStorage.getItem('bio');
+    this.changeExistingBioStatus();
     this.firstName = sessionStorage.getItem("firstName");
     this.lastName = sessionStorage.getItem("lastName");
     this.username = sessionStorage.getItem("userEmail");
@@ -245,4 +252,29 @@ export class ViewProfileComponent implements OnInit {
   tabSelect($event){
     console.log($event);
   }
+
+  /** Sets up contact information */
+  addContact(): void {
+    const contact: ContactInfo = {
+      id: null,
+      type: null,
+      info: null
+    };
+
+    this.contactInfoArray.push(contact);
+  }
+
+  updateBio(bioInput: string){
+    this.userService.updateBio(bioInput);
+    sessionStorage.setItem('bio', bioInput);
+    location.reload(true);
+    this.existingBio = bioInput;
+  }
+
+  changeExistingBioStatus() {
+    if(this.existingBioStatus != undefined){
+      this.existingBioStatus = true;
+    }
+  }
+
 }
