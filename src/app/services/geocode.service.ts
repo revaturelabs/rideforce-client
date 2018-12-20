@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 
 /**
  * Provides Specific geolocation services from Google maps
@@ -11,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class GeocodeService {
 
   dev: boolean = false;
-  endpoint: string = this.dev ? 'http://localhost:3333/location/?address=' : 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222/location/?address=';
+  endpoint: string = this.dev ? 'http://localhost:3333/location/?address=' : environment.apiUrl + '/location/?address=';
 
   /**
    * Sets up the Service with a Google Maps object
