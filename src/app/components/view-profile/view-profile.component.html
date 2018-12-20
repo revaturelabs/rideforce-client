@@ -1,6 +1,6 @@
 <br>
 <div class="form-group row">
-  <div class="col-1"></div>
+  <div class="col-5"></div>
   <div class="col-lg-4 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
       <div label="VIEW PROFILE div">
@@ -46,7 +46,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Email</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."
+                <input type="email" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."
                   disabled>
               </div>
               <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
@@ -54,7 +54,7 @@
                   Email cannot be empty
                 </div>
                 <div *ngIf="uName.errors.maxLength">
-                  Email cannot be more than 15 characters
+                  Email cannot be more than 25 characters
                 </div>
               </div>
 
@@ -76,8 +76,7 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1 ">Confirm</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" id="confirmPassword" required
-                  disabled>
+                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" id="confirmPassword" required disabled>
               </div>
               <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
                 <div *ngIf="password != passwordConfirm">
@@ -161,29 +160,46 @@
               <br>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">About You</span>
+                  <span id="basic-addon1"><h3>About You</h3></span>
                 </div>
               </div>
-              <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required></textarea>
+              <!-- back-end can only handle 225 characters -->
+              <div>
+              
+              <div>
+                <textarea type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
+              </div>              
               <br>
-
+<!-- Broke image upload into its own component
               <div class="input-group mb-3">
-                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>
-                <input class="profile-pic" type="file" name="pic" accept="image/*" (change)="selectFile($event)">
+                <div class="padBot">
+                <span id="basic-addon1">Profile Picture</span>
+                <input type="file" name="pic" accept="image/*" (change)="selectFile($event)">
+              	</div>
               </div>
               <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1" style="padding-right: 95px">Contact Info</span>
-                </div>
+                  
+                <!-- to do: Contact info list -->
+                <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
+             <!--     <div style="padding-left: 20px">
+                  <button class="btn" (click)="addContact()">
+                    <span aria-hidden="true"></span>
+                  </button>   
+                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>
+                <input #imageInput class="profile-pic" type="file" name="pic" accept="image/*" (change)="selectFile(imageInput)">
+              </div> -->
+              <div>
+                <app-image-upload></app-image-upload>
+              </div>
+              <div class="input-group mb-3">
                 <!-- to do: Contact info list -->
                 <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
                 <div style="padding-left: 20px">
-                  <button class="btn" (click)="addContact()">
-                    <span aria-hidden="true"></span>
-                  </button>
                 </div>
+                -->
               </div>
-
+              <button type="button" class="btn btn-success" (click)="updateBio(bioInput.value)">Submit</button>
+            </div>
               <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
                 <div class="input-group-prepend">
                   <div class="input-group-text" style="padding-right: 100px">
@@ -252,76 +268,8 @@
           </ng-template>
         </ngb-tab>
       </div>
-      <div *ngIf="authService.isAdmin()" label="CONFIRMATION div">
-        <ngb-tab title="View Users" id="4">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-            <br>
-            <h2>View Users</h2>
-            <table class="table table-striped table-bordered table-hover table-sm">
-              <thead>
-                <tr>
-                  <th>User ID</th>
-                  <th>User's Name</th>
-                  <th>User Email</th>
-                  <th>User Role</th>
-                  <th> </th>
-                  <th> </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let user of users">
-                  <td>{{ user.id }}</td>
-                  <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-                  <td>{{ user.email }}</td>
-                  <td>{{ user.role }}</td>
-                  <td><button *ngIf="user.role !== 'ADMIN'" class="btn btnEdit" (click)="makeAdmin(user.id)">Make Admin</button>
-                    <button *ngIf="user.role === 'DRIVER' || user.role === 'RIDER'" class="btn btn-info" (click)="makeTrainer(user.id)">Make Trainer</button>
-                  </td>
-                  <td>
-                    <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable Account <i class="fas fa-user-check"></i></button>
-                    <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-      <div *ngIf="currentRole === 'TRAINER'" label="TRAINER div">
-          <ngb-tab title="View Associates" id="5">
-            <ng-template ngbTabContent>
-              <div class="container-fluid">
-              <br>
-              <h2>View Associates</h2>
-              <table class="table table-striped table-bordered table-hover table-sm">
-                <thead>
-                  <tr>
-                    <th>User ID</th>
-                    <th>User's Name</th>
-                    <th>User Email</th>
-                    <th>User Role</th>
-                    <th> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let user of users">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.role }}</td>
-                    <td>
-                      <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable Account <i class="fas fa-user-check"></i></button>
-                      <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              </div>
-            </ng-template>
-          </ngb-tab>
-        </div>
+      
+      
     </ngb-tabset>
   </div>
 </div>

@@ -37,6 +37,8 @@ export interface User {
    */
   batchEnd: any;
   
+  // dayStart: number;
+  
   startTime: number;
   /**
    *  The user's about me that has a character limit of 255

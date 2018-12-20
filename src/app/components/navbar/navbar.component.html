@@ -14,13 +14,20 @@
         <a *ngIf="!session"class="nav-link text-expanded nav-text" routerLink="/login" style="padding-right:30px;">Login</a>
         <a *ngIf="role!=null&&authService.isTrainer()" class="nav-link text-expanded nav-text" routerLink="/admin" style="padding-right:30px;">Get Key</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/map" style="padding-right:30px;">Map</a>
-        <a *ngIf="session" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
-        <a *ngIf="session" class="nav-link text-expanded" routerLink="/favorites" style="padding-right:30px;">Favorites</a>
-        <a *ngIf="session" class="nav-link text-expanded" routerLink="/cars" style="padding-right:30px;">Car</a>
+        <a *ngIf="!authService.isTrainer()&&role!=null" class="nav-link text-expanded" routerLink="/rideswipe" style="padding-right:30px;">Browse</a>
+        <a *ngIf="session && role == 'DRIVER'" class="nav-link text-expanded" routerLink="/cars" style="padding-right:30px;">Car</a>
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/userProfile" style="padding-right: 30px;">Profile</a>
+        <a *ngIf="role!=null&&authService.isTrainer()" class="nav-link" routerLink="/viewUsers" style="padding-right:30px;">View Users</a>
         <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/howTo" style="padding-right:30px;">About</a>
+        
       </div>
   </div>
+
   <!-- replace this with logout0() eventually when auth0 is set up -->
   <button *ngIf="session&&!dropped" class="btn btn-secondary" (click)="logout()">Logout</button>
+
+  <div style="padding-left: 30px;">
+    <button *ngIf = "session&&isInstallable" class="btn btn-secondary" (click)="install()">Install</button>
+  </div>
+  
 </nav>

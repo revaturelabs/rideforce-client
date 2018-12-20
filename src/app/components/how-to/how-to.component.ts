@@ -18,5 +18,8 @@ export class HowToComponent implements OnInit {
    */
   ngOnInit() {
   }
+  tabSelect($event){
+    
+  }
 
 }
