@@ -72,6 +72,7 @@ export class AuthService {
           sessionStorage.setItem('userPassword', password);
           sessionStorage.setItem('active', x.active);
           sessionStorage.setItem('bio', x.bio);
+          sessionStorage.setItem('photoUrl', x.photoUrl);
           location.reload(true);
         });
       },

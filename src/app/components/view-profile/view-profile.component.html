@@ -170,7 +170,7 @@
                 <textarea type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
               </div>              
               <br>
-
+<!-- Broke image upload into its own component
               <div class="input-group mb-3">
                 <div class="padBot">
                 <span id="basic-addon1">Profile Picture</span>
@@ -185,6 +185,16 @@
                   <button class="btn" (click)="addContact()">
                     <span aria-hidden="true"></span>
                   </button>   
+                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>
+                <input #imageInput class="profile-pic" type="file" name="pic" accept="image/*" (change)="selectFile(imageInput)">
+              </div> -->
+              <div>
+                <app-image-upload></app-image-upload>
+              </div>
+              <div class="input-group mb-3">
+                <!-- to do: Contact info list -->
+                <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
+                <div style="padding-left: 20px">
                 </div>
                 -->
               </div>
