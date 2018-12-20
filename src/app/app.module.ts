@@ -35,9 +35,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
     CallbackComponent,
     // SearchUsersComponent,
     // ViewUsersComponent,
-    SearchUsersComponent,
-    ViewUsersComponent,
-    ImageUploadComponent,
+    // ImageUploadComponent,
     // DateFormatPipe,
   ],
   imports: [

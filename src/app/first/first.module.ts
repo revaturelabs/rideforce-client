@@ -40,6 +40,7 @@ import { environment } from '../../environments/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ViewUsersComponent } from '../components/view-users/view-users.component';
 import { SearchUsersComponent } from '../components/search-users/search-users.component';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { SearchUsersComponent } from '../components/search-users/search-users.co
     CarRegistrationComponent,
     ViewProfileComponent,
     SearchUsersComponent,
-    ViewUsersComponent
+    ViewUsersComponent,
+    ImageUploadComponent
     // DateFormatPipe,
   ],
   imports: [
