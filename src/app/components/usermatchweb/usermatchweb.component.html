@@ -40,7 +40,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="user.face=='back' || user.face=='back-front'" (click)="flipCard(user)">
+          <div *ngIf="user.face=='back' || user.face=='back-front'" (click)="flipCard(user)" style="overflow: auto">
             <div class="card-body" style="transform: rotateY(180deg); overflow:auto">
               <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
               <p class="card-text">{{user.user.address}}</p>

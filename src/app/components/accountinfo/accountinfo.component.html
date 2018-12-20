@@ -29,7 +29,7 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text " id="basic-addon1 ">Last Name</span>
                 </div>
-                <input type="text" class="form-control" pattern="[a-zA-Z]" [(ngModel)]="lastName" #lastname="ngModel" required>
+                <input type="text" class="form-control" pattern="[a-zA-Z]*" [(ngModel)]="lastName" #lastname="ngModel" required>
               </div>
               <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
                 <div *ngIf="lastname.errors.required">

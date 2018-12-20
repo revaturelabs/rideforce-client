@@ -337,6 +337,7 @@ export class AccountinfoComponent implements OnInit {
         sessionStorage.setItem("userPassword", x.password);
         sessionStorage.setItem("address", x.address);
         sessionStorage.setItem("role", x.role);
+        sessionStorage.setItem('bio', x.bio);
         this.router.navigate(['/landing']);
       });
 
