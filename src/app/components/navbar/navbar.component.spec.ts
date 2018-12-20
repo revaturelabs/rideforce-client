@@ -17,8 +17,7 @@ describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let auth: AuthService;
-  const mockRouter = jasmine.createSpyObj('Router', ['navigate']);
-  // let fixture: ComponentFixture<NavbarComponent>;
+  //const mockRouter = jasmine.createSpyObj('Router', ['navigate']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -69,10 +68,10 @@ describe('NavbarComponent', () => {
   // });
 
   // basic dropdown test
-  xit ('should toggle dropdown successfully', () => {
-    component.dropped == true;
+  it ('should toggle dropdown successfully', () => {
+    console.log(component.dropped);
     component.drop();
     console.log(component.dropped);
-    expect(component.dropped).toBeFalsy();
+    expect(component.dropped).toBeTruthy();
   })
 });

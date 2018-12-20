@@ -129,7 +129,6 @@ describe('AccountinfoComponent', () => {
   });
 
   xit('invalid password should display a message', () => {
-    // Can Jasmine test DOM manipulation?
     expect(false).toBe(true);
   })
 });
