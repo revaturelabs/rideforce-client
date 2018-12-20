@@ -67,4 +67,12 @@ describe('NavbarComponent', () => {
   //   component.sessionCheck();
   //   expect(component.session).toBeFalsy();
   // });
+
+  // basic dropdown test
+  xit ('should toggle dropdown successfully', () => {
+    component.dropped == true;
+    component.drop();
+    console.log(component.dropped);
+    expect(component.dropped).toBeFalsy();
+  })
 });
