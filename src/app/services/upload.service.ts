@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 // import * as S3 from 'aws-sdk/clients/s3';
 
 /**
@@ -40,12 +41,20 @@ export class UploadService {
    * @param file - the file to upload to the S3 service
    * @returns {string} - the url used for the file
    */
-  uploadfile(file: File): string {
-    const endpoint = 'http://localhost:5555/storage';
-    this.http.post(endpoint, file).toPromise().then(str => {
-      console.log("returned s3 bucket storage: " + str);
-      this.url = str;
-      return;
+
+  uploadfile(image: File): Observable<Object> {
+    const formData = new FormData();
+    const fileName = `user-${sessionStorage.getItem('id')}${image.name.substr(image.name.length - 4)}`;
+    console.log("FILENAME    ------ " + fileName)
+    formData.append('image', image, fileName);
+    const endpoint = 'http://localhost:2222/storage/uploadFile';
+    // const payload = {file: formData};
+    // const body = JSON.stringify(payload);
+    // console.log("post body: " + JSON.stringify(formData))
+    return this.http.post(endpoint, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data; boundary=whatever whatever--'
+      }
     });
   //  const params = {
   //     Bucket: 'rydeforce',
@@ -71,7 +80,7 @@ export class UploadService {
   //     console.log('upload failed');
   //   }
 
-    console.log('BEFORE RETURNING, this.url is: ' + this.url);
-    return this.url;
+    // console.log('BEFORE RETURNING, this.url is: ' + this.url);
+    // return this.url;
   }
 }

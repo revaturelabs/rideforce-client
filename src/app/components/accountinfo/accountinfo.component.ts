@@ -267,10 +267,10 @@ export class AccountinfoComponent implements OnInit {
   /**
    * Uploads image to the storage
    */
-  upload() {
-    const file = this.selectedFiles.item(0);
-    this.imageSrc = this.uploadService.uploadfile(file);
-  }
+  // upload() {
+  //   const file = this.selectedFiles.item(0);
+  //   this.imageSrc = this.uploadService.uploadfile(file);
+  // }
 
   /**
    * Manage the token

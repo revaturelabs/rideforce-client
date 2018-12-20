@@ -35,6 +35,7 @@ import { CallbackComponent } from './callback/callback/callback.component';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { ViewUsersComponent } from './components/view-users/view-users.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 // import { DateFormatPipe } from './pipes/date-format.pipe';
 
 /**
@@ -62,6 +63,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CallbackComponent,
     SearchUsersComponent,
     ViewUsersComponent,
+    ImageUploadComponent,
     // DateFormatPipe,
   ],
   imports: [
