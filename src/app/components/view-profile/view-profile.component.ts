@@ -56,7 +56,7 @@ export class ViewProfileComponent implements OnInit {
   */
   ngOnInit() {
     this.existingBio = sessionStorage.getItem('bio');
-    this.changeExistingBioStatus();
+    //this.changeExistingBioStatus();
     this.firstName = sessionStorage.getItem("firstName");
     this.lastName = sessionStorage.getItem("lastName");
     this.username = sessionStorage.getItem("userEmail");

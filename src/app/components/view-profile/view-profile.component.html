@@ -165,10 +165,8 @@
               </div>
               <!-- back-end can only handle 225 characters -->
               <div>
-              <div *ngIf="existingBioStatus">
-                <textarea type="text" class="form-control" rows="4" #bioInput required maxlength="225">No Biography Added.</textarea>
-              </div>
-              <div *ngIf="!existingBioStatus">
+              
+              <div>
                 <textarea type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
               </div>              
               <br>
