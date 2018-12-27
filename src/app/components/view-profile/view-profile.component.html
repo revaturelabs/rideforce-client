@@ -163,31 +163,12 @@
                   <span id="basic-addon1"><h3>About You</h3></span>
                 </div>
               </div>
-              <!-- back-end can only handle 225 characters -->
               <div>
               
               <div>
                 <textarea type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
               </div>              
               <br>
-<!-- Broke image upload into its own component
-              <div class="input-group mb-3">
-                <div class="padBot">
-                <span id="basic-addon1">Profile Picture</span>
-                <input type="file" name="pic" accept="image/*" (change)="selectFile($event)">
-              	</div>
-              </div>
-              <div class="input-group mb-3">
-                  
-                <!-- to do: Contact info list -->
-                <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
-             <!--     <div style="padding-left: 20px">
-                  <button class="btn" (click)="addContact()">
-                    <span aria-hidden="true"></span>
-                  </button>   
-                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>
-                <input #imageInput class="profile-pic" type="file" name="pic" accept="image/*" (change)="selectFile(imageInput)">
-              </div> -->
               <div>
                 <app-image-upload></app-image-upload>
               </div>
@@ -196,7 +177,6 @@
                 <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
                 <div style="padding-left: 20px">
                 </div>
-                -->
               </div>
               <button type="button" class="btn btn-success" (click)="updateBio(bioInput.value)">Submit</button>
             </div>
@@ -211,10 +191,6 @@
                   <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
                 </div>
               </div>
-              <!-- <div>
-                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="bioPrevious()">Previous</button></span>
-                <span> <button class="btn btnNextPrevious" (click)="bioNext()">Next</button></span>
-              </div> -->
             </div>
           </ng-template>
         </ngb-tab>
@@ -226,12 +202,6 @@
               <br>
               <h2>Car Information:</h2>
               <br>
-              <!-- <div class="input-group mb-3">
-                <div class="input-group" id="button-addon3">
-                  <span class="padRight"><button class="btn btnAddCar" type="button" (click)="isDriver()">Driver</button></span>
-                  <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>
-                </div>
-              </div> -->
               <br>
               <div>
                 <div class="input-group mb-3">
@@ -255,15 +225,6 @@
                   <input type="number" min="1950" max="5000" class="form-control" [(ngModel)]="carYear">
                 </div>
               </div>
-              <!-- <div>
-                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
-                <span> <button class="btn btnNextPrevious" (click)="edit()">Edit</button></span>
-              </div> -->
-              <!-- <div style="padding-top: 20px">
-                <div *ngIf="!requiredCarFields" class="alert alert-danger">
-                  Please select Driver or Rider
-                </div>
-              </div> -->
             </div>
           </ng-template>
         </ngb-tab>
