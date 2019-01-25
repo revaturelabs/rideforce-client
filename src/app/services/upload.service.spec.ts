@@ -10,8 +10,8 @@ describe('UploadService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get an S3 bucket', () => {
-    const service: UploadService = TestBed.get(UploadService);
-    expect(service.getS3Bucket()).toBeTruthy();
-  });
+  // it('should get an S3 bucket', () => {
+  //   const service: UploadService = TestBed.get(UploadService);
+  //   expect(service.getS3Bucket()).toBeTruthy();
+  // });
 });
