@@ -53,6 +53,10 @@ describe('AccountinfoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should return mobile false', () => {
+    expect(component.mobile).toBeFalsy();
+  });
   
   it('should "Create a Car"!', () => {
     component.carMake = 'Toyoda';
@@ -83,6 +87,14 @@ describe('AccountinfoComponent', () => {
       bio: "My Bio"
     }
     expect(component.userObject).toBeTruthy();
+    component.createUserObject();
+    expect(component.userObject.firstName).toEqual('John');
+    expect(component.userObject.lastName).toEqual('Doe');
+    expect(component.userObject.email).toEqual('jdoe@gmail.com');
+    expect(component.userObject.password).toEqual('jdopass');
+    expect(component.userObject.address).toEqual('12345 Pine Street, VA');
+    // not going to test all of it.
+
   });
 
   // should same spec test both add and removeContact?
@@ -130,5 +142,9 @@ describe('AccountinfoComponent', () => {
 
   xit('invalid password should display a message', () => {
     expect(false).toBe(true);
-  })
+  });
+
+  it('should go through test()', () => {
+    component.test;
+  });
 });
