@@ -5,6 +5,8 @@ import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
 import { constants } from 'fs';
 import { ContactInfo } from '../../models/contact-info.model';
+import { Login } from '../../classes/login';
+import {Role} from '../../models/role.model'
 
 
 /**
@@ -51,22 +53,29 @@ export class ViewProfileComponent implements OnInit {
   active: string;
   existingBio: string;
   existingBioStatus: boolean = false;
+
+  principal: Login;
   /**
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
-    this.existingBio = sessionStorage.getItem('bio');
-    //this.changeExistingBioStatus();
-    this.firstName = sessionStorage.getItem("firstName");
-    this.lastName = sessionStorage.getItem("lastName");
-    this.username = sessionStorage.getItem("userEmail");
-    this.address2 = sessionStorage.getItem("address");
-    this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
-    this.getOffices();
-    this.getUsers();
-    this.getRole();
-    this.getState();
-    this.filteredUsers = this.users;
+    this.authService.principal.subscribe(user => {
+      this.principal = user;
+      if (this.principal) {
+        //this.existingBio = sessionStorage.getItem('bio');
+        //this.changeExistingBioStatus();
+        //this.firstName = sessionStorage.getItem("firstName");
+        //this.lastName = sessionStorage.getItem("lastName");
+        //this.username = sessionStorage.getItem("userEmail");
+        //this.address2 = sessionStorage.getItem("address");
+        //this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
+        this.getOffices();
+        this.getUsers();
+        this.getRole();
+        this.getState();
+        this.filteredUsers = this.users;
+      }
+    });
   }
 
   /**
@@ -96,12 +105,18 @@ export class ViewProfileComponent implements OnInit {
    */
   submitChanges() {
 
-    sessionStorage.setItem('firstName', this.firstName);
-    sessionStorage.setItem('lastName', this.lastName);
-    sessionStorage.setItem('userEmail', this.username);
-    sessionStorage.setItem('address', this.address2);
-    sessionStorage.setItem('batchEnd', this.batchEnd);
-    sessionStorage.setItem('role', this.currentRole);
+    //sessionStorage.setItem('firstName', this.firstName);
+    //sessionStorage.setItem('lastName', this.lastName);
+    //sessionStorage.setItem('userEmail', this.username);
+    //sessionStorage.setItem('address', this.address2);
+    //sessionStorage.setItem('batchEnd', this.batchEnd);
+    //sessionStorage.setItem('role', this.currentRole);
+    this.principal.firstName = this.firstName;
+    this.principal.lastName = this.lastName;
+    this.principal.email = this.username;
+    this.principal.address = this.address2;
+    this.principal.batchEnd = this.batchEnd;
+    this.principal.role = Role[this.currentRole];
     //if(document.getElementById("activeState")) 
     this.userService.update().then();
     window.location.reload(true);
@@ -111,11 +126,11 @@ export class ViewProfileComponent implements OnInit {
    * Enables limited ability to modify the User's role in the system
    */
   switchRole() {
-    if (sessionStorage.getItem('role') === 'DRIVER') {
-      sessionStorage.setItem('role', 'RIDER');
+    if (this.principal.role === 'DRIVER') {
+      this.principal.role= Role['RIDER'];
       this.getRole();
-    } else if (sessionStorage.getItem('role') === 'RIDER') {
-      sessionStorage.setItem('role', 'DRIVER');
+    } else if (this.principal.role === 'RIDER') {
+      this.principal.role= Role['DRIVER'];
       this.getRole();
     } else {
       console.log('nope');
@@ -123,11 +138,11 @@ export class ViewProfileComponent implements OnInit {
   }
 
   switchState() {
-    if (sessionStorage.getItem('active') === 'ACTIVE') {
-      sessionStorage.setItem('active', 'INACTIVE');
+    if (this.principal.active === 'ACTIVE') {
+      this.principal.active = 'INACTIVE';
       this.getState();
-    } else if (sessionStorage.getItem('active') === 'INACTIVE') {
-      sessionStorage.setItem('active', 'ACTIVE');
+    } else if (this.principal.active === 'INACTIVE') {
+      this.principal.active = 'ACTIVE';
       this.getState();
     } else {
       console.log("Invalid State");
@@ -148,11 +163,11 @@ export class ViewProfileComponent implements OnInit {
    * Sets up the User's current role in the system
    */
   getRole() {
-    this.currentRole = sessionStorage.getItem('role');
+    this.currentRole = this.principal.role;
   }
   currentState: string;
   getState() {
-    this.currentState = sessionStorage.getItem('active');
+    this.currentState = this.principal.active;
   }
 
   /** Holds the list of all users in the system */
@@ -162,9 +177,9 @@ export class ViewProfileComponent implements OnInit {
   /** Sets up all users in the system */
   getUsers() {
     let data;
-    if (sessionStorage.getItem('role') === 'ADMIN') {
+    if (this.principal.role === 'ADMIN') {
       this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); this.users = data; this.filteredUsers = data; });
-    } else if (sessionStorage.getItem('role') === 'TRAINER') {
+    } else if (this.principal.role === 'TRAINER') {
       this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER'); this.users = data });
     }
     this.filterUsers(" ");
@@ -216,7 +231,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   /** Revert a trainer to a user */
-  makeRider(id: number){
+  makeRider(id: number) {
     this.result = window.confirm("Are you sure you want to make this trainer a rider?");
     let role = "RIDER";
     if (this.result) {
@@ -249,7 +264,7 @@ export class ViewProfileComponent implements OnInit {
     }
   }
   // added because the dummies added stupid stuff that breaks the code
-  tabSelect($event){
+  tabSelect($event) {
     console.log($event);
   }
 
@@ -264,15 +279,17 @@ export class ViewProfileComponent implements OnInit {
     this.contactInfoArray.push(contact);
   }
 
-  updateBio(bioInput: string){
+  updateBio(bioInput: string) {
     this.userService.updateBio(bioInput);
-    sessionStorage.setItem('bio', bioInput);
+    //sessionStorage.setItem('bio', bioInput);
+    this.principal.bio = bioInput;
+    this.authService.changePrincipal(this.principal);
     location.reload(true);
     this.existingBio = bioInput;
   }
 
   changeExistingBioStatus() {
-    if(this.existingBioStatus != undefined){
+    if (this.existingBioStatus != undefined) {
       this.existingBioStatus = true;
     }
   }

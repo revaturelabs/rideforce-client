@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { AuthService} from '../../services/auth.service';
 import { Auth0Service } from '../../services/auth0.service'
+import { Login } from 'src/app/classes/login';
 // import { Router } from '@angular/router';
 
 /**
@@ -22,6 +24,8 @@ export class LandingComponent implements OnInit {
    */
   role: String;
 
+  principal : Login;
+
   /**
    * Creates the Landing Component
    * @param {UserControllerService} userService - Allows Component to utilize User Functionality
@@ -29,7 +33,8 @@ export class LandingComponent implements OnInit {
    */
   constructor(
     private auth0Service: Auth0Service,
-    private userService: UserControllerService
+    private userService: UserControllerService,
+    private auth : AuthService
     ) { }
 
   /**
@@ -41,6 +46,8 @@ export class LandingComponent implements OnInit {
         this.currentUser = data;
       }
     );
+    this.auth.principal.subscribe(user =>{
+      this.principal = user;});
     this.sessionCheck();
     this.setCurrentRole();
   }
@@ -49,7 +56,7 @@ export class LandingComponent implements OnInit {
    * Checks to see if there is a session or not
    */
   sessionCheck() {
-    this.session = sessionStorage.length > 0;
+    this.session = this.principal===null;
   }
 
   /**
@@ -63,7 +70,7 @@ export class LandingComponent implements OnInit {
    * Sets the role of the Current user to determine what functionality should be available
    */
   setCurrentRole() {
-    this.role = sessionStorage.getItem('role');
+    this.role = this.principal.role;
   }
 
 }

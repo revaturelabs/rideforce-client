@@ -1,13 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { User } from '../../app/models/user.model';
-import { Observable, of } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { tap, map } from 'rxjs/operators';
-import { UserControllerService } from './api/user-controller.service';
-import { TokenStorage } from './../utils/token.storage';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { TokenStorage } from './../utils/token.storage';
+import { Login } from '../classes/login';
+import { UserControllerService } from './api/user-controller.service';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * Allows Users to authenticate themselves with the server
@@ -16,6 +15,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  private principalSource = new BehaviorSubject(new Login());
+  principal = this.principalSource.asObservable();
 
   /**
    * Sets up the Authentication service with the required dependencies
@@ -61,18 +62,12 @@ export class AuthService {
       (x) => {
         console.log('Got user from Authenticate (Promise mode)');
         this.userService.getUserByEmail(email).then((x) => {
-          console.log('Gotten email of user');
-          sessionStorage.setItem('id', x.id.toString());
-          sessionStorage.setItem('firstName', x.firstName);
-          sessionStorage.setItem('lastName', x.lastName);
-          sessionStorage.setItem('role', x.role);
-          sessionStorage.setItem('address', x.address);
-          sessionStorage.setItem('batchEnd', x.batchEnd);
-          sessionStorage.setItem('userEmail', email);
-          sessionStorage.setItem('userPassword', password);
-          sessionStorage.setItem('active', x.active);
-          sessionStorage.setItem('bio', x.bio);
-          sessionStorage.setItem('photoUrl', x.photoUrl);
+          console.log('Retrieved email of user');
+          this.userService.getUserById(x.id).pipe(map(
+            resp =>{
+              const l : Login = resp as Login;
+              this.changePrincipal(l);
+            }));
           location.reload(true);
         });
       },
@@ -98,30 +93,27 @@ export class AuthService {
       }
     );
   }
-
-
-  
   /**
    * Returns whether the current user is logged in as a Trainer
    */
   isTrainer(): boolean {
-    return sessionStorage.getItem('role') == "TRAINER" || this.isAdmin();
+    
+    return this.principalSource.value.role == "TRAINER" || this.isAdmin();
   }
-
-  
   /**
    * Returns whether the current user is logged in as an Admin
    */
   isAdmin(): boolean {
-    return sessionStorage.getItem('role') == "ADMIN";
+    return this.principalSource.value.role == "ADMIN";
   }
-
-  
   /**
    * Logs the user out of the service
    */
   logout() {
-    sessionStorage.clear();
+    this.changePrincipal(null);
+  }
+  changePrincipal(p : Login){
+    this.principalSource.next(p);
   }
 
 }
