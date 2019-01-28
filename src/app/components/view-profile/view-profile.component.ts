@@ -117,6 +117,7 @@ export class ViewProfileComponent implements OnInit {
     this.principal.address = this.address2;
     this.principal.batchEnd = this.batchEnd;
     this.principal.role = Role[this.currentRole];
+    this.authService.changePrincipal(this.principal);
     //if(document.getElementById("activeState")) 
     this.userService.update().then();
     window.location.reload(true);
@@ -128,9 +129,11 @@ export class ViewProfileComponent implements OnInit {
   switchRole() {
     if (this.principal.role === 'DRIVER') {
       this.principal.role= Role['RIDER'];
+      this.authService.changePrincipal(this.principal);
       this.getRole();
     } else if (this.principal.role === 'RIDER') {
       this.principal.role= Role['DRIVER'];
+      this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
       console.log('nope');
@@ -140,9 +143,11 @@ export class ViewProfileComponent implements OnInit {
   switchState() {
     if (this.principal.active === 'ACTIVE') {
       this.principal.active = 'INACTIVE';
+      this.authService.changePrincipal(this.principal);
       this.getState();
     } else if (this.principal.active === 'INACTIVE') {
       this.principal.active = 'ACTIVE';
+      this.authService.changePrincipal(this.principal);
       this.getState();
     } else {
       console.log("Invalid State");

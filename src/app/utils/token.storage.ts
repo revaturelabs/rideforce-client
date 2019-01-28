@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Login } from '../classes/login';
 
 /** Used to access the Authentication token in our session storage */
 const TOKEN_KEY = 'authToken';
@@ -11,14 +13,20 @@ export class TokenStorage {
   /**
    * @ignore
    */
-  constructor() { }
+  principal : Login;
+  constructor(private auth: AuthService) { 
+    auth.principal.subscribe(user => {
+      this.principal = user;});
+  }
 
   /**
    * Saves the provided authentication token to the session
    * @param {string} token - the authentication token to save
    */
   public saveToken(token: string) {
-    sessionStorage.setItem(TOKEN_KEY, token);
+    this.principal.authToken = token;
+    this.auth.changePrincipal(this.principal);
+    //sessionStorage.setItem(TOKEN_KEY, token);
   }
 
   /**
@@ -26,6 +34,6 @@ export class TokenStorage {
    * @returns {string} - the authentication token of the current session
    */
   public getToken(): string {
-    return sessionStorage.getItem(TOKEN_KEY);
+    return this.principal.authToken;
   }
 }

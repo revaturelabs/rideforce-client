@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadService } from '../services/upload.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Login } from '../classes/login';
+import { AuthService } from '../services/auth.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -15,8 +17,16 @@ export class ImageUploadComponent {
 
   selectedFile: File = null;
   imageUploadProgress: string = '0';
+  principal : Login;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private auth : AuthService) { }
+
+Oninit(){
+  this.auth.principal.subscribe(user =>{
+    this.principal = user;
+  })
+}
 
   onFileSelect(event) {
     this.imageUploadProgress = '0%';
@@ -43,10 +53,10 @@ export class ImageUploadComponent {
     }
     onFileUpload() {
       const fd = new FormData();
-      const fileName = `user-${sessionStorage.getItem('id')}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
+      const fileName = `user-${this.principal.id}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
       console.log("FILENAME    ------ " + fileName)
       fd.append('file', this.selectedFile, fileName);
-      fd.append('user', sessionStorage.getItem('id'));
+      fd.append('user', this.principal.id.toString());
       this.http.post('http://localhost:2222/storage/uploadFile', fd, {
         reportProgress: true,
         observe: 'events'

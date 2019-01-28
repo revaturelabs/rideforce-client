@@ -23,6 +23,11 @@ export class Login implements User {
     contactInfo: Link<ContactInfo>[];
     active: string;
     role: Role;
-    token: string;
+    authToken: string;
+    access_token: string;
+    api_token: string;
+    expires_at: any;
+    scopes: any;
+
 
 }

@@ -5,6 +5,8 @@ import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
+import { Login } from 'src/app/classes/login';
+import { AuthService } from 'src/app/services/auth.service';
 
 /**
  * Used as a more complex data structure for holding info on liked users
@@ -43,6 +45,8 @@ export class LikesmatchwebComponent implements OnInit {
      * Array of data structures that hold list of the User's liked drivers
      */
     likecards: UserCard[] = [];
+    
+    principal : Login;
 
     /**
      * Sets up the Component for Like demonstrations
@@ -53,7 +57,8 @@ export class LikesmatchwebComponent implements OnInit {
     constructor(
         private matchService: MatchingControllerService, 
         private userService: UserControllerService,
-        private route: Router
+        private route: Router,
+        private authService: AuthService
         ) { }
 
     /**
@@ -65,7 +70,9 @@ export class LikesmatchwebComponent implements OnInit {
      * Initializes the Component by populating the swipcards array with data on liked drivers
      */
     ngOnInit() {
-        if (sessionStorage.length == 0)
+        this.authService.principal.subscribe(user => {
+            this.principal = user
+        if (this.principal === null)
           this.route.navigate(["/landing"]);
         this.userService.getCurrentUser().subscribe(
             data => {
@@ -124,8 +131,7 @@ export class LikesmatchwebComponent implements OnInit {
                 );
             }
         );
-
-
+    });
     }
 
 
