@@ -7,7 +7,12 @@ import { environment } from '../../environments/environment';
 import { tap, map } from 'rxjs/operators';
 import { UserControllerService } from './api/user-controller.service';
 import { TokenStorage } from './../utils/token.storage';
+import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
 import { Router } from '@angular/router';
+
+
+
+const userPool = new CognitoUserPool(environment.cognitoData);
 
 /**
  * Allows Users to authenticate themselves with the server
@@ -31,6 +36,8 @@ export class AuthService {
     private route: Router*/
   ) { }
 
+  
+
   /**
    * Attempts to log the user in
    * @param email The email address to be sent from the view to the API
@@ -48,6 +55,34 @@ export class AuthService {
           this.tokenStorage.saveToken(token);
         })
       ).toPromise();
+  }
+
+  cognitoAuthenticate(email, password) { 
+    const authenticationData = {
+      Username : email,
+      Password : password,
+    };
+    const authenticationDetails = new AuthenticationDetails(authenticationData);
+
+    const userData = {
+      Username : email,
+      Pool : userPool
+    };
+    const cognitoUser = new CognitoUser(userData);
+    
+    return Observable.create(observer => {
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function (result) {
+          //console.log(result);
+          observer.next(result);
+          observer.complete();
+        },
+        onFailure: function(err) {
+          console.log(err);
+          observer.error(err);
+        },
+      });
+    });
   }
 
   /**
@@ -99,6 +134,7 @@ export class AuthService {
     );
   }
 
+  
 
   
   /**
