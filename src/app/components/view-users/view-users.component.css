@@ -1,0 +1,11 @@
+#bg{
+    margin: 0;
+    position: absolute;
+    z-index: -1;
+    width: 95%;
+    max-height: 700px;
+}
+
+.container-fluid{
+  background:rgb(255, 255, 255,0.8);
+}
