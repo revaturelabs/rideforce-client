@@ -57,10 +57,11 @@ export class UserControllerService {
   createUser(user: User, password: string, registrationKey: string): Promise<User> {////////////////////////////////////
     return this.addUserToCognito(user.email,user.password).subscribe(
       (data) => {        
-        //get data token
+        //get id token from cognito
+        let token = data.idToken.jwtToken;
         //then actually send data to the server
         return this.http.post<User>(environment.apiUrl + '/users',
-        { user, password, registrationKey }
+        { user, token, registrationKey }
         ).toPromise();
       },
       (err) => {
