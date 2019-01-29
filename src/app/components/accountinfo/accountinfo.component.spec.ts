@@ -6,7 +6,6 @@ import { AuthService } from '../../services/auth.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { HttpHandler, HttpClient } from '@angular/common/http';
 import { NgZone } from '@angular/core';
-import { UploadService } from '../../services/upload.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { Role } from '../../models/role.model';

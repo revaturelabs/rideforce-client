@@ -10,7 +10,6 @@ import { Office } from '../../models/office.model';
 import { Role } from '../../models/role.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
-import { UploadService } from '../../services/upload.service';
 import { Router } from '@angular/router';
 
 /**
@@ -161,7 +160,6 @@ export class AccountinfoComponent implements OnInit {
   constructor(private zone: NgZone,
     private auth: AuthService,
     private userService: UserControllerService,
-    private uploadService: UploadService,
     private router: Router) {
       this.carObject = new Car();
      }

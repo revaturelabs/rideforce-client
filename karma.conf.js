@@ -26,11 +26,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-<<<<<<< HEAD
-    browsers: ['Chrome','Firefox'],
-=======
     browsers: ['Chrome', 'Firefox'],
->>>>>>> 7d9c48b97c68caef4d3882e5e18c39e40fc6f0bb
     singleRun: false
   });
 };
