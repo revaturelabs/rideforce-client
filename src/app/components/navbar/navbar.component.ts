@@ -5,6 +5,7 @@ import { Router, NavigationStart } from '@angular/router';
 import { User } from '../../models/user.model';
 import { Auth0Service } from '../../services/auth0.service';
 import { filter } from 'rxjs/operators';
+import { Login } from '../../classes/login'
 /**
  * Hosts the Component that allows users to navigate between components
  */
@@ -37,6 +38,8 @@ export class NavbarComponent implements OnInit {
   deferredInstall = null;
   isInstallable: boolean = false;
 
+  principal:Login;
+
   /**
    * Sets up the component with relevent services
    * @param {Auth0Service} auth0 - Provides Auth0 functionality
@@ -46,7 +49,7 @@ export class NavbarComponent implements OnInit {
    */
   constructor(
     private auth0: Auth0Service,
-    public authService: AuthService,//made public so it can build
+    private authService: AuthService,//made public so it can build
     private userService: UserControllerService,
     private route: Router
 
@@ -72,15 +75,25 @@ export class NavbarComponent implements OnInit {
    * Sets up the Log in Session appearence
    */
   ngOnInit() {
-    this.sessionCheck();
-    this.setCurrentRole();
+    this.authService.principal.subscribe(p =>{
+      this.principal = p;
+      if (this.principal.id > 0){
+        this.role = this.principal.role;
+        this.sessionCheck();
+      }
+      
+    });
   }
 
   /**
    * Updates session, telling if the user is logged in or not
    */
   sessionCheck() {
-    this.session = sessionStorage.length > 0;
+    if(this.principal.id > 0){
+      this.session = true;
+    }else{
+      this.session = false;
+    }
   }
   /**
    * Sets up the current user
@@ -96,9 +109,9 @@ export class NavbarComponent implements OnInit {
   /**
    * Sets the role of the Current user to determine what functionality should be available
    */
-  setCurrentRole() {
-    this.role = sessionStorage.getItem('role');
-  }
+  //setCurrentRole() {
+    //this.role = sessionStorage.getItem('role');
+ // }
 
   /**
    * Allows User to log out of their session, informing
@@ -113,7 +126,9 @@ export class NavbarComponent implements OnInit {
    * uses await/async to avoid forcing User to reload manually to see the 'log in' button after log out
    */
   async logout() {
-    sessionStorage.clear();
+    this.principal = new Login();
+    this.principal.id = 0;
+    this.authService.changePrincipal(this.principal);
     if (this.route.url === '/landing') {
       location.reload(true);
     } else {

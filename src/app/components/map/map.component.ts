@@ -12,7 +12,7 @@ import { Marker } from 'aws-sdk/clients/storagegateway';
 import { Location } from '../../models/location.model';
 import { bool } from 'aws-sdk/clients/signer';
 import { AuthService } from '../../services/auth.service'
-import { Login } from 'src/app/classes/login';
+import { Login } from '../../classes/login';
 
 /**
  * Component that handles route navigation and displays a map

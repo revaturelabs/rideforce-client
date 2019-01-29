@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { Login } from 'src/app/classes/login';
+import { Login } from '../../classes/login';
 
 /** Provides an over view of User Likes, distinguishing between the mobile view and desktop view */
 @Component({

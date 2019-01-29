@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { TokenStorage } from './../utils/token.storage';
+//import { TokenStorage } from './../utils/token.storage';
 import { Login } from '../classes/login';
-import { UserControllerService } from './api/user-controller.service';
-import { BehaviorSubject } from 'rxjs';
+//import { UserControllerService } from './api/user-controller.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { logging } from 'protractor';
 
 /**
  * Allows Users to authenticate themselves with the server
@@ -17,7 +18,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   private principalSource = new BehaviorSubject(new Login());
   principal = this.principalSource.asObservable();
-
+  authToken :string;
   /**
    * Sets up the Authentication service with the required dependencies
    * @param {HttpClient} http - Our http client dependency for making http requests
@@ -27,10 +28,14 @@ export class AuthService {
    */
   constructor(
     private http: HttpClient,
-    private userService: UserControllerService,
-    private tokenStorage: TokenStorage /*,
-    private route: Router*/
-  ) { }
+    //private userService: UserControllerService,
+    //private tokenStorage: TokenStorage 
+    private route: Router
+  ) { 
+    var p = new Login();
+    p.id = 0;
+    this.changePrincipal(p);
+  }
 
   /**
    * Attempts to log the user in
@@ -46,7 +51,8 @@ export class AuthService {
       .pipe(
         map<string, void>(token => {
           console.log('Saving token');
-          this.tokenStorage.saveToken(token);
+          this.authToken = token;
+
         })
       ).toPromise();
   }
@@ -57,18 +63,16 @@ export class AuthService {
    * @param password - the password of the account
    * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
    */
-  async authenticate(email: string, password: string, usePromise?: boolean) {
+    authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) => {
         console.log('Got user from Authenticate (Promise mode)');
-        this.userService.getUserByEmail(email).then((x) => {
+        this.getUserByEmail(email).subscribe(resp =>{
           console.log('Retrieved email of user');
-          this.userService.getUserById(x.id).pipe(map(
-            resp =>{
-              const l : Login = resp as Login;
-              this.changePrincipal(l);
-            }));
-          location.reload(true);
+          const l : Login = resp as Login;
+          this.changePrincipal(l);
+          console.log("sending to landing");
+          this.route.navigate(['/landing']);
         });
       },
       (e) => {
@@ -115,5 +119,18 @@ export class AuthService {
   changePrincipal(p : Login){
     this.principalSource.next(p);
   }
+  getAuthToken() :string{
+    return this.authToken;
+  }
+
+
+
+  getUserByEmail(email : string): Observable<Login> {
+    console.log("getting by email")
+    return this.http.get<Login>(environment.apiUrl + '/users', {
+      params: { email }});
+  }
+
+
 
 }

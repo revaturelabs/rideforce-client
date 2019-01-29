@@ -5,8 +5,8 @@ import { User } from '../../models/user.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { Login } from 'src/app/classes/login';
+import { AuthService } from '../../services/auth.service';
+import { Login } from '../../classes/login';
 
 /**
  * Component that shows User Likes on a mobile device

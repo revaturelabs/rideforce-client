@@ -148,23 +148,22 @@ export class UserControllerService {
     * the user to update.
     * @returns {Observable<User>} - the user being updated
     */
-  update(): Promise<User> {
-    // const body = {
-    //   firstName: sessionStorage.getItem('firstName'),
-    //   lastName: sessionStorage.getItem('lastName'),
-    //   email: sessionStorage.getItem('userEmail'),
-    //   photoUrl: null,
-    //   password: sessionStorage.getItem('userPassword'),
-    //   role: sessionStorage.getItem('role'),
-    //   address: sessionStorage.getItem('address'),
-    //   batchEnd: new Date(sessionStorage.getItem('batchEnd')),
-    //   startTime: null,
-    //   active: sessionStorage.getItem('active')
-    // };
+   update(): Promise<User> {
+    const body = {
+      firstName: this.principal.firstName,
+      lastName: this.principal.firstName,
+      email: this.principal.email,
+      photoUrl: null,
+      password: this.principal.password,
+      role: this.principal.role,
+      address: this.principal.address,
+      batchEnd: new Date(this.principal.batchEnd),
+      startTime: null,
+      active: this.principal.active
+    };
 
     return this.http
-      .put<User>(environment.apiUrl + `/users/${this.principal.id}`, 
-      JSON.stringify(this.principal))
+      .put<User>(environment.apiUrl + `/users/${this.principal.id}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the
@@ -175,21 +174,23 @@ export class UserControllerService {
         })
       ).toPromise();
   }
+    
 
   updateBio(bioInput: string): Promise<User> {
-    // const body = {
-    //   firstName: sessionStorage.getItem('firstName'),
-    //   lastName: sessionStorage.getItem('lastName'),
-    //   email: sessionStorage.getItem('userEmail'),
-    //   photoUrl: null,
-    //   password: sessionStorage.getItem('userPassword'),
-    //   role: sessionStorage.getItem('role'),
-    //   address: sessionStorage.getItem('address'),
-    //   batchEnd: new Date(sessionStorage.getItem('batchEnd')),
-    //   startTime: null,
-    //   active: sessionStorage.getItem('active'),
-    //   bio: bioInput
-    // };
+     const body = {
+      firstName: this.principal.firstName,
+      lastName: this.principal.firstName,
+      email: this.principal.email,
+      photoUrl: null,
+      password: this.principal.password,
+      role: this.principal.role,
+      address: this.principal.address,
+      batchEnd: new Date(this.principal.batchEnd),
+      startTime: null,
+      active: this.principal.active,
+      bio: bioInput
+     };
+    
     this.principal.bio = bioInput;
 
     return this.http

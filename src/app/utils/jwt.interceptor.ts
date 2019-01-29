@@ -1,24 +1,25 @@
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 import { TokenStorage } from './token.storage';
+import { Login } from '../classes/login';
 
 /**
  * Ensures that each HTTP request we send has our authentication token
  */
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-
+principal: Login;
   /**
    * Sets up our interceptor for token addition
    * @param tokenStorage - the Service that allows us to access our authentication token
    */
-  constructor(private tokenStorage: TokenStorage) {}
+  constructor(private tokenStorage: TokenStorage, private auth: AuthService) {
+    this.auth.principal.subscribe(p =>{
+      this.principal = p;
+    });
+  }
 
   /**
    * Catches HTTP requests and adds the authentication token to its header
@@ -29,7 +30,9 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = this.tokenStorage.getToken();
+    //console.log("inter")
+    const token = this.auth.getAuthToken();
+    //console.log(token);
     if (token != null) {
       request = request.clone({
         setHeaders: {

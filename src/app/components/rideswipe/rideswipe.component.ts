@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { Login } from 'src/app/classes/login';
+import { AuthService } from '../../services/auth.service';
+import { Login } from '../../classes/login';
 
 /** Holds the two components for user matching and selects which to display based on whether view is desktop or mobile */
 @Component({

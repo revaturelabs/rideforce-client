@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
-import { AuthService} from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Auth0Service } from '../../services/auth0.service'
-import { Login } from 'src/app/classes/login';
+import { Login } from '../../classes/login';
 // import { Router } from '@angular/router';
 
 /**
@@ -19,12 +19,12 @@ export class LandingComponent implements OnInit {
   currentUser: User;
   /** Whether a User is, in fact, logged on */
   session: boolean;
-    /**
-   * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
-   */
+  /**
+ * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
+ */
   role: String;
 
-  principal : Login;
+  principal: Login;
 
   /**
    * Creates the Landing Component
@@ -34,29 +34,30 @@ export class LandingComponent implements OnInit {
   constructor(
     private auth0Service: Auth0Service,
     private userService: UserControllerService,
-    private auth : AuthService
-    ) { }
+    private auth: AuthService
+  ) { }
 
   /**
    * Initializes the component by retrieving the User
    */
   ngOnInit() {
-    this.userService.getCurrentUserObservable().subscribe(
-      data => {
-        this.currentUser = data;
-      }
-    );
-    this.auth.principal.subscribe(user =>{
-      this.principal = user;});
-    this.sessionCheck();
-    this.setCurrentRole();
+    //console.log("oninit");
+    this.auth.principal.subscribe(user => {
+      this.principal = user;
+      //console.log(this.principal);
+      this.sessionCheck();
+      this.setCurrentRole();
+    });
   }
 
   /**
    * Checks to see if there is a session or not
    */
   sessionCheck() {
-    this.session = this.principal===null;
+    if (this.principal.id !== 0) this.session = true;
+    else this.session = false;
+    //console.log("session =" + this.session);
+    //this.session = this.principal.id !== 0;
   }
 
   /**
@@ -66,9 +67,9 @@ export class LandingComponent implements OnInit {
     this.auth0Service.login();
   }
 
-   /**
-   * Sets the role of the Current user to determine what functionality should be available
-   */
+  /**
+  * Sets the role of the Current user to determine what functionality should be available
+  */
   setCurrentRole() {
     this.role = this.principal.role;
   }

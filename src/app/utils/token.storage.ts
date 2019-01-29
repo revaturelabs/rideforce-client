@@ -23,17 +23,17 @@ export class TokenStorage {
    * Saves the provided authentication token to the session
    * @param {string} token - the authentication token to save
    */
-  public saveToken(token: string) {
-    this.principal.authToken = token;
-    this.auth.changePrincipal(this.principal);
+  //public saveToken(token: string) {
+    //this.principal.authToken = token;
+    //this.auth.changePrincipal(this.principal);
     //sessionStorage.setItem(TOKEN_KEY, token);
-  }
+ // }
 
   /**
    * Retrieves the current authentication token being used
    * @returns {string} - the authentication token of the current session
    */
   public getToken(): string {
-    return this.principal.authToken;
+    return this.auth.getAuthToken();
   }
 }

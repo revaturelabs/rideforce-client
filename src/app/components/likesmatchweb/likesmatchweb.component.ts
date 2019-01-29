@@ -5,8 +5,8 @@ import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
-import { Login } from 'src/app/classes/login';
-import { AuthService } from 'src/app/services/auth.service';
+import { Login } from '../../classes/login';
+import { AuthService } from '../../services/auth.service';
 
 /**
  * Used as a more complex data structure for holding info on liked users
