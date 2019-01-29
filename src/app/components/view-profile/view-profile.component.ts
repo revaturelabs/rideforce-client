@@ -1,8 +1,10 @@
-import { Component, OnInit, Testability } from '@angular/core';
+import { Component, OnInit, Testability, Injectable } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
 import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
+import { constants } from 'fs';
+import { ContactInfo } from '../../models/contact-info.model';
 
 
 /**
@@ -21,7 +23,7 @@ export class ViewProfileComponent implements OnInit {
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService, private authService: AuthService) { }
+  constructor(private userService: UserControllerService, public authService: AuthService) { }
   /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -37,6 +39,8 @@ export class ViewProfileComponent implements OnInit {
   /** The day the User's batch ends*/
   batchEnd: any;
 
+  contactInfoArray: ContactInfo[] = [];
+
   /** Whether the user can make changes (Currently not used) */
   canEdit = false;
   /** List of offices held by the user */
@@ -45,10 +49,14 @@ export class ViewProfileComponent implements OnInit {
   officeObject: Office;
   /** User's active state */
   active: string;
+  existingBio: string;
+  existingBioStatus: boolean = false;
   /**
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
+    this.existingBio = sessionStorage.getItem('bio');
+    //this.changeExistingBioStatus();
     this.firstName = sessionStorage.getItem("firstName");
     this.lastName = sessionStorage.getItem("lastName");
     this.username = sessionStorage.getItem("userEmail");
@@ -58,6 +66,7 @@ export class ViewProfileComponent implements OnInit {
     this.getUsers();
     this.getRole();
     this.getState();
+    this.filteredUsers = this.users;
   }
 
   /**
@@ -148,14 +157,45 @@ export class ViewProfileComponent implements OnInit {
 
   /** Holds the list of all users in the system */
   users: any[];
+  /** Holds the list of users filtered with search query */
+  filteredUsers: any[];
   /** Sets up all users in the system */
   getUsers() {
     let data;
     if (sessionStorage.getItem('role') === 'ADMIN') {
-      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); this.users = data });
+      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); this.users = data; this.filteredUsers = data; });
     } else if (sessionStorage.getItem('role') === 'TRAINER') {
       this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER'); this.users = data });
     }
+    this.filterUsers(" ");
+  }
+
+  public filterUsers(query = "") {
+    let searchUsers = this.users;
+    console.log("how many users: " + this.users.length)
+    if (query.length < 1) {
+      console.log("returning all users: ", this.users.length)
+      this.filteredUsers = this.users;
+      return;
+    }
+    query = query.trim();
+    const queryStrings = query.split(" ");
+    this.filteredUsers = searchUsers.filter(user => {
+      for (let key in user) {
+        let data = user[key];
+        if (typeof data === "string") {
+          data = data.toLowerCase();
+          for (let searchTerm of queryStrings) {
+            searchTerm = searchTerm.toLocaleLowerCase();
+            let found = data.search(searchTerm);
+            if (found > -1) {
+              return user;
+            }
+          }
+
+        }
+      }
+    });
   }
 
   result: boolean;
@@ -169,6 +209,18 @@ export class ViewProfileComponent implements OnInit {
     }
     if (this.result) {
       this.userService.updateStatus(id, active).then();
+      location.reload(true);
+    } else {
+      alert('No changes will be made');
+    }
+  }
+
+  /** Revert a trainer to a user */
+  makeRider(id: number){
+    this.result = window.confirm("Are you sure you want to make this trainer a rider?");
+    let role = "RIDER";
+    if (this.result) {
+      this.userService.updateRole(id, role).then();
       location.reload(true);
     } else {
       alert('No changes will be made');
@@ -196,4 +248,33 @@ export class ViewProfileComponent implements OnInit {
       alert('No changes will be made');
     }
   }
+  // added because the dummies added stupid stuff that breaks the code
+  tabSelect($event){
+    console.log($event);
+  }
+
+  /** Sets up contact information */
+  addContact(): void {
+    const contact: ContactInfo = {
+      id: null,
+      type: null,
+      info: null
+    };
+
+    this.contactInfoArray.push(contact);
+  }
+
+  updateBio(bioInput: string){
+    this.userService.updateBio(bioInput);
+    sessionStorage.setItem('bio', bioInput);
+    location.reload(true);
+    this.existingBio = bioInput;
+  }
+
+  changeExistingBioStatus() {
+    if(this.existingBioStatus != undefined){
+      this.existingBioStatus = true;
+    }
+  }
+
 }

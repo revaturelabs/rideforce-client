@@ -17,6 +17,10 @@ export class LandingComponent implements OnInit {
   currentUser: User;
   /** Whether a User is, in fact, logged on */
   session: boolean;
+    /**
+   * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
+   */
+  role: String;
 
   /**
    * Creates the Landing Component
@@ -38,6 +42,7 @@ export class LandingComponent implements OnInit {
       }
     );
     this.sessionCheck();
+    this.setCurrentRole();
   }
 
   /**
@@ -53,4 +58,12 @@ export class LandingComponent implements OnInit {
   launchAuth0() {
     this.auth0Service.login();
   }
+
+   /**
+   * Sets the role of the Current user to determine what functionality should be available
+   */
+  setCurrentRole() {
+    this.role = sessionStorage.getItem('role');
+  }
+
 }
