@@ -33,8 +33,6 @@ export class AuthService {
    */
   constructor(
     private http: HttpClient,
-    //private userService: UserControllerService,
-    //private tokenStorage: TokenStorage 
     private route: Router
   ) { 
     var p = new Login();
@@ -42,35 +40,20 @@ export class AuthService {
     this.changePrincipal(p);
   }
 
-  
 
   /**
-   * Attempts to log the user in
-   * @param email The email address to be sent from the view to the API
-   * @param password The password to be sent from the view to the API
+   * Attempts to log the user in using Cognito
+   * @param email The email address to be sent from the view to Cognito
+   * @param password The password to be sent from the view to Cognito
    * @returns {null} - User mapped to token storage now
    */
-  authenticator(email: string, password: string) {
-    const credentials = { email, password };
-    console.log('in authenticate');
-    return this.http
-      .post<string>(environment.apiUrl + '/login', credentials)
-      .pipe(
-        map<string, void>(token => {
-          console.log('Saving token');
-          this.authToken = token;
-
-        })
-      ).toPromise();
-  }
-
-  //Really will just be cognito for login, registration will need to be different
-  authenticatorWhole(email:string,password:string) {
-    this.cognitoAuthenticator(email,password).subscribe((data) => {
+  authenticator(email:string,password:string) {
+    return this.cognitoAuthenticator(email,password).subscribe((data) => {
       console.log(data.idToken.jwtToken);
+      this.authToken = data.idToken.jwtToken;
     }, (err)=> {
-      //TODO: handle error
-    });   
+      //TODO: handle if there is an error (might be covered elsewhere, will need to test)
+    }).toPromise;   
   }
 
   cognitoAuthenticator(email:string, password:string) { 
@@ -141,7 +124,7 @@ export class AuthService {
       }
     );
   }
-  
+
   /**
    * Returns whether the current user is logged in as a Trainer
    */

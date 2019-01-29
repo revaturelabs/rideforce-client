@@ -61,14 +61,16 @@ export class UserControllerService {
    * @returns {Observable<User>} - the user entered into the system
    */
   // CREATE
-  createUser(user: User, password: string, registrationKey: string): Promise<User> {////////////////////////////////////
+  createUser(user: User, password: string, registrationToken: string): Promise<User> {
     return this.addUserToCognito(user.email,user.password).subscribe(
       (data) => {        
         //get id token from cognito
-        let token = data.idToken.jwtToken;
+        let idToken = data.idToken.jwtToken;
         //then actually send data to the server
+        //Note to future self(not future devs): no idea if this promise within a promise works,
+        //goal is to add user to cognito then send it to the java
         return this.http.post<User>(environment.apiUrl + '/users',
-        { user, token, registrationKey }
+        { user, idToken, registrationToken }
         ).toPromise();
       },
       (err) => {
