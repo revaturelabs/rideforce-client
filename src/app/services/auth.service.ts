@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { User } from '../../app/models/user.model';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { tap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { UserControllerService } from './api/user-controller.service';
 import { TokenStorage } from './../utils/token.storage';
-import { Router } from '@angular/router';
 
 /**
  * Allows Users to authenticate themselves with the server

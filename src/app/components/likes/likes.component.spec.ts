@@ -54,8 +54,10 @@ describe('LikesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should get the User', () => {
+  // Why was this x'd , removing it now for testing
+  it('should get the User', () => {
     component.ngOnInit();
     expect(component.currentUser).toBeTruthy();
+    // returns undefined instead of truthy
   });
 });

@@ -70,7 +70,7 @@ describe('AccountinfoComponent', () => {
 
   it('user object should create', () => {
     component.userObject = {
-      id:1,
+      id: 1,
       firstName: "John",
       lastName: "Doe",
       email: "jdoe@gmail.com",
@@ -87,6 +87,7 @@ describe('AccountinfoComponent', () => {
       bio: "My Bio"
     }
     expect(component.userObject).toBeTruthy();
+    // create the user object
     component.createUserObject();
     expect(component.userObject.firstName).toEqual('John');
     expect(component.userObject.lastName).toEqual('Doe');
@@ -142,9 +143,5 @@ describe('AccountinfoComponent', () => {
 
   xit('invalid password should display a message', () => {
     expect(false).toBe(true);
-  });
-
-  it('should go through test()', () => {
-    component.test;
   });
 });

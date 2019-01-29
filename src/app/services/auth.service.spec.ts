@@ -1,16 +1,11 @@
 
 import { AppModule } from '../app.module';
-import { TestBed, async, ComponentFixture, inject } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 
 import {APP_BASE_HREF} from '@angular/common';
 
 describe('AuthService', () => {
-  // beforeEach(() => TestBed.configureTestingModule({
-  //   imports: [HttpClientTestingModule]
-  // }));
-  // let fixture: ComponentFixture<AuthService>;
   let auth: AuthService;
 
   beforeEach(async(() => {

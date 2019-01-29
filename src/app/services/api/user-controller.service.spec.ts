@@ -3,7 +3,6 @@ import { TestBed, inject } from '@angular/core/testing';
 import { UserControllerService } from './user-controller.service';
 import { HttpClientTestingModule } from '../../../../node_modules/@angular/common/http/testing';
 import { Role } from '../../models/role.model';
-import { WorkMail } from 'aws-sdk/clients/all';
 
 describe('UserControllerService', () => {
   let regKey: string;

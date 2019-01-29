@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UploadService } from '../services/upload.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 
 class ImageSnippet {
@@ -22,23 +21,6 @@ export class ImageUploadComponent {
     this.imageUploadProgress = '0%';
     this.selectedFile = <File>event.target.files[0];
     console.log(this.selectedFile)
-    
-    // console.log("imageInput.files[0]  " + JSON.stringify(imageInput.files[0]));
-    // const file: File = imageInput.files[0];
-    // console.log("file to upload: " + file)
-    // const reader = new FileReader();
-
-    // reader.addEventListener('load', (event: any) => {
-    //   this.selectedFile = new ImageSnippet(event.target.result, file);
-    //   this.uploadService.uploadfile(this.selectedFile.file).subscribe(
-    //     res => {
-    //       console.log("response: " + JSON.stringify(res))
-    //     },
-    //     err => {
-    //       console.log('err: ' + err)
-    //     })
-    //   })
-    //   reader.readAsDataURL(file);
       
     }
     onFileUpload() {

@@ -128,6 +128,7 @@ component.currentSwipeCard = {
     component.hideImage(true);
     //expect(component.swipeCardMain).toBeTruthy();
   });
+  // this never worked ?
   it('unhide image tests', () => {
     component.hideImage(false);
   });
@@ -137,4 +138,21 @@ component.currentSwipeCard = {
   it('swipe action left', () => {
     component.swipe(component.SWIPE_ACTION.LEFT, null);
   })
+
+  it('check first values', () => {
+    expect(component.currentIndex).toBe(0);
+    expect(component.animState).toBe('center');
+    expect(component.animThumbState).toBe('one');
+    expect(component.thumbImg).toBe('assects/icons/thumbsDown.png');
+  });
+
+  it('run ngOnInit', () => {
+    component.ngOnInit();
+    expect(component).toBeTruthy();
+  });
+  
+  it('get current user', () => {
+    component.ngOnInit();
+    expect(component.currentUser).toBeTruthy();
+  });
 });
