@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
+import { Login } from '../../classes/login';
 
 /**
  * Responsible for providing a user the ability to log in
@@ -30,6 +31,8 @@ export class LoginComponent implements OnInit {
    */
   currentUser: User;
 
+  principal : Login;
+
   /**
    * Sets up the Login compoennt with dependency injection
    * @param { AuthService} authService - Provides the ability to authenticate the user
@@ -44,9 +47,13 @@ export class LoginComponent implements OnInit {
    * Checking to see if there is a current user, and if there is, redirects to landing.
    */
   ngOnInit() {
-      if (sessionStorage.length > 0){
+    this.authService.principal.subscribe(u =>{
+      this.principal = u;
+      if (this.principal.id !== 0){
         this.route.navigate(['/landing']);
       }
+    })
+      
     }
 
   /**
