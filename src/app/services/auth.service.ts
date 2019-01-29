@@ -47,16 +47,8 @@ export class AuthService {
    * @param password The password to be sent from the view to Cognito
    * @returns {null} - User mapped to token storage now
    */
-  authenticator(email:string,password:string) {
-    return this.cognitoAuthenticator(email,password).subscribe((data) => {
-      console.log(data.idToken.jwtToken);
-      this.authToken = data.idToken.jwtToken;
-    }, (err)=> {
-      //TODO: handle if there is an error (might be covered elsewhere, will need to test)
-    }).toPromise;   
-  }
-
-  cognitoAuthenticator(email:string, password:string) { 
+  authenticator(email:string, password:string) { 
+    console.log("in cognito auth");
     const authenticationData = {
       Username : email,
       Password : password,
@@ -81,7 +73,7 @@ export class AuthService {
           observer.error(err);
         },
       });
-    });
+    }).toPromise();
   }
 
   /**
@@ -93,7 +85,8 @@ export class AuthService {
     authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) => {
-        console.log('Got user from Authenticate (Promise mode)');
+        console.log(x.idToken.jwtToken); //printing the token to the console to check
+        this.authToken = x.idToken.jwtToken;
         this.getUserByEmail(email).subscribe(resp =>{
           console.log('Retrieved email of user');
           const l : Login = resp as Login;
