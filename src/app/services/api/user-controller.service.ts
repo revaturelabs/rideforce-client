@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../../app/models/user.model';
 import { Register } from '../../../app/models/register.model';
@@ -11,6 +12,8 @@ import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
 import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
 import { Role } from '../../models/role.model';
+import { Login } from '../../classes/login';
+import { AuthService } from '../../services/auth.service';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -24,7 +27,10 @@ export class UserControllerService {
    * Sets up the User Service via the Injection of the HttpClient
    * @param {HttpClient} http - Allows service to communicate with the server via HTTP requests
    */
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, auth: AuthService) {
+    auth.principal.subscribe(user => {
+      this.principal = user;});
+   }
 
   /** to be used with the url provided by back end */
   private url = '';
@@ -43,6 +49,7 @@ export class UserControllerService {
   /** Behaves in a manner similar to that of Observables for Users */
   currentUserSubject = new Subject<User>();
 
+  principal: Login;
 
   // CRUD FOR USERS * * * * * * * * * * * * * * * * * * * * *
 
@@ -171,22 +178,22 @@ export class UserControllerService {
     * the user to update.
     * @returns {Observable<User>} - the user being updated
     */
-  update(): Promise<User> {
+   update(): Promise<User> {
     const body = {
-      firstName: sessionStorage.getItem('firstName'),
-      lastName: sessionStorage.getItem('lastName'),
-      email: sessionStorage.getItem('userEmail'),
+      firstName: this.principal.firstName,
+      lastName: this.principal.firstName,
+      email: this.principal.email,
       photoUrl: null,
-      password: sessionStorage.getItem('userPassword'),
-      role: sessionStorage.getItem('role'),
-      address: sessionStorage.getItem('address'),
-      batchEnd: new Date(sessionStorage.getItem('batchEnd')),
+      password: this.principal.password,
+      role: this.principal.role,
+      address: this.principal.address,
+      batchEnd: new Date(this.principal.batchEnd),
       startTime: null,
-      active: sessionStorage.getItem('active')
+      active: this.principal.active
     };
 
     return this.http
-      .put<User>(environment.apiUrl + `/users/${sessionStorage.getItem('id')}`, body)
+      .put<User>(environment.apiUrl + `/users/${this.principal.id}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the
@@ -197,24 +204,28 @@ export class UserControllerService {
         })
       ).toPromise();
   }
+    
 
   updateBio(bioInput: string): Promise<User> {
-    const body = {
-      firstName: sessionStorage.getItem('firstName'),
-      lastName: sessionStorage.getItem('lastName'),
-      email: sessionStorage.getItem('userEmail'),
+     const body = {
+      firstName: this.principal.firstName,
+      lastName: this.principal.firstName,
+      email: this.principal.email,
       photoUrl: null,
-      password: sessionStorage.getItem('userPassword'),
-      role: sessionStorage.getItem('role'),
-      address: sessionStorage.getItem('address'),
-      batchEnd: new Date(sessionStorage.getItem('batchEnd')),
+      password: this.principal.password,
+      role: this.principal.role,
+      address: this.principal.address,
+      batchEnd: new Date(this.principal.batchEnd),
       startTime: null,
-      active: sessionStorage.getItem('active'),
+      active: this.principal.active,
       bio: bioInput
-    };
+     };
+    
+    this.principal.bio = bioInput;
 
     return this.http
-      .put<User>(environment.apiUrl + `/users/${sessionStorage.getItem('id')}`, body)
+      .put<User>(environment.apiUrl + `/users/${this.principal.id}`,
+      JSON.stringify(this.principal))
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the

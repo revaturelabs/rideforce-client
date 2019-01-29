@@ -1,14 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { User } from '../../app/models/user.model';
-import { Observable, of } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { tap, map } from 'rxjs/operators';
-import { UserControllerService } from './api/user-controller.service';
-import { TokenStorage } from './../utils/token.storage';
-import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+//import { TokenStorage } from './../utils/token.storage';
+import { Login } from '../classes/login';
+//import { UserControllerService } from './api/user-controller.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { logging } from 'protractor';
+import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
 
 
 
@@ -21,7 +21,9 @@ const userPool = new CognitoUserPool(environment.cognitoData);
   providedIn: 'root'
 })
 export class AuthService {
-
+  private principalSource = new BehaviorSubject(new Login());
+  principal = this.principalSource.asObservable();
+  authToken :string;
   /**
    * Sets up the Authentication service with the required dependencies
    * @param {HttpClient} http - Our http client dependency for making http requests
@@ -31,10 +33,14 @@ export class AuthService {
    */
   constructor(
     private http: HttpClient,
-    private userService: UserControllerService,
-    private tokenStorage: TokenStorage /*,
-    private route: Router*/
-  ) { }
+    //private userService: UserControllerService,
+    //private tokenStorage: TokenStorage 
+    private route: Router
+  ) { 
+    var p = new Login();
+    p.id = 0;
+    this.changePrincipal(p);
+  }
 
   
 
@@ -52,7 +58,8 @@ export class AuthService {
       .pipe(
         map<string, void>(token => {
           console.log('Saving token');
-          this.tokenStorage.saveToken(token);
+          this.authToken = token;
+
         })
       ).toPromise();
   }
@@ -100,24 +107,16 @@ export class AuthService {
    * @param password - the password of the account
    * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
    */
-  async authenticate(email: string, password: string, usePromise?: boolean) {
+    authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) => {
         console.log('Got user from Authenticate (Promise mode)');
-        this.userService.getUserByEmail(email).then((x) => {
-          console.log('Gotten email of user');
-          sessionStorage.setItem('id', x.id.toString());
-          sessionStorage.setItem('firstName', x.firstName);
-          sessionStorage.setItem('lastName', x.lastName);
-          sessionStorage.setItem('role', x.role);
-          sessionStorage.setItem('address', x.address);
-          sessionStorage.setItem('batchEnd', x.batchEnd);
-          sessionStorage.setItem('userEmail', email);
-          sessionStorage.setItem('userPassword', password);
-          sessionStorage.setItem('active', x.active);
-          sessionStorage.setItem('bio', x.bio);
-          sessionStorage.setItem('photoUrl', x.photoUrl);
-          location.reload(true);
+        this.getUserByEmail(email).subscribe(resp =>{
+          console.log('Retrieved email of user');
+          const l : Login = resp as Login;
+          this.changePrincipal(l);
+          console.log("sending to landing");
+          this.route.navigate(['/landing']);
         });
       },
       (e) => {
@@ -142,31 +141,41 @@ export class AuthService {
       }
     );
   }
-
-  
-
   
   /**
    * Returns whether the current user is logged in as a Trainer
    */
   isTrainer(): boolean {
-    return sessionStorage.getItem('role') == "TRAINER" || this.isAdmin();
+    
+    return this.principalSource.value.role == "TRAINER" || this.isAdmin();
   }
-
-  
   /**
    * Returns whether the current user is logged in as an Admin
    */
   isAdmin(): boolean {
-    return sessionStorage.getItem('role') == "ADMIN";
+    return this.principalSource.value.role == "ADMIN";
   }
-
-  
   /**
    * Logs the user out of the service
    */
   logout() {
-    sessionStorage.clear();
+    this.changePrincipal(null);
   }
+  changePrincipal(p : Login){
+    this.principalSource.next(p);
+  }
+  getAuthToken() :string{
+    return this.authToken;
+  }
+
+
+
+  getUserByEmail(email : string): Observable<Login> {
+    console.log("getting by email")
+    return this.http.get<Login>(environment.apiUrl + '/users', {
+      params: { email }});
+  }
+
+
 
 }

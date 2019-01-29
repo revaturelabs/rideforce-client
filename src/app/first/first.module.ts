@@ -37,6 +37,8 @@ import { CallbackComponent } from '../callback/callback/callback.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../../environments/environment';
 
+import {Login} from '../classes/login';
+
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ViewUsersComponent } from '../components/view-users/view-users.component';
 import { SearchUsersComponent } from '../components/search-users/search-users.component';

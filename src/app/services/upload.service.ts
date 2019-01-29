@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { Login } from '../classes/login';
+
 // import * as S3 from 'aws-sdk/clients/s3';
 
 /**
@@ -15,11 +18,14 @@ export class UploadService {
   FOLDER = 'rydeforce-s3/';
   /** Holds the url where the image will be stored*/
   url: any;
-
+  principal: Login;
   /**
    * Basic set up of the Service - it uses no dependency injection
    */
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, auth: AuthService) {
+    auth.principal.subscribe(user => {
+      this.principal = user;});
+   }
 
   /**
    * Retrieves an S3 bucket object so we can upload files to an actual S3 bucket on Amazon
@@ -44,7 +50,7 @@ export class UploadService {
 
   uploadfile(image: File): Observable<Object> {
     const formData = new FormData();
-    const fileName = `user-${sessionStorage.getItem('id')}${image.name.substr(image.name.length - 4)}`;
+    const fileName = `user-${this.principal.id}${image.name.substr(image.name.length - 4)}`;
     console.log("FILENAME    ------ " + fileName)
     formData.append('image', image, fileName);
     const endpoint = 'http://localhost:2222/storage/uploadFile';
