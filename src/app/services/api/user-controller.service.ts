@@ -9,6 +9,7 @@ import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
+import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
 import { Role } from '../../models/role.model';
 
 /**
@@ -53,10 +54,38 @@ export class UserControllerService {
    * @returns {Observable<User>} - the user entered into the system
    */
   // CREATE
-  createUser(user: User, password: string, registrationKey: string): Promise<User> {
-    return this.http.post<User>(environment.apiUrl + '/users',
-      { user, password, registrationKey }
-    ).toPromise();
+  createUser(user: User, password: string, registrationKey: string): Promise<User> {////////////////////////////////////
+    return this.addUserToCognito(user.email,user.password).subscribe(
+      (data) => {        
+        //get data token
+        //then actually send data to the server
+        return this.http.post<User>(environment.apiUrl + '/users',
+        { user, password, registrationKey }
+        ).toPromise();
+      },
+      (err) => {
+        //COGNITO ERROR
+      }
+    ).toPromise;
+    
+  }
+
+  addUserToCognito(email:string,password:string){
+    const userPool = new CognitoUserPool(environment.cognitoData);
+    const attributeList = [];
+
+    return Observable.create(observer => {
+      userPool.signUp(email, password, attributeList, null, (err, result) => {
+        if (err) {
+          console.log("signUp error", err);
+          observer.error(err);
+          return;
+        }
+        console.log("signUp success", result);
+        observer.next(result);
+        observer.complete();
+      });
+    });
   }
 
   /**

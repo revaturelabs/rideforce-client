@@ -57,7 +57,16 @@ export class AuthService {
       ).toPromise();
   }
 
-  cognitoAuthenticate(email, password) { 
+  //Really will just be cognito for login, registration will need to be different
+  authenticatorWhole(email:string,password:string) {
+    this.cognitoAuthenticator(email,password).subscribe((data) => {
+      console.log(data.idToken.jwtToken);
+    }, (err)=> {
+      //TODO: handle error
+    });   
+  }
+
+  cognitoAuthenticator(email:string, password:string) { 
     const authenticationData = {
       Username : email,
       Password : password,
