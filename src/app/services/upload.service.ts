@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 // import * as S3 from 'aws-sdk/clients/s3';
 
 /**
@@ -10,11 +11,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UploadService {
-
-  /** The Root folder name used by this system */
-  FOLDER = 'rydeforce-s3/';
-  /** Holds the url where the image will be stored*/
-  url: any;
 
   /**
    * Basic set up of the Service - it uses no dependency injection
@@ -27,20 +23,10 @@ export class UploadService {
    * @returns {string} - the url used for the file
    */
 
-  uploadfile(image: File): Observable<Object> {
-    const formData = new FormData();
-    const fileName = `user-${sessionStorage.getItem('id')}${image.name.substr(image.name.length - 4)}`;
-    console.log("FILENAME    ------ " + fileName)
-    formData.append('image', image, fileName);
-    const endpoint = 'http://localhost:2222/storage/uploadFile';
-    // const payload = {file: formData};
-    // const body = JSON.stringify(payload);
-    // console.log("post body: " + JSON.stringify(formData))
-    return this.http.post(endpoint, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data; boundary=whatever whatever--'
-      }
-    });
-
+  uploadfile(image: FormData): Observable<Object> {
+    this.http.post(environment.apiUrl + '/storage/uploadFile', image, {
+      reportProgress: true,
+      observe: 'events'
+    })
   }
 }

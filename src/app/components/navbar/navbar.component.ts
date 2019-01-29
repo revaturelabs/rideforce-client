@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { AuthService } from '../../services/auth.service';
+import { DownloadService } from '../../services/download.service';
 import { Router, NavigationStart } from '@angular/router';
 import { User } from '../../models/user.model';
 import { Auth0Service } from '../../services/auth0.service';
@@ -36,7 +37,6 @@ export class NavbarComponent implements OnInit {
   */
   deferredInstall = null;
   isInstallable: boolean = false;
-
   /**
    * Sets up the component with relevent services
    * @param {Auth0Service} auth0 - Provides Auth0 functionality
@@ -46,10 +46,11 @@ export class NavbarComponent implements OnInit {
    */
   constructor(
     private auth0: Auth0Service,
+    private downloadService: DownloadService,
     public authService: AuthService,//made public so it can build
     private userService: UserControllerService,
-    private route: Router
-
+    private route: Router,
+    private imageFile: File
   ) {
 
     route.events.pipe(
@@ -74,6 +75,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.sessionCheck();
     this.setCurrentRole();
+    
+    if(this.session){
+      this.imageFile = this.downloadService.downloadFile(sessionStorage.getItem('id')).subscribe(resp => {
+        this.imageFile = resp});        
+    }
+    if(this.imageFile){
+
+    }
   }
 
   /**

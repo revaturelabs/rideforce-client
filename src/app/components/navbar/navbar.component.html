@@ -25,7 +25,11 @@
 
   <!-- replace this with logout0() eventually when auth0 is set up -->
   <button *ngIf="session&&!dropped" class="btn btn-secondary" (click)="logout()">Logout</button>
-
+  <img class="rounded mx-auto d-block" src="../../assets/img/large_profile_default.png" *ngIf="session&&";else "loggedin">
+  <ng-template #loggedin>
+    <img class="rounded mx-auto d-block" src={{imageFile}} >
+  </ng-template>
+  
   <div style="padding-left: 30px;">
     <button *ngIf = "session&&isInstallable" class="btn btn-secondary" (click)="install()">Install</button>
   </div>
