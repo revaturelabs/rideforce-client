@@ -7,7 +7,6 @@ import { LoginComponent } from '../components/login/login.component';
 import { MapComponent } from '../components/map/map.component';
 import { RideswipeComponent } from '../components/rideswipe/rideswipe.component';
 import { UsercardComponent } from '../components/usercard/usercard.component';
-import { FavoritesComponent } from '../components/favorites/favorites.component';
 import { AccountinfoComponent } from '../components/accountinfo/accountinfo.component';
 import { AdminComponent } from '../components/admin/admin.component';
 import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';

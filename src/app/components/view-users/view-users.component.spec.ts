@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ViewUsersComponent } from './view-users.component';
 import { SearchUsersComponent } from '../search-users/search-users.component';
-import { from } from 'rxjs';
 
 describe('ViewUsersComponent', () => {
   let component: ViewUsersComponent;

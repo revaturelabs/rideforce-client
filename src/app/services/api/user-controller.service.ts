@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { User } from '../../../app/models/user.model';
-import { Register } from '../../../app/models/register.model';
 import { Observable, of, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
@@ -9,7 +8,6 @@ import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
-import { Role } from '../../models/role.model';
 
 /**
  * Enables multiple components to work with User services on the back-end
