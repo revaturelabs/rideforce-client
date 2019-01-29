@@ -373,10 +373,15 @@ export class AccountinfoComponent implements OnInit {
     }
   }
 
-  /** Moves Registration to the Car Tab */
+  /** Moves Registration to the Final Tab */
   bioNext() {
-    this.currentTab++;
-    this.tabset.select('3');
+    if (this.btnCarInfo === 0) {
+      this.requiredCarFields = false;
+    } else if (this.btnCarInfo > 0) {
+      this.requiredCarFields = true;
+      this.currentTab++;
+      this.tabset.select('3');
+    }
   }
 
   /** Moves Registration to the first page */
@@ -384,26 +389,27 @@ export class AccountinfoComponent implements OnInit {
     this.tabset.select('1');
   }
 
+  //Car info has been merged with the bio page.
   /** Moves Registration to the Final page */
-  carNext() {
+  // carNext() {
 
-    if (this.btnCarInfo === 0) {
-      this.requiredCarFields = false;
-    } else if (this.btnCarInfo > 0) {
-      this.requiredCarFields = true;
-      this.currentTab++;
-      this.tabset.select('4');
-    }
-  }
+  //   if (this.btnCarInfo === 0) {
+  //     this.requiredCarFields = false;
+  //   } else if (this.btnCarInfo > 0) {
+  //     this.requiredCarFields = true;
+  //     this.currentTab++;
+  //     this.tabset.select('4');
+  //   }
+  // }
 
-  /** Moves Registration to the Biography Tab */
-  carPrevious() {
-    this.tabset.select('2');
-  }
+  // /** Moves Registration to the Biography Tab */
+  // carPrevious() {
+  //   this.tabset.select('2');
+  // }
 
-    /** Moves Registration to the Car Tab */
+    /** Moves Registration to the Bio/Car Tab */
   reviewPrevious() {
-    this.tabset.select('3');
+    this.tabset.select('2');
   }
 
   test() {
