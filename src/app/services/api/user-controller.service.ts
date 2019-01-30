@@ -62,25 +62,29 @@ export class UserControllerService {
    */
   // CREATE
   createUser(user: User, password: string, registrationToken: string): Promise<User> {
-    return this.addUserToCognito(user.email,user.password).subscribe(
+    console.log("about to get cognito data");
+    return this.sendUserToCognito(user.email,user.password).then(
       (data) => {        
         //get id token from cognito
-        let idToken = data.idToken.jwtToken;
-        //then actually send data to the server
-        //Note to future self(not future devs): no idea if this promise within a promise works,
-        //goal is to add user to cognito then send it to the java
-        return this.http.post<User>(environment.apiUrl + '/users',
-        { user, idToken, registrationToken }
-        ).toPromise();
+        console.log("Got cognito data:");
+        console.log(data);
+        this.sendUserToServer(user,data.idToken.jwtToken,registrationToken);
       },
       (err) => {
         //COGNITO ERROR
       }
     ).toPromise;
-    
   }
 
-  addUserToCognito(email:string,password:string){
+  sendUserToServer(user:User,idToken:string, registrationToken:string){
+    console.log("in SUS");
+    return this.http.post<User>(environment.apiUrl + '/users',
+        { user, idToken, registrationToken }
+        ).toPromise();
+  }
+
+  sendUserToCognito(email:string,password:string){
+    console.log("In SUC");
     const userPool = new CognitoUserPool(environment.cognitoData);
     const attributeList = [];
 
@@ -95,7 +99,7 @@ export class UserControllerService {
         observer.next(result);
         observer.complete();
       });
-    });
+    }).toPromise();
   }
 
   /**
