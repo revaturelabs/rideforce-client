@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark navvy-ber" style="justify-content:initial;">
   <!--<div class="container" style="justify-content:center"> -->
-    <a class="navbar-brand" routerLink="landing"><img src="assets/img/rev-footer.png" class=" logo" 
-      onerror="this.onerror=null;this.src='rev-footer.png';"></a>
+    <a class="navbar-brand" routerLink="landing"><img src="assets/img/rev-footer.png" class=" logo"
+      height="50" width="100" onerror="this.onerror=null;this.src='rev-footer.png';"></a>
     <!-- <a class="navbar-brand" routerLink="/home"><img src="assets/img/rev-footer.png" class="img-fluid logo"></a> -->
     <button class="navbar-toggler ml-auto float-xs-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav"
       aria-expanded="false" aria-label="Toggle navigation" style="margin-right: 30px" (click)="drop()">
@@ -19,7 +19,7 @@
         <a *ngIf="session" class="nav-link text-expanded" routerLink="/userProfile" style="padding-right: 30px;">Profile</a>
         <a *ngIf="role!=null&&authService.isTrainer()" class="nav-link" routerLink="/viewUsers" style="padding-right:30px;">View Users</a>
         <a *ngIf="session" class="nav-link text-expanded nav-text" routerLink="/howTo" style="padding-right:30px;">About</a>
-        
+
       </div>
   </div>
 
@@ -29,5 +29,5 @@
   <div style="padding-left: 30px;">
     <button *ngIf = "session&&isInstallable" class="btn btn-secondary" (click)="install()">Install</button>
   </div>
-  
+
 </nav>
