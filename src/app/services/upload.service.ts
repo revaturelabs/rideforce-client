@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { Login } from '../classes/login';
+
 // import * as S3 from 'aws-sdk/clients/s3';
 
 /**
@@ -15,26 +18,14 @@ export class UploadService {
   FOLDER = 'rydeforce-s3/';
   /** Holds the url where the image will be stored*/
   url: any;
-
+  principal: Login;
   /**
    * Basic set up of the Service - it uses no dependency injection
    */
-  constructor(private http: HttpClient) { }
-
-  /**
-   * Retrieves an S3 bucket object so we can upload files to an actual S3 bucket on Amazon
-   * @returns {S3} - the S3 representation to utillize
-   */
-  // getS3Bucket(): any {
-  //   const bucket = new S3 (
-  //   {
-  //   accessKeyId: 'AKIAIRZG4TK6EBLZV7GA',
-  //   secretAccessKey: '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',
-  //   region: 'us-east-1'
-  //   }
-  //   );
-  //   return bucket;
-  // }
+  constructor(private http: HttpClient, auth: AuthService) {
+    auth.principal.subscribe(user => {
+      this.principal = user;});
+   }
 
   /**
    * Attempts to actually upload a file to the S3 Service
@@ -44,7 +35,7 @@ export class UploadService {
 
   uploadfile(image: File): Observable<Object> {
     const formData = new FormData();
-    const fileName = `user-${sessionStorage.getItem('id')}${image.name.substr(image.name.length - 4)}`;
+    const fileName = `user-${this.principal.id}${image.name.substr(image.name.length - 4)}`;
     console.log("FILENAME    ------ " + fileName)
     formData.append('image', image, fileName);
     const endpoint = 'http://localhost:2222/storage/uploadFile';
@@ -56,31 +47,6 @@ export class UploadService {
         'Content-Type': 'multipart/form-data; boundary=whatever whatever--'
       }
     });
-  //  const params = {
-  //     Bucket: 'rydeforce',
-  //     Key: this.FOLDER + Math.floor(Math.random() * 100000000000) + file.name ,
-  //     Body: file
-  //      // allow that and instead assign numbers on the beginning of the name.
-  //   };
 
-  //   const upResult = this.getS3Bucket().upload(params, function (err, data) {
-  //     if (err) {
-  //       console.log('There was an error uploading your file: ', err);
-  //       return false;
-  //     }
-  //     console.log('Successfully uploaded file.', data);
-  //     console.log(params);
-
-  //     return true;
-  //   });
-  //   if (!upResult.failed) {
-  //     console.log('upload successful');
-  //     this.url = 'https://s3.us-east-1.amazonaws.com/' + params.Bucket + '/' + params.Key;
-  //   } else {
-  //     console.log('upload failed');
-  //   }
-
-    // console.log('BEFORE RETURNING, this.url is: ' + this.url);
-    // return this.url;
   }
 }

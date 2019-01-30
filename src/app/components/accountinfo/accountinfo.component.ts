@@ -3,6 +3,7 @@ import { ViewChild } from '@angular/core';
 import { NgbTabset, NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { AddressModel } from '../../models/address.model';
 import { User } from '../../models/user.model';
+import {Login } from '../../classes/login'
 import { Car } from '../../models/car.model';
 import { ContactInfo } from '../../models/contact-info.model';
 import { AuthService } from '../../services/auth.service';
@@ -56,7 +57,7 @@ export class AccountinfoComponent implements OnInit {
   /**
    * The User being constructed
    */
-  userObject: User;
+  userObject: Login;
   /**
    * Represents whether the user is a rider, driver, trainer, or admin
    */
@@ -259,24 +260,6 @@ export class AccountinfoComponent implements OnInit {
   }
 
   /**
-   * Sets up a car
-   * (DEPRECATED: Moved to Car Regstration Component)
-   */
-  createCar() {
-    this.carObject.make = this.carMake;
-    this.carObject.model = this.carModel;
-    this.carObject.year = this.carYear;
-  }
-
-  /**
-   * Uploads image to the storage
-   */
-  // upload() {
-  //   const file = this.selectedFiles.item(0);
-  //   this.imageSrc = this.uploadService.uploadfile(file);
-  // }
-
-  /**
    * Manage the token
    */
   parseEncryption() {
@@ -306,38 +289,26 @@ export class AccountinfoComponent implements OnInit {
   createUserObject() {
 
     // this.upload();
-
-    this.userObject = {
-      id: 1,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.username,
-      password: this.password,
-      photoUrl: this.imageSrc,
-      address: this.address2,
-      office: '/offices/' + this.officeObject.id,
-      // I really don't understand what this translates to on the back end, but now it is dynamic
-      batchEnd: new Date(this.batchEnd).toISOString(),
-      startTime: this.timeSelect,
-      cars: [],
-      active: 'ACTIVE',
-      contactInfo: [],
-      role: this.roleObject,
-      bio: this.bio
-    };
+    this.userObject.id = 1;
+    this.userObject.firstName = this.firstName;
+    this.userObject.lastName = this.lastName;
+    this.userObject.email = this.username;
+    this.userObject.password = this.password;
+    this.userObject.photoUrl = this.imageSrc;
+    this.userObject.address = this.address2;
+    this.userObject.office = '/offices/' + this.officeObject.id;
+    this.userObject.batchEnd = new Date(this.batchEnd).toISOString();
+    this.userObject.startTime = this.timeSelect;
+    this.userObject.active = 'ACTIVE';
+    this.userObject.role = this.roleObject;
+    this.userObject.bio = this.bio;
     console.log(this.userObject);
     // get id from user after post and associate with a car object
     // this.carObject.id = owner from post
     this.userService.createUser(this.userObject, this.password, this.token.substring(28))
       .then((x) => {
-        sessionStorage.setItem("id", x.id.toString());
-        sessionStorage.setItem("firstName", x.firstName);
-        sessionStorage.setItem("lastName", x.lastName);
-        sessionStorage.setItem("userEmail", x.email);
-        sessionStorage.setItem("userPassword", x.password);
-        sessionStorage.setItem("address", x.address);
-        sessionStorage.setItem("role", x.role);
-        sessionStorage.setItem('bio', x.bio);
+        this.userObject.id = x.id;
+        this.auth.changePrincipal(this.userObject);
         this.router.navigate(['/landing']);
       });
 
@@ -373,10 +344,15 @@ export class AccountinfoComponent implements OnInit {
     }
   }
 
-  /** Moves Registration to the Car Tab */
+  /** Moves Registration to the Final Tab */
   bioNext() {
-    this.currentTab++;
-    this.tabset.select('3');
+    if (this.btnCarInfo === 0) {
+      this.requiredCarFields = false;
+    } else if (this.btnCarInfo > 0) {
+      this.requiredCarFields = true;
+      this.currentTab++;
+      this.tabset.select('3');
+    }
   }
 
   /** Moves Registration to the first page */
@@ -384,29 +360,9 @@ export class AccountinfoComponent implements OnInit {
     this.tabset.select('1');
   }
 
-  /** Moves Registration to the Final page */
-  carNext() {
-
-    if (this.btnCarInfo === 0) {
-      this.requiredCarFields = false;
-    } else if (this.btnCarInfo > 0) {
-      this.requiredCarFields = true;
-      this.currentTab++;
-      this.tabset.select('4');
-    }
-  }
-
-  /** Moves Registration to the Biography Tab */
-  carPrevious() {
+    /** Moves Registration to the Bio/Car Tab */
+  reviewPrevious() {
     this.tabset.select('2');
   }
 
-    /** Moves Registration to the Car Tab */
-  reviewPrevious() {
-    this.tabset.select('3');
-  }
-
-  test() {
-    console.log(this.timeSelect);
-  }
 }
