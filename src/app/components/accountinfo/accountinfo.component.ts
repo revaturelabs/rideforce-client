@@ -276,12 +276,6 @@ export class AccountinfoComponent implements OnInit {
     }
   }
 
-  /** Allows a User to select a file */
-  selectFile(event) {
-    this.selectedFiles = event.target.files;
-    console.log(this.selectedFiles[0].name);
-  }
-
   /** Creats a user from all the required fields */
   createUserObject() {
 

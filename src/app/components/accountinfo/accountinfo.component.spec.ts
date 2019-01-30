@@ -54,7 +54,7 @@ describe('AccountinfoComponent', () => {
     }
     expect(component.userObject).toBeTruthy();
     // create the user object
-    expect(component.createUserObject()).toBeTruthy();
+    component.createUserObject();
   });
 
   // should same spec test both add and removeContact?
@@ -103,4 +103,14 @@ describe('AccountinfoComponent', () => {
   xit('invalid password should display a message', () => {
     expect(false).toBe(true);
   });
+
+  it('bioNext', () => {
+    component.btnCarInfo = 0;
+    component.bioNext();
+    expect(component.requiredCarFields).toEqual(false);
+    component.btnCarInfo = 1;
+    component.bioNext();
+    expect(component.requiredCarFields).toEqual(true);
+  });
+
 });
