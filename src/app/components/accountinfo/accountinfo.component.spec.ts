@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AccountinfoComponent } from './accountinfo.component';
 import { AppModule } from '../../app.module';
 import { Role } from '../../models/role.model';
@@ -61,6 +60,8 @@ describe('AccountinfoComponent', () => {
       bio: "My Bio"
     }
     expect(component.userObject).toBeTruthy();
+
+    expect(component.createUserObject()).toBeTruthy();
   });
 
   // should same spec test both add and removeContact?
