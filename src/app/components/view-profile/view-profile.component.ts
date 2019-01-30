@@ -1,9 +1,8 @@
-import { Component, OnInit, Testability, Injectable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
 import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
-import { constants } from 'fs';
 import { ContactInfo } from '../../models/contact-info.model';
 
 
@@ -63,7 +62,7 @@ export class ViewProfileComponent implements OnInit {
     this.address2 = sessionStorage.getItem("address");
     this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
     this.getOffices();
-    this.getUsers();
+    //this.getUsers();
     this.getRole();
     this.getState();
     this.filteredUsers = this.users;

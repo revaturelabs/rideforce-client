@@ -5,9 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
-import { Filter } from '../../models/filter';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ThrowStmt } from '@angular/compiler';
 import { GeocodeService } from '../../services/geocode.service';
 
 /** Represents the User selection item in the html page */

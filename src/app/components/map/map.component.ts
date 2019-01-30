@@ -8,9 +8,7 @@ import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
-import { Marker } from 'aws-sdk/clients/storagegateway';
 import { Location } from '../../models/location.model';
-import { bool } from 'aws-sdk/clients/signer';
 
 /**
  * Component that handles route navigation and displays a map

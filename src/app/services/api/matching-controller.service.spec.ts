@@ -3,7 +3,7 @@ import { MatchingControllerService } from './matching-controller.service';
 import { HttpClientTestingModule } from '../../../../node_modules/@angular/common/http/testing';
 
 import { User } from "../../../app/models/user.model";
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Link } from '../../models/link.model';
 describe('MatchingControllerService', () => {
 

@@ -10,19 +10,6 @@ describe('LandingComponent', async() => {
   let component: LandingComponent;
   let fixture: ComponentFixture<LandingComponent>;
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ LandingComponent ],
-  //     providers: [HttpHandler, HttpClient, UserControllerService, LandingComponent]
-  //   })
-  //   .compileComponents();
-  // }));
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(LandingComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
   beforeEach(async(() => {
     TestBed.configureTestingModule({
         imports: [

@@ -1,7 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { NgbTabset, NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
-import { AddressModel } from '../../models/address.model';
 import { User } from '../../models/user.model';
 import { Car } from '../../models/car.model';
 import { ContactInfo } from '../../models/contact-info.model';
@@ -9,8 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { Office } from '../../models/office.model';
 import { Role } from '../../models/role.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
-import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
-import { UploadService } from '../../services/upload.service';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 /**
@@ -155,13 +153,11 @@ export class AccountinfoComponent implements OnInit {
    * @param {NgZone} zone - Allows the Location to be deduced
    * @param {AuthService} auth - Provides Authenitcation services (Does not appear to be used)
    * @param {UserControllerService} userService - Allows management of users
-   * @param {UploadService} uploadService - allows User to upload files
    * @param {Router} router - allows page navigation to take place
    */
   constructor(private zone: NgZone,
     private auth: AuthService,
     private userService: UserControllerService,
-    private uploadService: UploadService,
     private router: Router) {
       this.carObject = new Car();
      }
@@ -257,24 +253,6 @@ export class AccountinfoComponent implements OnInit {
   removeContact(item: ContactInfo) {
     this.contactInfoArray.splice(this.contactInfoArray.indexOf(item), 1);
   }
-
-  /**
-   * Sets up a car
-   * (DEPRECATED: Moved to Car Regstration Component)
-   */
-  createCar() {
-    this.carObject.make = this.carMake;
-    this.carObject.model = this.carModel;
-    this.carObject.year = this.carYear;
-  }
-
-  /**
-   * Uploads image to the storage
-   */
-  // upload() {
-  //   const file = this.selectedFiles.item(0);
-  //   this.imageSrc = this.uploadService.uploadfile(file);
-  // }
 
   /**
    * Manage the token
@@ -373,10 +351,15 @@ export class AccountinfoComponent implements OnInit {
     }
   }
 
-  /** Moves Registration to the Car Tab */
+  /** Moves Registration to the Final Tab */
   bioNext() {
-    this.currentTab++;
-    this.tabset.select('3');
+    if (this.btnCarInfo === 0) {
+      this.requiredCarFields = false;
+    } else if (this.btnCarInfo > 0) {
+      this.requiredCarFields = true;
+      this.currentTab++;
+      this.tabset.select('3');
+    }
   }
 
   /** Moves Registration to the first page */
@@ -384,29 +367,9 @@ export class AccountinfoComponent implements OnInit {
     this.tabset.select('1');
   }
 
-  /** Moves Registration to the Final page */
-  carNext() {
-
-    if (this.btnCarInfo === 0) {
-      this.requiredCarFields = false;
-    } else if (this.btnCarInfo > 0) {
-      this.requiredCarFields = true;
-      this.currentTab++;
-      this.tabset.select('4');
-    }
-  }
-
-  /** Moves Registration to the Biography Tab */
-  carPrevious() {
+    /** Moves Registration to the Bio/Car Tab */
+  reviewPrevious() {
     this.tabset.select('2');
   }
 
-    /** Moves Registration to the Car Tab */
-  reviewPrevious() {
-    this.tabset.select('3');
-  }
-
-  test() {
-    console.log(this.timeSelect);
-  }
 }
