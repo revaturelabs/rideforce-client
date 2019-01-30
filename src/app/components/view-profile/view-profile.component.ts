@@ -59,6 +59,7 @@ export class ViewProfileComponent implements OnInit {
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
+
     this.authService.principal.subscribe(user => {
       this.principal = user;
       if (this.principal) {
@@ -124,7 +125,7 @@ export class ViewProfileComponent implements OnInit {
     this.principal.batchEnd = this.batchEnd;
     this.principal.role = Role[this.currentRole];
     this.authService.changePrincipal(this.principal);
-    //if(document.getElementById("activeState")) 
+    //if(document.getElementById("activeState"))
     this.userService.update().then();
     window.location.reload(true);
   }
@@ -192,10 +193,10 @@ export class ViewProfileComponent implements OnInit {
   //   console.log(this.principal.role);
   //   if (this.principal.role == 'ADMIN') {
   //     console.log("I AM AN ADMIN");
-  //     this.userService.getAllUsers().then((x) => { 
-  //       data = x.filter(x => 
-  //         x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); 
-  //       this.users = data; this.filteredUsers = data; 
+  //     this.userService.getAllUsers().then((x) => {
+  //       data = x.filter(x =>
+  //         x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER');
+  //       this.users = data; this.filteredUsers = data;
   //     });
   //   } else if (this.principal.role == 'TRAINER') {
   //     console.log("THIS IS TRAINER");
