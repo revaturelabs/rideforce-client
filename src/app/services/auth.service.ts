@@ -12,7 +12,7 @@ import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognit
 
 
 
-const userPool = new CognitoUserPool(environment.cognitoData);
+
 
 /**
  * Allows Users to authenticate themselves with the server
@@ -54,6 +54,7 @@ export class AuthService {
       Password : password,
     };
     const authenticationDetails = new AuthenticationDetails(authenticationData);
+    const userPool = new CognitoUserPool(environment.cognitoData);
 
     const userData = {
       Username : email,

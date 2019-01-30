@@ -72,14 +72,25 @@ export class UserControllerService {
       //Sends the login credentials to cognito
       userPool.signUp(uri.user.email, uri.user.password, attributeList, null, (err, result) => {
         if (err) {
-          console.log("signUp error", err);
+          alert(err.message || JSON.stringify(err));
           observer.error(err);
         }else{
           console.log("signUp success", result);
           //Then wipes password and sends the user information to the actual server along with the idToken
           uri.user.password = "blankPass";
           this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
-            //if it errors here, then delete the cognito user
+            //its all good
+          }, error =>{
+            alert("Error: registration not completed.");
+            //if it errors here, then delete the cognito user  (code not working, user needs to be authenticated)
+            // console.log("Server error adding user");
+            // result.user.deleteUser(function(err, result) {
+            //   if (err) {
+            //       alert(err.message || JSON.stringify(err));
+            //       return;
+            //   }
+            //   console.log('call result: ' + result);
+            // });
           });
         }
         observer.next(result);
