@@ -3,7 +3,7 @@ import { ViewChild } from '@angular/core';
 import { NgbTabset, NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { AddressModel } from '../../models/address.model';
 import { User } from '../../models/user.model';
-import {Login } from '../../classes/login'
+import { Login } from '../../classes/login';
 import { Car } from '../../models/car.model';
 import { ContactInfo } from '../../models/contact-info.model';
 import { AuthService } from '../../services/auth.service';
@@ -13,6 +13,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { UploadService } from '../../services/upload.service';
 import { Router } from '@angular/router';
+import { UserRegistrationInfo } from '../../models/user-registration-info.model';
 
 /**
  * Used to allow for registration of new users
@@ -151,6 +152,9 @@ export class AccountinfoComponent implements OnInit {
   /**booleans for car information buttons*/
   btnCarInfo: Number = 0;
 
+  uri: UserRegistrationInfo;
+  tmp: string;
+
   /**
    * Sets up the Account info service with needed services provided
    * @param {NgZone} zone - Allows the Location to be deduced
@@ -169,6 +173,7 @@ export class AccountinfoComponent implements OnInit {
 
   /** Prepares the form and sets up validation */
   ngOnInit() {
+    this.uri = new UserRegistrationInfo();
     if (window.screen.width <= 430) { // 768px portrait
       this.mobile = true;
     }
@@ -289,6 +294,7 @@ export class AccountinfoComponent implements OnInit {
   createUserObject() {
 
     // this.upload();
+    this.userObject = new Login();
     this.userObject.id = 1;
     this.userObject.firstName = this.firstName;
     this.userObject.lastName = this.lastName;
@@ -350,6 +356,7 @@ export class AccountinfoComponent implements OnInit {
 
   /** Processes tab updates */
   tabSelect(e: NgbTabChangeEvent) {
+    console.log(e);
     if (Number(e.nextId) > this.currentTab) {
       e.preventDefault();
     }
@@ -391,4 +398,19 @@ export class AccountinfoComponent implements OnInit {
     this.tabset.select('2');
   }
 
+  // New Additions
+  validateToken() {
+    if (this.uri.registrationToken) {
+      let pref = this.uri.registrationToken.substr(0, 28);
+      if (pref.startsWith('XcvF')) {
+        pref = pref.substr(4);
+      }
+      const decrip = atob(pref).split('~');
+
+      this.uri.user.office = decrip[0];
+      this.uri.user.batchEnd = decrip[1];
+    }
+  }
 }
+
+
