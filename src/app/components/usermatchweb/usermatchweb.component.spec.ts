@@ -4,11 +4,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { User } from '../../models/user.model';
-import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 import { UsermatchwebComponent } from './usermatchweb.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { componentNeedsResolution } from '@angular/core/src/metadata/resource_loading';
 
 describe('UsermatchwebComponent', () => {
   let component: UsermatchwebComponent;
@@ -35,14 +33,6 @@ describe('UsermatchwebComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  /*   beforeEach(() => {
-      TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, MatchingControllerService,
-        UserControllerService, UsermatchwebComponent],
-        declarations:[UsermatchwebComponent]});
-      component = TestBed.get(UsermatchwebComponent);
-    }); */
-
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -86,7 +76,7 @@ describe('UsermatchwebComponent', () => {
 
     expect(component.users.push).toBeTruthy();
     expect(component.sortedUsers).toBeTruthy();
-    expect(component.loading).toBeFalsy();
+    expect(component.loading).toBeTruthy();
   });
 
   it('call getMyLocation', () => {
@@ -129,7 +119,6 @@ describe('UsermatchwebComponent', () => {
     // lat 2: 38.9663139
     // long 2: -77.4154329
 
-    // either the variables names are wrong or..
     // calculateDistance(long1,long2,lat1,lat2);
     expect(component.calculateDistance(-77.41358919999999,-77.4154329,38.9661878,38.9663139)).toBeTruthy();
   });
@@ -141,5 +130,5 @@ describe('UsermatchwebComponent', () => {
     component.like(3031,1); // like
     component.like(3031,2); // trash
     component.like(3031,3); // clear
-  })
+  });
 });
