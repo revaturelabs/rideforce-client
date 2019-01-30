@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
-
-class ImageSnippet {
-  constructor(public src: string, public file: File) { }
-}
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-image-upload',
@@ -21,15 +18,16 @@ export class ImageUploadComponent {
     this.imageUploadProgress = '0%';
     this.selectedFile = <File>event.target.files[0];
     console.log(this.selectedFile)
-      
     }
+    
     onFileUpload() {
       const fd = new FormData();
       const fileName = `user-${sessionStorage.getItem('id')}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
       console.log("FILENAME    ------ " + fileName)
       fd.append('file', this.selectedFile, fileName);
       fd.append('user', sessionStorage.getItem('id'));
-      this.http.post('http://localhost:2222/storage/uploadFile', fd, {
+      //this.http.post('http://localhost:2222/storage/uploadFile', fd, {
+      this.http.post(environment.apiUrl + '/storage/uploadFile', fd, {
         reportProgress: true,
         observe: 'events'
       })

@@ -62,7 +62,7 @@ export class ViewProfileComponent implements OnInit {
     this.address2 = sessionStorage.getItem("address");
     this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
     this.getOffices();
-    this.getUsers();
+    //this.getUsers();
     this.getRole();
     this.getState();
     this.filteredUsers = this.users;

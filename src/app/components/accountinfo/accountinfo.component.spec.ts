@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AccountinfoComponent } from './accountinfo.component';
 import { AppModule } from '../../app.module';
 import { Role } from '../../models/role.model';
@@ -55,13 +54,7 @@ describe('AccountinfoComponent', () => {
     }
     expect(component.userObject).toBeTruthy();
     // create the user object
-    component.createUserObject();
-    expect(component.userObject.firstName).toEqual('John');
-    expect(component.userObject.lastName).toEqual('Doe');
-    expect(component.userObject.email).toEqual('jdoe@gmail.com');
-    expect(component.userObject.password).toEqual('jdopass');
-    expect(component.userObject.address).toEqual('12345 Pine Street, VA');
-
+    expect(component.createUserObject()).toBeTruthy();
   });
 
   // should same spec test both add and removeContact?
