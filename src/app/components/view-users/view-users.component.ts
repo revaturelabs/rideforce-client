@@ -1,7 +1,10 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
+import { Login } from '../../classes/login'
+import { Role } from '../../models/role.model'
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-users',
@@ -17,7 +20,14 @@ export class ViewUsersComponent implements OnInit {
        * @param {AuthService} authService
        */
 
-  constructor(private userService: UserControllerService, private authService: AuthService) {}
+  constructor(
+    private userService: UserControllerService,
+    private authService: AuthService,
+    private router : Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+      }
+    }
     /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -50,7 +60,7 @@ export class ViewUsersComponent implements OnInit {
   userId: number;
   userStatus: string;
   
-  
+  principal : Login;
   
   /**
   * Sets up the form with data about the durrent user
@@ -58,6 +68,10 @@ export class ViewUsersComponent implements OnInit {
 
 
   ngOnInit() { 
+    console.log("ngOnInit");
+    this.authService.principal.subscribe(user => {
+      this.principal = user;
+    });
     console.log("getting users");
     this.getUsers().then(data=> 
       {
@@ -70,11 +84,13 @@ export class ViewUsersComponent implements OnInit {
   }
 
   switchRole() {
-    if (sessionStorage.getItem('role') === 'DRIVER') {
-      sessionStorage.setItem('role', 'RIDER');
+    if (this.principal.currentRole === 'DRIVER') {
+      this.principal.currentRole ='RIDER';
+      this.authService.changePrincipal(this.principal);
       this.getRole();
-    } else if (sessionStorage.getItem('role') === 'RIDER') {
-      sessionStorage.setItem('role', 'DRIVER');
+    } else if (this.principal.currentRole === 'RIDER') {
+      this.principal.currentRole = 'DRIVER';
+      this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
       console.log('nope');
@@ -82,11 +98,13 @@ export class ViewUsersComponent implements OnInit {
   }
 
   switchState() {
-    if (sessionStorage.getItem('active') === 'ACTIVE') {
-      sessionStorage.setItem('active', 'INACTIVE');
+    if (this.principal.active === 'ACTIVE') {
+      this.principal.active = 'INACTIVE';
+      this.authService.changePrincipal(this.principal);
       this.getState();
-    } else if (sessionStorage.getItem('active') === 'INACTIVE') {
-      sessionStorage.setItem('active', 'ACTIVE');
+    } else if (this.principal.active === 'INACTIVE') {
+      this.principal.active = 'ACTIVE';
+      this.authService.changePrincipal(this.principal);
       this.getState();
     } else {
       console.log("Invalid State");
@@ -96,24 +114,24 @@ export class ViewUsersComponent implements OnInit {
   
   currentRole: string; 
   getRole() {
-    this.currentRole = sessionStorage.getItem('role');
+    this.currentRole = this.principal.currentRole;
   }
   currentState: string;
   getState() {
-    this.currentState = sessionStorage.getItem('active');
+    this.currentState = this.principal.active;
   }
   /** Sets up all users in the system */
   getUsers() {
     let data;
     console.log("hitting users");
-    if (sessionStorage.getItem('role') === 'ADMIN') {
+    if (this.principal.currentRole === 'ADMIN') {
         return this.userService.getAllUsers().then((x) => { 
         data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER' || x.role === 'ADMIN'); 
         this.users = data;
         return data;
       });
     } 
-    else if (sessionStorage.getItem('role') === 'TRAINER') {
+    else if (this.principal.currentRole === 'TRAINER') {
       this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER');
        this.users = data;
       });
@@ -150,6 +168,7 @@ export class ViewUsersComponent implements OnInit {
   }
 
   confirmUserStatus(id: number, active: string) {
+    console.log("confirming");
     this.userId = id;
     this.userStatus = active;
     console.log(this.userId);
@@ -157,6 +176,7 @@ export class ViewUsersComponent implements OnInit {
   }
 
   updateUserStatus() {
+    console.log("updating");
     if (this.userStatus !== 'DISABLED') {
       //this.result = window.confirm("Are you sure you want to disable this account?");
       this.userStatus = 'DISABLED';
@@ -166,7 +186,7 @@ export class ViewUsersComponent implements OnInit {
     }
     
       this.userService.updateStatus(this.userId, this.userStatus).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
     
   }
 
@@ -179,7 +199,7 @@ export class ViewUsersComponent implements OnInit {
     //this.result = window.confirm("Are you sure you want to make this user a trainer?");
     let role = 'TRAINER';
       this.userService.updateRole(this.userId, role).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
     } 
   
 
@@ -187,14 +207,14 @@ export class ViewUsersComponent implements OnInit {
     //this.result = window.confirm("Are you sure you want to make this user an admin?");
     let role = 'ADMIN';
       this.userService.updateRole(this.userId, role).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
   }
 
   makeDriver() {
     //this.result = window.confirm("This user is now a Driver");
     let role = 'DRIVER';
       this.userService.updateRole(this.userId, role).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
     }
 
   makeRider() {
@@ -203,7 +223,7 @@ export class ViewUsersComponent implements OnInit {
     //console.log("Called makeRider");
    
       this.userService.updateRole(this.userId, role).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
     }
   
 
@@ -241,7 +261,7 @@ export class ViewUsersComponent implements OnInit {
   }
 
   reload() {
-    location.reload(true);
+    this.router.navigate(['/viewUsers']);
   }
 
 
