@@ -1,9 +1,8 @@
-#bg{
-    margin: 0;
-    position: absolute;
-    z-index: -1;
-    width: 95%;
-    max-height: 700px;
+#tablecont{
+    background-image: url('../../../assets/img/ss_dash.jpg');
+    background-repeat: no-repeat;
+    background-size: 95%;
+    background-position: center;
 }
 
 .container-fluid{
