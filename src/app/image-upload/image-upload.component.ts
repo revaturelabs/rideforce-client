@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-image-upload',
@@ -25,7 +26,8 @@ export class ImageUploadComponent {
       console.log("FILENAME    ------ " + fileName)
       fd.append('file', this.selectedFile, fileName);
       fd.append('user', sessionStorage.getItem('id'));
-      this.http.post('http://localhost:2222/storage/uploadFile', fd, {
+      //this.http.post('http://localhost:2222/storage/uploadFile', fd, {
+      this.http.post(environment.apiUrl + '/storage/uploadFile', fd, {
         reportProgress: true,
         observe: 'events'
       })
