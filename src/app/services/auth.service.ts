@@ -70,6 +70,7 @@ export class AuthService {
         this.getUserByEmail(email).subscribe(resp =>{
           console.log('Retrieved email of user');
           const l : Login = resp as Login;
+          l.currentRole = l.role;
           this.changePrincipal(l);
           console.log("sending to landing");
           this.route.navigate(['/landing']);
@@ -102,13 +103,13 @@ export class AuthService {
    */
   isTrainer(): boolean {
     
-    return this.principalSource.value.role == "TRAINER" || this.isAdmin();
+    return this.principalSource.value.currentRole == "TRAINER" || this.isAdmin();
   }
   /**
    * Returns whether the current user is logged in as an Admin
    */
   isAdmin(): boolean {
-    return this.principalSource.value.role == "ADMIN";
+    return this.principalSource.value.currentRole == "ADMIN";
   }
   /**
    * Logs the user out of the service

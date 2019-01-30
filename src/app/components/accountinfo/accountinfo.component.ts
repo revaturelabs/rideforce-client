@@ -320,25 +320,6 @@ export class AccountinfoComponent implements OnInit {
     this.userObject.active = 'ACTIVE';
     this.userObject.role = this.roleObject;
     this.userObject.bio = this.bio;
-
-    // this.userObject = {
-    //   id: 1,
-    //   firstName: this.firstName,
-    //   lastName: this.lastName,
-    //   email: this.username,
-    //   password: this.password,
-    //   photoUrl: this.imageSrc,
-    //   address: this.address2,
-    //   office: '/offices/' + this.officeObject.id,
-    //   // I really don't understand what this translates to on the back end, but now it is dynamic
-    //   batchEnd: new Date(this.batchEnd).toISOString(),
-    //   startTime: this.timeSelect,
-    //   cars: [],
-    //   active: 'ACTIVE',
-    //   contactInfo: [],
-    //   role: this.roleObject,
-    //   bio: this.bio
-    // };
     console.log(this.userObject);
     // get id from user after post and associate with a car object
     // this.carObject.id = owner from post
@@ -346,13 +327,6 @@ export class AccountinfoComponent implements OnInit {
       .then((x) => {
         this.userObject.id = x.id;
         this.auth.changePrincipal(this.userObject);
-        // sessionStorage.setItem("firstName", x.firstName);
-        // sessionStorage.setItem("lastName", x.lastName);
-        // sessionStorage.setItem("userEmail", x.email);
-        // sessionStorage.setItem("userPassword", x.password);
-        // sessionStorage.setItem("address", x.address);
-        // sessionStorage.setItem("role", x.role);
-        // sessionStorage.setItem('bio', x.bio);
         this.router.navigate(['/landing']);
       });
 

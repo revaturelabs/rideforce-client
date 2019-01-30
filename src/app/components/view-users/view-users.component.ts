@@ -4,6 +4,7 @@ import { User } from '../../models/user.model';
 import { Login } from '../../classes/login'
 import { Role } from '../../models/role.model'
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-users',
@@ -19,7 +20,14 @@ export class ViewUsersComponent implements OnInit {
        * @param {AuthService} authService
        */
 
-  constructor(private userService: UserControllerService, private authService: AuthService) {}
+  constructor(
+    private userService: UserControllerService,
+    private authService: AuthService,
+    private router : Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+      }
+    }
     /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -60,6 +68,7 @@ export class ViewUsersComponent implements OnInit {
 
 
   ngOnInit() { 
+    console.log("ngOnInit");
     this.authService.principal.subscribe(user => {
       this.principal = user;
     });
@@ -75,12 +84,12 @@ export class ViewUsersComponent implements OnInit {
   }
 
   switchRole() {
-    if (this.principal.role === 'DRIVER') {
-      this.principal.role = Role['RIDER'];
+    if (this.principal.currentRole === 'DRIVER') {
+      this.principal.currentRole ='RIDER';
       this.authService.changePrincipal(this.principal);
       this.getRole();
-    } else if (this.principal.role === 'RIDER') {
-      this.principal.role = Role['DRIVER'];
+    } else if (this.principal.currentRole === 'RIDER') {
+      this.principal.currentRole = 'DRIVER';
       this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
@@ -105,7 +114,7 @@ export class ViewUsersComponent implements OnInit {
   
   currentRole: string; 
   getRole() {
-    this.currentRole = this.principal.role;
+    this.currentRole = this.principal.currentRole;
   }
   currentState: string;
   getState() {
@@ -115,14 +124,14 @@ export class ViewUsersComponent implements OnInit {
   getUsers() {
     let data;
     console.log("hitting users");
-    if (this.principal.role === 'ADMIN') {
+    if (this.principal.currentRole === 'ADMIN') {
         return this.userService.getAllUsers().then((x) => { 
         data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER' || x.role === 'ADMIN'); 
         this.users = data;
         return data;
       });
     } 
-    else if (this.principal.role === 'TRAINER') {
+    else if (this.principal.currentRole === 'TRAINER') {
       this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER');
        this.users = data;
       });
@@ -159,6 +168,7 @@ export class ViewUsersComponent implements OnInit {
   }
 
   confirmUserStatus(id: number, active: string) {
+    console.log("confirming");
     this.userId = id;
     this.userStatus = active;
     console.log(this.userId);
@@ -166,6 +176,7 @@ export class ViewUsersComponent implements OnInit {
   }
 
   updateUserStatus() {
+    console.log("updating");
     if (this.userStatus !== 'DISABLED') {
       //this.result = window.confirm("Are you sure you want to disable this account?");
       this.userStatus = 'DISABLED';
@@ -175,7 +186,7 @@ export class ViewUsersComponent implements OnInit {
     }
     
       this.userService.updateStatus(this.userId, this.userStatus).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
     
   }
 
@@ -188,7 +199,7 @@ export class ViewUsersComponent implements OnInit {
     //this.result = window.confirm("Are you sure you want to make this user a trainer?");
     let role = 'TRAINER';
       this.userService.updateRole(this.userId, role).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
     } 
   
 
@@ -196,14 +207,14 @@ export class ViewUsersComponent implements OnInit {
     //this.result = window.confirm("Are you sure you want to make this user an admin?");
     let role = 'ADMIN';
       this.userService.updateRole(this.userId, role).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
   }
 
   makeDriver() {
     //this.result = window.confirm("This user is now a Driver");
     let role = 'DRIVER';
       this.userService.updateRole(this.userId, role).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
     }
 
   makeRider() {
@@ -212,7 +223,7 @@ export class ViewUsersComponent implements OnInit {
     //console.log("Called makeRider");
    
       this.userService.updateRole(this.userId, role).then();
-      location.reload(true);
+      this.router.navigate(['/viewUsers']);
     }
   
 
@@ -250,7 +261,7 @@ export class ViewUsersComponent implements OnInit {
   }
 
   reload() {
-    location.reload(true);
+    this.router.navigate(['/viewUsers']);
   }
 
 

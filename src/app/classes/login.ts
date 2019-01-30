@@ -22,7 +22,8 @@ export class Login implements User {
     venmo?: string;
     contactInfo: Link<ContactInfo>[];
     active: string;
-    role: Role;
+    currentRole: string;
+    role : Role;
     authToken: string;
     access_token: string;
     api_token: string;

@@ -71,7 +71,7 @@ export class LandingComponent implements OnInit {
   * Sets the role of the Current user to determine what functionality should be available
   */
   setCurrentRole() {
-    this.role = this.principal.role;
+    this.role = this.principal.currentRole;
   }
 
 }

@@ -30,7 +30,7 @@ export class FavoritesComponent implements OnInit {
   ngOnInit() {
     this.authService.principal.subscribe(user => {
       this.principal = user;
-      if (this.principal === null)
+      if (this.principal.id < 1)
         this.route.navigate(["/landing"]);
       if (window.screen.width <= 430) { // 768px portrait
         this.mobile = true;

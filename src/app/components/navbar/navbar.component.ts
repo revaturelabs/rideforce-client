@@ -78,7 +78,7 @@ export class NavbarComponent implements OnInit {
     this.authService.principal.subscribe(p =>{
       this.principal = p;
       if (this.principal.id > 0){
-        this.role = this.principal.role;
+        this.role = this.principal.currentRole;
         this.sessionCheck();
       }
       

@@ -196,7 +196,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   ngOnInit() {
     this.auth.principal.subscribe(user => {
       this.principal = user;
-      if (this.principal === null)
+      if (this.principal.id < 1)
         this.route.navigate(["/landing"]);
       this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
       this.hsong.loop = true;

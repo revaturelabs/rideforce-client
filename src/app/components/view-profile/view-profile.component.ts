@@ -7,6 +7,7 @@ import { constants } from 'fs';
 import { ContactInfo } from '../../models/contact-info.model';
 import { Login } from '../../classes/login';
 import {Role} from '../../models/role.model'
+import { Router } from '@angular/router';
 
 
 /**
@@ -25,7 +26,14 @@ export class ViewProfileComponent implements OnInit {
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService, public authService: AuthService) { }
+  constructor(
+    private userService: UserControllerService, 
+    private authService: AuthService,
+    private router : Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+     }
+    }
   /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -61,6 +69,7 @@ export class ViewProfileComponent implements OnInit {
   ngOnInit() {
     this.authService.principal.subscribe(user => {
       this.principal = user;
+      //debug console.log(this.principal);
       if (this.principal) {
         this.existingBio = this.principal.bio;
         this.firstName = this.principal.firstName;
@@ -68,15 +77,7 @@ export class ViewProfileComponent implements OnInit {
         this.username = this.principal.email;
         this.address2 = this.principal.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
-        //this.existingBio = sessionStorage.getItem('bio');
-        //this.changeExistingBioStatus();
-        //this.firstName = sessionStorage.getItem("firstName");
-        //this.lastName = sessionStorage.getItem("lastName");
-        //this.username = sessionStorage.getItem("userEmail");
-        //this.address2 = sessionStorage.getItem("address");
-        //this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
         this.getOffices();
-       // this.getUsers();
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
@@ -110,35 +111,29 @@ export class ViewProfileComponent implements OnInit {
    * Updates the user once he/she is content with the updates
    */
   submitChanges() {
-
-    //sessionStorage.setItem('firstName', this.firstName);
-    //sessionStorage.setItem('lastName', this.lastName);
-    //sessionStorage.setItem('userEmail', this.username);
-    //sessionStorage.setItem('address', this.address2);
-    //sessionStorage.setItem('batchEnd', this.batchEnd);
-    //sessionStorage.setItem('role', this.currentRole);
     this.principal.firstName = this.firstName;
     this.principal.lastName = this.lastName;
     this.principal.email = this.username;
     this.principal.address = this.address2;
     this.principal.batchEnd = this.batchEnd;
-    this.principal.role = Role[this.currentRole];
-    this.authService.changePrincipal(this.principal);
-    //if(document.getElementById("activeState")) 
+    this.principal.currentRole = this.currentRole;
+    
     this.userService.update().then();
-    window.location.reload(true);
+    this.authService.changePrincipal(this.principal);
+    //debug console.log("routing");
+    this.router.navigate(['userProfile']);
   }
 
   /**
    * Enables limited ability to modify the User's role in the system
    */
   switchRole() {
-    if (this.principal.role === 'DRIVER') {
-      this.principal.role= Role['RIDER'];
+    if (this.principal.currentRole === 'DRIVER') {
+      this.principal.currentRole= 'RIDER';
       this.authService.changePrincipal(this.principal);
       this.getRole();
-    } else if (this.principal.role === 'RIDER') {
-      this.principal.role= Role['DRIVER'];
+    } else if (this.principal.currentRole === 'RIDER') {
+      this.principal.currentRole= 'DRIVER';
       this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
@@ -174,7 +169,7 @@ export class ViewProfileComponent implements OnInit {
    * Sets up the User's current role in the system
    */
   getRole() {
-    this.currentRole = this.principal.role;
+    this.currentRole = this.principal.currentRole;
   }
   currentState: string;
   getState() {
@@ -185,55 +180,6 @@ export class ViewProfileComponent implements OnInit {
   users: any[];
   /** Holds the list of users filtered with search query */
   filteredUsers: any[];
-  /** Sets up all users in the system */
-  // getUsers() {
-  //   let data;
-  //   console.log("***ROLE****");
-  //   console.log(this.principal.role);
-  //   if (this.principal.role == 'ADMIN') {
-  //     console.log("I AM AN ADMIN");
-  //     this.userService.getAllUsers().then((x) => { 
-  //       data = x.filter(x => 
-  //         x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); 
-  //       this.users = data; this.filteredUsers = data; 
-  //     });
-  //   } else if (this.principal.role == 'TRAINER') {
-  //     console.log("THIS IS TRAINER");
-  //     this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER'); this.users = data });
-  //   }
-  //   console.log("DATA");
-  //   console.log(data);
-  //   this.filterUsers(" ");
-  // }
-
-  // public filterUsers(query = "") {
-  //  let searchUsers = this.users;
-  //   console.log("HORSE PILEDRIVER");
-  //   console.log("how many users: " + this.users.length)
-  //   if (query.length < 1) {
-  //     console.log("returning all users: ", this.users.length)
-  //     this.filteredUsers = this.users;
-  //     return;
-  //   }
-  //   query = query.trim();
-  //   const queryStrings = query.split(" ");
-  //   this.filteredUsers = searchUsers.filter(user => {
-  //     for (let key in user) {
-  //       let data = user[key];
-  //       if (typeof data === "string") {
-  //         data = data.toLowerCase();
-  //         for (let searchTerm of queryStrings) {
-  //           searchTerm = searchTerm.toLocaleLowerCase();
-  //           let found = data.search(searchTerm);
-  //           if (found > -1) {
-  //             return user;
-  //           }
-  //         }
-
-  //       }
-  //     }
-  //   });
-  // }
 
   result: boolean;
   updateUserStatus(id: number, active: string) {
