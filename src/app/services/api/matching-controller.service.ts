@@ -35,7 +35,7 @@ export class MatchingControllerService {
    * @returns {Observable<Link<User>[]>} - the list of drivers that "match" the user
    */
   getMatchingDrivers(riderId: number): Observable<Link<User>[]> {
-
+    console.log(riderId);
     return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
     //return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
   }
@@ -48,10 +48,9 @@ export class MatchingControllerService {
    */
   getFilteredDrivers(riderId: number, filter: Filter): Promise<User[]> {
     const body = {
-      filter,
-      riderId
+      filter
     };
-    return this.http.post<User[]>(environment.apiUrl + `matches/filtered`, body).toPromise();
+    return this.http.post<User[]>(environment.apiUrl + `matches/filtered`+riderId, body).toPromise();
   }
 
   /**
