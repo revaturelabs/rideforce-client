@@ -8,8 +8,8 @@ export const environment = {
   /** Are we in production */
   production: false,
   /** URL for the service we are relying on */
-  //apiUrl: 'http://localhost:2222'
-  apiUrl: 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222'
+  apiUrl: 'http://localhost:2222'
+  //apiUrl: 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222'
   //apiUrl: 'http://192.168.61.113:2222'
   //apiUrl: 'http://e5a3040f.ngrok.io/'
 };

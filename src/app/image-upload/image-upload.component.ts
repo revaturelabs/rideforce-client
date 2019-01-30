@@ -3,6 +3,8 @@ import { UploadService } from '../services/upload.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Login } from '../classes/login';
 import { AuthService } from '../services/auth.service';
+import { environment } from '../../environments/environment';
+
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -56,8 +58,11 @@ Oninit(){
       const fileName = `user-${this.principal.id}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
       console.log("FILENAME    ------ " + fileName)
       fd.append('file', this.selectedFile, fileName);
-      fd.append('user', this.principal.id.toString());
-      this.http.post('http://localhost:2222/storage/uploadFile', fd, {
+
+      fd.append('user', sessionStorage.getItem('id'));
+      //this.http.post('http://localhost:2222/storage/uploadFile', fd, {
+      this.http.post(environment.apiUrl + '/storage/uploadFile', fd, {
+
         reportProgress: true,
         observe: 'events'
       })
