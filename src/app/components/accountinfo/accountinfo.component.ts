@@ -257,24 +257,6 @@ export class AccountinfoComponent implements OnInit {
   }
 
   /**
-   * Sets up a car
-   * (DEPRECATED: Moved to Car Regstration Component)
-   */
-  createCar() {
-    this.carObject.make = this.carMake;
-    this.carObject.model = this.carModel;
-    this.carObject.year = this.carYear;
-  }
-
-  /**
-   * Uploads image to the storage
-   */
-  // upload() {
-  //   const file = this.selectedFiles.item(0);
-  //   this.imageSrc = this.uploadService.uploadfile(file);
-  // }
-
-  /**
    * Manage the token
    */
   parseEncryption() {

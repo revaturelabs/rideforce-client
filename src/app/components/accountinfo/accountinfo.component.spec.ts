@@ -34,16 +34,6 @@ describe('AccountinfoComponent', () => {
   it('should return mobile false', () => {
     expect(component.mobile).toBeFalsy();
   });
-  
-  it('should "Create a Car"!', () => {
-    component.carMake = 'Toyoda';
-    component.carModel = 'Corolla';
-    component.carYear = 2008;
-    component.createCar();
-    expect(component.carObject.make).toEqual('Toyoda');
-    expect(component.carObject.model).toEqual('Corolla');
-    expect(component.carObject.year).toEqual(2008);
-  });
 
   it('user object should create', () => {
     component.userObject = {
@@ -71,7 +61,6 @@ describe('AccountinfoComponent', () => {
     expect(component.userObject.email).toEqual('jdoe@gmail.com');
     expect(component.userObject.password).toEqual('jdopass');
     expect(component.userObject.address).toEqual('12345 Pine Street, VA');
-    // not going to test all of it.
 
   });
 
