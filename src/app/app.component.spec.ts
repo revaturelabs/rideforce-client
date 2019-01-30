@@ -1,19 +1,12 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { HttpClientTestingModule } from '../../node_modules/@angular/common/http/testing';
 import { AppModule } from './app.module';
 import {APP_BASE_HREF} from '@angular/common';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [
-//         router,AppComponent
-//       ]
-//     });
-//   }));
+
 beforeEach(async(() => {
   TestBed.configureTestingModule({
       // declarations: [ LoginComponent ],

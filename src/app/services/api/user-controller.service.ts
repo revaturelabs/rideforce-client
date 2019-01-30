@@ -2,7 +2,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../../app/models/user.model';
-import { Register } from '../../../app/models/register.model';
 import { Observable, of, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';

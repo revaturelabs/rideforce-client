@@ -344,7 +344,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>, auth: <a href="../injectables/AuthService.html">AuthService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, uploadService: <a href="../injectables/UploadService.html">UploadService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>, auth: <a href="../injectables/AuthService.html">AuthService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -423,12 +423,7 @@
 </code>
                                                         </td>
                                                 </tr>
-                                                <tr>
-                                                        <td>uploadService</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
-                                                        </td>
+                                                <tr>                                                  
                                                   
                                                     <td>
                                                             No
@@ -3035,7 +3030,6 @@ import { Office } from &#x27;../../models/office.model&#x27;;
 import { Role } from &#x27;../../models/role.model&#x27;;
 import { UserControllerService } from &#x27;../../services/api/user-controller.service&#x27;;
 import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from &#x27;@angular/forms&#x27;;
-import { UploadService } from &#x27;../../services/upload.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
 /**
@@ -3179,13 +3173,11 @@ export class AccountinfoComponent implements OnInit {
    * @param {NgZone} zone - Allows the Location to be deduced
    * @param {AuthService} auth - Provides Authenitcation services (Does not appear to be used)
    * @param {UserControllerService} userService - Allows management of users
-   * @param {UploadService} uploadService - allows User to upload files
    * @param {Router} router - allows page navigation to take place
    */
   constructor(private zone: NgZone,
     private auth: AuthService,
     private userService: UserControllerService,
-    private uploadService: UploadService,
     private router: Router) {
       this.carObject &#x3D; new Car();
      }
@@ -3286,14 +3278,6 @@ export class AccountinfoComponent implements OnInit {
     this.carObject.make &#x3D; this.carMake;
     this.carObject.model &#x3D; this.carModel;
     this.carObject.year &#x3D; this.carYear;
-  }
-
-  /**
-   * Uploads image to the storage
-   */
-  upload() {
-    const file &#x3D; this.selectedFiles.item(0);
-    this.imageSrc &#x3D; this.uploadService.uploadfile(file);
   }
 
   /**

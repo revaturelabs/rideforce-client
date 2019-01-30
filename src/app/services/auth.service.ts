@@ -8,6 +8,8 @@ import { Login } from '../classes/login';
 //import { UserControllerService } from './api/user-controller.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { logging } from 'protractor';
+import { UserControllerService } from './api/user-controller.service';
+import { TokenStorage } from './../utils/token.storage';
 
 /**
  * Allows Users to authenticate themselves with the server

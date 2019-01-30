@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { LatLngLiteral } from '@agm/core';
 import { RouteInfo } from '../../models/route-info.model';
 import { Location } from '../../models/location.model'
 

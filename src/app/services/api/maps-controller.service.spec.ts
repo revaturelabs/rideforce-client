@@ -1,5 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { MapsControllerService } from './maps-controller.service';
 import { HttpClientTestingModule } from '../../../../node_modules/@angular/common/http/testing';
 import { RouteInfo } from '../../models/route-info.model';
