@@ -168,6 +168,7 @@ export class ViewUsersComponent implements OnInit {
   }
 
   confirmUserStatus(id: number, active: string) {
+    console.log("confirming");
     this.userId = id;
     this.userStatus = active;
     console.log(this.userId);
@@ -175,6 +176,7 @@ export class ViewUsersComponent implements OnInit {
   }
 
   updateUserStatus() {
+    console.log("updating");
     if (this.userStatus !== 'DISABLED') {
       //this.result = window.confirm("Are you sure you want to disable this account?");
       this.userStatus = 'DISABLED';
