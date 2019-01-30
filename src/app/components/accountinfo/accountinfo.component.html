@@ -204,27 +204,15 @@
                   <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
                 </div>
               </div>
-              <!--Moving Driver/Rider toggle to page 2, so it isn't the only thing on page-->
-              <div class="input-group mb-3">
-                <div class="btn-group" role="group" aria-label="btn groups">
-                  <button type="button" class="btn" id="riderBtn" (click)="isRider()">Rider</button>
-                  <button type="button" class="btn" id="driverBtn" (click)="isDriver()">Driver</button>
-                </div>
-              </div>
               <div>
                 <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="bioPrevious()">Previous</button></span>
                 <span> <button class="btn btnNextPrevious" (click)="bioNext()">Next</button></span>
-              </div>
-              <div style="padding-top: 20px">
-                <div *ngIf="!requiredCarFields" class="alert alert-danger">
-                  Please select Driver or Rider
-                </div>
               </div>
             </div>
           </ng-template>
         </ngb-tab>
       </div>
-     <!--  <div label="CAR INFO div">
+      <div label="CAR INFO div">
         <ngb-tab title="3" id="3">
           <ng-template ngbTabContent>
             <div class="input-group mb-3">
@@ -244,10 +232,10 @@
               </div>
             </div>
           </ng-template>
-        </ngb-tab> 
-      </div> -->
+        </ngb-tab>
+      </div>
       <div label="CONFIRMATION div">
-        <ngb-tab title="3" id="3">
+        <ngb-tab title="4" id="4">
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>

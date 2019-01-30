@@ -82,7 +82,11 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById("batchEnd").removeAttribute("disabled");
     document.getElementById("dayStart").removeAttribute("disabled");
     document.getElementById("switchRoles").removeAttribute("hidden");
-    document.getElementById("switchStates").removeAttribute("hidden");
+    //Had to put this in an if; Page would break if Admin or Trainer clicked edit
+    //Since for them, this button didn't exist to make visible
+    if(this.currentRole === "DRIVER" || this.currentRole === "RIDER"){
+      document.getElementById("switchStates").removeAttribute("hidden");
+    }
     document.getElementById("edit").style.display = "none";
     document.getElementById("submit").style.display = "inline";
     document.getElementById("batchEnd").setAttribute("type", "date");
