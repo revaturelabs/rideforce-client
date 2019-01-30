@@ -14,6 +14,7 @@ import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognit
 import { Role } from '../../models/role.model';
 import { Login } from '../../classes/login';
 import { AuthService } from '../../services/auth.service';
+import { UserRegistrationInfo } from '../../models/user-registration-info.model';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -54,52 +55,37 @@ export class UserControllerService {
   // CRUD FOR USERS * * * * * * * * * * * * * * * * * * * * *
 
   /**
-   * Creates a new user with the given data and password.
+   * Creates a new user in both cognito and 
+   * serverside with the given data and password.
    *
    * @param email the user data object
    * @param password the new user's password
    * @returns {Observable<User>} - the user entered into the system
    */
   // CREATE
-  createUser(user: User, password: string, registrationToken: string): Promise<User> {
-    console.log("about to get cognito data");
-    return this.sendUserToCognito(user.email,user.password).then(
-      (data) => {        
-        //get id token from cognito
-        console.log("Got cognito data:");
-        console.log(data);
-        this.sendUserToServer(user,data.idToken.jwtToken,registrationToken);
-      },
-      (err) => {
-        //COGNITO ERROR
-      }
-    ).toPromise;
-  }
-
-  sendUserToServer(user:User,idToken:string, registrationToken:string){
-    console.log("in SUS");
-    return this.http.post<User>(environment.apiUrl + '/users',
-        { user, idToken, registrationToken }
-        ).toPromise();
-  }
-
-  sendUserToCognito(email:string,password:string){
-    console.log("In SUC");
+  createUser(uri:UserRegistrationInfo){
+    console.log("In Cognito Create");
     const userPool = new CognitoUserPool(environment.cognitoData);
     const attributeList = [];
 
     return Observable.create(observer => {
-      userPool.signUp(email, password, attributeList, null, (err, result) => {
+      //Sends the login credentials to cognito
+      userPool.signUp(uri.user.email, uri.user.password, attributeList, null, (err, result) => {
         if (err) {
           console.log("signUp error", err);
           observer.error(err);
-          return;
+        }else{
+          console.log("signUp success", result);
+          //Then wipes password and sends the user information to the actual server along with the idToken
+          uri.user.password = "blankPass";
+          this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
+            //if it errors here, then delete the cognito user
+          });
         }
-        console.log("signUp success", result);
         observer.next(result);
         observer.complete();
       });
-    }).toPromise();
+    });
   }
 
   /**

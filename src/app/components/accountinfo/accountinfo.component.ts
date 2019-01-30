@@ -327,19 +327,12 @@ export class AccountinfoComponent implements OnInit {
     console.log(this.userObject);
     // get id from user after post and associate with a car object
     // this.carObject.id = owner from post
-    this.userService.createUser(this.userObject, this.password, this.token.substring(28))
-      .then((x) => {
-        this.userObject.id = x.id;
-        this.auth.changePrincipal(this.userObject);
-        // sessionStorage.setItem("firstName", x.firstName);
-        // sessionStorage.setItem("lastName", x.lastName);
-        // sessionStorage.setItem("userEmail", x.email);
-        // sessionStorage.setItem("userPassword", x.password);
-        // sessionStorage.setItem("address", x.address);
-        // sessionStorage.setItem("role", x.role);
-        // sessionStorage.setItem('bio', x.bio);
-        this.router.navigate(['/landing']);
-      });
+    // this.userService.createUser(this.userObject, this.password, this.token.substring(28))
+    //   .then((x) => {
+    //     this.userObject.id = x.id;
+    //     this.auth.changePrincipal(this.userObject);
+    //     this.router.navigate(['/landing']);
+    //   });
 
 
   }
@@ -411,7 +404,9 @@ export class AccountinfoComponent implements OnInit {
   }
 
   register() {
-    // Use this method to register
+    this.userService.createUser(this.uri).subscribe((x) => {
+      this.router.navigate(['/landing']);
+    });
   }
 }
 
