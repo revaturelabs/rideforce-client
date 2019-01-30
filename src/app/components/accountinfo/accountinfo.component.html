@@ -76,10 +76,10 @@
                     <label for="registrationToken">Registration Token</label>
                     <textarea [(ngModel)]="uri.registrationToken" (change)="validateToken()" class="form-control" aria-label="With textarea" name="registrationToken" id="registrationToken" placeholder="Registration Token" required></textarea>
                   </div>
-                  <div class="form-row">
+                  <div *ngIf="uri.user.office" class="form-row">
                     <div class="form-group col-md-6">
                       <label for="officeLocation">Office Location</label>
-                      <input [(ngModel)]="uri.user.office" type="text" class="form-control" name="officeLocation" id="officeLocation" placeholder="Office Location" disabled>
+                      <input [(ngModel)]="uri.user.office.name" type="text" class="form-control" name="officeLocation" id="officeLocation" placeholder="Office Location" disabled>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="batchEndDate">Batch End Date</label>
@@ -88,15 +88,20 @@
                   </div>
                   <p *ngIf="e.valid">EMAIL VALID</p>
                   <p>TOKEN: {{uri | json}}</p>
-                  <div><button class="btn btnNextPrevious" (click)="accountInfoNext()">Next</button></div>
-                  <div style="padding-top: 20px"><div *ngIf="!requiredInfoFields" class="alert alert-danger">Please fill out ALL fields and confirm your passwords match</div></div>
+                  <div><button class="btn btnNextPrevious" (click)="register()">Register</button></div>
                 </form>
           </ng-template>
       </ngb-tab>
       <ngb-tab title="Profile" id="tab2">
-
+          <ng-template ngbTabContent>
+          <br>
+        <div class="form-group">
+          <label for="aboutYou">About You</label>
+          <textarea [(ngModel)]="uri.user.bio" class="form-control" aria-label="With textarea" name="aboutYou" id="aboutYou" placeholder="Tell me about yourself." required></textarea>
+        </div>
+      </ng-template>
       </ngb-tab>
-      <ngb-tab title="Confirm" id="tab3">
+      <ngb-tab title="Review" id="tab3">
 
       </ngb-tab>
     </ngb-tabset>

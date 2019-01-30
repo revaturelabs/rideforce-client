@@ -1,8 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { NgbTabset, NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
-import { AddressModel } from '../../models/address.model';
-import { User } from '../../models/user.model';
 import { Login } from '../../classes/login';
 import { Car } from '../../models/car.model';
 import { ContactInfo } from '../../models/contact-info.model';
@@ -10,8 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { Office } from '../../models/office.model';
 import { Role } from '../../models/role.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
-import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
-import { UploadService } from '../../services/upload.service';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserRegistrationInfo } from '../../models/user-registration-info.model';
 
@@ -154,6 +151,7 @@ export class AccountinfoComponent implements OnInit {
 
   uri: UserRegistrationInfo;
   tmp: string;
+  offices: Office[];
 
   /**
    * Sets up the Account info service with needed services provided
@@ -166,7 +164,6 @@ export class AccountinfoComponent implements OnInit {
   constructor(private zone: NgZone,
     private auth: AuthService,
     private userService: UserControllerService,
-    private uploadService: UploadService,
     private router: Router) {
       this.carObject = new Car();
      }
@@ -351,15 +348,16 @@ export class AccountinfoComponent implements OnInit {
   getOffices() {
     this.userService.getAllOffices().subscribe(data => {
       this.officeObjectArray = data;
+      this.offices = data;
     });
   }
 
   /** Processes tab updates */
   tabSelect(e: NgbTabChangeEvent) {
     console.log(e);
-    if (Number(e.nextId) > this.currentTab) {
-      e.preventDefault();
-    }
+    // if (Number(e.nextId) > this.currentTab) {
+    //   e.preventDefault();
+    // }
   }
 
   /**
@@ -407,9 +405,13 @@ export class AccountinfoComponent implements OnInit {
       }
       const decrip = atob(pref).split('~');
 
-      this.uri.user.office = decrip[0];
+      this.uri.user.office = this.offices.filter(o => o.name === decrip[0])[0];
       this.uri.user.batchEnd = decrip[1];
     }
+  }
+
+  register() {
+    // Use this method to register
   }
 }
 

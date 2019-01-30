@@ -1,4 +1,5 @@
 import { Role } from './role.model';
+import { Office } from './office.model';
 
 export class Usr {
   id: number;
@@ -10,7 +11,7 @@ export class Usr {
   bio: string;
   active: string;
   role: Role;
-  office: string;
+  office: Office;
   address: string;
   startTime: number;
   batchEnd: string;
