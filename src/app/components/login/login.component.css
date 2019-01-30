@@ -10,7 +10,16 @@ body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
 }
+#bg{
+    margin: 0;
+    top: -10%;
+    position: absolute;
+    z-index: -1;
+    padding: 30px;
+    height: 105%;
+    max-height: 700px;
 
+}
 a {
   color: #92badd;
   display:inline-block;
@@ -59,7 +68,7 @@ h2 {
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
+  background:rgb(255, 255, 255,0.8);
   padding: 30px;
   width: 90%;
   max-width: 450px;
