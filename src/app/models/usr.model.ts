@@ -1,5 +1,6 @@
 import { Role } from './role.model';
 import { Office } from './office.model';
+import { ContactInfo } from './contact-info.model';
 
 export class Usr {
   id: number;
@@ -16,10 +17,13 @@ export class Usr {
   startTime: number;
   batchEnd: string;
   cars: any[];
-  contactInfo: any[];
+  contactInfo: ContactInfo[];
 
   constructor() {
     this.id = 1;
     this.active = 'ACTIVE';
+    this.role = Role.Rider;
+    this.startTime = 7.5;
+    this.contactInfo = [];
   }
 }

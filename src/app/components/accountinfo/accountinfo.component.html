@@ -1,226 +1,59 @@
 <div class="container-fluid">
-<div class="row justify-content-center">
-  <div class="col-lg-6 pt-3">
-    <ngb-tabset (tabChange)="tabSelect($event)">
-      <ngb-tab title="Register" id="tab1">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 pt-3">
+      <!-- Tab Container -->
+      <ngb-tabset>
+        <ngb-tab title="Register" id="tab1">
+          <!-- Tab 1 Content -->
           <ng-template ngbTabContent>
-            <br/>
-              <form>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="firstName">First Name</label>
-                      <input [ngClass]="{'is-invalid': fn.invalid && (fn.dirty || fn.touched), 'is-valid': fn.valid}" #fn="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="uri.user.firstName" type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required>
-                      <div *ngIf="!!fn?.errors?.required" class="invalid-feedback">
-                        First name cannot be empty.
-                      </div>
-                      <div *ngIf="!!fn?.errors?.pattern" class="invalid-feedback">
-                        First name cannot have any symbols or numbers.
-                      </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="lastName">Last Name</label>
-                      <input [ngClass]="{'is-invalid': ln.invalid && (ln.dirty || ln.touched), 'is-valid': ln.valid}" #ln="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="uri.user.lastName" type="text" class="form-control" name="lastName" id="lastName" placeholder="Doe" required>
-                      <div *ngIf="!!ln?.errors?.required" class="invalid-feedback">
-                        Last name cannot be empty.
-                      </div>
-                      <div *ngIf="!!ln?.errors?.pattern" class="invalid-feedback">
-                        Last name cannot have any symbols or numbers.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email</label>
-                    <input [ngClass]="{'is-invalid': e.invalid && (e.dirty || e.touched), 'is-valid': e.valid}" #e="ngModel" pattern="[a-zA-z0-9\.]+@[a-zA-z0-9]+\.[a-zA-z0-9.]+" [(ngModel)]="uri.user.email" type="text" class="form-control" name="email" id="email" placeholder="john.doe@example.com" required>
-                    <div *ngIf="!!e?.errors?.required" class="invalid-feedback">
-                      Email cannot be empty.
-                    </div>
-                    <div *ngIf="!!e?.errors?.pattern" class="invalid-feedback">
-                      Email must be a valid email.
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="address">Address</label>
-                    <input [(ngModel)]="uri.user.address" type="text" class="form-control" name="address" id="address" placeholder="Your Address" appPlacesAutocomplete required>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="password">Password</label>
-                      <input [ngClass]="{'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid}" #p="ngModel" pattern="[0-9a-zA-Z!@#]{8,16}" [(ngModel)]="uri.user.password" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                      <div *ngIf="!!p?.errors?.required" class="invalid-feedback">
-                        Password cannot be empty.
-                      </div>
-                      <div *ngIf="!!p?.errors?.pattern" class="invalid-feedback">
-                        Password must be between 8-16 characters long.
-                      </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="confirmPassword">Confirm Password</label>
-                      <input [ngClass]="{'is-invalid': uri.user.password !== tmp && (pc.dirty || pc.touched), 'is-valid': uri.user.password === tmp && (pc.dirty || pc.touched)}" #pc="ngModel" [(ngModel)]="tmp" type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
-                      <div *ngIf="true" class="invalid-feedback">
-                        Password doesn't match.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="startTime">Day Start</label>
-                    <select class="custom-select my-1 mr-sm-2" name="startTime" id="startTime" [(ngModel)]="uri.user.startTime" required>
-                      <option value="7.5">7:30 AM</option>
-                      <option value="8">8:00 AM</option>
-                      <option value="8.5">8:30 AM</option>
-                      <option value="9">9:00 AM</option>
-                      <option value="9.5">9:30 AM</option>
-                      <option value="10">10:00 AM</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="registrationToken">Registration Token</label>
-                    <textarea [(ngModel)]="uri.registrationToken" (change)="validateToken()" class="form-control" aria-label="With textarea" name="registrationToken" id="registrationToken" placeholder="Registration Token" required></textarea>
-                  </div>
-                  <div *ngIf="uri.user.office" class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="officeLocation">Office Location</label>
-                      <input [(ngModel)]="uri.user.office.name" type="text" class="form-control" name="officeLocation" id="officeLocation" placeholder="Office Location" disabled>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="batchEndDate">Batch End Date</label>
-                      <input [(ngModel)]="uri.user.batchEnd" type="date" class="form-control" name="batchEndDate" id="batchEndDate" placeholder="Batch End Date" disabled>
-                    </div>
-                  </div>
-                  <p *ngIf="e.valid">EMAIL VALID</p>
-                  <p>TOKEN: {{uri | json}}</p>
-                  <div><button class="btn btnNextPrevious" (click)="register()">Register</button></div>
-                </form>
-          </ng-template>
-      </ngb-tab>
-      <ngb-tab title="Profile" id="tab2">
-          <ng-template ngbTabContent>
-          <br>
-        <div class="form-group">
-          <label for="aboutYou">About You</label>
-          <textarea [(ngModel)]="uri.user.bio" class="form-control" aria-label="With textarea" name="aboutYou" id="aboutYou" placeholder="Tell me about yourself." required></textarea>
-        </div>
-      </ng-template>
-      </ngb-tab>
-      <ngb-tab title="Review" id="tab3">
-
-      </ngb-tab>
-    </ngb-tabset>
-  </div>
-</div>
-</div>
-
-<br />
-<div class="form-group row">
-  <div class="col-3"></div>
-  <div class="col-lg-6 col-xs-12 extend">
-    <ngb-tabset (tabChange)="tabSelect($event)">
-      <div label="CREATE PROFILE div">
-        <ngb-tab title="1" id="1">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-              <br />
-              <h2>Create Profile</h2>
-              <br />
-              <div class="input-group mb-3">
-                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">First Name</span></div>
-                <input type="text" class="form-control" pattern="[a-zA-Z ]*" [(ngModel)]="firstName" #firstname="ngModel" required />
-              </div>
-              <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
-                <div *ngIf="firstname.errors.required">First name cannot be empty</div>
-                <div *ngIf="firstname.errors.pattern">First name cannot have any symbols or numbers</div>
-              </div>
-
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend "><span class="input-group-text " id="basic-addon1 ">Last Name</span></div>
-                <input type="text" class="form-control" pattern="[a-zA-Z]*" [(ngModel)]="lastName" #lastname="ngModel" required />
-              </div>
-              <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
-                <div *ngIf="lastname.errors.required">Last name cannot be empty</div>
-                <div *ngIf="lastname.errors.pattern">Last name cannot have any symbols or numbers</div>
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Email</span></div>
-                <input type="text" pattern="[a-zA-z0-9\.]+@[a-zA-z0-9]+\.[a-zA-z0-9.]+" class="form-control" [(ngModel)]="username" #uName="ngModel" required maxlength="40" placeholder="Email.." />
-              </div>
-              <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
-                <div *ngIf="uName.errors.required">Email cannot be empty</div>
-                <div *ngIf="uName.errors?.email">Email must be a valid email</div>
-              </div>
-
-              <div *ngIf="uName.valid" class="alert alert-success">Email is valid!</div>
-
-              <div><p>Password cannot be empty and must be between 8-16 characters long.</p></div>
-
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend "><span class="input-group-text" id="basic-addon1">Password</span></div>
-                <input
-                  type="password"
-                  class="form-control"
-                  [(ngModel)]="password"
-                  #pWord="ngModel"
-                  required
-                  placeholder="8-16 characters"
-                  pattern="[0-9a-zA-Z!@#]{8,16}"
-                  title="Between 8 - 16 character, !@# accepted"
-                />
-              </div>
-              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger"><div *ngIf="pWord.errors.required">Password cannot be empty</div></div>
-
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend "><span class="input-group-text" id="basic-addon1 ">Confirm</span></div>
-                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" required placeholder="Confirm password" />
-              </div>
-
-              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-                <div *ngIf="pConfirm.errors.required">Password Confirm cannot be empty</div>
-                <div *ngIf="password != passwordConfirm">
-                  <!--------------------- FOR SOME REASON WON'T WORK --------------------->
-                  Password does not match.
+            <br />
+            <form>
+              <div class="form-row">
+                <!-- First Name Input -->
+                <div class="form-group col-md-6">
+                  <label for="firstName">First Name</label>
+                  <input [ngClass]="{ 'is-invalid': fn.invalid && (fn.dirty || fn.touched), 'is-valid': fn.valid }" #fn="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="uri.user.firstName" type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required/>
+                  <div *ngIf="!!fn?.errors?.required" class="invalid-feedback">First name cannot be empty.</div>
+                  <div *ngIf="!!fn?.errors?.pattern" class="invalid-feedback">First name cannot have any symbols or numbers.</div>
+                </div>
+                <!-- Last Name Input -->
+                <div class="form-group col-md-6">
+                  <label for="lastName">Last Name</label>
+                  <input [ngClass]="{ 'is-invalid': ln.invalid && (ln.dirty || ln.touched), 'is-valid': ln.valid }" #ln="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="uri.user.lastName" type="text" class="form-control" name="lastName" id="lastName" placeholder="Doe" required/>
+                  <div *ngIf="!!ln?.errors?.required" class="invalid-feedback">Last name cannot be empty.</div>
+                  <div *ngIf="!!ln?.errors?.pattern" class="invalid-feedback">Last name cannot have any symbols or numbers.</div>
                 </div>
               </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Key</span></div>
-                <input type="text" class="form-control" [(ngModel)]="token" #tInput="ngModel" required (blur)="parseEncryption()" />
+              <!-- Email Input -->
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input [ngClass]="{ 'is-invalid': e.invalid && (e.dirty || e.touched), 'is-valid': e.valid }" #e="ngModel" pattern="[a-zA-z0-9\.]+@[a-zA-z0-9]+\.[a-zA-z0-9.]+" [(ngModel)]="uri.user.email" type="text" class="form-control" name="email" id="email" placeholder="john.doe@example.com" required/>
+                <div *ngIf="!!e?.errors?.required" class="invalid-feedback">Email cannot be empty.</div>
+                <div *ngIf="!!e?.errors?.pattern" class="invalid-feedback">Email must be a valid email.</div>
               </div>
-              <div *ngIf="tInput.invalid && (tInput.dirty || tInput.touched)" class="alert alert-danger"><div *ngIf="tInput.errors.required">You need a Key</div></div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Office Address</span></div>
-                <div class="input-group-text" style="padding-right: 100px">
-                  <select [(ngModel)]="office" disabled>
-                    <option>Location Name</option>
-                    <option *ngFor="let office of officeObjectArray">{{ office.name }}</option>
-                  </select>
+              <!-- Address Input -->
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input [(ngModel)]="uri.user.address" (addressSelect)="onAddressSelect($event)" type="text" class="form-control" name="address" id="address" placeholder="Your Address" appPlacesAutocomplete required/>
+              </div>
+              <!-- Password Input -->
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="password">Password</label>
+                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="[0-9a-zA-Z!@#]{8,16}" [(ngModel)]="uri.user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
+                  <div *ngIf="!!p?.errors?.required" class="invalid-feedback">Password cannot be empty.</div>
+                  <div *ngIf="!!p?.errors?.pattern" class="invalid-feedback">Password must be between 8-16 characters long.</div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <input [ngClass]="{ 'is-invalid': pc.invalid && (pc.dirty || pc.touched), 'is-valid': pc.valid }" [pattern]="uri.user.password" #pc="ngModel" [(ngModel)]="passwordConfirm" type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required/>
+                  <div *ngIf="true" class="invalid-feedback">Password doesn't match.</div>
                 </div>
               </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Address</span></div>
-                <input
-                  type="text"
-                  class="form-control"
-                  aria-label="Small"
-                  aria-describedby="inputGroup-sizing-sm"
-                  name="autocompleteTest"
-                  appPlacesAutocomplete
-                  (addressSelect)="autocomplete2($event)"
-                  [(ngModel)]="address2"
-                  #address="ngModel"
-                  required
-                  placeholder="Type to search.."
-                />
-              </div>
-              <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger"><div *ngIf="address.errors.required">Address cannot be empty</div></div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Batch End</span></div>
-                <input type="date" class="form-control" [(ngModel)]="batchEnd" data-provide="datepicker" disabled />
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Day Start</span></div>
-                <select class="form-control" [(ngModel)]="timeSelect">
+              <!-- Day Start Input -->
+              <div class="form-group">
+                <label for="startTime">Day Start</label>
+                <select class="custom-select my-1 mr-sm-2" name="startTime" id="startTime" [(ngModel)]="uri.user.startTime" required>
                   <option value="7.5">7:30 AM</option>
                   <option value="8">8:00 AM</option>
                   <option value="8.5">8:30 AM</option>
@@ -229,135 +62,108 @@
                   <option value="10">10:00 AM</option>
                 </select>
               </div>
-              <div><button class="btn btnNextPrevious" (click)="accountInfoNext()">Next</button></div>
-              <div style="padding-top: 20px"><div *ngIf="!requiredInfoFields" class="alert alert-danger">Please fill out ALL fields and confirm your passwords match</div></div>
-            </div>
+              <!-- Registration Token Input -->
+              <div class="form-group">
+                <label for="registrationToken">Registration Token</label>
+                <textarea [(ngModel)]="uri.registrationToken" (change)="validateToken()" class="form-control" name="registrationToken" id="registrationToken" placeholder="Registration Token" required></textarea>
+              </div>
+              <div *ngIf="uri.user.office" class="form-row">
+                <!-- Office Display -->
+                <div class="form-group col-md-6">
+                  <label for="officeLocation">Office Location</label>
+                  <input [(ngModel)]="uri.user.office.name" type="text" class="form-control" name="officeLocation" id="officeLocation" placeholder="Office Location" disabled />
+                </div>
+                <!-- Batch End Date Display -->
+                <div class="form-group col-md-6">
+                  <label for="batchEndDate">Batch End Date</label>
+                  <input [(ngModel)]="uri.user.batchEnd" type="date" class="form-control" name="batchEndDate" id="batchEndDate" placeholder="Batch End Date" disabled />
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary float-right" (click)="changeTab('tab2')" [disabled]="fn.invalid || ln.invalid || e.invalid || p.invalid || pc.invalid || !uri.user.office">Next</button>
+            </form>
           </ng-template>
         </ngb-tab>
-      </div>
-      <div label="BIO div">
-        <ngb-tab title="2" id="2">
+        <ngb-tab title="Profile" id="tab2" [disabled]="true">
+          <!-- Tab 2 Content -->
           <ng-template ngbTabContent>
-            <div class="container-fluid">
-              <br />
-              <h2>Biography:</h2>
-              <br />
-              <div class="input-group mb-3">
-                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">About You</span></div>
-              </div>
-              <textarea type="text" class="form-control" rows="4" maxlength="280" [(ngModel)]="bio" required></textarea> <br />
-
-              <!-- <div class="input-group mb-3">
-                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>
-                <input class="profile-pic" type="file" name="pic" accept="image/*" (change)="selectFile($event)">
-              </div> -->
-              <div class="input-group mb-3">
-                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1" style="padding-right: 95px">Contact Info</span></div>
-                <!-- to do: Contact info list -->
-                <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
-                <div style="padding-left: 20px">
-                  <button class="btn" (click)="addContact()"><span aria-hidden="true">+</span></button>
-                </div>
-              </div>
-
-              <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <div class="input-group-text" style="padding-right: 100px">
-                    <select [(ngModel)]="item.type">
-                      <option *ngFor="let contact of contactTypeArray">{{ contact }}</option>
-                    </select>
-                  </div>
-                  <input type="text" class="" [(ngModel)]="item.info" /> <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
-                </div>
-              </div>
-              <!--Moving Driver/Rider toggle to page 2, so it isn't the only thing on page-->
-              <div class="input-group mb-3">
-                <div class="btn-group" role="group" aria-label="btn groups">
-                  <button type="button" class="btn" id="riderBtn" (click)="isRider()">Rider</button> <button type="button" class="btn" id="driverBtn" (click)="isDriver()">Driver</button>
-                </div>
-              </div>
-              <div>
-                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="bioPrevious()">Previous</button></span>
-                <span> <button class="btn btnNextPrevious" (click)="bioNext()">Next</button></span>
-              </div>
-              <div style="padding-top: 20px"><div *ngIf="!requiredCarFields" class="alert alert-danger">Please select Driver or Rider</div></div>
+            <br />
+            <!-- Bio Input -->
+            <div class="form-group">
+              <label for="aboutYou">Bio</label>
+              <textarea [(ngModel)]="uri.user.bio" class="form-control" name="aboutYou" id="aboutYou" placeholder="Tell me about yourself." required></textarea>
             </div>
+            <!-- Role Selection -->
+            <label>Role</label>
+            <div class="btn-group w-100 mb-3" role="group">
+              <button type="button" class="btn" [ngClass]="uri.user.role === roles.Rider ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Rider)">Rider</button>
+              <button type="button" class="btn" [ngClass]="uri.user.role === roles.Driver ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Driver)">Driver</button>
+            </div>
+            <!-- Contact Info Input -->
+            <label>Contact Info</label>
+            <div class="input-group">
+              <select [(ngModel)]="contactInfo.type" name="contactTypes" id="contactTypes" class="form-control">
+                <option *ngFor="let item of contactTypes">{{ item }}</option>
+              </select>
+              <input type="text" class="form-control" [(ngModel)]="contactInfo.info" />
+              <div class="input-group-append"><button class="btn btn-primary" type="button" (click)="addContactInfo()" [disabled]="!contactInfo.info">Add Contact Info</button></div>
+            </div>
+            <!-- Contact Info Display -->
+            <ul class="list-group">
+              <li *ngFor="let item of uri.user.contactInfo" class="list-group-item d-flex justify-content-between align-items-center">
+                {{ item.info }} <span class="badge badge-primary badge-pill">{{ item.type }}</span>
+              </li>
+            </ul>
+            <br />
+            <button class="btn btn-primary float-left" (click)="changeTab('tab1')">Previous</button>
+            <button class="btn btn-primary float-right" (click)="changeTab('tab3')">Next</button>
           </ng-template>
         </ngb-tab>
-      </div>
-      <!--  <div label="CAR INFO div">
-        <ngb-tab title="3" id="3">
+        <ngb-tab title="Review" id="tab3" [disabled]="true">
+          <!-- Tab 3 Content -->
           <ng-template ngbTabContent>
-            <div class="input-group mb-3">
-              <div class="btn-group" role="group" aria-label="btn groups">
-                <button type="button" class="btn" id="riderBtn" (click)="isRider()">Rider</button>
-                <button type="button" class="btn" id="driverBtn" (click)="isDriver()">Driver</button>
-              </div>
-            </div>
+            <!-- Display Gathered Data -->
+            <br/>
+            <dl class="row">
+              <dt class="col-sm-4">Name:</dt>
+              <dd class="col-sm-8">{{ uri.user.firstName }} {{ uri.user.lastName }}</dd>
 
-            <div>
-              <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
-              <span> <button class="btn btnNextPrevious" (click)="carNext()">Next</button></span>
-            </div>
-            <div style="padding-top: 20px">
-              <div *ngIf="!requiredCarFields" class="alert alert-danger">
-                Please select Driver or Rider
-              </div>
-            </div>
+              <dt class="col-sm-4">Email:</dt>
+              <dd class="col-sm-8">{{ uri.user.email }}</dd>
+
+              <dt class="col-sm-4">Address:</dt>
+              <dd class="col-sm-8">{{ uri.user.address }}</dd>
+
+              <dt class="col-sm-4">Role:</dt>
+              <dd class="col-sm-8">{{ uri.user.role }}</dd>
+
+              <dt class="col-sm-4">Day Start:</dt>
+              <dd class="col-sm-8">{{ uri.user.startTime }}</dd>
+
+              <dt class="col-sm-4">Batch End Date:</dt>
+              <dd class="col-sm-8">{{ uri.user.batchEnd | date }}</dd>
+
+              <dt class="col-sm-4" *ngIf="uri.user.office">Office Location:</dt>
+              <dd class="col-sm-8" *ngIf="uri.user.office">
+                {{ uri.user.office.name }} <br />
+                {{ uri.user.office.address }}
+              </dd>
+
+              <dt class="col-sm-4">Bio:</dt>
+              <dd class="col-sm-8">{{ uri.user.bio }}</dd>
+
+              <dt class="col-sm-4">Contact Info:</dt>
+              <dd class="col-sm-8">
+                <dl class="row" *ngFor="let item of uri.user.contactInfo">
+                  <dt class="col-sm-3">{{ item.type }}:</dt>
+                  <dd class="col-sm-9">{{ item.info }}</dd>
+                </dl>
+              </dd>
+            </dl>
+            <button class="btn btn-primary float-left" (click)="changeTab('tab2')">Previous</button>
+            <button class="btn btn-primary float-right" (click)="register()">Register</button>
           </ng-template>
         </ngb-tab>
-      </div> -->
-      <div label="CONFIRMATION div">
-        <ngb-tab title="3" id="3">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-              <br />
-              <h2>Review and submit:</h2>
-              <br />
-              <h3><u>User Information</u></h3>
-              <span>First name: {{ firstName }}</span> <br />
-              <span>Last Name: {{ lastName }}</span> <br />
-              <span>Email: {{ username }}</span> <br />
-              <span class="dyn-height" *ngIf="officeObject">
-                Office Address:
-                <div class="col-10">{{ officeObject.name }}</div>
-                <div class="col-10">{{ officeObject.address }}</div>
-                <br />
-              </span>
-              <span class="dyn-height" *ngIf="address2">
-                Apartment Address:
-                <div class="col-10">{{ address2 }}</div></span
-              >
-              <span>Batch: {{ batchEnd }}</span> <br />
-              <br />
-              <div *ngIf="bio || contactInfoArray.length > 0">
-                <h3><u>Biography</u></h3>
-                <span class="dyn-height"
-                  >About You:
-                  <div class="col-10">{{ bio }}</div></span
-                >
-                <span>Contact Info:</span>
-                <div style="margin-left: 20px">
-                  <span *ngFor="let item of contactInfoArray"> {{ item.type }}: {{ item.info }} <br /> </span>
-                </div>
-              </div>
-              <br />
-              <div *ngIf="carMake && carModel && carYear">
-                <h3><u>Car Info</u></h3>
-                <span>Make: {{ carMake }}</span> <br />
-                <span>Model: {{ carModel }}</span> <br />
-                <span>Year: {{ carYear }}</span> <br />
-              </div>
-              <br />
-              <div>
-                <span class="padRight"> <button class="btn btnNextPrevious" (click)="reviewPrevious()">Previous</button></span>
-
-                <span> <button class="btn btnNextPrevious" (click)="createUserObject()">Finish</button></span>
-              </div>
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-    </ngb-tabset>
+      </ngb-tabset>
+    </div>
   </div>
 </div>
