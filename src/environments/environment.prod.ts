@@ -5,7 +5,7 @@ export const environment = {
   /** URL for the service we are relying on */
   apiUrl: 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222',
   cognitoData : {
-    UserPoolId: 'us-east-2_j1J5UdBsV',
-    ClientId: '53liee79hsuc0gvqeg54qeprbc'
+    UserPoolId: 'us-east-1_WDI06D2wk',
+    ClientId: '2lphaal777tsbnv83sum33sb78'
   }
 };

@@ -55,7 +55,7 @@ export class UserControllerService {
   // CRUD FOR USERS * * * * * * * * * * * * * * * * * * * * *
 
   /**
-   * Creates a new user in both cognito and 
+   * Creates a new user in both cognito and
    * serverside with the given data and password.
    *
    * @param email the user data object
@@ -67,6 +67,7 @@ export class UserControllerService {
     console.log("In Cognito Create");
     const userPool = new CognitoUserPool(environment.cognitoData);
     const attributeList = [];
+    console.log(environment.cognitoData);
 
     return Observable.create(observer => {
       //Sends the login credentials to cognito
@@ -209,7 +210,7 @@ export class UserControllerService {
         })
       ).toPromise();
   }
-    
+
 
   updateBio(bioInput: string): Promise<User> {
      const body = {
@@ -225,7 +226,7 @@ export class UserControllerService {
       active: this.principal.active,
       bio: bioInput
      };
-    
+
     this.principal.bio = bioInput;
 
     return this.http
