@@ -75,27 +75,28 @@ export class UserControllerService {
           alert(err.message || JSON.stringify(err));
           observer.error(err);
         }else{
-          console.log("signUp success", result);
           //Then wipes password and sends the user information to the actual server along with the idToken
           uri.user.password = "blankPass";
           this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
-            //its all good
+            alert("Please check your email to confirm registration.");
           }, error =>{
-            alert("Error: registration not completed.");
-            //if it errors here, then delete the cognito user  (code not working, user needs to be authenticated)
-            // console.log("Server error adding user");
-            // result.user.deleteUser(function(err, result) {
-            //   if (err) {
-            //       alert(err.message || JSON.stringify(err));
-            //       return;
-            //   }
-            //   console.log('call result: ' + result);
-            // });
+            alert("Error during registration.");
+            //if it errors here, then delete the cognito user (currently doesnt work due to unathentication)
+                // this.deleteCognitoUser(result.user);
           });
         }
         observer.next(result);
         observer.complete();
       });
+    });
+  }
+
+  deleteCognitoUser(user: CognitoUser){
+    user.deleteUser(function(err, result) {
+      if (err) {
+          console.log(err);
+          return;
+      }
     });
   }
 
@@ -243,19 +244,31 @@ export class UserControllerService {
   /**
    * Updates the password of the user with the given ID.
    *
-   * @param id the ID of the user whose password to update
+   * @param email the email of the user whose password to update
    * @param oldPassword the user's current password, for verification
    * @param newPassword the desired new password
    * @returns {Observable<void>} - the value returned by the server
    */
   updatePassword(
-    id: number,
+    email: string,
     oldPassword: string,
     newPassword: string
-  ): Observable<void> {
-    return this.http.post<void>(environment.apiUrl + `/users/${id}/password`, {
-      oldPassword,
-      newPassword,
+  ): Observable<any> {
+    const userPool = new CognitoUserPool(environment.cognitoData);
+    const userData = {
+      Username : email,
+      Pool : userPool
+    };
+    const user = new CognitoUser(userData);
+    return Observable.create(observer => {
+     user.changePassword('oldPassword', 'newPassword', function(err, result) {
+      if (err) {
+          alert(err.message || JSON.stringify(err));
+          observer.error(err);
+      }
+      observer.next(result);
+      observer.complete();
+      });
     });
   }
 

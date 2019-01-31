@@ -48,7 +48,6 @@ export class AuthService {
    * @returns {null} - User mapped to token storage now
    */
   authenticator(email:string, password:string) { 
-    console.log("in cognito auth");
     const authenticationData = {
       Username : email,
       Password : password,
