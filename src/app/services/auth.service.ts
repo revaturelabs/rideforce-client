@@ -9,10 +9,11 @@ import { Login } from '../classes/login';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { logging } from 'protractor';
 import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
+import { create } from 'domain';
 
 
 
-const userPool = new CognitoUserPool(environment.cognitoData);
+
 
 /**
  * Allows Users to authenticate themselves with the server
@@ -40,6 +41,27 @@ export class AuthService {
     this.changePrincipal(p);
   }
 
+  //Will resend the confirmation email
+  resendConfirmation(email:string): Observable<void>{
+    const userPool = new CognitoUserPool(environment.cognitoData);
+
+    const userData = {
+      Username : email,
+      Pool : userPool
+    };
+    const user = new CognitoUser(userData);
+    return Observable.create(observer => {
+      user.resendConfirmationCode(function(err, result) {
+        if (err) {
+            observer.error(err);
+            return;
+        }
+        observer.next(result);
+        observer.complete();
+      });
+    });
+  }
+
 
   /**
    * Attempts to log the user in using Cognito
@@ -47,21 +69,13 @@ export class AuthService {
    * @param password The password to be sent from the view to Cognito
    * @returns {null} - User mapped to token storage now
    */
-  authenticator(email:string,password:string) {
-    return this.cognitoAuthenticator(email,password).subscribe((data) => {
-      console.log(data.idToken.jwtToken);
-      this.authToken = data.idToken.jwtToken;
-    }, (err)=> {
-      //TODO: handle if there is an error (might be covered elsewhere, will need to test)
-    }).toPromise;   
-  }
-
-  cognitoAuthenticator(email:string, password:string) { 
+  authenticator(email:string, password:string) { 
     const authenticationData = {
       Username : email,
       Password : password,
     };
     const authenticationDetails = new AuthenticationDetails(authenticationData);
+    const userPool = new CognitoUserPool(environment.cognitoData);
 
     const userData = {
       Username : email,
@@ -81,7 +95,7 @@ export class AuthService {
           observer.error(err);
         },
       });
-    });
+    }).toPromise();
   }
 
   /**
@@ -93,7 +107,8 @@ export class AuthService {
     authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) => {
-        console.log('Got user from Authenticate (Promise mode)');
+        console.log(x.idToken.jwtToken); //printing the token to the console to check
+        this.authToken = x.idToken.jwtToken;
         this.getUserByEmail(email).subscribe(resp =>{
           console.log('Retrieved email of user');
           const l : Login = resp as Login;

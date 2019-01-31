@@ -67,11 +67,11 @@
                 <label for="registrationToken">Registration Token</label>
                 <textarea [(ngModel)]="uri.registrationToken" (change)="validateToken()" class="form-control" name="registrationToken" id="registrationToken" placeholder="Registration Token" required></textarea>
               </div>
-              <div *ngIf="uri.user.office" class="form-row">
+              <div *ngIf="office" class="form-row">
                 <!-- Office Display -->
                 <div class="form-group col-md-6">
                   <label for="officeLocation">Office Location</label>
-                  <input [(ngModel)]="uri.user.office.name" type="text" class="form-control" name="officeLocation" id="officeLocation" placeholder="Office Location" disabled />
+                  <input [(ngModel)]="office.name" type="text" class="form-control" name="officeLocation" id="officeLocation" placeholder="Office Location" disabled />
                 </div>
                 <!-- Batch End Date Display -->
                 <div class="form-group col-md-6">
@@ -142,10 +142,10 @@
               <dt class="col-sm-4">Batch End Date:</dt>
               <dd class="col-sm-8">{{ uri.user.batchEnd | date }}</dd>
 
-              <dt class="col-sm-4" *ngIf="uri.user.office">Office Location:</dt>
-              <dd class="col-sm-8" *ngIf="uri.user.office">
-                {{ uri.user.office.name }} <br />
-                {{ uri.user.office.address }}
+              <dt class="col-sm-4" *ngIf="office">Office Location:</dt>
+              <dd class="col-sm-8" *ngIf="office">
+                {{ office.name }} <br />
+                {{ office.address }}
               </dd>
 
               <dt class="col-sm-4">Bio:</dt>
@@ -161,6 +161,7 @@
             </dl>
             <button class="btn btn-primary float-left" (click)="changeTab('tab2')">Previous</button>
             <button class="btn btn-primary float-right" (click)="register()">Register</button>
+            <p>{{uri | json}}</p>
           </ng-template>
         </ngb-tab>
       </ngb-tabset>

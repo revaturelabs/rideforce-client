@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Role } from '../../models/role.model';
 import { ViewChild, NgZone } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -20,6 +21,8 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 export class AccountinfoComponent implements OnInit {
   /** User Roles */
   roles = Role;
+  /** Current Office */
+  office: Office;
   /** Office Locations */
   offices: Office[];
   /** Possible Contact Types */
@@ -37,7 +40,7 @@ export class AccountinfoComponent implements OnInit {
    * Import services.
    * @param userService contains various user services.
    */
-  constructor(private zone: NgZone, private userService: UserControllerService) { }
+  constructor(private router: Router, private zone: NgZone, private userService: UserControllerService) { }
 
   /**
    * Initialize variables.
@@ -59,8 +62,8 @@ export class AccountinfoComponent implements OnInit {
         pref = pref.substr(4);
       }
       const decrip = atob(pref).split('~');
-
-      this.uri.user.office = this.offices.filter(o => o.name === decrip[0])[0];
+      this.office = this.offices.filter(o => o.name === decrip[0])[0];
+      this.uri.user.office = '/offices/' + this.office.id,
       this.uri.user.batchEnd = decrip[1];
     }
   }
@@ -106,6 +109,8 @@ export class AccountinfoComponent implements OnInit {
    * Registers a user with Cognito and the back-end.
    */
   register() {
-    // Use this method to register
+    this.userService.createUser(this.uri).subscribe((x) => {
+      this.router.navigate(['/landing']);
+    });
   }
 }

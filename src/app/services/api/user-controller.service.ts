@@ -10,10 +10,11 @@ import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
-import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
+import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { Role } from '../../models/role.model';
 import { Login } from '../../classes/login';
 import { AuthService } from '../../services/auth.service';
+import { UserRegistrationInfo } from '../../models/user-registration-info.model';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -54,46 +55,67 @@ export class UserControllerService {
   // CRUD FOR USERS * * * * * * * * * * * * * * * * * * * * *
 
   /**
-   * Creates a new user with the given data and password.
+   * Creates a new user in both cognito and
+   * serverside with the given data and password.
    *
    * @param email the user data object
    * @param password the new user's password
    * @returns {Observable<User>} - the user entered into the system
    */
   // CREATE
-  createUser(user: User, password: string, registrationToken: string): Promise<User> {
-    return this.addUserToCognito(user.email,user.password).subscribe(
-      (data) => {
-        //get id token from cognito
-        let idToken = data.idToken.jwtToken;
-        //then actually send data to the server
-        //Note to future self(not future devs): no idea if this promise within a promise works,
-        //goal is to add user to cognito then send it to the java
-        return this.http.post<User>(environment.apiUrl + '/users',
-        { user, idToken, registrationToken }
-        ).toPromise();
-      },
-      (err) => {
-        //COGNITO ERROR
-      }
-    ).toPromise;
-  }
-
-  addUserToCognito(email:string,password:string){
+  createUser(uri:UserRegistrationInfo){
+    console.log("In Cognito Create");
     const userPool = new CognitoUserPool(environment.cognitoData);
     const attributeList = [];
+    console.log(environment.cognitoData);
 
     return Observable.create(observer => {
-      userPool.signUp(email, password, attributeList, null, (err, result) => {
+      //Sends the login credentials to cognito
+      userPool.signUp(uri.user.email, uri.user.password, attributeList, null, (err, result) => {
         if (err) {
-          console.log("signUp error", err);
+          alert(err.message || JSON.stringify(err));
           observer.error(err);
-          return;
+        }else{
+          //Then wipes password and sends the user information to the actual server along with the idToken
+          console.log(result);
+          uri.user.password = "blankPass";
+          this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
+            alert("Please check your email to confirm registration.");
+          }, error =>{
+            alert("Error during registration.");
+            //if it errors here, then delete the cognito user (currently doesnt work due to unathentication)
+                // this.deleteCognitoUser(result.user);
+          });
         }
-        console.log("signUp success", result);
         observer.next(result);
         observer.complete();
       });
+    });
+  }
+
+  //Will resend the confirmation email
+  resendConfirmation(email:string){
+    const userPool = new CognitoUserPool(environment.cognitoData);
+
+    const userData = {
+      Username : email,
+      Pool : userPool
+    };
+    const user = new CognitoUser(userData);
+    return user.resendConfirmationCode(function(err, result) {
+      if (err) {
+          console.log(err);
+          return;
+      }
+  });
+  }
+
+  deleteCognitoUser(user: CognitoUser){
+    user.deleteUser(function(err, result) {
+      if (err) {
+          console.log(err);
+          return;
+      }
     });
   }
 
@@ -241,19 +263,31 @@ export class UserControllerService {
   /**
    * Updates the password of the user with the given ID.
    *
-   * @param id the ID of the user whose password to update
+   * @param email the email of the user whose password to update
    * @param oldPassword the user's current password, for verification
    * @param newPassword the desired new password
    * @returns {Observable<void>} - the value returned by the server
    */
   updatePassword(
-    id: number,
+    email: string,
     oldPassword: string,
     newPassword: string
-  ): Observable<void> {
-    return this.http.post<void>(environment.apiUrl + `/users/${id}/password`, {
-      oldPassword,
-      newPassword,
+  ): Observable<any> {
+    const userPool = new CognitoUserPool(environment.cognitoData);
+    const userData = {
+      Username : email,
+      Pool : userPool
+    };
+    const user = new CognitoUser(userData);
+    return Observable.create(observer => {
+     user.changePassword('oldPassword', 'newPassword', function(err, result) {
+      if (err) {
+          alert(err.message || JSON.stringify(err));
+          observer.error(err);
+      }
+      observer.next(result);
+      observer.complete();
+      });
     });
   }
 

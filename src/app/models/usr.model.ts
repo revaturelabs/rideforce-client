@@ -12,7 +12,7 @@ export class Usr {
   bio: string;
   active: string;
   role: Role;
-  office: Office;
+  office: string;
   address: string;
   startTime: number;
   batchEnd: string;
