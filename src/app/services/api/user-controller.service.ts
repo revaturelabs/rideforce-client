@@ -10,7 +10,7 @@ import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
-import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
+import {AuthenticationDetails, CognitoUser, CognitoUserPool, CognitoUserAttribute} from 'amazon-cognito-identity-js'
 import { Role } from '../../models/role.model';
 import { Login } from '../../classes/login';
 import { AuthService } from '../../services/auth.service';
@@ -90,23 +90,6 @@ export class UserControllerService {
         observer.complete();
       });
     });
-  }
-
-  //Will resend the confirmation email
-  resendConfirmation(email:string){
-    const userPool = new CognitoUserPool(environment.cognitoData);
-
-    const userData = {
-      Username : email,
-      Pool : userPool
-    };
-    const user = new CognitoUser(userData);
-    return user.resendConfirmationCode(function(err, result) {
-      if (err) {
-          console.log(err);
-          return;
-      }
-  });
   }
 
   deleteCognitoUser(user: CognitoUser){
