@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 
 import {APP_BASE_HREF} from '@angular/common';
 
-describe('AuthService', () => {
+xdescribe('AuthService', () => {
   let auth: AuthService;
 
   beforeEach(async(() => {

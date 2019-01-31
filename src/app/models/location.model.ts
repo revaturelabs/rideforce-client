@@ -1,5 +1,5 @@
 /** Represents a specific location on Earth */
-export interface Location {
+export class Location {
     /** Cached ID */
     cached_id: number;
     /** Address */ 
