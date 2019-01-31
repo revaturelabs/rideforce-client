@@ -76,7 +76,7 @@ export class ViewProfileComponent implements OnInit {
         this.username = this.principal.email;
         this.address2 = this.principal.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
-        this.getOffices();
+        //this.getOffices();
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;

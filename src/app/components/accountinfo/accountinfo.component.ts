@@ -283,8 +283,6 @@ export class AccountinfoComponent implements OnInit {
 
   /** Creats a user from all the required fields */
   createUserObject() {
-
-    // this.upload();
     this.userObject.id = 1;
     this.userObject.firstName = this.firstName;
     this.userObject.lastName = this.lastName;
