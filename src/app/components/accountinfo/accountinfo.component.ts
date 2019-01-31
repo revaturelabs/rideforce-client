@@ -259,24 +259,6 @@ export class AccountinfoComponent implements OnInit {
   }
 
   /**
-   * Sets up a car
-   * (DEPRECATED: Moved to Car Regstration Component)
-   */
-  createCar() {
-    this.carObject.make = this.carMake;
-    this.carObject.model = this.carModel;
-    this.carObject.year = this.carYear;
-  }
-
-  /**
-   * Uploads image to the storage
-   */
-  // upload() {
-  //   const file = this.selectedFiles.item(0);
-  //   this.imageSrc = this.uploadService.uploadfile(file);
-  // }
-
-  /**
    * Manage the token
    */
   parseEncryption() {
@@ -304,9 +286,6 @@ export class AccountinfoComponent implements OnInit {
 
   /** Creats a user from all the required fields */
   createUserObject() {
-
-    // this.upload();
-
     this.userObject = {
       id: 1,
       firstName: this.firstName,
@@ -316,7 +295,6 @@ export class AccountinfoComponent implements OnInit {
       photoUrl: this.imageSrc,
       address: this.address2,
       office: '/offices/' + this.officeObject.id,
-      // I really don't understand what this translates to on the back end, but now it is dynamic
       batchEnd: new Date(this.batchEnd).toISOString(),
       startTime: this.timeSelect,
       cars: [],
@@ -389,30 +367,9 @@ export class AccountinfoComponent implements OnInit {
     this.tabset.select('1');
   }
 
-  //Car info has been merged with the bio page.
-  /** Moves Registration to the Final page */
-  // carNext() {
-
-  //   if (this.btnCarInfo === 0) {
-  //     this.requiredCarFields = false;
-  //   } else if (this.btnCarInfo > 0) {
-  //     this.requiredCarFields = true;
-  //     this.currentTab++;
-  //     this.tabset.select('4');
-  //   }
-  // }
-
-  // /** Moves Registration to the Biography Tab */
-  // carPrevious() {
-  //   this.tabset.select('2');
-  // }
-
     /** Moves Registration to the Bio/Car Tab */
   reviewPrevious() {
     this.tabset.select('2');
   }
 
-  test() {
-    console.log(this.timeSelect);
-  }
 }
