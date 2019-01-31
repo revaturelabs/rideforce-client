@@ -82,7 +82,10 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById("batchEnd").removeAttribute("disabled");
     document.getElementById("dayStart").removeAttribute("disabled");
     document.getElementById("switchRoles").removeAttribute("hidden");
-    document.getElementById("switchStates").removeAttribute("hidden");
+    //Admins/Trainers have no switch state button to make visible
+    if(this.currentRole === "RIDER" || this.currentRole === "DRIVER"){
+      document.getElementById("switchStates").removeAttribute("hidden");
+    }
     document.getElementById("edit").style.display = "none";
     document.getElementById("submit").style.display = "inline";
     document.getElementById("batchEnd").setAttribute("type", "date");
