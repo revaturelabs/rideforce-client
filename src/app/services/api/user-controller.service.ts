@@ -63,7 +63,7 @@ export class UserControllerService {
   // CREATE
   createUser(user: User, password: string, registrationToken: string): Promise<User> {
     return this.addUserToCognito(user.email,user.password).subscribe(
-      (data) => {        
+      (data) => {
         //get id token from cognito
         let idToken = data.idToken.jwtToken;
         //then actually send data to the server
@@ -77,7 +77,6 @@ export class UserControllerService {
         //COGNITO ERROR
       }
     ).toPromise;
-    
   }
 
   addUserToCognito(email:string,password:string){
@@ -206,7 +205,7 @@ export class UserControllerService {
         })
       ).toPromise();
   }
-    
+
 
   updateBio(bioInput: string): Promise<User> {
      const body = {
@@ -222,7 +221,7 @@ export class UserControllerService {
       active: this.principal.active,
       bio: bioInput
      };
-    
+
     this.principal.bio = bioInput;
 
     return this.http
