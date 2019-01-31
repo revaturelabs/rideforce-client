@@ -76,6 +76,7 @@ export class UserControllerService {
           observer.error(err);
         }else{
           //Then wipes password and sends the user information to the actual server along with the idToken
+          console.log(result);
           uri.user.password = "blankPass";
           this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
             alert("Please check your email to confirm registration.");
@@ -89,6 +90,23 @@ export class UserControllerService {
         observer.complete();
       });
     });
+  }
+
+  //Will resend the confirmation email
+  resendConfirmation(email:string){
+    const userPool = new CognitoUserPool(environment.cognitoData);
+
+    const userData = {
+      Username : email,
+      Pool : userPool
+    };
+    const user = new CognitoUser(userData);
+    return user.resendConfirmationCode(function(err, result) {
+      if (err) {
+          console.log(err);
+          return;
+      }
+  });
   }
 
   deleteCognitoUser(user: CognitoUser){

@@ -21,6 +21,14 @@ export class LoginComponent implements OnInit {
    */
   userEmail: string;
 
+  sentLink: boolean;
+  errorLink: boolean;
+
+  /**
+   * The email to resend confirmation link to
+   */
+  reEmail: string;
+
   /**
    * The password associated with the indended account
    */
@@ -62,5 +70,22 @@ export class LoginComponent implements OnInit {
    */
   login() {
     this.authService.authenticate(this.userEmail, this.userPass);
+  }
+
+  resendEmail(){
+    this.authService.resendConfirmation(this.reEmail).subscribe(complete =>{
+      this.errorLink = false;
+      this.sentLink = true;
+    }, error =>{
+      this.errorLink = true;
+      this.sentLink = false;
+    });
+    
+  }
+
+  initModal(){
+    this.errorLink = false;
+    this.sentLink = false;
+    this.reEmail = "";
   }
 }

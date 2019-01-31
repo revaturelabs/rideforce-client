@@ -9,6 +9,7 @@ import { Login } from '../classes/login';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { logging } from 'protractor';
 import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
+import { create } from 'domain';
 
 
 
@@ -38,6 +39,27 @@ export class AuthService {
     var p = new Login();
     p.id = 0;
     this.changePrincipal(p);
+  }
+
+  //Will resend the confirmation email
+  resendConfirmation(email:string): Observable<void>{
+    const userPool = new CognitoUserPool(environment.cognitoData);
+
+    const userData = {
+      Username : email,
+      Pool : userPool
+    };
+    const user = new CognitoUser(userData);
+    return Observable.create(observer => {
+      user.resendConfirmationCode(function(err, result) {
+        if (err) {
+            observer.error(err);
+            return;
+        }
+        observer.next(result);
+        observer.complete();
+      });
+    });
   }
 
 
