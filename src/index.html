@@ -1,83 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <base href="/" />
+    <title>RideshareClient</title>
 
-<head>
-  <meta charset="utf-8">
-  <title>RideshareClient</title>
-  <base href="/">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="assets/icons/revatureIcon.png" />
 
-  <!-- First Contentful Paint -->
-  <!-- <link rel="prefetch" href="fonts.css" as="style"> -->
-  <!-- <link rel="preload" href="fonts.css" as="style"> -->
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="assets/icons/revatureIcon.png">
-
-  <!-- Stylesheets -->
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" >
-  <!-- Bootstrap Toggle -->
-  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-
-  <!-- Auth0
-    <script type="text/javascript" src="node_modules/auth0-js/build/auth0.js"></script>
-  -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1976d2">
-
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1976d2" />
   </head>
 
-<body>
-  <app-root></app-root>
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <body>
+    <app-root></app-root>
+    <noscript>Please enable JavaScript to continue using this application.</noscript>
+  </body>
 
-  <!-- Javascript -->
-  <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <!-- Popper.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <!-- Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  <!-- Bootstrap Toggle JS -->
-  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" defer></script>
-</body>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="container" style="max-width:100%">
-    <div class="flex-row">
-      <div class="col-xs-2" style="margin-left:1%">
-        <img class="rev-logo" src="assets/img/rev-footer.png" onerror='this.onerror = null; this.src="rev-footer.png"'
-          alt="revature" style="height:70px; width:85px;padding-top:40px;" />
-      </div>
-      <div class="col-xs-2 contact-info hidden-sm-up float-right" style="font-size:10px; margin-left:0 !important;">
-        <br>
-        <div class="container-fixed" id="footer-container" style="position:sticky; margin-bottom:20px;">
-          <span class="text-nowrap">
-            <span class="glyphicon glyphicon-home" style="margin-top:10px"></span>
-            <span>&nbsp;11730 Plaza America Drive
-              <br>Reston, VA 20190
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container" style="max-width:100%">
+      <div class="flex-row">
+        <div class="col-xs-2" style="margin-left:1%">
+          <img class="rev-logo" src="assets/img/rev-footer.png" onerror="this.onerror = null; this.src=&quot;rev-footer.png&quot;" alt="revature" style="height:70px; width:85px;padding-top:40px;" />
+        </div>
+        <div class="col-xs-2 contact-info hidden-sm-up float-right" style="font-size:10px; margin-left:0 !important;">
+          <br />
+          <div class="container-fixed" id="footer-container" style="position:sticky; margin-bottom:20px;">
+            <span class="text-nowrap">
+              <span class="fas fa-home" style="margin-top:10px"></span> <span>&nbsp;11730 Plaza America Drive <br />Reston, VA 20190 </span> <br />
+              <span class="fas fa-phone"></span> <a href="tel:(703) 570-8282">&nbsp;(703) 570-8282</a> <br />
+              <span class="fas fa-envelope"></span> <a href="mailto:info@revature.com">&nbsp;info@revature.com</a> <br />
+              <span class="fas fa-link"></span> <a target="_blank" href="http://revature.com">&nbsp;revature.com</a> <br />
+              <span class="copyright"> <i class="fas fa-copyright" aria-hidden="true"></i>2018 Revature</span>
             </span>
-            <br>
-            <span class="glyphicon glyphicon-earphone"></span>
-            <a href="tel:(703) 570-8282">&nbsp;(703) 570-8282</a>
-            <br>
-            <span class="glyphicon glyphicon-envelope"></span>
-            <a href="mailto:info@revature.com">&nbsp;info@revature.com</a>
-            <br>
-            <span class="glyphicon glyphicon-link"></span>
-            <a target="_blank" href="http://revature.com">&nbsp;revature.com</a>
-            <br>
-            <span class="copyright">
-              <i class="fa fa-copyright" aria-hidden="true"></i>2018 Revature</span>
-          </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
-
+  </footer>
 </html>
