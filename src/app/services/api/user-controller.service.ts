@@ -77,7 +77,11 @@ export class UserControllerService {
           observer.error(err);
         }else{
           //Then wipes password and sends the user information to the actual server along with the idToken
-          console.log(result);
+          // @ts-ignore
+          let token = JSON.stringify(result.user.storage);
+          token = token.slice(token.search("idToken")).slice(10);
+          token = token.slice(0,token.search("\\\""));
+          uri.idToken = token;
           uri.user.password = "blankPass";
           this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
             alert("Please check your email to confirm registration.");
