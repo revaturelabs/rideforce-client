@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 export class GeocodeService {
 
   dev: boolean = false;
-  endpoint: string = this.dev ? 'http://localhost:3333/location/?address=' : environment.apiUrl + '/location/?address=';
+  endpoint: string = this.dev ? 'http://localhost:3333/location/?address=' : environment.mapUrl + '/location/?address=';
 
   /**
    * Sets up the Service with a Google Maps object

@@ -8,7 +8,13 @@ export const environment = {
   /** Are we in production */
   production: false,
   /** URL for the service we are relying on */
-  apiUrl: 'http://localhost:2222'
+  apiUrl: 'http://localhost:2222', //Gateway serivce! When hosting services locally
   //apiUrl: 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222'
 
+  //'http://localhost:3333 if running locally w/o gateway
+  mapUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/maps',
+  //'http://localhost:4444 if running locally w/o gateway
+  matchUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/matching', 
+  //'http://localhost:5555' if running locally w/o gateway
+  userUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/user' 
 };

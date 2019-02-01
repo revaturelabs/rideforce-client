@@ -43,7 +43,7 @@ Oninit(){}
 
       fd.append('user', sessionStorage.getItem('id'));
       //this.http.post('http://localhost:2222/storage/uploadFile', fd, {
-      this.http.post(environment.apiUrl + '/storage/uploadFile', fd, {
+      this.http.post(environment.userUrl + '/storage/uploadFile', fd, {
 
         reportProgress: true,
         observe: 'events'
