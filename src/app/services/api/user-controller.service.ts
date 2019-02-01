@@ -78,10 +78,17 @@ export class UserControllerService {
         }else{
           //Then wipes password and sends the user information to the actual server along with the idToken
           //These next few lines are nessisary in order to retrieve the idToken from the user object
+
+          console.log(result.userConfirmed);
           // @ts-ignore
           let token = JSON.stringify(result.user.storage);
           token = token.slice(token.search("idToken")).slice(10);
           token = token.slice(0,token.search('"'));
+          console.log(result);
+          console.log("Token: "+token);
+
+          
+
 
           uri.idToken = token;
           uri.user.password = "blankPass";
@@ -90,21 +97,11 @@ export class UserControllerService {
           }, error =>{
             alert("Error during registration.");
             //if it errors here, then delete the cognito user (currently doesnt work due to unathentication)
-                // this.deleteCognitoUser(result.user);
           });
         }
         observer.next(result);
         observer.complete();
       });
-    });
-  }
-
-  deleteCognitoUser(user: CognitoUser){
-    user.deleteUser(function(err, result) {
-      if (err) {
-          console.log(err);
-          return;
-      }
     });
   }
 
@@ -196,7 +193,6 @@ export class UserControllerService {
       lastName: this.principal.firstName,
       email: this.principal.email,
       photoUrl: null,
-      password: this.principal.password,
       role: this.principal.role,
       address: this.principal.address,
       batchEnd: new Date(this.principal.batchEnd),
@@ -224,7 +220,6 @@ export class UserControllerService {
       lastName: this.principal.firstName,
       email: this.principal.email,
       photoUrl: null,
-      password: this.principal.password,
       role: this.principal.role,
       address: this.principal.address,
       batchEnd: new Date(this.principal.batchEnd),

@@ -32,9 +32,11 @@ export class ViewProfileComponent implements OnInit {
   lastName: string;
   /** The user name of the user (hooked to form item in html) */
   username: string;
-  /** The password of the user (hooked to form item in html) */
+  /** The old password of the user (will be hooked up to form in html) */
+  oldPassword: string;
+  /** The new password of the user (hooked to form item in html) */
   password: string;
-  /** The password of the user, used to confirm User knows the password (hooked to form item in html) */
+  /** The new password of the user, used to confirm User knows the password (hooked to form item in html) */
   confirmPassword: string;
   /** The address of the user (hooked to form item in html) */
   address2: string;
@@ -69,13 +71,6 @@ export class ViewProfileComponent implements OnInit {
         this.username = this.principal.email;
         this.address2 = this.principal.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
-        //this.existingBio = sessionStorage.getItem('bio');
-        //this.changeExistingBioStatus();
-        //this.firstName = sessionStorage.getItem("firstName");
-        //this.lastName = sessionStorage.getItem("lastName");
-        //this.username = sessionStorage.getItem("userEmail");
-        //this.address2 = sessionStorage.getItem("address");
-        //this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
         this.getOffices();
        // this.getUsers();
         this.getRole();
@@ -91,9 +86,9 @@ export class ViewProfileComponent implements OnInit {
   edit() {
     document.getElementById("firstName").removeAttribute("disabled");
     document.getElementById("lastName").removeAttribute("disabled");
-    document.getElementById("email").removeAttribute("disabled");
-    document.getElementById("password").removeAttribute("disabled");
-    document.getElementById("confirmPassword").removeAttribute("disabled");
+    //document.getElementById("email").removeAttribute("disabled");
+    //document.getElementById("password").removeAttribute("disabled");
+    //document.getElementById("confirmPassword").removeAttribute("disabled");
     document.getElementById("address").removeAttribute("disabled");
     document.getElementById("batchEnd").removeAttribute("disabled");
     document.getElementById("dayStart").removeAttribute("disabled");
@@ -101,9 +96,9 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById("switchStates").removeAttribute("hidden");
     document.getElementById("edit").style.display = "none";
     document.getElementById("submit").style.display = "inline";
-    document.getElementById("batchEnd").setAttribute("type", "date");
-    document.getElementById("currentOffice").style.display = "none";
-    document.getElementById("selectOffice").style.display = "inline";
+    //document.getElementById("batchEnd").setAttribute("type", "date");
+    //document.getElementById("currentOffice").style.display = "none";
+    //document.getElementById("selectOffice").style.display = "inline";
     document.getElementById("errorMessage").removeAttribute("hidden");
   }
 
@@ -112,20 +107,11 @@ export class ViewProfileComponent implements OnInit {
    */
   submitChanges() {
 
-    //sessionStorage.setItem('firstName', this.firstName);
-    //sessionStorage.setItem('lastName', this.lastName);
-    //sessionStorage.setItem('userEmail', this.username);
-    //sessionStorage.setItem('address', this.address2);
-    //sessionStorage.setItem('batchEnd', this.batchEnd);
-    //sessionStorage.setItem('role', this.currentRole);
     this.principal.firstName = this.firstName;
     this.principal.lastName = this.lastName;
-    this.principal.email = this.username;
     this.principal.address = this.address2;
-    this.principal.batchEnd = this.batchEnd;
-    this.principal.role = Role[this.currentRole];
+    //this.principal.startTime = this.startTime(); //Need this, but currently no value
     this.authService.changePrincipal(this.principal);
-    //if(document.getElementById("activeState"))
     this.userService.update().then();
     window.location.reload(true);
   }
@@ -182,59 +168,14 @@ export class ViewProfileComponent implements OnInit {
     this.currentState = this.principal.active;
   }
 
+  updatePassword(){
+    this.userService.updatePassword(this.principal.email,this.oldPassword,this.password).subscribe();
+  }
+
   /** Holds the list of all users in the system */
   users: any[];
   /** Holds the list of users filtered with search query */
   filteredUsers: any[];
-  /** Sets up all users in the system */
-  // getUsers() {
-  //   let data;
-  //   console.log("***ROLE****");
-  //   console.log(this.principal.role);
-  //   if (this.principal.role == 'ADMIN') {
-  //     console.log("I AM AN ADMIN");
-  //     this.userService.getAllUsers().then((x) => {
-  //       data = x.filter(x =>
-  //         x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER');
-  //       this.users = data; this.filteredUsers = data;
-  //     });
-  //   } else if (this.principal.role == 'TRAINER') {
-  //     console.log("THIS IS TRAINER");
-  //     this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER'); this.users = data });
-  //   }
-  //   console.log("DATA");
-  //   console.log(data);
-  //   this.filterUsers(" ");
-  // }
-
-  // public filterUsers(query = "") {
-  //  let searchUsers = this.users;
-  //   console.log("HORSE PILEDRIVER");
-  //   console.log("how many users: " + this.users.length)
-  //   if (query.length < 1) {
-  //     console.log("returning all users: ", this.users.length)
-  //     this.filteredUsers = this.users;
-  //     return;
-  //   }
-  //   query = query.trim();
-  //   const queryStrings = query.split(" ");
-  //   this.filteredUsers = searchUsers.filter(user => {
-  //     for (let key in user) {
-  //       let data = user[key];
-  //       if (typeof data === "string") {
-  //         data = data.toLowerCase();
-  //         for (let searchTerm of queryStrings) {
-  //           searchTerm = searchTerm.toLocaleLowerCase();
-  //           let found = data.search(searchTerm);
-  //           if (found > -1) {
-  //             return user;
-  //           }
-  //         }
-
-  //       }
-  //     }
-  //   });
-  // }
 
   result: boolean;
   updateUserStatus(id: number, active: string) {

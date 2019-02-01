@@ -41,6 +41,7 @@ export class AuthService {
     this.changePrincipal(p);
   }
 
+  cognitoUser : CognitoUser;
   //Will resend the confirmation email
   resendConfirmation(email:string): Observable<void>{
     const userPool = new CognitoUserPool(environment.cognitoData);
@@ -49,9 +50,9 @@ export class AuthService {
       Username : email,
       Pool : userPool
     };
-    const user = new CognitoUser(userData);
+    this.cognitoUser = new CognitoUser(userData);
     return Observable.create(observer => {
-      user.resendConfirmationCode(function(err, result) {
+      this.cognitoUser.resendConfirmationCode(function(err, result) {
         if (err) {
             observer.error(err);
             return;
@@ -62,7 +63,7 @@ export class AuthService {
     });
   }
 
-
+  
   /**
    * Attempts to log the user in using Cognito
    * @param email The email address to be sent from the view to Cognito
@@ -81,10 +82,10 @@ export class AuthService {
       Username : email,
       Pool : userPool
     };
-    const cognitoUser = new CognitoUser(userData);
+    this.cognitoUser = new CognitoUser(userData);
     
     return Observable.create(observer => {
-      cognitoUser.authenticateUser(authenticationDetails, {
+      this.cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
           //console.log(result);
           observer.next(result);
@@ -115,6 +116,9 @@ export class AuthService {
           this.changePrincipal(l);
           console.log("sending to landing");
           this.route.navigate(['/landing']);
+        },
+        error =>{
+          this.cognitoUser.signOut();
         });
       },
       (e) => {
@@ -157,6 +161,7 @@ export class AuthService {
    * Logs the user out of the service
    */
   logout() {
+    this.cognitoUser.signOut();
     this.changePrincipal(null);
   }
   changePrincipal(p : Login){
