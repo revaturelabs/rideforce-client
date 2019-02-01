@@ -10,7 +10,7 @@ import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
-import {AuthenticationDetails, CognitoUser, CognitoUserPool, CognitoUserAttribute} from 'amazon-cognito-identity-js'
+import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
 import { Role } from '../../models/role.model';
 import { Login } from '../../classes/login';
 import { AuthService } from '../../services/auth.service';
@@ -77,10 +77,12 @@ export class UserControllerService {
           observer.error(err);
         }else{
           //Then wipes password and sends the user information to the actual server along with the idToken
+          //These next few lines are nessisary in order to retrieve the idToken from the user object
           // @ts-ignore
           let token = JSON.stringify(result.user.storage);
           token = token.slice(token.search("idToken")).slice(10);
           token = token.slice(0,token.search('"'));
+
           uri.idToken = token;
           uri.user.password = "blankPass";
           this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
