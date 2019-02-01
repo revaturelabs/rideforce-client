@@ -68,6 +68,7 @@ export class UserControllerService {
     const userPool = new CognitoUserPool(environment.cognitoData);
     const attributeList = [];
     console.log(environment.cognitoData);
+    uri.user.email = uri.user.email.toLowerCase();
 
     return Observable.create(observer => {
       //Sends the login credentials to cognito
@@ -83,12 +84,7 @@ export class UserControllerService {
           // @ts-ignore
           let token = JSON.stringify(result.user.storage);
           token = token.slice(token.search("idToken")).slice(10);
-          token = token.slice(0,token.search('"'));
-          console.log(result);
-          console.log("Token: "+token);
-
-          
-
+          token = token.slice(0, token.search('"'));
 
           uri.idToken = token;
           uri.user.password = "blankPass";
