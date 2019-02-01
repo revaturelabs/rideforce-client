@@ -21,13 +21,13 @@ export class ImageUploadComponent {
   principal : Login;
 
   constructor(private http: HttpClient,
-    private auth : AuthService) { }
+    private auth : AuthService) {
+      this.auth.principal.subscribe(user =>{
+        this.principal = user;
+      })
+     }
 
-Oninit(){
-  this.auth.principal.subscribe(user =>{
-    this.principal = user;
-  })
-}
+Oninit(){}
 
   onFileSelect(event) {
     this.imageUploadProgress = '0%';
