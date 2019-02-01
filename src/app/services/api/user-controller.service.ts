@@ -80,7 +80,7 @@ export class UserControllerService {
           // @ts-ignore
           let token = JSON.stringify(result.user.storage);
           token = token.slice(token.search("idToken")).slice(10);
-          token = token.slice(0,token.search("\\\""));
+          token = token.slice(0,token.search('"'));
           uri.idToken = token;
           uri.user.password = "blankPass";
           this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
