@@ -126,9 +126,9 @@ describe('UsermatchwebComponent', () => {
   it('call like', () => {
     // like(id, interest)
   
-    component.like(3031,0); // dislike
-    component.like(3031,1); // like
-    component.like(3031,2); // trash
-    component.like(3031,3); // clear
+    expect(component.like(3031,0)).toBeTruthy(); // dislike
+    expect(component.like(3031,1)).toBeTruthy(); // like
+    expect(component.like(3031,2)).toBeTruthy(); // trash
+    expect(component.like(3031,3)).toBeTruthy(); // clear
   });
 });
