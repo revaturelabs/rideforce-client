@@ -56,7 +56,7 @@ describe('ViewProfileComponent', () => {
   it('calling switchState', () => {
     sessionStorage.setItem('active', 'ACTIVE');
     component.switchState();
-    expect(sessionStorage.getItem('role')).toBe('INACTIVE');
+    expect(sessionStorage.getItem('active')).toBe('INACTIVE');
 
     sessionStorage.setItem('active', 'INACTIVE');
     component.switchState();

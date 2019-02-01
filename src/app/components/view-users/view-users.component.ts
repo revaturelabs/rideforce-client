@@ -56,7 +56,6 @@ export class ViewUsersComponent implements OnInit {
   * Sets up the form with data about the durrent user
   */
 
-
   ngOnInit() { 
     console.log("getting users");
     this.getUsers().then(data=> 
