@@ -58,34 +58,6 @@
                 </div>
               </div>
 
-              <!-- Password section needs to be in it's own section. Commented out because the code is still good
-              it just needs to be moved -->
-              <!-- <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Password</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>
-              </div>
-              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
-                <div *ngIf="pWord.errors.required">
-                  Password cannot be empty
-                </div>
-                <div *ngIf="pWord.errors.maxLength">
-                  Password cannot be more than 15 characters
-                </div>
-              </div>
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Confirm</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" id="confirmPassword" required disabled>
-              </div>
-              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-                <div *ngIf="password != passwordConfirm">
-                  Passwords do not match.
-                </div>
-              </div> -->
-
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -235,5 +207,51 @@
       
       
     </ngb-tabset>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="passwordModalLabel">Change Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                  <span class="input-group-text" id="basic-addon1 ">Password</span>
+                </div>
+                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>
+              </div>
+              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
+                <div *ngIf="pWord.errors.required">
+                  Password cannot be empty
+                </div>
+                <div *ngIf="pWord.errors.maxLength">
+                  Password cannot be more than 15 characters
+                </div>
+              </div>
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                  <span class="input-group-text" id="basic-addon1 ">Confirm</span>
+                </div>
+                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" id="confirmPassword" required disabled>
+              </div>
+              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
+                <div *ngIf="password != passwordConfirm">
+                  Passwords do not match.
+                </div>
+              </div>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" *ngIf="!sentLink" (click)="updatePassword()">Send</button>
+      </div>
+    </div>
   </div>
 </div>
