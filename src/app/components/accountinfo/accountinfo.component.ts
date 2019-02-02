@@ -63,6 +63,7 @@ export class AccountinfoComponent implements OnInit {
       }
       const decrip = atob(pref).split('~');
       this.office = this.offices.filter(o => o.name === decrip[0])[0];
+      var o = '1';
       this.uri.user.office = '/offices/' + this.office.id,
       this.uri.user.batchEnd = decrip[1];
     }
