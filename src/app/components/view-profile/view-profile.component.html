@@ -134,7 +134,6 @@
               <br>
               <!--Inactivity does not affect admin/trainer functionality. No point in showing them the button-->
               <div *ngIf="currentRole !== 'ADMIN' && currentRole !== 'TRAINER'" id="switchStates" hidden>
-                <!-- <input type="checkbox" id="activeState" disabled data-toggle="toggle" data-onstyle="success" data-on="Active <i class='fas fa-bell'></i>" data-offstyle="danger" data-height="100%" data-off="Inactive <i class='fas fa-bell-slash'></i>"> -->
                 <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Switch to Inactive <i class='fas fa-bell-slash'></i></button>
                 <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
               </div>
@@ -165,10 +164,10 @@
                 </div>
               </div>
               <div>
-              
+
               <div>
                 <textarea type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
-              </div>              
+              </div>
               <br>
               <div>
                 <app-image-upload></app-image-upload>
@@ -230,8 +229,8 @@
           </ng-template>
         </ngb-tab>
       </div>
-      
-      
+
+
     </ngb-tabset>
   </div>
 </div>
