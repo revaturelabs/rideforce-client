@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
           messageLogin.style.display = 'block';
           messageLogin.style.color = 'red';
           switch(err.name){
-            case "":{
+            case "UserNotFoundException":{
               messageLogin.innerHTML = "Email not found.";
               break;
             }
@@ -122,15 +122,15 @@ export class LoginComponent implements OnInit {
     const cognitoUser = this.createCognitoUser(this.userEmail);
     cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
       onSuccess: () => {
-        // /*debug*/ console.log("changed")
-        $("#forogModal").modal('hide');
+      //  /*debug*/ console.log("changed")
+        $("#forgotModal").modal("hide");
         var messageLogin = document.getElementById('errorMessageLogin');
         messageLogin.style.display = 'block';
         messageLogin.style.color = 'green';
         messageLogin.innerHTML = "Password changed.";
       },
       onFailure: err => {
-         /*debug*/ console.log(err);
+      //   /*debug*/ console.log(err);
         switch (err.name) {
           case "CodeMismatchException": {
             let input: any = "";
@@ -142,10 +142,8 @@ export class LoginComponent implements OnInit {
             break;
           }
           default:{
-
           }
         }
-
       }
     });
   }
