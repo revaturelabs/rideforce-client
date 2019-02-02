@@ -5,8 +5,10 @@ import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { NgForm } from '@angular/forms';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
-
 import { environment } from '../../../environments/environment';
+import { from } from 'rxjs';
+
+declare var $: any;
 
 /**
  * Responsible for providing a user the ability to log in
@@ -72,36 +74,84 @@ export class LoginComponent implements OnInit {
   }
 
   resetEmail() {
-    /*debug*/ console.log("in reset");
-    const cognitoUser = this.createCognitoUser(this.userEmail);
+     // /*debug*/ console.log("in reset");
+    try {
+      var messageLogin = document.getElementById('errorMessageLogin');
+      messageLogin.style.display = "none";
+      const cognitoUser = this.createCognitoUser(this.userEmail);
 
-    /*debug*/ console.log("aws");
-    cognitoUser.forgotPassword({
-      onSuccess: function (result) {
-        /*debug*/ console.log('call result:' + result);
-        
-        
-      },
-      onFailure: function (err) {
-        alert(err);
-        /*debug*/ console.log(err);
-      }
-    });
+      // /*debug*/ console.log("aws");
+      cognitoUser.forgotPassword({
+        onSuccess: function (result) {
+          // /*debug*/ console.log('call result:' + result);
+          $("#forgotModal").modal();
+        },
+        onFailure: function (err) {
+           /*debug*/ console.log(err);
+          messageLogin.style.display = 'block';
+          messageLogin.style.color = 'red';
+          switch(err.name){
+            case "":{
+              messageLogin.innerHTML = "Email not found.";
+              break;
+            }
+            case "LimitExceededException":{
+              messageLogin.innerHTML = err.message;
+              break;
+            }
+            default:{
+              messageLogin.innerHTML = "ERROR";
+            }
+          }
+
+        }
+      });
+    } catch (err) {
+     // /*debug*/ console.log("catch");
+      var messageLogin = document.getElementById('errorMessageLogin');
+      messageLogin.style.display = 'block';
+      messageLogin.style.color = 'red';
+      messageLogin.innerHTML = "Please enter email.";
+    }
+
+
   }
 
 
-  resetPassword(form : NgForm){
+  resetPassword(form: NgForm) {
     const cognitoUser = this.createCognitoUser(this.userEmail);
-    cognitoUser.confirmPassword(form.value.verifyCode,form.value.resetPassword, {
+    cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
       onSuccess: () => {
-        console.log("changed")
+        // /*debug*/ console.log("changed")
+        $("#forogModal").modal('hide');
+        var messageLogin = document.getElementById('errorMessageLogin');
+        messageLogin.style.display = 'block';
+        messageLogin.style.color = 'green';
+        messageLogin.innerHTML = "Password changed.";
       },
-      onFailure: err =>{
-        console.log(err);
+      onFailure: err => {
+         /*debug*/ console.log(err);
+        switch (err.name) {
+          case "CodeMismatchException": {
+            let input: any = "";
+            input = document.getElementById("verifyCode");
+            input.value = "";
+            var error = document.getElementById("verifyMsg");
+            form.form.controls["verifyCode"].setErrors({ 'incorrect': true });
+            error.innerHTML = "Invalid Code";
+            break;
+          }
+          default:{
+
+          }
+        }
+
       }
     });
   }
-  createCognitoUser(email:string): CognitoUser{
+
+
+  createCognitoUser(email: string): CognitoUser {
     const userPool = new CognitoUserPool(environment.cognitoData);
     const userData = {
       Username: email,
