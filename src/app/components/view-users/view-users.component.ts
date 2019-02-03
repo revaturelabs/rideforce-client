@@ -62,7 +62,9 @@ export class ViewUsersComponent implements OnInit {
   ngOnInit() { 
     this.authService.principal.subscribe(user => {
       this.principal = user;
+      console.log(this.principal);
     });
+    
     console.log("getting users");
     this.getUsers().then(data=> 
       {

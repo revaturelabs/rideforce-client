@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { UploadService } from '../services/upload.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { Login } from '../classes/login';
 import { AuthService } from '../services/auth.service';
-import { environment } from '../../environments/environment';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -18,22 +16,24 @@ export class ImageUploadComponent {
 
   selectedFile: File = null;
   imageUploadProgress: string = '0';
-  principal : Login;
+  principal: Login;
 
   constructor(private http: HttpClient,
-    private auth : AuthService) { }
+    private auth: AuthService) {
+    this.auth.principal.subscribe(user => {
+      this.principal = user;
+      console.log(this.principal);
+    })
+  }
 
-Oninit(){
-  this.auth.principal.subscribe(user =>{
-    this.principal = user;
-  })
-}
+  Oninit() {
+  }
 
   onFileSelect(event) {
     this.imageUploadProgress = '0%';
     this.selectedFile = <File>event.target.files[0];
     console.log(this.selectedFile)
-    
+
     // console.log("imageInput.files[0]  " + JSON.stringify(imageInput.files[0]));
     // const file: File = imageInput.files[0];
     // console.log("file to upload: " + file)
@@ -50,29 +50,29 @@ Oninit(){
     //     })
     //   })
     //   reader.readAsDataURL(file);
-      
-    }
-    onFileUpload() {
-      const fd = new FormData();
-      const fileName = `user-${this.principal.id}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
-      console.log("FILENAME    ------ " + fileName)
-      fd.append('file', this.selectedFile, fileName);
-      fd.append('user', sessionStorage.getItem('id'));
-      this.http.post('http://localhost:2222/storage/uploadFile', fd, {
+
+  }
+  onFileUpload() {
+    const fd = new FormData();
+    const fileName = `user-${this.principal.id}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
+    console.log("FILENAME    ------ " + fileName)
+    fd.append('file', this.selectedFile, fileName);
+    fd.append('user', this.principal.id.toString());
+    this.http.post('http://localhost:2222/storage/uploadFile', fd, {
       //this.http.post(environment.apiUrl + '/storage/uploadFile', fd, {
-        reportProgress: true,
-        observe: 'events'
-      })
-        .subscribe( event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            this.imageUploadProgress = Math.round(event.loaded / event.total) * 100 + '%';
-            console.log('Upload Progress: ',this.imageUploadProgress)
-          } 
-        },
+      reportProgress: true,
+      observe: 'events'
+    })
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.imageUploadProgress = Math.round(event.loaded / event.total) * 100 + '%';
+          console.log('Upload Progress: ', this.imageUploadProgress)
+        }
+      },
         err => {
           console.log(err);
         }
-        )
-    }
+      )
   }
+}
 

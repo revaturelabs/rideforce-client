@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "types": ["node", "@types/googlemaps"],
+    "types": ["node", "@types/googlemaps", "jquery"],
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015"
