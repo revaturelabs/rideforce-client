@@ -166,14 +166,15 @@ export class AuthService {
                 if(attributes[i].getName() == "email") 
                   email = attributes[i].getValue();
               }
+              console.log("email:"+email);
               this.getUserByEmail(email).subscribe(resp =>{
                 console.log('Retrieved email of user');
                 const l : Login = resp as Login;
                 this.changePrincipal(l);
               });
             }
-        });
-      });
+        }.bind(this));
+      }.bind(this));
     }
   }
 
@@ -194,8 +195,10 @@ export class AuthService {
    * Logs the user out of the service
    */
   logout() {
+    console.log("Logging out.");
+    const userPool = new CognitoUserPool(environment.cognitoData);
+    this.cognitoUser = userPool.getCurrentUser();
     this.cognitoUser.signOut();
-    this.changePrincipal(null);
   }
   changePrincipal(p : Login){
     this.principalSource.next(p);

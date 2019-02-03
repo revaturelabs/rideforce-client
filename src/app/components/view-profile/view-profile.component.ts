@@ -62,8 +62,6 @@ export class ViewProfileComponent implements OnInit {
   */
   ngOnInit() {
 
-    this.authService.checkAuthenticate();
-
     this.authService.principal.subscribe(user => {
       this.principal = user;
       if (this.principal) {

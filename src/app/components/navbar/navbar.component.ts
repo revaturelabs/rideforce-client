@@ -126,6 +126,7 @@ export class NavbarComponent implements OnInit {
    * uses await/async to avoid forcing User to reload manually to see the 'log in' button after log out
    */
   async logout() {
+    this.authService.logout();
     this.principal = new Login();
     this.principal.id = 0;
     this.authService.changePrincipal(this.principal);
