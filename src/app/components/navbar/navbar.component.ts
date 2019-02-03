@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit {
    */
   constructor(
     private auth0: Auth0Service,
-    private authService: AuthService,//made public so it can build
+    public authService: AuthService,//made public so it can build
     private userService: UserControllerService,
     private route: Router
 
