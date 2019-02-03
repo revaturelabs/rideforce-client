@@ -2,19 +2,18 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../../app/models/user.model';
-import { Register } from '../../../app/models/register.model';
 import { Observable, of, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
-import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
-import { Role } from '../../models/role.model';
+import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { Login } from '../../classes/login';
 import { AuthService } from '../../services/auth.service';
-import { UserRegistrationInfo } from '../../models/user-registration-info.model';
+import { UserRegistration } from '../../models/user-registration.model';
+import { RegistrationToken } from '../../models/registration-token.model';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -60,8 +59,9 @@ export class UserControllerService {
    *
    * @param email the user data object
    * @param password the new user's password
-   * @returns {Observable<User>} - the user entered into the system
+   * @returns {Observable<string>} the registration outcome
    */
+<<<<<<< HEAD
   // CREATE
   createUser(uri:UserRegistrationInfo){
     console.log("In Cognito Create");
@@ -99,6 +99,10 @@ export class UserControllerService {
         observer.complete();
       });
     });
+=======
+  createUser(ur: UserRegistration): Observable<string> {
+    return this.http.post<{message: string}>(environment.apiUrl + '/users', ur).pipe(map(d => d.message));
+>>>>>>> e53dce8f2e274139a3384e724d36cb53594ab026
   }
 
   /**
@@ -171,8 +175,11 @@ export class UserControllerService {
    * generate a key for trainers/managers to register users
    * @returns {Observable<string>} - the key to offer new users to use
    */
-  getRegistrationKey() {
-    return this.http.get<string>(environment.apiUrl + `/registration-key`);
+  getRegistrationKey(rtr: RegistrationToken): Observable<string> {
+    console.log(JSON.stringify(rtr.office));
+    console.log( { office: `/offices/${rtr.office.id}`, batchendDate: rtr.batchEndDate });
+    return this.http.post<{token: string}>(`${environment.apiUrl}/tokens/registration`,
+      { office: `/offices/${rtr.office.id}`, batchendDate: rtr.batchEndDate }).pipe(map(r => r.token));
   }
 
   // UPDATE

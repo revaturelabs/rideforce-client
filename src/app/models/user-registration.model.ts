@@ -1,8 +1,7 @@
 import { Usr } from './usr.model';
 
-export class UserRegistrationInfo {
+export class UserRegistration {
   user: Usr;
-  idToken: string;
   registrationToken: string;
 
   constructor() {

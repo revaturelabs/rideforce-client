@@ -9,7 +9,6 @@ export const environment = {
   production: false,
   /** URL for the service we are relying on */
   apiUrl: 'http://localhost:2222',
-  //apiUrl: 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222',
   cognitoData : {
     UserPoolId: 'us-east-2_j1J5UdBsV',
     ClientId: '53liee79hsuc0gvqeg54qeprbc'
