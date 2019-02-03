@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
    */
   dropped: boolean = false;
   /*
-  * Used for PWA install 
+  * Used for PWA install
   */
   deferredInstall = null;
   isInstallable: boolean = false;
@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit {
    */
   constructor(
     private auth0: Auth0Service,
-    private authService: AuthService,//made public so it can build
+    public authService: AuthService,//made public so it can build
     private userService: UserControllerService,
     private route: Router
 
@@ -81,7 +81,7 @@ export class NavbarComponent implements OnInit {
         this.role = this.principal.role;
         this.sessionCheck();
       }
-      
+
     });
   }
 
@@ -163,7 +163,7 @@ export class NavbarComponent implements OnInit {
           }
           this.deferredInstall = null;
         });
-     
+
     }//brings up install prompt and if installed button disappears
 
   }
