@@ -144,6 +144,39 @@ export class AuthService {
     );
   }
 
+  checkAuthenticate(){
+    console.log("calling check auth");
+    const userPool = new CognitoUserPool(environment.cognitoData);
+    let cognitoUser = userPool.getCurrentUser();
+    if(cognitoUser != null){
+      cognitoUser.getSession(function(err, session) {
+        if (err) {
+            alert(err.message || JSON.stringify(err));
+            return;
+        }
+        //this.authToken = session.idToken.jwtToken;
+        cognitoUser.getUserAttributes(function(err, attributes) {
+            if (err) {
+                // Handle error
+            } else {
+              console.log("attributes:");
+              console.log(attributes);
+              let email = "";
+              for (let i = 0; i < attributes.length; i++) {
+                if(attributes[i].getName() == "email") 
+                  email = attributes[i].getValue();
+              }
+              this.getUserByEmail(email).subscribe(resp =>{
+                console.log('Retrieved email of user');
+                const l : Login = resp as Login;
+                this.changePrincipal(l);
+              });
+            }
+        });
+      });
+    }
+  }
+
   /**
    * Returns whether the current user is logged in as a Trainer
    */
@@ -167,14 +200,17 @@ export class AuthService {
   changePrincipal(p : Login){
     this.principalSource.next(p);
   }
-  getAuthToken() :string{
+  getAuthToken(): string{
     return this.authToken;
   }
 
 
 
+
+
   getUserByEmail(email : string): Observable<Login> {
     console.log("getting by email")
+    
     return this.http.get<Login>(environment.apiUrl + '/users', {
       params: { email }});
   }
