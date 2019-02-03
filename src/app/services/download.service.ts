@@ -11,11 +11,11 @@ export class DownloadService {
 
   constructor(private http: HttpClient) { }
 
-  downloadFile(id:String):Observable<FormData>{
-    return this.http.get(environment.apiUrl + '/storage/getFile',id,{withCredentials: true}).pipe(map(
+  downloadFile(id:String):Observable<Blob>{
+    return this.http.get(environment.apiUrl + '/storage/getFile/'+id,{ responseType: 'blob' }).pipe(map(
       resp=>{        
-        const f:File = resp as File;
-        return f;
+        const b:Blob = resp as Blob;
+        return b;
       }
     ))
   }

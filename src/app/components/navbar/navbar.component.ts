@@ -6,6 +6,7 @@ import { Router, NavigationStart } from '@angular/router';
 import { User } from '../../models/user.model';
 import { Auth0Service } from '../../services/auth0.service';
 import { filter } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 /**
  * Hosts the Component that allows users to navigate between components
  */
@@ -37,6 +38,8 @@ export class NavbarComponent implements OnInit {
   */
   deferredInstall = null;
   isInstallable: boolean = false;
+
+
   /**
    * Sets up the component with relevent services
    * @param {Auth0Service} auth0 - Provides Auth0 functionality
@@ -50,7 +53,7 @@ export class NavbarComponent implements OnInit {
     public authService: AuthService,//made public so it can build
     private userService: UserControllerService,
     private route: Router,
-    private imageFile: File
+    private DomSanitizationService: DomSanitizer
   ) {
 
     route.events.pipe(
@@ -72,24 +75,44 @@ export class NavbarComponent implements OnInit {
   /**
    * Sets up the Log in Session appearence
    */
+
+  private imageFile: any;
+    
   ngOnInit() {
     this.sessionCheck();
     this.setCurrentRole();
-    
-    if(this.session){
-      this.imageFile = this.downloadService.downloadFile(sessionStorage.getItem('id')).subscribe(resp => {
-        this.imageFile = resp});        
-    }
-    if(this.imageFile){
-
-    }
   }
 
+downloadFile(){
+
+    this.downloadService.downloadFile(sessionStorage.getItem('id')).subscribe(resp => {
+      this.createImageFromBlob(resp);
+    }, error => {
+      console.log(error);
+    });
+    
+  console.log("Download service called");
+  console.log(this.imageFile);
+}
+
+createImageFromBlob(image: Blob) {
+  let reader = new FileReader();
+  reader.addEventListener("load", () => {
+     this.imageFile = reader.result;
+  }, false);
+
+  if (image) {
+     reader.readAsDataURL(image);
+  }
+}
   /**
    * Updates session, telling if the user is logged in or not
    */
   sessionCheck() {
     this.session = sessionStorage.length > 0;
+    if(this.session){
+      this.downloadFile();
+    }
   }
   /**
    * Sets up the current user
@@ -161,9 +184,5 @@ export class NavbarComponent implements OnInit {
     }//brings up install prompt and if installed button disappears
 
   }
-
-
-
-
 }
 

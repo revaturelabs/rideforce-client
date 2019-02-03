@@ -23,10 +23,4 @@ export class UploadService {
    * @returns {string} - the url used for the file
    */
 
-  uploadfile(image: FormData): Observable<Object> {
-    this.http.post(environment.apiUrl + '/storage/uploadFile', image, {
-      reportProgress: true,
-      observe: 'events'
-    })
-  }
 }
