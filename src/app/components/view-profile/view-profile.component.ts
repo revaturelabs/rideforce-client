@@ -134,11 +134,11 @@ export class ViewProfileComponent implements OnInit {
   switchRole() {
     if (this.principal.currentRole === 'DRIVER') {
       this.principal.currentRole= 'RIDER';
-      this.authService.changePrincipal(this.principal);
+      //this.authService.changePrincipal(this.principal);
       this.getRole();
     } else if (this.principal.currentRole === 'RIDER') {
       this.principal.currentRole= 'DRIVER';
-      this.authService.changePrincipal(this.principal);
+      //this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
       console.log('nope');
@@ -148,11 +148,11 @@ export class ViewProfileComponent implements OnInit {
   switchState() {
     if (this.principal.active === 'ACTIVE') {
       this.principal.active = 'INACTIVE';
-      this.authService.changePrincipal(this.principal);
+      //this.authService.changePrincipal(this.principal);
       this.getState();
     } else if (this.principal.active === 'INACTIVE') {
       this.principal.active = 'ACTIVE';
-      this.authService.changePrincipal(this.principal);
+      //this.authService.changePrincipal(this.principal);
       this.getState();
     } else {
       console.log("Invalid State");

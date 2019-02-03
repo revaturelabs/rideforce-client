@@ -47,7 +47,7 @@ export class AuthService {
     const credentials = { email, password };
     console.log('in authenticate');
     return this.http
-      .post<string>(environment.apiUrl + '/login', credentials)
+      .post<string>(environment.userUrl + '/login', credentials)
       .pipe(
         map<string, void>(token => {
           console.log('Saving token');
@@ -128,7 +128,7 @@ export class AuthService {
 
   getUserByEmail(email : string): Observable<Login> {
     console.log("getting by email")
-    return this.http.get<Login>(environment.apiUrl + '/users', {
+    return this.http.get<Login>(environment.userUrl + '/users', {
       params: { email }});
   }
 

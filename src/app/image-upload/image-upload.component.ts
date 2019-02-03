@@ -22,35 +22,18 @@ export class ImageUploadComponent {
   principal : Login;
 
   constructor(private http: HttpClient,
-    private auth : AuthService) { }
-
-Oninit(){
-  this.auth.principal.subscribe(user =>{
-    this.principal = user;
-  })
-}
+    private auth : AuthService) {
+      this.auth.principal.subscribe(user =>{
+        this.principal = user;
+      })
+     }
+ 
+ Oninit(){}
 
   onFileSelect(event) {
     this.imageUploadProgress = '0%';
     this.selectedFile = <File>event.target.files[0];
     console.log(this.selectedFile)
-    
-    // console.log("imageInput.files[0]  " + JSON.stringify(imageInput.files[0]));
-    // const file: File = imageInput.files[0];
-    // console.log("file to upload: " + file)
-    // const reader = new FileReader();
-
-    // reader.addEventListener('load', (event: any) => {
-    //   this.selectedFile = new ImageSnippet(event.target.result, file);
-    //   this.uploadService.uploadfile(this.selectedFile.file).subscribe(
-    //     res => {
-    //       console.log("response: " + JSON.stringify(res))
-    //     },
-    //     err => {
-    //       console.log('err: ' + err)
-    //     })
-    //   })
-    //   reader.readAsDataURL(file);
       
     }
     onFileUpload() {
@@ -61,7 +44,7 @@ Oninit(){
 
       fd.append('user', sessionStorage.getItem('id'));
       //this.http.post('http://localhost:2222/storage/uploadFile', fd, {
-      this.http.post(environment.apiUrl + '/storage/uploadFile', fd, {
+      this.http.post(environment.userUrl + '/storage/uploadFile', fd, {
 
         reportProgress: true,
         observe: 'events'
