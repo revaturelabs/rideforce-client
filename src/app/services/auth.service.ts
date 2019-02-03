@@ -99,21 +99,15 @@ export class AuthService {
   authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) => {
-        //debug console.log(x.idToken.jwtToken); 
         this.authToken = x.idToken.jwtToken;
-        this.getUserByEmail('admin@revature.com').subscribe(resp => {
-          //debug console.log('Retrieved email of user');
-          //debug console.log(l);
+        this.getUserByEmail(email).subscribe(resp => {
           const l: Login = resp as Login;
           this.changePrincipal(l);
-          //debug console.log("sending to landing");
           this.route.navigate(['/landing']);
         });
       },
       (e) => {
         // error coming from the backend
-        //debug console.log('Printing Login error (Promise Mode)!');
-        //debug console.log(e);
         if (document) {
           const messageLogin = document.getElementById('errorMessageLogin');
           if (messageLogin) {
@@ -156,9 +150,9 @@ export class AuthService {
     });
   }
 
-  
 
-  
+
+
 
   createCognitoUser(email:string): CognitoUser{
     const userPool = new CognitoUserPool(environment.cognitoData);

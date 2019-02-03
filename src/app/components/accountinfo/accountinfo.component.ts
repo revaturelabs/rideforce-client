@@ -68,20 +68,21 @@ export class AccountinfoComponent implements OnInit {
       // Parse the token
       const parsedToken = KJUR.jws.JWS.parse(this.ur.registrationToken);
       // Attempt to verify the token
-      if (KJUR.jws.JWS.verifyJWT(this.ur.registrationToken,
-        this.jwks.get(parsedToken.headerObj.kid), { alg: [`${parsedToken.headerObj.alg}`] })) {
+      if (KJUR.jws.JWS.verifyJWT(this.ur.registrationToken, this.jwks.get(parsedToken.headerObj.kid), { alg: [`${parsedToken.headerObj.alg}`] })) {
         // Set the office based on the token data
         this.offices.filter(o => o.id === parsedToken.payloadObj.oid)
           .forEach(o => {
             this.office = o;
             this.ur.user.office = '/offices/' + this.office.id;
           });
+        console.log(parsedToken);
         // Set the batch end date based on the token data
         this.ur.user.batchEnd = new Date(parsedToken.payloadObj.bed * 1000).toISOString().split('T')[0];
       } else {
         throw new Error('Token not valid');
       }
     } catch (err) {
+      console.log(err);
       // Token is invalid, reset values
       this.office = null;
       this.ur.user.office = null;
