@@ -61,48 +61,8 @@ export class UserControllerService {
    * @param password the new user's password
    * @returns {Observable<string>} the registration outcome
    */
-<<<<<<< HEAD
-  // CREATE
-  createUser(uri:UserRegistrationInfo){
-    console.log("In Cognito Create");
-    const userPool = new CognitoUserPool(environment.cognitoData);
-    const attributeList = [];
-    console.log(environment.cognitoData);
-    uri.user.email = uri.user.email.toLowerCase();
-
-    return Observable.create(observer => {
-      //Sends the login credentials to cognito
-      userPool.signUp(uri.user.email, uri.user.password, attributeList, null, (err, result) => {
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          observer.error(err);
-        }else{
-          //Then wipes password and sends the user information to the actual server along with the idToken
-          //These next few lines are nessisary in order to retrieve the idToken from the user object
-
-          console.log(result.userConfirmed);
-          // @ts-ignore
-          let token = JSON.stringify(result.user.storage);
-          token = token.slice(token.search("idToken")).slice(10);
-          token = token.slice(0, token.search('"'));
-
-          uri.idToken = token;
-          uri.user.password = "blankPass";
-          this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
-            alert("Please check your email to confirm registration.");
-          }, error =>{
-            alert("Error during registration.");
-            //if it errors here, then delete the cognito user (currently doesnt work due to unathentication)
-          });
-        }
-        observer.next(result);
-        observer.complete();
-      });
-    });
-=======
   createUser(ur: UserRegistration): Observable<string> {
     return this.http.post<{message: string}>(environment.apiUrl + '/users', ur).pipe(map(d => d.message));
->>>>>>> e53dce8f2e274139a3384e724d36cb53594ab026
   }
 
   /**
