@@ -2,10 +2,13 @@ import { Router } from '@angular/router';
 import { Role } from '../../models/role.model';
 import { ViewChild, NgZone } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { KJUR, KEYUTIL, RSAKey } from 'jsrsasign';
+import { HttpClient } from '@angular/common/http';
 import { Office } from '../../models/office.model';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { ContactInfo } from '../../models/contact-info.model';
-import { UserRegistrationInfo } from '../../models/user-registration-info.model';
+import { environment } from '../../../environments/environment';
+import { UserRegistration } from '../../models/user-registration.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 
 /**
@@ -15,9 +18,8 @@ import { UserControllerService } from '../../services/api/user-controller.servic
   selector: 'app-accountinfo',
   templateUrl: './accountinfo.component.html',
   styleUrls: ['./accountinfo.component.css'],
-  providers: [ NgbTabset ]
+  providers: [NgbTabset]
 })
-
 export class AccountinfoComponent implements OnInit {
   /** User Roles */
   roles = Role;
@@ -31,40 +33,59 @@ export class AccountinfoComponent implements OnInit {
   passwordConfirm: string;
   /** Contact Info Model */
   contactInfo: ContactInfo;
+  /** Map containing JWK's */
+  jwks: Map<String, RSAKey>;
   /** User Registration Info Model */
-  uri: UserRegistrationInfo;
+  ur: UserRegistration;
   /** Tabset Object */
   @ViewChild(NgbTabset) private tabset: NgbTabset;
+
 
   /**
    * Import services.
    * @param userService contains various user services.
    */
-  constructor(private router: Router, private zone: NgZone, private userService: UserControllerService) { }
+  constructor(private http: HttpClient, private router: Router, private zone: NgZone, private userService: UserControllerService) {}
 
   /**
    * Initialize variables.
    */
   ngOnInit() {
-    this.uri = new UserRegistrationInfo();
+    this.jwks = new Map();
+    this.ur = new UserRegistration();
     this.contactInfo = { type: 'Cell Phone', id: null, info: null };
-    this.userService.getAllOffices().subscribe(offices => this.offices = offices);
+    this.userService.getAllOffices().subscribe(offices => (this.offices = offices));
     this.contactTypes = ['Cell Phone', 'Email', 'Slack', 'Skype', 'Discord', 'Facebook', 'GroupMe', 'Other'];
+    this.http.get<{ keys: { kid: string }[] }>(environment.apiUrl + '/.well-known/jwks.json')
+      .subscribe(d => d.keys.forEach(k => this.jwks.set(k.kid, KEYUTIL.getKey(k))));
   }
 
   /**
    * Checks if the provided registration token is valid and updates the user with its data.
    */
   validateToken() {
-    if (this.uri.registrationToken) {
-      let pref = this.uri.registrationToken.substr(0, 28);
-      if (pref.startsWith('XcvF')) {
-        pref = pref.substr(4);
+    try {
+      // Parse the token
+      const parsedToken = KJUR.jws.JWS.parse(this.ur.registrationToken);
+      // Attempt to verify the token
+      if (KJUR.jws.JWS.verifyJWT(this.ur.registrationToken,
+        this.jwks.get(parsedToken.headerObj.kid), { alg: [`${parsedToken.headerObj.alg}`] })) {
+        // Set the office based on the token data
+        this.offices.filter(o => o.id === parsedToken.payloadObj.oid)
+          .forEach(o => {
+            this.office = o;
+            this.ur.user.office = '/offices/' + this.office.id;
+          });
+        // Set the batch end date based on the token data
+        this.ur.user.batchEnd = new Date(parsedToken.payloadObj.bed * 1000).toISOString().split('T')[0];
+      } else {
+        throw new Error('Token not valid');
       }
-      const decrip = atob(pref).split('~');
-      this.office = this.offices.filter(o => o.name === decrip[0])[0];
-      this.uri.user.office = '/offices/' + this.office.id,
-      this.uri.user.batchEnd = decrip[1];
+    } catch (err) {
+      // Token is invalid, reset values
+      this.office = null;
+      this.ur.user.office = null;
+      this.ur.user.batchEnd = null;
     }
   }
 
@@ -72,7 +93,7 @@ export class AccountinfoComponent implements OnInit {
    * Adds contact into to the current user.
    */
   addContactInfo() {
-    this.uri.user.contactInfo.push(this.contactInfo);
+    this.ur.user.contactInfo.push(this.contactInfo);
     this.contactInfo = { type: 'Cell Phone', id: null, info: null };
   }
 
@@ -81,7 +102,7 @@ export class AccountinfoComponent implements OnInit {
    * @param role the role to set for the user.
    */
   onRoleSelect(role: Role) {
-    this.uri.user.role = role;
+    this.ur.user.role = role;
   }
 
   /**
@@ -89,7 +110,7 @@ export class AccountinfoComponent implements OnInit {
    * @param address the address to set for the user.
    */
   onAddressSelect(address: string) {
-    this.zone.run(() => this.uri.user.address = address);
+    this.zone.run(() => (this.ur.user.address = address));
   }
 
   /**
@@ -98,9 +119,9 @@ export class AccountinfoComponent implements OnInit {
    */
   changeTab(newTab: string) {
     // Enable the next tab
-    this.tabset.tabs.find((t) => t.id === newTab).disabled = false;
+    this.tabset.tabs.find(t => t.id === newTab).disabled = false;
     // Disable the previous tab
-    this.tabset.tabs.find((t) => t.id === this.tabset.activeId).disabled = true;
+    this.tabset.tabs.find(t => t.id === this.tabset.activeId).disabled = true;
     // Switch to the new tab
     this.tabset.select(newTab);
   }
@@ -109,8 +130,12 @@ export class AccountinfoComponent implements OnInit {
    * Registers a user with Cognito and the back-end.
    */
   register() {
-    this.userService.createUser(this.uri).subscribe((x) => {
+    this.userService.createUser(this.ur).subscribe(data => {
+      alert(data);
       this.router.navigate(['/landing']);
-    });
+    }, error => {
+        alert(error);
+      }
+    );
   }
 }

@@ -2,19 +2,18 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../../app/models/user.model';
-import { Register } from '../../../app/models/register.model';
 import { Observable, of, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
-import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js'
-import { Role } from '../../models/role.model';
+import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { Login } from '../../classes/login';
 import { AuthService } from '../../services/auth.service';
-import { UserRegistrationInfo } from '../../models/user-registration-info.model';
+import { UserRegistration } from '../../models/user-registration.model';
+import { RegistrationToken } from '../../models/registration-token.model';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -60,44 +59,10 @@ export class UserControllerService {
    *
    * @param email the user data object
    * @param password the new user's password
-   * @returns {Observable<User>} - the user entered into the system
+   * @returns {Observable<string>} the registration outcome
    */
-  // CREATE
-  createUser(uri:UserRegistrationInfo){
-    console.log("In Cognito Create");
-    const userPool = new CognitoUserPool(environment.cognitoData);
-    const attributeList = [];
-    console.log(environment.cognitoData);
-    uri.user.email = uri.user.email.toLowerCase();
-
-    return Observable.create(observer => {
-      //Sends the login credentials to cognito
-      userPool.signUp(uri.user.email, uri.user.password, attributeList, null, (err, result) => {
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          observer.error(err);
-        }else{
-          //Then wipes password and sends the user information to the actual server along with the idToken
-          //These next few lines are nessisary in order to retrieve the idToken from the user object
-          // @ts-ignore
-          let token = JSON.stringify(result.user.storage);
-          token = token.slice(token.search("idToken")).slice(10);
-          token = token.slice(0, token.search('"'));
-
-          uri.idToken = token;
-          uri.user.password = "blankPass";
-          this.http.post<User>(environment.apiUrl + '/users',uri).subscribe((data)=>{
-            alert("Please check your email to confirm registration.");
-          }, error =>{
-            alert("Error during registration.");
-            //if it errors here, then delete the cognito user (currently doesnt work due to unathentication)
-                // this.deleteCognitoUser(result.user);
-          });
-        }
-        observer.next(result);
-        observer.complete();
-      });
-    });
+  createUser(ur: UserRegistration): Observable<string> {
+    return this.http.post<{message: string}>(environment.apiUrl + '/users', ur).pipe(map(d => d.message));
   }
 
   deleteCognitoUser(user: CognitoUser){
@@ -179,8 +144,11 @@ export class UserControllerService {
    * generate a key for trainers/managers to register users
    * @returns {Observable<string>} - the key to offer new users to use
    */
-  getRegistrationKey() {
-    return this.http.get<string>(environment.apiUrl + `/registration-key`);
+  getRegistrationKey(rtr: RegistrationToken): Observable<string> {
+    console.log(JSON.stringify(rtr.office));
+    console.log( { office: `/offices/${rtr.office.id}`, batchendDate: rtr.batchEndDate });
+    return this.http.post<{token: string}>(`${environment.apiUrl}/tokens/registration`,
+      { office: `/offices/${rtr.office.id}`, batchendDate: rtr.batchEndDate }).pipe(map(r => r.token));
   }
 
   // UPDATE
