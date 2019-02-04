@@ -136,9 +136,7 @@ export class UserControllerService {
    * @returns {Observable<string>} - the key to offer new users to use
    */
   getRegistrationKey(rtr: RegistrationToken): Observable<string> {
-    console.log(JSON.stringify(rtr.office));
-    console.log( { office: `/offices/${rtr.office.id}`, batchendDate: rtr.batchEndDate });
-    return this.http.post<{token: string}>(`${environment.apiUrl}/tokens/registration`,
+    return this.http.post<{ token: string }>(`${environment.apiUrl}/tokens/registration`,
       { office: `/offices/${rtr.office.id}`, batchendDate: rtr.batchEndDate }).pipe(map(r => r.token));
   }
 

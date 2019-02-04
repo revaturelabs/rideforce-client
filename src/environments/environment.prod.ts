@@ -3,9 +3,9 @@ export const environment = {
   /** whater instance is in production mode (true in this case) */
   production: true,
   /** URL for the service we are relying on */
-  apiUrl: 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222',
+  apiUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/user',
   cognitoData : {
-    UserPoolId: 'us-east-2_j1J5UdBsV',
-    ClientId: '53liee79hsuc0gvqeg54qeprbc'
+    UserPoolId: 'us-east-1_lyIcVP12k',
+    ClientId: 'pjkpr0p3d2d8qlklehu9d3hic'
   }
 };

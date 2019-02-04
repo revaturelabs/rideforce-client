@@ -10,7 +10,7 @@ export const environment = {
   /** URL for the service we are relying on */
   apiUrl: 'http://localhost:2222',
   cognitoData : {
-    UserPoolId: 'us-east-1_WDI06D2wk',
-    ClientId: '3dd3ghbnv8v9s9ika4tpgj19t5'
+    UserPoolId: 'us-east-1_lyIcVP12k',
+    ClientId: 'pjkpr0p3d2d8qlklehu9d3hic'
   }
 };
