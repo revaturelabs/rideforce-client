@@ -66,15 +66,4 @@ describe('ImageUploadComponent', () => {
     });
   }));
 
-  //Currently throws a giant error that I think is related to the post request not making it to localhost:2222
-  xit('#onFileUpload should alter fd and fileName', async(() => {
-    spyOn(component, 'onFileUpload').and.callThrough();
-  
-    let button = fixture.debugElement.nativeElement.querySelector('button');
-    button.click();
-
-    expect(component.fd).toBeDefined();
-    expect(component.fileName).toBeDefined();
-  }));
-
 });
