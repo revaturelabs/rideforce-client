@@ -81,46 +81,22 @@ describe('ViewProfileComponent', () => {
   });
 
   it('makeRider', () => {
-      spyOn(component, "makeRider").and.callFake(function () {
-        expect(component.makeRider(3031)).toHaveBeenCalled();
-        // callfake to prevent the popup from happening while testing
-      });
-      component.makeRider(3031);
+      expect(component.makeRider(3031)).toBeTruthy();
     });
 
   it('makeAdmin', () => {
-    spyOn(component, "makeAdmin").and.callFake(function () {
-      expect(component.makeAdmin(3031)).toHaveBeenCalled();
-      // callfake to prevent the popup from happening while testing
+    expect(component.makeAdmin(3031)).toBeTruthy();
     });
-    component.makeAdmin(3031);
-  });
 
   it('makeTrainer', () => {
-    spyOn(component, "makeTrainer").and.callFake(function () {
-      expect(component.makeTrainer(3031)).toHaveBeenCalled();
-      // callfake to prevent the popup from happening while testing
-    });
-    component.makeTrainer(3031);
+    expect(component.makeAdmin(3031)).toBeTruthy();
   });
 
-  it('updateUserStatus Active => Disabled', () => {
-    spyOn(component, "updateUserStatus").and.callFake(function () {
-      expect(component.updateUserStatus(3031, 'ACTIVE')).toHaveBeenCalled();
-      // callfake to prevent the popup from happening while testing
-      component.active = 'DISABLED';
+  it('updateUserStatus', () => {
+      component.updateUserStatus(3031, 'ACTIVE');
+      expect(component.active).toEqual('DISABLED');
+      
+      component.updateUserStatus(3031, 'DISABLED');
+      expect(component.active).toEqual('ACTIVE');
     });
-    component.updateUserStatus(3031, 'ACTIVE');
-    expect(component.active).toEqual('DISABLED');
-  });
-
-  it('updateUserStatus Disabled => Active', () => {
-    spyOn(component, "updateUserStatus").and.callFake(function () {
-      expect(component.updateUserStatus(3031, 'DISABLED')).toHaveBeenCalled();
-      // callfake to prevent the popup from happening while testing
-      component.active = 'ACTIVE';
-    });
-    component.updateUserStatus(3031, 'DISABLED');
-    expect(component.active).toEqual('ACTIVE');
-  });
 });

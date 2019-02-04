@@ -74,13 +74,11 @@ describe('UsercardComponent', () => {
 
   it('hide image tests', () => {
     spyOn(component, 'hideImage');
-    component.hideImage(true);
-    expect(component.hideImage).toHaveBeenCalled();
+    expect(component.hideImage(true)).toHaveBeenCalled();
   });
   it('unhide image tests', () => {
     spyOn(component, 'hideImage');
-    component.hideImage(false);
-    expect(component.hideImage).toHaveBeenCalled();
+    expect(component.hideImage(false)).toHaveBeenCalled();
   });
   it('swipe action right', () => {
     spyOn(component, 'swipe');
@@ -117,5 +115,15 @@ describe('UsercardComponent', () => {
     component.thumbAnimDone();
 
     expect(component.animThumbState).toBe('one');
+  });
+
+  it('swiped', () => {
+    component.animState = 'left';
+    component.swiped();
+    expect(component.animState).toEqual('center');
+
+    component.animState = 'right';
+    component.swiped();
+    expect(component.animState).toEqual('center');
   });
 });
