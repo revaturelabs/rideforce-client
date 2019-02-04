@@ -85,7 +85,7 @@ export class AccountinfoComponent implements OnInit {
    */
   passwordsMatch: boolean;
   /**
-   * The token that should have been provided by a trainor
+   * The token that should have been provided by a trainer
    */
   token: string;
   /**

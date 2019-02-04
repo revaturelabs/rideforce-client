@@ -11,8 +11,10 @@ export class ImageUploadComponent {
 
   selectedFile: File = null;
   imageUploadProgress: string = '0';
+  fd;
+  fileName;
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   onFileSelect(event) {
     this.imageUploadProgress = '0%';
@@ -21,13 +23,13 @@ export class ImageUploadComponent {
     }
     
     onFileUpload() {
-      const fd = new FormData();
-      const fileName = `user-${sessionStorage.getItem('id')}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
-      console.log("FILENAME    ------ " + fileName)
-      fd.append('file', this.selectedFile, fileName);
-      fd.append('user', sessionStorage.getItem('id'));
-      //this.http.post('http://localhost:2222/storage/uploadFile', fd, {
-      this.http.post(environment.apiUrl + '/storage/uploadFile', fd, {
+      this.fd = new FormData();
+      this.fileName = `user-${sessionStorage.getItem('id')}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
+      console.log("fileName    ------ " + this.fileName)
+      this.fd.append('file', this.selectedFile, this.fileName);
+      this.fd.append('user', sessionStorage.getItem('id'));
+      //this.http.post('http://localhost:2222/storage/uploadFile', this.fd, {
+      this.http.post(environment.apiUrl + '/storage/uploadFile', this.fd, {
         reportProgress: true,
         observe: 'events'
       })

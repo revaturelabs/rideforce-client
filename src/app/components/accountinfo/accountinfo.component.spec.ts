@@ -4,6 +4,7 @@ import { AppModule } from '../../app.module';
 import { Role } from '../../models/role.model';
 import {APP_BASE_HREF} from '@angular/common';
 import { ContactInfo } from '../../models/contact-info.model';
+import { Office } from '../../models/office.model';
 
 describe('AccountinfoComponent', () => {
   let component: AccountinfoComponent;
@@ -34,27 +35,34 @@ describe('AccountinfoComponent', () => {
     expect(component.mobile).toBeFalsy();
   });
 
-  it('user object should create', () => {
-    component.userObject = {
-      id: 1,
-      firstName: "John",
-      lastName: "Doe",
-      email: "jdoe@gmail.com",
-      password: "jdopass",
-      photoUrl: "imgprofile",
-      address: "12345 Pine Street, VA",
-      office: '/offices/' + 1,
-      startTime: 0,
-      batchEnd: new Date().toISOString(),
-      cars: [],
-      active: 'ACTIVE',
-      contactInfo: [],
-      role: Role.Rider,
-      bio: "My Bio"
-    }
-    expect(component.userObject).toBeTruthy();
-    // create the user object
-    component.createUserObject();
+  it('#createUserObject should create a user', () => {
+    spyOn(component, 'createUserObject').and.callThrough();
+
+    component.token = 'XcvFXcvFXcvFXcvFXcvFXcvFXcvF';
+    component.firstName = 'John';
+    component.lastName = 'Doe';
+    component.username = 'jdoe@gmail.com';
+    component.password = 'jdopass';
+    component.imageSrc = 'imgprofile';
+    component.address2 = '12345 Pine Street, VA';
+    let testOffice = new Office();
+    testOffice.address = '1234 Fake Street, VA';
+    testOffice.id = 1;
+    testOffice.name = 'Fake Office';
+    component.officeObject = testOffice;
+    component.batchEnd = new Date().toISOString();
+    component.timeSelect = 0;
+    component.roleObject = Role.Rider;
+    component.bio = 'My Bio';
+
+    let button = fixture.debugElement.nativeElement.querySelector('button');
+    button.click();
+
+
+    fixture.whenStable().then(() => {
+      expect(component.createUserObject).toHaveBeenCalled();
+      expect(component.userObject).toBeTruthy();
+    });
   });
 
   // should same spec test both add and removeContact?

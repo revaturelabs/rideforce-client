@@ -36,7 +36,7 @@ describe('ImageUploadComponent', () => {
     expect(component.imageUploadProgress).toEqual('0');
   });
 
-  it('should have called onFileSelect on change', async(() => {
+  it('#onFileSelect should have been called on change', async(() => {
     spyOn(component, 'onFileSelect');
   
     let input = fixture.debugElement.nativeElement.querySelector('input');
@@ -45,7 +45,17 @@ describe('ImageUploadComponent', () => {
     expect(component.onFileSelect).toHaveBeenCalled();
   }));
 
-  it('should have called onFileUpload on button click', async(() => {
+  it('#onFileSelect should have changed imageUploadProgress and selectedFile', async(() => {
+    spyOn(component, 'onFileSelect').and.callThrough();
+  
+    let input = fixture.debugElement.nativeElement.querySelector('input');
+    input.dispatchEvent(new Event('change'));
+
+    expect(component.imageUploadProgress).toBe('0%');
+    expect(component.selectedFile).not.toBeNull();
+  }));
+
+  it('#onFileUpload should have been called on button click', async(() => {
     spyOn(component, 'onFileUpload');
   
     let button = fixture.debugElement.nativeElement.querySelector('button');
@@ -54,6 +64,17 @@ describe('ImageUploadComponent', () => {
     fixture.whenStable().then(() => {
       expect(component.onFileUpload).toHaveBeenCalled();
     });
+  }));
+
+  //Currently throws a giant error that I think is related to the post request not making it to localhost:2222
+  xit('#onFileUpload should alter fd and fileName', async(() => {
+    spyOn(component, 'onFileUpload').and.callThrough();
+  
+    let button = fixture.debugElement.nativeElement.querySelector('button');
+    button.click();
+
+    expect(component.fd).toBeDefined();
+    expect(component.fileName).toBeDefined();
   }));
 
 });
