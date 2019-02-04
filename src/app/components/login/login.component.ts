@@ -178,6 +178,7 @@ export class LoginComponent implements OnInit {
   }
 
   initModal(){
+    console.log("Initializing modal");
     this.errorLink = false;
     this.sentLink = false;
     this.reEmail = "";

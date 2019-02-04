@@ -103,7 +103,7 @@
           <div class="alert alert-danger" role="alert" *ngIf="errorLink">Could not find unconfirmed account with email provided.</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="initModal()">Close</button>
         <button type="button" class="btn btn-primary" *ngIf="!sentLink" (click)="resendEmail()">Send</button>
       </div>
     </div>
