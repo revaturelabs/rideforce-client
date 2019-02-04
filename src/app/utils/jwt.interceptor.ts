@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { TokenStorage } from './token.storage';
-import { Login } from '../classes/login';
+import { Login } from '../models/login.model';
 
 /**
  * Ensures that each HTTP request we send has our authentication token

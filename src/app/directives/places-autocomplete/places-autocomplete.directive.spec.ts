@@ -1,6 +1,6 @@
 import { PlacesAutocompleteDirective } from './places-autocomplete.directive';
 import { MapsAPILoader } from '@agm/core';
-import { Directive, OnInit, ElementRef, EventEmitter, Output } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 describe('PlacesAutocompleteDirective', () => {

@@ -1,10 +1,10 @@
+import { Router } from '@angular/router';
+import { Login } from '../../models/login.model';
+import { Role } from '../../models/role.model';
+import { User } from '../../models/user.model';
+import { AuthService } from '../../services/auth.service';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
-import { User } from '../../models/user.model';
-import { Login } from '../../classes/login'
-import { Role } from '../../models/role.model'
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-users',
@@ -13,22 +13,8 @@ import { Router } from '@angular/router';
 })
 @Injectable()
 export class ViewUsersComponent implements OnInit {
-
   currentUser: User;
-    /** 
-       * @param userService
-       * @param {AuthService} authService
-       */
-
-  constructor(
-    private userService: UserControllerService,
-    private authService: AuthService,
-    private router : Router) {
-      this.router.routeReuseStrategy.shouldReuseRoute = function () {
-        return false;
-      }
-    }
-    /** The first name of the user (hooked to form item in html) */
+  /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
   lastName: string;
@@ -56,40 +42,42 @@ export class ViewUsersComponent implements OnInit {
   canEdit = false;
   /** User's active state */
   active: string;
-  
   userId: number;
   userStatus: string;
-  
-  principal : Login;
-  
+  principal: Login;
+  currentRole: Role;
+  currentState: string;
+
+  constructor(private userService: UserControllerService, private authService: AuthService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
+
   /**
   * Sets up the form with data about the durrent user
   */
-
-
-  ngOnInit() { 
-    console.log("ngOnInit");
+  ngOnInit() {
+    console.log('ngOnInit');
     this.authService.principal.subscribe(user => {
       this.principal = user;
+      console.log(this.principal);
     });
-    console.log("getting users");
-    this.getUsers().then(data=> 
-      {
+
+    console.log('getting users');
+    this.getUsers().then(data => {
         this.users = data;
-        this.filterUsers("");
-        
+        this.filterUsers('');
       });
     this.getRole();
     this.getState();
   }
 
   switchRole() {
-    if (this.principal.currentRole === 'DRIVER') {
-      this.principal.currentRole ='RIDER';
+    if (this.principal.role === Role.Driver) {
+      this.principal.role = Role.Rider;
       this.authService.changePrincipal(this.principal);
       this.getRole();
-    } else if (this.principal.currentRole === 'RIDER') {
-      this.principal.currentRole = 'DRIVER';
+    } else if (this.principal.role === Role.Rider) {
+      this.principal.role = Role.Driver;
       this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
@@ -107,68 +95,62 @@ export class ViewUsersComponent implements OnInit {
       this.authService.changePrincipal(this.principal);
       this.getState();
     } else {
-      console.log("Invalid State");
+      console.log('Invalid State');
     }
   }
-  
-  
-  currentRole: string; 
+
   getRole() {
-    this.currentRole = this.principal.currentRole;
+    this.currentRole = this.principal.role;
   }
-  currentState: string;
+
   getState() {
     this.currentState = this.principal.active;
   }
   /** Sets up all users in the system */
   getUsers() {
     let data;
-    console.log("hitting users");
-    if (this.principal.currentRole === 'ADMIN') {
-        return this.userService.getAllUsers().then((x) => { 
-        data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER' || x.role === 'ADMIN'); 
+    console.log('hitting users');
+    if (this.principal.role === Role.Admin) {
+        return this.userService.getAllUsers().then((x) => {
+        data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider || y.role === Role.Trainer || y.role === Role.Admin);
         this.users = data;
         return data;
       });
-    } 
-    else if (this.principal.currentRole === 'TRAINER') {
-      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER');
+    } else if (this.principal.role === Role.Trainer) {
+      this.userService.getAllUsers().then((x) => { data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider);
        this.users = data;
       });
     }
     console.log(data);
   }
-  
-  
-  paginate(users: any[], pageSize: number, pageNumber: number)
-    {
-      this.currPage = pageNumber;
-      --pageNumber;
-      const result = users.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
-      console.log(pageNumber, pageSize);
-      console.log("Page number: " + this.numPages);
-      this.paginatedUsers = result;
-      console.log("how many paginated users?  ", this.paginatedUsers)
-      // this.filterUsers("");
-      return this.paginatedUsers;
+
+
+  paginate(users: any[], pageSize: number, pageNumber: number) {
+    this.currPage = pageNumber;
+    --pageNumber;
+    const result = users.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
+    console.log(pageNumber, pageSize);
+    console.log('Page number: ' + this.numPages);
+    this.paginatedUsers = result;
+    console.log('how many paginated users?  ', this.paginatedUsers);
+    // this.filterUsers("");
+    return this.paginatedUsers;
     }
-  
-  dividePages(users: any[], divider:number)
-  {
+
+  dividePages(users: any[], divider: number) {
     this.numPages = [];
     let counter = 0;
     counter = Math.round(users.length / divider);
     let n = 1;
-    while(n <= counter)
-    {
+    while (n <= counter) {
       this.numPages.push(n++);
     }
-    console.log("Number of pages: " + this.numPages);
+    console.log('Number of pages: ' + this.numPages);
     return this.numPages;
   }
 
   confirmUserStatus(id: number, active: string) {
-    console.log("confirming");
+    console.log('confirming');
     this.userId = id;
     this.userStatus = active;
     console.log(this.userId);
@@ -176,71 +158,63 @@ export class ViewUsersComponent implements OnInit {
   }
 
   updateUserStatus() {
-    console.log("updating");
+    console.log('updating');
     if (this.userStatus !== 'DISABLED') {
-      //this.result = window.confirm("Are you sure you want to disable this account?");
+      // this.result = window.confirm("Are you sure you want to disable this account?");
       this.userStatus = 'DISABLED';
     } else {
-      //this.result = window.confirm("Are you sure you want to enable this account?");
+      // this.result = window.confirm("Are you sure you want to enable this account?");
       this.userStatus = 'ACTIVE';
     }
-    
+
       this.userService.updateStatus(this.userId, this.userStatus).then();
       this.router.navigate(['/viewUsers']);
-    
   }
 
   setUserId(id: number) {
       this.userId = id;
   }
 
-  
   makeTrainer() {
-    //this.result = window.confirm("Are you sure you want to make this user a trainer?");
-    let role = 'TRAINER';
-      this.userService.updateRole(this.userId, role).then();
+    // this.result = window.confirm("Are you sure you want to make this user a trainer?");
+      this.userService.updateRole(this.userId, Role.Trainer).then();
       this.router.navigate(['/viewUsers']);
-    } 
-  
+    }
+
 
   makeAdmin() {
-    //this.result = window.confirm("Are you sure you want to make this user an admin?");
-    let role = 'ADMIN';
-      this.userService.updateRole(this.userId, role).then();
+    // this.result = window.confirm("Are you sure you want to make this user an admin?");
+      this.userService.updateRole(this.userId, Role.Admin).then();
       this.router.navigate(['/viewUsers']);
   }
 
   makeDriver() {
-    //this.result = window.confirm("This user is now a Driver");
-    let role = 'DRIVER';
-      this.userService.updateRole(this.userId, role).then();
+    // this.result = window.confirm("This user is now a Driver");
+      this.userService.updateRole(this.userId, Role.Driver).then();
       this.router.navigate(['/viewUsers']);
     }
 
   makeRider() {
-   //this.result = window.confirm("This user is now a Rider.");
-    let role = 'RIDER';
-    //console.log("Called makeRider");
-   
-      this.userService.updateRole(this.userId, role).then();
+   // this.result = window.confirm("This user is now a Rider.");
+    // console.log("Called makeRider");
+      this.userService.updateRole(this.userId, Role.Rider).then();
       this.router.navigate(['/viewUsers']);
     }
-  
+
 
   public filterUsers(query) {
-    console.log("query: " + query)
-    let searchUsers = this.users;
-    console.log("how many users: " + this.users.length)
+    console.log('query: ' + query);
+    console.log('how many users: ' + this.users.length);
     if (query.length < 1) {
-      console.log("returning all users: ", this.users.length)
+      console.log('returning all users: ', this.users.length);
       this.filteredUsers = this.users;
       this.paginate(this.filteredUsers, 10, 1);
       this.dividePages(this.filteredUsers, 10);
       return;
     }
     query = query.trim();
-    const queryStrings = query.split(" ");
-    this.filteredUsers = searchUsers.filter(user => {
+    const queryStrings = query.split(' ');
+    this.filteredUsers = this.users.filter(user => {
       for (let key in user) {
         let data = user[key];
         if (typeof data === "string") {
@@ -252,7 +226,6 @@ export class ViewUsersComponent implements OnInit {
               return user;
             }
           }
-
         }
       }
     });
@@ -263,7 +236,4 @@ export class ViewUsersComponent implements OnInit {
   reload() {
     this.router.navigate(['/viewUsers']);
   }
-
-
 }
-

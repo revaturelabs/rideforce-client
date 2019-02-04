@@ -43,7 +43,7 @@ export class CarRegistrationComponent implements OnInit {
   carColor: string;
 
   /**
-   * Relic from the AccountInfoComponent that previously managed cars
+   * Relic from the RegisterComponent that previously managed cars
    */
   optInToDrive: boolean;
 

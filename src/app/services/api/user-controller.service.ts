@@ -2,17 +2,19 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../../app/models/user.model';
-import { Register } from '../../../app/models/register.model';
 import { Observable, of, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { Office } from '../../models/office.model';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
-import { Role } from '../../models/role.model';
-import { Login } from '../../classes/login';
+import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { Login } from '../../models/login.model';
 import { AuthService } from '../../services/auth.service';
+import { UserRegistration } from '../../models/user-registration.model';
+import { RegistrationToken } from '../../models/registration-token.model';
+import { Role } from '../../models/role.model';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -29,7 +31,7 @@ export class UserControllerService {
   constructor(private http: HttpClient, auth: AuthService) {
     auth.principal.subscribe(user => {
       this.principal = user;});
-      
+
    }
 
   /** to be used with the url provided by back end */
@@ -54,17 +56,15 @@ export class UserControllerService {
   // CRUD FOR USERS * * * * * * * * * * * * * * * * * * * * *
 
   /**
-   * Creates a new user with the given data and password.
+   * Creates a new user in both cognito and
+   * serverside with the given data and password.
    *
    * @param email the user data object
    * @param password the new user's password
-   * @returns {Observable<User>} - the user entered into the system
+   * @returns {Observable<string>} the registration outcome
    */
-  // CREATE
-  createUser(user: User, password: string, registrationKey: string): Promise<User> {
-    return this.http.post<User>(environment.apiUrl + '/users',
-      { user, password, registrationKey }
-    ).toPromise();
+  createUser(ur: UserRegistration): Observable<string> {
+    return this.http.post<{message: string}>(environment.userUrl + '/users', ur).pipe(map(d => d.message));
   }
 
   /**
@@ -72,14 +72,14 @@ export class UserControllerService {
    * @returns {Observable<User[]>} - the list of Users on the system
    */
   getAllUsers(): Promise<User[]> {
-    return this.http.get<User[]>(environment.apiUrl + '/users').toPromise();
+    return this.http.get<User[]>(environment.userUrl + '/users').toPromise();
   }
   /** Gets a single user via the given endpoint and id
    * @param {number} id - the id of the user to retrieve
    * @returns {Observable<User>} - the user with the given id
   */
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(environment.apiUrl + `/users/${id}`);
+    return this.http.get<User>(environment.userUrl + `/users/${id}`);
   }
   /**
    * Gets a single user via the given endpoint and email
@@ -87,7 +87,7 @@ export class UserControllerService {
    * @returns {Observable<User>} - the user with the given email
    */
   getUserByEmail(email: string): Promise<User> {
-    return this.http.get<User>(environment.apiUrl + '/users', {
+    return this.http.get<User>(environment.userUrl + '/users', {
       params: { email },
     }).toPromise();
   }
@@ -105,12 +105,12 @@ export class UserControllerService {
   getCurrentUser(): Observable<User> {
     // We cache the current user in a local variable to prevent making too many
     // calls to the database.
-    console.log('Getting current User! api is "' + environment.apiUrl + '/login"');
+    console.log('Getting current User! api is "' + environment.userUrl + '/login"');
 
     return this.currentUser
       ? of(this.currentUser)
       : this.http
-        .get<User>(environment.apiUrl + '/login')
+        .get<User>(environment.userUrl + '/login')
         .pipe(
           catchError(function <T>(res?: T) {
             this.currentUser = null;
@@ -137,8 +137,9 @@ export class UserControllerService {
    * generate a key for trainers/managers to register users
    * @returns {Observable<string>} - the key to offer new users to use
    */
-  getRegistrationKey() {
-    return this.http.get<string>(environment.apiUrl + `/registration-key`);
+  getRegistrationKey(rtr: RegistrationToken): Observable<string> {
+    return this.http.post<{ token: string }>(`${environment.userUrl}/tokens/registration`,
+      { office: `/offices/${rtr.office.id}`, batchendDate: rtr.batchEndDate }).pipe(map(r => r.token));
   }
 
   // UPDATE
@@ -156,8 +157,7 @@ export class UserControllerService {
       lastName: this.principal.lastName,
       email: this.principal.email,
       photoUrl: null,
-      password: this.principal.password,
-      role: this.principal.currentRole,
+      role: this.principal.role,
       address: this.principal.address,
       batchEnd: new Date(this.principal.batchEnd),
       startTime: null,
@@ -165,7 +165,7 @@ export class UserControllerService {
     };
     console.log("sending");
     return this.http
-      .put<User>(environment.apiUrl + `/users/${this.principal.id}`, body)
+      .put<User>(environment.userUrl + `/users/${this.principal.id}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the
@@ -178,7 +178,7 @@ export class UserControllerService {
         })
       ).toPromise();
   }
-    
+
 
   updateBio(bioInput: string): Promise<User> {
      const body = {
@@ -186,19 +186,18 @@ export class UserControllerService {
       lastName: this.principal.firstName,
       email: this.principal.email,
       photoUrl: null,
-      password: this.principal.password,
-      role: this.principal.currentRole,
+      role: this.principal.role,
       address: this.principal.address,
       batchEnd: new Date(this.principal.batchEnd),
       startTime: null,
       active: this.principal.active,
       bio: bioInput
      };
-    
+
     this.principal.bio = bioInput;
 
     return this.http
-      .put<User>(environment.apiUrl + `/users/${this.principal.id}`,
+      .put<User>(environment.userUrl + `/users/${this.principal.id}`,
       JSON.stringify(this.principal))
       .pipe(
         tap(updated => {
@@ -214,19 +213,31 @@ export class UserControllerService {
   /**
    * Updates the password of the user with the given ID.
    *
-   * @param id the ID of the user whose password to update
+   * @param email the email of the user whose password to update
    * @param oldPassword the user's current password, for verification
    * @param newPassword the desired new password
    * @returns {Observable<void>} - the value returned by the server
    */
   updatePassword(
-    id: number,
+    email: string,
     oldPassword: string,
     newPassword: string
-  ): Observable<void> {
-    return this.http.post<void>(environment.apiUrl + `/users/${id}/password`, {
-      oldPassword,
-      newPassword,
+  ): Observable<any> {
+    const userPool = new CognitoUserPool(environment.cognitoData);
+    const userData = {
+      Username : email,
+      Pool : userPool
+    };
+    const user = new CognitoUser(userData);
+    return Observable.create(observer => {
+     user.changePassword('oldPassword', 'newPassword', function(err, result) {
+      if (err) {
+          alert(err.message || JSON.stringify(err));
+          observer.error(err);
+      }
+      observer.next(result);
+      observer.complete();
+      });
     });
   }
 
@@ -258,7 +269,7 @@ export class UserControllerService {
    * @returns {Observable<Office>} - the office entered into the system
   */
   createOffice(newOffice: Office): Observable<Office> {
-    return this.http.post<Office>(environment.apiUrl + '/offices', newOffice);
+    return this.http.post<Office>(environment.userUrl + '/offices', newOffice);
   }
 
   // READ
@@ -267,7 +278,7 @@ export class UserControllerService {
    * @returns {Observable<Office[]>} - Returns all offices entered in the system
    */
   getAllOffices(): Observable<Office[]> {
-    return this.http.get<Office[]>(environment.apiUrl + '/offices');
+    return this.http.get<Office[]>(environment.userUrl + '/offices');
   }
 
   // may have to replace string with Link<Office>
@@ -279,7 +290,7 @@ export class UserControllerService {
    * -Martin
   */
   getOfficeByLink(officeUri: Link<Office>): Observable<Office> {
-    return this.http.get<Office>(environment.apiUrl + officeUri);
+    return this.http.get<Office>(environment.userUrl + officeUri);
   }
 
   // UPDATE
@@ -290,7 +301,7 @@ export class UserControllerService {
    * @returns {Observable<Office>} - the office the system updated
    */
   updateOffice(officeUri: Link<Office>, updatedOffice: Office): Observable<Office> {
-    return this.http.put<Office>(environment.apiUrl + officeUri, updatedOffice);
+    return this.http.put<Office>(environment.userUrl + officeUri, updatedOffice);
     // maybe implement pipe to verify if the user has authorization to add a location (i.e. a trainer/manager)
   }
 
@@ -307,8 +318,8 @@ export class UserControllerService {
    * @returns {Observable<Car>} - the Data entered into the system
    */
   createCar(newCar: Car): Observable<Car> {
-    console.log('Creating new Car! ' + environment.apiUrl);
-    return this.http.post<Car>(environment.apiUrl + '/cars', newCar);
+    console.log('Creating new Car! ' + environment.userUrl);
+    return this.http.post<Car>(environment.userUrl + '/cars', newCar);
   }
 
   // READ
@@ -318,7 +329,7 @@ export class UserControllerService {
    */
   getAllCars(): Observable<Car[]> {
     console.log('Getting all cars!');
-    return this.http.get<Car[]>(environment.apiUrl + '/cars');
+    return this.http.get<Car[]>(environment.userUrl + '/cars');
   }
 
   /**
@@ -327,7 +338,7 @@ export class UserControllerService {
    * @returns {Observable<Car>} - the Data returned by the system
    */
   getCarById(id: number): Observable<Car> {
-    return this.http.get<Car>(environment.apiUrl + `/cars/${id}`);
+    return this.http.get<Car>(environment.userUrl + `/cars/${id}`);
   }
 
   // UPDATE
@@ -339,7 +350,7 @@ export class UserControllerService {
    */
   updateCar(carUri: Link<Car>, newCar: Car): Observable<Car> {
     return this.http
-      .put<Car>(environment.apiUrl + carUri, newCar);
+      .put<Car>(environment.userUrl + carUri, newCar);
   }
 
   // TODO
@@ -354,7 +365,7 @@ export class UserControllerService {
    * @returns {Observable<ContactInfo>} - the Data entered into the system
    */
   createContactInfo(newContactInfo: ContactInfo): Observable<ContactInfo> {
-    return this.http.post<ContactInfo>(environment.apiUrl + '/contact-info', newContactInfo);
+    return this.http.post<ContactInfo>(environment.userUrl + '/contact-info', newContactInfo);
   }
 
   // READ
@@ -363,7 +374,7 @@ export class UserControllerService {
    * @returns {Observable<ContactInfo[]>} - the Data returned by the system
    */
   getAllContactInfo(): Observable<ContactInfo[]> {
-    return this.http.get<ContactInfo[]>(environment.apiUrl + '/contact-info');
+    return this.http.get<ContactInfo[]>(environment.userUrl + '/contact-info');
   }
 
   /**
@@ -372,7 +383,7 @@ export class UserControllerService {
    * @returns {Observable<ContactInfo>} - the Data returned by the system
    */
   getContactInfoById(id: number): Observable<ContactInfo> {
-    return this.http.get<ContactInfo>(environment.apiUrl + `/contact-info/${id}`);
+    return this.http.get<ContactInfo>(environment.userUrl + `/contact-info/${id}`);
   }
 
   // UPDATE
@@ -384,7 +395,7 @@ export class UserControllerService {
    */
   updateContactInfo(contactInfoUri: Link<ContactInfo>, newContactInfo: ContactInfo): Observable<ContactInfo> {
     return this.http
-      .put<ContactInfo>(environment.apiUrl + contactInfoUri, newContactInfo);
+      .put<ContactInfo>(environment.userUrl + contactInfoUri, newContactInfo);
   }
 
   updateStatus(id: number, active: string) {
@@ -402,7 +413,7 @@ export class UserControllerService {
     }
 
     return this.http
-      .put<User>(environment.apiUrl + `/users/${id}`, body)
+      .put<User>(environment.userUrl + `/users/${id}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the
@@ -417,7 +428,7 @@ export class UserControllerService {
     // DELETE CONTACT-INFO
   }
 
-  updateRole(id: number, role: string) {
+  updateRole(id: number, role: Role) {
     const body = {
       firstName: null,
       lastName: null,
@@ -429,10 +440,10 @@ export class UserControllerService {
       batchEnd: null,
       startTime: null,
       active: null
-    }
+    };
 
     return this.http
-      .put<User>(environment.apiUrl + `/users/${id}`, body)
+      .put<User>(environment.userUrl + `/users/${id}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the

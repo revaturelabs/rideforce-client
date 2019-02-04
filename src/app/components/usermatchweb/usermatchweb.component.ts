@@ -2,7 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Login } from "../../classes/login";
+import { Login } from "../../models/login.model";
 import { Link } from '../../models/link.model';
 import { User } from '../../models/user.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
@@ -94,7 +94,7 @@ export class UsermatchwebComponent implements OnInit {
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
-        
+
         let userLinks: Link<User>[] = null;
         this.matchService.getMatchingDrivers(+(this.principal.id)).subscribe(
           data2 => {
@@ -209,18 +209,18 @@ export class UsermatchwebComponent implements OnInit {
     }
   }
 
-  sortDrivers(filter: string): void { 
-  
+  sortDrivers(filter: string): void {
+
     const options = [
-      [this.filterBatchEnd, 'batchend'], 
-      [this.filterDistance, 'distance'], 
+      [this.filterBatchEnd, 'batchend'],
+      [this.filterDistance, 'distance'],
       [this.filterStartTime, 'starttime']
     ];
 
     this.sortedUsers = this.shuffle(this.users);
 
     const filterMap = {
-      "starttime": () => { 
+      "starttime": () => {
         console.log('sorting by start time')
         this.sortedUsers = this.users.sort((a, b) => a.user.startTime - b.user.startTime)
       },
@@ -252,7 +252,7 @@ export class UsermatchwebComponent implements OnInit {
 
     calculateDistance(x1: number, x2: number, y1: number, y2: number): number {
       // const distance: number = Math.sqrt(Math.pow((x2 - x1), 2)/Math.pow((y2 - y1), 2));
-      
+
       const radlat1 = Math.PI * y1/180;
       const radlat2 = Math.PI * y2/180;
       const radlong1 = Math.PI * x1/180;
@@ -272,9 +272,9 @@ export class UsermatchwebComponent implements OnInit {
       const myLocation = await this.geocodeService.geocode(this.principal.address).toPromise();
       const location = await this.geocodeService.geocode(user.user.address).toPromise();
       user["distance"] = this.calculateDistance(
-        myLocation["lng"], 
-        location["lng"], 
-        myLocation["lat"], 
+        myLocation["lng"],
+        location["lng"],
+        myLocation["lat"],
         location["lat"]
         );
         console.log('usre with appended distance: ' + user);
@@ -291,10 +291,10 @@ export class UsermatchwebComponent implements OnInit {
       const y2 = otherLocation["lat"];
       return this.calculateDistance(x1, x2, y1, y2);
     }
-   
+
     getMyLocation() {
       const address = this.principal.address;
-      if (!this.myLocation) { 
+      if (!this.myLocation) {
         this.myLocation = this.getLngLat(address);
       }
       return this.myLocation;

@@ -7,13 +7,12 @@ import { LoginComponent } from '../components/login/login.component';
 import { MapComponent } from '../components/map/map.component';
 import { RideswipeComponent } from '../components/rideswipe/rideswipe.component';
 import { UsercardComponent } from '../components/usercard/usercard.component';
-import { FavoritesComponent } from '../components/favorites/favorites.component';
-import { AccountinfoComponent } from '../components/accountinfo/accountinfo.component';
 import { AdminComponent } from '../components/admin/admin.component';
 import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 import { CallbackComponent } from '../callback/callback/callback.component';
 import { ViewUsersComponent } from '../components/view-users/view-users.component';
+import { RegisterComponent } from '../components/register/register.component';
 
 
 /**
@@ -29,7 +28,7 @@ export const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
-  { path: 'accountInfo', component: AccountinfoComponent},
+  { path: 'register', component: RegisterComponent},
   { path: 'rideswipe', component: RideswipeComponent },
   { path: 'userCard', component: UsercardComponent },
   { path: 'admin', component: AdminComponent },
@@ -42,7 +41,7 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'})
+    RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})
   ],
   exports: [ RouterModule ],
   declarations: []

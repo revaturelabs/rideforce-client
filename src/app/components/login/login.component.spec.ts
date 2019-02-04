@@ -1,9 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '../../app.module';
 import { By } from '@angular/platform-browser';
-
 import { LoginComponent } from '../login/login.component';
-
 import {APP_BASE_HREF} from '@angular/common';
 
 describe('LoginComponent', () => {
@@ -102,17 +100,5 @@ describe('LoginComponent', () => {
       });
       
     });
-
-  // it('should return "Incorrect email or password."', function(){
-  //   component.userEmail="Garbage";
-  //   component.userPass="Garbage";
-  //   expect(component.login()).toEqual('string');
-  //   //'Incorrect email or password.'
-  // });
-  // it('should return "Input validation failed."', function(){
-  //   component.userEmail="";
-  //   component.userPass="";
-  //   expect(component.login()).toBe('Input validation failed.');
-  // })
 
 });

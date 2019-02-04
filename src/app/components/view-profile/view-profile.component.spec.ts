@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpHandler, HttpClient } from '@angular/common/http';
 import { UserControllerService } from '../../services/api/user-controller.service';
-// import { DateFormatPipe } from '../../pipes/date-format.pipe';
-import { By } from '@angular/platform-browser';
 
 import { ViewProfileComponent } from './view-profile.component';
 import { FormsModule } from '../../../../node_modules/@angular/forms';
@@ -11,13 +9,6 @@ import { NgbModule } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
 describe('ViewProfileComponent', () => {
   let component: ViewProfileComponent;
   let fixture: ComponentFixture<ViewProfileComponent>;
-
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ ViewProfileComponent ]
-  //   })
-  //   .compileComponents();
-  // }));
 
   //Got rid of DateFormatPipe from providers to make code work.
   beforeEach(() => {
