@@ -81,21 +81,45 @@ describe('ViewProfileComponent', () => {
   });
 
   it('makeRider', () => {
-    expect(component.makeRider(3031)).toBeTruthy();
-  });
+      spyOn(component, "makeRider").and.callFake(function () {
+        expect(component.makeRider(3031)).toHaveBeenCalled();
+        // callfake to prevent the popup from happening while testing
+      });
+      component.makeRider(3031);
+    });
 
   it('makeAdmin', () => {
-    expect(component.makeTrainer(3031)).toBeTruthy();
+    spyOn(component, "makeAdmin").and.callFake(function () {
+      expect(component.makeAdmin(3031)).toHaveBeenCalled();
+      // callfake to prevent the popup from happening while testing
+    });
+    component.makeAdmin(3031);
   });
 
   it('makeTrainer', () => {
-    expect(component.makeTrainer(3031)).toBeTruthy();
+    spyOn(component, "makeTrainer").and.callFake(function () {
+      expect(component.makeTrainer(3031)).toHaveBeenCalled();
+      // callfake to prevent the popup from happening while testing
+    });
+    component.makeTrainer(3031);
   });
 
-  it('updateUserStatus', () => {
+  it('updateUserStatus Active => Disabled', () => {
+    spyOn(component, "updateUserStatus").and.callFake(function () {
+      expect(component.updateUserStatus(3031, 'ACTIVE')).toHaveBeenCalled();
+      // callfake to prevent the popup from happening while testing
+      component.active = 'DISABLED';
+    });
     component.updateUserStatus(3031, 'ACTIVE');
     expect(component.active).toEqual('DISABLED');
+  });
 
+  it('updateUserStatus Disabled => Active', () => {
+    spyOn(component, "updateUserStatus").and.callFake(function () {
+      expect(component.updateUserStatus(3031, 'DISABLED')).toHaveBeenCalled();
+      // callfake to prevent the popup from happening while testing
+      component.active = 'ACTIVE';
+    });
     component.updateUserStatus(3031, 'DISABLED');
     expect(component.active).toEqual('ACTIVE');
   });
