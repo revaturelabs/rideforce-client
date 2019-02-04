@@ -112,10 +112,13 @@ describe('UsercardComponent', () => {
     expect(component.currentUser).toBeTruthy();
   });
 
-  it('thumbAnimDone', () => {
-    component.animThumbState = 'two';
-    component.thumbAnimDone();
+  it('swiped', () => {
+    component.animState = 'left';
+    component.swiped();
+    expect(component.animState).toEqual('center');
 
-    expect(component.animThumbState).toBe('one');
+    component.animState = 'right';
+    component.swiped();
+    expect(component.animState).toEqual('center');
   });
 });

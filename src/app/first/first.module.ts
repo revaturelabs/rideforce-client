@@ -1,37 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { RideswipeComponent } from '../components/rideswipe/rideswipe.component';
 import { LoginComponent } from '../components/login/login.component';
 import { UsercardComponent } from '../components/usercard/usercard.component';
 import { HowToComponent } from '../components/how-to/how-to.component';
 import { MapComponent } from '../components/map/map.component';
-import { AgmCoreModule, GoogleMapsAPIWrapper, CircleManager } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { LikesComponent } from '../components/likes/likes.component';
 import { UsermatchwebComponent } from '../components/usermatchweb/usermatchweb.component';
 import { LikesmatchwebComponent } from '../components/likesmatchweb/likesmatchweb.component';
 import { UserControllerService } from '../services/api/user-controller.service';
 import { MapsControllerService } from '../services/api/maps-controller.service';
 import { MatchingControllerService } from '../services/api/matching-controller.service';
-import { HttpClientModule, HttpClient, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PlacesAutocompleteDirective } from '../directives/places-autocomplete/places-autocomplete.directive';
 import { FavoritesComponent } from '../components/favorites/favorites.component';
-import { AccountinfoComponent } from '../components/accountinfo/accountinfo.component';
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from '../utils/jwt.interceptor';
 import { ErrorInterceptor } from '../utils/error.interceptor';
 import { AdminComponent } from '../components/admin/admin.component';
 import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
-
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ViewUsersComponent } from '../components/view-users/view-users.component';
 import { SearchUsersComponent } from '../components/search-users/search-users.component';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
+import { RegisterComponent } from '../components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +41,7 @@ import { ImageUploadComponent } from '../image-upload/image-upload.component';
     LikesmatchwebComponent,
     PlacesAutocompleteDirective,
     FavoritesComponent,
-    AccountinfoComponent,
+    RegisterComponent,
     AdminComponent,
     CarRegistrationComponent,
     ViewProfileComponent,

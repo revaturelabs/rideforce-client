@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
+import { AuthService } from './auth.service';
+import { Login } from '../models/login.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,12 @@ export class Auth0Service {
     scope: this.requestedScopes
   });
 
-  constructor(private router: Router) {}
+  principal : Login;
+
+  constructor(private router: Router, private authService : AuthService) {
+    this.authService.principal.subscribe(user => {
+      this.principal = user;})
+  }
 
   /** Launches the Auth0 remote login page */
   public login(): void{
@@ -55,21 +62,26 @@ export class Auth0Service {
   private setSession(authResult):void {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     const scopes = authResult.scope || this.requestedScopes || '';
-    sessionStorage.setItem('access_token', authResult.accessToken);
-    sessionStorage.setItem('api_token', authResult.idToken);
-    sessionStorage.setItem('expires_at',expiresAt);
-    sessionStorage.setItem('scopes',JSON.stringify(scopes));
+    // sessionStorage.setItem('access_token', authResult.accessToken);
+    // sessionStorage.setItem('api_token', authResult.idToken);
+    // sessionStorage.setItem('expires_at',expiresAt);
+    // sessionStorage.setItem('scopes',JSON.stringify(scopes));
+    this.principal.access_token = authResult.accessToken;
+    this.principal.api_token = authResult.idToken;
+    this.principal.expires_at = expiresAt;
+    this.principal.scopes = JSON.stringify(scopes);
+    this.authService.changePrincipal(this.principal);
   }
 
   /** Checks whether or not a token is still valid, or has expired (not used) */
   public isAuthenticated(): boolean {
-    const expiresAt = JSON.parse(sessionStorage.getItem('expires_at'));
+    const expiresAt = JSON.parse(this.principal.expires_at);
     return new Date().getTime() < expiresAt;
   }
 
   /** Fetches profile information from access_token and decompiles information (not used) */
   public getProfile(cb): void {
-    const accessToken = sessionStorage.getItem('access_token');
+    const accessToken =this.principal.access_token;
     if (!accessToken){
       throw new Error('Access Token must exist to fetch profile');
     }
@@ -83,14 +95,14 @@ export class Auth0Service {
   }
 
   /** Validates that a given user has access to a set of Auth0 scopes (not used) */
-  public userHasScopes(scopes: Array<string>): boolean {  
-    const grantedScopes = JSON.parse(sessionStorage.getItem('scopes')).split(' ');
+  public userHasScopes(scopes: Array<string>): boolean {
+    const grantedScopes = JSON.parse(this.principal.scopes).split(' ');
     return scopes.every(scope => grantedScopes.includes(scope));
   }
 
   /** Clears session storage and Auth0 cookies, informing the Auth0 API that the user is logging out */
   public logout0() {
-    sessionStorage.clear();
+    this.authService.changePrincipal(null);
     this.auth.logout({
       returnTo: "http://localhost:4200/landing",
       client_id: this.client_id
