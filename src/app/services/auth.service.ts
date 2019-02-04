@@ -123,7 +123,10 @@ export class AuthService {
               messageLogin.innerHTML = 'Server unavailable';
             } else if (e.message == 'undefined') {
               messageLogin.innerHTML = 'GATEWAY unavailable';
-            } else {
+            } else if (e.message == 'User is not confirmed.'){
+              messageLogin.innerHTML = e.message+' <a class="underlineHover" data-toggle="modal" data-target="#resendModal" '+
+                      '(click)="initModal()"href="javascript:;">Resend Confirmation.</a>';
+            }else{
               messageLogin.innerHTML = e.message;
             }
           }
