@@ -4,10 +4,6 @@ import { Login } from '../models/login.model';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
 
-class ImageSnippet {
-  constructor(public src: string, public file: File) { }
-}
-
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
@@ -41,6 +37,7 @@ export class ImageUploadComponent {
       fd.append('file', this.selectedFile, fileName);
 
       fd.append('user', sessionStorage.getItem('id'));
+
       //this.http.post('http://localhost:2222/storage/uploadFile', fd, {
       this.http.post(environment.userUrl + '/storage/uploadFile', fd, {
         reportProgress: true,

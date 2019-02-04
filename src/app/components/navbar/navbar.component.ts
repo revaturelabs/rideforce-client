@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
-
+import { DownloadService } from '../../services/download.service';
+import { DomSanitizer } from '@angular/platform-browser';
 /**
  * Hosts the Component that allows users to navigate between components
  */
@@ -47,7 +48,11 @@ export class NavbarComponent implements OnInit {
    * @param {UserControllerService} userService - Allows User Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
-  constructor(public authService: AuthService, private userService: UserControllerService, private route: Router) {
+  constructor(public authService: AuthService,
+    private downloadService: DownloadService,
+    private userService: UserControllerService,
+    public DomSanitizationService: DomSanitizer,
+    private route: Router) {
     route.events.pipe(filter(e => e instanceof NavigationStart))
       .subscribe(e => this.sessionCheck());
 
@@ -63,6 +68,9 @@ export class NavbarComponent implements OnInit {
   /**
    * Sets up the Log in Session appearence
    */
+
+  private imageFile: any;
+
   ngOnInit() {
     this.authService.principal.subscribe(p => {
       this.principal = p;
@@ -73,11 +81,33 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+downloadFile() {
+    this.downloadService.downloadFile(sessionStorage.getItem('id')).subscribe(resp => {
+      this.createImageFromBlob(resp);
+    }, error => {
+      console.log(error);
+    });
+
+  console.log('Download service called');
+  console.log(this.imageFile);
+}
+
+createImageFromBlob(image: Blob) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => {
+     this.imageFile = reader.result;
+  }, false);
+
+  if (image) {
+     reader.readAsDataURL(image);
+  }
+}
   /**
    * Updates session, telling if the user is logged in or not
    */
   sessionCheck() {
     if (this.principal.id > 0) {
+      this.downloadFile();
       this.session = true;
     } else {
       this.session = false;
