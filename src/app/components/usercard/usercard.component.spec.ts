@@ -72,17 +72,10 @@ describe('UsercardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('hide image tests', () => {
-    fixture.detectChanges();
   it('hide image tests', () => {
     spyOn(component, 'hideImage');
-
     component.hideImage(true);
-  });
-  // this never worked ?
-  xit('unhide image tests', () => {
     expect(component.hideImage).toHaveBeenCalled();
-    //expect(component.swipeCardMain).toBeTruthy();
   });
   it('unhide image tests', () => {
     spyOn(component, 'hideImage');
