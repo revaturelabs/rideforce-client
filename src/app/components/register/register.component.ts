@@ -15,12 +15,12 @@ import { UserControllerService } from '../../services/api/user-controller.servic
  * Used for new user registration.
  */
 @Component({
-  selector: 'app-accountinfo',
-  templateUrl: './accountinfo.component.html',
-  styleUrls: ['./accountinfo.component.css'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
   providers: [NgbTabset]
 })
-export class AccountinfoComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   /** User Roles */
   roles = Role;
   /** Current Office */
