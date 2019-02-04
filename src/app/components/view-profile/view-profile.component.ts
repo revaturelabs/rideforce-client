@@ -5,6 +5,9 @@ import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
 import { constants } from 'fs';
 import { ContactInfo } from '../../models/contact-info.model';
+import { Login } from '../../classes/login';
+import {Role} from '../../models/role.model'
+import { Router } from '@angular/router';
 
 
 /**
@@ -23,7 +26,14 @@ export class ViewProfileComponent implements OnInit {
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService, public authService: AuthService) { }
+  constructor(
+    private userService: UserControllerService, 
+    private authService: AuthService,
+    private router : Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+     }
+    }
   /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -51,22 +61,28 @@ export class ViewProfileComponent implements OnInit {
   active: string;
   existingBio: string;
   existingBioStatus: boolean = false;
+
+  principal: Login;
   /**
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
-    this.existingBio = sessionStorage.getItem('bio');
-    //this.changeExistingBioStatus();
-    this.firstName = sessionStorage.getItem("firstName");
-    this.lastName = sessionStorage.getItem("lastName");
-    this.username = sessionStorage.getItem("userEmail");
-    this.address2 = sessionStorage.getItem("address");
-    this.batchEnd = new Date(sessionStorage.getItem("batchEnd")).toLocaleDateString();
-    this.getOffices();
-    //this.getUsers();
-    this.getRole();
-    this.getState();
-    this.filteredUsers = this.users;
+    this.authService.principal.subscribe(user => {
+      this.principal = user;
+      //debug console.log(this.principal);
+      if (this.principal) {
+        this.existingBio = this.principal.bio;
+        this.firstName = this.principal.firstName;
+        this.lastName = this.principal.lastName;
+        this.username = this.principal.email;
+        this.address2 = this.principal.address;
+        this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
+        this.getOffices();
+        this.getRole();
+        this.getState();
+        this.filteredUsers = this.users;
+      }
+    });
   }
 
   /**
@@ -82,7 +98,11 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById("batchEnd").removeAttribute("disabled");
     document.getElementById("dayStart").removeAttribute("disabled");
     document.getElementById("switchRoles").removeAttribute("hidden");
-    document.getElementById("switchStates").removeAttribute("hidden");
+    //Had to put this in an if; Page would break if Admin or Trainer clicked edit
+    //Since for them, this button didn't exist to make visible
+    if(this.currentRole === "DRIVER" || this.currentRole === "RIDER"){
+      document.getElementById("switchStates").removeAttribute("hidden");
+    }
     document.getElementById("edit").style.display = "none";
     document.getElementById("submit").style.display = "inline";
     document.getElementById("batchEnd").setAttribute("type", "date");
@@ -95,27 +115,30 @@ export class ViewProfileComponent implements OnInit {
    * Updates the user once he/she is content with the updates
    */
   submitChanges() {
-
-    sessionStorage.setItem('firstName', this.firstName);
-    sessionStorage.setItem('lastName', this.lastName);
-    sessionStorage.setItem('userEmail', this.username);
-    sessionStorage.setItem('address', this.address2);
-    sessionStorage.setItem('batchEnd', this.batchEnd);
-    sessionStorage.setItem('role', this.currentRole);
-    //if(document.getElementById("activeState")) 
+    this.principal.firstName = this.firstName;
+    this.principal.lastName = this.lastName;
+    this.principal.email = this.username;
+    this.principal.address = this.address2;
+    this.principal.batchEnd = this.batchEnd;
+    this.principal.currentRole = this.currentRole;
+    
     this.userService.update().then();
-    window.location.reload(true);
+    this.authService.changePrincipal(this.principal);
+    //debug console.log("routing");
+    this.router.navigate(['userProfile']);
   }
 
   /**
    * Enables limited ability to modify the User's role in the system
    */
   switchRole() {
-    if (sessionStorage.getItem('role') === 'DRIVER') {
-      sessionStorage.setItem('role', 'RIDER');
+    if (this.principal.currentRole === 'DRIVER') {
+      this.principal.currentRole= 'RIDER';
+      this.authService.changePrincipal(this.principal);
       this.getRole();
-    } else if (sessionStorage.getItem('role') === 'RIDER') {
-      sessionStorage.setItem('role', 'DRIVER');
+    } else if (this.principal.currentRole === 'RIDER') {
+      this.principal.currentRole= 'DRIVER';
+      this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
       console.log('nope');
@@ -123,11 +146,13 @@ export class ViewProfileComponent implements OnInit {
   }
 
   switchState() {
-    if (sessionStorage.getItem('active') === 'ACTIVE') {
-      sessionStorage.setItem('active', 'INACTIVE');
+    if (this.principal.active === 'ACTIVE') {
+      this.principal.active = 'INACTIVE';
+      this.authService.changePrincipal(this.principal);
       this.getState();
-    } else if (sessionStorage.getItem('active') === 'INACTIVE') {
-      sessionStorage.setItem('active', 'ACTIVE');
+    } else if (this.principal.active === 'INACTIVE') {
+      this.principal.active = 'ACTIVE';
+      this.authService.changePrincipal(this.principal);
       this.getState();
     } else {
       console.log("Invalid State");
@@ -148,55 +173,17 @@ export class ViewProfileComponent implements OnInit {
    * Sets up the User's current role in the system
    */
   getRole() {
-    this.currentRole = sessionStorage.getItem('role');
+    this.currentRole = this.principal.currentRole;
   }
   currentState: string;
   getState() {
-    this.currentState = sessionStorage.getItem('active');
+    this.currentState = this.principal.active;
   }
 
   /** Holds the list of all users in the system */
   users: any[];
   /** Holds the list of users filtered with search query */
   filteredUsers: any[];
-  /** Sets up all users in the system */
-  getUsers() {
-    let data;
-    if (sessionStorage.getItem('role') === 'ADMIN') {
-      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER' || x.role === 'TRAINER'); this.users = data; this.filteredUsers = data; });
-    } else if (sessionStorage.getItem('role') === 'TRAINER') {
-      this.userService.getAllUsers().then((x) => { data = x.filter(x => x.role === 'DRIVER' || x.role === 'RIDER'); this.users = data });
-    }
-    this.filterUsers(" ");
-  }
-
-  public filterUsers(query = "") {
-    let searchUsers = this.users;
-    console.log("how many users: " + this.users.length)
-    if (query.length < 1) {
-      console.log("returning all users: ", this.users.length)
-      this.filteredUsers = this.users;
-      return;
-    }
-    query = query.trim();
-    const queryStrings = query.split(" ");
-    this.filteredUsers = searchUsers.filter(user => {
-      for (let key in user) {
-        let data = user[key];
-        if (typeof data === "string") {
-          data = data.toLowerCase();
-          for (let searchTerm of queryStrings) {
-            searchTerm = searchTerm.toLocaleLowerCase();
-            let found = data.search(searchTerm);
-            if (found > -1) {
-              return user;
-            }
-          }
-
-        }
-      }
-    });
-  }
 
   result: boolean;
   updateUserStatus(id: number, active: string) {
@@ -216,7 +203,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   /** Revert a trainer to a user */
-  makeRider(id: number){
+  makeRider(id: number) {
     this.result = window.confirm("Are you sure you want to make this trainer a rider?");
     let role = "RIDER";
     if (this.result) {
@@ -249,7 +236,7 @@ export class ViewProfileComponent implements OnInit {
     }
   }
   // added because the dummies added stupid stuff that breaks the code
-  tabSelect($event){
+  tabSelect($event) {
     console.log($event);
   }
 
@@ -264,15 +251,17 @@ export class ViewProfileComponent implements OnInit {
     this.contactInfoArray.push(contact);
   }
 
-  updateBio(bioInput: string){
+  updateBio(bioInput: string) {
     this.userService.updateBio(bioInput);
-    sessionStorage.setItem('bio', bioInput);
+    //sessionStorage.setItem('bio', bioInput);
+    this.principal.bio = bioInput;
+    this.authService.changePrincipal(this.principal);
     location.reload(true);
     this.existingBio = bioInput;
   }
 
   changeExistingBioStatus() {
-    if(this.existingBioStatus != undefined){
+    if (this.existingBioStatus != undefined) {
       this.existingBioStatus = true;
     }
   }

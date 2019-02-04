@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user.model';
-import { Link } from '../../models/link.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Login } from "../../classes/login";
+import { Link } from '../../models/link.model';
+import { User } from '../../models/user.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
-import { Router } from '@angular/router';
-import { Filter } from '../../models/filter';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ThrowStmt } from '@angular/compiler';
+import { AuthService } from '../../services/auth.service';
 import { GeocodeService } from '../../services/geocode.service';
+
 
 /** Represents the User selection item in the html page */
 interface DriverCard {
@@ -50,6 +51,8 @@ export class UsermatchwebComponent implements OnInit {
   selected: string = 'none';
   /** to store user location */
   myLocation: object = null;
+
+  principal : Login;
   /**
      * Sets up Component with the Matching and User services injected
      * @param {MatchingControllerService} matchService - Enables the matching service
@@ -60,7 +63,8 @@ export class UsermatchwebComponent implements OnInit {
     private userService: UserControllerService,
     private route: Router,
     private spinner: NgxSpinnerService,
-    private geocodeService: GeocodeService
+    private geocodeService: GeocodeService,
+    private auth : AuthService
   ) { }
 
   /** Holds the current user of the system */
@@ -79,7 +83,9 @@ export class UsermatchwebComponent implements OnInit {
    * Sets up the component by populating the list of possibel matches for the current user
    */
   ngOnInit() {
-    if (sessionStorage.length == 0) {
+    this.auth.principal.subscribe(user =>{
+      this.principal = user;
+    if (this.principal.id < 1) {
       this.route.navigate(['/landing']);
     }
     this.spinner.show();
@@ -90,7 +96,7 @@ export class UsermatchwebComponent implements OnInit {
         this.currentUser = data;
         
         let userLinks: Link<User>[] = null;
-        this.matchService.getMatchingDrivers(+(sessionStorage.getItem("id"))).subscribe(
+        this.matchService.getMatchingDrivers(+(this.principal.id)).subscribe(
           data2 => {
             // console.log("data2 is " + data2);
             userLinks = data2;
@@ -136,6 +142,7 @@ export class UsermatchwebComponent implements OnInit {
         console.log(e);
       }
     );
+  });
   }
 
   /**
@@ -262,7 +269,7 @@ export class UsermatchwebComponent implements OnInit {
 
     // get the address and append it
     async appendLocation(user) {
-      const myLocation = await this.geocodeService.geocode(sessionStorage.address).toPromise();
+      const myLocation = await this.geocodeService.geocode(this.principal.address).toPromise();
       const location = await this.geocodeService.geocode(user.user.address).toPromise();
       user["distance"] = this.calculateDistance(
         myLocation["lng"], 
@@ -277,7 +284,7 @@ export class UsermatchwebComponent implements OnInit {
     async getLngLat(address: string): Promise<number> {
       let uLongitude: number, uLatitude: number;
       const otherLocation = await this.geocodeService.geocode(address).toPromise();
-      const myLocation = await this.geocodeService.geocode(sessionStorage.address).toPromise();
+      const myLocation = await this.geocodeService.geocode(this.principal.address).toPromise();
       const x1 = myLocation["lng"];
       const x2 = otherLocation["lng"];
       const y1 = myLocation["lat"];
@@ -286,7 +293,7 @@ export class UsermatchwebComponent implements OnInit {
     }
    
     getMyLocation() {
-      const address = sessionStorage.address;
+      const address = this.principal.address;
       if (!this.myLocation) { 
         this.myLocation = this.getLngLat(address);
       }

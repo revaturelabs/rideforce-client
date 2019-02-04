@@ -4,6 +4,17 @@
 	}
 }
 
+.container-fluid{
+      background:rgb(255, 255, 255,0.8);
+}
+
+#tablecont{
+    background-image: url("../../../assets/img/ss_roadview.jpg");
+    background-repeat: no-repeat;
+    background-size: 95%;
+    background-position: center;
+}
+
 @media ( min-width : 401px) and (max-width: 600px) {
 	.chart-container {
 		min-height: 11.8em;

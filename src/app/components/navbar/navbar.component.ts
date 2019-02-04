@@ -7,6 +7,7 @@ import { User } from '../../models/user.model';
 import { Auth0Service } from '../../services/auth0.service';
 import { filter } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Login } from '../../classes/login'
 /**
  * Hosts the Component that allows users to navigate between components
  */
@@ -39,6 +40,7 @@ export class NavbarComponent implements OnInit {
   deferredInstall = null;
   isInstallable: boolean = false;
 
+  principal:Login;
 
   /**
    * Sets up the component with relevent services
@@ -79,8 +81,14 @@ export class NavbarComponent implements OnInit {
   private imageFile: any;
     
   ngOnInit() {
-    this.sessionCheck();
-    this.setCurrentRole();
+    this.authService.principal.subscribe(p =>{
+      this.principal = p;
+      if (this.principal.id > 0){
+        this.role = this.principal.currentRole;
+        this.sessionCheck();
+      }
+      
+    });
   }
 
 downloadFile(){
@@ -113,6 +121,12 @@ createImageFromBlob(image: Blob) {
     if(this.session){
       this.downloadFile();
     }
+    
+    if(this.principal.id > 0){
+      this.session = true;
+    }else{
+      this.session = false;
+    }
   }
   /**
    * Sets up the current user
@@ -128,9 +142,9 @@ createImageFromBlob(image: Blob) {
   /**
    * Sets the role of the Current user to determine what functionality should be available
    */
-  setCurrentRole() {
-    this.role = sessionStorage.getItem('role');
-  }
+  //setCurrentRole() {
+    //this.role = sessionStorage.getItem('role');
+ // }
 
   /**
    * Allows User to log out of their session, informing
@@ -145,7 +159,9 @@ createImageFromBlob(image: Blob) {
    * uses await/async to avoid forcing User to reload manually to see the 'log in' button after log out
    */
   async logout() {
-    sessionStorage.clear();
+    this.principal = new Login();
+    this.principal.id = 0;
+    this.authService.changePrincipal(this.principal);
     if (this.route.url === '/landing') {
       location.reload(true);
     } else {
