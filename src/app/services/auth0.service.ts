@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { AuthService } from './auth.service';
-import { Login } from '../classes/login';
+import { Login } from '../models/login.model';
 
 @Injectable({
   providedIn: 'root'
@@ -95,7 +95,7 @@ export class Auth0Service {
   }
 
   /** Validates that a given user has access to a set of Auth0 scopes (not used) */
-  public userHasScopes(scopes: Array<string>): boolean {  
+  public userHasScopes(scopes: Array<string>): boolean {
     const grantedScopes = JSON.parse(this.principal.scopes).split(' ');
     return scopes.every(scope => grantedScopes.includes(scope));
   }

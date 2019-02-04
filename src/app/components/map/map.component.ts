@@ -12,7 +12,7 @@ import { Marker } from 'aws-sdk/clients/storagegateway';
 import { Location } from '../../models/location.model';
 import { bool } from 'aws-sdk/clients/signer';
 import { AuthService } from '../../services/auth.service'
-import { Login } from '../../classes/login';
+import { Login } from '../../models/login.model';
 
 /**
  * Component that handles route navigation and displays a map
@@ -274,7 +274,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       this.findMe();
     })
     }
-  
+
   /**
    * Final initialization after the content is set up
    */
@@ -514,7 +514,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       title: 'Got you!'
     });
     this.markers.push(marker);
-    //adds Marker for the current user 
+    //adds Marker for the current user
     this.showingUser = true;
   }
 
@@ -618,8 +618,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
-  /** 
-   * Makes a request to update the user's favorite locations table  
+  /**
+   * Makes a request to update the user's favorite locations table
   */
   saveLocation() {
     let selectedLocation: string = (document.getElementById("currentLocation") as HTMLInputElement).value;

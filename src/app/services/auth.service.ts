@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Login } from '../classes/login';
+import { Login } from '../models/login.model';
 import { Injectable } from '@angular/core';
 import { Role } from '../models/role.model';
 import { HttpClient } from '@angular/common/http';

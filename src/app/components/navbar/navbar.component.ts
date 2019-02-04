@@ -1,5 +1,5 @@
 import { filter } from 'rxjs/operators';
-import { Login } from '../../classes/login';
+import { Login } from '../../models/login.model';
 import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
 import { Component, OnInit } from '@angular/core';

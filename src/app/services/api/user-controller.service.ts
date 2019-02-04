@@ -10,7 +10,7 @@ import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
-import { Login } from '../../classes/login';
+import { Login } from '../../models/login.model';
 import { AuthService } from '../../services/auth.service';
 import { UserRegistration } from '../../models/user-registration.model';
 import { RegistrationToken } from '../../models/registration-token.model';

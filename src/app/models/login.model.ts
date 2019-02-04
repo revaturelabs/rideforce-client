@@ -1,9 +1,9 @@
-import {User} from '../models/user.model'
-import { Link } from '../models/link.model';
-import { Office } from '../models/office.model';
-import { Car } from '../models/car.model';
-import { ContactInfo } from '../models/contact-info.model';
-import { Role } from '../models/role.model';
+import { User } from './user.model';
+import { Link } from './link.model';
+import { Office } from './office.model';
+import { Car } from './car.model';
+import { Role } from './role.model';
+import { ContactInfo } from './contact-info.model';
 
 export class Login implements User {
     id: number;

@@ -1,6 +1,6 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Login } from '../classes/login';
+import { Login } from '../models/login.model';
 import { AuthService } from '../services/auth.service';
 
 class ImageSnippet {
