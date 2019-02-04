@@ -40,7 +40,7 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="password">Password</label>
-                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="[0-9a-zA-Z!@#]{8,16}" [(ngModel)]="ur.user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
+                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" [(ngModel)]="ur.user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
                   <div *ngIf="!!p?.errors?.required" class="invalid-feedback">Password cannot be empty.</div>
                   <div *ngIf="!!p?.errors?.pattern" class="invalid-feedback">Password must be between 8-16 characters long.</div>
                 </div>
@@ -159,7 +159,6 @@
                   <dd class="col-sm-9">{{ item.info }}</dd>
                 </dl>
               </dd>
-              <p>{{ur | json}}</p>
             </dl>
             <button class="btn btn-primary float-left" (click)="changeTab('tab2')">Previous</button>
             <button class="btn btn-primary float-right" (click)="register()">Register</button>
