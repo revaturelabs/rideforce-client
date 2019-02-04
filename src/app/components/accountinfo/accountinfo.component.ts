@@ -290,7 +290,6 @@ export class AccountinfoComponent implements OnInit {
       photoUrl: this.imageSrc,
       address: this.address2,
       office: '/offices/' + this.officeObject.id,
-      // I really don't understand what this translates to on the back end, but now it is dynamic
       batchEnd: new Date(this.batchEnd).toISOString(),
       startTime: this.timeSelect,
       cars: [],
