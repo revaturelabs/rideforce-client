@@ -1,5 +1,5 @@
 <br>
-<div class="form-group row">
+<div class="form-group row" id="tablecont">
   <div class="col-5"></div>
   <div class="col-lg-4 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
@@ -153,6 +153,9 @@
                 </div>
               </div>
               <button type="button" class="btn btn-success" (click)="updateBio(bioInput.value)">Submit</button>
+              <br>
+              <br>
+              <br>
             </div>
               <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -162,7 +165,9 @@
                     </select>
                   </div>
                   <input type="text" class="" [(ngModel)]="item.info">
+                  <br>
                   <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
+                  <br>
                 </div>
               </div>
             </div>
@@ -209,7 +214,6 @@
   </div>
 </div>
 
-
 <!-- Modal -->
 <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -254,3 +258,4 @@
     </div>
   </div>
 </div>
+

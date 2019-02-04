@@ -14,6 +14,7 @@ import { Login } from '../../classes/login';
 import { AuthService } from '../../services/auth.service';
 import { UserRegistration } from '../../models/user-registration.model';
 import { RegistrationToken } from '../../models/registration-token.model';
+import { Role } from '../../models/role.model';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -30,6 +31,7 @@ export class UserControllerService {
   constructor(private http: HttpClient, auth: AuthService) {
     auth.principal.subscribe(user => {
       this.principal = user;});
+
    }
 
   /** to be used with the url provided by back end */
@@ -149,9 +151,10 @@ export class UserControllerService {
     * @returns {Observable<User>} - the user being updated
     */
    update(): Promise<User> {
+     console.log("updating");
     const body = {
       firstName: this.principal.firstName,
-      lastName: this.principal.firstName,
+      lastName: this.principal.lastName,
       email: this.principal.email,
       photoUrl: null,
       role: this.principal.role,
@@ -160,14 +163,16 @@ export class UserControllerService {
       startTime: null,
       active: this.principal.active
     };
-
+    console.log("sending");
     return this.http
       .put<User>(environment.apiUrl + `/users/${this.principal.id}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the
           // one that was updated.
+          console.log("checking");
           if (this.currentUser && this.currentUser.id === updated.id) {
+            console.log("same");
             this.currentUser = updated;
           }
         })
@@ -423,7 +428,7 @@ export class UserControllerService {
     // DELETE CONTACT-INFO
   }
 
-  updateRole(id: number, role: string) {
+  updateRole(id: number, role: Role) {
     const body = {
       firstName: null,
       lastName: null,
@@ -435,7 +440,7 @@ export class UserControllerService {
       batchEnd: null,
       startTime: null,
       active: null
-    }
+    };
 
     return this.http
       .put<User>(environment.apiUrl + `/users/${id}`, body)

@@ -50,12 +50,11 @@ export class ImageUploadComponent {
     //     })
     //   })
     //   reader.readAsDataURL(file);
-
   }
   onFileUpload() {
     const fd = new FormData();
     const fileName = `user-${this.principal.id}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
-    console.log("FILENAME    ------ " + fileName)
+    console.log("FILENAME    ------ " + fileName);
     fd.append('file', this.selectedFile, fileName);
     fd.append('user', this.principal.id.toString());
     this.http.post('http://localhost:2222/storage/uploadFile', fd, {
@@ -72,7 +71,7 @@ export class ImageUploadComponent {
         err => {
           console.log(err);
         }
-      )
+      );
   }
 }
 

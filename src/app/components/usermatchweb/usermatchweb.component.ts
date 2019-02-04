@@ -85,7 +85,7 @@ export class UsermatchwebComponent implements OnInit {
   ngOnInit() {
     this.auth.principal.subscribe(user =>{
       this.principal = user;
-    if (this.principal === null) {
+    if (this.principal.id < 1) {
       this.route.navigate(['/landing']);
     }
     this.spinner.show();

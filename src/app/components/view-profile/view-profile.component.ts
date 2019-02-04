@@ -1,13 +1,12 @@
-import { Component, OnInit, Testability, Injectable } from '@angular/core';
-import { UserControllerService } from '../../services/api/user-controller.service';
+import { Router } from '@angular/router';
+import { Login } from '../../classes/login';
+import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
+import { Component, OnInit } from '@angular/core';
 import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
-import { constants } from 'fs';
 import { ContactInfo } from '../../models/contact-info.model';
-import { Login } from '../../classes/login';
-import {Role} from '../../models/role.model'
-
+import { UserControllerService } from '../../services/api/user-controller.service';
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -20,12 +19,8 @@ import {Role} from '../../models/role.model'
 export class ViewProfileComponent implements OnInit {
   /** The User being selected */
   currentUser: User;
-  /**
-   * Sets up the component with the User Service injected
-   * @param userService - Allows the component to work with the user service (for updating)
-   * @param {AuthService} authService - Allows Authentication Services to be utilized
-   */
-  constructor(private userService: UserControllerService, public authService: AuthService) { }
+  /** The current role of the logged on user in string form */
+  currentRole: Role;
   /** The first name of the user (hooked to form item in html) */
   firstName: string;
   /** The last name of the user (hooked to form item in html) */
@@ -42,9 +37,7 @@ export class ViewProfileComponent implements OnInit {
   address2: string;
   /** The day the User's batch ends*/
   batchEnd: any;
-
   contactInfoArray: ContactInfo[] = [];
-
   /** Whether the user can make changes (Currently not used) */
   canEdit = false;
   /** List of offices held by the user */
@@ -55,13 +48,27 @@ export class ViewProfileComponent implements OnInit {
   active: string;
   existingBio: string;
   existingBioStatus: boolean = false;
-
   principal: Login;
+  currentState: string;
+  /** Holds the list of all users in the system */
+  users: any[];
+  /** Holds the list of users filtered with search query */
+  filteredUsers: any[];
+  result: boolean;
+
+  /**
+   * Sets up the component with the User Service injected
+   * @param userService - Allows the component to work with the user service (for updating)
+   * @param {AuthService} authService - Allows Authentication Services to be utilized
+   */
+  constructor(private userService: UserControllerService, private authService: AuthService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
+
   /**
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
-
     this.authService.principal.subscribe(user => {
       this.principal = user;
       if (this.principal) {
@@ -72,7 +79,6 @@ export class ViewProfileComponent implements OnInit {
         this.address2 = this.principal.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
         this.getOffices();
-       // this.getUsers();
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
@@ -84,48 +90,53 @@ export class ViewProfileComponent implements OnInit {
    * Allows the form to be edited
    */
   edit() {
-    document.getElementById("firstName").removeAttribute("disabled");
-    document.getElementById("lastName").removeAttribute("disabled");
-    //document.getElementById("email").removeAttribute("disabled");
-    //document.getElementById("password").removeAttribute("disabled");
-    //document.getElementById("confirmPassword").removeAttribute("disabled");
-    document.getElementById("address").removeAttribute("disabled");
-    document.getElementById("batchEnd").removeAttribute("disabled");
-    document.getElementById("dayStart").removeAttribute("disabled");
-    document.getElementById("switchRoles").removeAttribute("hidden");
-    document.getElementById("switchStates").removeAttribute("hidden");
-    document.getElementById("edit").style.display = "none";
-    document.getElementById("submit").style.display = "inline";
-    //document.getElementById("batchEnd").setAttribute("type", "date");
-    //document.getElementById("currentOffice").style.display = "none";
-    //document.getElementById("selectOffice").style.display = "inline";
-    document.getElementById("errorMessage").removeAttribute("hidden");
+    document.getElementById('firstName').removeAttribute('disabled');
+    document.getElementById('lastName').removeAttribute('disabled');
+    // document.getElementById("email").removeAttribute("disabled");
+    // document.getElementById("password").removeAttribute("disabled");
+    // document.getElementById("confirmPassword").removeAttribute("disabled");
+    document.getElementById('address').removeAttribute('disabled');
+    document.getElementById('batchEnd').removeAttribute('disabled');
+    document.getElementById('dayStart').removeAttribute('disabled');
+    document.getElementById('switchRoles').removeAttribute('hidden');
+    // Had to put this in an if; Page would break if Admin or Trainer clicked edit
+    // Since for them, this button didn't exist to make visible
+    if (this.currentRole === Role.Driver || this.currentRole === Role.Rider) {
+      document.getElementById('switchStates').removeAttribute('hidden');
+    }
+    document.getElementById('edit').style.display = 'none';
+    document.getElementById('submit').style.display = 'inline';
+    // document.getElementById("batchEnd").setAttribute("type", "date");
+    // document.getElementById("currentOffice").style.display = "none";
+    // document.getElementById("selectOffice").style.display = "inline";
+    document.getElementById('errorMessage').removeAttribute('hidden');
   }
 
   /**
    * Updates the user once he/she is content with the updates
    */
   submitChanges() {
-
     this.principal.firstName = this.firstName;
     this.principal.lastName = this.lastName;
     this.principal.address = this.address2;
-    //this.principal.startTime = this.startTime(); //Need this, but currently no value
+    // this.principal.startTime = this.startTime(); //Need this, but currently no value
     this.authService.changePrincipal(this.principal);
     this.userService.update().then();
-    window.location.reload(true);
+    this.authService.changePrincipal(this.principal);
+    // debug console.log("routing");
+    this.router.navigate(['userProfile']);
   }
 
   /**
    * Enables limited ability to modify the User's role in the system
    */
   switchRole() {
-    if (this.principal.role === 'DRIVER') {
-      this.principal.role= Role['RIDER'];
+    if (this.principal.role === Role.Driver) {
+      this.principal.role = Role.Rider;
       this.authService.changePrincipal(this.principal);
       this.getRole();
-    } else if (this.principal.role === 'RIDER') {
-      this.principal.role= Role['DRIVER'];
+    } else if (this.principal.role === Role.Rider) {
+      this.principal.role = Role.Driver;
       this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
@@ -143,7 +154,7 @@ export class ViewProfileComponent implements OnInit {
       this.authService.changePrincipal(this.principal);
       this.getState();
     } else {
-      console.log("Invalid State");
+      console.log('Invalid State');
     }
   }
 
@@ -155,35 +166,29 @@ export class ViewProfileComponent implements OnInit {
       this.officeObjectArray = data;
     });
   }
-  /** The current role of the logged on user in string form */
-  currentRole: string;
+
   /**
    * Sets up the User's current role in the system
    */
   getRole() {
     this.currentRole = this.principal.role;
   }
-  currentState: string;
+
   getState() {
     this.currentState = this.principal.active;
   }
 
-  updatePassword(){
-    this.userService.updatePassword(this.principal.email,this.oldPassword,this.password).subscribe();
+  updatePassword() {
+    this.userService.updatePassword(this.principal.email, this.oldPassword, this.password).subscribe();
   }
 
-  /** Holds the list of all users in the system */
-  users: any[];
-  /** Holds the list of users filtered with search query */
-  filteredUsers: any[];
 
-  result: boolean;
   updateUserStatus(id: number, active: string) {
     if (active !== 'DISABLED') {
-      this.result = window.confirm("Are you sure you want to disable this account?");
+      this.result = window.confirm('Are you sure you want to disable this account?');
       active = 'DISABLED';
     } else {
-      this.result = window.confirm("Are you sure you want to enable this account?");
+      this.result = window.confirm('Are you sure you want to enable this account?');
       active = 'ACTIVE';
     }
     if (this.result) {
@@ -196,10 +201,9 @@ export class ViewProfileComponent implements OnInit {
 
   /** Revert a trainer to a user */
   makeRider(id: number) {
-    this.result = window.confirm("Are you sure you want to make this trainer a rider?");
-    let role = "RIDER";
+    this.result = window.confirm('Are you sure you want to make this trainer a rider?');
     if (this.result) {
-      this.userService.updateRole(id, role).then();
+      this.userService.updateRole(id, Role.Rider).then();
       location.reload(true);
     } else {
       alert('No changes will be made');
@@ -207,10 +211,9 @@ export class ViewProfileComponent implements OnInit {
   }
 
   makeTrainer(id: number) {
-    this.result = window.confirm("Are you sure you want to make this user a trainer?");
-    let role = 'TRAINER';
+    this.result = window.confirm('Are you sure you want to make this user a trainer?');
     if (this.result) {
-      this.userService.updateRole(id, role).then();
+      this.userService.updateRole(id, Role.Trainer).then();
       location.reload(true);
     } else {
       alert('No changes will be made');
@@ -218,10 +221,9 @@ export class ViewProfileComponent implements OnInit {
   }
 
   makeAdmin(id: number) {
-    this.result = window.confirm("Are you sure you want to make this user an admin?");
-    let role = 'ADMIN';
+    this.result = window.confirm('Are you sure you want to make this user an admin?');
     if (this.result) {
-      this.userService.updateRole(id, role).then();
+      this.userService.updateRole(id, Role.Admin).then();
       location.reload(true);
     } else {
       alert('No changes will be made');
@@ -245,7 +247,7 @@ export class ViewProfileComponent implements OnInit {
 
   updateBio(bioInput: string) {
     this.userService.updateBio(bioInput);
-    //sessionStorage.setItem('bio', bioInput);
+    // sessionStorage.setItem('bio', bioInput);
     this.principal.bio = bioInput;
     this.authService.changePrincipal(this.principal);
     location.reload(true);

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { UserControllerService } from '../../services/api/user-controller.service';
-import { AuthService } from '../../services/auth.service';
-import { Router, NavigationStart } from '@angular/router';
-import { User } from '../../models/user.model';
-import { Auth0Service } from '../../services/auth0.service';
 import { filter } from 'rxjs/operators';
-import { Login } from '../../classes/login'
+import { Login } from '../../classes/login';
+import { Role } from '../../models/role.model';
+import { User } from '../../models/user.model';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { UserControllerService } from '../../services/api/user-controller.service';
+
 /**
  * Hosts the Component that allows users to navigate between components
  */
@@ -14,7 +15,6 @@ import { Login } from '../../classes/login'
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-
 export class NavbarComponent implements OnInit {
 
   /** Holds the current user of the app */
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
   /**
    * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
    */
-  role: String;
+  role: Role;
   /**
    * Just a boolean stating whether the dropdown has been toggled.
    */
@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
   deferredInstall = null;
   isInstallable: boolean = false;
 
-  principal:Login;
+  principal: Login;
 
   /**
    * Sets up the component with relevent services
@@ -47,41 +47,29 @@ export class NavbarComponent implements OnInit {
    * @param {UserControllerService} userService - Allows User Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
-  constructor(
-    private auth0: Auth0Service,
-    public authService: AuthService,//made public so it can build
-    private userService: UserControllerService,
-    private route: Router
+  constructor(public authService: AuthService, private userService: UserControllerService, private route: Router) {
+    route.events.pipe(filter(e => e instanceof NavigationStart))
+      .subscribe(e => this.sessionCheck());
 
-  ) {
-
-    route.events.pipe(
-      filter(e => e instanceof NavigationStart)
-    ).subscribe(e => {
-      this.sessionCheck();
-    });
-
-    //checks if criteria for being installable are met
-    //Note this will never be triggerable if the app is currently installed
-    //To uninstall a PWA go to chrome://apps/ right click on the app (rideshare-client) and select remove from chrome
+    // checks if criteria for being installable are met
+    // Note this will never be triggerable if the app is currently installed
+    // To uninstall a PWA go to chrome://apps/ right click on the app (rideshare-client) and select remove from chrome
     window.addEventListener('beforeinstallprompt', (event) => {
       this.deferredInstall = event;
       this.isInstallable = true;
     });
-
   }
 
   /**
    * Sets up the Log in Session appearence
    */
   ngOnInit() {
-    this.authService.principal.subscribe(p =>{
+    this.authService.principal.subscribe(p => {
       this.principal = p;
-      if (this.principal.id > 0){
+      if (this.principal.id > 0) {
         this.role = this.principal.role;
         this.sessionCheck();
       }
-
     });
   }
 
@@ -89,9 +77,9 @@ export class NavbarComponent implements OnInit {
    * Updates session, telling if the user is logged in or not
    */
   sessionCheck() {
-    if(this.principal.id > 0){
+    if (this.principal.id > 0) {
       this.session = true;
-    }else{
+    } else {
       this.session = false;
     }
   }
@@ -104,21 +92,6 @@ export class NavbarComponent implements OnInit {
         this.currentUser = data;
       }
     );
-  }
-
-  /**
-   * Sets the role of the Current user to determine what functionality should be available
-   */
-  //setCurrentRole() {
-    //this.role = sessionStorage.getItem('role');
- // }
-
-  /**
-   * Allows User to log out of their session, informing
-   * Auth0 API that a logout has occured
-   */
-  logout0() {
-    this.auth0.logout0();
   }
 
   /**
@@ -141,7 +114,7 @@ export class NavbarComponent implements OnInit {
   /** Toggles a drop-down menu close to the log-out option */
   drop() {
     // this.dropped= !this.dropped;
-    if (this.dropped == true) {
+    if (this.dropped === true) {
       setTimeout(() => {
         this.dropped = !this.dropped;
       }, 390);
@@ -149,9 +122,9 @@ export class NavbarComponent implements OnInit {
       this.dropped = !this.dropped;
     }
   }
+
   /*Allows installation of PWA */
   install() {
-
     if (this.deferredInstall) {
       this.deferredInstall.prompt();
       this.deferredInstall.userChoice
@@ -164,13 +137,6 @@ export class NavbarComponent implements OnInit {
           }
           this.deferredInstall = null;
         });
-
-    }//brings up install prompt and if installed button disappears
-
+    }// brings up install prompt and if installed button disappears
   }
-
-
-
-
 }
-
