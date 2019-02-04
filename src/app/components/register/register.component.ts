@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
     this.contactInfo = { type: 'Cell Phone', id: null, info: null };
     this.userService.getAllOffices().subscribe(offices => (this.offices = offices));
     this.contactTypes = ['Cell Phone', 'Email', 'Slack', 'Skype', 'Discord', 'Facebook', 'GroupMe', 'Other'];
-    this.http.get<{ keys: { kid: string }[] }>(environment.apiUrl + '/.well-known/jwks.json')
+    this.http.get<{ keys: { kid: string }[] }>(environment.userUrl + '/.well-known/jwks.json')
       .subscribe(d => d.keys.forEach(k => this.jwks.set(k.kid, KEYUTIL.getKey(k))));
   }
 

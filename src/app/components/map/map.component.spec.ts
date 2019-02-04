@@ -1,9 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
-import { UsercardComponent } from '../usercard/usercard.component';
 import { User } from '../../models/user.model';
 import { Role } from '../../models/role.model';
 
@@ -27,13 +25,6 @@ import { Role } from '../../models/role.model';
     fixture.detectChanges();
     await component.ngOnInit();
   });
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(MapComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  //   component.ngOnInit();
-  // });
 
   it('should create', () => {
     expect(component).toBeTruthy();

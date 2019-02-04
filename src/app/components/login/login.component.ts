@@ -6,7 +6,6 @@ import { AuthService } from '../../services/auth.service';
 import { NgForm } from '@angular/forms';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from '../../../environments/environment';
-import { from } from 'rxjs';
 
 declare var $: any;
 

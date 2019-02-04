@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
 import { GeocodeService } from './geocode.service';
-import { LatLngLiteral } from '@agm/core';
-import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 
 describe('GeocodeService', () => {
   beforeEach(() => TestBed.configureTestingModule({ providers: [GeocodeService]}));

@@ -203,8 +203,7 @@ export class AuthService {
 
   getUserByEmail(email: string): Observable<Login> {
     console.log('getting by email');
-
-    return this.http.get<Login>(environment.apiUrl + '/users', {
+    return this.http.get<Login>(environment.userUrl + '/users', {
       params: { email }});
   }
 }

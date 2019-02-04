@@ -243,7 +243,7 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1 ">Confirm</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" id="confirmPassword" required disabled>
+                <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel" id="confirmPassword" required disabled>
               </div>
               <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
                 <div *ngIf="password != passwordConfirm">
@@ -253,7 +253,7 @@
           </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" *ngIf="!sentLink" (click)="updatePassword()">Send</button>
+        <button type="button" class="btn btn-primary" (click)="updatePassword()">Send</button>
       </div>
     </div>
   </div>

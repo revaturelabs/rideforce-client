@@ -4,7 +4,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { User } from '../../models/user.model';
-import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 import { UsermatchwebComponent } from './usermatchweb.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -34,13 +33,6 @@ describe('UsermatchwebComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  /*   beforeEach(() => {
-      TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, MatchingControllerService,
-        UserControllerService, UsermatchwebComponent],
-        declarations:[UsermatchwebComponent]});
-      component = TestBed.get(UsermatchwebComponent);
-    }); */
 
 
   it('should create', () => {

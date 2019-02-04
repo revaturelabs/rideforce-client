@@ -13,9 +13,6 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FirstModule } from './first/first.module';
 
-
-// import { DateFormatPipe } from './pipes/date-format.pipe';
-
 /**
  * Loads all necessary modules for the first contentful paint
  * - Team PWA

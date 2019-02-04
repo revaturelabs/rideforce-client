@@ -6,18 +6,6 @@ describe('HowToComponent', () => {
   let component: HowToComponent;
   // let fixture: ComponentFixture<HowToComponent>;
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ HowToComponent ]
-  //   })
-  //   .compileComponents();
-  // }));
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(HowToComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
   beforeEach(() => {
     TestBed.configureTestingModule({providers: [HowToComponent]});
     component = TestBed.get(HowToComponent);

@@ -64,7 +64,7 @@ export class UserControllerService {
    * @returns {Observable<string>} the registration outcome
    */
   createUser(ur: UserRegistration): Observable<string> {
-    return this.http.post<{message: string}>(environment.apiUrl + '/users', ur).pipe(map(d => d.message));
+    return this.http.post<{message: string}>(environment.userUrl + '/users', ur).pipe(map(d => d.message));
   }
 
   /**
@@ -72,14 +72,14 @@ export class UserControllerService {
    * @returns {Observable<User[]>} - the list of Users on the system
    */
   getAllUsers(): Promise<User[]> {
-    return this.http.get<User[]>(environment.apiUrl + '/users').toPromise();
+    return this.http.get<User[]>(environment.userUrl + '/users').toPromise();
   }
   /** Gets a single user via the given endpoint and id
    * @param {number} id - the id of the user to retrieve
    * @returns {Observable<User>} - the user with the given id
   */
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(environment.apiUrl + `/users/${id}`);
+    return this.http.get<User>(environment.userUrl + `/users/${id}`);
   }
   /**
    * Gets a single user via the given endpoint and email
@@ -87,7 +87,7 @@ export class UserControllerService {
    * @returns {Observable<User>} - the user with the given email
    */
   getUserByEmail(email: string): Promise<User> {
-    return this.http.get<User>(environment.apiUrl + '/users', {
+    return this.http.get<User>(environment.userUrl + '/users', {
       params: { email },
     }).toPromise();
   }
@@ -105,12 +105,12 @@ export class UserControllerService {
   getCurrentUser(): Observable<User> {
     // We cache the current user in a local variable to prevent making too many
     // calls to the database.
-    console.log('Getting current User! api is "' + environment.apiUrl + '/login"');
+    console.log('Getting current User! api is "' + environment.userUrl + '/login"');
 
     return this.currentUser
       ? of(this.currentUser)
       : this.http
-        .get<User>(environment.apiUrl + '/login')
+        .get<User>(environment.userUrl + '/login')
         .pipe(
           catchError(function <T>(res?: T) {
             this.currentUser = null;
@@ -138,7 +138,7 @@ export class UserControllerService {
    * @returns {Observable<string>} - the key to offer new users to use
    */
   getRegistrationKey(rtr: RegistrationToken): Observable<string> {
-    return this.http.post<{ token: string }>(`${environment.apiUrl}/tokens/registration`,
+    return this.http.post<{ token: string }>(`${environment.userUrl}/tokens/registration`,
       { office: `/offices/${rtr.office.id}`, batchendDate: rtr.batchEndDate }).pipe(map(r => r.token));
   }
 
@@ -165,7 +165,7 @@ export class UserControllerService {
     };
     console.log("sending");
     return this.http
-      .put<User>(environment.apiUrl + `/users/${this.principal.id}`, body)
+      .put<User>(environment.userUrl + `/users/${this.principal.id}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the
@@ -197,7 +197,7 @@ export class UserControllerService {
     this.principal.bio = bioInput;
 
     return this.http
-      .put<User>(environment.apiUrl + `/users/${this.principal.id}`,
+      .put<User>(environment.userUrl + `/users/${this.principal.id}`,
       JSON.stringify(this.principal))
       .pipe(
         tap(updated => {
@@ -269,7 +269,7 @@ export class UserControllerService {
    * @returns {Observable<Office>} - the office entered into the system
   */
   createOffice(newOffice: Office): Observable<Office> {
-    return this.http.post<Office>(environment.apiUrl + '/offices', newOffice);
+    return this.http.post<Office>(environment.userUrl + '/offices', newOffice);
   }
 
   // READ
@@ -278,7 +278,7 @@ export class UserControllerService {
    * @returns {Observable<Office[]>} - Returns all offices entered in the system
    */
   getAllOffices(): Observable<Office[]> {
-    return this.http.get<Office[]>(environment.apiUrl + '/offices');
+    return this.http.get<Office[]>(environment.userUrl + '/offices');
   }
 
   // may have to replace string with Link<Office>
@@ -290,7 +290,7 @@ export class UserControllerService {
    * -Martin
   */
   getOfficeByLink(officeUri: Link<Office>): Observable<Office> {
-    return this.http.get<Office>(environment.apiUrl + officeUri);
+    return this.http.get<Office>(environment.userUrl + officeUri);
   }
 
   // UPDATE
@@ -301,7 +301,7 @@ export class UserControllerService {
    * @returns {Observable<Office>} - the office the system updated
    */
   updateOffice(officeUri: Link<Office>, updatedOffice: Office): Observable<Office> {
-    return this.http.put<Office>(environment.apiUrl + officeUri, updatedOffice);
+    return this.http.put<Office>(environment.userUrl + officeUri, updatedOffice);
     // maybe implement pipe to verify if the user has authorization to add a location (i.e. a trainer/manager)
   }
 
@@ -318,8 +318,8 @@ export class UserControllerService {
    * @returns {Observable<Car>} - the Data entered into the system
    */
   createCar(newCar: Car): Observable<Car> {
-    console.log('Creating new Car! ' + environment.apiUrl);
-    return this.http.post<Car>(environment.apiUrl + '/cars', newCar);
+    console.log('Creating new Car! ' + environment.userUrl);
+    return this.http.post<Car>(environment.userUrl + '/cars', newCar);
   }
 
   // READ
@@ -329,7 +329,7 @@ export class UserControllerService {
    */
   getAllCars(): Observable<Car[]> {
     console.log('Getting all cars!');
-    return this.http.get<Car[]>(environment.apiUrl + '/cars');
+    return this.http.get<Car[]>(environment.userUrl + '/cars');
   }
 
   /**
@@ -338,7 +338,7 @@ export class UserControllerService {
    * @returns {Observable<Car>} - the Data returned by the system
    */
   getCarById(id: number): Observable<Car> {
-    return this.http.get<Car>(environment.apiUrl + `/cars/${id}`);
+    return this.http.get<Car>(environment.userUrl + `/cars/${id}`);
   }
 
   // UPDATE
@@ -350,7 +350,7 @@ export class UserControllerService {
    */
   updateCar(carUri: Link<Car>, newCar: Car): Observable<Car> {
     return this.http
-      .put<Car>(environment.apiUrl + carUri, newCar);
+      .put<Car>(environment.userUrl + carUri, newCar);
   }
 
   // TODO
@@ -365,7 +365,7 @@ export class UserControllerService {
    * @returns {Observable<ContactInfo>} - the Data entered into the system
    */
   createContactInfo(newContactInfo: ContactInfo): Observable<ContactInfo> {
-    return this.http.post<ContactInfo>(environment.apiUrl + '/contact-info', newContactInfo);
+    return this.http.post<ContactInfo>(environment.userUrl + '/contact-info', newContactInfo);
   }
 
   // READ
@@ -374,7 +374,7 @@ export class UserControllerService {
    * @returns {Observable<ContactInfo[]>} - the Data returned by the system
    */
   getAllContactInfo(): Observable<ContactInfo[]> {
-    return this.http.get<ContactInfo[]>(environment.apiUrl + '/contact-info');
+    return this.http.get<ContactInfo[]>(environment.userUrl + '/contact-info');
   }
 
   /**
@@ -383,7 +383,7 @@ export class UserControllerService {
    * @returns {Observable<ContactInfo>} - the Data returned by the system
    */
   getContactInfoById(id: number): Observable<ContactInfo> {
-    return this.http.get<ContactInfo>(environment.apiUrl + `/contact-info/${id}`);
+    return this.http.get<ContactInfo>(environment.userUrl + `/contact-info/${id}`);
   }
 
   // UPDATE
@@ -395,7 +395,7 @@ export class UserControllerService {
    */
   updateContactInfo(contactInfoUri: Link<ContactInfo>, newContactInfo: ContactInfo): Observable<ContactInfo> {
     return this.http
-      .put<ContactInfo>(environment.apiUrl + contactInfoUri, newContactInfo);
+      .put<ContactInfo>(environment.userUrl + contactInfoUri, newContactInfo);
   }
 
   updateStatus(id: number, active: string) {
@@ -413,7 +413,7 @@ export class UserControllerService {
     }
 
     return this.http
-      .put<User>(environment.apiUrl + `/users/${id}`, body)
+      .put<User>(environment.userUrl + `/users/${id}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the
@@ -443,7 +443,7 @@ export class UserControllerService {
     };
 
     return this.http
-      .put<User>(environment.apiUrl + `/users/${id}`, body)
+      .put<User>(environment.userUrl + `/users/${id}`, body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the
