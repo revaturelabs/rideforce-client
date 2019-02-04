@@ -24,7 +24,7 @@
             <div class="form-group">
               <label for="resetPassword">Password</label>
               <input type="password" class="form-control" name="resetPassword" id="resetPassword" required ngModel
-                #resetPass="ngModel" [class.is-invalid]="resetPass.invalid && resetPass.dirty" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                #resetPass="ngModel" [class.is-invalid]="resetPass.invalid && resetPass.dirty" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
               <br>
               <small [class.d-none]="resetPass.valid || resetPass.untouched" class="text-danger">
                 Password contain at least 8 characters, one captial letter, and one number.
