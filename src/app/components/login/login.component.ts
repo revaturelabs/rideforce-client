@@ -34,6 +34,14 @@ export class LoginComponent implements OnInit {
    */
   userPass: string;
 
+  sentLink: boolean;
+  errorLink: boolean;
+
+  /**
+   * The email to resend confirmation link to
+   */
+  reEmail: string;
+
   /**
    * The User to log on to
    */
@@ -156,5 +164,23 @@ export class LoginComponent implements OnInit {
     };
     const cognitoUser = new CognitoUser(userData);
     return cognitoUser;
+  }
+
+  resendEmail(){
+    this.authService.resendConfirmation(this.reEmail).subscribe(complete =>{
+      this.errorLink = false;
+      this.sentLink = true;
+    }, error =>{
+      this.errorLink = true;
+      this.sentLink = false;
+    });
+
+  }
+
+  initModal(){
+    console.log("Initializing modal");
+    this.errorLink = false;
+    this.sentLink = false;
+    this.reEmail = "";
   }
 }
