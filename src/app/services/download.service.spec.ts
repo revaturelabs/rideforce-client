@@ -3,7 +3,7 @@ import { AppModule } from '../app.module';
 import {APP_BASE_HREF} from '@angular/common';
 import { DownloadService } from './download.service';
 
-fdescribe('DownloadService', () => {
+describe('DownloadService', () => {
   let service: DownloadService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({

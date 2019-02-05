@@ -27,7 +27,6 @@ export class LandingComponent implements OnInit {
   /**
    * Creates the Landing Component
    * @param {UserControllerService} userService - Allows Component to utilize User Functionality
-   * @param {Auth0Service} auth0Service - Provides Auth0 functionality
    */
   constructor(private auth: AuthService) { }
 

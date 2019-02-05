@@ -43,7 +43,6 @@ export class NavbarComponent implements OnInit {
 
   /**
    * Sets up the component with relevent services
-   * @param {Auth0Service} auth0 - Provides Auth0 functionality
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    * @param {UserControllerService} userService - Allows User Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components

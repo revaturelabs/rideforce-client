@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth0Service} from './services/auth0.service';
 import { AuthService } from './services/auth.service';
 
 /**
@@ -20,10 +19,8 @@ export class AppComponent implements OnInit{
 
   /**
    * Creates the Root component of the Ride-share front-end
-   * @param auth0 - the updated authentication service to use
    */
-  constructor(public auth0: Auth0Service, public authService: AuthService) {
-    auth0.handleAuthentication();
+  constructor(public authService: AuthService) {
   }
 
   ngOnInit() {

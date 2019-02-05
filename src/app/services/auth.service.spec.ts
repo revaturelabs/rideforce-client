@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 import {APP_BASE_HREF} from '@angular/common';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 
-fdescribe('AuthService', () => {
+describe('AuthService', () => {
   let auth: AuthService;
 
   beforeEach(async(() => {

@@ -3,7 +3,7 @@ import { AppModule } from '../app.module';
 import {APP_BASE_HREF} from '@angular/common';
 import { GeocodeService } from './geocode.service';
 
-fdescribe('GeocodeService', () => {
+describe('GeocodeService', () => {
   let service: GeocodeService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({

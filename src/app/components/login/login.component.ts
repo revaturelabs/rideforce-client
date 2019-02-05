@@ -11,7 +11,6 @@ declare var $: any;
 
 /**
  * Responsible for providing a user the ability to log in
- * Only uses back end authentication, should be removed once Auth0 is fully implemented
  */
 @Component({
   selector: 'app-login',
