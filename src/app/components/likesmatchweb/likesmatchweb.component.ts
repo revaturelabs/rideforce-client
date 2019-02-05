@@ -5,6 +5,8 @@ import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
+import { Login } from '../../models/login.model';
+import { AuthService } from '../../services/auth.service';
 
 /**
  * Used as a more complex data structure for holding info on liked users
@@ -44,6 +46,8 @@ export class LikesmatchwebComponent implements OnInit {
      */
     likecards: UserCard[] = [];
 
+    principal : Login;
+
     /**
      * Sets up the Component for Like demonstrations
      * @param {MatchingControllerService} matchService - Access to Rider Driver matching service
@@ -51,9 +55,10 @@ export class LikesmatchwebComponent implements OnInit {
      * @param {Router} route - Allows Nav compnent to switch between sub-components
      */
     constructor(
-        private matchService: MatchingControllerService, 
+        private matchService: MatchingControllerService,
         private userService: UserControllerService,
-        private route: Router
+        private route: Router,
+        private authService: AuthService
         ) { }
 
     /**
@@ -65,7 +70,9 @@ export class LikesmatchwebComponent implements OnInit {
      * Initializes the Component by populating the swipcards array with data on liked drivers
      */
     ngOnInit() {
-        if (sessionStorage.length == 0)
+        this.authService.principal.subscribe(user => {
+            this.principal = user
+        if (this.principal.id < 1)
           this.route.navigate(["/landing"]);
         this.userService.getCurrentUser().subscribe(
             data => {
@@ -107,7 +114,7 @@ export class LikesmatchwebComponent implements OnInit {
                                         choose: 'none',
                                         face: 'front'
                                     };
-                                    
+
                                     this.likecards.push(card);
                                 }
                             );
@@ -116,8 +123,7 @@ export class LikesmatchwebComponent implements OnInit {
                 );
             }
         );
-
-
+    });
     }
 
 

@@ -9,6 +9,9 @@ import { MatchingControllerService } from '../../services/api/matching-controlle
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
 import { Location } from '../../models/location.model';
+import { bool } from 'aws-sdk/clients/signer';
+import { AuthService } from '../../services/auth.service'
+import { Login } from '../../models/login.model';
 
 /**
  * Component that handles route navigation and displays a map
@@ -130,6 +133,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /**Store name location to delete into textbox locally **/
   deleteFavorite: string;
 
+  principal: Login;
+
   /**
    * Sets up the map component with dependency injection
    * @param {MatchingControllerService} matchService - Allows management between riders and drivers
@@ -142,6 +147,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     private matchService: MatchingControllerService,
     private userService: UserControllerService,
     private mapService: MapsControllerService,
+    private auth: AuthService,
     private zone: NgZone,
     private route: Router,
     private http: HttpClient
@@ -187,90 +193,92 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   addresses: string[] = ["9416 wooded glen avenue", "1099 godfrey road", "11740 Plaza America Dr", "829 East Sage Road"];
 
   ngOnInit() {
+    this.auth.principal.subscribe(user => {
+      this.principal = user;
+      if (this.principal.id < 1)
+        this.route.navigate(["/landing"]);
+      this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
+      this.hsong.loop = true;
+      this.hsong.load();
+      this.csong.src = 'assets/audio/EndTitle.mp3';
+      this.csong.loop = true;
+      this.csong.load();
+      this.userService.getCurrentUser().subscribe(
+        data => {
+          this.currentUser = data;
+          this.mapService.getDistance(data.address).subscribe(
+            coordinates => {
+              console.log("setting center good sir");
+              this.currentLat = coordinates.latitude;
+              this.currentLong = coordinates.longitude;
+            });
+          console.log('User data from current user (Service) called by Map component');
+          console.log(data);
+          let userLinks: Link<User>[] = null;
+          this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
+            data2 => {
+              userLinks = data2;
+              for (let i = 0; i < userLinks.length; i++) {
 
-    if (sessionStorage.length == 0)
-      this.route.navigate(["/landing"]);
-    this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
-    this.hsong.loop = true;
-    this.hsong.load();
-    this.csong.src = 'assets/audio/EndTitle.mp3';
-    this.csong.loop = true;
-    this.csong.load();
-    this.userService.getCurrentUser().subscribe(
-      data => {
-        this.currentUser = data;
-        this.mapService.getDistance(data.address).subscribe(
-          coordinates => {
-            console.log("setting center good sir");
-            this.currentLat = coordinates.latitude;
-            this.currentLong = coordinates.longitude;
-          });
-        console.log('User data from current user (Service) called by Map component');
-        console.log(data);
-        let userLinks: Link<User>[] = null;
-        this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
-          data2 => {
-            userLinks = data2;
-            for (let i = 0; i < userLinks.length; i++) {
-
-              this.matchService.getFromLink(userLinks[i]).subscribe(
-                data3 => {
-                  if (!data3.photoUrl || data3.photoUrl === 'null') {
-                    data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
-                  }
-                  const marker: any = {
-                    user: data3,
-                    icon: {
-                      url: data3.photoUrl,
-                      scaledSize: {
-                        width: 30,
-                        height: 30
-                      }
-                    },
-                    location: {
-                      latitude: 0,
-                      longitude: 0
-                    },
-                    opacity: .92
-                  };
+                this.matchService.getFromLink(userLinks[i]).subscribe(
+                  data3 => {
+                    if (!data3.photoUrl || data3.photoUrl === 'null') {
+                      data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
+                    }
+                    const marker: any = {
+                      user: data3,
+                      icon: {
+                        url: data3.photoUrl,
+                        scaledSize: {
+                          width: 30,
+                          height: 30
+                        }
+                      },
+                      location: {
+                        latitude: 0,
+                        longitude: 0
+                      },
+                      opacity: .92
+                    };
 
                     this.mapService.getDistance(data3.address).subscribe(
-                    data4 => {
-                      this.addDriverMarkers(data4);
-                    },
-                    e => {
-                      console.log('error getting distance!');
-                      console.log(e);
-                    }
-                  );
-                  // Sets the current swipe card to the first element of the array if the array has something in it.
-                },
-                e => {
-                  console.log('error getting match user (Map component)!');
-                  console.log(e);
-                }
-              );
+                      data4 => {
+                        this.addDriverMarkers(data4);
+                      },
+                      e => {
+                        console.log('error getting distance!');
+                        console.log(e);
+                      }
+                    );
+                    // Sets the current swipe card to the first element of the array if the array has something in it.
+                  },
+                  e => {
+                    console.log('error getting match user (Map component)!');
+                    console.log(e);
+                  }
+                );
+              }
+            },
+            e => {
+              console.log('error getting match drivers (Map Component)!');
+              console.log(e);
             }
-          },
-          e => {
-            console.log('error getting match drivers (Map Component)!');
-            console.log(e);
-          }
-        );
-      },
-      e => {
-        console.log('error getting current user (Map Component)!');
-        console.log(e);
-      }
-    );
-        this.findMe();
-  }
+          );
+        },
+        e => {
+          console.log('error getting current user (Map Component)!');
+          console.log(e);
+        }
+      );
+      this.findMe();
+    })
+    }
 
   /**
    * Final initialization after the content is set up
    */
   ngAfterContentInit() {
-    
+
     //this.findMe();
     //this.getMarkers();
   }
@@ -283,12 +291,12 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.csong.pause();
   }
 
-  initMap(latitude, longitude){
+  initMap(latitude, longitude) {
     this.map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: latitude, lng: longitude},
+      center: { lat: latitude, lng: longitude },
       zoom: 8
     });
-    }
+  }
 
 
   /**
@@ -377,7 +385,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
 
-  
+
   /** Changes the radius of your search */
   public changeRadius() {
     // setTimeout(() => {
@@ -447,7 +455,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       ];
     }
   }
-  
+
   //Christmas overlay for Map
   christmas() {
     if (this.christmasStyle !== null) {
@@ -483,7 +491,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
-  
+
   /**
    * Shows the location you are at
    * (incomplete)
@@ -505,7 +513,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       title: 'Got you!'
     });
     this.markers.push(marker);
-    //adds Marker for the current user 
+    //adds Marker for the current user
     this.showingUser = true;
   }
 
@@ -515,15 +523,15 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   */
 
   addDriverMarkers(newLocation: Location) {
-      const location = new google.maps.LatLng(newLocation.latitude, newLocation.longitude);
-      const marker = new google.maps.Marker({
-        position: location,
-        map: this.map,
-        // icon: this.iconBase + this.selectedMarkerType,
-        label: this.labels[this.labelIndex++ % this.labels.length],
-        title: 'Got you!'
-      });
-      this.markers.push(marker);
+    const location = new google.maps.LatLng(newLocation.latitude, newLocation.longitude);
+    const marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+      // icon: this.iconBase + this.selectedMarkerType,
+      label: this.labels[this.labelIndex++ % this.labels.length],
+      title: 'Got you!'
+    });
+    this.markers.push(marker);
   }
 
   /** Toggles whether or not the map is hidden */
@@ -609,15 +617,15 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
-  /** 
-   * Makes a request to update the user's favorite locations table  
+  /**
+   * Makes a request to update the user's favorite locations table
   */
   saveLocation() {
     let selectedLocation: string = (document.getElementById("currentLocation") as HTMLInputElement).value;
     this.http.post<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?address=' +
       selectedLocation + '&name='
       + this.favoriteName + '&userId='
-      + sessionStorage.getItem('id'), {}).subscribe(message =>
+      + this.principal.id, {}).subscribe(message =>
         console.log(message));
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
     //this.refresh();
@@ -626,7 +634,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Retrieves the current list of user's favorite locations*/
   getLocations() {
     this.showFavorites = !this.showFavorites;
-    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/' + sessionStorage.getItem('id')).subscribe(favorites => {
+    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/' + this.principal.id).subscribe(favorites => {
       //this.tokenStorage.saveToken(token);)
       let marker: any;
       for (let favorite of favorites) {
@@ -662,7 +670,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     if (this.marker) {
       this.marker.setMap(null);
     }
-    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/' + sessionStorage.getItem('id')).subscribe(favorites => {
+    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/' + this.principal.id).subscribe(favorites => {
       let marker: any;
       for (let favorite of favorites) {
         let fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
@@ -681,7 +689,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   deleteLocation() {
     this.http.delete<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?name='
       + this.deleteFavorite + '&userId='
-      + sessionStorage.getItem('id'), {}).subscribe(message =>
+      + this.principal.id, {}).subscribe(message =>
         console.log(message));
     console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
     //this.refresh();
