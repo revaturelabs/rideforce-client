@@ -139,7 +139,7 @@ export class UserControllerService {
    */
   getRegistrationKey(rtr: RegistrationToken): Observable<string> {
     return this.http.post<{ token: string }>(`${environment.userUrl}/tokens/registration`,
-      { office: `/offices/${rtr.office.id}`, batchendDate: rtr.batchEndDate }).pipe(map(r => r.token));
+      { office: `/offices/${rtr.office.id}`, batchEndDate: rtr.batchEndDate }).pipe(map(r => r.token));
   }
 
   // UPDATE
