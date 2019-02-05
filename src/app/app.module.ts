@@ -7,7 +7,6 @@ import { AuthService } from '../app/services/auth.service';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
-import { CallbackComponent } from './callback/callback/callback.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -22,8 +21,7 @@ import { FirstModule } from './first/first.module';
     AppComponent,
     LandingComponent,
     NavbarComponent,
-    LoginComponent,
-    CallbackComponent,
+    LoginComponent
   ],
   imports: [
     FirstModule,

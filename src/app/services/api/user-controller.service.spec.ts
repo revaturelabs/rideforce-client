@@ -52,7 +52,8 @@ describe('UserControllerService', () => {
     });
   });
   */
-  // // test key retrieval by expecting its length
+  // test key retrieval by expecting its length
+  //USER-CONTROLLER.SERVICE HAS BEEN UPDATED BY ANOTHER TEAM. TEST NEEDS UPDATED TOO.
   // it('getRegistrationKey should get key from observable', inject([UserControllerService], (service: UserControllerService) => {
   //   this.regKey = service.getRegistrationKey().subscribe(
   //     value => {
@@ -63,7 +64,8 @@ describe('UserControllerService', () => {
 
   // }));
 
-  // // test duplicate email - currently must be run with above spec
+  // test duplicate email - currently must be run with above spec
+    //USER-CONTROLLER.SERVICE HAS BEEN UPDATED BY ANOTHER TEAM. TEST NEEDS UPDATED TOO.
   // it('duplicate email should throw error', inject([UserControllerService], (service: UserControllerService) => {
   //   userObj.email = "chatnoir@mail.net"; // or any existing email
   //   expect(service.createUser(userObj, userObj.password, this.regKey)).toThrowError; // but is it the expected error?
