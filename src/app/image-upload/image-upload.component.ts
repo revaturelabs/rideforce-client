@@ -36,7 +36,7 @@ export class ImageUploadComponent {
       console.log("FILENAME    ------ " + fileName);
       fd.append('file', this.selectedFile, fileName);
 
-      fd.append('user', sessionStorage.getItem('id'));
+      fd.append('user', this.principal.id.toString());
 
       //this.http.post('http://localhost:2222/storage/uploadFile', fd, {
       this.http.post(environment.userUrl + '/storage/uploadFile', fd, {
