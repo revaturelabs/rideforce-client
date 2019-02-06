@@ -148,7 +148,7 @@ export class AuthService {
             alert(err.message || JSON.stringify(err));
             return;
         }
-        // this.authToken = session.idToken.jwtToken;
+        this.authToken = session.idToken.jwtToken;
         cognitoUser.getUserAttributes(function(err, attributes) {
             if (err) {
                 // Handle error
