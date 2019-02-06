@@ -6,7 +6,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientTestingModule } from '../../../../node_modules/@angular/common/http/testing'
 import { AppModule } from '../../app.module';
 
-fdescribe('ViewUsersComponent', () => {
+describe('ViewUsersComponent', () => {
   let component: ViewUsersComponent;
   let fixture: ComponentFixture<ViewUsersComponent>;
 
