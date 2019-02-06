@@ -194,7 +194,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(auth0: <a href="../injectables/Auth0Service.html">Auth0Service</a>, authService: <a href="../injectables/AuthService.html">AuthService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(authService: <a href="../injectables/AuthService.html">AuthService</a>, userService: <a href="../injectables/UserControllerService.html">UserControllerService</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -219,24 +219,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                <tr>
-                                                        <td>auth0</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/Auth0Service.html" target="_self" >Auth0Service</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><ul>
-<li>Provides Auth0 functionality</li>
-</ul>
-</code>
-                                                        </td>
-                                                </tr>
                                                 <tr>
                                                         <td>authService</td>
                                                   
@@ -426,47 +408,6 @@ uses await/async to avoid forcing User to reload manually to see the &#39;log in
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="logout0"></a>
-                        <span class="name">
-                            <b>
-                            logout0
-                            </b>
-                            <a href="#logout0"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>logout0()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/components/navbar/navbar.component.ts:85</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Allows User to log out of their session, informing
-Auth0 API that a logout has occured</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
                     </td>
@@ -776,7 +717,6 @@ import { UserControllerService } from &#x27;../../services/api/user-controller.s
 import { AuthService } from &#x27;../../services/auth.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { User } from &#x27;../../models/user.model&#x27;;
-import { Auth0Service } from &#x27;../../services/auth0.service&#x27;;
 
 /**
  * Hosts the Component that allows users to navigate between components
@@ -806,13 +746,11 @@ export class NavbarComponent implements OnInit {
 
   /**
    * Sets up the component with relevent services
-   * @param {Auth0Service} auth0 - Provides Auth0 functionality
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    * @param {UserControllerService} userService - Allows User Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
-    private auth0: Auth0Service,
     private authService: AuthService,
     private userService: UserControllerService,
     private route: Router
@@ -849,14 +787,6 @@ export class NavbarComponent implements OnInit {
    */
   setCurrentRole() {
     this.role &#x3D; sessionStorage.getItem(&#x27;role&#x27;);
-  }
-
-  /**
-   * Allows User to log out of their session, informing
-   * Auth0 API that a logout has occured
-   */
-  logout0() {
-    this.auth0.logout0();
   }
 
   /**

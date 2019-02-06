@@ -17,7 +17,7 @@ describe('MapsControllerService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should retrieve route information', async function() {
+  xit('should retrieve route information', async function() {
     const add1 = '378 Colonel Myers Dr. N, Martinsburg WV, 25404';
     const add2 = '508 Pride Ave., Herndon VA, 20170';
 
