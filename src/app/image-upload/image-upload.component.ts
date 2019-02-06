@@ -47,6 +47,9 @@ export class ImageUploadComponent {
           if (event.type === HttpEventType.UploadProgress) {
             this.imageUploadProgress = Math.round(event.loaded / event.total) * 100 + '%';
             console.log('Upload Progress: ', this.imageUploadProgress);
+            if(this.imageUploadProgress == '100%'){
+              document.getElementById("UploadStats").innerHTML = "Upload Complete!";
+            }
           }
         },
         err => {
