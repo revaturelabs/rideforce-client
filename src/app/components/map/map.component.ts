@@ -649,7 +649,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
     )
   }
-  // added because the dumbies added stupid stuff that breaks the code
   tabSelect($event) {
     console.log($event);
   }

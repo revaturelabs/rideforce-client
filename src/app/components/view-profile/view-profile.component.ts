@@ -229,8 +229,8 @@ export class ViewProfileComponent implements OnInit {
       alert('No changes will be made');
     }
   }
-  // added because the dummies added stupid stuff that breaks the code
-  tabSelect($event) {
+  
+  tabSelect($event){
     console.log($event);
   }
 
@@ -247,7 +247,6 @@ export class ViewProfileComponent implements OnInit {
 
   updateBio(bioInput: string) {
     this.userService.updateBio(bioInput);
-    // sessionStorage.setItem('bio', bioInput);
     this.principal.bio = bioInput;
     this.authService.changePrincipal(this.principal);
     location.reload(true);

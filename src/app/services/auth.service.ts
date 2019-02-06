@@ -116,6 +116,7 @@ export class AuthService {
         console.log(e);
         if (document) {
           const messageLogin = document.getElementById('errorMessageLogin');
+          console.log(messageLogin);
           if (messageLogin) {
             messageLogin.style.display = 'block';
             console.log(e.message);
@@ -123,11 +124,15 @@ export class AuthService {
               messageLogin.innerHTML = 'Server unavailable';
             } else if (e.message == 'undefined') {
               messageLogin.innerHTML = 'GATEWAY unavailable';
-            } else {
+            } else if (e.message == 'User is not confirmed.'){
+              messageLogin.innerHTML = e.message+' <a class="underlineHover" data-toggle="modal" data-target="#resendModal" '+
+                      '(click)="initModal()"href="javascript:;">Resend Confirmation.</a>';
+            }else{
               messageLogin.innerHTML = e.message;
             }
           }
         }
+        console.log('before return: ' + e.message);
         return e.message;
       }
     );

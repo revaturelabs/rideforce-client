@@ -92,24 +92,20 @@ describe('UsercardComponent', () => {
     component.swipe(component.SWIPE_ACTION.LEFT, null);
     expect(component.swipe).toHaveBeenCalled();
   });
-
-  it('run ngOnInit', () => {
-    component.ngOnInit();
-    expect(component).toBeTruthy();
-  });
-
-  it('check first values', () => {
-    expect(component).toBeTruthy();
-    expect(component.currentIndex).toBe(0);
-    expect(component.animState).toBe('center');
-    expect(component.animThumbState).toBe('one');
-    expect(component.thumbImg).toBe('assets/icons/thumbsDown.png');
-    
-  });
   
   xit('get current user', () => {
     component.ngOnInit();
     expect(component.currentUser).toBeTruthy();
+  });
+
+  it('swiped', () => {
+    component.animState = 'left';
+    component.swiped();
+    expect(component.animState).toEqual('center');
+
+    component.animState = 'right';
+    component.swiped();
+    expect(component.animState).toEqual('center');
   });
 
   it('swiped', () => {

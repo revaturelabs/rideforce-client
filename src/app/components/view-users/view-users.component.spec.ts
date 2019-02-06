@@ -3,8 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ViewUsersComponent } from './view-users.component';
 import { SearchUsersComponent } from '../search-users/search-users.component';
+import { Role } from '../../models/role.model';
+import { RouterTestingModule } from '@angular/router/testing';
 
-xdescribe('ViewUsersComponent', () => {
+describe('ViewUsersComponent', () => {
   let component: ViewUsersComponent;
   let fixture: ComponentFixture<ViewUsersComponent>;
 
@@ -14,7 +16,7 @@ xdescribe('ViewUsersComponent', () => {
         SearchUsersComponent,
         ViewUsersComponent ],
         imports: [
-          FormsModule
+          FormsModule, RouterTestingModule
         ],
         providers: [
           HttpClient, HttpHandler
@@ -35,36 +37,44 @@ xdescribe('ViewUsersComponent', () => {
 
   // repeat of view-profile
   it('calling switchRole', () => {
-    sessionStorage.setItem('role', 'DRIVER');
+    component.principal.role = Role.Driver;
     component.switchRole();
-    expect(sessionStorage.getItem('role')).toBe('RIDER');
+    expect(component.principal.role).toEqual(Role.Rider);
 
-    sessionStorage.setItem('role', 'RIDER');
+    component.principal.role = Role.Rider;
     component.switchRole();
-    expect(sessionStorage.getItem('role')).toBe('DRIVER');
+    expect(component.principal.role).toEqual(Role.Driver);
   });
 
   // repeat 
   it('calling switchState', () => {
-    sessionStorage.setItem('active', 'ACTIVE');
+    component.principal.active = 'ACTIVE';
     component.switchState();
-    expect(sessionStorage.getItem('active')).toBe('INACTIVE');
+    expect(component.principal.active).toEqual('INACTIVE');
 
-    sessionStorage.setItem('active', 'INACTIVE');
+    component.principal.active = 'INACTIVE';
     component.switchState();
-    expect(sessionStorage.getItem('active')).toBe('ACTIVE');
+    expect(component.principal.active).toEqual('ACTIVE');
   });
 
   it('getting fakeRole', () => {
-    sessionStorage.setItem('role','DRIVER');
+    component.principal.role = Role.Driver;
     component.getRole();
-    expect(component.currentRole).toEqual('DRIVER');
+    expect(component.currentRole).toEqual(component.principal.role);
   });
 
   it('getting fakeState', () => {
-    sessionStorage.setItem('active', 'ACTIVE');
+    component.principal.active = 'ACTIVE';
     component.getState();
     expect(component.currentState).toEqual('ACTIVE');
+  });
+
+  it('getUsers', () => {
+    component.principal.role = Role.Admin;
+    expect(component.getUsers()).toBeTruthy();
+
+    component.principal.role = Role.Trainer;
+    expect(component.getUsers()).toBeTruthy();
   });
 
   it('confirmUserStatus', () => {
@@ -78,38 +88,42 @@ xdescribe('ViewUsersComponent', () => {
     expect(component.userId).toEqual(3031);
   });
 
-  /* Throws an infinite loop */
   // similar to view-profile
-  xit('updateUserStatus', () => {
-    component.confirmUserStatus(3031, 'ACTIVE');
+  it('updateUserStatus', () => {
+    component.userStatus = 'ACTIVE';
     component.updateUserStatus();
     expect(component.active).toEqual('DISABLED');
 
-    component.confirmUserStatus(3031, 'DISABLED');
+    component.userStatus = 'DISABLED';
     component.updateUserStatus();
     expect(component.active).toEqual('ACTIVE');
   });
 
   // similar to view-profile
-  xit('makeRider', () => {
+  it('makeRider', () => {
+    component.userId = 3031;
     expect(component.makeRider()).toBeTruthy();
   });
 
   // similar to view-profile
-  xit('makeAdmin', () => {
+  it('makeAdmin', () => {
+    component.userId = 3031;
     expect(component.makeTrainer()).toBeTruthy();
   });
 
   // similar to view-profile
-  xit('makeTrainer', () => {
+  it('makeTrainer', () => {
+    component.userId = 3031;
     expect(component.makeTrainer()).toBeTruthy();
   });
 
-  xit('makeDriver', () => {
+  it('makeDriver', () => {
+    component.userId = 3031;
     expect(component.makeDriver()).toBeTruthy();
   });
 
   xit('reload function', () => {
+    // a hard coded reload function. Not really testable
     expect(component.reload()).toBeTruthy();
   });
 });

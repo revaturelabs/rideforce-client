@@ -95,15 +95,7 @@ export class LikesmatchwebComponent implements OnInit {
                                         console.log(data3.contactInfo[0]);
                                         data3.photoUrl = 'https://s3.us-east-1.amazonaws.com/rydeforce/rydeforce-s3/65600312303b.png';
                                     }
-                                    // This does very bad things.
-                                    // So, for each contact in data3.contactInfo (which is a list of
-                                    // Link<ContactInfo>), it gets the ContactInfo data by using
-                                    // the function defined in the user service as getContactInfoById().
-                                    // This is an observable. I'm sorry.
-                                    // It basically replaces what is in the Link[] with what is in the actual
-                                    // ContactInfo object.
-                                    // We should probably refactor the User Model object to have a ContactInfo[]
-                                    // instead of a Link<ContactInfo>[].
+                                    
                                     for(let contact in data3.contactInfo){
                                         let num = +data3.contactInfo[contact].substring(14);
                                         this.userService.getContactInfoById(num).subscribe(
