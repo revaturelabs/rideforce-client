@@ -29,7 +29,7 @@ export class MapsControllerService {
   */
 
   getDistance(address: string): Observable<Location> { // gives back latitude and longitude
-    return this.http.get<Location>(environment.mapUrl + '/location', {
+    return this.http.get<Location>(environment.userUrl + '/location', {
       params: { address },
     });
   }
