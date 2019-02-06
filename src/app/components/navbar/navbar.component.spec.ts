@@ -26,37 +26,56 @@ describe('NavbarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
-    auth = TestBed.get(AuthService);
+    //auth = TestBed.get(AuthService);
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the navbar component', () => {
     expect(component).toBeTruthy();
   });
 
-  //   it('should log out (probably does anyway)!', () => {
-  //     console.log('logout test');
-  //     component.logout();
-  //     component.sessionCheck();
-  //     expect(component.session).toBeFalsy();
-  //   });
+  it('should log out (probably does anyway)!', () => {
+    console.log('logout test');
+    component.logout();
+    component.sessionCheck();
+    expect(component.session).toBeFalsy();
+  });
 
-  // it('should log in successfully', async () => {
-  //   console.log('login test');
-  //   // NgZone.run();
-  //   await auth.authenticate('admin@revature.com', 'password', true);
-  //   component.sessionCheck();
-  //   expect(component.session).toBeTruthy();
-  //   component.logout(); 
-  //   component.sessionCheck();
-  //   expect(component.session).toBeFalsy();
-  // });
+  xit('should log in successfully', async () => {
+    console.log('login test');
+    // NgZone.run();
+    await auth.authenticate('admin@revature.com', 'P@ssw0rd', true);
+    component.sessionCheck();
+    expect(component.session).toBeTruthy();
+    component.logout(); 
+    component.sessionCheck();
+    expect(component.session).toBeFalsy();
+  });
 
   // basic dropdown test
   it ('should toggle dropdown successfully', () => {
-    console.log(component.dropped);
     component.drop();
-    console.log(component.dropped);
     expect(component.dropped).toBeTruthy();
-  })
+  });
+
+  it('should handle the if condition in drop', () => {
+    component.dropped = true;
+    component.drop();
+    expect(component.dropped).toBeTruthy();
+  });
+
+  it('sessionCheck values', () => {
+    component.principal.id = 1;
+    component.sessionCheck();
+    expect(component.session).toBeTruthy();
+
+    component.principal.id = 0;
+    component.sessionCheck();
+    expect(component.session).toBeFalsy();
+  });
+
+  it('test the installation of PWA', () => {
+    component.deferredInstall = 1;
+    expect(component.install()).toBeTruthy();
+  });
 });

@@ -116,6 +116,7 @@ export class AuthService {
         console.log(e);
         if (document) {
           const messageLogin = document.getElementById('errorMessageLogin');
+          console.log(messageLogin);
           if (messageLogin) {
             messageLogin.style.display = 'block';
             console.log(e.message);
@@ -131,6 +132,7 @@ export class AuthService {
             }
           }
         }
+        console.log('before return: ' + e.message);
         return e.message;
       }
     );

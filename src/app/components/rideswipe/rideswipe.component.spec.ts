@@ -24,7 +24,7 @@ describe('RideswipeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the rideswipe component', () => {
     expect(component).toBeTruthy();
   });
 });

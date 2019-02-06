@@ -1,12 +1,26 @@
-import { TestBed } from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from '../app.module';
+import {APP_BASE_HREF} from '@angular/common';
 import { GeocodeService } from './geocode.service';
 
 describe('GeocodeService', () => {
-  beforeEach(() => TestBed.configureTestingModule({ providers: [GeocodeService]}));
+  let service: GeocodeService;
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+        imports: [
+          AppModule
+          ],
+        providers: [ {provide: APP_BASE_HREF, useValue : '/' }
+        ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    service = TestBed.get(GeocodeService);
+  });
 
   it('should be created', () => {
-    const service: GeocodeService = TestBed.get(GeocodeService);
     expect(service).toBeTruthy();
   });
 
@@ -21,24 +35,5 @@ describe('GeocodeService', () => {
 
     expect().nothing();
   });
-
-  // it('should return geocode from Latitude and Longitide', async function() {
-  //   const service: GeocodeService = TestBed.get(GeocodeService);
-
-  //   const add = '508 Pride Ave., Herndon VA, 20170';
-
-
-  //   // let latLong: google.maps.LatLng;
-  //   // latLong.lat = 35.5;
-  //   // latLong.lng = 35.4;
-  //   // let lInfo: LatLngLiteral;
-
-  //   await service.geocode(add).subscribe( l => {
-  //     service.reverseGeocode(l).subscribe( g => {
-  //     expect(g).toBeTruthy();
-  //   });
-  //   });
-  //   expect().nothing();
-  // });
 
 });

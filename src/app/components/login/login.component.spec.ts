@@ -27,11 +27,11 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the login component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display Incorrect email or password for nonexistant user', (done) => {
+  it('should display "User does not exist."', (done) => {
 
     component.userEmail = 'notrealuser';
     component.userPass = 'notrealpass';
@@ -42,16 +42,16 @@ describe('LoginComponent', () => {
 
     fixture.whenStable().then(() => {
       let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
-      expect(errorMessage).toBe('Incorrect email or password.');
+      expect(errorMessage).toBe('User does not exist.');
       done();
     });
 
   });
 
-  it('should display Input validation failed when fields are submitted empty', (done) => {
+  it('should display "Missing required parameter USERNAME"', (done) => {
 
     component.userEmail = '';
-    component.userPass = '';
+    component.userPass = 'notrealpass';
     fixture.debugElement.injector.get(LoginComponent).login();
 
     fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
@@ -59,46 +59,31 @@ describe('LoginComponent', () => {
     
     fixture.whenStable().then(() => {
       let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
-      expect(errorMessage).toBe('Input validation failed.');
+      expect(errorMessage).toBe('Missing required parameter USERNAME');
       done();    
     });
 
   });
 
-  //there could be more input validation
-  xit('login component should perform input validation to check that email is submitted in the correct format -- currently not implemented', (done) => {
-
-    component.userEmail = '@';
-    component.userPass = 'password';
-    fixture.debugElement.injector.get(LoginComponent).login();
-
-    fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
-    fixture.detectChanges();
-    
-    fixture.whenStable().then(() => {
-      let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
-      expect(errorMessage).toBe('Input validation failed.');
-      done();
-    });
-    
+  it('resetEmail but cannot access scope variables', () =>{
+    component.userEmail = 'jedimasterdjd@yahoo.com';
+    component.resetEmail();
+    let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
+    expect(errorMessage).toBeTruthy();
   });
 
-    //testing password length input validation
-    xit('password length input validation -- currently not implemented', (done) => {
+  it('initModal', () => {
+    component.initModal();
+    expect(component.errorLink).toBeFalsy();
+    expect(component.sentLink).toBeFalsy();
+    expect(component.reEmail).toBe('');
+  });
 
-      component.userEmail = 'email';
-      component.userPass = 'longstring12345678sdfghjedrfgtyhujsdfghjsdfghjdfgh';
-      fixture.debugElement.injector.get(LoginComponent).login();
+  it('resendEmail', () => {
+    component.resendEmail();
+    // needs to send in user and pool information
+    expect(component.errorLink).toBeFalsy();
+    expect(component.sentLink).toBeTruthy();
+  });
   
-      fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
-      fixture.detectChanges();
-      
-      fixture.whenStable().then(() => {
-        let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
-        expect(errorMessage).toBe('Input validation failed.');
-        done();
-      });
-      
-    });
-
 });
