@@ -5,25 +5,25 @@ import { ViewUsersComponent } from './view-users.component';
 import { SearchUsersComponent } from '../search-users/search-users.component';
 import { Role } from '../../models/role.model';
 import { RouterTestingModule } from '@angular/router/testing';
+import { APP_BASE_HREF } from '@angular/common';
+import { HttpClientTestingModule } from '../../../../node_modules/@angular/common/http/testing'
+import { AppModule } from '../../app.module';
 
-describe('ViewUsersComponent', () => {
+fdescribe('ViewUsersComponent', () => {
   let component: ViewUsersComponent;
   let fixture: ComponentFixture<ViewUsersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        SearchUsersComponent,
-        ViewUsersComponent ],
         imports: [
-          FormsModule, RouterTestingModule
-        ],
-        providers: [
-          HttpClient, HttpHandler
+          AppModule,
+          HttpClientTestingModule
+          ],
+        providers: [ {provide: APP_BASE_HREF, useValue : '/' }
         ]
     })
     .compileComponents();
-  }));
+  })); 
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewUsersComponent);

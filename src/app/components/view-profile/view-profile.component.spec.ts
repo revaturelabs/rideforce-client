@@ -67,6 +67,11 @@ describe('ViewProfileComponent', () => {
     expect(component.contactInfoArray[0]).toEqual(input);
   });
 
+  /*
+    Make sure when running the following test cases: makeRider, makeAdmin, makeTrainer
+    to hit "cancel" on the pop-up instead of "ok". When "ok" is selected, it will auto-refresh.
+    Line 123 will explain how to test those cases.
+  */
   it('makeRider', () => {
       expect(component.makeRider(3031)).toBeUndefined();
   });
@@ -117,6 +122,7 @@ describe('ViewProfileComponent', () => {
   /* 
   x'd the functions below because they all have a location.reload which messes with test case
   To run these test case, comment out "location.reload(true);" in the actual component
+  and remove the "x" from the below cases
   */
   xit('updateBio', () => {
     component.updateBio('I have a Bio now..');
