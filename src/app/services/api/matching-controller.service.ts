@@ -25,7 +25,7 @@ export class MatchingControllerService {
    * @returns {Observable<any>} - anthing that might be returned
    */
   getFromLink(uri: Link<any>): Observable<any> {
-    return this.http.get<any>(environment.matchUrl + uri);
+    return this.http.get<any>(environment.userUrl + uri);
   }
   /**
    * Returns all drivers who match the rider with the given user ID.
