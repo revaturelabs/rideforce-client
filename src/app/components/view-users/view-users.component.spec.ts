@@ -1,8 +1,5 @@
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { ViewUsersComponent } from './view-users.component';
-import { SearchUsersComponent } from '../search-users/search-users.component';
 import { Role } from '../../models/role.model';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_BASE_HREF } from '@angular/common';
@@ -17,7 +14,8 @@ fdescribe('ViewUsersComponent', () => {
     TestBed.configureTestingModule({
         imports: [
           AppModule,
-          HttpClientTestingModule
+          HttpClientTestingModule,
+          RouterTestingModule
           ],
         providers: [ {provide: APP_BASE_HREF, useValue : '/' }
         ]
