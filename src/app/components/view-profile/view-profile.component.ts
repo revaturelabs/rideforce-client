@@ -133,11 +133,9 @@ export class ViewProfileComponent implements OnInit {
   switchRole() {
     if (this.principal.role === Role.Driver) {
       this.principal.role = Role.Rider;
-      this.authService.changePrincipal(this.principal);
       this.getRole();
     } else if (this.principal.role === Role.Rider) {
       this.principal.role = Role.Driver;
-      this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
       console.log('nope');
