@@ -9,10 +9,10 @@ export const environment = {
   production: false,
 /** URL for the service we are relying on */
   mapUrl: 'https://apirideforce.revaturelabs.com/maps',
-  //matchUrl: 'https://apirideforce.revaturelabs.com/matching',
+  matchUrl: 'https://apirideforce.revaturelabs.com/matching',
   userUrl: 'https://apirideforce.revaturelabs.com/user',
   //mapUrl: 'http://localhost:3333',
-  matchUrl: 'http://localhost:4444',
+  //matchUrl: 'http://localhost:4444',
   //userUrl: 'http://localhost:5555',
   cognitoData : {
     UserPoolId: 'us-east-1_lyIcVP12k',
