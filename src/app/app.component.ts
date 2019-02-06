@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Auth0Service} from './services/auth0.service';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 /**
  * Serves as the root component for the entire page
@@ -9,7 +9,7 @@ import { Auth0Service} from './services/auth0.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   /** Provides a basic title */
   title = 'app';
   /** Provides a password for the user */
@@ -19,10 +19,12 @@ export class AppComponent {
 
   /**
    * Creates the Root component of the Ride-share front-end
-   * @param auth0 - the updated authentication service to use
    */
-  constructor(public auth0: Auth0Service) {
-    auth0.handleAuthentication();
+  constructor(public authService: AuthService) {
+  }
+
+  ngOnInit() {
+    this.authService.checkAuthenticate();
   }
 
   /**

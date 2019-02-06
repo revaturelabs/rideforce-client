@@ -7,16 +7,15 @@
 export const environment = {
   /** Are we in production */
   production: false,
-  /** URL for the service we are relying on */
-  apiUrl: 'http://localhost:2222', //Gateway serivce! When hosting services locally
-  //apiUrl: 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222'
-
-  //mapUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/maps',
-  mapUrl: 'http://localhost:3333', //if running locally w/o gatew
-
-  //matchUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/matching',
-  matchUrl: 'http://localhost:4444', //if running locally w/o gateway
-
-  //userUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/user'
-  userUrl: 'http://localhost:5555' //if running locally w/o gateway
+/** URL for the service we are relying on */
+  mapUrl: 'https://apirideforce.revaturelabs.com/maps',
+  matchUrl: 'https://apirideforce.revaturelabs.com/matching',
+  userUrl: 'https://apirideforce.revaturelabs.com/user',
+  //mapUrl: 'http://localhost:3333',
+  //matchUrl: 'http://localhost:4444',
+  //userUrl: 'http://localhost:5555',
+  cognitoData : {
+    UserPoolId: 'us-east-1_lyIcVP12k',
+    ClientId: 'pjkpr0p3d2d8qlklehu9d3hic'
+  }
 };

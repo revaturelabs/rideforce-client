@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Login } from '../classes/login';
+import { Login } from '../models/login.model';
 
 /** Used to access the Authentication token in our session storage */
 const TOKEN_KEY = 'authToken';
@@ -14,7 +14,7 @@ export class TokenStorage {
    * @ignore
    */
   principal : Login;
-  constructor(private auth: AuthService) { 
+  constructor(private auth: AuthService) {
     auth.principal.subscribe(user => {
       this.principal = user;});
   }

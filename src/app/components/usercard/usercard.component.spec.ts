@@ -1,18 +1,11 @@
 import { HttpHandler, HttpClient } from '@angular/common/http';
-import { DebugElement, ElementRef } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-
+import { Role } from '../../models/role.model';
 import { UsercardComponent } from './usercard.component';
 import { AppModule } from '../../app.module';
-import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
-import { Role } from '../../models/role.model';
-import { SwipecardModel } from '../../models/swipecard.model';
-import { User } from '../../models/user.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
-import { from } from 'rxjs';
 
 describe('UsercardComponent', () => {
   let component: UsercardComponent;
@@ -20,43 +13,6 @@ describe('UsercardComponent', () => {
 
 //  let de: DebugElement;
 //  let el: HTMLElement;
-
-component.currentUser = {
-    id:1,
-    firstName: "John",
-    lastName: "Doe",
-    email: "jdoe@gmail.com",
-    password: "jdopass",
-    photoUrl: "imgprofile",
-    address: "12345 Pine Street, VA",
-    office: '/offices/' + 1,
-    startTime: 0,
-    batchEnd: new Date().toISOString(),
-    cars: [],
-    active: 'ACTIVE',
-    contactInfo: [],
-    role: Role.Rider,
-    bio: "My Bio"
-};
-
-component.currentSwipeCard = {
-  user : component.currentUser,
-  visible : true
-};
-
-
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ UsercardComponent ]
-  //   })
-  //   .compileComponents();
-  // }));
-
-  // beforeEach(() => {
-  //   TestBed.configureTestingModule({providers: [HttpHandler, HttpClient, MatchingControllerService,
-  //      UserControllerService, UsercardComponent]});
-  //   component = TestBed.get(UsercardComponent);
-  // });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -71,10 +27,6 @@ component.currentSwipeCard = {
       ],
       providers: [
         HttpClient, HttpHandler,
-        //        {
-        //          provide: APP_BASE_HREF, useValue: '/',
-        //          UsercardComponent
-        //        },
         MatchingControllerService, UserControllerService
 
       ]
@@ -89,11 +41,7 @@ component.currentSwipeCard = {
 //   de = fixture.debugElement.query(By.css('#swipeMain'));
 //   el = elRef.nativeElement;
 
-
-
-    fixture.detectChanges();
-
-/*    component.currentUser = {
+    component.currentUser = {
       id:1,
       firstName: "John",
       lastName: "Doe",
@@ -109,32 +57,64 @@ component.currentSwipeCard = {
       contactInfo: [],
       role: Role.Rider,
       bio: "My Bio"
-  }*/
+  }
+
+  component.currentSwipeCard = {
+    user : component.currentUser,
+    visible : true
+  };
+
+  fixture.detectChanges();
 
   });
 
-  it('should create', () => {
+  it('should create the usercard component', () => {
     expect(component).toBeTruthy();
   });
 
   it('hide image tests', () => {
-
-    fixture.detectChanges();
-
-
-   //    const spyObj = jasmine.createSpy('nativeElement');
-    // let elRef: ElementRef;
-    // component.swipeCardMain = elRef;
+    spyOn(component, 'hideImage');
     component.hideImage(true);
-    //expect(component.swipeCardMain).toBeTruthy();
+    expect(component.hideImage).toHaveBeenCalled();
   });
   it('unhide image tests', () => {
+    spyOn(component, 'hideImage');
     component.hideImage(false);
+    expect(component.hideImage).toHaveBeenCalled();
   });
   it('swipe action right', () => {
+    spyOn(component, 'swipe');
     component.swipe(component.SWIPE_ACTION.RIGHT, null);
-  })
+    expect(component.swipe).toHaveBeenCalled();
+  });
   it('swipe action left', () => {
+    spyOn(component, 'swipe');
     component.swipe(component.SWIPE_ACTION.LEFT, null);
-  })
+    expect(component.swipe).toHaveBeenCalled();
+  });
+  
+  xit('get current user', () => {
+    component.ngOnInit();
+    expect(component.currentUser).toBeTruthy();
+  });
+
+  it('swiped', () => {
+    component.animState = 'left';
+    component.swiped();
+    expect(component.animState).toEqual('center');
+
+    component.animState = 'right';
+    component.swiped();
+    expect(component.animState).toEqual('center');
+  });
+
+  it('swiped', () => {
+    component.animState = 'left';
+    component.swiped();
+    expect(component.animState).toEqual('center');
+
+    component.animState = 'right';
+    component.swiped();
+    expect(component.animState).toEqual('center');
+  });
 });

@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Login } from '../../models/login.model';
+import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
-import { UserControllerService } from '../../services/api/user-controller.service';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Auth0Service } from '../../services/auth0.service'
-import { Login } from '../../classes/login';
-// import { Router } from '@angular/router';
 
 /**
  * Supports the Carousel Appearence as a Site Intro
@@ -22,29 +20,24 @@ export class LandingComponent implements OnInit {
   /**
  * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
  */
-  role: String;
+  role: Role;
 
   principal: Login;
 
   /**
    * Creates the Landing Component
    * @param {UserControllerService} userService - Allows Component to utilize User Functionality
-   * @param {Auth0Service} auth0Service - Provides Auth0 functionality
    */
-  constructor(
-    private auth0Service: Auth0Service,
-    private userService: UserControllerService,
-    private auth: AuthService
-  ) { }
+  constructor(private auth: AuthService) { }
 
   /**
    * Initializes the component by retrieving the User
    */
   ngOnInit() {
-    //console.log("oninit");
+    // console.log("oninit");
     this.auth.principal.subscribe(user => {
       this.principal = user;
-      //console.log(this.principal);
+      // console.log(this.principal);
       this.sessionCheck();
       this.setCurrentRole();
     });
@@ -54,24 +47,17 @@ export class LandingComponent implements OnInit {
    * Checks to see if there is a session or not
    */
   sessionCheck() {
-    if (this.principal.id !== 0) this.session = true;
-    else this.session = false;
-    //console.log("session =" + this.session);
-    //this.session = this.principal.id !== 0;
-  }
-
-  /**
-   * Calls Auth0 remote login page
-   */
-  launchAuth0() {
-    this.auth0Service.login();
+    if (this.principal.id !== 0) {
+      this.session = true;
+    } else {
+      this.session = false;
+    }
   }
 
   /**
   * Sets the role of the Current user to determine what functionality should be available
   */
   setCurrentRole() {
-    this.role = this.principal.currentRole;
+    this.role = this.principal.role;
   }
-
 }

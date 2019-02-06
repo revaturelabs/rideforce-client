@@ -1,14 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
-import { UsercardComponent } from '../usercard/usercard.component';
 import { User } from '../../models/user.model';
 import { Role } from '../../models/role.model';
 
 //  x
-  describe('MapComponent', () => {
+describe('MapComponent', () => {
   let component: MapComponent;
   let fixture: ComponentFixture<MapComponent>;
 
@@ -28,14 +26,7 @@ import { Role } from '../../models/role.model';
     await component.ngOnInit();
   });
 
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(MapComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  //   component.ngOnInit();
-  // });
-
-  it('should create', () => {
+  it('should create the map component', () => {
     expect(component).toBeTruthy();
   });
 
@@ -117,6 +108,7 @@ import { Role } from '../../models/role.model';
   });
 
   it('should toggle the map', () => {
+    spyOn(component, 'toggleMap').and.callThrough();
     const curTog = component.isHidden;
     component.toggleMap();
     expect(component.isHidden).toBe(!curTog);

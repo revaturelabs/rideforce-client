@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
@@ -11,8 +11,7 @@ import { environment } from '../../environments/environment';
 })
 export class GeocodeService {
 
-  dev: boolean = false;
-  endpoint: string = this.dev ? 'http://localhost:3333/location/?address=' : environment.mapUrl + '/location/?address=';
+  endpoint: string = environment.mapUrl + '/location/?address=';
 
   /**
    * Sets up the Service with a Google Maps object

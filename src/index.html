@@ -1,97 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <base href="/" />
+    <title>RideForceClient</title>
 
-<head>
-  <meta charset="utf-8">
-  <title>RideshareClient</title>
-  <base href="/">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="assets/icons/revatureIcon.png" />
 
-  <!-- First Contentful Paint -->
-  <!-- <link rel="prefetch" href="fonts.css" as="style"> -->
-  <!-- <link rel="preload" href="fonts.css" as="style"> -->
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="assets/icons/revatureIcon.png">
-
-  <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous" defer></script>
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous" media="(min-width: 40em)">
-  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" defer></script>
-
-  <!-- Custom styles for this template -->
-
-  <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js" defer></script>
-  <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js" defer></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous" defer></script>
-  <!--   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-    crossorigin="anonymous"></script> -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-    crossorigin="anonymous" >
-
-  <!-- AOS animation
-    <link rel="stylesheet" href="bower_components/aos/dist/aos.css">
-
-  
-<script src="bower_components/aos/dist/aos.js"></script> -->
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-    crossorigin="anonymous" >
-
-  <!-- Auth0
-    <script type="text/javascript" src="node_modules/auth0-js/build/auth0.js"></script>
-  -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1976d2">
- 
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1976d2" />
   </head>
 
-<body>
-  <app-root></app-root>
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
-</body>
+  <body>
+    <app-root></app-root>
+    <noscript>Please enable JavaScript to continue using this application.</noscript>
+  </body>
 
-<!-- Footer -->
-
-<footer class="footer">
-  <div class="container" style="max-width:100%">
-    <div class="flex-row">
-      <div class="col-xs-2" style="margin-left:1%">
-        <img class="rev-logo" src="assets/img/rev-footer.png" onerror='this.onerror = null; this.src="rev-footer.png"'
-          alt="revature" style="height:70px; width:85px;padding-top:40px;" />
-      </div>
-      <div class="col-xs-2 contact-info hidden-sm-up float-right" style="font-size:10px; margin-left:0 !important;">
-        <br>
-        <div class="container-fixed" id="footer-container" style="position:sticky; margin-bottom:20px;">
-          <span class="text-nowrap">
-            <span class="glyphicon glyphicon-home" style="margin-top:10px"></span>
-            <span>&nbsp;11730 Plaza America Drive
-              <br>Reston, VA 20190
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container" style="max-width:100%">
+      <div class="flex-row">
+        <div class="col-xs-2" style="margin-left:1%">
+          <img class="rev-logo" src="assets/img/rev-footer.png" onerror="this.onerror = null; this.src=&quot;rev-footer.png&quot;" alt="revature" style="height:70px; width:85px;padding-top:40px;" />
+        </div>
+        <div class="col-xs-2 contact-info hidden-sm-up float-right" style="font-size:10px; margin-left:0 !important;">
+          <br />
+          <div class="container-fixed" id="footer-container" style="position:sticky; margin-bottom:20px;">
+            <span class="text-nowrap">
+              <span class="fas fa-home" style="margin-top:10px"></span> <span>&nbsp;11730 Plaza America Drive <br />Reston, VA 20190 </span> <br />
+              <span class="fas fa-phone"></span> <a href="tel:(703) 570-8282">&nbsp;(703) 570-8282</a> <br />
+              <span class="fas fa-envelope"></span> <a href="mailto:info@revature.com">&nbsp;info@revature.com</a> <br />
+              <span class="fas fa-link"></span> <a target="_blank" href="http://revature.com">&nbsp;revature.com</a> <br />
+              <span class="copyright"> <i class="fas fa-copyright" aria-hidden="true"></i>2018 Revature</span>
             </span>
-            <br>
-            <span class="glyphicon glyphicon-earphone"></span>
-            <a href="tel:(703) 570-8282">&nbsp;(703) 570-8282</a>
-            <br>
-            <span class="glyphicon glyphicon-envelope"></span>
-            <a href="mailto:info@revature.com">&nbsp;info@revature.com</a>
-            <br>
-            <span class="glyphicon glyphicon-link"></span>
-            <a target="_blank" href="http://revature.com">&nbsp;revature.com</a>
-            <br>
-            <span class="copyright">
-              <i class="fa fa-copyright" aria-hidden="true"></i>2018 Revature</span>
-          </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
-
+  </footer>
 </html>
