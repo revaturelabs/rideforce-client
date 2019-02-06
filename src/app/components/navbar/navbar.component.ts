@@ -81,7 +81,7 @@ export class NavbarComponent implements OnInit {
   }
 
 downloadFile() {
-    this.downloadService.downloadFile(sessionStorage.getItem('id')).subscribe(resp => {
+    this.downloadService.downloadFile(this.principal.id.toString()).subscribe(resp => {
       this.createImageFromBlob(resp);
     }, error => {
       console.log(error);
