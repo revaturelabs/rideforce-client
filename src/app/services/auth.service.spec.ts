@@ -2,9 +2,7 @@
 import { AppModule } from '../app.module';
 import { TestBed, async } from '@angular/core/testing';
 import { AuthService } from './auth.service';
-
 import {APP_BASE_HREF} from '@angular/common';
-import { CognitoUser } from 'amazon-cognito-identity-js';
 
 describe('AuthService', () => {
   let auth: AuthService;
