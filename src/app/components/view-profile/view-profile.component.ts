@@ -247,7 +247,6 @@ export class ViewProfileComponent implements OnInit {
 
   updateBio(bioInput: string) {
     this.userService.updateBio(bioInput);
-    // sessionStorage.setItem('bio', bioInput);
     this.principal.bio = bioInput;
     this.authService.changePrincipal(this.principal);
     location.reload(true);

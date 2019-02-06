@@ -3,6 +3,7 @@ import { HttpHandler, HttpClient } from '@angular/common/http';
 import { SearchUsersComponent } from './search-users.component';
 import { FormsModule } from '@angular/forms';
 import { ViewUsersComponent } from '../view-users/view-users.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SearchUsersComponent', () => {
   let component: SearchUsersComponent;
@@ -11,7 +12,7 @@ describe('SearchUsersComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchUsersComponent],
-      imports: [FormsModule],
+      imports: [FormsModule, RouterTestingModule],
       providers: [HttpHandler, HttpClient, ViewUsersComponent]
     })
       .compileComponents();

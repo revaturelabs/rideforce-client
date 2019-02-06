@@ -3,7 +3,7 @@ import { RideswipeComponent } from './rideswipe.component';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
-xdescribe('RideswipeComponent', () => {
+describe('RideswipeComponent', () => {
   let component: RideswipeComponent;
   let fixture: ComponentFixture<RideswipeComponent>;
 

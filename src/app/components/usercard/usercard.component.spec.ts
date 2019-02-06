@@ -74,11 +74,13 @@ describe('UsercardComponent', () => {
 
   it('hide image tests', () => {
     spyOn(component, 'hideImage');
-    expect(component.hideImage(true)).toHaveBeenCalled();
+    component.hideImage(true);
+    expect(component.hideImage).toHaveBeenCalled();
   });
   it('unhide image tests', () => {
     spyOn(component, 'hideImage');
-    expect(component.hideImage(false)).toHaveBeenCalled();
+    component.hideImage(false);
+    expect(component.hideImage).toHaveBeenCalled();
   });
   it('swipe action right', () => {
     spyOn(component, 'swipe');
@@ -89,20 +91,6 @@ describe('UsercardComponent', () => {
     spyOn(component, 'swipe');
     component.swipe(component.SWIPE_ACTION.LEFT, null);
     expect(component.swipe).toHaveBeenCalled();
-  });
-
-  it('run ngOnInit', () => {
-    component.ngOnInit();
-    expect(component).toBeTruthy();
-  });
-
-  it('check first values', () => {
-    expect(component).toBeTruthy();
-    expect(component.currentIndex).toBe(0);
-    expect(component.animState).toBe('center');
-    expect(component.animThumbState).toBe('one');
-    expect(component.thumbImg).toBe('assets/icons/thumbsDown.png');
-    
   });
   
   xit('get current user', () => {
