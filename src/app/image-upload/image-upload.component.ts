@@ -1,16 +1,16 @@
 import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Login } from '../models/login.model';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
+import bsCustomFileInput from 'bs-custom-file-input';
 
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.css']
 })
-export class ImageUploadComponent {
-
+export class ImageUploadComponent implements OnInit {
   selectedFile: File = null;
   imageUploadProgress: string = '0';
   principal: Login;
@@ -22,7 +22,9 @@ export class ImageUploadComponent {
     });
   }
 
-  Oninit() { }
+  ngOnInit(): void {
+    bsCustomFileInput.init();
+  }
 
   onFileSelect(event) {
     this.imageUploadProgress = '0%';

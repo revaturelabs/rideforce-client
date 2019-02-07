@@ -128,19 +128,11 @@
       <div label="BIO div">
         <ngb-tab title="About Me" id="2">
           <ng-template ngbTabContent>
+            <br>
             <div class="container-fluid">
-              <br>
-              <h2>Biography:</h2>
-              <br>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span id="basic-addon1"><h3>About You</h3></span>
-                </div>
-              </div>
-              <div>
-
-              <div>
-                <textarea type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
+              <div class="form-group">
+                <label for="aboutYou">Bio</label>
+                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
               </div>
               <br>
               <div>
@@ -156,7 +148,6 @@
               <br>
               <br>
               <br>
-            </div>
               <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
                 <div class="input-group-prepend">
                   <div class="input-group-text" style="padding-right: 100px">
