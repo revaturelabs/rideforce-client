@@ -99,7 +99,15 @@
               <button type="button" class="btn" [ngClass]="ur.user.role === roles.Rider ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Rider)">Rider</button>
               <button type="button" class="btn" [ngClass]="ur.user.role === roles.Driver ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Driver)">Driver</button>
             </div>
-            <!-- Contact Info Input -->
+            <!--
+
+             Contact Info Input - Removed because the improper HATEOAS implementation
+             prevents this from ever bing possible. Hopefully the next batch can properly
+             implement it. To help you guys out, the reason this doesnt work is because the
+             server expects the contactInfo array to be a array of contactInfo links
+             (eg /contact-info/{id}) and not contactInfo objects. But how can you create
+             contactInfo objects without having a user? You cant! Good Luck!
+
             <label>Contact Info</label>
             <div class="input-group">
               <select [(ngModel)]="contactInfo.type" name="contactTypes" id="contactTypes" class="form-control">
@@ -108,6 +116,8 @@
               <input type="text" class="form-control" [(ngModel)]="contactInfo.info" />
               <div class="input-group-append"><button class="btn btn-primary" type="button" (click)="addContactInfo()" [disabled]="!contactInfo.info">Add Contact Info</button></div>
             </div>
+            -->
+
             <!-- Contact Info Display -->
             <ul class="list-group">
               <li *ngFor="let item of ur.user.contactInfo" class="list-group-item d-flex justify-content-between align-items-center">
@@ -151,7 +161,7 @@
 
               <dt class="col-sm-4">Bio:</dt>
               <dd class="col-sm-8">{{ ur.user.bio }}</dd>
-
+              <!--
               <dt class="col-sm-4">Contact Info:</dt>
               <dd class="col-sm-8">
                 <dl class="row" *ngFor="let item of ur.user.contactInfo">
@@ -159,6 +169,7 @@
                   <dd class="col-sm-9">{{ item.info }}</dd>
                 </dl>
               </dd>
+              -->
             </dl>
             <button class="btn btn-primary float-left" (click)="changeTab('tab2')">Previous</button>
             <button class="btn btn-primary float-right" (click)="register()">Register</button>
