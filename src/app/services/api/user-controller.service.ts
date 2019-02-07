@@ -185,11 +185,9 @@ export class UserControllerService {
       firstName: this.principal.firstName,
       lastName: this.principal.firstName,
       email: this.principal.email,
-      photoUrl: null,
       role: this.principal.role,
       address: this.principal.address,
       batchEnd: new Date(this.principal.batchEnd),
-      startTime: null,
       active: this.principal.active,
       bio: bioInput
      };
@@ -198,7 +196,7 @@ export class UserControllerService {
 
     return this.http
       .put<User>(environment.userUrl + `/users/${this.principal.id}`,
-      JSON.stringify(this.principal))
+      body)
       .pipe(
         tap(updated => {
           // We need to make sure that we refresh the current user if that's the

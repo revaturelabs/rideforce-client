@@ -247,7 +247,7 @@ export class ViewProfileComponent implements OnInit {
     this.userService.updateBio(bioInput);
     this.principal.bio = bioInput;
     this.authService.changePrincipal(this.principal);
-    location.reload(true);
+    this.router.navigate(['/userProfile']);
     this.existingBio = bioInput;
   }
 

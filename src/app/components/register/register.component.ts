@@ -135,7 +135,7 @@ export class RegisterComponent implements OnInit {
       alert(data);
       this.router.navigate(['/landing']);
     }, error => {
-        alert(error);
+        alert("There was an error during registration.");
       }
     );
   }
