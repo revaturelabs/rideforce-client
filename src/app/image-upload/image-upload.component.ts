@@ -1,16 +1,16 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Login } from '../models/login.model';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
+import bsCustomFileInput from 'bs-custom-file-input';
 
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.css']
 })
-export class ImageUploadComponent {
-
+export class ImageUploadComponent implements OnInit {
   selectedFile: File = null;
   imageUploadProgress: string = '0';
   principal: Login;
@@ -22,10 +22,13 @@ export class ImageUploadComponent {
     });
   }
 
-  Oninit() { }
+  ngOnInit(): void {
+    bsCustomFileInput.init();
+  }
 
   onFileSelect(event) {
     this.imageUploadProgress = '0%';
+    document.getElementById('UploadStats').innerHTML = '';
     this.selectedFile = <File>event.target.files[0];
     console.log(this.selectedFile);
     }
@@ -35,27 +38,19 @@ export class ImageUploadComponent {
       const fileName = `user-${this.principal.id}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
       console.log("FILENAME    ------ " + fileName);
       fd.append('file', this.selectedFile, fileName);
-
       fd.append('user', this.principal.id.toString());
 
-      //this.http.post('http://localhost:2222/storage/uploadFile', fd, {
-      this.http.post(environment.userUrl + '/storage/uploadFile', fd, {
-        reportProgress: true,
-        observe: 'events'
-      })
-        .subscribe( event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            this.imageUploadProgress = Math.round(event.loaded / event.total) * 100 + '%';
+      const req = new HttpRequest('POST', environment.userUrl + '/storage/uploadFile', fd, { reportProgress: true });
+
+      this.http.request(req).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.imageUploadProgress = Math.round((100 * event.loaded) / event.total) + '%';
             console.log('Upload Progress: ', this.imageUploadProgress);
-            if(this.imageUploadProgress == '100%'){
-              document.getElementById("UploadStats").innerHTML = "Upload Complete!";
-            }
-          }
-        },
-        err => {
-          console.log(err);
+        } else if (event.type === HttpEventType.Response) {
+          // File uploaded
+          document.getElementById('UploadStats').innerHTML = 'Upload Complete!';
         }
-      );
+      });
   }
 }
 

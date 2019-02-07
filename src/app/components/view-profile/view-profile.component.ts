@@ -227,7 +227,7 @@ export class ViewProfileComponent implements OnInit {
       alert('No changes will be made');
     }
   }
-  
+
   tabSelect($event){
     console.log($event);
   }
