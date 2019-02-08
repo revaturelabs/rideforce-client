@@ -9,6 +9,9 @@ import { MatchingControllerService } from '../../services/api/matching-controlle
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { AuthService } from '../../services/auth.service';
 import { GeocodeService } from '../../services/geocode.service';
+import { DownloadService } from '../../services/download.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { userInfo } from 'os';
 
 
 /** Represents the User selection item in the html page */
@@ -64,7 +67,9 @@ export class UsermatchwebComponent implements OnInit {
     private route: Router,
     private spinner: NgxSpinnerService,
     private geocodeService: GeocodeService,
-    private auth : AuthService
+    private auth : AuthService,
+    private DLService: DownloadService,
+    public SanizeService: DomSanitizer
   ) { }
 
   /** Holds the current user of the system */
@@ -78,6 +83,8 @@ export class UsermatchwebComponent implements OnInit {
   filterDistance: boolean = false;
   /**If page is loading */
   loading: boolean;
+  
+  private imageFile: any;
 
   /**
    * Sets up the component by populating the list of possibel matches for the current user
@@ -107,6 +114,8 @@ export class UsermatchwebComponent implements OnInit {
                 data3 => {
                   if (!data3.photoUrl || data3.photoUrl === 'null') {
                     data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
+                  }else{
+                    this.DLService.downloadFile(data3.id.toString);
                   }
                   const card: DriverCard = {
                     user: data3,
@@ -312,5 +321,25 @@ export class UsermatchwebComponent implements OnInit {
       return list;
     }
 
-
+    downloadFile(target: User){
+      this.DLService.downloadFile(target.id.toString()).subscribe(resp => {
+        this.createImageFromBlob(resp);
+      }, error => {
+        console.log(error);
+      });
+  
+    console.log('Download service called');
+    //console.log(this.imageFile);
   }
+
+  createImageFromBlob(image: Blob) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+       this.imageFile = reader.result;
+    }, false);
+  
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+  }
+}

@@ -88,7 +88,7 @@ downloadFile() {
     });
 
   console.log('Download service called');
-  console.log(this.imageFile);
+  //console.log(this.imageFile);
 }
 
 createImageFromBlob(image: Blob) {
