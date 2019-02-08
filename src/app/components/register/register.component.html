@@ -99,9 +99,6 @@
               <button type="button" class="btn" [ngClass]="ur.user.role === roles.Rider ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Rider)">Rider</button>
               <button type="button" class="btn" [ngClass]="ur.user.role === roles.Driver ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Driver)">Driver</button>
             </div>
-<<<<<<< HEAD
-            <!-- Contact Info Input -->
-=======
             <!--
 
              Contact Info Input - Removed because the improper HATEOAS implementation
@@ -111,7 +108,6 @@
              (eg /contact-info/{id}) and not contactInfo objects. But how can you create
              contactInfo objects without having a user? You cant! Good Luck!
 
->>>>>>> 5ebf6c11d31272bbd38908e5d162a6f1d9189b35
             <label>Contact Info</label>
             <div class="input-group">
               <select [(ngModel)]="contactInfo.type" name="contactTypes" id="contactTypes" class="form-control">
@@ -120,11 +116,8 @@
               <input type="text" class="form-control" [(ngModel)]="contactInfo.info" />
               <div class="input-group-append"><button class="btn btn-primary" type="button" (click)="addContactInfo()" [disabled]="!contactInfo.info">Add Contact Info</button></div>
             </div>
-<<<<<<< HEAD
-=======
             -->
 
->>>>>>> 5ebf6c11d31272bbd38908e5d162a6f1d9189b35
             <!-- Contact Info Display -->
             <ul class="list-group">
               <li *ngFor="let item of ur.user.contactInfo" class="list-group-item d-flex justify-content-between align-items-center">
@@ -168,11 +161,7 @@
 
               <dt class="col-sm-4">Bio:</dt>
               <dd class="col-sm-8">{{ ur.user.bio }}</dd>
-<<<<<<< HEAD
-
-=======
               <!--
->>>>>>> 5ebf6c11d31272bbd38908e5d162a6f1d9189b35
               <dt class="col-sm-4">Contact Info:</dt>
               <dd class="col-sm-8">
                 <dl class="row" *ngFor="let item of ur.user.contactInfo">
@@ -180,10 +169,7 @@
                   <dd class="col-sm-9">{{ item.info }}</dd>
                 </dl>
               </dd>
-<<<<<<< HEAD
-=======
               -->
->>>>>>> 5ebf6c11d31272bbd38908e5d162a6f1d9189b35
             </dl>
             <button class="btn btn-primary float-left" (click)="changeTab('tab2')">Previous</button>
             <button class="btn btn-primary float-right" (click)="register()">Register</button>
