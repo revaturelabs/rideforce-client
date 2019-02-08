@@ -115,7 +115,7 @@ export class UsermatchwebComponent implements OnInit {
                   if (!data3.photoUrl || data3.photoUrl === 'null') {
                     data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
                   }else{
-                    this.DLService.downloadFile(data3.id.toString);
+                    this.imageFile = this.DLService.downloadFile(data3.id.toString);
                   }
                   const card: DriverCard = {
                     user: data3,
