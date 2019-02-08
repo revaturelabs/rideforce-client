@@ -145,11 +145,9 @@ export class ViewProfileComponent implements OnInit {
   switchState() {
     if (this.principal.active === 'ACTIVE') {
       this.principal.active = 'INACTIVE';
-      this.authService.changePrincipal(this.principal);
       this.getState();
     } else if (this.principal.active === 'INACTIVE') {
       this.principal.active = 'ACTIVE';
-      this.authService.changePrincipal(this.principal);
       this.getState();
     } else {
       console.log('Invalid State');
@@ -227,7 +225,6 @@ export class ViewProfileComponent implements OnInit {
       alert('No changes will be made');
     }
   }
-
   tabSelect($event){
     console.log($event);
   }
