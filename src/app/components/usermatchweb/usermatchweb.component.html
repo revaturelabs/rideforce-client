@@ -27,7 +27,7 @@
           [ngStyle]="{ 'background-color': user.choose == 'none' ?
       'white' : user.choose == 'liked' ? '#92badd' : 'rgba(128, 128, 128, 0.514)'}">
           <div *ngIf="user.face=='front' || user.face=='front-back'">
-            <img class="card-img-top cardimg" [src]="SanizeService.bypassSecurityTrustUrl(imageFile)" alt="Card image cap" (click)="flipCard(user)">
+            <img class="card-img-top cardimg" [src]="user.image" alt="Card image cap" (click)="flipCard(user)">
             <div class="card-body">
               <h6 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h6>
               <br>
