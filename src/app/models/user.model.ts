@@ -7,7 +7,7 @@ import { Role } from './role.model';
 /**
  * Represents a user of the ride-share system on our front-end
  */
-export interface User {
+export class User {
   /**
    * The ID of the user in the database.
    */
@@ -36,6 +36,8 @@ export interface User {
    * The end date of the batch, in the format (yyyy-MM-dd'T'HH:mm:ss.SSS'Z').
    */
   batchEnd: any;
+  
+  // dayStart: number;
   
   startTime: number;
   /**

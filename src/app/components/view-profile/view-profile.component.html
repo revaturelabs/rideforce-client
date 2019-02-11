@@ -1,6 +1,6 @@
 <br>
-<div class="form-group row">
-  <div class="col-1"></div>
+<div class="form-group row" id="tablecont">
+  <div class="col-5"></div>
   <div class="col-lg-4 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
       <div label="VIEW PROFILE div">
@@ -46,7 +46,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Email</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."
+                <input type="email" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."
                   disabled>
               </div>
               <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
@@ -54,34 +54,7 @@
                   Email cannot be empty
                 </div>
                 <div *ngIf="uName.errors.maxLength">
-                  Email cannot be more than 15 characters
-                </div>
-              </div>
-
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Password</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>
-              </div>
-              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
-                <div *ngIf="pWord.errors.required">
-                  Password cannot be empty
-                </div>
-                <div *ngIf="pWord.errors.maxLength">
-                  Password cannot be more than 15 characters
-                </div>
-              </div>
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Confirm</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="passwordConfirm" #pConfirm="ngModel" id="confirmPassword" required
-                  disabled>
-              </div>
-              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-                <div *ngIf="password != passwordConfirm">
-                  Passwords do not match.
+                  Email cannot be more than 25 characters
                 </div>
               </div>
 
@@ -129,12 +102,12 @@
               </div>
 
               <div id="switchRoles" hidden>
-                <button *ngIf="currentRole === 'DRIVER'" class="btn" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
-                <button *ngIf="currentRole === 'RIDER'" class="btn" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
+                <button *ngIf="currentRole === 'DRIVER'" class="btn btn-secondary" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
+                <button *ngIf="currentRole === 'RIDER'" class="btn btn-secondary" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
               </div>
               <br>
-              <div id="switchStates" hidden>
-                <!-- <input type="checkbox" id="activeState" disabled data-toggle="toggle" data-onstyle="success" data-on="Active <i class='fas fa-bell'></i>" data-offstyle="danger" data-height="100%" data-off="Inactive <i class='fas fa-bell-slash'></i>"> -->
+              <!--Inactivity does not affect admin/trainer functionality. No point in showing them the button-->
+              <div *ngIf="currentRole !== 'ADMIN' && currentRole !== 'TRAINER'" id="switchStates" hidden>
                 <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Switch to Inactive <i class='fas fa-bell-slash'></i></button>
                 <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
               </div>
@@ -155,35 +128,26 @@
       <div label="BIO div">
         <ngb-tab title="About Me" id="2">
           <ng-template ngbTabContent>
+            <br>
             <div class="container-fluid">
-              <br>
-              <h2>Biography:</h2>
-              <br>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">About You</span>
-                </div>
+              <div class="form-group">
+                <label for="aboutYou">Bio</label>
+                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
               </div>
-              <textarea type="text" class="form-control" rows="4" [(ngModel)]="bio" required></textarea>
               <br>
-
-              <div class="input-group mb-3">
-                <div class="padBot"><span class="input-group-text" id="basic-addon1">Profile Picture</span></div>
-                <input class="profile-pic" type="file" name="pic" accept="image/*" (change)="selectFile($event)">
+              <div>
+                <app-image-upload></app-image-upload>
               </div>
               <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1" style="padding-right: 95px">Contact Info</span>
-                </div>
                 <!-- to do: Contact info list -->
                 <!-- <input type="text" class="form-control" [(ngModel)]="contactInfo"> -->
                 <div style="padding-left: 20px">
-                  <button class="btn" (click)="addContact()">
-                    <span aria-hidden="true"></span>
-                  </button>
                 </div>
               </div>
-
+              <button type="button" class="btn btn-success" (click)="updateBio(bioInput.value)">Submit</button>
+              <br>
+              <br>
+              <br>
               <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
                 <div class="input-group-prepend">
                   <div class="input-group-text" style="padding-right: 100px">
@@ -192,13 +156,11 @@
                     </select>
                   </div>
                   <input type="text" class="" [(ngModel)]="item.info">
+                  <br>
                   <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
+                  <br>
                 </div>
               </div>
-              <!-- <div>
-                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="bioPrevious()">Previous</button></span>
-                <span> <button class="btn btnNextPrevious" (click)="bioNext()">Next</button></span>
-              </div> -->
             </div>
           </ng-template>
         </ngb-tab>
@@ -210,12 +172,6 @@
               <br>
               <h2>Car Information:</h2>
               <br>
-              <!-- <div class="input-group mb-3">
-                <div class="input-group" id="button-addon3">
-                  <span class="padRight"><button class="btn btnAddCar" type="button" (click)="isDriver()">Driver</button></span>
-                  <span><button class="btn btnAddCar" type="button" (click)="isRider()">Rider</button></span>
-                </div>
-              </div> -->
               <br>
               <div>
                 <div class="input-group mb-3">
@@ -239,89 +195,58 @@
                   <input type="number" min="1950" max="5000" class="form-control" [(ngModel)]="carYear">
                 </div>
               </div>
-              <!-- <div>
-                <span style="padding-right: 20px"><button class="btn btnNextPrevious" (click)="carPrevious()">Previous</button></span>
-                <span> <button class="btn btnNextPrevious" (click)="edit()">Edit</button></span>
-              </div> -->
-              <!-- <div style="padding-top: 20px">
-                <div *ngIf="!requiredCarFields" class="alert alert-danger">
-                  Please select Driver or Rider
-                </div>
-              </div> -->
             </div>
           </ng-template>
         </ngb-tab>
       </div>
-      <div *ngIf="authService.isAdmin()" label="CONFIRMATION div">
-        <ngb-tab title="View Users" id="4">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-            <br>
-            <h2>View Users</h2>
-            <table class="table table-striped table-bordered table-hover table-sm">
-              <thead>
-                <tr>
-                  <th>User ID</th>
-                  <th>User's Name</th>
-                  <th>User Email</th>
-                  <th>User Role</th>
-                  <th> </th>
-                  <th> </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let user of users">
-                  <td>{{ user.id }}</td>
-                  <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-                  <td>{{ user.email }}</td>
-                  <td>{{ user.role }}</td>
-                  <td><button *ngIf="user.role !== 'ADMIN'" class="btn btnEdit" (click)="makeAdmin(user.id)">Make Admin</button>
-                    <button *ngIf="user.role === 'DRIVER' || user.role === 'RIDER'" class="btn btn-info" (click)="makeTrainer(user.id)">Make Trainer</button>
-                  </td>
-                  <td>
-                    <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable Account <i class="fas fa-user-check"></i></button>
-                    <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-      <div *ngIf="currentRole === 'TRAINER'" label="TRAINER div">
-          <ngb-tab title="View Associates" id="5">
-            <ng-template ngbTabContent>
-              <div class="container-fluid">
-              <br>
-              <h2>View Associates</h2>
-              <table class="table table-striped table-bordered table-hover table-sm">
-                <thead>
-                  <tr>
-                    <th>User ID</th>
-                    <th>User's Name</th>
-                    <th>User Email</th>
-                    <th>User Role</th>
-                    <th> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let user of users">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.role }}</td>
-                    <td>
-                      <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="updateUserStatus(user.id, user.active)">Enable Account <i class="fas fa-user-check"></i></button>
-                      <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="updateUserStatus(user.id, user.active)">Disable Account <i class="fas fa-user-times"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              </div>
-            </ng-template>
-          </ngb-tab>
-        </div>
+
+
     </ngb-tabset>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="passwordModalLabel">Change Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                  <span class="input-group-text" id="basic-addon1 ">Password</span>
+                </div>
+                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>
+              </div>
+              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
+                <div *ngIf="pWord.errors.required">
+                  Password cannot be empty
+                </div>
+                <div *ngIf="pWord.errors.maxLength">
+                  Password cannot be more than 15 characters
+                </div>
+              </div>
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                  <span class="input-group-text" id="basic-addon1 ">Confirm</span>
+                </div>
+                <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel" id="confirmPassword" required disabled>
+              </div>
+              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
+                <div *ngIf="password != passwordConfirm">
+                  Passwords do not match.
+                </div>
+              </div>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updatePassword()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+

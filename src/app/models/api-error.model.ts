@@ -1,7 +1,7 @@
 /**
  * Represents an error that accompanied the response to an HTTP request
  */
-export interface ApiError {
+export class ApiError {
     /**
      * The primary message corresponding to the error.
      */

@@ -1,5 +1,5 @@
 /** Holds a means of contacting a user */
-export interface ContactInfo {
+export class ContactInfo {
     /**
      * The ID of this contact info entry in the database.
      */

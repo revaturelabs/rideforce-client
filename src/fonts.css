@@ -1,0 +1,7 @@
+@font-face {
+	font-family: 'Futura-Std-Book';
+	src: url('assets/fonts/Futura-Std-Book.otf') format('opentype');
+}
+body {
+	font-family: 'Futura-Std-Book';
+}

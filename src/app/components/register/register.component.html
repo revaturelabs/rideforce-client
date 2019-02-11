@@ -1,0 +1,181 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 pt-3">
+      <!-- Tab Container -->
+      <ngb-tabset>
+        <ngb-tab title="Register" id="tab1">
+          <!-- Tab 1 Content -->
+          <ng-template ngbTabContent>
+            <br />
+            <form>
+              <div class="form-row">
+                <!-- First Name Input -->
+                <div class="form-group col-md-6">
+                  <label for="firstName">First Name</label>
+                  <input [ngClass]="{ 'is-invalid': fn.invalid && (fn.dirty || fn.touched), 'is-valid': fn.valid }" #fn="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="ur.user.firstName" type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required/>
+                  <div *ngIf="!!fn?.errors?.required" class="invalid-feedback">First name cannot be empty.</div>
+                  <div *ngIf="!!fn?.errors?.pattern" class="invalid-feedback">First name cannot have any symbols or numbers.</div>
+                </div>
+                <!-- Last Name Input -->
+                <div class="form-group col-md-6">
+                  <label for="lastName">Last Name</label>
+                  <input [ngClass]="{ 'is-invalid': ln.invalid && (ln.dirty || ln.touched), 'is-valid': ln.valid }" #ln="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="ur.user.lastName" type="text" class="form-control" name="lastName" id="lastName" placeholder="Doe" required/>
+                  <div *ngIf="!!ln?.errors?.required" class="invalid-feedback">Last name cannot be empty.</div>
+                  <div *ngIf="!!ln?.errors?.pattern" class="invalid-feedback">Last name cannot have any symbols or numbers.</div>
+                </div>
+              </div>
+              <!-- Email Input -->
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input [ngClass]="{ 'is-invalid': e.invalid && (e.dirty || e.touched), 'is-valid': e.valid }" #e="ngModel" pattern="[a-zA-z0-9\.]+@[a-zA-z0-9]+\.[a-zA-z0-9.]+" [(ngModel)]="ur.user.email" type="text" class="form-control" name="email" id="email" placeholder="john.doe@example.com" required/>
+                <div *ngIf="!!e?.errors?.required" class="invalid-feedback">Email cannot be empty.</div>
+                <div *ngIf="!!e?.errors?.pattern" class="invalid-feedback">Email must be a valid email.</div>
+              </div>
+              <!-- Address Input -->
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input [(ngModel)]="ur.user.address" (addressSelect)="onAddressSelect($event)" type="text" class="form-control" name="address" id="address" placeholder="Your Address" appPlacesAutocomplete required/>
+              </div>
+              <!-- Password Input -->
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="password">Password</label>
+                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" [(ngModel)]="ur.user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
+                  <div *ngIf="!!p?.errors?.required" class="invalid-feedback">Password cannot be empty.</div>
+                  <div *ngIf="!!p?.errors?.pattern" class="invalid-feedback">Password must be at least 8 characters long, have both a lowercase and uppercase letter, a number, and a special character.</div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <input [ngClass]="{ 'is-invalid': pc.invalid && (pc.dirty || pc.touched), 'is-valid': pc.valid }" [pattern]="ur.user.password" #pc="ngModel" [(ngModel)]="passwordConfirm" type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required/>
+                  <div class="invalid-feedback">Password doesn't match.</div>
+                </div>
+              </div>
+              <!-- Day Start Input -->
+              <div class="form-group">
+                <label for="startTime">Day Start</label>
+                <select class="custom-select my-1 mr-sm-2" name="startTime" id="startTime" [(ngModel)]="ur.user.startTime" required>
+                  <option value="7.5">7:30 AM</option>
+                  <option value="8">8:00 AM</option>
+                  <option value="8.5">8:30 AM</option>
+                  <option value="9">9:00 AM</option>
+                  <option value="9.5">9:30 AM</option>
+                  <option value="10">10:00 AM</option>
+                </select>
+              </div>
+              <!-- Registration Token Input -->
+              <div class="form-group">
+                <label for="registrationToken">Registration Token</label>
+                <textarea [ngClass]="{ 'is-invalid': !office && tk.touched, 'is-valid': office }" [(ngModel)]="ur.registrationToken" #tk="ngModel" (change)="validateToken()" class="form-control" name="registrationToken" id="registrationToken" placeholder="Registration Token" required></textarea>
+                <div class="invalid-feedback">Registration token invalid.</div>
+              </div>
+              <div *ngIf="office" class="form-row">
+                <!-- Office Display -->
+                <div class="form-group col-md-6">
+                  <label for="officeLocation">Office Location</label>
+                  <input [(ngModel)]="office.name" type="text" class="form-control" name="officeLocation" id="officeLocation" placeholder="Office Location" disabled />
+                </div>
+                <!-- Batch End Date Display -->
+                <div class="form-group col-md-6">
+                  <label for="batchEndDate">Batch End Date</label>
+                  <input [(ngModel)]="ur.user.batchEnd" type="date" class="form-control" name="batchEndDate" id="batchEndDate" placeholder="Batch End Date" disabled />
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary float-right" (click)="changeTab('tab2')" [disabled]="fn.invalid || ln.invalid || e.invalid || p.invalid || pc.invalid || !ur.user.office">Next</button>
+            </form>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Profile" id="tab2" [disabled]="true">
+          <!-- Tab 2 Content -->
+          <ng-template ngbTabContent>
+            <br />
+            <!-- Bio Input -->
+            <div class="form-group">
+              <label for="aboutYou">Bio</label>
+              <textarea [(ngModel)]="ur.user.bio" class="form-control" name="aboutYou" id="aboutYou" placeholder="Tell me about yourself." required></textarea>
+            </div>
+            <!-- Role Selection -->
+            <label>Role</label>
+            <div class="btn-group w-100 mb-3" role="group">
+              <button type="button" class="btn" [ngClass]="ur.user.role === roles.Rider ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Rider)">Rider</button>
+              <button type="button" class="btn" [ngClass]="ur.user.role === roles.Driver ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Driver)">Driver</button>
+            </div>
+            <!--
+
+             Contact Info Input - Removed because the improper HATEOAS implementation
+             prevents this from ever bing possible. Hopefully the next batch can properly
+             implement it. To help you guys out, the reason this doesnt work is because the
+             server expects the contactInfo array to be a array of contactInfo links
+             (eg /contact-info/{id}) and not contactInfo objects. But how can you create
+             contactInfo objects without having a user? You cant! Good Luck!
+
+            <label>Contact Info</label>
+            <div class="input-group">
+              <select [(ngModel)]="contactInfo.type" name="contactTypes" id="contactTypes" class="form-control">
+                <option *ngFor="let item of contactTypes">{{ item }}</option>
+              </select>
+              <input type="text" class="form-control" [(ngModel)]="contactInfo.info" />
+              <div class="input-group-append"><button class="btn btn-primary" type="button" (click)="addContactInfo()" [disabled]="!contactInfo.info">Add Contact Info</button></div>
+            </div>
+            -->
+
+            <!-- Contact Info Display -->
+            <ul class="list-group">
+              <li *ngFor="let item of ur.user.contactInfo" class="list-group-item d-flex justify-content-between align-items-center">
+                {{ item.info }} <span class="badge badge-primary badge-pill">{{ item.type }}</span>
+              </li>
+            </ul>
+            <br />
+            <button class="btn btn-primary float-left" (click)="changeTab('tab1')">Previous</button>
+            <button class="btn btn-primary float-right" (click)="changeTab('tab3')">Next</button>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Review" id="tab3" [disabled]="true">
+          <!-- Tab 3 Content -->
+          <ng-template ngbTabContent>
+            <!-- Display Gathered Data -->
+            <br/>
+            <dl class="row">
+              <dt class="col-sm-4">Name:</dt>
+              <dd class="col-sm-8">{{ ur.user.firstName }} {{ ur.user.lastName }}</dd>
+
+              <dt class="col-sm-4">Email:</dt>
+              <dd class="col-sm-8">{{ ur.user.email }}</dd>
+
+              <dt class="col-sm-4">Address:</dt>
+              <dd class="col-sm-8">{{ ur.user.address }}</dd>
+
+              <dt class="col-sm-4">Role:</dt>
+              <dd class="col-sm-8">{{ ur.user.role }}</dd>
+
+              <dt class="col-sm-4">Day Start:</dt>
+              <dd class="col-sm-8">{{ ur.user.startTime }}</dd>
+
+              <dt class="col-sm-4">Batch End Date:</dt>
+              <dd class="col-sm-8">{{ ur.user.batchEnd | date }}</dd>
+
+              <dt class="col-sm-4" *ngIf="office">Office Location:</dt>
+              <dd class="col-sm-8" *ngIf="office">
+                {{ office.name }} <br />
+                {{ office.address }}
+              </dd>
+
+              <dt class="col-sm-4">Bio:</dt>
+              <dd class="col-sm-8">{{ ur.user.bio }}</dd>
+              <!--
+              <dt class="col-sm-4">Contact Info:</dt>
+              <dd class="col-sm-8">
+                <dl class="row" *ngFor="let item of ur.user.contactInfo">
+                  <dt class="col-sm-3">{{ item.type }}:</dt>
+                  <dd class="col-sm-9">{{ item.info }}</dd>
+                </dl>
+              </dd>
+              -->
+            </dl>
+            <button class="btn btn-primary float-left" (click)="changeTab('tab2')">Previous</button>
+            <button class="btn btn-primary float-right" (click)="register()">Register</button>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

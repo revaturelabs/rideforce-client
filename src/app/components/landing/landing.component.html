@@ -1,18 +1,17 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
-
   <div class="carousel-inner" role="listbox">
     <div class="carousel-item active">
-      <img class="carousel-img d-block w-100" src="assets/img/ss_phonegroup.jpg" alt="First slide" onerror='this.onerror=null; this.src="ss_phonegroup.jpg"'>
+      <img class="carousel-img d-block w-100" src="../../../assets/img/ss_phonegroup.jpg" alt="First slide" onerror='this.onerror=null; this.src="ss_phonegroup.webp"' />
     </div>
     <div class="carousel-item">
-      <img class="carousel-img d-block w-100" src="assets/img/ss_road.jpg" alt="Second slide" onerror='this.onerror=null; this.src="ss_road.jpg"'>
+      <img class="carousel-img d-block w-100" src="../../../assets/img/ss_road.jpg" alt="Second slide" onerror='this.onerror=null; this.src="ss_road.webp"' />
     </div>
     <div class="carousel-item">
-      <img class="carousel-img d-block w-100" src="assets/img/ss_phonegirl.jpg" alt="Third slide" onerror="this.onerror=null;this.src='ss_phonegirl.jpg';">
+      <img class="carousel-img d-block w-100" src="../../../assets/img/ss_phonegirl.jpg" alt="Third slide" onerror="this.onerror=null;this.src='ss_phonegirl.webp';" />
     </div>
     <div class="carousel-item">
-        <img class="carousel-img d-block w-100" src="assets/img/ss_lightdash.jpg" alt="Fourth slide" onerror="this.onerror=null;this.src='ss_lightdash.jpg';">
-      </div>
+      <img class="carousel-img d-block w-100" src="../../../assets/img/ss_lightdash.jpg" alt="Fourth slide" onerror="this.onerror=null;this.src='ss_lightdash.webp';" />
+    </div>
   </div>
   <a class="carousel-control-prev arrow" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -24,56 +23,39 @@
   </a>
 </div>
 
-<!-- <div class="page-header">
-    <img src='http://beagreencommuter.com/wp-content/uploads/2015/04/Carpool-Banner.jpg' alt='banner' width=100%>
-  </div> -->
 <div class="text-center" style="max-height: 460x;">
-    <div class="subheader ">
-        <h2 class="cover-heading fadeIn first">RideForce</h2>
-        <p *ngIf="!session" class="lead fadeIn second">Looking for a ride? Sign up today to be a driver or a rider</p>
-        <p *ngIf="session" class="lead fadeIn second">Start browsing for your perfect match here!</p>
-        <a *ngIf="!session" class="button nav-link started fadeIn third" routerLink="/login" style="vertical-align:middle"><span>Get
-            Started</span></a>
-            <!-- this call will run the Auth0 login page, essentially redirecting to a private sign in -->
-        <!-- <a *ngIf="!session" class="button nav-link started fadeIn third" (click)="launchAuth0()" style="vertical-align:middle"><span>Get
-          Started</span></a> -->
-        <a *ngIf="session" class="button nav-link started fadeIn third" routerLink="/rideswipe" style="padding-right:30px;"><span>Browse</span></a>
-        <div class="fadeIn fourth">
-          For more information,
-          <a href="/howTo">click here</a>
-        </div>
-      </div>
+  <div class="subheader ">
+    <h2 class="cover-heading fadeIn first">RideForce</h2>
 
-    <div class="cover-container d-flex h-100 p-3 mx-auto">
-      <main class="header">
+    <p *ngIf="!session" class="lead fadeIn second">Looking for a ride? Sign up today to be a driver or a rider</p>
+    <p *ngIf="session" class="lead fadeIn second">Start browsing for your perfect match here!</p>
+    <a *ngIf="!session" class="button nav-link started fadeIn third" routerLink="/login" style="vertical-align:middle"><span>Get Started</span></a>
+    <a *ngIf="role != 'ADMIN' && session" class="button nav-link started fadeIn third" routerLink="/rideswipe" style="padding-right:30px;"><span>Browse</span></a>
+    <a *ngIf="role == 'ADMIN' && session" class="button nav-link started fadeIn third" routerLink="/viewUsers" style="padding-right:30px;"><span>View Users</span></a>
+    <div class="fadeIn fourth">
+      For more information,
+      <a href="/howTo">click here</a>
+    </div>
+  </div>
+
+  <div class="cover-container d-flex h-100 p-3 mx-auto">
+    <main class="header">
       <div class="row text-center " style="margin-top: -235px;">
         <div class="hide-on-init col-md-4" animateOnScroll animationName="fadeIn fifth">
-
           <h4 class="service-heading">Rider</h4>
-          <p class="text-muted">If you're looking to carpool to and from work, then RideForce is the app for you. Use
-            the app to find and like drivers who you enjoy riding with.</p>
+          <p class="text-muted">If you're looking to carpool to and from work, then RideForce is the app for you. Use the app to find and like drivers who you enjoy riding with.</p>
         </div>
         <div class="hide-on-init col-md-4" animateOnScroll animationName="fadeIn sixth">
-
           <h4 class="service-heading">Driver</h4>
-          <p class="text-muted">Want to give others a ride? Sign up to be a driver to help others find a way and lessen
-            the burden of gas prices.</p>
+          <p class="text-muted">Want to give others a ride? Sign up to be a driver to help others find a way and lessen the burden of gas prices.</p>
         </div>
         <div class="hide-on-init col-md-4" animateOnScroll animationName="fadeIn seventh">
-
           <h4 class="service-heading">Safe</h4>
-          <p class="text-muted">Find drivers and riders within your employer's company, circle, or group. Members are
-            give a token that will expire in 2 hours so both riders and drivers are approved by the group</p>
+          <p class="text-muted">
+            Find drivers and riders within your employer's company, circle, or group. Members are give a token that will expire in 2 hours so both riders and drivers are approved by the group
+          </p>
         </div>
       </div>
-</main>
+    </main>
+  </div>
 </div>
-
-
-
-
-
-
-
-
-

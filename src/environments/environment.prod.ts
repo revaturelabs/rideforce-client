@@ -2,6 +2,11 @@
 export const environment = {
   /** whater instance is in production mode (true in this case) */
   production: true,
-  /** URL for the service we are relying on */
-  apiUrl: 'http://ec2-35-174-153-234.compute-1.amazonaws.com:2222'
+  mapUrl: 'https://apirideforce.revaturelabs.com/maps',
+  matchUrl: 'https://apirideforce.revaturelabs.com/matching',
+  userUrl: 'https://apirideforce.revaturelabs.com/user',
+  cognitoData : {
+    UserPoolId: 'us-east-1_lyIcVP12k',
+    ClientId: 'pjkpr0p3d2d8qlklehu9d3hic'
+  }
 };
