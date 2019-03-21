@@ -28,16 +28,6 @@ h6 {
 
 }
 
-@media screen and (max-width: 1000px) {
-  /* .grid-container {
-    display: grid;
-    grid-gap: 50px 50px;
-    grid-template-columns: 50% 50%;
-    grid-template-columns: 50%;
-    padding: 10px;
-  } */
-}
-
 .card, .sliding-card {
   height: 400px;
   width: 250px;
@@ -53,11 +43,17 @@ h6 {
   /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
+.approval-icons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .flex-item {
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
   padding: 20px;
-  font-size: 30px;
+  font-size: 32px;
   text-align: center;
 }
 
@@ -65,12 +61,25 @@ h6 {
   transform-style: preserve-3d;
 }
 
+.card-body-back {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
+  height: 350px;
+  width: 205px;
+}
+
 .cardimg {
   height: 200px;
 }
 
+.card-title {
+  font-size: 24px;
+}
+
 .card-text {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .dislike {
@@ -191,4 +200,46 @@ h6 {
   100% {
     transform: translateX(0px)
   }
+}
+
+@media screen and (max-width: 1000px) {
+
+  .flex-container {
+    justify-content: center;
+  }
+
+  .card, .sliding-card {
+    height: 480px;
+    width: 360px;
+  }
+
+  .flex-item {
+    font-size: 36px;
+  }
+
+  .cardimg {
+    height: 250px;
+  }
+
+  .card-title {
+    padding-top: 10px;
+    font-size: 32px;
+  }
+
+  .card-text {
+    font-size: 24px;
+  }
+
+  .card-body-back {
+    height: 430px;
+    width: 320px;
+  }
+
+  /* .grid-container {
+    display: grid;
+    grid-gap: 50px 50px;
+    grid-template-columns: 50% 50%;
+    grid-template-columns: 50%;
+    padding: 10px;
+  } */
 }

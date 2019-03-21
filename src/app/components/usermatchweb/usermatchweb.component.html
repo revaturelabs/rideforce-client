@@ -18,6 +18,10 @@
       Day Start Time <br>
       <input type="checkbox" [(ngModel)]="filterDistance" (change)="sortDrivers('distance')" checked />
       Distance <br>
+      <!-- 
+        the commented button below seems to have been left from the last batch. 
+        Apparently they wanted a filter dropdown? 
+      -->
       <!--button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>-->
     </div>
   </div>
@@ -49,10 +53,14 @@
           <!-- the ngIf below checks the state of the user object to play the proper animations -->
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <img class="card-img-top cardimg" [src]="user.image" alt="Card image cap" (click)="flipCard(user)">
-            <div class="card-body">
+            <div class="card-body-front">
+              <!-- 
+                Well, I have no idea how the first user and second user are different. 
+                Attempting to just have 'user.firstname' and 'user.lastname' means it doesn't show up.
+              -->
               <h6 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h6>
               <br>
-              <div style="display: flex; justify-content: space-between;">
+              <div class="approval-icons">
                 <button *ngIf="user.choose!='disliked'" class="dislike" (click)="like(i, 0)"></button>
                 <button *ngIf="user.choose=='disliked'" class="trashButton" (click)="like(i, 2)"></button>
                 <button *ngIf="user.choose!='none'" class="undoButton" (click)="like(i, 3)"></button>
@@ -61,12 +69,21 @@
             </div>
           </div>
           <div *ngIf="user.face=='back' || user.face=='back-front'" (click)="flipCard(user)" style="overflow: auto">
-            <div class="card-body" style="transform: rotateY(180deg); overflow:auto">
-              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+            <div class="card-body-back" style="transform: rotateY(180deg); overflow:auto">
+              <!-- 
+                For some odd reason, changing those h5 tags to p tags make some components
+                unavailable for view. I think I'll get back to fixing this later...
+                and definitely implement a pipe to automatically add a new line after
+                a certain length.
+              -->
+              <h5 class="card-title"><b>{{user.user.firstName}} {{user.user.lastName}}</b></h5>
               <p class="card-text">{{user.user.address}}</p>
               <h5 class="card-text">{{user.user.email}}</h5>
               <h5 class="card-text">{{user.user.batchEnd | date}}</h5>
-              <!-- Later should be made into a dropdown menu for better viewing -->
+              <!-- 
+                Later should be made into a dropdown menu for better viewing
+                (this comment is left by last batch)
+              -->
               <!-- <ul>
                 <li *ngFor="let contact of user.user.contactInfo"><a class="dropdown">{{contact.type}}: {{contact.info}}</a></li>
               </ul> -->
