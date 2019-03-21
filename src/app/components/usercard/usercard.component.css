@@ -45,10 +45,10 @@
 }
 
 @media screen and (min-width: 1025px){
-    .cardImg{
+    .cardImg {
         height: 400px;
         width: 30%
-       }
+    }
 }
 
 

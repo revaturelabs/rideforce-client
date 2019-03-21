@@ -14,25 +14,31 @@
 }
 
 
-  h6
-  {
-    font-size:17px;
-  }
+h6 {
+  font-size:17px;
+}
 
 .grid-container {
-  display: grid;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  
+  /* display: grid;
   grid-gap: 50px 50px;
   grid-template-columns: 22% 22% 22% 22%;
-  padding: 10px;
+  padding: 10px; */
 }
 
 @media screen and (max-width: 1000px) {
-  .grid-container {
+  /* .grid-container {
     display: grid;
     grid-gap: 50px 50px;
     grid-template-columns: 50% 50%;
+    grid-template-columns: 50%;
     padding: 10px;
-  }
+  } */
 }
 
 .grid-item {
@@ -112,14 +118,18 @@
   /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
-.enlarge:hover {
+.card {
+  height: 250;
+  width: 225px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.card:hover {
   transform: scale(1.1);
   /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
-.card {
-  height: 400px;
-}
 
 #dropdownSettingsButton2 {
   text-align: center;

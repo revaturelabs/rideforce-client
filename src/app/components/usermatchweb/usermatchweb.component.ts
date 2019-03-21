@@ -40,7 +40,7 @@ interface DriverCard {
       state('front-back', style({ transform: 'rotateY(90deg' })),
       state('back', style({ transform: 'rotateY(180deg)' })),
       state('back-front', style({ transform: 'rotateY(90deg' })),
-      transition('* => *', animate(400))
+      transition('* => *', animate(200))
     ])
   ]
 })
@@ -88,7 +88,7 @@ export class UsermatchwebComponent implements OnInit {
   private imageFile: any;
 
   /**
-   * Sets up the component by populating the list of possibel matches for the current user
+   * Sets up the component by populating the list of possible matches for the current user
    */
   ngOnInit() {
     this.auth.principal.subscribe(user => {
