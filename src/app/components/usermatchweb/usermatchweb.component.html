@@ -1,3 +1,9 @@
+<!-- 
+  Who in the previous batch thought it was a good idea to do all this inline CSS??? 
+  WHO??!?!
+  - A message from Henry He of Batch 1901-Jan-22
+-->
+
 <div class="container" style="padding-top:40px">
   <div class="dropdown">
     <p class="" id="dropdownSettingsButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,10 +26,10 @@
   <div>
     <ngx-spinner bdColor="rgba(51,51,51,0)" size="large" color="#fa971a" type="square-jelly-box"></ngx-spinner>
   </div>
-  <div class="grid-container">
+  <div class="flex-container">
     <div *ngFor="let user of sortedUsers; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
       <div class="card">
-        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item sliding-card"
+        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="flex-item sliding-card"
           [ngStyle]="{ 'background-color': user.choose == 'none' ?
       'white' : user.choose == 'liked' ? '#92badd' : 'rgba(128, 128, 128, 0.514)'}">
           <div *ngIf="user.face=='front' || user.face=='front-back'">
