@@ -1,21 +1,22 @@
 <!-- 
+  3/21/2019
   Who in the previous batch thought it was a good idea to do all this inline CSS??? 
-  WHO??!?!
+  WHO??!?! I suppose I'll go do some clean up of this code...as much as I can anyway.
   - A message from Henry He of Batch 1901-Jan-22
 -->
 
-<div class="container" style="padding-top:40px">
+<div class="container">
   <div class="dropdown">
     <p class="" id="dropdownSettingsButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Filter <i class="fas fa-filter"></i>
     </p>
     <img src="" alt="" id="filter">
     <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterBatchEnd" (change)="sortDrivers('batchEnd')" checked />
+      <input type="checkbox" [(ngModel)]="filterBatchEnd" (change)="sortDrivers('batchEnd')" checked />
       Batch End Date <br>
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterStartTime" (change)="sortDrivers('startTime')" checked />
+      <input type="checkbox" [(ngModel)]="filterStartTime" (change)="sortDrivers('startTime')" checked />
       Day Start Time <br>
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterDistance" (change)="sortDrivers('distance')" checked />
+      <input type="checkbox" [(ngModel)]="filterDistance" (change)="sortDrivers('distance')" checked />
       Distance <br>
       <!--button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>-->
     </div>
@@ -24,14 +25,28 @@
 
   <h2>Potential Matches </h2>
   <div>
-    <ngx-spinner bdColor="rgba(51,51,51,0)" size="large" color="#fa971a" type="square-jelly-box"></ngx-spinner>
+    <!-- ngx-spinner is the loading page, or the squishy square you see... -->
+    <ngx-spinner 
+      bdColor="rgba(51,51,51,0)" size="large" 
+      color="#fa971a" type="square-jelly-box">
+    </ngx-spinner>
   </div>
   <div class="flex-container">
-    <div *ngFor="let user of sortedUsers; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
+    <div class="user" *ngFor="let user of sortedUsers; let i = index">
       <div class="card">
-        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="flex-item sliding-card"
-          [ngStyle]="{ 'background-color': user.choose == 'none' ?
-      'white' : user.choose == 'liked' ? '#92badd' : 'rgba(128, 128, 128, 0.514)'}">
+        <!-- 
+          the ngStyle below changes the card background and includes another icon
+          WHEN the user clicks on the check/like icon.
+
+          Still not entirely sure what @flip and @flip.done does...
+          Appears it binds the user card to flip animation in the ts file?
+        -->
+        <div 
+          [@flip]="user.face" (@flip.done)="endFlipCard(user)" 
+          class="flex-item sliding-card"
+          [ngStyle]="{ 'background-color': user.choose == 'none' ? 'white' : user.choose == 'liked' ? '#92badd' : 'rgba(128, 128, 128, 0.514)'}"
+        >
+          <!-- the ngIf below checks the state of the user object to play the proper animations -->
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <img class="card-img-top cardimg" [src]="user.image" alt="Card image cap" (click)="flipCard(user)">
             <div class="card-body">

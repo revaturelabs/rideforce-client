@@ -1,12 +1,17 @@
-/*Cards css*/
-.dyn-height {
-  max-height: 650px;
-  width: 20%;
-  overflow-y: auto;
+.container {
+  padding-top: 40px
+}
+
+.container input {
+  margin-left: 20px
 }
 
 h6 {
   font-size: 17px;
+}
+
+.user {
+  background-color:rgba(255, 255, 255, 0.918)
 }
 
 .flex-container {
@@ -54,6 +59,10 @@ h6 {
   padding: 20px;
   font-size: 30px;
   text-align: center;
+}
+
+.flex-item, .sliding-card {
+  transform-style: preserve-3d;
 }
 
 .cardimg {
