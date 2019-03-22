@@ -51,7 +51,7 @@ export class UserControllerService {
   /** Behaves in a manner similar to that of Observables for Users */
   currentUserSubject = new Subject<User>();
 
-  principal: Login;
+  principal: User;
 
   // CRUD FOR USERS * * * * * * * * * * * * * * * * * * * * *
 
@@ -63,8 +63,9 @@ export class UserControllerService {
    * @param password the new user's password
    * @returns {Observable<string>} the registration outcome
    */
-  createUser(ur: UserRegistration): Observable<string> {
-    return this.http.post<{message: string}>(environment.userUrl + '/users', ur).pipe(map(d => d.message));
+  createUser(user: User): Observable<string> {
+
+    return this.http.post<{message: string}>(environment.userUrl + '/users', user).pipe(map(d => d.message));
   }
 
   /**
@@ -158,7 +159,7 @@ export class UserControllerService {
       email: this.principal.email,
       photoUrl: null,
       role: this.principal.role,
-      address: this.principal.address,
+      address: this.principal.location.address,
       batchEnd: new Date(this.principal.batchEnd),
       startTime: null,
       active: this.principal.active
@@ -186,7 +187,7 @@ export class UserControllerService {
       lastName: this.principal.firstName,
       email: this.principal.email,
       role: this.principal.role,
-      address: this.principal.address,
+      address: this.principal.location.address,
       batchEnd: new Date(this.principal.batchEnd),
       active: this.principal.active,
       bio: bioInput

@@ -8,9 +8,9 @@ export const environment = {
   /** Are we in production */
   production: false,
 /** URL for the service we are relying on */
-  //mapUrl: 'https://apirideforce.revaturelabs.com/maps',
-  //matchUrl: 'https://apirideforce.revaturelabs.com/matching',
-  //userUrl: 'https://apirideforce.revaturelabs.com/user',
+  // mapUrl: 'https://apirideforce.revaturelabs.com/maps',
+  // matchUrl: 'https://apirideforce.revaturelabs.com/matching',
+  // userUrl: 'https://apirideforce.revaturelabs.com/user',
   mapUrl: 'http://localhost:3333',
   matchUrl: 'http://localhost:4444',
   userUrl: 'http://localhost:5555',

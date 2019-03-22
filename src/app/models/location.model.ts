@@ -1,18 +1,14 @@
-/** Represents a specific location on Earth */
+/** Represents possible adress of Users of the system */
 export class Location {
-    /** Cached ID */
-    cached_id: number;
-    /** Address */ 
-    address: String;
-    /** City */
-    city: String;
-    /** State code */
-    state_code: String;
-    /** ZIP Code */
-    zip_code: number;
-    /** the North/West value of the location */
-    latitude: number;
-    /** The East/West value of the location */
-    longitude: number;
+    //Some if by which locations are cached.
+    addressID: number;
 
+    //If needed, a second address line can be used. 
+    address: string;
+    address2?: string;
+    city: string;
+    state: string;
+    zip: string;
+    latitude: number;
+    longitude: number;
 }
