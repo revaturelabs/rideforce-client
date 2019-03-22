@@ -24,7 +24,7 @@ export class LikesComponent implements OnInit {
     swipecards: SwipecardModel[] = [];
 
 
-    principal: Login;
+    principal: User;
     /**
      * Sets up the Component for Like demonstrations
    * @param {Router} route - Allows Nav compnent to switch between sub-components
