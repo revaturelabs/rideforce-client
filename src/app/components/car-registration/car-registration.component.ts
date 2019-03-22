@@ -23,38 +23,8 @@ export class CarRegistrationComponent implements OnInit {
   /**
    * The car to create and register
    */
-  carObject: Car;
-  /**
-   * The company that manufactured it
-   */
-  carMake: string;
-
-  /**
-   * Model of the car
-   */
-  carModel: string;
-
-  /**
-   * When the car was produced
-   */
-  carYear: number;
-
-  // Color
-  carColor: string;
-
-  /**
-   * Relic from the RegisterComponent that previously managed cars
-   */
-  optInToDrive: boolean;
-
-  /**
-   * List of cars owned by the ownwer to present in a table
-   */
-  cars: Car[];
-
-  // booleans for car information buttons
-  btnCarInfo: Number = 0;
-
+  carObject: Car = new Car;
+  
   /**
    * Sets up the Car Registration component with dependencies
    * @param {UserControllerService} userService - the Service that allows us to manager the user AND the cars available on the system
@@ -63,9 +33,10 @@ export class CarRegistrationComponent implements OnInit {
   constructor(
     private userService: UserControllerService,
     private route: Router
-    ) {
+    )
+  {
 
-   }
+  }
 
   /**
    * Makes sure there is a car object available to operate on
@@ -75,12 +46,8 @@ export class CarRegistrationComponent implements OnInit {
   }
 
 
-  submitAutomobile(make, model, year, color) {
-    console.log(`Make: ${make} Model: ${model} Year: ${year} Color: ${color}`);
-    this.carMake = make;
-    this.carModel = model;
-    this.carYear = year;
-    this.carColor = color;
+  submitAutomobile() {
+    console.log(`Make: ${this.carObject.make} Model: ${this.carObject.model} Year: ${this.carObject.year} Color: ${this.carObject.color} License: ${this.carObject.license}`);
   }
 
 }
