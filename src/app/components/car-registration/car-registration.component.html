@@ -23,9 +23,10 @@
         <label for="color">Color</label>
         <br>
         <input type="text" class="form-control" id="formColor" placeholder="Color" #carColor>
+        <br>
+        <button class="btn-submit" (click)="submitAutomobile(carMake.value, carModel.value, carYear.value, carColor.value)">Register Car</button>
       </div>
           <br>
-    <button (click)="submitAutomobile(carMake.value, carModel.value, carYear.value, carColor.value)">Register Car</button>
     </form>
     <!-- Development Purposes
     <br>
