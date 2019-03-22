@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../../models/car.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 /**
  * Supports the functionality of car registration and management
@@ -32,7 +34,8 @@ export class CarRegistrationComponent implements OnInit {
    */
   constructor(
     private userService: UserControllerService,
-    private route: Router
+    private route: Router,
+    private http: HttpClient 
     )
   {
 
@@ -48,6 +51,7 @@ export class CarRegistrationComponent implements OnInit {
 
   submitAutomobile() {
     console.log(`Make: ${this.carObject.make} Model: ${this.carObject.model} Year: ${this.carObject.year} Color: ${this.carObject.color} License: ${this.carObject.license}`);
+    this.http.post<Car>(environment.userUrl + '/cars', this.carObject);
   }
 
 }
