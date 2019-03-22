@@ -57,3 +57,32 @@
     clear: both;
     height: 0;
 }
+
+/* 
+    No idea about the stuff above, but I want
+    navbar to occupy 100% of the view width
+    AND follow the user as they scroll through
+    their "matches" when screen size reaches 
+    530 or lower.
+
+    I also have no idea why we do not have 
+    a footer component...and apparently it's in the
+    index.html.
+
+    Eh. As long as my usermatch looks and feels good.
+*/
+@media only screen and (max-width:530px) {
+
+    .navbar {
+        position: fixed;
+        width: 100vw;
+        height: 20vw;
+    }
+
+    .footer {
+        position: fixed;
+        width: 100vw;
+        height: 20vw;
+    }
+
+}
