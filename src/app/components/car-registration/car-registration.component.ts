@@ -47,7 +47,11 @@ export class CarRegistrationComponent implements OnInit {
 
 
   submitAutomobile() {
-    console.log(`Make: ${this.carObject.make} Model: ${this.carObject.model} Year: ${this.carObject.year} Color: ${this.carObject.color} License: ${this.carObject.license}`);
+    console.log(`Make: ${this.carObject.make} 
+                  Model: ${this.carObject.model} 
+                  Year: ${this.carObject.year} 
+                  Color: ${this.carObject.color} 
+                  License: ${this.carObject.license}`);
   }
 
 }
