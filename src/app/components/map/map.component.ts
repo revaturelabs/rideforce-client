@@ -1,5 +1,5 @@
 /// <reference path="../../../../node_modules/@types/googlemaps/index.d.ts" />
-import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, AfterContentInit, } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { MapsControllerService } from '../../services/api/maps-controller.service';
 import { HttpClient } from '@angular/common/http';
@@ -24,7 +24,7 @@ import { Login } from '../../models/login.model';
     NgbTabset
   ]
 })
-export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
+export class MapComponent implements OnInit, AfterContentInit {
 
   /** Where Users reside */
   private start = 'herndon';
@@ -57,8 +57,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   //Styles
   styles: any = null;
-  halloweenStyle: any = null;
-  christmasStyle: any = null;
 
   /** Represents an element labeled 'gmap' (currently not used) */
   @ViewChild('gmap') gmapElement: any;
@@ -97,7 +95,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   ];
 
-  /** Whether the map is hidden or not */
+  /** Whether the user card is hidden or not */
   isHidden = false;
 
   /**
@@ -106,9 +104,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    */
   myLocation: any;
 
-  /** Represents a song that is playing in the background */
-  hsong = new Audio();
-  csong = new Audio();
   /** Holds the User that's logged in */
   currentUser: User;
 
@@ -197,12 +192,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       this.principal = user;
       if (this.principal.id < 1)
         this.route.navigate(["/landing"]);
-      this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
-      this.hsong.loop = true;
-      this.hsong.load();
-      this.csong.src = 'assets/audio/EndTitle.mp3';
-      this.csong.loop = true;
-      this.csong.load();
       this.userService.getCurrentUser().subscribe(
         data => {
           this.currentUser = data;
@@ -283,21 +272,12 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     //this.getMarkers();
   }
 
-  /**
-   * Stops any song playing once the component is being terminated
-   */
-  ngOnDestroy() {
-    this.hsong.pause();
-    this.csong.pause();
-  }
-
   initMap(latitude, longitude) {
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: latitude, lng: longitude },
       zoom: 8
     });
   }
-
 
   /**
    * Sets up markers of Drivers on the map
@@ -417,80 +397,44 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.selectedUser = user;
   }
 
-  /**
+  /*
    * Sets the component style
    * @param style - the style to set the component to
    */
   //Halloween overlay for maps
-  halloween() {
-    if (this.halloweenStyle !== null) {
-      this.halloweenStyle = null;
-      this.hsong.pause();
-    } else if (this.halloweenStyle === null) {
-      this.hsong.play();
-      this.csong.pause();
-      this.christmasStyle = null;
-      this.halloweenStyle = [{
-        'featureType': 'water',
-        'stylers': [{
-          'color': '#000000'
-        }]
-      },
-      {
-        'featureType': 'landscape',
-        'elementType': 'geometry',
+  // halloween() {
+  //   if (this.halloweenStyle !== null) {
+  //     this.halloweenStyle = null;
+  //     this.hsong.pause();
+  //   } else if (this.halloweenStyle === null) {
+  //     this.hsong.play();
+  //     this.csong.pause();
+  //     this.christmasStyle = null;
+  //     this.halloweenStyle = [{
+  //       'featureType': 'water',
+  //       'stylers': [{
+  //         'color': '#000000'
+  //       }]
+  //     },
+  //     {
+  //       'featureType': 'landscape',
+  //       'elementType': 'geometry',
 
-        'stylers': [{
-          'color': '#ffa500'
-        }]
-      },
-      {
-        'featureType': 'poi',
-        'elementType': 'geometry',
-        'stylers': [{
-          'color': '#39ff14'
-        }]
-      }
+  //       'stylers': [{
+  //         'color': '#ffa500'
+  //       }]
+  //     },
+  //     {
+  //       'featureType': 'poi',
+  //       'elementType': 'geometry',
+  //       'stylers': [{
+  //         'color': '#39ff14'
+  //       }]
+  //     }
 
-      ];
-    }
-  }
-
-  //Christmas overlay for Map
-  christmas() {
-    if (this.christmasStyle !== null) {
-      this.christmasStyle = null;
-      this.csong.pause();
-    } else if (this.christmasStyle === null) {
-      this.csong.play();
-      this.hsong.pause();
-      this.halloweenStyle = null;
-      this.christmasStyle = [{
-        'featureType': 'water',
-        'stylers': [{
-          'color': '#5897fc'
-        }]
-      },
-      {
-        'featureType': 'landscape',
-        'elementType': 'geometry',
-
-        'stylers': [{
-          'color': '#dbffdb'
-        }]
-      },
-      {
-        'featureType': 'poi',
-        'elementType': 'geometry',
-        'stylers': [{
-          'color': '##ffd8e1'
-        }]
-      }
-
-      ];
-    }
-  }
-
+  //     ];
+  //   }
+  // }
 
   /**
    * Shows the location you are at

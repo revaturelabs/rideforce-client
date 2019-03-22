@@ -1,7 +1,7 @@
-        <br>        <div class="row">
-          <div class=""> <!--col-lg-4 col-lg-offset-4 -->
-            <div class="" style = "margin-left: 25px;"><!--col-lg-8 col-lg-offset-2 -->
-              <h2 *ngIf="!christmasStyle && !halloweenStyle">Drivers near me</h2>
+        <!-- <div class="row"> -->
+          <!-- <div class=""> col-lg-4 col-lg-offset-4 -->
+            <!-- <div class="" style = "margin-left: 25px;"> col-lg-8 col-lg-offset-2 -->
+              <!-- <h2 *ngIf="!christmasStyle && !halloweenStyle">Drivers near me</h2>
               <h2 *ngIf="styles==null" style = "color:white;">Drives near me</h2>
               <form class="form-inline" #form="ngForm">
                 <div class="form-group">
@@ -10,9 +10,9 @@
                 </div>
               </form>
             </div>
-            <br>
-            <div class="" style = "margin-left: 25px"><!--col-lg-8 col-lg-offset-2 -->
-              <form class="form-inline" #form="ngForm">
+            <br> -->
+            <!-- <div class="" style = "margin-left: 25px"> col-lg-8 col-lg-offset-2 -->
+              <!-- <form class="form-inline" #form="ngForm">
                 <div class="form-group">
                   <input type="number" class="form-control" name="radius" [(ngModel)]="currentRadius" placeholder="Enter Search Radius">
                 </div>
@@ -22,18 +22,24 @@
             </div>
           </div>
         </div>
-  <br>
-
-
-  <br>
-
+  <br> -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-0"></div>
-    <div class="col-12">
+    <div class="col">
       <br>
-      <br>
-      <br>
+      <!-- <div style="display: flex; justify-content:flex-start; margin-left: .5vw;">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Map Style
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="setMapType('roadmap')">Road Map</a>
+            <a class="dropdown-item" (click)="setMapType('terrain')">Terrain</a>
+            <a class="dropdown-item" (click)="setMapType('satellite')">Satellite</a>
+          </div>
+        </div>
+        <br>
+      </div> -->
       <agm-map (mapReady)="mapReady($event)" *ngIf="!isHidden" [latitude]="currentLat" [longitude]="currentLong" [styles]="styles"
         [mapTypeId]="mapTypeId" [usePanning]="true">
         <!--
@@ -45,142 +51,13 @@
       -->
       </agm-map>
     </div>
-  </div>
-</div>
-<div class="container-fluid" [class.spooky-font]="halloweenStyle!=null" [class.frosty-font]="christmasStyle!=null">
-
-  <table *ngIf="selectedUser" class="table">
-    <tr>
-      <th>Person Info</th>
-      <th>Value</th>
-    </tr>
-    <tr>
-      <td>Name</td>
-      <td>{{selectedUser.firstName}} {{selectedUser.lastName}}</td>
-    </tr>
-    <tr>
-      <td>Address</td>
-      <td>{{selectedUser.address}}</td>
-    </tr>
-    <tr>
-      <td>Batch End</td>
-      <td>{{selectedUser.batchEnd}}</td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td>{{selectedUser.email}}</td>
-    </tr>
-  </table>
-
-  <div class="row">
-
-    <div class="col-12 text-center">
-
-
-      <div class="row" style="display: flex; justify-content:flex-end; margin-right: 50px; margin-top: 25px">
-        <div class="col-2"></div>
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Map Style
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" (click)="setMapType('terrain')">Terrain</a>
-            <a class="dropdown-item" (click)="setMapType('satellite')">Satellite</a>
-            <a class="dropdown-item" (click)="setMapType('roadmap')">Road Map</a>
-            <a class="dropdown-item" (click)="halloween()">Halloween</a>
-            <a class="dropdown-item" (click)="christmas()">Christmas</a>
-          </div>
-          <button type="button" (click)="toggleMap()" class="btn btn-primary">Toggle Map</button>
-        </div>
-        <br>
+    <!-- <div class="col profile-card">
+      <div class="row">
+        <img class="profile-pic" src="../../../assets/img/21.png" alt="placeholder image" />
       </div>
-
-      <!-- <div class="row">
-        <div class="col-md-12">
-          <div class="text-center">
-          </div>
-        </div>
-      </div> -->
-      <table *ngIf="users.length > 0" class="table">
-        <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Batch End</th>
-          <th>Email</th>
-        </tr>
-        <tr *ngFor="let user of users">
-          <td>{{user.firstName}} {{user.lastName}}</td>
-          <td>{{user.address}}</td>
-          <td>{{user.batchEnd}}</td>
-          <td>{{user.email}}</td>
-        </tr>
-      </table>
-
-    </div>
-  </div>
-
-  <div *ngIf = "halloweenStyle != null">
-    <div class="witch-container witch-container-one">
-      <div class="witch witch-one"></div>
-    </div>
-
-    <div class="witch-container witch-container-two">
-      <div class="witch witch-two"></div>
-    </div>
-
-    <div class="witch-container witch-container-three">
-      <div class="witch witch-three"></div>
-    </div>
-
-    <div class="witch-container witch-container-four">
-      <div class="witch witch-four"></div>
-    </div>
-
-
-    <div class="ghost-container ghost-container-one">
-      <div class="ghost ghost-one"></div>
-    </div>
-
-    <div class="ghost-container ghost-container-two">
-      <div class="ghost ghost-two"></div>
-    </div>
-
-    <div class="ghost-container ghost-container-three">
-      <div class="ghost ghost-three"></div>
-    </div>
-
-    <div class="ghost-container ghost-container-four">
-      <div class="ghost ghost-four"></div>
-    </div>
-  </div>  
-
-  <div *ngIf="christmasStyle != null">
-    
-    <!-- Santa's container -->
-    <div class="witch-container witch-container-one">
-      <div class="sleigh witch-one"></div>
-    </div>
-  
-    <!-- Snowflake -->
-    <div class="ghost-container ghost-container-one">
-      <div class="snowflake ghost-container-one"></div>
-    </div>
-
-    <div class="ghost-container ghost-container-two">
-      <div class="snowflake ghost-container-two"></div>
-    </div>
-
-    <div class="ghost-container ghost-container-three">
-      <div class="snowflake ghost-container-three"></div>
-    </div>
-
-    <div class="ghost-container ghost-container-four">
-      <div class="snowflake ghost-container-four"></div>
-    </div>
+      <div>
+      </div>
+    </div> -->
   </div>
 </div>
 
-<img id="spooky" *ngIf="halloweenStyle != null" src="http://pavbca.com/walldb/original/8/e/6/731397.jpg" alt="" class="spooky-background">
-<!-- <img *ngIf="styles != null" src="/src/assets/img/christmas.jpg" class="jolly-background"> -->
-<img *ngIf="christmasStyle != null" src="/src/assets/img/christmas.jpg" alt="" class="spooky-background">
-<!--  -->
