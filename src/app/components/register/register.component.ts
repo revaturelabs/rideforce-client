@@ -10,6 +10,9 @@ import { ContactInfo } from '../../models/contact-info.model';
 import { environment } from '../../../environments/environment';
 import { UserRegistration } from '../../models/user-registration.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { User } from '../../models/user.model';
+import { GeocodeService } from '../../services/geocode.service';
+import { Location } from '../../models/location.model';
 
 /**
  * Used for new user registration.
@@ -21,6 +24,9 @@ import { UserControllerService } from '../../services/api/user-controller.servic
   providers: [NgbTabset]
 })
 export class RegisterComponent implements OnInit {
+
+  user: User = new User();
+
   /** User Roles */
   roles = Role;
   /** Current Office */
@@ -45,12 +51,14 @@ export class RegisterComponent implements OnInit {
    * Import services.
    * @param userService contains various user services.
    */
-  constructor(private http: HttpClient, private router: Router, private zone: NgZone, private userService: UserControllerService) {}
+  constructor(private http: HttpClient, private router: Router, private zone: NgZone, private userService: UserControllerService, private locationService: GeocodeService) {}
 
   /**
    * Initialize variables.
    */
   ngOnInit() {
+    this.user.location = new Location;
+
     this.jwks = new Map();
     this.ur = new UserRegistration();
     this.contactInfo = { type: 'Cell Phone', id: null, info: null };
@@ -66,18 +74,18 @@ export class RegisterComponent implements OnInit {
   validateToken() {
     try {
       // Parse the token
-      const parsedToken = KJUR.jws.JWS.parse(this.ur.registrationToken);
+      const parsedToken = KJUR.jws.JWS.parse(this.user.registrationToken);
       // Attempt to verify the token
-      if (KJUR.jws.JWS.verifyJWT(this.ur.registrationToken, this.jwks.get(parsedToken.headerObj.kid), { alg: [`${parsedToken.headerObj.alg}`] })) {
+      if (KJUR.jws.JWS.verifyJWT(this.user.registrationToken, this.jwks.get(parsedToken.headerObj.kid), { alg: [`${parsedToken.headerObj.alg}`] })) {
         // Set the office based on the token data
         this.offices.filter(o => o.id === parsedToken.payloadObj.oid)
           .forEach(o => {
             this.office = o;
-            this.ur.user.office = '/offices/' + this.office.id;
+            this.user.office = '/offices/' + this.office.id;
           });
         console.log(parsedToken);
         // Set the batch end date based on the token data
-        this.ur.user.batchEnd = new Date(parsedToken.payloadObj.bed * 1000).toISOString().split('T')[0];
+        this.user.batchEnd = new Date(parsedToken.payloadObj.bed * 1000).toISOString().split('T')[0];
       } else {
         throw new Error('Token not valid');
       }
@@ -85,8 +93,8 @@ export class RegisterComponent implements OnInit {
       console.log(err);
       // Token is invalid, reset values
       this.office = null;
-      this.ur.user.office = null;
-      this.ur.user.batchEnd = null;
+      this.user.office = null;
+      this.user.batchEnd = null;
     }
   }
 
@@ -103,7 +111,10 @@ export class RegisterComponent implements OnInit {
    * @param role the role to set for the user.
    */
   onRoleSelect(role: Role) {
-    this.ur.user.role = role;
+    console.log(this.user);
+    this.user.role = role;
+    console.log(this.user);
+    console.log(this.user.role);
   }
 
   /**
@@ -127,16 +138,25 @@ export class RegisterComponent implements OnInit {
     this.tabset.select(newTab);
   }
 
-  /**
-   * Registers a user with Cognito and the back-end.
-   */
+ //Register new user with Cognito in server-side application. 
   register() {
-    this.userService.createUser(this.ur).subscribe(data => {
+    this.populateLocation();
+    console.log(this.user);
+    this.userService.createUser(this.user).subscribe(data => {
       alert(data);
+      console.log(this.user);
       this.router.navigate(['/landing']);
     }, error => {
         alert("There was an error during registration.");
       }
     );
+  }
+
+  //Populate user location by finding the latitude and logitude via Maps service. 
+  populateLocation() {
+    this.locationService.getlocation(this.user.location).subscribe(data => {
+      console.log(data);
+      this.user.location = data;
+    });
   }
 }
