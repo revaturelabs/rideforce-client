@@ -94,48 +94,44 @@ export class AuthService {
    * @param password - the password of the account
    * @param {boolean} usePromise - (TESTING) whether to use the promise version or stick with observable
    */
-    authenticate(email: string, password: string, usePromise?: boolean) {
-    this.authenticator(email, password).then(
-      (x) => {
-        console.log(x.idToken.jwtToken); // printing the token to the console to check
-        this.authToken = x.idToken.jwtToken;
-        this.getUserByEmail(email).subscribe(resp => {
-          console.log('Retrieved email of user');
-          const l: Login = resp as Login;
-          this.changePrincipal(l);
-          console.log('sending to landing');
-          this.route.navigate(['/landing']);
-        },
-        error => {
-          this.cognitoUser.signOut();
-        });
-      },
-      (e) => {
-        // error coming from the backend
-        console.log('Printing Login error (Promise Mode)!');
-        console.log(e);
-        if (document) {
-          const messageLogin = document.getElementById('errorMessageLogin');
-          console.log(messageLogin);
-          if (messageLogin) {
-            messageLogin.style.display = 'block';
-            console.log(e.message);
-            if (e.message == 'GENERAL') {
-              messageLogin.innerHTML = 'Server unavailable';
-            } else if (e.message == 'undefined') {
-              messageLogin.innerHTML = 'GATEWAY unavailable';
-            } else if (e.message == 'User is not confirmed.'){
-              messageLogin.innerHTML = e.message+' <a class="underlineHover" data-toggle="modal" data-target="#resendModal" '+
-                      '(click)="initModal()"href="javascript:;">Resend Confirmation.</a>';
-            }else{
-              messageLogin.innerHTML = e.message;
-            }
+  authenticate(email: string, password: string, usePromise?: boolean) {
+    this.authenticator(email, password).then(x => {
+      console.log(x.idToken.jwtToken); // printing the token to the console to check
+      this.authToken = x.idToken.jwtToken;
+      this.getUserByEmail(email).subscribe(resp => {
+        console.log('Retrieved email of user');
+        const l: Login = resp as Login;
+        this.changePrincipal(l);
+        console.log('sending to landing');
+        this.route.navigate(['/landing']);
+      }, error => {
+        this.cognitoUser.signOut();
+      });
+    }, e => {
+      // error coming from the backend
+      console.log('Printing Login error (Promise Mode)!');
+      console.log(e);
+      if (document) {
+        const messageLogin = document.getElementById('errorMessageLogin');
+        console.log(messageLogin);
+        if (messageLogin) {
+          messageLogin.style.display = 'block';
+          console.log(e.message);
+          if (e.message == 'GENERAL') {
+            messageLogin.innerHTML = 'Server unavailable';
+          } else if (e.message == 'undefined') {
+            messageLogin.innerHTML = 'GATEWAY unavailable';
+          } else if (e.message == 'User is not confirmed.'){
+            messageLogin.innerHTML = e.message+' <a class="underlineHover" data-toggle="modal" data-target="#resendModal" '+
+                    '(click)="initModal()"href="javascript:;">Resend Confirmation.</a>';
+          }else{
+            messageLogin.innerHTML = e.message;
           }
         }
-        console.log('before return: ' + e.message);
-        return e.message;
       }
-    );
+      console.log('before return: ' + e.message);
+      return e.message;
+    });
   }
 
   checkAuthenticate() {

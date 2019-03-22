@@ -88,67 +88,58 @@ export class UsermatchwebComponent implements OnInit {
   private imageFile: any;
 
   /**
-   * Sets up the component by populating the list of possibel matches for the current user
+   * Sets up the component by populating the list of possible matches for the current user
    */
   ngOnInit() {
+    console.clear();
     this.auth.principal.subscribe(user => {
       this.principal = user;
-    if (this.principal.id < 1) {
-      this.route.navigate(['/landing']);
-    }
-    this.spinner.show();
-    this.loading = true;
-    console.log('Loading: ' + this.loading);
-    this.userService.getCurrentUser().subscribe(
-      data => {
+      if (this.principal.id < 1) {
+        this.route.navigate(['/landing']);
+      }
+      this.spinner.show();
+      this.loading = true;
+      console.log('Loading: ' + this.loading);
+      this.userService.getCurrentUser().subscribe(data => {
         this.currentUser = data;
 
         let userLinks: Link<User>[] = null;
-        this.matchService.getMatchingDrivers(+(this.principal.id)).subscribe(
-          data2 => {
-            userLinks = data2;
-            console.log(userLinks);
-            for (let i = 0; i < userLinks.length; i++) {
-
-              this.matchService.getFromLink(userLinks[i]).subscribe(
-                data3 => {
-                  const card: DriverCard = {
-                    user: data3,
-                    choose: 'none',
-                    face: 'front',
-                    distance: null,
-                    image: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
-                  };
-                  this.populateProfileImage(card);
-                  // Sets the current swipe card to the first element of the array if the array has something in it.
-                  this.users.push(card);
-                  // assign drivers to the list to render and shuffle
-                  this.sortedUsers = this.users;
-                  // sets loading to false
-                  this.users.forEach(u => this.appendLocation(u));
-                  this.loading = false;
-                  // hides the spinner
-                  this.spinner.hide();
-                },
-                e => {
-                  console.log('error getting match user!');
-                  console.log(e);
-                }
-              );
-            }
-          },
-          e => {
-            console.log('error getting match Drivers!');
-            console.log(e);
+        this.matchService.getMatchingDrivers(+(this.principal.id)).subscribe(data2 => {
+          userLinks = data2;
+          console.log(userLinks);
+          for (let i = 0; i < userLinks.length; i++) {
+            this.matchService.getFromLink(userLinks[i]).subscribe(data3 => {
+              const card: DriverCard = {
+                user: data3,
+                choose: 'none',
+                face: 'front',
+                distance: null,
+                image: 'http://semantic-ui.com/images/avatar/large/chris.jpg'
+              };
+              this.populateProfileImage(card);
+              // Sets the current swipe card to the first element of the array if the array has something in it.
+              this.users.push(card);
+              // assign drivers to the list to render and shuffle
+              this.sortedUsers = this.users;
+              // sets loading to false
+              this.users.forEach(u => this.appendLocation(u));
+              this.loading = false;
+              // hides the spinner
+              this.spinner.hide();
+            }, e => {
+              console.log('error getting match user!');
+              console.log(e);
+            });
           }
-        );
-      },
-      e => {
+        }, e => {
+          console.log('error getting match Drivers!');
+          console.log(e);
+        });
+      }, e => {
         console.log('error getting user (matching service)!');
         console.log(e);
-      }
-    );
-  });
+      });
+    });
   }
 
   /**
