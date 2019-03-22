@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Login } from '../models/login.model';
+import { User } from '../models/user.model';
 
 // import * as S3 from 'aws-sdk/clients/s3';
 
@@ -19,7 +20,7 @@ export class UploadService {
   FOLDER = 'rydeforce-s3/';
   /** Holds the url where the image will be stored*/
   url: any;
-  principal: Login;
+  principal: User;
   /**
    * Basic set up of the Service - it uses no dependency injection
    */

@@ -46,7 +46,7 @@ export class LikesmatchwebComponent implements OnInit {
      */
     likecards: UserCard[] = [];
 
-    principal : Login;
+    principal : User;
 
     /**
      * Sets up the Component for Like demonstrations

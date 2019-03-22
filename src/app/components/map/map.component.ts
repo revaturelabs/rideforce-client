@@ -133,7 +133,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /**Store name location to delete into textbox locally **/
   deleteFavorite: string;
 
-  principal: Login;
+  principal: User;
 
   /**
    * Sets up the map component with dependency injection
@@ -206,7 +206,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       this.userService.getCurrentUser().subscribe(
         data => {
           this.currentUser = data;
-          this.mapService.getDistance(data.address).subscribe(
+          this.mapService.getDistance(data.location.address).subscribe(
             coordinates => {
               console.log("setting center good sir");
               this.currentLat = coordinates.latitude;

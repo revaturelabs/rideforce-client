@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Login } from '../../models/login.model';
+import { User } from '../../models/user.model';
 
 /** Provides an over view of User Likes, distinguishing between the mobile view and desktop view */
 @Component({
@@ -14,7 +15,7 @@ export class FavoritesComponent implements OnInit {
   /** Whether or not the Device is a mobile device */
   public mobile = false;
 
-  principal: Login;
+  principal: User;
 
   /**
    * Simply sets up the Favorites component.

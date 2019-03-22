@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   deferredInstall = null;
   isInstallable: boolean = false;
 
-  principal: Login;
+  principal: User;
 
   /**
    * Sets up the component with relevent services

@@ -56,7 +56,7 @@ export class UsermatchwebComponent implements OnInit {
   /** to store user location */
   myLocation: object = null;
 
-  principal: Login;
+  principal: User;
   /**
      * Sets up Component with the Matching and User services injected
      * @param {MatchingControllerService} matchService - Enables the matching service
@@ -125,7 +125,7 @@ export class UsermatchwebComponent implements OnInit {
                   // assign drivers to the list to render and shuffle
                   this.sortedUsers = this.users;
                   // sets loading to false
-                  this.users.forEach(u => this.appendLocation(u));
+                  // this.users.forEach(u => this.appendLocation(u));
                   this.loading = false;
                   // hides the spinner
                   this.spinner.hide();
@@ -223,7 +223,7 @@ export class UsermatchwebComponent implements OnInit {
       [this.filterStartTime, 'starttime']
     ];
 
-    this.sortedUsers = this.shuffle(this.users);
+    // this.sortedUsers = this.shuffle(this.users);
 
     const filterMap = {
       'starttime': () => {
@@ -272,47 +272,47 @@ export class UsermatchwebComponent implements OnInit {
     }
 
     // get the address and append it
-    async appendLocation(user) {
-      const myLocation = await this.geocodeService.geocode(this.principal.address).toPromise();
-      const location = await this.geocodeService.geocode(user.user.address).toPromise();
-      user['distance'] = this.calculateDistance(
-        myLocation['lng'],
-        location['lng'],
-        myLocation['lat'],
-        location['lat']
-        );
-        console.log('usre with appended distance: ' + user);
-        return user;
-    }
+    // async appendLocation(user) {
+    //   const myLocation = await this.geocodeService.geocode(this.principal.address).toPromise();
+    //   const location = await this.geocodeService.geocode(user.user.address).toPromise();
+    //   user['distance'] = this.calculateDistance(
+    //     myLocation['lng'],
+    //     location['lng'],
+    //     myLocation['lat'],
+    //     location['lat']
+    //     );
+    //     console.log('usre with appended distance: ' + user);
+    //     return user;
+    // }
 
-    async getLngLat(address: string): Promise<number> {
-      const otherLocation = await this.geocodeService.geocode(address).toPromise();
-      const myLocation = await this.geocodeService.geocode(this.principal.address).toPromise();
-      const x1 = myLocation['lng'];
-      const x2 = otherLocation['lng'];
-      const y1 = myLocation['lat'];
-      const y2 = otherLocation['lat'];
-      return this.calculateDistance(x1, x2, y1, y2);
-    }
+    // async getLngLat(address: string): Promise<number> {
+    //   const otherLocation = await this.geocodeService.geocode(address).toPromise();
+    //   const myLocation = await this.geocodeService.geocode(this.principal.address).toPromise();
+    //   const x1 = myLocation['lng'];
+    //   const x2 = otherLocation['lng'];
+    //   const y1 = myLocation['lat'];
+    //   const y2 = otherLocation['lat'];
+    //   return this.calculateDistance(x1, x2, y1, y2);
+    // }
 
-    getMyLocation() {
-      const address = this.principal.address;
-      if (!this.myLocation) {
-        this.myLocation = this.getLngLat(address);
-      }
-      return this.myLocation;
-    }
+  //   getMyLocation() {
+  //     const address = this.principal.address;
+  //     if (!this.myLocation) {
+  //       this.myLocation = this.getLngLat(address);
+  //     }
+  //     return this.myLocation;
+  //   }
 
-    shuffle(list: DriverCard[]): Array<DriverCard> {
-      let m = list.length, t: DriverCard, i: number;
-      while (m) {
-        i = Math.floor(Math.random() * m--);
-        t = list[m];
-        list[m] = list[i];
-        list[i] = t;
-      }
-      return list;
-  }
+  //   shuffle(list: DriverCard[]): Array<DriverCard> {
+  //     let m = list.length, t: DriverCard, i: number;
+  //     while (m) {
+  //       i = Math.floor(Math.random() * m--);
+  //       t = list[m];
+  //       list[m] = list[i];
+  //       list[i] = t;
+  //     }
+  //     return list;
+  // }
   
   populateProfileImage(dc: DriverCard) {
     this.ds.downloadFile(dc.user.id.toString()).subscribe(b => dc.image = this.ss.bypassSecurityTrustUrl(window.URL.createObjectURL(b)));

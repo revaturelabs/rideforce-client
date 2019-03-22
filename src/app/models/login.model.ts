@@ -4,15 +4,18 @@ import { Office } from './office.model';
 import { Car } from './car.model';
 import { Role } from './role.model';
 import { ContactInfo } from './contact-info.model';
+import { Location } from './location.model';
 
 export class Login implements User {
+    location: Location;
+    registrationToken: string;
     id: number;
     firstName: string;
     lastName: string;
     email: string;
     password: string;
     photoUrl: string;
-    address: string;
+    address: Location;
     office:  Link<Office>;
     batchEnd: any;
     startTime: number;
