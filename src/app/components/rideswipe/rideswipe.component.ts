@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Login } from '../../models/login.model';
+import { User } from '../../models/user.model';
 
 /** Holds the two components for user matching and selects which to display based on whether view is desktop or mobile */
 @Component({
@@ -14,7 +15,7 @@ export class RideswipeComponent implements OnInit {
   /** Whether the view is mobile (Desktop is the default) */
   public mobile = false;
 
-  principal : Login;
+  principal : User;
   /**
    * Sets up a router for managing the Desktop vs mobile component
    * @param {Router} route - Allows Nav compnent to switch between sub-components

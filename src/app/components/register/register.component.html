@@ -12,14 +12,14 @@
                 <!-- First Name Input -->
                 <div class="form-group col-md-6">
                   <label for="firstName">First Name</label>
-                  <input [ngClass]="{ 'is-invalid': fn.invalid && (fn.dirty || fn.touched), 'is-valid': fn.valid }" #fn="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="ur.user.firstName" type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required/>
+                  <input [ngClass]="{ 'is-invalid': fn.invalid && (fn.dirty || fn.touched), 'is-valid': fn.valid }" #fn="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="user.firstName" type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required/>
                   <div *ngIf="!!fn?.errors?.required" class="invalid-feedback">First name cannot be empty.</div>
                   <div *ngIf="!!fn?.errors?.pattern" class="invalid-feedback">First name cannot have any symbols or numbers.</div>
                 </div>
                 <!-- Last Name Input -->
                 <div class="form-group col-md-6">
                   <label for="lastName">Last Name</label>
-                  <input [ngClass]="{ 'is-invalid': ln.invalid && (ln.dirty || ln.touched), 'is-valid': ln.valid }" #ln="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="ur.user.lastName" type="text" class="form-control" name="lastName" id="lastName" placeholder="Doe" required/>
+                  <input [ngClass]="{ 'is-invalid': ln.invalid && (ln.dirty || ln.touched), 'is-valid': ln.valid }" #ln="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="user.lastName" type="text" class="form-control" name="lastName" id="lastName" placeholder="Doe" required/>
                   <div *ngIf="!!ln?.errors?.required" class="invalid-feedback">Last name cannot be empty.</div>
                   <div *ngIf="!!ln?.errors?.pattern" class="invalid-feedback">Last name cannot have any symbols or numbers.</div>
                 </div>
@@ -27,20 +27,20 @@
               <!-- Email Input -->
               <div class="form-group">
                 <label for="email">Email</label>
-                <input [ngClass]="{ 'is-invalid': e.invalid && (e.dirty || e.touched), 'is-valid': e.valid }" #e="ngModel" pattern="[a-zA-z0-9\.]+@[a-zA-z0-9]+\.[a-zA-z0-9.]+" [(ngModel)]="ur.user.email" type="text" class="form-control" name="email" id="email" placeholder="john.doe@example.com" required/>
+                <input [ngClass]="{ 'is-invalid': e.invalid && (e.dirty || e.touched), 'is-valid': e.valid }" #e="ngModel" pattern="[a-zA-z0-9\.]+@[a-zA-z0-9]+\.[a-zA-z0-9.]+" [(ngModel)]="user.email" type="text" class="form-control" name="email" id="email" placeholder="john.doe@example.com" required/>
                 <div *ngIf="!!e?.errors?.required" class="invalid-feedback">Email cannot be empty.</div>
                 <div *ngIf="!!e?.errors?.pattern" class="invalid-feedback">Email must be a valid email.</div>
               </div>
               <!-- Address Input -->
               <div class="form-group">
                 <label for="address">Address</label>
-                <input [(ngModel)]="ur.user.address" (addressSelect)="onAddressSelect($event)" type="text" class="form-control" name="address" id="address" placeholder="Your Address" appPlacesAutocomplete required/>
+                <input [(ngModel)]="user.location.address" (addressSelect)="onAddressSelect($event)" type="text" class="form-control" name="address" id="address" placeholder="Your Address" appPlacesAutocomplete required/>
               </div>
               <!-- Password Input -->
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="password">Password</label>
-                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" [(ngModel)]="ur.user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
+                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" [(ngModel)]="user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
                   <div *ngIf="!!p?.errors?.required" class="invalid-feedback">Password cannot be empty.</div>
                   <div *ngIf="!!p?.errors?.pattern" class="invalid-feedback">Password must be at least 8 characters long, have both a lowercase and uppercase letter, a number, and a special character.</div>
                 </div>
@@ -53,7 +53,7 @@
               <!-- Day Start Input -->
               <div class="form-group">
                 <label for="startTime">Day Start</label>
-                <select class="custom-select my-1 mr-sm-2" name="startTime" id="startTime" [(ngModel)]="ur.user.startTime" required>
+                <select class="custom-select my-1 mr-sm-2" name="startTime" id="startTime" [(ngModel)]="user.startTime" required>
                   <option value="7.5">7:30 AM</option>
                   <option value="8">8:00 AM</option>
                   <option value="8.5">8:30 AM</option>
@@ -65,7 +65,7 @@
               <!-- Registration Token Input -->
               <div class="form-group">
                 <label for="registrationToken">Registration Token</label>
-                <textarea [ngClass]="{ 'is-invalid': !office && tk.touched, 'is-valid': office }" [(ngModel)]="ur.registrationToken" #tk="ngModel" (change)="validateToken()" class="form-control" name="registrationToken" id="registrationToken" placeholder="Registration Token" required></textarea>
+                <textarea [ngClass]="{ 'is-invalid': !office && tk.touched, 'is-valid': office }" [(ngModel)]="user.registrationToken" #tk="ngModel" (change)="validateToken()" class="form-control" name="registrationToken" id="registrationToken" placeholder="Registration Token" required></textarea>
                 <div class="invalid-feedback">Registration token invalid.</div>
               </div>
               <div *ngIf="office" class="form-row">
@@ -77,10 +77,10 @@
                 <!-- Batch End Date Display -->
                 <div class="form-group col-md-6">
                   <label for="batchEndDate">Batch End Date</label>
-                  <input [(ngModel)]="ur.user.batchEnd" type="date" class="form-control" name="batchEndDate" id="batchEndDate" placeholder="Batch End Date" disabled />
+                  <input [(ngModel)]="user.batchEnd" type="date" class="form-control" name="batchEndDate" id="batchEndDate" placeholder="Batch End Date" disabled />
                 </div>
               </div>
-              <button type="button" class="btn btn-primary float-right" (click)="changeTab('tab2')" [disabled]="fn.invalid || ln.invalid || e.invalid || p.invalid || pc.invalid || !ur.user.office">Next</button>
+              <button type="button" class="btn btn-primary float-right" (click)="changeTab('tab2')" [disabled]="fn.invalid || ln.invalid || e.invalid || p.invalid || pc.invalid || !user.office">Next</button>
             </form>
           </ng-template>
         </ngb-tab>
@@ -91,13 +91,13 @@
             <!-- Bio Input -->
             <div class="form-group">
               <label for="aboutYou">Bio</label>
-              <textarea [(ngModel)]="ur.user.bio" class="form-control" name="aboutYou" id="aboutYou" placeholder="Tell me about yourself." required></textarea>
+              <textarea [(ngModel)]="user.bio" class="form-control" name="aboutYou" id="aboutYou" placeholder="Tell me about yourself." required></textarea>
             </div>
             <!-- Role Selection -->
             <label>Role</label>
             <div class="btn-group w-100 mb-3" role="group">
-              <button type="button" class="btn" [ngClass]="ur.user.role === roles.Rider ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Rider)">Rider</button>
-              <button type="button" class="btn" [ngClass]="ur.user.role === roles.Driver ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Driver)">Driver</button>
+              <button type="button" class="btn" [ngClass]="user.role === roles.Rider ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Rider)">Rider</button>
+              <button type="button" class="btn" [ngClass]="user.role === roles.Driver ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Driver)">Driver</button>
             </div>
             <!--
 
@@ -120,7 +120,7 @@
 
             <!-- Contact Info Display -->
             <ul class="list-group">
-              <li *ngFor="let item of ur.user.contactInfo" class="list-group-item d-flex justify-content-between align-items-center">
+              <li *ngFor="let item of user.contactInfo" class="list-group-item d-flex justify-content-between align-items-center">
                 {{ item.info }} <span class="badge badge-primary badge-pill">{{ item.type }}</span>
               </li>
             </ul>
@@ -136,22 +136,22 @@
             <br/>
             <dl class="row">
               <dt class="col-sm-4">Name:</dt>
-              <dd class="col-sm-8">{{ ur.user.firstName }} {{ ur.user.lastName }}</dd>
+              <dd class="col-sm-8">{{ user.firstName }} {{ user.lastName }}</dd>
 
               <dt class="col-sm-4">Email:</dt>
-              <dd class="col-sm-8">{{ ur.user.email }}</dd>
+              <dd class="col-sm-8">{{ user.email }}</dd>
 
               <dt class="col-sm-4">Address:</dt>
-              <dd class="col-sm-8">{{ ur.user.address }}</dd>
+              <dd class="col-sm-8">{{ user.location.address }}</dd>
 
               <dt class="col-sm-4">Role:</dt>
-              <dd class="col-sm-8">{{ ur.user.role }}</dd>
+              <dd class="col-sm-8">{{ user.role }}</dd>
 
               <dt class="col-sm-4">Day Start:</dt>
-              <dd class="col-sm-8">{{ ur.user.startTime }}</dd>
+              <dd class="col-sm-8">{{ user.startTime }}</dd>
 
               <dt class="col-sm-4">Batch End Date:</dt>
-              <dd class="col-sm-8">{{ ur.user.batchEnd | date }}</dd>
+              <dd class="col-sm-8">{{ user.batchEnd | date }}</dd>
 
               <dt class="col-sm-4" *ngIf="office">Office Location:</dt>
               <dd class="col-sm-8" *ngIf="office">
@@ -160,7 +160,7 @@
               </dd>
 
               <dt class="col-sm-4">Bio:</dt>
-              <dd class="col-sm-8">{{ ur.user.bio }}</dd>
+              <dd class="col-sm-8">{{ user.bio }}</dd>
               <!--
               <dt class="col-sm-4">Contact Info:</dt>
               <dd class="col-sm-8">

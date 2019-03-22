@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { User } from '../models/user.model';
 
 /**
  * Allows Users to authenticate themselves with the server
@@ -14,7 +15,7 @@ import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cogn
   providedIn: 'root'
 })
 export class AuthService {
-  private principalSource = new BehaviorSubject(new Login());
+  private principalSource = new BehaviorSubject(new User());
   principal = this.principalSource.asObservable();
   authToken: string;
   /**
@@ -25,7 +26,7 @@ export class AuthService {
    * @param {Router} route - enables navigation between components (does not appear to be used)
    */
   constructor(private http: HttpClient, private route: Router) {
-    const p = new Login();
+    const p = new User();
     p.id = 0;
     this.changePrincipal(p);
   }
@@ -76,7 +77,6 @@ export class AuthService {
     return Observable.create(observer => {
       this.cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
-          // console.log(result);
           observer.next(result);
           observer.complete();
         },
@@ -97,13 +97,12 @@ export class AuthService {
     authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) => {
-        console.log(x.idToken.jwtToken); // printing the token to the console to check
-        this.authToken = x.idToken.jwtToken;
         this.getUserByEmail(email).subscribe(resp => {
           console.log('Retrieved email of user');
-          const l: Login = resp as Login;
+          const l: User = resp as User;
+          l.authToken = x.idToken.jwtToken;
+          this.authToken = l.authToken;
           this.changePrincipal(l);
-          console.log('sending to landing');
           this.route.navigate(['/landing']);
         },
         error => {
@@ -149,6 +148,7 @@ export class AuthService {
             return;
         }
         this.authToken = session.idToken.jwtToken;
+        console.log(this.authToken);
         cognitoUser.getUserAttributes(function(err, attributes) {
             if (err) {
                 // Handle error
@@ -164,8 +164,10 @@ export class AuthService {
               console.log('email:' + email);
               this.getUserByEmail(email).subscribe(resp => {
                 console.log('Retrieved email of user');
-                const l: Login = resp as Login;
-                console.log(l);
+                const l: User = resp as User;
+                l.authToken = session.idToken.jwtToken;
+                this.authToken = l.authToken;
+                // console.log(l);
                 this.changePrincipal(l);
               });
             }
@@ -198,17 +200,18 @@ export class AuthService {
     this.cognitoUser.signOut();
   }
 
-  changePrincipal(p: Login) {
+  changePrincipal(p: User) {
     this.principalSource.next(p);
   }
 
   getAuthToken(): string {
+    console.log("Token is being generated. ");
     return this.authToken;
   }
 
-  getUserByEmail(email: string): Observable<Login> {
+  getUserByEmail(email: string): Observable<User> {
     console.log('getting by email');
-    return this.http.get<Login>(environment.userUrl + '/users', {
+    return this.http.get<User>(environment.userUrl + '/users', {
       params: { email }});
   }
 }

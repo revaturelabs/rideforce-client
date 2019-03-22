@@ -22,7 +22,7 @@ export class LandingComponent implements OnInit {
  */
   role: Role;
 
-  principal: Login;
+  principal: User;
 
   /**
    * Creates the Landing Component
