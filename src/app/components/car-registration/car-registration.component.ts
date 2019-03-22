@@ -53,7 +53,10 @@ export class CarRegistrationComponent implements OnInit {
   cars: Car[];
 
   // booleans for car information buttons
-  btnCarInfo: Number = 0;
+  btnCarInfo: Number = 1;
+
+  //license plate information
+  licensePlate: string = '';
 
   /**
    * Sets up the Car Registration component with dependencies
@@ -63,9 +66,10 @@ export class CarRegistrationComponent implements OnInit {
   constructor(
     private userService: UserControllerService,
     private route: Router
-    ) {
+    )
+  {
 
-   }
+  }
 
   /**
    * Makes sure there is a car object available to operate on
@@ -75,12 +79,13 @@ export class CarRegistrationComponent implements OnInit {
   }
 
 
-  submitAutomobile(make, model, year, color) {
-    console.log(`Make: ${make} Model: ${model} Year: ${year} Color: ${color}`);
+  submitAutomobile(make, model, year, color, licensePlate) {
+    console.log(`Make: ${make} Model: ${model} Year: ${year} Color: ${color} License: ${licensePlate}`);
     this.carMake = make;
     this.carModel = model;
     this.carYear = year;
     this.carColor = color;
+    this.licensePlate = licensePlate;
   }
 
 }

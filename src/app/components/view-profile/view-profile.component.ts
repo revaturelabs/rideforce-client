@@ -254,4 +254,8 @@ export class ViewProfileComponent implements OnInit {
     }
   }
 
+  registerCar(){
+    console.log("im printing kevin");
+    this.router.navigate(['/cars']);
+  }
 }

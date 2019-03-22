@@ -6,7 +6,7 @@
     <br>
   </div>
   <div>
-    <form>
+    <form id='carForm'>
       <div class="form-group">
         <label for="Make">Make</label>
         <br>
@@ -23,9 +23,14 @@
         <label for="color">Color</label>
         <br>
         <input type="text" class="form-control" id="formColor" placeholder="Color" #carColor>
+        <br>
+        <label for="licensePlate">License Plate</label>
+        <br>
+        <input type="text" class="form-control" id="formLicensePlate" placeholder="LicensePlate" #carLicense>
+        <br>
       </div>
-          <br>
-    <button (click)="submitAutomobile(carMake.value, carModel.value, carYear.value, carColor.value)">Register Car</button>
+    <button type='submit' value ='Submit' form='carForm'
+    (click)="submitAutomobile(carMake.value, carModel.value, carYear.value, carColor.value)">Register Car</button>
     </form>
     <!-- Development Purposes
     <br>
