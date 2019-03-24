@@ -48,7 +48,7 @@ export class ViewProfileComponent implements OnInit {
   active: string;
   existingBio: string;
   existingBioStatus: boolean = false;
-  principal: Login;
+  principal: User;
   currentState: string;
   /** Holds the list of all users in the system */
   users: any[];
@@ -76,9 +76,10 @@ export class ViewProfileComponent implements OnInit {
         this.firstName = this.principal.firstName;
         this.lastName = this.principal.lastName;
         this.username = this.principal.email;
-        this.address2 = this.principal.address;
+        this.address2 = this.principal.location.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
-        //this.getOffices();
+        this.getOffices();
+        
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
@@ -118,7 +119,7 @@ export class ViewProfileComponent implements OnInit {
   submitChanges() {
     this.principal.firstName = this.firstName;
     this.principal.lastName = this.lastName;
-    this.principal.address = this.address2;
+    // this.principal.address = this.address2;
     // this.principal.startTime = this.startTime(); //Need this, but currently no value
     this.authService.changePrincipal(this.principal);
     this.userService.update().then();

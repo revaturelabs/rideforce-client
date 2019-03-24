@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
    */
   currentUser: User;
 
-  principal: Login;
+  principal: User;
 
   /**
    * Sets up the Login compoennt with dependency injection

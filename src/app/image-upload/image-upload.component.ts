@@ -4,6 +4,7 @@ import { Login } from '../models/login.model';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
 import bsCustomFileInput from 'bs-custom-file-input';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-image-upload',
@@ -13,7 +14,7 @@ import bsCustomFileInput from 'bs-custom-file-input';
 export class ImageUploadComponent implements OnInit {
   selectedFile: File = null;
   imageUploadProgress: string = '0';
-  principal: Login;
+  principal: User;
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.auth.principal.subscribe(user => {
