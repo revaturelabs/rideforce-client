@@ -140,15 +140,11 @@ export class UsermatchwebComponent implements OnInit {
           e => {
             console.log('error getting match Drivers!');
             console.log(e);
-          }
-        }, e => {
-          console.log('error getting match Drivers!');
-          console.log(e);
-        });
+          });
       }, e => {
         console.log('error getting user (matching service)!');
         console.log(e);
-      });
+      })
     });
   }
 
