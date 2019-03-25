@@ -50,8 +50,19 @@ export class CarRegistrationComponent implements OnInit {
 
 
   submitAutomobile() {
-    console.log(`Make: ${this.carObject.make} Model: ${this.carObject.model} Year: ${this.carObject.year} Color: ${this.carObject.color} License: ${this.carObject.license}`);
-    this.http.post<Car>(environment.userUrl + '/cars', this.carObject);
+    console.log(`Make: ${this.carObject.make} 
+                  Model: ${this.carObject.model} 
+                  Year: ${this.carObject.year} 
+                  Color: ${this.carObject.color} 
+                  License: ${this.carObject.license}`);
+    this.userService.getCurrentUser().subscribe(e => {
+      this.userObject = e;
+      console.log(JSON.parse(JSON.stringify(e)));
+      this.carObject.owner = ("/users/" + e.id);
+
+      console.log(this.carObject);
+      this.http.post<Car>(environment.userUrl + '/cars', this.carObject).subscribe();
+    });
   }
 
 }
