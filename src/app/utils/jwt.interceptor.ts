@@ -32,7 +32,6 @@ principal: User;
   ): Observable<HttpEvent<any>> {
     //console.log("inter")
     const token = this.auth.getAuthToken();
-    console.log("This is the token being sendt to the request: " + token);
     if (token != null) {
       request = request.clone({
         setHeaders: {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- 
   3/21/2019
   Who in the previous batch thought it was a good idea to do all this inline CSS??? 
@@ -10,6 +11,10 @@
 
 <div class="container">
   <div class="dropdown">
+=======
+<div class="container" style="padding-top:40px">
+  <!-- <div class="dropdown">
+>>>>>>> 3fb8d21684c7cef1fa3382bca59b2924c28bc719
     <p class="" id="dropdownSettingsButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Filter <i class="fas fa-filter"></i>
     </p>
@@ -19,6 +24,7 @@
       Batch End Date <br>
       <input type="checkbox" [(ngModel)]="filterStartTime" (change)="sortDrivers('startTime')" checked />
       Day Start Time <br>
+<<<<<<< HEAD
       <input type="checkbox" [(ngModel)]="filterDistance" (change)="sortDrivers('distance')" checked />
       Distance <br>
       <!-- 
@@ -26,8 +32,13 @@
         Apparently they wanted a filter dropdown? 
       -->
       <!--button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>-->
+=======
+      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterDistance" (change)="sortDrivers('distance')" checked="true" />
+      Distance <br>
+      <button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>
+>>>>>>> 3fb8d21684c7cef1fa3382bca59b2924c28bc719
     </div>
-  </div>
+  </div> -->
 
 
   <h2>Potential Matches </h2>

@@ -91,16 +91,16 @@ export class UsermatchwebComponent implements OnInit {
    * Sets up the component by populating the list of possible matches for the current user
    */
   ngOnInit() {
+    console.clear();
     this.auth.principal.subscribe(user => {
       this.principal = user;
-    if (this.principal.id < 1) {
-      this.route.navigate(['/landing']);
-    }
-    this.spinner.show();
-    this.loading = true;
-    console.log('Loading: ' + this.loading);
-    this.userService.getCurrentUser().subscribe(
-      data => {
+      if (this.principal.id < 1) {
+        this.route.navigate(['/landing']);
+      }
+      this.spinner.show();
+      this.loading = true;
+      console.log('Loading: ' + this.loading);
+      this.userService.getCurrentUser().subscribe(data => {
         this.currentUser = data;
 
         let userLinks: Link<User>[] = null;
@@ -140,15 +140,12 @@ export class UsermatchwebComponent implements OnInit {
           e => {
             console.log('error getting match Drivers!');
             console.log(e);
-          }
-        );
-      },
-      e => {
+          });
+      }, e => {
         console.log('error getting user (matching service)!');
         console.log(e);
-      }
-    );
-  });
+      })
+    });
   }
 
   /**

@@ -1,10 +1,10 @@
 import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Login } from '../models/login.model';
-import { AuthService } from '../services/auth.service';
-import { environment } from '../../environments/environment';
+import { Login } from '../../models/login.model';
+import { AuthService } from '../../services/auth.service';
+import { environment } from '../../../environments/environment';
 import bsCustomFileInput from 'bs-custom-file-input';
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-image-upload',
