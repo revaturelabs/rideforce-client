@@ -122,7 +122,8 @@ export class RegisterComponent implements OnInit {
    * @param address the address to set for the user.
    */
   onAddressSelect(address: string) {
-    this.zone.run(() => (this.ur.user.address = address));
+    this.zone.run(() => (this.user.location.address = address));
+    this.populateLocation();
   }
 
   /**
