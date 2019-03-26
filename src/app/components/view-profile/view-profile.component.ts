@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Login } from '../../models/login.model';
 import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
+import { Location } from '../../models/location.model';
 import { Component, OnInit } from '@angular/core';
 import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
@@ -44,6 +45,7 @@ export class ViewProfileComponent implements OnInit {
   officeObjectArray: Office[] = [];
   /** Current office being examined */
   officeObject: Office;
+  officeAddress: string;
   /** User's active state */
   active: string;
   existingBio: string;
@@ -55,6 +57,7 @@ export class ViewProfileComponent implements OnInit {
   /** Holds the list of users filtered with search query */
   filteredUsers: any[];
   result: boolean;
+  location : Location;
 
   /**
    * Sets up the component with the User Service injected
@@ -76,9 +79,14 @@ export class ViewProfileComponent implements OnInit {
         this.firstName = this.principal.firstName;
         this.lastName = this.principal.lastName;
         this.username = this.principal.email;
+        this.location = this.location;
         this.address2 = this.principal.location.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
-        this.getOffices();
+
+        
+
+        //this.getOffice();
+
         
         this.getRole();
         this.getState();
@@ -119,7 +127,6 @@ export class ViewProfileComponent implements OnInit {
   submitChanges() {
     this.principal.firstName = this.firstName;
     this.principal.lastName = this.lastName;
-    // this.principal.address = this.address2;
     // this.principal.startTime = this.startTime(); //Need this, but currently no value
     this.authService.changePrincipal(this.principal);
     this.userService.update().then();
@@ -162,6 +169,18 @@ export class ViewProfileComponent implements OnInit {
     this.userService.getAllOffices().subscribe(data => {
       this.officeObjectArray = data;
     });
+  }
+
+  getOffice(){
+    this.userService.getOfficeByLink(this.principal.office).subscribe( data =>{
+      if(data){
+        var address = data.address;
+        this.officeAddress = address;
+        console.log(data.address);
+        console.log(this.officeAddress);
+      }
+    });
+    console.log(this.officeAddress);
   }
 
   /**
