@@ -42,17 +42,14 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="password">Password</label>
-                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" [(ngModel)]="user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
+                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,})" [(ngModel)]="user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
                   <div *ngIf="!!p?.errors?.required" class="invalid-feedback">Password cannot be empty.</div>
                   <div *ngIf="!!p?.errors?.pattern" class="invalid-feedback">Password must be at least 8 characters
                     long, have both a lowercase and uppercase letter, a number, and a special character.</div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="confirmPassword">Confirm Password</label>
-                  <input [ngClass]="{ 'is-invalid': pc.invalid && (pc.dirty || pc.touched), 'is-valid': pc.valid }"
-                    [pattern]="ur.user.password" #pc="ngModel" [(ngModel)]="passwordConfirm" type="password"
-                    class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"
-                    required />
+                  <input [ngClass]="{ 'is-invalid': pc.invalid && (pc.dirty || pc.touched), 'is-valid': pc.valid }" [pattern]="user.password" #pc="ngModel" [(ngModel)]="passwordConfirm" type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required/>
                   <div class="invalid-feedback">Password doesn't match.</div>
                 </div>
               </div>

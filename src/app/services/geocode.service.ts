@@ -13,7 +13,7 @@ import { Location } from '../models/location.model';
 })
 export class GeocodeService {
 
-  endpoint: string = environment.mapUrl + '/location/?address=';
+  endpoint: string = environment.mapUrl + '/address';
 
   /**
    * Sets up the Service with a Google Maps object
@@ -35,8 +35,8 @@ export class GeocodeService {
 
   //Get the location of a given address model and populate the lat/lon
   getlocation(location: Location): Observable<Location> {
-    let refractoredAddress = location.address.substr(0, location.address.length- 3);
-    console.log(refractoredAddress);
-    return this.http.get<Location>(this.endpoint + refractoredAddress);
+    // let refractoredAddress = location.address.substr(0, location.address.length- 3);
+    // console.log(refractoredAddress);
+    return this.http.post<Location>(this.endpoint, location);
   }
 }
