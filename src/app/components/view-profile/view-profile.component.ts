@@ -56,6 +56,8 @@ export class ViewProfileComponent implements OnInit {
   filteredUsers: any[];
   result: boolean;
 
+  startTime: number ;
+
   /**
    * Sets up the component with the User Service injected
    * @param userService - Allows the component to work with the user service (for updating)
@@ -80,11 +82,15 @@ export class ViewProfileComponent implements OnInit {
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
         this.getOffices();
         
+        this.startTime = this.principal.startTime;
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
       }
     });
+    this.getOffice();
+    console.log(this.officeObject);
+    console.log(this.principal);
   }
 
   /**
@@ -162,6 +168,12 @@ export class ViewProfileComponent implements OnInit {
     this.userService.getAllOffices().subscribe(data => {
       this.officeObjectArray = data;
     });
+  }
+
+  getOffice() {
+    this.userService.getOfficeByLink(this.principal.office).subscribe(data => {
+      this.officeObject = data;
+    })
   }
 
   /**
