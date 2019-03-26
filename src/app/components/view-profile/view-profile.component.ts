@@ -88,7 +88,10 @@ export class ViewProfileComponent implements OnInit {
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
+
         
+        //loads the first car. done this way because original batch made car-user relationship a 1 to many
+        //should've been a one to one
         console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
 
         this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe( e => {
