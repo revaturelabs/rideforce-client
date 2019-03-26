@@ -1,52 +1,91 @@
-<div class="container" style="padding-top:40px">
-  <div class="dropdown">
+<!-- 
+  3/21/2019
+  Who in the previous batch thought it was a good idea to do all this inline CSS??? 
+  WHO??!?! I suppose I'll go do some clean up of this code...as much as I can anyway.
+  - A message from Henry He of Batch 1901-Jan-22
+
+  3/21/2019
+  Cleaned up most of the inline CSS and placed them over in usermatchweb.component.css.
+-->
+
+<div class="container">
+  <!-- <div class="dropdown">
     <p class="" id="dropdownSettingsButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Filter <i class="fas fa-filter"></i>
     </p>
     <img src="" alt="" id="filter">
     <div class="dropdown-menu dropdown-menu-right" id="ddMenu2" aria-labelledby="dropdownMenuButton">
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterBatchEnd" (change)="sortDrivers('batchEnd')" checked />
+      <input type="checkbox" [(ngModel)]="filterBatchEnd" (change)="sortDrivers('batchEnd')" checked />
       Batch End Date <br>
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterStartTime" (change)="sortDrivers('startTime')" checked />
+      <input type="checkbox" [(ngModel)]="filterStartTime" (change)="sortDrivers('startTime')" checked />
       Day Start Time <br>
-      <input style="margin-left: 20px" type="checkbox" [(ngModel)]="filterDistance" (change)="sortDrivers('distance')" checked />
+      <input type="checkbox" [(ngModel)]="filterDistance" (change)="sortDrivers('distance')" checked />
       Distance <br>
-      <!--button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>-->
+
+        the commented button below seems to have been left from the last batch. 
+        Apparently they wanted a filter dropdown? 
+      <button class="btn" style="margin-left: 20px" type="button" (click)="filter()">Submit</button>
     </div>
-  </div>
+  </div> -->
 
 
   <h2>Potential Matches </h2>
   <div>
-    <ngx-spinner bdColor="rgba(51,51,51,0)" size="large" color="#fa971a" type="square-jelly-box"></ngx-spinner>
+    <!-- ngx-spinner is the loading page, or the squishy square you see... -->
+    <ngx-spinner 
+      bdColor="rgba(51,51,51,0)" size="large" 
+      color="#fa971a" type="square-jelly-box">
+    </ngx-spinner>
   </div>
-  <div class="grid-container">
-    <div *ngFor="let user of sortedUsers; let i = index" style="background-color:rgba(255, 255, 255, 0.918)">
-      <div class="enlarge">
-        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item sliding-card"
-          [ngStyle]="{ 'background-color': user.choose == 'none' ?
-      'white' : user.choose == 'liked' ? '#92badd' : 'rgba(128, 128, 128, 0.514)'}">
+  <div class="flex-container">
+    <div class="user" *ngFor="let user of sortedUsers; let i = index">
+      <div class="card">
+        <!-- 
+          the ngStyle below changes the card background and includes another icon
+          WHEN the user clicks on the check/like icon.
+
+          Still not entirely sure what @flip and @flip.done does...
+          Appears it binds the user card to flip animation in the ts file?
+        -->
+        <div 
+          [@flip]="user.face" (@flip.done)="endFlipCard(user)" 
+          class="flex-item sliding-card"
+          [ngStyle]="{ 'background-color': user.choose == 'none' ? 'white' : user.choose == 'liked' ? '#92badd' : 'rgba(128, 128, 128, 0.514)'}"
+        >
+          <!-- the ngIf below checks the state of the user object to play the proper animations -->
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <img class="card-img-top cardimg" [src]="user.image" alt="Card image cap" (click)="flipCard(user)">
-            <div class="card-body">
+            <div class="card-body-front">
+              <!-- 
+                Well, I have no idea how the first user and second user are different. 
+                Attempting to just have 'user.firstname' and 'user.lastname' means it doesn't show up.
+              -->
               <h6 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h6>
               <br>
-              <div style="display: flex; justify-content: space-between;">
+              <div class="approval-icons">
                 <button *ngIf="user.choose!='disliked'" class="dislike" (click)="like(i, 0)"></button>
                 <button *ngIf="user.choose=='disliked'" class="trashButton" (click)="like(i, 2)"></button>
                 <button *ngIf="user.choose!='none'" class="undoButton" (click)="like(i, 3)"></button>
                 <button type="button" class="like" (click)="like(i, 1)"></button>
-
               </div>
             </div>
           </div>
           <div *ngIf="user.face=='back' || user.face=='back-front'" (click)="flipCard(user)" style="overflow: auto">
-            <div class="card-body" style="transform: rotateY(180deg); overflow:auto">
-              <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
+            <div class="card-body-back" style="transform: rotateY(180deg); overflow:auto">
+              <!-- 
+                For some odd reason, changing those h5 tags to p tags make some components
+                unavailable for view. I think I'll get back to fixing this later...
+                and definitely implement a pipe to automatically add a new line after
+                a certain length.
+              -->
+              <h5 class="card-title"><b>{{user.user.firstName}} {{user.user.lastName}}</b></h5>
               <p class="card-text">{{user.user.address}}</p>
               <h5 class="card-text">{{user.user.email}}</h5>
               <h5 class="card-text">{{user.user.batchEnd | date}}</h5>
-              <!-- Later should be made into a dropdown menu for better viewing -->
+              <!-- 
+                Later should be made into a dropdown menu for better viewing
+                (this comment is left by last batch)
+              -->
               <!-- <ul>
                 <li *ngFor="let contact of user.user.contactInfo"><a class="dropdown">{{contact.type}}: {{contact.info}}</a></li>
               </ul> -->

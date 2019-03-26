@@ -131,8 +131,8 @@ export class AuthService {
             }
           }
         }
-        console.log('before return: ' + e.message);
-        return e.message;
+      console.log('before return: ' + e.message);
+      return e.message;
       }
     );
   }

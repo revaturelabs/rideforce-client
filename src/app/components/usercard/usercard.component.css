@@ -45,11 +45,11 @@
   background-size: cover;
 }
 
-@media screen and (min-width: 1025px) {
-  .cardImg {
-    height: 400px;
-    width: 30%
-  }
+@media screen and (min-width: 1025px){
+    .cardImg {
+        height: 400px;
+        width: 30%
+    }
 }
 
 

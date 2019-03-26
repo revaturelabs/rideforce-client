@@ -39,4 +39,21 @@
       </div>
     </div>
   </footer>
+
+  <style>
+  /* 
+    Still not sure why the footer above is not a component...
+    nor do I understand WHY these people love their inline CSS.
+
+    CSS code below forces the footer to the bottom of a mobile device.
+  */
+  @media only screen and (max-width:530px) {
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100vw;
+      height: 200px;
+    }
+  }
+  </style>
 </html>
