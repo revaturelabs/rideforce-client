@@ -44,7 +44,7 @@ export class ViewUsersComponent implements OnInit {
   active: string;
   userId: number;
   userStatus: string;
-  principal: Login;
+  principal: User;
   currentRole: Role;
   currentState: string;
 
