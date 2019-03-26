@@ -1,12 +1,15 @@
 import { Router } from '@angular/router';
+import { NgZone } from '@angular/core';
 import { Login } from '../../models/login.model';
 import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
+import { Location } from '../../models/location.model';
 import { Component, OnInit } from '@angular/core';
 import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
 import { ContactInfo } from '../../models/contact-info.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { GeocodeService } from '../../services/geocode.service';
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -34,7 +37,7 @@ export class ViewProfileComponent implements OnInit {
   /** The new password of the user, used to confirm User knows the password (hooked to form item in html) */
   confirmPassword: string;
   /** The address of the user (hooked to form item in html) */
-  address2: string;
+  address: string;
   /** The day the User's batch ends*/
   batchEnd: any;
   contactInfoArray: ContactInfo[] = [];
@@ -44,6 +47,7 @@ export class ViewProfileComponent implements OnInit {
   officeObjectArray: Office[] = [];
   /** Current office being examined */
   officeObject: Office;
+  officeAddress: string;
   /** User's active state */
   active: string;
   existingBio: string;
@@ -55,15 +59,15 @@ export class ViewProfileComponent implements OnInit {
   /** Holds the list of users filtered with search query */
   filteredUsers: any[];
   result: boolean;
-
-  startTime: number ;
+  location : Location;
 
   /**
    * Sets up the component with the User Service injected
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService, private authService: AuthService, private router: Router) {
+  constructor(private userService: UserControllerService, private authService: AuthService,
+    private locationService: GeocodeService, private zone: NgZone, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -78,19 +82,20 @@ export class ViewProfileComponent implements OnInit {
         this.firstName = this.principal.firstName;
         this.lastName = this.principal.lastName;
         this.username = this.principal.email;
-        this.address2 = this.principal.location.address;
+        this.location = this.location;
+        this.address = this.principal.location.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
-        this.getOffices();
+
         
-        this.startTime = this.principal.startTime;
+
+        //this.getOffice();
+
+        
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
       }
     });
-    this.getOffice();
-    console.log(this.officeObject);
-    console.log(this.principal);
   }
 
   /**
@@ -125,13 +130,36 @@ export class ViewProfileComponent implements OnInit {
   submitChanges() {
     this.principal.firstName = this.firstName;
     this.principal.lastName = this.lastName;
-    // this.principal.address = this.address2;
+    /* if (this.address2 != this.principal.location.address){
+      this.principal.location.address = this.address2;
+      this.locationService.getlocation(this.principal.location).subscribe(data => {
+        console.log(data);
+        this.principal.location = data;
+      });
+    } */
     // this.principal.startTime = this.startTime(); //Need this, but currently no value
     this.authService.changePrincipal(this.principal);
     this.userService.update().then();
     this.authService.changePrincipal(this.principal);
     // debug console.log("routing");
     this.router.navigate(['userProfile']);
+  }
+
+   /**
+   * Sets the users address.
+   * @param address the address to set for the user.
+   */
+  onAddressSelect(address: string) {
+    this.zone.run(() => (this.principal.location.address = address));
+    this.populateLocation();
+  }
+
+  //Populate user location by finding the latitude and logitude via Maps service. 
+  populateLocation() {
+    this.locationService.getlocation(this.principal.location).subscribe(data => {
+      console.log(data);
+      this.principal.location = data;
+    });
   }
 
   /**
@@ -170,10 +198,16 @@ export class ViewProfileComponent implements OnInit {
     });
   }
 
-  getOffice() {
-    this.userService.getOfficeByLink(this.principal.office).subscribe(data => {
-      this.officeObject = data;
-    })
+  getOffice(){
+    this.userService.getOfficeByLink(this.principal.office).subscribe( data =>{
+      if(data){
+        var address = data.address;
+        this.officeAddress = address;
+        console.log(data.address);
+        console.log(this.officeAddress);
+      }
+    });
+    console.log(this.officeAddress);
   }
 
   /**
