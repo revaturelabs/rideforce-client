@@ -127,6 +127,9 @@ export class ViewProfileComponent implements OnInit {
   submitChanges() {
     this.principal.firstName = this.firstName;
     this.principal.lastName = this.lastName;
+    if (this.address2 != this.principal.location.address){
+      
+    }
     // this.principal.startTime = this.startTime(); //Need this, but currently no value
     this.authService.changePrincipal(this.principal);
     this.userService.update().then();
