@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 import { ContactInfo } from '../../models/contact-info.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { GeocodeService } from '../../services/geocode.service';
+import { CustomtimePipe} from '../../pipes/customtime.pipe';
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -60,6 +61,8 @@ export class ViewProfileComponent implements OnInit {
   filteredUsers: any[];
   result: boolean;
   location : Location;
+  startTime : Date;
+  pipe : CustomtimePipe = new CustomtimePipe();
 
   /**
    * Sets up the component with the User Service injected
@@ -85,7 +88,8 @@ export class ViewProfileComponent implements OnInit {
         this.location = this.location;
         this.address = this.principal.location.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
-
+        this.startTime = this.pipe.transform(this.principal.startTime);
+        console.log(this.startTime);
         
 
         //this.getOffice();
@@ -108,8 +112,8 @@ export class ViewProfileComponent implements OnInit {
     // document.getElementById("password").removeAttribute("disabled");
     // document.getElementById("confirmPassword").removeAttribute("disabled");
     document.getElementById('address').removeAttribute('disabled');
-    document.getElementById('batchEnd').removeAttribute('disabled');
-    document.getElementById('dayStart').removeAttribute('disabled');
+    //document.getElementById('batchEnd').removeAttribute('disabled');
+    //document.getElementById('dayStart').removeAttribute('disabled');
     document.getElementById('switchRoles').removeAttribute('hidden');
     // Had to put this in an if; Page would break if Admin or Trainer clicked edit
     // Since for them, this button didn't exist to make visible
@@ -121,7 +125,7 @@ export class ViewProfileComponent implements OnInit {
     // document.getElementById("batchEnd").setAttribute("type", "date");
     // document.getElementById("currentOffice").style.display = "none";
     // document.getElementById("selectOffice").style.display = "inline";
-    document.getElementById('errorMessage').removeAttribute('hidden');
+    //document.getElementById('errorMessage').removeAttribute('hidden');
   }
 
   /**

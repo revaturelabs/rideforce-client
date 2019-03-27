@@ -11,6 +11,9 @@ import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FirstModule } from './first/first.module';
+import { CustomtimePipe } from './pipes/customtime.pipe';
+
+
 
 /**
  * Loads all necessary modules for the first contentful paint
@@ -21,7 +24,8 @@ import { FirstModule } from './first/first.module';
     AppComponent,
     LandingComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    CustomtimePipe
   ],
   imports: [
     FirstModule,

@@ -96,11 +96,11 @@
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Starting Time {{ startTime }}</span>
+                  <span class="input-group-text" id="basic-addon1">Starting Time</span>
                 </div>
-                <input type="time" id="dayStart" class="form-control" [(ngModel)]="startTime" disabled>
+                <input type="text" id="dayStart" class="form-control" value= "{{startTime | date:'shortTime'}}" disabled> 
               </div>
-
+            
               <div id="switchRoles" hidden>
                 <button *ngIf="currentRole === 'DRIVER'" class="btn btn-secondary" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
                 <button *ngIf="currentRole === 'RIDER'" class="btn btn-secondary" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
