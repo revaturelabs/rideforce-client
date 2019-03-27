@@ -77,7 +77,6 @@ export class AuthService {
     return Observable.create(observer => {
       this.cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
-          console.log("Result from cognito stuff " + JSON.stringify(result));
           observer.next(result);
           observer.complete();
         },
@@ -98,14 +97,12 @@ export class AuthService {
     authenticate(email: string, password: string, usePromise?: boolean) {
     this.authenticator(email, password).then(
       (x) => {
-        console.log("This is a token: " + x.idToken.jwtToken); // printing the token to the console to check
         this.getUserByEmail(email).subscribe(resp => {
           console.log('Retrieved email of user');
           const l: User = resp as User;
           l.authToken = x.idToken.jwtToken;
           this.authToken = l.authToken;
           this.changePrincipal(l);
-          console.log('sending to landing with ' + JSON.stringify(l));
           this.route.navigate(['/landing']);
         },
         error => {
@@ -134,8 +131,8 @@ export class AuthService {
             }
           }
         }
-        console.log('before return: ' + e.message);
-        return e.message;
+      console.log('before return: ' + e.message);
+      return e.message;
       }
     );
   }
