@@ -34,7 +34,7 @@ export class ViewProfileComponent implements OnInit {
   /** The new password of the user, used to confirm User knows the password (hooked to form item in html) */
   confirmPassword: string;
   /** The address of the user (hooked to form item in html) */
-  address: string;
+  _address: string;
   /** The day the User's batch ends*/
   batchEnd: any;
   contactInfoArray: ContactInfo[] = [];
@@ -79,7 +79,7 @@ export class ViewProfileComponent implements OnInit {
         this.firstName = this.principal.firstName;
         this.lastName = this.principal.lastName;
         this.username = this.principal.email;
-        this.address = this.principal.location.address;
+        this._address = this.principal.location.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
         this.getOffices();
         

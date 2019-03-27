@@ -78,7 +78,7 @@
                   <span class="input-group-text" id="basic-addon1">Address</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-                  appPlacesAutocomplete (addressSelect)="onAddressSelect($event)" [(ngModel)]="principal.location.address" #address="ngModel"
+                  appPlacesAutocomplete (addressSelect)="onAddressSelect($event)" [(ngModel)]="_address" #address="ngModel"
                   required id="address" placeholder="Type to search.." disabled>
               </div>
               <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
