@@ -369,8 +369,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
               
               
              
-              this.ll = coordinates.latitude; 
-              this.lg = coordinates.longitude;
+              // this.ll = coordinates.latitude; 
+              // this.lg = coordinates.longitude;
 
               this.events = coordinates
               console.log(coordinates); 
