@@ -54,6 +54,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   longitude: any;
   /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
+  
 
   //Styles
   styles: any = null;
@@ -174,9 +175,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Sets up the Map
    * @param {GoogleMap.maps.Map} map - the Google Map to set
    */
-  protected mapReady(map) {
-    this.map = map;
-  }
+  // protected mapReady(map) {
+  //   this.map = map;
+  // }
 
   /**
    * retrieves the selected user
@@ -192,85 +193,102 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   addresses: string[] = ["9416 wooded glen avenue", "1099 godfrey road", "11740 Plaza America Dr", "829 East Sage Road"];
 
+ 
+
+
   ngOnInit() {
-    this.auth.principal.subscribe(user => {
-      this.principal = user;
-      if (this.principal.id < 1)
-        this.route.navigate(["/landing"]);
-      this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
-      this.hsong.loop = true;
-      this.hsong.load();
-      this.csong.src = 'assets/audio/EndTitle.mp3';
-      this.csong.loop = true;
-      this.csong.load();
-      this.userService.getCurrentUser().subscribe(
-        data => {
-          this.currentUser = data;
-          this.mapService.getDistance(data.location.address).subscribe(
-            coordinates => {
-              console.log("setting center good sir");
-              this.currentLat = coordinates.latitude;
-              this.currentLong = coordinates.longitude;
-            });
-          console.log('User data from current user (Service) called by Map component');
-          console.log(data);
-          let userLinks: Link<User>[] = null;
-          this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
-            data2 => {
-              userLinks = data2;
-              for (let i = 0; i < userLinks.length; i++) {
+    // this.auth.principal.subscribe(user => {
+    //   this.principal = user;
+    //   if (this.principal.id < 1)
+    //     this.route.navigate(["/landing"]);
+    //   this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
+    //   this.hsong.loop = true;
+    //   this.hsong.load();
+    //   this.csong.src = 'assets/audio/EndTitle.mp3';
+    //   this.csong.loop = true;
+    //   this.csong.load();
+    //   this.userService.getCurrentUser().subscribe(
+    //     data => {
+    //       this.currentUser = data;
+    //       this.mapService.getDistance(data.location.address).subscribe(
+    //         coordinates => {
+    //           console.log("setting center good sir");
+    //           this.currentLat = coordinates.latitude;
+    //           this.currentLong = coordinates.longitude;
+    //         });
+    //       console.log('User data from current user (Service) called by Map component');
+    //       console.log(data);
+    //       let userLinks: Link<User>[] = null;
+    //       this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
+    //         data2 => {
+    //           userLinks = data2;
+    //           for (let i = 0; i < userLinks.length; i++) {
 
-                this.matchService.getFromLink(userLinks[i]).subscribe(
-                  data3 => {
-                    if (!data3.photoUrl || data3.photoUrl === 'null') {
-                      data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
-                    }
-                    const marker: any = {
-                      user: data3,
-                      icon: {
-                        url: data3.photoUrl,
-                        scaledSize: {
-                          width: 30,
-                          height: 30
-                        }
-                      },
-                      location: {
-                        latitude: 0,
-                        longitude: 0
-                      },
-                      opacity: .92
-                    };
+    //             this.matchService.getFromLink(userLinks[i]).subscribe(
+    //               data3 => {
+    //                 if (!data3.photoUrl || data3.photoUrl === 'null') {
+    //                   data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
+    //                 }
+    //                 const marker: any = {
+    //                   user: data3,
+    //                   icon: {
+    //                     url: data3.photoUrl,
+    //                     scaledSize: {
+    //                       width: 30,
+    //                       height: 30
+    //                     }
+    //                   },
+    //                   location: {
+    //                     latitude: 0,
+    //                     longitude: 0
+    //                   },
+    //                   opacity: .92
+    //                 };
 
-                    this.mapService.getDistance(data3.address).subscribe(
-                      data4 => {
-                        this.addDriverMarkers(data4);
-                      },
-                      e => {
-                        console.log('error getting distance!');
-                        console.log(e);
-                      }
-                    );
-                    // Sets the current swipe card to the first element of the array if the array has something in it.
-                  },
-                  e => {
-                    console.log('error getting match user (Map component)!');
-                    console.log(e);
-                  }
-                );
-              }
-            },
-            e => {
-              console.log('error getting match drivers (Map Component)!');
-              console.log(e);
-            }
-          );
-        },
-        e => {
-          console.log('error getting current user (Map Component)!');
-          console.log(e);
-        }
-      );
-      this.findMe();
+    //                 this.mapService.getDistance(data3.address).subscribe(
+    //                   data4 => {
+    //                     this.addDriverMarkers(data4);
+    //                   },
+    //                   e => {
+    //                     console.log('error getting distance!');
+    //                     console.log(e);
+    //                   }
+    //                 );
+    //                 // Sets the current swipe card to the first element of the array if the array has something in it.
+    //               },
+    //               e => {
+    //                 console.log('error getting match user (Map component)!');
+    //                 console.log(e);
+    //               }
+    //             );
+    //           }
+    //         },
+    //         e => {
+    //           console.log('error getting match drivers (Map Component)!');
+    //           console.log(e);
+    //         }
+    //       );
+    //     },
+    //     e => {
+    //       console.log('error getting current user (Map Component)!');
+    //       console.log(e);
+    //     }
+    //   );
+    //   this.findMe();
+    // })
+
+    
+
+    this.mapService.getLocation().subscribe(data => {
+      //console.log(data); 
+      this.lat = data.latitude; 
+      this.lng = data.longitude;
+      
+      this.events = [{ 
+        latitude: this.lat, 
+        longitude: this.lng, 
+        
+      }];
     })
     }
 
@@ -296,6 +314,81 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       center: { lat: latitude, lng: longitude },
       zoom: 8
     });
+  }
+
+  labelOptions = {
+
+    color: 'blue',
+
+    fontFamily: '',
+
+    fontSize: '14px',
+
+    fontWeight: 'bold',
+
+    text: 'You Are Here!',
+
+  }  
+
+  customMap: any;
+  mapReady(event: any){
+    this.customMap = event;
+    this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('festivals'));
+    // this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('sports'));
+    // this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('nights'));
+    // this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('concerts'));
+
+
+  }
+
+  events: any; 
+  lat: any; 
+  lng: any; 
+  ll:any;
+  lg: any; 
+
+  festivalClicked(){
+    this.getEvents();
+    console.log('clicked'); 
+  }
+
+  getEvents(){
+
+
+
+  
+     
+      this.userService.getCurrentUser().subscribe(
+        data => {
+          this.currentUser = data;
+          this.mapService.getDistance(this.currentUser.location).subscribe(
+
+
+            coordinates => {
+
+              
+              
+             
+              // this.ll = coordinates.latitude; 
+              // this.lg = coordinates.longitude;
+
+              this.events = coordinates
+              console.log(coordinates); 
+              console.log('Everything in events' + this.events); 
+              console.log("setting center good sir");
+             
+              }
+
+
+
+            );
+
+          
+        }
+       
+      );
+    
+
   }
 
 

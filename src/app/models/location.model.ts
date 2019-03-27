@@ -5,9 +5,9 @@ export class Location {
 
     //If needed, a second address line can be used. 
     address: string;
-    address2?: string;
+    //address2?: string;
     city: string;
-    state: string;
+    stateCode: string;
     zip: string;
     latitude: number;
     longitude: number;

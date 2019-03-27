@@ -34,15 +34,18 @@
       <br>
       <br>
       <br>
-      <agm-map (mapReady)="mapReady($event)" *ngIf="!isHidden" [latitude]="currentLat" [longitude]="currentLong" [styles]="styles"
-        [mapTypeId]="mapTypeId" [usePanning]="true">
-        <!--
-        <agm-marker *ngFor="let user of markers; let i = index" [iconUrl]="user.icon" [latitude]="user.location.latitude" [longitude]="user.location.longitude"
-          [opacity]="user.opacity" (markerClick)="markerClicked(user)">
-        </agm-marker> 
-        <agm-marker *ngFor="let m of placedMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [title]="m.title">
-        </agm-marker>
-      -->
+      <agm-map [latitude]="latitude" [longitude]="longitude" (mapReady) = "mapReady($event)" [fitBounds]="true">
+          <button  class="btn btn-primary" id = "festivals" (click) = "festivalClicked()"> Drivers Near You
+            </button>
+          <agm-marker  [latitude] = 'lat' [longitude] = 'lng'[label]="labelOptions" [agmFitBounds]="true">
+            </agm-marker>
+            <agm-marker (markerClick)="window.open()" (markerClick)="window.close()" *ngFor = "let coords of events; let i = index" [latitude] = "coords.latitude" [longitude] = "coords.longitude" [agmFitBounds]="true">
+
+                <agm-info-window #window>
+                    <h6>{{ events[i].latitude }}</h6>
+                  </agm-info-window>
+            </agm-marker>
+       
       </agm-map>
     </div>
   </div>

@@ -9,6 +9,8 @@ import { ContactInfo } from '../../models/contact-info.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
+import { GeocodeService } from '../../services/geocode.service';
+import { CustomtimePipe} from '../../pipes/customtime.pipe';
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -36,7 +38,7 @@ export class ViewProfileComponent implements OnInit {
   /** The new password of the user, used to confirm User knows the password (hooked to form item in html) */
   confirmPassword: string;
   /** The address of the user (hooked to form item in html) */
-  address2: string;
+  _address: string;
   /** The day the User's batch ends*/
   batchEnd: any;
   contactInfoArray: ContactInfo[] = [];
@@ -58,8 +60,12 @@ export class ViewProfileComponent implements OnInit {
   filteredUsers: any[];
   result: boolean;
   car: Car;
+  location : Location;
+  startTime : Date;
+  pipe : CustomtimePipe = new CustomtimePipe();
 
-  startTime: number ;
+  session: boolean;
+  
 
   /**
    * Sets up the component with the User Service injected
@@ -78,16 +84,20 @@ export class ViewProfileComponent implements OnInit {
   ngOnInit() {
     this.authService.principal.subscribe(user => {
       this.principal = user;
-      if (this.principal) {
+      if (this.principal.id > 0) {
         this.existingBio = this.principal.bio;
         this.firstName = this.principal.firstName;
         this.lastName = this.principal.lastName;
         this.username = this.principal.email;
-        this.address2 = this.principal.location.address;
+        this._address = this.principal.location.address;
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
-        this.getOffices();
+        this.startTime = this.pipe.transform(this.principal.startTime);
+        console.log(this.startTime);
         
-        this.startTime = this.principal.startTime;
+
+        //this.getOffice();
+
+        
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
@@ -102,11 +112,24 @@ export class ViewProfileComponent implements OnInit {
           console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
         });
 
+        this.sessionCheck();
+      }
+      console.log(user);
+      if (this.principal) {
+        
       }
     });
     this.getOffice();
     console.log(this.officeObject);
     console.log(this.principal);
+  }
+
+  sessionCheck() {
+    if (this.principal.id > 0) {
+      this.session = true;
+    } else {
+      this.session = false;
+    }
   }
 
   /**
@@ -119,8 +142,8 @@ export class ViewProfileComponent implements OnInit {
     // document.getElementById("password").removeAttribute("disabled");
     // document.getElementById("confirmPassword").removeAttribute("disabled");
     document.getElementById('address').removeAttribute('disabled');
-    document.getElementById('batchEnd').removeAttribute('disabled');
-    document.getElementById('dayStart').removeAttribute('disabled');
+    //document.getElementById('batchEnd').removeAttribute('disabled');
+    //document.getElementById('dayStart').removeAttribute('disabled');
     document.getElementById('switchRoles').removeAttribute('hidden');
     // Had to put this in an if; Page would break if Admin or Trainer clicked edit
     // Since for them, this button didn't exist to make visible
@@ -132,7 +155,7 @@ export class ViewProfileComponent implements OnInit {
     // document.getElementById("batchEnd").setAttribute("type", "date");
     // document.getElementById("currentOffice").style.display = "none";
     // document.getElementById("selectOffice").style.display = "inline";
-    document.getElementById('errorMessage').removeAttribute('hidden');
+    //document.getElementById('errorMessage').removeAttribute('hidden');
   }
 
   /**
@@ -189,7 +212,7 @@ export class ViewProfileComponent implements OnInit {
   getOffice() {
     this.userService.getOfficeByLink(this.principal.office).subscribe(data => {
       this.officeObject = data;
-    })
+    });
   }
 
   /**
