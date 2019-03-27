@@ -61,7 +61,9 @@ export class CarRegistrationComponent implements OnInit {
       this.carObject.owner = ("/users/" + e.id);
 
       console.log(this.carObject);
-      this.http.post<Car>(environment.userUrl + '/cars', this.carObject).subscribe();
+      console.log(environment.userUrl + e.cars);
+
+      this.http.put<Car>(environment.userUrl + e.cars, this.carObject).subscribe();
     });
   }
 
