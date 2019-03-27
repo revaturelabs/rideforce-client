@@ -27,7 +27,7 @@ import { ViewProfileComponent } from '../components/view-profile/view-profile.co
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ViewUsersComponent } from '../components/view-users/view-users.component';
 import { SearchUsersComponent } from '../components/search-users/search-users.component';
-import { ImageUploadComponent } from '../image-upload/image-upload.component';
+import { ImageUploadComponent } from '../components/image-upload/image-upload.component';
 import { RegisterComponent } from '../components/register/register.component';
 
 @NgModule({

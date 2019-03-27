@@ -20,13 +20,15 @@
             </div>
             <!-- Get Key button -->
             <div class="col-md-4 mt-3">
-              <button class="btn btn-primary w-100" *ngIf="rtr.office && rtr.batchEndDate" (click)="getRegistrationKey()">Get Key</button>
+              <button class="btn btn-primary w-100" *ngIf="rtr.office && rtr.batchEndDate"
+                (click)="getRegistrationKey()">Get Key</button>
             </div>
           </div>
           <!-- Registration Token -->
           <div class="form-group">
             <label for="registrationToken">Registration Token</label>
-            <textarea [(ngModel)]="registrationToken" class="form-control " id="registrationToken" rows="8" readonly></textarea>
+            <textarea [(ngModel)]="registrationToken" class="form-control " id="registrationToken" rows="8"
+              readonly></textarea>
           </div>
         </div>
       </div>

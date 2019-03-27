@@ -40,7 +40,7 @@ interface DriverCard {
       state('front-back', style({ transform: 'rotateY(90deg' })),
       state('back', style({ transform: 'rotateY(180deg)' })),
       state('back-front', style({ transform: 'rotateY(90deg' })),
-      transition('* => *', animate(400))
+      transition('* => *', animate(200))
     ])
   ]
 })
@@ -88,19 +88,19 @@ export class UsermatchwebComponent implements OnInit {
   private imageFile: any;
 
   /**
-   * Sets up the component by populating the list of possibel matches for the current user
+   * Sets up the component by populating the list of possible matches for the current user
    */
   ngOnInit() {
+    console.clear();
     this.auth.principal.subscribe(user => {
       this.principal = user;
-    if (this.principal.id < 1) {
-      this.route.navigate(['/landing']);
-    }
-    this.spinner.show();
-    this.loading = true;
-    console.log('Loading: ' + this.loading);
-    this.userService.getCurrentUser().subscribe(
-      data => {
+      if (this.principal.id < 1) {
+        this.route.navigate(['/landing']);
+      }
+      this.spinner.show();
+      this.loading = true;
+      console.log('Loading: ' + this.loading);
+      this.userService.getCurrentUser().subscribe(data => {
         this.currentUser = data;
 
         let userLinks: Link<User>[] = null;
@@ -140,15 +140,12 @@ export class UsermatchwebComponent implements OnInit {
           e => {
             console.log('error getting match Drivers!');
             console.log(e);
-          }
-        );
-      },
-      e => {
+          });
+      }, e => {
         console.log('error getting user (matching service)!');
         console.log(e);
-      }
-    );
-  });
+      })
+    });
   }
 
   /**

@@ -1,46 +1,78 @@
-/*Cards css*/
-.dyn-height {
-  max-height: 650px;
-  width: 20%;
-  overflow-y: auto;
+.container {
+  padding-top: 40px
+}
+
+.container input {
+  margin-left: 20px
+}
+
+h6 {
+  font-size: 17px;
+}
+
+.user {
+  background-color:rgba(255, 255, 255, 0.918)
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.card, .sliding-card {
+  height: 400px;
+  width: 250px;
+}
+
+.card {
+  margin-top: 25px;
+  border: transparent;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.approval-icons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 32px;
+  text-align: center;
+}
+
+.flex-item, .sliding-card {
+  transform-style: preserve-3d;
+}
+
+.card-body-back {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
+  height: 350px;
+  width: 205px;
 }
 
 .cardimg {
   height: 200px;
 }
 
+.card-title {
+  font-size: 24px;
+}
+
 .card-text {
-  font-size: 15px;
-}
-
-
-  h6
-  {
-    font-size:17px;
-  }
-
-.grid-container {
-  display: grid;
-  grid-gap: 50px 50px;
-  grid-template-columns: 22% 22% 22% 22%;
-  padding: 10px;
-}
-
-@media screen and (max-width: 1000px) {
-  .grid-container {
-    display: grid;
-    grid-gap: 50px 50px;
-    grid-template-columns: 50% 50%;
-    padding: 10px;
-  }
-}
-
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
+  font-size: 16px;
 }
 
 .dislike {
@@ -112,15 +144,6 @@
   /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
-.enlarge:hover {
-  transform: scale(1.1);
-  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-}
-
-.card {
-  height: 400px;
-}
-
 #dropdownSettingsButton2 {
   text-align: center;
   width: 10%;
@@ -169,5 +192,65 @@
 
   100% {
     transform: translateX(0px)
+  }
+}
+
+@media screen and (max-width: 530px) {
+
+  /*
+    Not terribly happy with this half-finished dropdown
+    I'll hide it for mobile displays.
+
+    Someone can finish it in the future and 
+    finagle with its position. 
+  */
+  .dropdown {
+    display: none;
+  }
+
+  /*
+    Honestly kinda shocked how easy it was to do the rideswipe
+    with just a flexbox... was thinking I needed some fancy
+    tinder swipe animation or maybe hammer.js animations.
+
+    No. In fact...just put everything in a flexbox container
+    as a row...with no wrapping. and it's done. Huh.
+  */
+  .flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .card, .sliding-card {
+    height: 480px;
+    width: 360px;
+  }
+
+  .card {
+    margin-right: 20px;
+  }
+
+  .flex-item {
+    font-size: 36px;
+  }
+
+  .cardimg {
+    height: 250px;
+  }
+
+  .card-title {
+    padding-top: 10px;
+    font-size: 32px;
+  }
+
+  .card-text {
+    font-size: 24px;
+  }
+
+  .card-body-back {
+    height: 430px;
+    width: 320px;
   }
 }
