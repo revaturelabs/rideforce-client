@@ -221,6 +221,10 @@ h6 {
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-evenly;
+
+    width: 100vw;
+    
+    overflow: scroll;
   }
 
   .card, .sliding-card {
