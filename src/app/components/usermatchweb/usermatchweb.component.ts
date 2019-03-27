@@ -103,14 +103,14 @@ export class UsermatchwebComponent implements OnInit {
       data => {
         this.currentUser = data;
 
-        let userLinks: Link<User>[] = null;
+        let userLinks: User[] = null;
         this.matchService.getMatchingDrivers(+(this.principal.id)).subscribe(
           data2 => {
             userLinks = data2;
             console.log(userLinks);
-            for (let i = 0; i < userLinks.length; i++) {
+            for (let u of userLinks) {
 
-              this.matchService.getFromLink(userLinks[i]).subscribe(
+              this.matchService.getPhoto(u).subscribe(
                 data3 => {
                   const card: DriverCard = {
                     user: data3,

@@ -75,23 +75,24 @@ export class UsercardComponent implements OnInit {
      * Sets up the component by populating the list of possibel matches for the current user
      */
     ngOnInit() {
-        if (sessionStorage.length == 0)
-          this.route.navigate(["/landing"]);
+        if (sessionStorage.length === 0) {
+          this.route.navigate(['/landing']);
+        }
         this.userService.getCurrentUser().subscribe(
             data => {
                 console.log('data');
                 this.currentUser = data;
                 console.log(this.currentUser);
-                let userLinks: Link<User>[] = null;
+                let userLinks: User[] = null;
                 this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
                     data2 => {
                         // console.log("data2 is " + data2);
                         userLinks = data2;
                         console.log(userLinks);
-                        for (let i = 0; i < userLinks.length; i++) {
-                            console.log(userLinks[i]);
+                        for (const u of userLinks) {
+                            console.log(u);
 
-                            this.matchService.getFromLink(userLinks[i]).subscribe(
+                            this.matchService.getPhoto(u).subscribe(
                                 data3 => {
                                     console.log(data3);
                                     if (!data3.photoUrl || data3.photoUrl === 'null') {

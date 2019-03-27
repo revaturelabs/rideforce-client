@@ -27,6 +27,9 @@ export class MatchingControllerService {
   getFromLink(uri: Link<any>): Observable<any> {
     return this.http.get<any>(environment.userUrl + uri);
   }
+  getPhoto(u: User): Observable<any> {
+    return this.http.get<any>(environment.userUrl + u);
+  }
   /**
    * Returns all drivers who match the rider with the given user ID.
    * "/users/{userid}"
@@ -34,9 +37,9 @@ export class MatchingControllerService {
    * @param {number} riderId - the id of the rider making the request
    * @returns {Observable<Link<User>[]>} - the list of drivers that "match" the user
    */
-  getMatchingDrivers(riderId: number): Observable<Link<User>[]> {
+  getMatchingDrivers(riderId: number): Observable<User[]> {
     console.log(riderId);
-    return this.http.get<Link<User>[]>(environment.matchUrl + `/matches/${riderId}`);
+    return this.http.get<User[]>(environment.matchUrl + `/matches/test/${riderId}`);
     //return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
   }
 
