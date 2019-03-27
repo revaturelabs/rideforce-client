@@ -6,6 +6,7 @@ import { RouteInfo } from '../../models/route-info.model';
 import { Location } from '../../models/location.model';
 import { User } from '../../models/user.model';
 import { UserControllerService } from './user-controller.service';
+import { MatchingControllerService } from './matching-controller.service';
 
 
 /**
@@ -36,7 +37,7 @@ export class MapsControllerService {
     // console.log(Location.address); 
     console.log(Location); 
 
-    this.sb.getCurrentUser().subscribe();
+    //this.sb.getCurrentUser().subscribe();
     
     return this.http.post<Location>(environment.mapUrl + '/location', Location); 
     

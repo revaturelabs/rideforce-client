@@ -54,7 +54,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   longitude: any;
   /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
-  
+
 
   //Styles
   styles: any = null;
@@ -193,7 +193,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   addresses: string[] = ["9416 wooded glen avenue", "1099 godfrey road", "11740 Plaza America Dr", "829 East Sage Road"];
 
- 
+
 
 
   ngOnInit() {
@@ -277,20 +277,14 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     //   this.findMe();
     // })
 
-    
+
 
     this.mapService.getLocation().subscribe(data => {
       //console.log(data); 
-      this.lat = data.latitude; 
+      this.lat = data.latitude;
       this.lng = data.longitude;
-      
-      this.events = [{ 
-        latitude: this.lat, 
-        longitude: this.lng, 
-        
-      }];
     })
-    }
+  }
 
   /**
    * Final initialization after the content is set up
@@ -328,10 +322,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
     text: 'You Are Here!',
 
-  }  
+  }
 
   customMap: any;
-  mapReady(event: any){
+  mapReady(event: any) {
     this.customMap = event;
     this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('festivals'));
     // this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('sports'));
@@ -341,53 +335,69 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   }
 
-  events: any; 
-  lat: any; 
-  lng: any; 
-  ll:any;
-  lg: any; 
+  events: User[];
+  lat: any;
+  lng: any;
+  ll: any;
+  lg: any;
 
-  festivalClicked(){
+  festivalClicked() {
     this.getEvents();
-    console.log('clicked'); 
+    console.log('clicked');
   }
 
-  getEvents(){
+  getEvents() {
 
 
 
-  
-     
-      this.userService.getCurrentUser().subscribe(
-        data => {
-          this.currentUser = data;
-          this.mapService.getDistance(this.currentUser.location).subscribe(
 
 
-            coordinates => {
+    this.userService.getCurrentUser().subscribe(
+      data => {
+        this.currentUser = data;
+        // this.mapService.getDistance(this.currentUser.location).subscribe(
 
-              
-              
-             
-              // this.ll = coordinates.latitude; 
-              // this.lg = coordinates.longitude;
 
-              this.events = coordinates
-              console.log(coordinates); 
-              console.log('Everything in events' + this.events); 
-              console.log("setting center good sir");
-             
-              }
+        //   coordinates => {
 
 
 
-            );
 
-          
-        }
-       
-      );
-    
+        //     // this.ll = coordinates.latitude; 
+        //     // this.lg = coordinates.longitude;
+
+        //     this.events = coordinates
+        //     console.log(coordinates); 
+        //     console.log('Everything in events' + this.events); 
+        //     console.log("setting center good sir");
+
+        //     }
+
+
+
+        //   );
+
+        this.matchService.getDrivers().subscribe(
+
+          drivers => {
+
+            this.events = drivers;
+
+            // for(let d of drivers ){
+            //   this.events.push(d.location);
+            // }
+            // this.events = drivers; 
+            console.log(drivers);
+          }
+
+
+        );
+
+
+      }
+
+    );
+
 
   }
 

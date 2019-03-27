@@ -40,17 +40,21 @@
       <br>
       <br>
       <br>
-      <agm-map [latitude]="latitude" [longitude]="longitude" (mapReady)="mapReady($event)" [fitBounds]="true">
+      <agm-map [latitude]="lat" [longitude]="lng" (mapReady)="mapReady($event)" [fitBounds]="true">
         <button class="btn btn-primary" id="festivals" (click)="festivalClicked()"> Drivers Near You
         </button>
         <agm-marker [latitude]='lat' [longitude]='lng' [label]="labelOptions" [agmFitBounds]="true">
         </agm-marker>
         <agm-marker (markerClick)="window.open()" (markerClick)="window.close()"
-          *ngFor="let coords of events; let i = index" [latitude]="coords.latitude" [longitude]="coords.longitude"
+          *ngFor="let coords of events; let i = index" [latitude]="coords.location.latitude" [longitude]="coords.location.longitude"
           [agmFitBounds]="true">
 
           <agm-info-window #window>
-            <h6>{{ events[i].latitude }}</h6>
+            <h5>Driver Name:</h5>
+            <h6>{{ coords.firstName }}</h6>
+            <br>
+            <h5>Driver Contact Info:</h5>
+            <h6>{{coords.email}}</h6>
           </agm-info-window>
         </agm-marker>
 

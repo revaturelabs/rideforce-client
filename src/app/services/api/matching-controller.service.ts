@@ -30,7 +30,11 @@ export class MatchingControllerService {
   getFromLink(uri: Link<any>): Observable<any> {
     return this.http.get<any>(environment.userUrl + uri);
   }
-  
+
+  getDrivers() {
+    return this.http.get<User[]>(environment.matchUrl + "/matches");
+  }
+
   getPhoto(u: User): Observable<any> {
     return this.http.get<any>(environment.userUrl + u.photoUrl);
   }
