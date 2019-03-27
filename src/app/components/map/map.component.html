@@ -42,7 +42,7 @@
             <agm-marker (markerClick)="window.open()" (markerClick)="window.close()" *ngFor = "let coords of events; let i = index" [latitude] = "coords.latitude" [longitude] = "coords.longitude" [agmFitBounds]="true">
 
                 <agm-info-window #window>
-                    <h6>{{ events[i].firstname }}</h6>
+                    <h6>{{ events[i].latitude }}</h6>
                   </agm-info-window>
             </agm-marker>
        

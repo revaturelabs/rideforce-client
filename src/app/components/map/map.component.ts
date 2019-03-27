@@ -355,7 +355,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   getEvents(){
 
 
-    // this.userService.getAllUsers().subscribe();
 
   
      
@@ -365,20 +364,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
           this.mapService.getDistance(this.currentUser.location).subscribe(
 
 
-            //console.log(this.currentUser.location); 
             coordinates => {
 
-              // this.events.push ({
-                
-              //   addressID: 0,
-              //   address: 'string',
-              //   city: 'string',
-              //   stateCode: 'string',
-              //   zip: 'string',
-              //   latitude: coordinates.latitude, 
-              //   longitude: coordinates.longitude
               
-              // });  
+              
+             
               this.ll = coordinates.latitude; 
               this.lg = coordinates.longitude;
 
@@ -386,80 +376,18 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
               console.log(coordinates); 
               console.log('Everything in events' + this.events); 
               console.log("setting center good sir");
-              
-
-
              
               }
+
+
+
             );
-          // console.log('User data from current user (Service) called by Map component');
-          // // console.log(data);
-          // console.log(this.currentUser); 
-          // console.log(this.currentUser.location); 
-          // console.log(this.events[0].latitude);
-          // console.log(this.events[0].longitude);
-          // console.log(this.events[1].latitude);
-          // console.log(this.events[1].longitude);
 
-
-          // let userLinks: Link<User>[] = null;
-          // this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
-          //   data2 => {
-          //     userLinks = data2;
-          //     for (let i = 0; i < userLinks.length; i++) {
-
-          //       this.matchService.getFromLink(userLinks[i]).subscribe(
-          //         data3 => {
-          //           if (!data3.photoUrl || data3.photoUrl === 'null') {
-          //             data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
-          //           }
-          //           const marker: any = {
-          //             user: data3,
-          //             icon: {
-          //               url: data3.photoUrl,
-          //               scaledSize: {
-          //                 width: 30,
-          //                 height: 30
-          //               }
-          //             },
-          //             location: {
-          //               latitude: 0,
-          //               longitude: 0
-          //             },
-          //             opacity: .92
-          //           };
-
-          //           this.mapService.getDistance(data3.address).subscribe(
-          //             data4 => {
-          //               this.addDriverMarkers(data4);
-          //             },
-          //             e => {
-          //               console.log('error getting distance!');
-          //               console.log(e);
-          //             }
-          //           );
-          //           // Sets the current swipe card to the first element of the array if the array has something in it.
-          //         },
-          //         e => {
-          //           console.log('error getting match user (Map component)!');
-          //           console.log(e);
-          //         }
-          //       );
-          //     }
-          //   },
-          //   e => {
-          //     console.log('error getting match drivers (Map Component)!');
-          //     console.log(e);
-          //   }
-          // );
+          
         }
-        // e => {
-        //   console.log('error getting current user (Map Component)!');
-        //   console.log(e);
-        // }
+       
       );
-      // this.findMe();
- 
+    
 
   }
 
