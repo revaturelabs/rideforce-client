@@ -82,16 +82,16 @@ export class UsercardComponent implements OnInit {
                 console.log('data');
                 this.currentUser = data;
                 console.log(this.currentUser);
-                let userLinks: Link<User>[] = null;
+                let userLinks: User[] = null;
                 this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
                     data2 => {
                         // console.log("data2 is " + data2);
                         userLinks = data2;
                         console.log(userLinks);
-                        for (let i = 0; i < userLinks.length; i++) {
-                            console.log(userLinks[i]);
+                        for (let u of userLinks) {
+                            console.log(u);
 
-                            this.matchService.getFromLink(userLinks[i]).subscribe(
+                            this.matchService.getPhoto(u).subscribe(
                                 data3 => {
                                     console.log(data3);
                                     if (!data3.photoUrl || data3.photoUrl === 'null') {

@@ -11,8 +11,8 @@ describe('UsercardComponent', () => {
   let component: UsercardComponent;
   let fixture: ComponentFixture<UsercardComponent>;
 
-//  let de: DebugElement;
-//  let el: HTMLElement;
+  //  let de: DebugElement;
+  //  let el: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -38,17 +38,25 @@ describe('UsercardComponent', () => {
     fixture = TestBed.createComponent(UsercardComponent);
     component = fixture.componentInstance;
 
-//   de = fixture.debugElement.query(By.css('#swipeMain'));
-//   el = elRef.nativeElement;
+    //   de = fixture.debugElement.query(By.css('#swipeMain'));
+    //   el = elRef.nativeElement;
 
     component.currentUser = {
-      id:1,
+      id: 1,
       firstName: "John",
       lastName: "Doe",
       email: "jdoe@gmail.com",
       password: "jdopass",
       photoUrl: "imgprofile",
-      address: "12345 Pine Street, VA",
+      location: {
+        addressID: 12,
+        address: "12345 Pine Street, VA",
+        city: "string",
+        state: "string",
+        zip: "string",
+        latitude: 0,
+        longitude: 0,
+      },
       office: '/offices/' + 1,
       startTime: 0,
       batchEnd: new Date().toISOString(),
@@ -56,15 +64,16 @@ describe('UsercardComponent', () => {
       active: 'ACTIVE',
       contactInfo: [],
       role: Role.Rider,
-      bio: "My Bio"
-  }
+      bio: "My Bio",
 
-  component.currentSwipeCard = {
-    user : component.currentUser,
-    visible : true
-  };
+    }
 
-  fixture.detectChanges();
+    component.currentSwipeCard = {
+      user: component.currentUser,
+      visible: true
+    };
+
+    fixture.detectChanges();
 
   });
 
@@ -92,7 +101,7 @@ describe('UsercardComponent', () => {
     component.swipe(component.SWIPE_ACTION.LEFT, null);
     expect(component.swipe).toHaveBeenCalled();
   });
-  
+
   xit('get current user', () => {
     component.ngOnInit();
     expect(component.currentUser).toBeTruthy();

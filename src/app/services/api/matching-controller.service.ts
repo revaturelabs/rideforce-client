@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../../app/models/user.model';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Link } from '../../models/link.model';
 import { Filter } from '../../models/filter';
@@ -11,6 +11,9 @@ import { Filter } from '../../models/filter';
  */
 @Injectable()
 export class MatchingControllerService {
+
+  private _matches = new BehaviorSubject<User[]>([]);
+  private $matches = this._matches.asObservable();
 
   /**
    * Sets up the Service with an HTTPClient injection
@@ -27,6 +30,10 @@ export class MatchingControllerService {
   getFromLink(uri: Link<any>): Observable<any> {
     return this.http.get<any>(environment.userUrl + uri);
   }
+  
+  getPhoto(u: User): Observable<any> {
+    return this.http.get<any>(environment.userUrl + u.photoUrl);
+  }
   /**
    * Returns all drivers who match the rider with the given user ID.
    * "/users/{userid}"
@@ -34,10 +41,13 @@ export class MatchingControllerService {
    * @param {number} riderId - the id of the rider making the request
    * @returns {Observable<Link<User>[]>} - the list of drivers that "match" the user
    */
-  getMatchingDrivers(riderId: number): Observable<Link<User>[]> {
+  getMatchingDrivers(riderId: number): Observable<User[]> {
     console.log(riderId);
-    return this.http.get<Link<User>[]>(environment.matchUrl + `/matches/${riderId}`);
-    //return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
+    var obs = this.http.get<User[]>(environment.matchUrl + `/matches/test/${riderId}`);
+    obs.subscribe(resp => this._matches.next(resp));
+    return obs;
+    // return this.http.get<Link<User>[]>(environment.matchUrl + `/matches/${riderId}`);
+    // return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
   }
 
   /**
@@ -50,7 +60,7 @@ export class MatchingControllerService {
     const body = {
       filter
     };
-    return this.http.post<User[]>(environment.matchUrl + `matches/filtered`+riderId, body).toPromise();
+    return this.http.post<User[]>(environment.matchUrl + `matches/filtered` + riderId, body).toPromise();
   }
 
   /**
@@ -73,9 +83,7 @@ export class MatchingControllerService {
    * @returns {Observable<string[]>} - Does not actually return anything
    */
   likeDriver(riderId: number, driverId: number): Observable<string[]> {
-
     return this.http.put<Link<User>[]>(environment.matchUrl + `/matches/likes/${riderId}/${driverId}`, '');
-
   }
 
   /**
@@ -119,4 +127,5 @@ export class MatchingControllerService {
   unDislikeDriver(riderId: number, driverId: number): Observable<string[]> {
     return this.http.delete<Link<User>[]>(environment.matchUrl + `/matches/dislikes/${riderId}/${driverId}`);
   }
+
 }

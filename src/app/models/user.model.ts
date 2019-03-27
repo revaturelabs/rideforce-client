@@ -25,16 +25,15 @@ export class User {
   contactInfo: Link<ContactInfo>[];
   active: string;
   role: Role;
-  authToken: string;
-  api_token: string;
-  expires_at: any;
-  scopes: any;
 
   //Address should be an object with location in it. 
   location: Location;
 
   //Registration token. Will not persist in teh DB. 
-  registrationToken: string;
-
+  registrationToken?: string;
+  authToken?: string;
+  api_token?: string;
+  expires_at?: any;
+  scopes?: any;
   
 }
