@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Login } from "../../models/login.model";
 import { Link } from "../../models/link.model";
+import { DriverCard } from "../../models/driver-card.model";
 import { User } from "../../models/user.model";
 import { MatchingControllerService } from "../../services/api/matching-controller.service";
 import { UserControllerService } from "../../services/api/user-controller.service";
@@ -17,20 +18,6 @@ import { AuthService } from "../../services/auth.service";
 import { GeocodeService } from "../../services/geocode.service";
 import { DownloadService } from "../../services/download.service";
 import { DomSanitizer } from "@angular/platform-browser";
-
-/** Represents the User selection item in the html page */
-interface DriverCard {
-  /** The User being represented */
-  user: User;
-  /** The status of the given user */
-  choose: string;
-  /** Toggle for the card */
-  face: String;
-  /** Card image */
-  image: any;
-  /**The calculated distance for sorting with geolocation */
-  distance: number;
-}
 
 /**
  * Allows Views for Other Users in a desktop view
@@ -136,7 +123,6 @@ export class UsermatchwebComponent implements OnInit {
               console.log(users);
               this.matchService.updateMatches(users);
               // sets loading to false
-              // this.users.forEach(u => this.appendLocation(u));
               this.loading = false;
               // hides the spinner
               this.spinner.hide();
@@ -291,47 +277,57 @@ export class UsermatchwebComponent implements OnInit {
   }
 
   // get the address and append it
-  // async appendLocation(user) {
-  //   const myLocation = await this.geocodeService.geocode(this.principal.address).toPromise();
-  //   const location = await this.geocodeService.geocode(user.user.address).toPromise();
-  //   user['distance'] = this.calculateDistance(
-  //     myLocation['lng'],
-  //     location['lng'],
-  //     myLocation['lat'],
-  //     location['lat']
-  //     );
-  //     console.log('usre with appended distance: ' + user);
-  //     return user;
-  // }
+  async appendLocation(user) {
+    const myLocation = await this.geocodeService
+      .geocode(this.principal.location.address)
+      .toPromise();
+    const location = await this.geocodeService
+      .geocode(user.user.address)
+      .toPromise();
+    user["distance"] = this.calculateDistance(
+      myLocation["lng"],
+      location["lng"],
+      myLocation["lat"],
+      location["lat"]
+    );
+    console.log("usre with appended distance: " + user);
+    return user;
+  }
 
-  // async getLngLat(address: string): Promise<number> {
-  //   const otherLocation = await this.geocodeService.geocode(address).toPromise();
-  //   const myLocation = await this.geocodeService.geocode(this.principal.address).toPromise();
-  //   const x1 = myLocation['lng'];
-  //   const x2 = otherLocation['lng'];
-  //   const y1 = myLocation['lat'];
-  //   const y2 = otherLocation['lat'];
-  //   return this.calculateDistance(x1, x2, y1, y2);
-  // }
+  async getLngLat(address: string): Promise<number> {
+    const otherLocation = await this.geocodeService
+      .geocode(address)
+      .toPromise();
+    const myLocation = await this.geocodeService
+      .geocode(this.principal.location.address)
+      .toPromise();
+    const x1 = myLocation["lng"];
+    const x2 = otherLocation["lng"];
+    const y1 = myLocation["lat"];
+    const y2 = otherLocation["lat"];
+    return this.calculateDistance(x1, x2, y1, y2);
+  }
 
-  //   getMyLocation() {
-  //     const address = this.principal.address;
-  //     if (!this.myLocation) {
-  //       this.myLocation = this.getLngLat(address);
-  //     }
-  //     return this.myLocation;
-  //   }
+  getMyLocation() {
+    const address = this.principal.location.address;
+    if (!this.myLocation) {
+      this.myLocation = this.getLngLat(address);
+    }
+    return this.myLocation;
+  }
 
-  //   shuffle(list: DriverCard[]): Array<DriverCard> {
-  //     let m = list.length, t: DriverCard, i: number;
-  //     while (m) {
-  //       i = Math.floor(Math.random() * m--);
-  //       t = list[m];
-  //       list[m] = list[i];
-  //       list[i] = t;
-  //     }
-  //     return list;
-  // }
+  shuffle(list: DriverCard[]): Array<DriverCard> {
+    let m = list.length,
+      t: DriverCard,
+      i: number;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = list[m];
+      list[m] = list[i];
+      list[i] = t;
+    }
+    return list;
+  }
 
   populateProfileImage(dc: DriverCard) {
     this.ds

@@ -80,6 +80,7 @@ export class UsercardComponent implements OnInit {
       this.route.navigate(["/landing"]);
     }
     this.matchService.getMatches().subscribe(function(users) {
+      console.log(users);
       for (let u of users) {
         console.log(u);
         if (!u.photoUrl || u.photoUrl === "null") {

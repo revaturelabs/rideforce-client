@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { User } from '../../models/user.model';
+import { DriverCard } from '../../models/driver-card.model';
 import { UsermatchwebComponent } from './usermatchweb.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -43,27 +44,19 @@ describe('UsermatchwebComponent', () => {
     expect(component).toBeTruthy();
   });
   it('flipCard() test', () => {
-    /** Represents the User selection item in the html page */
-    interface DriverCard {
-      /** The User being represented */
-      user: User;
-      /** The status of the given user */
-      choose: string;
-      /** Link to profile picture of the user */
-      face: String;
-      distance: number;
-    }
     const card1: DriverCard = {
       user: null,
       choose: 'none',
       face: 'front',
-      distance: 1
+      distance: 1,
+      image: null,
     };
     const card2: DriverCard = {
       user: null,
       choose: 'none',
       face: 'back',
-      distance: 5
+      distance: 5,
+      image: null,
     };
     component.flipCard(card1);
     component.flipCard(card2);
@@ -84,26 +77,19 @@ describe('UsermatchwebComponent', () => {
   });
 
   it('call shuffle', () => {
-    interface DriverCard {
-      /** The User being represented */
-      user: User;
-      /** The status of the given user */
-      choose: string;
-      /** Link to profile picture of the user */
-      face: String;
-      distance: number;
-    }
     const card1: DriverCard = {
       user: null,
       choose: 'none',
       face: 'front',
-      distance: 1
+      distance: 1,
+      image: null,
     };
     const card2: DriverCard = {
       user: null,
       choose: 'none',
       face: 'back',
-      distance: 5
+      distance: 5,
+      image: null,
     };
 
    var list: DriverCard[] = [];
