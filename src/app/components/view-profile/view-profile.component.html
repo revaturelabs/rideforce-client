@@ -59,18 +59,18 @@
               </div>
 
 
-              <div class="input-group mb-3">
+<!--               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Office Address</span>
                 </div>
                 <div class="input-group-text" style="padding-right: 137px; display: inline" id="currentOffice">
                 </div>
                 <div class="input-group-text" style="padding-right: 100px; display: none" id="selectOffice">
-                  <select [(ngModel)]="officeObject">
+                   <select [(ngModel)]="officeObject">
                     <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
-                  </select>
+                  </select> 
                 </div>
-              </div>
+              </div> -->
 
 
               <div class="input-group mb-3">
@@ -78,7 +78,7 @@
                   <span class="input-group-text" id="basic-addon1">Address</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-                  appPlacesAutocomplete (addressSelect)="autocomplete2($event)" [(ngModel)]="address2" #address="ngModel"
+                  appPlacesAutocomplete (addressSelect)="onAddressSelect($event)" [(ngModel)]="_address" #address="ngModel"
                   required id="address" placeholder="Type to search.." disabled>
               </div>
               <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
@@ -96,11 +96,11 @@
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Day Start</span>
+                  <span class="input-group-text" id="basic-addon1">Starting Time</span>
                 </div>
-                <input type="time" id="dayStart" class="form-control" [(ngModel)]="dayStart" disabled>
+                <input type="text" id="dayStart" class="form-control" value= "{{startTime | date:'shortTime'}}" disabled> 
               </div>
-
+            
               <div id="switchRoles" hidden>
                 <button *ngIf="currentRole === 'DRIVER'" class="btn btn-secondary" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
                 <button *ngIf="currentRole === 'RIDER'" class="btn btn-secondary" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>

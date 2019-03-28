@@ -89,7 +89,11 @@ export class UsercardComponent implements OnInit {
                         // console.log("data2 is " + data2);
                         userLinks = data2;
                         console.log(userLinks);
+<<<<<<< HEAD
+                        for (const u of userLinks) {
+=======
                         for (let u of userLinks) {
+>>>>>>> origin/Malikbranch
                             console.log(u);
 
                             this.matchService.getPhoto(u).subscribe(

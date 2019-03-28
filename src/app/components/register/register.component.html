@@ -14,14 +14,16 @@
                   <label for="firstName">First Name</label>
                   <input [ngClass]="{ 'is-invalid': fn.invalid && (fn.dirty || fn.touched), 'is-valid': fn.valid }" #fn="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="user.firstName" type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required/>
                   <div *ngIf="!!fn?.errors?.required" class="invalid-feedback">First name cannot be empty.</div>
-                  <div *ngIf="!!fn?.errors?.pattern" class="invalid-feedback">First name cannot have any symbols or numbers.</div>
+                  <div *ngIf="!!fn?.errors?.pattern" class="invalid-feedback">First name cannot have any symbols or
+                    numbers.</div>
                 </div>
                 <!-- Last Name Input -->
                 <div class="form-group col-md-6">
                   <label for="lastName">Last Name</label>
                   <input [ngClass]="{ 'is-invalid': ln.invalid && (ln.dirty || ln.touched), 'is-valid': ln.valid }" #ln="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="user.lastName" type="text" class="form-control" name="lastName" id="lastName" placeholder="Doe" required/>
                   <div *ngIf="!!ln?.errors?.required" class="invalid-feedback">Last name cannot be empty.</div>
-                  <div *ngIf="!!ln?.errors?.pattern" class="invalid-feedback">Last name cannot have any symbols or numbers.</div>
+                  <div *ngIf="!!ln?.errors?.pattern" class="invalid-feedback">Last name cannot have any symbols or
+                    numbers.</div>
                 </div>
               </div>
               <!-- Email Input -->
@@ -40,13 +42,14 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="password">Password</label>
-                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" [(ngModel)]="user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
+                  <input [ngClass]="{ 'is-invalid': p.invalid && (p.dirty || p.touched), 'is-valid': p.valid }" #p="ngModel" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,})" [(ngModel)]="user.password" (keydown)="passwordConfirm=''" type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
                   <div *ngIf="!!p?.errors?.required" class="invalid-feedback">Password cannot be empty.</div>
-                  <div *ngIf="!!p?.errors?.pattern" class="invalid-feedback">Password must be at least 8 characters long, have both a lowercase and uppercase letter, a number, and a special character.</div>
+                  <div *ngIf="!!p?.errors?.pattern" class="invalid-feedback">Password must be at least 8 characters
+                    long, have both a lowercase and uppercase letter, a number, and a special character.</div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="confirmPassword">Confirm Password</label>
-                  <input [ngClass]="{ 'is-invalid': pc.invalid && (pc.dirty || pc.touched), 'is-valid': pc.valid }" [pattern]="ur.user.password" #pc="ngModel" [(ngModel)]="passwordConfirm" type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required/>
+                  <input [ngClass]="{ 'is-invalid': pc.invalid && (pc.dirty || pc.touched), 'is-valid': pc.valid }" [pattern]="user.password" #pc="ngModel" [(ngModel)]="passwordConfirm" type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required/>
                   <div class="invalid-feedback">Password doesn't match.</div>
                 </div>
               </div>
@@ -72,7 +75,8 @@
                 <!-- Office Display -->
                 <div class="form-group col-md-6">
                   <label for="officeLocation">Office Location</label>
-                  <input [(ngModel)]="office.name" type="text" class="form-control" name="officeLocation" id="officeLocation" placeholder="Office Location" disabled />
+                  <input [(ngModel)]="office.name" type="text" class="form-control" name="officeLocation"
+                    id="officeLocation" placeholder="Office Location" disabled />
                 </div>
                 <!-- Batch End Date Display -->
                 <div class="form-group col-md-6">
@@ -133,7 +137,7 @@
           <!-- Tab 3 Content -->
           <ng-template ngbTabContent>
             <!-- Display Gathered Data -->
-            <br/>
+            <br />
             <dl class="row">
               <dt class="col-sm-4">Name:</dt>
               <dd class="col-sm-8">{{ user.firstName }} {{ user.lastName }}</dd>

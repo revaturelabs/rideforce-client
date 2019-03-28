@@ -157,11 +157,11 @@ export class UserControllerService {
       firstName: this.principal.firstName,
       lastName: this.principal.lastName,
       email: this.principal.email,
-      photoUrl: null,
+      photoUrl: this.principal.photoUrl,
       role: this.principal.role,
-      address: this.principal.location.address,
+      address: this.principal.location,
       batchEnd: new Date(this.principal.batchEnd),
-      startTime: null,
+      startTime: null,//this.principal.startTime,
       active: this.principal.active
     };
     console.log("sending");

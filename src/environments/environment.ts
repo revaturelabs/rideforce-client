@@ -7,7 +7,7 @@
 export const environment = {
   /** Are we in production */
   production: false,
-/** URL for the service we are relying on */
+  /** URL for the service we are relying on */
   // mapUrl: 'https://apirideforce.revaturelabs.com/maps',
   // matchUrl: 'https://apirideforce.revaturelabs.com/matching',
   // userUrl: 'https://apirideforce.revaturelabs.com/user',
