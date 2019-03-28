@@ -75,8 +75,9 @@ export class UsercardComponent implements OnInit {
      * Sets up the component by populating the list of possibel matches for the current user
      */
     ngOnInit() {
-        if (sessionStorage.length == 0)
-          this.route.navigate(["/landing"]);
+        if (sessionStorage.length === 0) {
+          this.route.navigate(['/landing']);
+        }
         this.userService.getCurrentUser().subscribe(
             data => {
                 console.log('data');
