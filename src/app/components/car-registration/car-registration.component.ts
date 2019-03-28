@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../../models/car.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 /**
  * Supports the functionality of car registration and management
@@ -23,37 +25,19 @@ export class CarRegistrationComponent implements OnInit {
   /**
    * The car to create and register
    */
-  carObject: Car;
+  carObject: Car = new Car;
+  
   /**
-   * The company that manufactured it
+   * variables to take in user input
    */
-  carMake: string;
+  make:string;
+  model:string;
+  year:number;
+  color:string;
+  license:string;
 
-  /**
-   * Model of the car
-   */
-  carModel: string;
-
-  /**
-   * When the car was produced
-   */
-  carYear: number;
-
-  // Color
-  carColor: string;
-
-  /**
-   * Relic from the RegisterComponent that previously managed cars
-   */
-  optInToDrive: boolean;
-
-  /**
-   * List of cars owned by the ownwer to present in a table
-   */
-  cars: Car[];
-
-  // booleans for car information buttons
-  btnCarInfo: Number = 0;
+  //prints out if update is successful or not
+  success:string;
 
   /**
    * Sets up the Car Registration component with dependencies
@@ -62,25 +46,58 @@ export class CarRegistrationComponent implements OnInit {
    */
   constructor(
     private userService: UserControllerService,
-    private route: Router
-    ) {
+    private route: Router,
+    private http: HttpClient 
+    )
+  {
 
-   }
+  }
 
   /**
    * Makes sure there is a car object available to operate on
    */
   ngOnInit() {
 
+    this.success = "";
   }
 
 
-  submitAutomobile(make, model, year, color) {
-    console.log(`Make: ${make} Model: ${model} Year: ${year} Color: ${color}`);
-    this.carMake = make;
-    this.carModel = model;
-    this.carYear = year;
-    this.carColor = color;
+  submitAutomobile() {
+
+    this.userService.getCurrentUser().subscribe(e => {
+      this.userObject = e;
+
+      console.log(JSON.parse(JSON.stringify(e)));
+      this.carObject.owner = ("/users/" + e.id);
+      this.carObject.make = this.make.toUpperCase();
+      this.carObject.model = this.model.toUpperCase();
+      this.carObject.year = this.year;
+      this.carObject.color = this.color.toUpperCase();
+      this.carObject.license = this.license.toUpperCase();
+
+      console.log(this.carObject);
+      console.log(environment.userUrl + e.cars);
+
+
+      if(e.cars.length == 0) {
+        this.http.post<Car>(environment.userUrl + '/cars/', this.carObject, {observe: 'response'}).subscribe(response => {
+          if(response.status == 201)
+            this.success = "Success";
+          else
+            this.success = "Failed";
+
+        });
+      }
+      else {
+        this.http.put<Car>(environment.userUrl + e.cars, this.carObject, {observe: 'response'}).subscribe(response => {
+        if(response.status == 200)
+          this.success = "Success";
+        else
+          this.success = "Failed";
+        
+        });
+      }
+    });
   }
 
 }
