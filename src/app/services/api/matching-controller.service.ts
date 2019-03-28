@@ -34,10 +34,11 @@ export class MatchingControllerService {
   getDrivers() {
     return this.http.get<User[]>(environment.matchUrl + "/matches");
   }
-
-  getPhoto(u: User): Observable<any> {
-    return this.http.get<any>(environment.userUrl + u.photoUrl);
+  
+  getUser(u: User): Observable<any> {
+    return this.http.get<any>(environment.userUrl + `/users/${u.id}`);
   }
+
   /**
    * Returns all drivers who match the rider with the given user ID.
    * "/users/{userid}"
@@ -50,7 +51,7 @@ export class MatchingControllerService {
     var obs = this.http.get<User[]>(environment.matchUrl + `/matches/${riderId}`);
     obs.subscribe(resp => this._matches.next(resp));
     return obs;
-    // return this.http.get<Link<User>[]>(environment.matchUrl + `/matches/${riderId}`);
+    // return this.http.get<Link<User>[]>(environment.matchUrl + `/matches/test/${riderId}`);
     // return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
   }
 

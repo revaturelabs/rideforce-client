@@ -110,7 +110,7 @@ export class UsermatchwebComponent implements OnInit {
             console.log(userLinks);
             for (let u of userLinks) {
 
-              this.matchService.getPhoto(u).subscribe(
+              this.matchService.getUser(u).subscribe(
                 data3 => {
                   const card: DriverCard = {
                     user: data3,

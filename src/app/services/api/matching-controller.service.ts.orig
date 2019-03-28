@@ -31,9 +31,6 @@ export class MatchingControllerService {
     return this.http.get<any>(environment.userUrl + uri);
   }
 <<<<<<< HEAD
-  getPhoto(u: User): Observable<any> {
-    return this.http.get<any>(environment.userUrl + u);
-=======
 
   getDrivers() {
     return this.http.get<User[]>(environment.matchUrl + "/matches");
@@ -41,8 +38,14 @@ export class MatchingControllerService {
 
   getPhoto(u: User): Observable<any> {
     return this.http.get<any>(environment.userUrl + u.photoUrl);
->>>>>>> origin/Malikbranch
   }
+=======
+  
+  getUser(u: User): Observable<any> {
+    return this.http.get<any>(environment.userUrl + `/users/${u.id}`);
+  }
+
+>>>>>>> 1eddc5f8fe460b9d742bdba6c02038ed70aca919
   /**
    * Returns all drivers who match the rider with the given user ID.
    * "/users/{userid}"
@@ -52,16 +55,11 @@ export class MatchingControllerService {
    */
   getMatchingDrivers(riderId: number): Observable<User[]> {
     console.log(riderId);
-<<<<<<< HEAD
-    return this.http.get<User[]>(environment.matchUrl + `/matches/test/${riderId}`);
-    //return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
-=======
-    var obs = this.http.get<User[]>(environment.matchUrl + `/matches/test/${riderId}`);
+    var obs = this.http.get<User[]>(environment.matchUrl + `/matches/${riderId}`);
     obs.subscribe(resp => this._matches.next(resp));
     return obs;
-    // return this.http.get<Link<User>[]>(environment.matchUrl + `/matches/${riderId}`);
+    // return this.http.get<Link<User>[]>(environment.matchUrl + `/matches/test/${riderId}`);
     // return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
->>>>>>> origin/Malikbranch
   }
 
   /**

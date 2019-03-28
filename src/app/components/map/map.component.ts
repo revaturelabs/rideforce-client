@@ -197,7 +197,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
 
   ngOnInit() {
-    
     this.mapService.getLocation().subscribe(data => {
       //console.log(data); 
       this.lat = data.latitude;
@@ -271,7 +270,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         this.currentUser = data;
        
 
-        this.matchService.getDrivers().subscribe(
+        this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
 
           drivers => {
 
