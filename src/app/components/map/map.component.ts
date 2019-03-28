@@ -214,13 +214,13 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
             });
           console.log('User data from current user (Service) called by Map component');
           console.log(data);
-          let userLinks: Link<User>[] = null;
+          let userLinks: User[] = null;
           this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
             data2 => {
               userLinks = data2;
-              for (let i = 0; i < userLinks.length; i++) {
+              for (let u of userLinks) {
 
-                this.matchService.getFromLink(userLinks[i]).subscribe(
+                this.matchService.getUser(u).subscribe(
                   data3 => {
                     if (!data3.photoUrl || data3.photoUrl === 'null') {
                       data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';

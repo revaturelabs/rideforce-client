@@ -91,7 +91,7 @@ export class UsercardComponent implements OnInit {
                         for (let u of userLinks) {
                             console.log(u);
 
-                            this.matchService.getPhoto(u).subscribe(
+                            this.matchService.getUser(u).subscribe(
                                 data3 => {
                                     console.log(data3);
                                     if (!data3.photoUrl || data3.photoUrl === 'null') {
