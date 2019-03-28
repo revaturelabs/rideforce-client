@@ -55,6 +55,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
 
+
   //Styles
   styles: any = null;
   halloweenStyle: any = null;
@@ -174,9 +175,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Sets up the Map
    * @param {GoogleMap.maps.Map} map - the Google Map to set
    */
-  protected mapReady(map) {
-    this.map = map;
-  }
+  // protected mapReady(map) {
+  //   this.map = map;
+  // }
 
   /**
    * retrieves the selected user
@@ -192,95 +193,22 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   addresses: string[] = ["9416 wooded glen avenue", "1099 godfrey road", "11740 Plaza America Dr", "829 East Sage Road"];
 
+
+
+
   ngOnInit() {
-    this.auth.principal.subscribe(user => {
-      this.principal = user;
-      if (this.principal.id < 1)
-        this.route.navigate(["/landing"]);
-      this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
-      this.hsong.loop = true;
-      this.hsong.load();
-      this.csong.src = 'assets/audio/EndTitle.mp3';
-      this.csong.loop = true;
-      this.csong.load();
-      this.userService.getCurrentUser().subscribe(
-        data => {
-          this.currentUser = data;
-          this.mapService.getDistance(data.location.address).subscribe(
-            coordinates => {
-              console.log("setting center good sir");
-              this.currentLat = coordinates.latitude;
-              this.currentLong = coordinates.longitude;
-            });
-          console.log('User data from current user (Service) called by Map component');
-          console.log(data);
-          let userLinks: User[] = null;
-          this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
-            data2 => {
-              userLinks = data2;
-              for (let u of userLinks) {
-
-                this.matchService.getUser(u).subscribe(
-                  data3 => {
-                    if (!data3.photoUrl || data3.photoUrl === 'null') {
-                      data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
-                    }
-                    const marker: any = {
-                      user: data3,
-                      icon: {
-                        url: data3.photoUrl,
-                        scaledSize: {
-                          width: 30,
-                          height: 30
-                        }
-                      },
-                      location: {
-                        latitude: 0,
-                        longitude: 0
-                      },
-                      opacity: .92
-                    };
-
-                    this.mapService.getDistance(data3.address).subscribe(
-                      data4 => {
-                        this.addDriverMarkers(data4);
-                      },
-                      e => {
-                        console.log('error getting distance!');
-                        console.log(e);
-                      }
-                    );
-                    // Sets the current swipe card to the first element of the array if the array has something in it.
-                  },
-                  e => {
-                    console.log('error getting match user (Map component)!');
-                    console.log(e);
-                  }
-                );
-              }
-            },
-            e => {
-              console.log('error getting match drivers (Map Component)!');
-              console.log(e);
-            }
-          );
-        },
-        e => {
-          console.log('error getting current user (Map Component)!');
-          console.log(e);
-        }
-      );
-      this.findMe();
+    this.mapService.getLocation().subscribe(data => {
+      //console.log(data); 
+      this.lat = data.latitude;
+      this.lng = data.longitude;
     })
-    }
+  }
 
   /**
    * Final initialization after the content is set up
    */
   ngAfterContentInit() {
 
-    //this.findMe();
-    //this.getMarkers();
   }
 
   /**
@@ -298,13 +226,75 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     });
   }
 
+  labelOptions = {
+
+    color: 'blue',
+
+    fontFamily: '',
+
+    fontSize: '14px',
+
+    fontWeight: 'bold',
+
+    text: 'You Are Here!',
+
+  }
+
+  customMap: any;
+  mapReady(event: any) {
+    this.customMap = event;
+    this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('festivals'));
+    
+
+  }
+
+  events: User[];
+  lat: any;
+  lng: any;
+  ll: any;
+  lg: any;
+
+  festivalClicked() {
+    this.getEvents();
+    console.log('clicked');
+  }
+
+  getEvents() {
+
+
+
+
+
+    this.userService.getCurrentUser().subscribe(
+      data => {
+        this.currentUser = data;
+       
+
+        this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
+
+          drivers => {
+
+            this.events = drivers;
+            console.log('Drivers are ' + this.events);
+          }
+
+
+        );
+
+
+      }
+
+    );
+
+
+  }
+
 
   /**
    * Sets up markers of Drivers on the map
    * Does not appear to serve a purpose this may be removable?
    */
   getMarkers() {
-    //console.log("Latitude " + this.markers[0].location.latitude);
     for (const user of this.users) {
       const marker: any = {
         user: user,
@@ -321,7 +311,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         },
         opacity: .92
       };
-      //this.markers.push(marker);
       const newLocation = new google.maps.LatLng(marker.location.latitude, marker.location.longitude);
     }
 
@@ -497,13 +486,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * (incomplete)
    */
   showCustomMarker() {
-    //console.log("Location " + this.currentLat + "," + this.currentLong);
 
     this.map.setCenter(new google.maps.LatLng(this.currentLat, this.currentLong));
 
     const location = new google.maps.LatLng(this.currentLat, this.currentLong);
 
-    // console.log(`selected marker: ${this.selectedMarkerType}`);
 
     const marker = new google.maps.Marker({
       position: location,
@@ -580,18 +567,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;
 
-    /*    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-       this.map.panTo(location);
-
-       if (!this.marker) {
-         this.marker = new google.maps.Marker({
-           position: location,
-           map: this.map,
-           title: 'Got you!'
-         });
-       } else {
-         this.marker.setPosition(location);
-       } */
+ 
   }
 
   /**
