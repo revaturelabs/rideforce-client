@@ -27,6 +27,12 @@ export class CarRegistrationComponent implements OnInit {
    */
   carObject: Car = new Car;
   
+  make:string;
+  model:string;
+  year:number;
+  color:string;
+  license:string;
+
   /**
    * Sets up the Car Registration component with dependencies
    * @param {UserControllerService} userService - the Service that allows us to manager the user AND the cars available on the system
@@ -50,20 +56,26 @@ export class CarRegistrationComponent implements OnInit {
 
 
   submitAutomobile() {
-    console.log(`Make: ${this.carObject.make} 
-                  Model: ${this.carObject.model} 
-                  Year: ${this.carObject.year} 
-                  Color: ${this.carObject.color} 
-                  License: ${this.carObject.license}`);
+
     this.userService.getCurrentUser().subscribe(e => {
       this.userObject = e;
+
       console.log(JSON.parse(JSON.stringify(e)));
       this.carObject.owner = ("/users/" + e.id);
+      this.carObject.make = this.make.toUpperCase();
+      this.carObject.model = this.model.toUpperCase();
+      this.carObject.year = this.year;
+      this.carObject.color = this.color.toUpperCase();
+      this.carObject.license = this.license.toUpperCase();
 
       console.log(this.carObject);
       console.log(environment.userUrl + e.cars);
 
-      this.http.put<Car>(environment.userUrl + e.cars, this.carObject).subscribe();
+
+      if(e.cars.length == 0)
+        this.http.post<Car>(environment.userUrl + '/cars/', this.carObject).subscribe();
+      else
+        this.http.put<Car>(environment.userUrl + e.cars, this.carObject).subscribe();
     });
   }
 
