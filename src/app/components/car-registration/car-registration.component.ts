@@ -27,11 +27,17 @@ export class CarRegistrationComponent implements OnInit {
    */
   carObject: Car = new Car;
   
+  /**
+   * variables to take in user input
+   */
   make:string;
   model:string;
   year:number;
   color:string;
   license:string;
+
+  //prints out if update is successful or not
+  success:string;
 
   /**
    * Sets up the Car Registration component with dependencies
@@ -52,6 +58,7 @@ export class CarRegistrationComponent implements OnInit {
    */
   ngOnInit() {
 
+    this.success = "";
   }
 
 
@@ -72,10 +79,24 @@ export class CarRegistrationComponent implements OnInit {
       console.log(environment.userUrl + e.cars);
 
 
-      if(e.cars.length == 0)
-        this.http.post<Car>(environment.userUrl + '/cars/', this.carObject).subscribe();
-      else
-        this.http.put<Car>(environment.userUrl + e.cars, this.carObject).subscribe();
+      if(e.cars.length == 0) {
+        this.http.post<Car>(environment.userUrl + '/cars/', this.carObject, {observe: 'response'}).subscribe(response => {
+          if(response.status == 201)
+            this.success = "Success";
+          else
+            this.success = "Failed";
+
+        });
+      }
+      else {
+        this.http.put<Car>(environment.userUrl + e.cars, this.carObject, {observe: 'response'}).subscribe(response => {
+        if(response.status == 200)
+          this.success = "Success";
+        else
+          this.success = "Failed";
+        
+        });
+      }
     });
   }
 
