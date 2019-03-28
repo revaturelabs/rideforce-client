@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Login } from '../../models/login.model';
+import { NgZone } from '@angular/core';
 import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
 import { Component, OnInit } from '@angular/core';
@@ -73,7 +74,7 @@ export class ViewProfileComponent implements OnInit {
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
   constructor(private userService: UserControllerService, 
-              private authService: AuthService, 
+              private authService: AuthService, private zone: NgZone, private locationSerivce: GeocodeService, 
               private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -171,6 +172,19 @@ export class ViewProfileComponent implements OnInit {
     this.authService.changePrincipal(this.principal);
     // debug console.log("routing");
     this.router.navigate(['userProfile']);
+  }
+
+  onAddressSelect(address: string) {
+    this.zone.run(() => (this.principal.location.address = address));
+    this.populateLocation();
+  }
+
+  //Populate user location by finding the latitude and logitude via Maps service. 
+  populateLocation() {
+    this.locationSerivce.getlocation(this.principal.location).subscribe(data => {
+      console.log(data);
+      this.principal.location = data;
+    });
   }
 
   /**
