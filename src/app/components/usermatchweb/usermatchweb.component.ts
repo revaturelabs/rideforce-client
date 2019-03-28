@@ -85,6 +85,7 @@ export class UsermatchwebComponent implements OnInit {
     console.clear();
     this.matchService.getMatches().subscribe(
       users => {
+        this.users = [];
         for (let u of users) {
           const card: DriverCard = {
             user: u,
@@ -96,7 +97,7 @@ export class UsermatchwebComponent implements OnInit {
               "http://semantic-ui.com/images/avatar/large/chris.jpg"
           };
           this.populateProfileImage(card);
-          // Sets the current swipe card to the first element of the array if the array has something in it.
+          
           this.users.push(card);
         }
         // assign drivers to the list to render and shuffle
@@ -115,7 +116,9 @@ export class UsermatchwebComponent implements OnInit {
       this.spinner.show();
       this.loading = true;
       console.log("Loading: " + this.loading);
+      
       this.userService.getCurrentUser().subscribe(
+
         data => {
           this.currentUser = data;
           this.matchService.getMatchingDrivers(+this.principal.id).subscribe(
@@ -133,10 +136,12 @@ export class UsermatchwebComponent implements OnInit {
             }
           );
         },
+
         e => {
           console.log("error getting user (matching service)!");
           console.log(e);
         }
+
       );
     });
   }
