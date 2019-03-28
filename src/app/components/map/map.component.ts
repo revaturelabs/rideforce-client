@@ -387,7 +387,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
             //   this.events.push(d.location);
             // }
             // this.events = drivers; 
-            console.log(drivers);
+            console.log('Drivers are ' + this.events);
           }
 
 
