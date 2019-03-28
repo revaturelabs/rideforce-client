@@ -21,6 +21,14 @@ export class MatchingControllerService {
    */
   constructor(private http: HttpClient) { }
 
+  public getMatches(){
+    return this.$matches;
+  }
+
+  public updateMatches(users: User[]){
+    this._matches.next(users);
+  }
+
   /**
    * will deserialize the link object. returns the object reference from the link
    * a link is a reference to the object without having to fetch the object from the database
