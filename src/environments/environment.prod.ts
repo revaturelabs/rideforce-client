@@ -2,9 +2,9 @@
 export const environment = {
   /** whater instance is in production mode (true in this case) */
   production: true,
-  mapUrl: 'https://apirideforce.revaturelabs.com/maps',
-  matchUrl: 'https://apirideforce.revaturelabs.com/matching',
-  userUrl: 'https://apirideforce.revaturelabs.com/user',
+  mapUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/maps',
+  matchUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/matching',
+  userUrl: 'http://rideforce-alb-1943696763.us-east-1.elb.amazonaws.com/user',
   // mapUrl: 'http://localhost:3333',
   // matchUrl: 'http://localhost:4444',
   // userUrl: 'http://localhost:5555',
