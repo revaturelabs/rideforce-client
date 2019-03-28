@@ -7,6 +7,8 @@ import { Office } from '../../models/office.model';
 import { AuthService } from '../../services/auth.service';
 import { ContactInfo } from '../../models/contact-info.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { Car } from '../../models/car.model';
+import { Link } from '../../models/link.model';
 import { GeocodeService } from '../../services/geocode.service';
 import { CustomtimePipe} from '../../pipes/customtime.pipe';
 
@@ -57,6 +59,7 @@ export class ViewProfileComponent implements OnInit {
   /** Holds the list of users filtered with search query */
   filteredUsers: any[];
   result: boolean;
+  car: Car;
   location : Location;
   startTime : Date;
   pipe : CustomtimePipe = new CustomtimePipe();
@@ -69,7 +72,9 @@ export class ViewProfileComponent implements OnInit {
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService, private authService: AuthService, private router: Router) {
+  constructor(private userService: UserControllerService, 
+              private authService: AuthService, 
+              private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -96,6 +101,17 @@ export class ViewProfileComponent implements OnInit {
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
+
+        
+        //loads the first car. done this way because original batch made car-user relationship a 1 to many
+        //should've been a one to one
+        console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
+
+        this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe( e => {
+          this.car = e;
+          console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
+        });
+
         this.sessionCheck();
       }
       console.log(user);
@@ -290,4 +306,8 @@ export class ViewProfileComponent implements OnInit {
     }
   }
 
+  registerCar(){
+    console.log("going to register car");
+    this.router.navigate(['/cars']);
+  }
 }

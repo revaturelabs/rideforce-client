@@ -177,23 +177,43 @@
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Make</span>
+                    <span class="input-group-text">{{car['make']}}</span>
                   </div>
-                  <input type="text" class="form-control" [(ngModel)]="carMake">
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Model</span>
+                    <span class="input-group-text">{{car['model']}}</span>
+                    
                   </div>
-                  <input type="text" class="form-control" [(ngModel)]="carModel">
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Year</span>
+                    <span class="input-group-text">{{car['year']}}</span>
+                    
                   </div>
-                  <input type="number" min="1950" max="5000" class="form-control" [(ngModel)]="carYear">
                 </div>
+              
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Color</span>
+                    <span class="input-group-text">{{car['color']}}</span>
+        
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">License</span>
+                    <span class="input-group-text">{{car['license']}}</span>
+                    
+                  </div>
+                </div>
+
+                <button class="btn-primary" (click)="registerCar()">Update Car</button>
               </div>
             </div>
           </ng-template>
