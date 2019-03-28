@@ -197,88 +197,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
 
   ngOnInit() {
-    // this.auth.principal.subscribe(user => {
-    //   this.principal = user;
-    //   if (this.principal.id < 1)
-    //     this.route.navigate(["/landing"]);
-    //   this.hsong.src = 'assets/audio/GrimGrinningGhosts.mp3';
-    //   this.hsong.loop = true;
-    //   this.hsong.load();
-    //   this.csong.src = 'assets/audio/EndTitle.mp3';
-    //   this.csong.loop = true;
-    //   this.csong.load();
-    //   this.userService.getCurrentUser().subscribe(
-    //     data => {
-    //       this.currentUser = data;
-    //       this.mapService.getDistance(data.location.address).subscribe(
-    //         coordinates => {
-    //           console.log("setting center good sir");
-    //           this.currentLat = coordinates.latitude;
-    //           this.currentLong = coordinates.longitude;
-    //         });
-    //       console.log('User data from current user (Service) called by Map component');
-    //       console.log(data);
-    //       let userLinks: Link<User>[] = null;
-    //       this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
-    //         data2 => {
-    //           userLinks = data2;
-    //           for (let i = 0; i < userLinks.length; i++) {
-
-    //             this.matchService.getFromLink(userLinks[i]).subscribe(
-    //               data3 => {
-    //                 if (!data3.photoUrl || data3.photoUrl === 'null') {
-    //                   data3.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
-    //                 }
-    //                 const marker: any = {
-    //                   user: data3,
-    //                   icon: {
-    //                     url: data3.photoUrl,
-    //                     scaledSize: {
-    //                       width: 30,
-    //                       height: 30
-    //                     }
-    //                   },
-    //                   location: {
-    //                     latitude: 0,
-    //                     longitude: 0
-    //                   },
-    //                   opacity: .92
-    //                 };
-
-    //                 this.mapService.getDistance(data3.address).subscribe(
-    //                   data4 => {
-    //                     this.addDriverMarkers(data4);
-    //                   },
-    //                   e => {
-    //                     console.log('error getting distance!');
-    //                     console.log(e);
-    //                   }
-    //                 );
-    //                 // Sets the current swipe card to the first element of the array if the array has something in it.
-    //               },
-    //               e => {
-    //                 console.log('error getting match user (Map component)!');
-    //                 console.log(e);
-    //               }
-    //             );
-    //           }
-    //         },
-    //         e => {
-    //           console.log('error getting match drivers (Map Component)!');
-    //           console.log(e);
-    //         }
-    //       );
-    //     },
-    //     e => {
-    //       console.log('error getting current user (Map Component)!');
-    //       console.log(e);
-    //     }
-    //   );
-    //   this.findMe();
-    // })
-
-
-
+    
     this.mapService.getLocation().subscribe(data => {
       //console.log(data); 
       this.lat = data.latitude;
@@ -291,8 +210,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    */
   ngAfterContentInit() {
 
-    //this.findMe();
-    //this.getMarkers();
   }
 
   /**
@@ -328,10 +245,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   mapReady(event: any) {
     this.customMap = event;
     this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('festivals'));
-    // this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('sports'));
-    // this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('nights'));
-    // this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('concerts'));
-
+    
 
   }
 
@@ -355,38 +269,13 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
-        // this.mapService.getDistance(this.currentUser.location).subscribe(
-
-
-        //   coordinates => {
-
-
-
-
-        //     // this.ll = coordinates.latitude; 
-        //     // this.lg = coordinates.longitude;
-
-        //     this.events = coordinates
-        //     console.log(coordinates); 
-        //     console.log('Everything in events' + this.events); 
-        //     console.log("setting center good sir");
-
-        //     }
-
-
-
-        //   );
+       
 
         this.matchService.getDrivers().subscribe(
 
           drivers => {
 
             this.events = drivers;
-
-            // for(let d of drivers ){
-            //   this.events.push(d.location);
-            // }
-            // this.events = drivers; 
             console.log('Drivers are ' + this.events);
           }
 
@@ -407,7 +296,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Does not appear to serve a purpose this may be removable?
    */
   getMarkers() {
-    //console.log("Latitude " + this.markers[0].location.latitude);
     for (const user of this.users) {
       const marker: any = {
         user: user,
@@ -424,7 +312,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         },
         opacity: .92
       };
-      //this.markers.push(marker);
       const newLocation = new google.maps.LatLng(marker.location.latitude, marker.location.longitude);
     }
 
@@ -600,13 +487,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * (incomplete)
    */
   showCustomMarker() {
-    //console.log("Location " + this.currentLat + "," + this.currentLong);
 
     this.map.setCenter(new google.maps.LatLng(this.currentLat, this.currentLong));
 
     const location = new google.maps.LatLng(this.currentLat, this.currentLong);
 
-    // console.log(`selected marker: ${this.selectedMarkerType}`);
 
     const marker = new google.maps.Marker({
       position: location,
@@ -683,18 +568,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;
 
-    /*    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-       this.map.panTo(location);
-
-       if (!this.marker) {
-         this.marker = new google.maps.Marker({
-           position: location,
-           map: this.map,
-           title: 'Got you!'
-         });
-       } else {
-         this.marker.setPosition(location);
-       } */
+ 
   }
 
   /**
