@@ -106,6 +106,7 @@ export class UsercardComponent implements OnInit {
         .getMatchingDrivers(this.currentUser.id)
         .subscribe(users => {
           console.log(users);
+          this.matchService.updateMatches(users);
         });
     });
   }

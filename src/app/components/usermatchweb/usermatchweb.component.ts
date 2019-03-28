@@ -84,7 +84,7 @@ export class UsermatchwebComponent implements OnInit {
   ngOnInit() {
     console.clear();
     this.matchService.getMatches().subscribe(
-      function(users) {
+      users => {
         for (let u of users) {
           const card: DriverCard = {
             user: u,
@@ -98,9 +98,9 @@ export class UsermatchwebComponent implements OnInit {
           this.populateProfileImage(card);
           // Sets the current swipe card to the first element of the array if the array has something in it.
           this.users.push(card);
-          // assign drivers to the list to render and shuffle
-          this.sortedUsers = this.users;
         }
+        // assign drivers to the list to render and shuffle
+        this.sortedUsers = this.users;
       },
       e => {
         console.log("error getting match user!");
@@ -329,14 +329,10 @@ export class UsermatchwebComponent implements OnInit {
     return list;
   }
 
-  populateProfileImage(dc: DriverCard) {
-    this.ds
-      .downloadFile(dc.user.id.toString())
-      .subscribe(
-        b =>
-          (dc.image = this.ss.bypassSecurityTrustUrl(
-            window.URL.createObjectURL(b)
-          ))
-      );
+  public populateProfileImage(dc: DriverCard) {
+    this.ds.downloadFile(dc.user.id.toString()).subscribe(b => {
+      dc.image = this.ss.bypassSecurityTrustUrl(window.URL.createObjectURL(b));
+    });
   }
+
 }

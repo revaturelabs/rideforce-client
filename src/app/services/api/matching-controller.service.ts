@@ -56,9 +56,7 @@ export class MatchingControllerService {
    */
   getMatchingDrivers(riderId: number): Observable<User[]> {
     console.log(riderId);
-    var obs = this.http.get<User[]>(environment.matchUrl + `/matches/${riderId}`);
-    obs.subscribe(resp => this._matches.next(resp));
-    return obs;
+    return this.http.get<User[]>(environment.matchUrl + `/matches/${riderId}`);
     // return this.http.get<Link<User>[]>(environment.matchUrl + `/matches/test/${riderId}`);
     // return this.http.get<Link<User>[]>(environment.apiUrl + `/matches/${riderId}`);
   }
