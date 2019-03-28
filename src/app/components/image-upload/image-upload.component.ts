@@ -41,17 +41,37 @@ export class ImageUploadComponent implements OnInit {
       fd.append('file', this.selectedFile, fileName);
       fd.append('user', this.principal.id.toString());
 
-      const req = new HttpRequest('POST', environment.userUrl + '/storage/uploadFile', fd, { reportProgress: true });
+      
+      
+      
+      
+      if(this.principal.photoUrl != null){
+        const req = new HttpRequest('POST', environment.userUrl + '/storage/uploadFile', fd, { reportProgress: true });
 
-      this.http.request(req).subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.imageUploadProgress = Math.round((100 * event.loaded) / event.total) + '%';
+        this.http.request(req).subscribe(event => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.imageUploadProgress = Math.round((100 * event.loaded) / event.total) + '%';
             console.log('Upload Progress: ', this.imageUploadProgress);
-        } else if (event.type === HttpEventType.Response) {
-          // File uploaded
-          document.getElementById('UploadStats').innerHTML = 'Upload Complete!';
-        }
-      });
+          } else if (event.type === HttpEventType.Response) {
+            // File uploaded
+            document.getElementById('UploadStats').innerHTML = 'Upload Complete!';
+          }
+        });
+
+      } else {
+   
+        const req = new HttpRequest('POST', environment.userUrl + '/storage/uploadFile', fd, { reportProgress: true });
+
+        this.http.request(req).subscribe(event => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.imageUploadProgress = Math.round((100 * event.loaded) / event.total) + '%';
+            console.log('Upload Progress: ', this.imageUploadProgress);
+          } else if (event.type === HttpEventType.Response) {
+            // File uploaded
+            document.getElementById('UploadStats').innerHTML = 'Upload Complete!';
+          }
+        });
+      } 
   }
 }
 
