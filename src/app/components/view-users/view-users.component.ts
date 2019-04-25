@@ -50,7 +50,8 @@ export class ViewUsersComponent implements OnInit {
   //User firstname
   accntFirstName: string;
   accntLastName: string;
-  accntActive;
+  accntRole;
+  accntActive: string;
 
   constructor(private userService: UserControllerService, private authService: AuthService, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -179,10 +180,11 @@ export class ViewUsersComponent implements OnInit {
       this.userId = id;
   }
   //set the whole user
-  setUser(id: number, fName: string, lName: string, active){
+  setUser(id: number, fName: string, lName: string, role, active: string){
     this.userId = id;
     this.accntFirstName = fName;
     this.accntLastName = lName;
+    this.accntRole = role;
     this.accntActive = active;
   }
 

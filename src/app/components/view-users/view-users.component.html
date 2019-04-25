@@ -19,7 +19,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of paginatedUsers" data-toggle="modal" data-target="#user-change-modal"
-            (click)="setUser(user.id, user.firstName, user.lastName, user.role)">
+            (click)="setUser(user.id, user.firstName, user.lastName, user.role, user.active)">
             <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role }}</td>
@@ -293,7 +293,7 @@
         </div>
         <div class="row">
           <div class="col-sm-4">
-            <h6>Activate/Deactivate</h6>
+            <h6>{{userActive}}</h6>
           </div>
           <div class="col-sm-5">
             <button *ngIf="accntActive === 'DISABLED'" class="btn btn-success" data-toggle="modal"
