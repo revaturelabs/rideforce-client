@@ -47,6 +47,10 @@ export class ViewUsersComponent implements OnInit {
   principal: User;
   currentRole: Role;
   currentState: string;
+  //User firstname
+  accntFirstName: string;
+  accntLastName: string;
+  accntActive;
 
   constructor(private userService: UserControllerService, private authService: AuthService, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -174,6 +178,13 @@ export class ViewUsersComponent implements OnInit {
   setUserId(id: number) {
       this.userId = id;
   }
+  //set the whole user
+  setUser(id: number, fName: string, lName: string, active){
+    this.userId = id;
+    this.accntFirstName = fName;
+    this.accntLastName = lName;
+    this.accntActive = active;
+  }
 
   makeTrainer() {
     // this.result = window.confirm("Are you sure you want to make this user a trainer?");
@@ -235,5 +246,9 @@ export class ViewUsersComponent implements OnInit {
 
   reload() {
     this.router.navigate(['/viewUsers']);
+  }
+
+  notice(){
+    alert('This is an alert!');
   }
 }

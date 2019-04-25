@@ -2,92 +2,111 @@
 <div class="form-group row justify-content-center">
   <div class="col-lg-8 col-xs-12 extend" id="tablecont">
     <div class="container-fluid">
-        <span><app-search-users></app-search-users></span>
+      <span>
+        <app-search-users></app-search-users>
+      </span>
       <br>
-      <table class="table table-striped table-bordered table-hover table-sm" >
+      <table class="table table-striped table-bordered table-hover table-sm">
 
         <thead>
           <tr>
-            <th>User ID</th>
-            <th>User's Name</th>
-            <th>User Email</th>
-            <th>User Role</th>
-            <th> </th>
-            <th> </th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Change Role</th>
+            <th>Deactivate Account</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of paginatedUsers">
-            <td>{{ user.id }}</td>
+          <tr *ngFor="let user of paginatedUsers" data-toggle="modal" data-target="#user-change-modal"
+            (click)="setUser(user.id, user.firstName, user.lastName, user.role)">
             <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role }}</td>
             <td>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'ADMIN'">
-                    <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeAdmin" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
-                    </label>
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeTrainer" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
-                    </label>
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeDriver" (click)="setUserId(user.id)">
-                        <input type="radio" name="options" id="driver" autocomplete="off"> Driver
-                      </label>
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeRider" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="rider" autocomplete="off"> Rider
-                    </label>
-                </div>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'ADMIN'">
+                <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeAdmin"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
+                </label>
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeTrainer"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
+                </label>
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeDriver"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="driver" autocomplete="off"> Driver
+                </label>
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeRider"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="rider" autocomplete="off"> Rider
+                </label>
+              </div>
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'TRAINER'">
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeAdmin" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="admin" autocomplete="off"> Admin
-                    </label>
-                    <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeTrainer" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="trainer" autocomplete="off" checked> Trainer
-                    </label>
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeDriver" (click)="setUserId(user.id)">
-                        <input type="radio" name="options" id="driver" autocomplete="off"> Driver
-                      </label>
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeRider" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="rider" autocomplete="off"> Rider
-                    </label>
-                </div>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'TRAINER'">
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeAdmin"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="admin" autocomplete="off"> Admin
+                </label>
+                <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeTrainer"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="trainer" autocomplete="off" checked> Trainer
+                </label>
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeDriver"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="driver" autocomplete="off"> Driver
+                </label>
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeRider"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="rider" autocomplete="off"> Rider
+                </label>
+              </div>
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'DRIVER'">
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeAdmin" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="admin" autocomplete="off"> Admin
-                    </label>
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeTrainer" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
-                    </label>
-                    <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeDriver" (click)="setUserId(user.id)">
-                        <input type="radio" name="options" id="driver" autocomplete="off" checked> Driver
-                      </label>
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeRider" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="rider" autocomplete="off"> Rider
-                    </label>
-                </div>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'DRIVER'">
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeAdmin"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="admin" autocomplete="off"> Admin
+                </label>
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeTrainer"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
+                </label>
+                <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeDriver"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="driver" autocomplete="off" checked> Driver
+                </label>
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeRider"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="rider" autocomplete="off"> Rider
+                </label>
+              </div>
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'RIDER'">
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeAdmin" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="admin" autocomplete="off"> Admin
-                    </label>
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeTrainer" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
-                    </label>
-                    <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeDriver" (click)="setUserId(user.id)">
-                        <input type="radio" name="options" id="driver" autocomplete="off"> Driver
-                      </label>
-                    <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeRider" (click)="setUserId(user.id)">
-                      <input type="radio" name="options" id="rider" autocomplete="off" checked> Rider
-                    </label>
-                </div>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngIf="user.role === 'RIDER'">
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeAdmin"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="admin" autocomplete="off"> Admin
+                </label>
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeTrainer"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
+                </label>
+                <label class="btn btn-outline-info" data-toggle="modal" data-target="#makeDriver"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="driver" autocomplete="off"> Driver
+                </label>
+                <label class="btn btn-outline-info active" data-toggle="modal" data-target="#makeRider"
+                  (click)="setUserId(user.id)">
+                  <input type="radio" name="options" id="rider" autocomplete="off" checked> Rider
+                </label>
+              </div>
             </td>
             <td>
-              <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" data-toggle="modal" data-target="#accountConfirmation" (click)="confirmUserStatus(user.id, user.active)">Enable
-                Account <i class="fas fa-user-check"></i></button>
-              <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" data-toggle="modal" data-target="#accountConfirmation" (click)="confirmUserStatus(user.id, user.active)">Disable
-                Account <i class="fas fa-user-times"></i></button>
+              <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" data-toggle="modal"
+                data-target="#accountConfirmation" (click)="confirmUserStatus(user.id, user.active)">
+                <i class="fas fa-user-check"></i></button>
+              <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" data-toggle="modal"
+                data-target="#accountConfirmation" (click)="confirmUserStatus(user.id, user.active)">
+                <i class="fas fa-user-times"></i></button>
             </td>
           </tr>
         </tbody>
@@ -102,24 +121,24 @@
       <table class="table table-striped table-bordered table-hover table-sm">
         <thead>
           <tr>
-            <th>User ID</th>
-            <th>User's Name</th>
-            <th>User Email</th>
-            <th>User Role</th>
-            <th> </th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Deactivate Account</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of paginatedUsers">
-            <td>{{ user.id }}</td>
             <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role }}</td>
             <td>
-              <button *ngIf="user.active === 'DISABLED'" class="btn btn-success" (click)="confirmUserStatus(user.id, user.active)">Enable
-                Account <i class="fas fa-user-check"></i></button>
-              <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger" (click)="confirmUserStatus(user.id, user.active)">Disable
-                Account <i class="fas fa-user-times"></i></button>
+              <button *ngIf="user.active === 'DISABLED'" class="btn btn-success"
+                (click)="confirmUserStatus(user.id, user.active)">
+                <i class="fas fa-user-check"></i></button>
+              <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger"
+                (click)="confirmUserStatus(user.id, user.active)">
+                <i class="fas fa-user-times"></i></button>
             </td>
           </tr>
         </tbody>
@@ -195,7 +214,7 @@
         <p>Are you sure you want to submit the changes?.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)="makeTrainer()">Yes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="makeTrainer()">Yes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
       </div>
     </div>
@@ -232,12 +251,66 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to submit the changes?.</p>
+        <p>Are you sure you want to submit the changes?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="makeRider()">Yes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="makeRider()">Yes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
       </div>
     </div>
   </div>
+</div>
+<!--Change role Modal-->
+<div class="modal" role="dialog" id="user-change-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change Role</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>This is: {{accntFirstName}} {{accntLastName}}</p>
+        <div class="row">
+          <div class="form-grou col-sm-4">
+            <h6>Change Role: </h6>
+          </div>
+          <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
+            <label class="btn btn-outline-info active" data-toggle="modal">
+              <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
+            </label>
+            <label class="btn btn-outline-info" data-toggle="modal" >
+              <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
+            </label>
+            <label class="btn btn-outline-info" data-toggle="modal" >
+              <input type="radio" name="options" id="driver" autocomplete="off"> Driver
+            </label>
+            <label class="btn btn-outline-info" data-toggle="modal">
+              <input type="radio" name="options" id="rider" autocomplete="off"> Rider
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <h6>Activate/Deactivate</h6>
+          </div>
+          <div class="col-sm-5">
+            <button *ngIf="accntActive === 'DISABLED'" class="btn btn-success" data-toggle="modal"
+               (click)="confirmUserStatus(user.id, user.active)">
+                <i class="fas fa-user-check"></i></button>
+              <button *ngIf="accntActive !== 'DISABLED'" class="btn btn-danger" data-toggle="modal"
+                (click)="confirmUserStatus(user.id, user.active)">
+                <i class="fas fa-user-times"></i></button>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-dismiss="modal" id="deny-btn">Cancel</button>
+          <button class="btn btn-primary" data-dismiss="modal" id="confirm-btn">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
