@@ -276,7 +276,7 @@
           <div class="form-grou col-sm-4">
             <h6>Change Role: </h6>
           </div>
-          <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
+          <!-- <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
             <label class="btn btn-outline-info active" data-toggle="modal">
               <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
             </label>
@@ -289,6 +289,17 @@
             <label class="btn btn-outline-info" data-toggle="modal">
               <input type="radio" name="options" id="rider" autocomplete="off"> Rider
             </label>
+          </div> -->
+          <div class="col-sm-4">
+            <mat-form-field>
+              <mat-label>Change Role</mat-label>
+              <mat-select [(value)] = "accntRole">
+                <mat-option value="ADMIN">Admin</mat-option>
+                <mat-option value="TRAINER">Trainer</mat-option>
+                <mat-option value="DRIVER">Driver</mat-option>
+                <mat-option value="RIDER">Rider</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
         <div class="row">
