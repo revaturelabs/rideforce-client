@@ -5,6 +5,7 @@ import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
+import { makeAnimationEvent } from '@angular/animations/browser/src/render/shared';
 
 @Component({
   selector: 'app-view-users',
@@ -50,8 +51,9 @@ export class ViewUsersComponent implements OnInit {
   //User firstname
   accntFirstName: string;
   accntLastName: string;
-  accntRole;
+  accntRole: string;
   accntActive: string;
+  accntEmail: string;
 
   constructor(private userService: UserControllerService, private authService: AuthService, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -69,9 +71,9 @@ export class ViewUsersComponent implements OnInit {
 
     console.log('getting users');
     this.getUsers().then(data => {
-        this.users = data;
-        this.filterUsers('');
-      });
+      this.users = data;
+      this.filterUsers('');
+    });
     this.getRole();
     this.getState();
   }
@@ -116,14 +118,15 @@ export class ViewUsersComponent implements OnInit {
     let data;
     console.log('hitting users');
     if (this.principal.role === Role.Admin) {
-        return this.userService.getAllUsers().then((x) => {
+      return this.userService.getAllUsers().then((x) => {
         data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider || y.role === Role.Trainer || y.role === Role.Admin);
         this.users = data;
         return data;
       });
     } else if (this.principal.role === Role.Trainer) {
-      this.userService.getAllUsers().then((x) => { data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider);
-       this.users = data;
+      this.userService.getAllUsers().then((x) => {
+        data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider);
+        this.users = data;
       });
     }
     console.log(data);
@@ -140,7 +143,7 @@ export class ViewUsersComponent implements OnInit {
     console.log('how many paginated users?  ', this.paginatedUsers);
     // this.filterUsers("");
     return this.paginatedUsers;
-    }
+  }
 
   dividePages(users: any[], divider: number) {
     this.numPages = [];
@@ -172,47 +175,48 @@ export class ViewUsersComponent implements OnInit {
       this.userStatus = 'ACTIVE';
     }
 
-      this.userService.updateStatus(this.userId, this.userStatus).then();
-      this.router.navigate(['/viewUsers']);
+    this.userService.updateStatus(this.userId, this.userStatus).then();
+    this.router.navigate(['/viewUsers']);
   }
 
   setUserId(id: number) {
-      this.userId = id;
+    this.userId = id;
   }
   //set the whole user
-  setUser(id: number, fName: string, lName: string, role, active: string){
+  setUser(id: number, fName: string, lName: string, email: string, role, active: string) {
     this.userId = id;
     this.accntFirstName = fName;
     this.accntLastName = lName;
+    this.accntEmail = email;
     this.accntRole = role;
     this.accntActive = active;
   }
 
   makeTrainer() {
     // this.result = window.confirm("Are you sure you want to make this user a trainer?");
-      this.userService.updateRole(this.userId, Role.Trainer).then();
-      this.router.navigate(['/viewUsers']);
-    }
+    this.userService.updateRole(this.userId, Role.Trainer).then();
+    this.router.navigate(['/viewUsers']);
+  }
 
 
   makeAdmin() {
     // this.result = window.confirm("Are you sure you want to make this user an admin?");
-      this.userService.updateRole(this.userId, Role.Admin).then();
-      this.router.navigate(['/viewUsers']);
+    this.userService.updateRole(this.userId, Role.Admin).then();
+    this.router.navigate(['/viewUsers']);
   }
 
   makeDriver() {
     // this.result = window.confirm("This user is now a Driver");
-      this.userService.updateRole(this.userId, Role.Driver).then();
-      this.router.navigate(['/viewUsers']);
-    }
+    this.userService.updateRole(this.userId, Role.Driver).then();
+    this.router.navigate(['/viewUsers']);
+  }
 
   makeRider() {
-   // this.result = window.confirm("This user is now a Rider.");
+    // this.result = window.confirm("This user is now a Rider.");
     // console.log("Called makeRider");
-      this.userService.updateRole(this.userId, Role.Rider).then();
-      this.router.navigate(['/viewUsers']);
-    }
+    this.userService.updateRole(this.userId, Role.Rider).then();
+    this.router.navigate(['/viewUsers']);
+  }
 
 
   public filterUsers(query) {
@@ -250,7 +254,28 @@ export class ViewUsersComponent implements OnInit {
     this.router.navigate(['/viewUsers']);
   }
 
-  notice(){
-    alert('This is an alert!');
+  //submit changes user depending on new accntRole
+  changeRole() {
+    console.log("clicked on");
+    if (this.accntRole == "") {
+      console.log("nothing Happens");
+    }
+    else if (this.accntRole == "ADMIN") {
+      console.log("Made into an Admin");
+      this.makeAdmin();
+    }
+    else if (this.accntRole == "TRAINER") {
+      console.log("Made into a Trainer");
+      this.makeTrainer();
+    }
+    else if (this.accntRole == "DRIVER") {
+      console.log("Made into a Driver");
+      this.makeDriver();
+    }
+    else if (this.accntRole == "RIDER") {
+      console.log("Made into Rider");
+      this.makeRider();
+    }
+    this.updateUserStatus();
   }
 }

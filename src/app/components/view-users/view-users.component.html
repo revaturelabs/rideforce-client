@@ -19,7 +19,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of paginatedUsers" data-toggle="modal" data-target="#user-change-modal"
-            (click)="setUser(user.id, user.firstName, user.lastName, user.role, user.active)">
+            (click)="setUser(user.id, user.firstName, user.lastName, user.email, user.role, user.active)">
             <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role }}</td>
@@ -265,13 +265,24 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Change Role</h5>
+        <h5 class="modal-title">Account Settings</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>This is: {{accntFirstName}} {{accntLastName}}</p>
+        <div class="row">
+          <h6 class="col-sm-4">
+            Name:
+          </h6>        
+          <h6 class="col-sm-4">{{accntFirstName}} {{accntLastName}}</h6> <br>
+
+        </div>
+        <div class="row">
+          <h6 class="col-sm-4">Email: </h6>
+          <p class="col-sm-4">{{accntEmail}}</p>
+        </div>
+        
         <div class="row">
           <div class="form-grou col-sm-4">
             <h6>Change Role: </h6>
@@ -291,7 +302,7 @@
             </label>
           </div> -->
           <div class="col-sm-4">
-            <mat-form-field>
+            <!--<mat-form-field>
               <mat-label>Change Role</mat-label>
               <mat-select [(value)] = "accntRole">
                 <mat-option value="ADMIN">Admin</mat-option>
@@ -299,26 +310,33 @@
                 <mat-option value="DRIVER">Driver</mat-option>
                 <mat-option value="RIDER">Rider</mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field>-->
+  <select class="form-group" matNativeControl [(ngModel)]= "accntRole" required>
+    <option value="ADMIN">Admin</option>
+    <option value="TRAINER">Trainer</option>
+    <option value="DRIVER">Driver</option>
+    <option value="RIDER">Rider</option>
+  </select>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-4">
-            <h6>{{userActive}}</h6>
+            <h6>Activate/Deactivate:</h6>
           </div>
           <div class="col-sm-5">
             <button *ngIf="accntActive === 'DISABLED'" class="btn btn-success" data-toggle="modal"
                (click)="confirmUserStatus(user.id, user.active)">
-                <i class="fas fa-user-check"></i></button>
+               Activate <i class="fas fa-user-check"></i></button>
               <button *ngIf="accntActive !== 'DISABLED'" class="btn btn-danger" data-toggle="modal"
                 (click)="confirmUserStatus(user.id, user.active)">
-                <i class="fas fa-user-times"></i></button>
+                Deactivate <i class="fas fa-user-times"></i></button>
           </div>
         </div>
 
         <div class="modal-footer">
           <button class="btn btn-secondary" data-dismiss="modal" id="deny-btn">Cancel</button>
-          <button class="btn btn-primary" data-dismiss="modal" id="confirm-btn">Submit</button>
+          <button class="btn btn-primary" data-dismiss="modal" id="confirm-btn"
+          (click)="changeRole()">Submit</button>
         </div>
       </div>
     </div>
