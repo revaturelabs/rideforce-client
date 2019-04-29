@@ -8,17 +8,15 @@
 
         <thead>
           <tr>
-            <th>User ID</th>
-            <th>User's Name</th>
-            <th>User Email</th>
-            <th>User Role</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
             <th> </th>
             <th> </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of paginatedUsers">
-            <td>{{ user.id }}</td>
             <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role }}</td>

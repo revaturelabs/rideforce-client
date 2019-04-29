@@ -22,6 +22,8 @@ import { UserControllerService } from '../../services/api/user-controller.servic
    registrationToken: string;
    /*copyToClipboard message for ngif*/
    private copyToClipboard;
+   /*error popup for invalid date*/   
+   private ERROR;
 
   /**
    * Injects services into the component.
@@ -47,7 +49,15 @@ import { UserControllerService } from '../../services/api/user-controller.servic
    * Generates a new registration key.
    */
    getRegistrationKey() {
-     this.userService.getRegistrationKey(this.rtr).subscribe(data => this.registrationToken = data);
+     let today = new Date().getTime();
+     let parse = Date.parse(this.rtr.batchEndDate);
+     if (today > parse) {
+       this.ERROR = true;
+     }
+     else{
+       this.userService.getRegistrationKey(this.rtr).subscribe(data => this.registrationToken = data);
+       this.ERROR = false;
+     }
      this.copyToClipboard = false;
    }
 
