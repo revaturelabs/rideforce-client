@@ -284,7 +284,7 @@
         </div>
         
         <div class="row">
-          <div class="form-grou col-sm-4">
+          <div class="form-group col-sm-4">
             <h6>Change Role: </h6>
           </div>
           <!-- <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
@@ -319,17 +319,39 @@
   </select>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <h6>Activate/Deactivate:</h6>
+
+    <div class="row">
+          <div class="form-group col-sm-4">
+            <h6>Activate/Deactivate: </h6>
           </div>
-          <div class="col-sm-5">
-            <button *ngIf="accntActive === 'DISABLED'" class="btn btn-success" data-toggle="modal"
-               (click)="confirmUserStatus(user.id, user.active)">
-               Activate <i class="fas fa-user-check"></i></button>
-              <button *ngIf="accntActive !== 'DISABLED'" class="btn btn-danger" data-toggle="modal"
-                (click)="confirmUserStatus(user.id, user.active)">
-                Deactivate <i class="fas fa-user-times"></i></button>
+          <!-- <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
+            <label class="btn btn-outline-info active" data-toggle="modal">
+              <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
+            </label>
+            <label class="btn btn-outline-info" data-toggle="modal" >
+              <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
+            </label>
+            <label class="btn btn-outline-info" data-toggle="modal" >
+              <input type="radio" name="options" id="driver" autocomplete="off"> Driver
+            </label>
+            <label class="btn btn-outline-info" data-toggle="modal">
+              <input type="radio" name="options" id="rider" autocomplete="off"> Rider
+            </label>
+          </div> -->
+          <div class="col-sm-4">
+            <!--<mat-form-field>
+              <mat-label>Change Role</mat-label>
+              <mat-select [(value)] = "accntRole">
+                <mat-option value="ADMIN">Admin</mat-option>
+                <mat-option value="TRAINER">Trainer</mat-option>
+                <mat-option value="DRIVER">Driver</mat-option>
+                <mat-option value="RIDER">Rider</mat-option>
+              </mat-select>
+            </mat-form-field>-->
+            <select class="form-group" matNativeControl [(ngModel)]="accntActive" required>
+            <option value="ACTIVE">Active</option>
+            <option value="INACTIVE">Inactive</option>
+  </select>
           </div>
         </div>
 
