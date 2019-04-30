@@ -40,7 +40,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   public selectedUser: User = null;// made public so it can build. was private
 
 
-
+  
   /** Holds list of possible drivers to present */
   users: any[] = [];
 
@@ -256,11 +256,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   mapReady(event: any) {
     this.customMap = event;
     this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('festivals'));
-
-
   }
 
-  events: User[];
+  drivers: User[];
   lat: any;
   lng: any;
   ll: any;
@@ -272,33 +270,18 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   getEvents() {
-
-
-
-
-
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
-
-
         this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
-
           drivers => {
-
-            this.events = drivers;
-            console.log('Drivers are ' + this.events);
+            this.drivers = drivers;
+            this.fitBounds = true;
+            //console.log('Drivers are ' + JSON.stringify(this.drivers));
           }
-
-
         );
-
-
       }
-
     );
-
-
   }
 
 
@@ -307,25 +290,24 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Does not appear to serve a purpose this may be removable?
    */
   getMarkers() {
-    for (const user of this.users) {
+    for (const driver of this.drivers) {
       const marker: any = {
-        user: user,
+        user: driver,
         icon: {
-          url: user.user.photoUrl,
+          url: driver.photoUrl,
           scaledSize: {
             width: 30,
             height: 30
           }
         },
         location: {
-          latitude: user.location.latitude,
-          longitude: user.location.longitude
+          latitude: driver.location.latitude,
+          longitude: driver.location.longitude
         },
         opacity: .92
       };
       const newLocation = new google.maps.LatLng(marker.location.latitude, marker.location.longitude);
     }
-
   }
 
   /**
@@ -504,7 +486,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
     const location = new google.maps.LatLng(this.currentLat, this.currentLong);
 
-
     const marker = new google.maps.Marker({
       position: location,
       map: this.map,
@@ -521,7 +502,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     addDriverMarkers
     Renders location of a drivers provided a location
   */
-
   addDriverMarkers(newLocation: Location) {
     const location = new google.maps.LatLng(newLocation.latitude, newLocation.longitude);
     const marker = new google.maps.Marker({
