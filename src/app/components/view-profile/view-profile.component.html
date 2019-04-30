@@ -165,6 +165,24 @@
           </ng-template>
         </ngb-tab>
       </div>
+      <div label="Contact div">
+        <ngb-tab title="Contact info" id="3">
+          <ng-template ngbTabContent>
+            <div class="container-fluid">
+              <table *ngIf="contactInfoArray">
+                <thead>
+                  <tr *ngFor="let item of contactInfoArray" >
+                    
+                    <td>{{item.type}}:</td>
+                    <td>{{item.info}}</td>
+                  </tr>
+                </thead>
+              </table>
+              
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </div>
       <div *ngIf="currentRole === 'DRIVER'" label="CAR INFO div">
         <ngb-tab title="Your Garage" id="3">
           <ng-template ngbTabContent>

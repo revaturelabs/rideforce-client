@@ -12,6 +12,10 @@ import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { GeocodeService } from '../../services/geocode.service';
 import { CustomtimePipe} from '../../pipes/customtime.pipe';
+import { HttpClient } from '@angular/common/http';
+import { CognitoUser } from 'amazon-cognito-identity-js';
+import { ContactType } from 'aws-sdk/clients/route53domains';
+
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -42,6 +46,7 @@ export class ViewProfileComponent implements OnInit {
   _address: string;
   /** The day the User's batch ends*/
   batchEnd: any;
+  /** Array of User's contact-info from DB */
   contactInfoArray: ContactInfo[] = [];
   /** Whether the user can make changes (Currently not used) */
   canEdit = false;
@@ -59,6 +64,7 @@ export class ViewProfileComponent implements OnInit {
   users: any[];
   /** Holds the list of users filtered with search query */
   filteredUsers: any[];
+  /** Holds the list of contact-info items for the currently logged user */
   result: boolean;
   car: Car;
   location : Location;
@@ -75,7 +81,8 @@ export class ViewProfileComponent implements OnInit {
    */
   constructor(private userService: UserControllerService, 
               private authService: AuthService, private zone: NgZone, private locationSerivce: GeocodeService, 
-              private router: Router) {
+              private router: Router,
+              private http: HttpClient) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -83,6 +90,7 @@ export class ViewProfileComponent implements OnInit {
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
+ 
     this.authService.principal.subscribe(user => {
       this.principal = user;
       if (this.principal.id > 0) {
@@ -94,7 +102,7 @@ export class ViewProfileComponent implements OnInit {
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
         this.startTime = this.pipe.transform(this.principal.startTime);
         console.log(this.startTime);
-        
+        this.getInfoById();
 
         //this.getOffice();
 
@@ -120,7 +128,9 @@ export class ViewProfileComponent implements OnInit {
         
       }
     });
+
     this.getOffice();
+    
     console.log(this.officeObject);
     console.log(this.principal);
   }
@@ -134,8 +144,26 @@ export class ViewProfileComponent implements OnInit {
   }
 
   /**
-   * Allows the form to be edited
+   * Get contact-info for specified user-id
    */
+  getInfoById(){
+
+    //return this.http.get<ContactInfo[]>("http://turtlejr.sps.cuny.edu:5555/contact-info/58");
+    console.log("pre");
+    console.log(this.principal.id);
+    console.log("post");  
+    console.log('http://turtlejr.sps.cuny.edu:5555/contact-info/c/'+this.principal.id);
+     this.http.get('http://turtlejr.sps.cuny.edu:5555/contact-info/c/'+this.principal.id).subscribe(
+       response => {
+        this.contactInfoArray = response as ContactInfo[];
+        console.log("CONTACT INFO ARRAY: " +  this.contactInfoArray);
+        this.contactInfoArray.forEach(function(element){
+          console.log(element.type);
+        });
+        console.log(response);
+      });
+     //get json array that is for slack and isolate id
+  }
   edit() {
     document.getElementById('firstName').removeAttribute('disabled');
     document.getElementById('lastName').removeAttribute('disabled');
@@ -293,6 +321,7 @@ export class ViewProfileComponent implements OnInit {
   }
   tabSelect($event){
     console.log($event);
+    
   }
 
   /** Sets up contact information */
