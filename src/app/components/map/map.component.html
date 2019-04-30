@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <br>
-      <agm-map [latitude]="lat" [longitude]="lng" (mapReady)="mapReady($event)" [fitBounds]="true">
+      <agm-map [latitude]="lat" [longitude]="lng" (mapReady)="mapReady($event)" [fitBounds]="fitBounds" [zoom]="17">
         <button class="btn btn-primary" id="festivals" (click)="festivalClicked()"> Drivers Near You
         </button>
         <agm-marker [latitude]='lat' [longitude]='lng' [label]="labelOptions" [agmFitBounds]="true">
