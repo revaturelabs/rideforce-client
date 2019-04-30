@@ -134,6 +134,7 @@ export class LoginComponent implements OnInit {
         messageLogin.style.display = 'block';
         messageLogin.style.color = 'green';
         messageLogin.innerHTML = "Password changed.";
+        this.route.navigateByUrl("/");
       },
       onFailure: err => {
       //   /*debug*/ console.log(err);
