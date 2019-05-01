@@ -97,10 +97,12 @@ export class ViewUsersComponent implements OnInit {
       this.principal.active = 'INACTIVE';
       this.authService.changePrincipal(this.principal);
       this.getState();
+      console.log("swtching to inactive");
     } else if (this.principal.active === 'INACTIVE') {
       this.principal.active = 'ACTIVE';
       this.authService.changePrincipal(this.principal);
       this.getState();
+      console.log("swtching to active");
     } else {
       console.log('Invalid State');
     }
@@ -275,6 +277,22 @@ export class ViewUsersComponent implements OnInit {
     else if (this.accntRole == "RIDER") {
       console.log("Made into Rider");
       this.makeRider();
+    }
+    this.updateUserStatus();
+  }
+
+  //change state between active/inactive
+  changeState() {
+    if (this.accntActive == "") {
+      console.log("nothing to change");
+    }
+    else if (this.accntActive == "ACTIVE") {
+      console.log("making account active");
+      this.switchState();
+    }
+    else if (this.accntActive == "INACTIVE") {
+      console.log("making account inactive");
+      this.switchState();
     }
     this.updateUserStatus();
   }
