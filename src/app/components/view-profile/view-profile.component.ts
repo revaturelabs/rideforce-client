@@ -74,7 +74,7 @@ export class ViewProfileComponent implements OnInit {
   startTime: Date;
   pipe: CustomtimePipe = new CustomtimePipe();
   /** Pre-constructed list of possible contact-types in DB */
-  contactInfoTypes = ["Cell Phone", "Email", "Skype", "Slack", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
+  contactInfoTypes = ["Cell Phone", "Email", "Slack", "Skype", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
 
   session: boolean;
 
