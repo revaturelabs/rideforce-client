@@ -15,6 +15,8 @@ import { CustomtimePipe} from '../../pipes/customtime.pipe';
 import { HttpClient } from '@angular/common/http';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { ContactType } from 'aws-sdk/clients/route53domains';
+import { environment } from '../../../environments/environment';
+
 
 
 /**
@@ -152,7 +154,7 @@ export class ViewProfileComponent implements OnInit {
     console.log("pre");
     console.log(this.principal.id);
     console.log("post");  
-    console.log('http://turtlejr.sps.cuny.edu:5555/contact-info/c/'+this.principal.id);
+    console.log(environment.userUrl+"/contact-info/c/"+this.principal.id);
      this.http.get('http://turtlejr.sps.cuny.edu:5555/contact-info/c/'+this.principal.id).subscribe(
        response => {
         this.contactInfoArray = response as ContactInfo[];
