@@ -21,9 +21,9 @@ import { UserControllerService } from '../../services/api/user-controller.servic
    /** Holds the generated registration token */
    registrationToken: string;
    /*copyToClipboard message for ngif*/
-   public copyToClipboard;
+   private copyToClipboard;
    /*error popup for invalid date*/   
-   public invalidDate;
+   private invalidDate;
 
   /**
    * Injects services into the component.
