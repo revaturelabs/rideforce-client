@@ -174,57 +174,41 @@
               <h2>Car Information:</h2>
               <br>
               <br>
-              <!--
-
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Email</span>
-                </div>
-                <input type="email" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."
-                  disabled>
-              </div>
-              <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
-                <div *ngIf="uName.errors.required">
-                  Email cannot be empty
-                </div>
-                <div *ngIf="uName.errors.maxLength">
-                  Email cannot be more than 25 characters
-                </div>
-              </div>
-              -->
+             
               <div>
                   
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Make</span>                   
+                    <!--<span class="input-group-text" id="basic-addon1">Make</span>-->
+                    <span class="input-group-text" id="basic-addon1"><strong>Make</strong></span>                   
                   </div>
-                  <input class="form-control" id="basic-addon1" value="{{car['make']}}" disabled required>
+                  <input class="form-control" value="{{car['make']}}" disabled required>
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Model</span>                    
+                    <span class="input-group-text" id="basic-addon1"><strong>Model</strong></span>                    
                   </div>
-                  <input class="form-control" id="basic-addon1" value="{{car['model']}}" disabled required>                    
+                  <input class="form-control" value="{{car['model']}}" disabled required>                    
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Year</span>                 
+                    <span class="input-group-text" id="basic-addon1"><strong>Year</strong></span>                 
                   </div>
-                  <input class="form-control" id="basic-addon1" value="{{car['year']}}" disabled required>
+                  <input class="form-control" value="{{car['year']}}" disabled required>
                 </div>
               
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Color</span>                            
+                    <span class="input-group-text" id="basic-addon1"><strong>Color</strong></span>                            
                   </div>
-                  <input class="form-control" id="basic-addon1" value="{{car['color']}}" disabled required>
+                  <input class="form-control" value="{{car['color']}}" disabled required>
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">License</span>
+                    <span class="input-group-text"><strong>License</strong></span>
                   </div>
                   <input class="form-control" id="basic-addon1" value="{{car['license']}}" disabled required>
                 </div>
