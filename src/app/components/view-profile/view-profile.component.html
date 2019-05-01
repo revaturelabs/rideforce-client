@@ -193,43 +193,40 @@
               </div>
               -->
               <div>
+                  
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Make</span>
-                    <span class="input-group-text">{{car['make']}}</span>
+                    <span class="input-group-text" id="basic-addon1">Make</span>                   
                   </div>
+                  <input class="form-control" id="basic-addon1" value="{{car['make']}}" disabled required>
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Model</span>
-                    <span class="input-group-text">{{car['model']}}</span>
-                    
+                    <span class="input-group-text">Model</span>                    
                   </div>
+                  <input class="form-control" id="basic-addon1" value="{{car['model']}}" disabled required>                    
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Year</span>
-                    <span class="input-group-text">{{car['year']}}</span>
-                    
+                    <span class="input-group-text">Year</span>                 
                   </div>
+                  <input class="form-control" id="basic-addon1" value="{{car['year']}}" disabled required>
                 </div>
               
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Color</span>
-                    <span class="input-group-text">{{car['color']}}</span>
-        
+                    <span class="input-group-text">Color</span>                            
                   </div>
+                  <input class="form-control" id="basic-addon1" value="{{car['color']}}" disabled required>
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">License</span>
-                    <span class="input-group-text">{{car['license']}}</span>
-                    
                   </div>
+                  <input class="form-control" id="basic-addon1" value="{{car['license']}}" disabled required>
                 </div>
 
                 <button class="btn btnEdit" (click)="registerCar()">Update Car</button>
