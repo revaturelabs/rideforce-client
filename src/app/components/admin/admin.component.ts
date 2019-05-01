@@ -23,7 +23,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
    /*copyToClipboard message for ngif*/
    private copyToClipboard;
    /*error popup for invalid date*/   
-   private invalidDate;
+   public invalidDate;
 
   /**
    * Injects services into the component.
