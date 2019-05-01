@@ -14,7 +14,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">First Name</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" id="firstName" required disabled>
+                <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" id="firstName"
+                  required disabled>
               </div>
               <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
                 <div *ngIf="firstname.errors.required">
@@ -30,7 +31,8 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text " id="basic-addon1 ">Last Name</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="lastName" #lastname="ngModel" id="lastName" required disabled>
+                <input type="text" class="form-control" [(ngModel)]="lastName" #lastname="ngModel" id="lastName"
+                  required disabled>
               </div>
               <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
                 <div *ngIf="lastname.errors.required">
@@ -46,8 +48,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Email</span>
                 </div>
-                <input type="email" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."
-                  disabled>
+                <input type="email" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required
+                  placeholder="Email.." disabled>
               </div>
               <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
                 <div *ngIf="uName.errors.required">
@@ -59,7 +61,7 @@
               </div>
 
 
-<!--               <div class="input-group mb-3">
+              <!--               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Office Address</span>
                 </div>
@@ -77,9 +79,10 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Address</span>
                 </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-                  appPlacesAutocomplete (addressSelect)="onAddressSelect($event)" [(ngModel)]="_address" #address="ngModel"
-                  required id="address" placeholder="Type to search.." disabled>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                  name="autocompleteTest" appPlacesAutocomplete (addressSelect)="onAddressSelect($event)"
+                  [(ngModel)]="_address" #address="ngModel" required id="address" placeholder="Type to search.."
+                  disabled>
               </div>
               <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
                 <div *ngIf="address.errors.required">
@@ -98,23 +101,28 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Starting Time</span>
                 </div>
-                <input type="text" id="dayStart" class="form-control" value= "{{startTime | date:'shortTime'}}" disabled> 
+                <input type="text" id="dayStart" class="form-control" value="{{startTime | date:'shortTime'}}" disabled>
               </div>
-            
+
               <div id="switchRoles" hidden>
-                <button *ngIf="currentRole === 'DRIVER'" class="btn btn-secondary" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
-                <button *ngIf="currentRole === 'RIDER'" class="btn btn-secondary" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
+                <button *ngIf="currentRole === 'DRIVER'" class="btn btn-secondary" id="switchRider"
+                  (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
+                <button *ngIf="currentRole === 'RIDER'" class="btn btn-secondary" id="switchDriver"
+                  (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
               </div>
               <br>
               <!--Inactivity does not affect admin/trainer functionality. No point in showing them the button-->
               <div *ngIf="currentRole !== 'ADMIN' && currentRole !== 'TRAINER'" id="switchStates" hidden>
-                <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Switch to Inactive <i class='fas fa-bell-slash'></i></button>
-                <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
+                <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive"
+                  (click)="switchState()">Switch to Inactive <i class='fas fa-bell-slash'></i></button>
+                <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive"
+                  (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
               </div>
               <br>
               <div>
                 <button class="btn btnEdit" (click)="edit()" id="edit">Edit <i class="fas fa-pencil-alt"></i></button>
-                <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i class="fas fa-save"></i></button>
+                <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i
+                    class="fas fa-save"></i></button>
               </div>
               <div style="padding-top: 20px">
                 <div *ngIf="!requiredInfoFields" class="alert alert-danger" id="errorMessage" hidden>
@@ -132,7 +140,8 @@
             <div class="container-fluid">
               <div class="form-group">
                 <label for="aboutYou">Bio</label>
-                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
+                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required
+                  maxlength="225">{{existingBio}}</textarea>
               </div>
               <br>
               <div>
@@ -171,14 +180,28 @@
             <div class="container-fluid">
               <table *ngIf="contactInfoArray">
                 <thead>
-                  <tr *ngFor="let item of contactInfoArray" >
-                    
+                  <tr *ngFor="let item of contactInfoArray">
+
                     <td>{{item.type}}:</td>
                     <td>{{item.info}}</td>
                   </tr>
                 </thead>
               </table>
               
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <select class="browser-default custom-select" #contactType>
+                      <option [value] = "type" *ngFor="let type of contactInfoTypes">
+                              {{type}}
+                      </option>
+                    </select>
+                  </span>
+                </div>
+                <input type="text" class="form-control" #contactContent required>
+                <button type="button" class="btn btn-warning" (click) = "updateContactInfo(contactType.value, contactContent.value)">Update</button>
+              </div>
+            
             </div>
           </ng-template>
         </ngb-tab>
@@ -203,7 +226,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Model</span>
                     <span class="input-group-text">{{car['model']}}</span>
-                    
+
                   </div>
                 </div>
 
@@ -211,15 +234,15 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Year</span>
                     <span class="input-group-text">{{car['year']}}</span>
-                    
+
                   </div>
                 </div>
-              
+
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Color</span>
                     <span class="input-group-text">{{car['color']}}</span>
-        
+
                   </div>
                 </div>
 
@@ -227,7 +250,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">License</span>
                     <span class="input-group-text">{{car['license']}}</span>
-                    
+
                   </div>
                 </div>
 
@@ -244,7 +267,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -254,32 +278,34 @@
         </button>
       </div>
       <div class="modal-body">
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Password</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>
-              </div>
-              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
-                <div *ngIf="pWord.errors.required">
-                  Password cannot be empty
-                </div>
-                <div *ngIf="pWord.errors.maxLength">
-                  Password cannot be more than 15 characters
-                </div>
-              </div>
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Confirm</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel" id="confirmPassword" required disabled>
-              </div>
-              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-                <div *ngIf="password != passwordConfirm">
-                  Passwords do not match!
-                </div>
-              </div>
+        <div class="input-group mb-3 ">
+          <div class="input-group-prepend ">
+            <span class="input-group-text" id="basic-addon1 ">Password</span>
           </div>
+          <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required
+            disabled>
+        </div>
+        <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
+          <div *ngIf="pWord.errors.required">
+            Password cannot be empty
+          </div>
+          <div *ngIf="pWord.errors.maxLength">
+            Password cannot be more than 15 characters
+          </div>
+        </div>
+        <div class="input-group mb-3 ">
+          <div class="input-group-prepend ">
+            <span class="input-group-text" id="basic-addon1 ">Confirm</span>
+          </div>
+          <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel"
+            id="confirmPassword" required disabled>
+        </div>
+        <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
+          <div *ngIf="password != passwordConfirm">
+            Passwords do not match!
+          </div>
+        </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="updatePassword()">Send</button>
@@ -287,4 +313,3 @@
     </div>
   </div>
 </div>
-
