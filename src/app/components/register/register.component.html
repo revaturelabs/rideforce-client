@@ -15,7 +15,8 @@
                   <input [ngClass]="{ 'is-invalid': fn.invalid && (fn.dirty || fn.touched), 'is-valid': fn.valid }" #fn="ngModel" pattern="[a-zA-Z]*" [(ngModel)]="user.firstName" type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required/>
                   <div *ngIf="!!fn?.errors?.required" class="invalid-feedback">First name cannot be empty.</div>
                   <div *ngIf="!!fn?.errors?.pattern" class="invalid-feedback">First name cannot have any symbols or
-                    numbers.</div>
+                    numbers.
+                  </div>
                 </div>
                 <!-- Last Name Input -->
                 <div class="form-group col-md-6">
