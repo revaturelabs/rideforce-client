@@ -244,7 +244,7 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1 ">Password</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>
+                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required >
               </div>
               <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
                 <div *ngIf="pWord.errors.required">
@@ -258,7 +258,7 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text" id="basic-addon1 ">Confirm</span>
                 </div>
-                <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel" id="confirmPassword" required disabled>
+                <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel" id="confirmPassword" required >
               </div>
               <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
                 <div *ngIf="password != passwordConfirm">
