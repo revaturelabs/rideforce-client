@@ -3,6 +3,7 @@
   <div class="col-5"></div>
   <div class="col-lg-4 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
+
       <div label="VIEW PROFILE div">
         <ngb-tab title="Your Profile" id="1">
           <ng-template ngbTabContent>
@@ -59,21 +60,6 @@
                   Email cannot be more than 25 characters
                 </div>
               </div>
-
-
-              <!--               <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Office Address</span>
-                </div>
-                <div class="input-group-text" style="padding-right: 137px; display: inline" id="currentOffice">
-                </div>
-                <div class="input-group-text" style="padding-right: 100px; display: none" id="selectOffice">
-                   <select [(ngModel)]="officeObject">
-                    <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
-                  </select> 
-                </div>
-              </div> -->
-
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -153,124 +139,73 @@
                 <div style="padding-left: 20px">
                 </div>
               </div>
-              <button type="button" class="btn btn-success" (click)="updateBio(bioInput.value)">Submit</button>
+              <button type="button" class="btn btnEdit" (click)="updateBio(bioInput.value)">Submit <i class='fas fa-person-booth'></i></button>
               <br>
               <br>
               <br>
-              <!--<div *ngFor="let item of contactInfoArray" class="input-group mb-3">
+              <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
                 <div class="input-group-prepend">
                   <div class="input-group-text" style="padding-right: 100px">
                     <select [(ngModel)]="item.type">
-                     <option *ngFor="let contact of contactTypeArray">{{contact}}</option>
+                      <option *ngFor="let contact of contactTypeArray">{{contact}}</option>
                     </select>
                   </div>
                   <input type="text" class="" [(ngModel)]="item.info">
                   <br>
                   <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
                   <br>
-                </div> 
-              </div>
-              From previous batch
-            Moved contact info to its own tab, will leave thsi code here if future batch would like to move it back, keep in this this code was only able to get the arary
-            but wasnt able to make use of contact types
-            --> 
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-      <div label="Contact div" id="cinfo">
-        <ngb-tab title="Contact Info" id="4">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-              
-              <div *ngIf="contactInfoArray.length > 0 ; else none">
-              <table  class ="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Contact Type</th>
-                        <th scope="col">Contact Info</th>
-                      </tr>
-                </thead>
-                  <tr *ngFor="let item of contactInfoArray">
-
-                    <td>{{item.type}}</td>
-                    <td>{{item.info}}</td>
-                  </tr>
-                
-              </table>
-            </div>
-            <ng-template #none>
-                <h5>Looks like you don't have any contact info recorded. Add some below!</h5>
-              </ng-template>
-              
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <select class="browser-default custom-select" #contactType>
-                      <option [value] = "type" *ngFor="let type of contactInfoTypes">
-                              {{type}}
-                      </option>
-                    </select>
-                  </span>
                 </div>
-                <input type="text" class="form-control" #contactContent required>
-                <button type="button" id= "updatebtn" class="btn btn-warning" (click) = "updateContactInfo(contactType.value, contactContent.value)">Update</button>
               </div>
-            
             </div>
           </ng-template>
         </ngb-tab>
       </div>
-      <div *ngIf="currentRole === 'DRIVER'" label="CAR INFO div">
+      <!-- <div *ngIf="currentRole === 'DRIVER'" label="CAR INFO div"> -->
+      <div label="CAR INFO div">
         <ngb-tab title="Your Garage" id="3">
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>
               <h2>Car Information:</h2>
               <br>
-              <br>
-              <div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Make</span>
-                    <span class="input-group-text">{{car['make']}}</span>
-                  </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <!--<span class="input-group-text" id="basic-addon1">Make</span>-->
+                  <span class="input-group-text" id="basic-addon1"><strong>Make</strong></span>
                 </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Model</span>
-                    <span class="input-group-text">{{car['model']}}</span>
-
-                  </div>
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Year</span>
-                    <span class="input-group-text">{{car['year']}}</span>
-
-                  </div>
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Color</span>
-                    <span class="input-group-text">{{car['color']}}</span>
-
-                  </div>
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">License</span>
-                    <span class="input-group-text">{{car['license']}}</span>
-
-                  </div>
-                </div>
-
-                <button class="btn-primary" (click)="registerCar()">Update Car</button>
+                <input class="form-control" value="{{car['make']}}" disabled required>
               </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><strong>Model</strong></span>
+                </div>
+                <input class="form-control" value="{{car['model']}}" disabled required>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><strong>Year</strong></span>
+                </div>
+                <input class="form-control" value="{{car['year']}}" disabled required>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><strong>Color</strong></span>
+                </div>
+                <input class="form-control" value="{{car['color']}}" disabled required>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><strong>License</strong></span>
+                </div>
+                <input class="form-control" id="basic-addon1" value="{{car['license']}}" disabled required>
+              </div>
+
+              <button class="btn btnEdit" (click)="registerCar()">Update Car <i class='fas fa-car'></i></button>
+
             </div>
           </ng-template>
         </ngb-tab>
@@ -317,7 +252,7 @@
         </div>
         <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
           <div *ngIf="password != passwordConfirm">
-            Passwords do not match!
+            Passwords do not match.
           </div>
         </div>
       </div>

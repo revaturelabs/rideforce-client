@@ -26,6 +26,7 @@ export class CarRegistrationComponent implements OnInit {
    * The car to create and register
    */
   carObject: Car = new Car;
+  car: Car;
   
   /**
    * variables to take in user input
@@ -57,7 +58,16 @@ export class CarRegistrationComponent implements OnInit {
    * Makes sure there is a car object available to operate on
    */
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe(e => {
+      this.userObject = e;
+      console.log(e);
+    });
+    console.log("PRINTING OUT CAR = " + this.userObject.cars[0].match(/\d+/)[0]);
 
+    this.userService.getCarById(Number(this.userObject.cars[0].match(/\d+/)[0])).subscribe(e => {
+      this.car = e;
+      console.log(JSON.stringify(e));
+    });
     this.success = "";
   }
 
@@ -66,6 +76,7 @@ export class CarRegistrationComponent implements OnInit {
 
     this.userService.getCurrentUser().subscribe(e => {
       this.userObject = e;
+      console.log(e);
 
       console.log(JSON.parse(JSON.stringify(e)));
       this.carObject.owner = ("/users/" + e.id);
