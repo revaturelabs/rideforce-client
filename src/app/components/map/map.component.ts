@@ -40,7 +40,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   public selectedUser: User = null;// made public so it can build. was private
 
 
-  
+
   /** Holds list of possible drivers to present */
   users: any[] = [];
 
@@ -55,6 +55,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   longitude: any;
   /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
+  /** The label on the button located in corner of the map */
+  buttonLabel: string;
+  /** User role to be used in map popup */
+  userRole: string;
 
 
   //Styles
@@ -114,8 +118,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Represents a song that is playing in the background */
   hsong = new Audio();
   csong = new Audio();
-  /** Holds the User that's logged in */
-  currentUser: User;
 
   /** Sets the range to search */
   circle: any = {
@@ -207,13 +209,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         console.log("Location: " + JSON.stringify(this.principal.location));
         this.lat = this.principal.location.latitude;
         this.lng = this.principal.location.longitude;
+        if (this.principal.role == "RIDER") {
+          this.buttonLabel = "Drivers Near Me";
+          this.userRole = "Driver";
+        }
+        else if (this.principal.role == "DRIVER") {
+          this.userRole = "Rider";
+          this.buttonLabel = "Riders Near Me";
+        }
       }
     });
-    // this.mapService.getLocation().subscribe(data => {
-    //   //console.log(data); 
-    //   this.lat = data.latitude;
-    //   this.lng = data.longitude;
-    // })
   }
 
   /**
@@ -258,28 +263,41 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('festivals'));
   }
 
-  drivers: User[];
+  events: User[];
   lat: any;
   lng: any;
   ll: any;
   lg: any;
 
   festivalClicked() {
-    this.getEvents();
     console.log('clicked');
+    this.getEvents();
   }
 
   getEvents() {
-    this.userService.getCurrentUser().subscribe(
-      data => {
-        this.currentUser = data;
-        this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
-          drivers => {
-            this.drivers = drivers;
-            this.fitBounds = true;
-            //console.log('Drivers are ' + JSON.stringify(this.drivers));
-          }
-        );
+    console.log(this.principal);
+    this.fitBounds = true;
+    if (this.principal.role == "RIDER") {
+      this.getNearestDrivers();
+    }
+    else if (this.principal.role == "DRIVER")
+      this.getNearestRiders();
+  }
+
+  getNearestDrivers() {
+    this.matchService.getMatchingDrivers(this.principal.id).subscribe(
+      drivers => {
+        this.events = drivers;
+      }
+    );
+  }
+
+  getNearestRiders() {
+    console.log("I am a DRIVER!");
+    let officeId: number = parseInt(this.principal.office.substring(9));
+    this.userService.getUserByOfficeAndRole(officeId, "RIDER").subscribe(
+      riders => {
+        this.events = riders;
       }
     );
   }
@@ -290,7 +308,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Does not appear to serve a purpose this may be removable?
    */
   getMarkers() {
-    for (const driver of this.drivers) {
+    for (const driver of this.events) {
       const marker: any = {
         user: driver,
         icon: {
@@ -535,7 +553,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     } else {
       alert("Location can not be accessed")
     }
-
   }
 
   /**
