@@ -1,54 +1,58 @@
-<div class="container-fluid">
-  <br>
-  <h2>Car Information:</h2>
-  <br>
-  
-  <br>
-  <div >
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Make</span>
-      </div>
-      <input type="text" class="form-control" (click)="resetCars()" [(ngModel)]="carMake">
-    </div>
+<div class="container">
+ <div class="container-fluid">
+   <br>
+   <h2>Vehicle Information:</h2>
+   <br>
+   <br>
+ </div>
+ <div class="container-fluid">
+   <form name="VehicleForm" novalidate>
+     <div class="form-row">
+       <div class="form-group col-md-6">
+         <label for="Make">Make</label>
+         <input [ngClass]="{ 'is-invalid': make.invalid && (make.dirty || make.touched), 'is-valid': make.valid }"
+           #make="ngModel" [(ngModel)]="carObject.make" type="text" class="form-control" name="make" id="make" placeholder = "Honda" required />
+           <div *ngIf="!!make?.errors?.required" class="invalid-feedback">Make cannot be empty
+           </div>
+         </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Model</span>
-      </div>
-      <input type="text" class="form-control" (click)="resetCars()" [(ngModel)]="carModel">
-    </div>
+         <div class="form-group col-md-6">
+           <label for="Model">Model</label>
+           <input [ngClass]="{ 'is-invalid': model.invalid && (model.dirty || model.touched), 'is-valid': model.valid }"
+           #model="ngModel" [(ngModel)]="carObject.model" type="text" class="form-control" name="model" id="model" placeholder = "Civic" required />
+             <div *ngIf="!!model?.errors?.required" class="invalid-feedback">Model cannot be empty
+             </div>
+         </div>
+         <div class="form-group col-md-6">
+           <label for="Year">Year</label>
+           <input [ngClass]="{ 'is-invalid': year.invalid && (year.dirty || year.touched), 'is-valid': year.valid }"
+         #year="ngModel" [(ngModel)]="carObject.year" type="number" class="form-control" name="year" id="year" placeholder="2018"
+         required />
+           <div *ngIf="!!year?.errors?.required" class="invalid-feedback">Year cannot be empty
+           </div>
+         </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Year</span>
-      </div>
-      <input type="number" min="1950" max="5000" class="form-control" (click)="resetCars()" [(ngModel)]="carYear">
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Submit</span>
-      </div>
-      <button class="btn btn-submit" (click)="addCarToUser()">Add Car</button>
-      <button class="btn btn-info" (click)="refreshFields()">Clear Fields</button>
-    </div>
-    <div class="input-group mb-3">
-      <table class="table" *ngIf="cars !== undefined && cars != null && cars.length > 0">
-        <tr>
-          <th>ID</th>
-          <th>Make</th>
-          <th>Model</th>
-          <th>Year</th>
-        </tr>
-        <tr *ngFor="let c of cars">
-          <td>{{c.id}}</td>
-          <td>{{c.make}}</td>
-          <td>{{c.model}}</td>
-          <td>{{c.year}}</td>
-          
-        </tr>
-      </table>
-    </div>
-  </div>
-  
+         <div class="form-group col-md-6">
+           <label for="Color">Color</label>
+           <input [ngClass]="{ 'is-invalid': color.invalid && (color.dirty || color.touched), 'is-valid': color.valid }"
+         #color="ngModel" [(ngModel)]="carObject.color" type="text" class="form-control" name="color" id="color"
+         placeholder="Red" required />
+           <div *ngIf="!!color?.errors?.required" class="invalid-feedback">Color cannot be empty
+           </div>
+         </div>
+
+         <div class="form-group col-md-6">
+           <label for="License">License Plate</label>
+           <input
+         [ngClass]="{ 'is-invalid': license.invalid && (license.dirty || license.touched), 'is-valid': license.valid }"
+         #color="ngModel" [(ngModel)]="carObject.license" type="text" class="form-control" name="license" id="license"
+         placeholder = "ABC 123" required />
+           <div *ngIf="!!license?.errors?.required" class="invalid-feedback">License Plate cannot be empty
+           </div>
+         </div>
+       </div>
+   </form>
+   <button class='btn btn-edit' type='submit' (click)="submitAutomobile()" style= "background-color:orange; width: 15%">Update Car</button>
+   <span id="successLine">{{success}}</span>
+</div>    
 </div>

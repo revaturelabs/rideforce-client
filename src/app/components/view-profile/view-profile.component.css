@@ -29,10 +29,14 @@ input, textarea[type="text"]
     font-size:15px;
 }
 
-.input-group-text {
-    max-width: 150px;
-    max-height: 34px;
+
+.input-group-text { 
+    width: 150px;
+    max-height: 36px;
     text-align:left;
+    background-color: white;
+    font-weight: 700;
+
  }
 
 .dyn-height {
@@ -57,10 +61,6 @@ input, textarea[type="text"]
 
 .btnAddCar{
     background-color: #72A4C2;
-}
-
-.profile-pic{
-    border-radius: 100px;
 }
 
 .padRight{

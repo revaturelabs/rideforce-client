@@ -1,11 +1,14 @@
 /** Provides the barebones information about a given route */
-export interface RouteInfo {
+export class RouteInfo {
+
     /**
- * The total route distance, in meters.
- */
+     * The total route distance, in meters.
+    */
     distance: number;
+
     /**
      * The total route time, in seconds.
      */
     duration: number;
+
 }

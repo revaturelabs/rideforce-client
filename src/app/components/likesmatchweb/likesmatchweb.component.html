@@ -3,10 +3,12 @@
   <div class="grid-container">
     <div *ngFor="let user of likecards; let i = index" style="background-color: rgba(255, 255, 255, 0.918)">
       <div class="enlarge">
-        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d" class="card grid-item">
+        <div [@flip]="user.face" (@flip.done)="endFlipCard(user)" style="transform-style: preserve-3d"
+          class="card grid-item">
           <div *ngIf="user.face=='front' || user.face=='front-back'">
             <!-- user image is hardcoded for now. need to replace with [src]="user.user.photourl" or something like that -->
-            <img class="card-img-top cardimg" src="http://semantic-ui.com/images/avatar/large/chris.jpg" alt="Card image cap" >
+            <img class="card-img-top cardimg" src="http://semantic-ui.com/images/avatar/large/chris.jpg"
+              alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{user.user.firstName}} {{user.user.lastName}}</h5>
               <p class="card-text"> {{user.user.email}} </p>
@@ -24,8 +26,6 @@
               <h5 *ngFor="let contact of user.user.contactInfo" class="card-text">{{contact}}</h5>
               <h5 class="card-text">User bio: {{user.user.bio}}</h5>
             </div>
-            <!--I'm sorry but if I did it a reasonable way with transform: rotateY(180deg) the button only works halfway
-            -Martin -->
             <button class="btn btn-info" (click)="flipCard(user)" style="margin-bottom: 10px;">qilꟻ</button>
           </div>
         </div>

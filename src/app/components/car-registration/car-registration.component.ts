@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../../models/car.model';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 /**
  * Supports the functionality of car registration and management
@@ -23,34 +25,20 @@ export class CarRegistrationComponent implements OnInit {
   /**
    * The car to create and register
    */
-  carObject: Car;
+  carObject: Car = new Car;
+  
   /**
-   * The company that manufactured it
+   * variables to take in user input
    */
-  carMake: string;
+  make:string;
+  model:string;
+  year:number;
+  color:string;
+  license:string;
+  state:string;
 
-  /**
-   * Model of the car
-   */
-  carModel: string;
-
-  /**
-   * When the car was produced
-   */
-  carYear: number;
-
-  /**
-   * Relic from the AccountInfoComponent that previously managed cars
-   */
-  optInToDrive: boolean;
-
-  /**
-   * List of cars owned by the ownwer to present in a table
-   */
-  cars: Car[];
-
-  // booleans for car information buttons
-  btnCarInfo: Number = 0;
+  //prints out if update is successful or not
+  success:string;
 
   /**
    * Sets up the Car Registration component with dependencies
@@ -59,96 +47,59 @@ export class CarRegistrationComponent implements OnInit {
    */
   constructor(
     private userService: UserControllerService,
-    private route: Router
-    ) {
+    private route: Router,
+    private http: HttpClient 
+    )
+  {
 
-   }
+  }
 
   /**
    * Makes sure there is a car object available to operate on
    */
   ngOnInit() {
-    if (sessionStorage.length == 0)
-      this.route.navigate(["/landing"]);
-    this.carObject = new Car();
+
+    this.success = "";
   }
 
-  /**
-   * Clears the fields in the form
-   */
-  resetCars() {
 
-    if (this.cars !== undefined && this.cars != null && this.cars.length !== 0) {
-      return;
-    }
-    this.resetUser();
-    const userId = this.userObject.id;
-    this.cars = [];
-    this.userService.getAllCars().subscribe(c => {
+  submitAutomobile() {
 
-      c.forEach(element => {
-        const strNum = element.owner.substring(7);
-        const num = Number.parseInt(strNum);
-        if (num === userId) {
-          this.cars.push(element);
-        }
-      });
+    this.userService.getCurrentUser().subscribe(e => {
+      this.userObject = e;
+
+      console.log(JSON.parse(JSON.stringify(e)));
+      this.carObject.owner = ("/users/" + e.id);
+      this.carObject.make = this.make.toUpperCase();
+      this.carObject.model = this.model.toUpperCase();
+      this.carObject.year = this.year;
+      this.carObject.color = this.color.toUpperCase();
+      this.carObject.license = this.license.toUpperCase();
+      this.carObject.state = this.state.toUpperCase();
+
+      console.log(this.carObject);
+      console.log(environment.userUrl + e.cars);
+
+
+      if(e.cars.length == 0) {
+        this.http.post<Car>(environment.userUrl + '/cars/', this.carObject, {observe: 'response'}).subscribe(response => {
+          if(response.status == 201)
+            this.success = "Success";
+          else
+            this.success = "Failed";
+
+        });
+      }
+      else {
+        this.http.put<Car>(environment.userUrl + e.cars, this.carObject, {observe: 'response'}).subscribe(response => {
+        if(response.status == 200)
+          this.success = "Success";
+        else
+          this.success = "Failed";
+        
+        });
+      }
     });
-  }
-
-
-  /**
-   * Ensures that the component is working with the logged on user
-   */
-  resetUser() {
-    this.userService.getCurrentUser().subscribe(user => {
-      // console.log('Car reg: Gotten User: ' + user);
-      this.userObject = user;
-    },
-    e => {
-      // console.log('Car reg: Failed to get user: ');
-      // console.log(e);
-    });
-
-  }
- 
-  /**
-   * Sets the car with appropriate values and sends it to the server using the User Service
-   */
-  addCarToUser(inTesting?: boolean) {
-
-    if (!inTesting) {
-      this.resetUser();
-    }
-
-    if (!this.carObject) {
-      this.carObject = new Car();
-    }
-
-    this.carObject.id = 1;
-    this.carObject.make = this.carMake;
-    this.carObject.model = this.carModel;
-
-    this.carObject.owner = '/users/' + this.userObject.id;
-    this.carObject.year = this.carYear;
-    // this.userObject.cars.push(this.carObject);
-
-    console.log('Owner prop (car reg):');
-    console.log(this.carObject.owner);
-
-    this.userService.createCar(this.carObject).subscribe(car => {
-      this.carObject = car;
-    });
-
-  }
-
-  /**
-   * Refreshes the fields in the Car form
-   */
-  refreshFields() {
-    this.carMake = '';
-    this.carModel = '';
-    this.carYear = new Date().getFullYear();
   }
 
 }

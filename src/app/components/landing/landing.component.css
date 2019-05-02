@@ -1,4 +1,4 @@
-.carousel-img{
+.carousel-img {
   object-fit: cover;
   height: 600px;
 }
@@ -25,13 +25,13 @@
 a,
 a:focus,
 a:hover {
-  color:black;
+  color: black;
 }
 
 .started,
 .started focus,
 .started:hover {
-    color: #fff;
+  color: #fff;
 }
 
 
@@ -40,67 +40,94 @@ a:hover {
 .btn-secondary:hover,
 .btn-secondary:focus {
   color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
+  text-shadow: none;
+  /* Prevent inheritance from `body` */
   background-color: #fff;
   border: .05rem solid #fff;
 }
 
 /* Simple CSS3 Fade-in Animation */
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
 
 .fadeIn {
-  opacity:0;
-  -webkit-animation:fadeIn ease-in 1;
-  -moz-animation:fadeIn ease-in 1;
-  animation:fadeIn ease-in 1;
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
 
-  -webkit-animation-fill-mode:forwards;
-  -moz-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 
-  -webkit-animation-duration:1s;
-  -moz-animation-duration:1s;
-  animation-duration:1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
 }
 
 .fadeIn.first {
-    -webkit-animation-delay: 0.3s;
-    -moz-animation-delay: 0.3s;
-    animation-delay: 0.3s;
+  -webkit-animation-delay: 0.3s;
+  -moz-animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 
 .fadeIn.second {
-   -webkit-animation-delay: 0.5s;
-   -moz-animation-delay: 0.5s;
-   animation-delay: 0.5s;
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  animation-delay: 0.5s;
 }
 
 .fadeIn.third {
-    -webkit-animation-delay: 0.7s;
-    -moz-animation-delay: 0.7s;
-     animation-delay: 0.7s;
+  -webkit-animation-delay: 0.7s;
+  -moz-animation-delay: 0.7s;
+  animation-delay: 0.7s;
 }
 
 .fadeIn.fourth {
-    -webkit-animation-delay: 0.9s;
-    -moz-animation-delay: 0.9s;
-     animation-delay: 0.9s;
-   }
+  -webkit-animation-delay: 0.9s;
+  -moz-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+}
 
 .fadeIn.fifth {
-    -webkit-animation-delay: 0.12s;
-    -moz-animation-delay: 0.12s;
-    animation-delay: 0.12s;
-    visibility: visible !important;
-   }
+  -webkit-animation-delay: 0.12s;
+  -moz-animation-delay: 0.12s;
+  animation-delay: 0.12s;
+  visibility: visible !important;
+}
 
 .fadeIn.sixth {
-    -webkit-animation-delay: 0.14s;
-    -moz-animation-delay: 0.14s;
-    animation-delay: 0.14s;
-    visibility: visible !important;
+  -webkit-animation-delay: 0.14s;
+  -moz-animation-delay: 0.14s;
+  animation-delay: 0.14s;
+  visibility: visible !important;
 }
 
 .fadeIn.seventh {
@@ -115,7 +142,7 @@ a:hover {
 }
 
 
- 
+
 
 
 /*
@@ -125,7 +152,7 @@ a:hover {
 html,
 body {
   height: 100%;
-  
+
   /* background-color: #333; */
 }
 
@@ -155,8 +182,8 @@ body {
 }
 
 .cover-heading {
-    font-size: 50px;
-    /* color: black;
+  font-size: 50px;
+  /* color: black;
   background: repeating-linear-gradient(
     45deg,
     transparent,
@@ -199,7 +226,7 @@ body {
   border-bottom-color: rgba(255, 255, 255, .25);
 }
 
-.nav-masthead .nav-link + .nav-link {
+.nav-masthead .nav-link+.nav-link {
   margin-left: 1rem;
 }
 
@@ -212,6 +239,7 @@ body {
   .masthead-brand {
     float: left;
   }
+
   .nav-masthead {
     float: right;
   }
@@ -224,6 +252,7 @@ body {
 .cover {
   padding: 0 1.5rem;
 }
+
 .cover .btn-lg {
   padding: .75rem 1.25rem;
   font-weight: 700;
@@ -238,12 +267,12 @@ body {
 }
 
 .button1 {
-    display: auto;
-    border-radius: 6px;
-    background-color:  #F26925;
-    color: black;
-    border: 2px solid black;
-    width: 30%;
+  display: auto;
+  border-radius: 6px;
+  background-color: #F26925;
+  color: black;
+  border: 2px solid black;
+  width: 30%;
 }
 
 
@@ -276,14 +305,14 @@ body {
     visibility : hidden;
 }
 */
-.page-header img{
-    height: 337.3px;
-    opacity: .8;
-    text-align: center;  
-} 
+.page-header img {
+  height: 337.3px;
+  opacity: .8;
+  text-align: center;
+}
 
 .page-header {
-    margin: -20px;
+  margin: -20px;
 }
 
 /* .header {
@@ -291,79 +320,81 @@ body {
 } */
 
 .button {
-    display: inline-block;
-    border-radius: 4px;
-    background-color: #F26925;
-    border: none;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 27px;
-    padding: 20px;
-    width: 200px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-  }
-  #rider {
-    position: relative;
-    border: 1px solid;
-    padding: 10px;
-    box-shadow: 5px 10px;
-    font-size: 20px;
-    margin-right: 300px;
-  }
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #F26925;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 27px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
 
-  .header {
-    width: 100%
-  }
+#rider {
+  position: relative;
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px;
+  font-size: 20px;
+  margin-right: 300px;
+}
 
-  
-  
-  .button span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
-  
-  .button span:after {
-    content: '\00bb';
-    position: absolute;
+.header {
+  width: 100%
+}
+
+
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.lead {
+  font-size: 24px;
+}
+
+@keyframes fadeInLeft {
+  0% {
     opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
+    transform: translateX(-20px);
   }
-  
-  .button:hover span {
-    padding-right: 25px;
-  }
-  
-  .button:hover span:after {
+
+  100% {
     opacity: 1;
-    right: 0;
+    transform: translateX(0);
   }
+}
 
-  .lead {
-      font-size: 24px;
-  }
-
-  @keyframes fadeInLeft {
-    0% {
-       opacity: 0;
-       transform: translateX(-20px);
-    }
-    100% {
-       opacity: 1;
-       transform: translateX(0);
-    }
- }   
-
- .animated {
+.animated {
   background-repeat: no-repeat;
   background-position: left top;
-  padding-top:95px;
-  margin-bottom:60px;
+  padding-top: 95px;
+  margin-bottom: 60px;
   -webkit-animation-duration: 5s;
   animation-duration: 5s;
   -webkit-animation-fill-mode: both;
@@ -372,27 +403,29 @@ body {
 
 @-webkit-keyframes fadeInLeft {
   0% {
-     opacity: 0;
-     -webkit-transform: translateX(-20px);
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
   }
+
   100% {
-     opacity: 1;
-     -webkit-transform: translateX(0);
+    opacity: 1;
+    -webkit-transform: translateX(0);
   }
 }
 
 @keyframes fadeInLeft {
   0% {
-     opacity: 0;
-     transform: translateX(-20px);
+    opacity: 0;
+    transform: translateX(-20px);
   }
+
   100% {
-     opacity: 1;
-     transform: translateX(0);
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
 .fadeInLeft {
--webkit-animation-name: fadeInLeft;
-animation-name: fadeInLeft;
-} 
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}

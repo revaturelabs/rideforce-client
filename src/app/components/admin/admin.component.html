@@ -1,36 +1,37 @@
-<br>
-<br>
-<div class="form-group row">
-  <div class="col-1"></div>
-  <div class="col-lg-6 col-xs-12">
-    <div class="container-fluid">
-      <h2>Generate Key</h2>
-      <h3>This key expires after 2 hours</h3>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Batch End</span>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 pt-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Generate Registration Token</h5>
+          <h6 class="card-subtitle mb-2 text-muted">This token will be valid for 24 hours.</h6>
+          <div class="form-row align-items-center">
+            <!-- Office Location Selector -->
+            <div class="form-group col-md-4">
+              <label for="officeLocation">Office Location</label>
+              <select [(ngModel)]="rtr.office" class="form-control" id="officeLocation">
+                <option [ngValue]="office" *ngFor="let office of offices">{{ office.name }}</option>
+              </select>
+            </div>
+            <!-- Batch End Date Input -->
+            <div class="form-group col-md-4">
+              <label for="batchEndDate">Batch End Date</label>
+              <input type="date" class="form-control" [(ngModel)]="rtr.batchEndDate" />
+            </div>
+            <!-- Get Key button -->
+            <div class="col-md-4 mt-3">
+              <button class="btn btn-primary w-100" *ngIf="rtr.office && rtr.batchEndDate"
+                (click)="getRegistrationKey()">Get Key</button>
+            </div>
+          </div>
+          <!-- Registration Token -->
+          <div class="form-group">
+            <label for="registrationToken">Registration Token</label>
+            <textarea [(ngModel)]="registrationToken" class="form-control " id="registrationToken" rows="8"
+              readonly></textarea>
+          </div>
         </div>
-        <input type="date" class="form-control" [(ngModel)]="batchEnd">
       </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Office Address</span>
-        </div>
-        <div class="input-group-text" style="padding-right: 100px">
-          <select [(ngModel)]="officeObject">
-            <option value="" selected>Select Office</option>
-            <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
-          </select>
-        </div>
-      </div>
-      <button class="btn btn-primary" *ngIf="officeObject && batchEnd" (click)="getRegistrationKey()">Get Key</button>
-      <br>
-      <br>
-      <p>Please send this key to your batch associates</p>
-      <hr>
-      <span class="key-text">
-        <div>{{encryptedLocationDate}}{{registrationKey}}</div>
-      </span>
     </div>
   </div>
 </div>

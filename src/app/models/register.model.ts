@@ -1,6 +1,6 @@
 
 /** Represents the object the Account Info component would use when creating a new user in the system */
-export interface Register {
+export class Register {
   /** The User name of the new user */
   username: string;
   /** THe password of the new user */

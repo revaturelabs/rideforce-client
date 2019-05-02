@@ -5,6 +5,8 @@ import { Link } from '../../models/link.model';
 import { MatchingControllerService } from '../../services/api/matching-controller.service';
 import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
+import { Login } from '../../models/login.model';
+import { AuthService } from '../../services/auth.service';
 
 /**
  * Used as a more complex data structure for holding info on liked users
@@ -44,6 +46,8 @@ export class LikesmatchwebComponent implements OnInit {
      */
     likecards: UserCard[] = [];
 
+    principal : User;
+
     /**
      * Sets up the Component for Like demonstrations
      * @param {MatchingControllerService} matchService - Access to Rider Driver matching service
@@ -51,9 +55,10 @@ export class LikesmatchwebComponent implements OnInit {
      * @param {Router} route - Allows Nav compnent to switch between sub-components
      */
     constructor(
-        private matchService: MatchingControllerService, 
+        private matchService: MatchingControllerService,
         private userService: UserControllerService,
-        private route: Router
+        private route: Router,
+        private authService: AuthService
         ) { }
 
     /**
@@ -65,7 +70,9 @@ export class LikesmatchwebComponent implements OnInit {
      * Initializes the Component by populating the swipcards array with data on liked drivers
      */
     ngOnInit() {
-        if (sessionStorage.length == 0)
+        this.authService.principal.subscribe(user => {
+            this.principal = user
+        if (this.principal.id < 1)
           this.route.navigate(["/landing"]);
         this.userService.getCurrentUser().subscribe(
             data => {
@@ -88,15 +95,7 @@ export class LikesmatchwebComponent implements OnInit {
                                         console.log(data3.contactInfo[0]);
                                         data3.photoUrl = 'https://s3.us-east-1.amazonaws.com/rydeforce/rydeforce-s3/65600312303b.png';
                                     }
-                                    // This does very bad things.
-                                    // So, for each contact in data3.contactInfo (which is a list of 
-                                    // Link<ContactInfo>), it gets the ContactInfo data by using
-                                    // the function defined in the user service as getContactInfoById().
-                                    // This is an observable. I'm sorry.
-                                    // It basically replaces what is in the Link[] with what is in the actual
-                                    // ContactInfo object. 
-                                    // We should probably refactor the User Model object to have a ContactInfo[]
-                                    // instead of a Link<ContactInfo>[].
+                                    
                                     for(let contact in data3.contactInfo){
                                         let num = +data3.contactInfo[contact].substring(14);
                                         this.userService.getContactInfoById(num).subscribe(
@@ -115,7 +114,7 @@ export class LikesmatchwebComponent implements OnInit {
                                         choose: 'none',
                                         face: 'front'
                                     };
-                                    
+
                                     this.likecards.push(card);
                                 }
                             );
@@ -124,8 +123,7 @@ export class LikesmatchwebComponent implements OnInit {
                 );
             }
         );
-
-
+    });
     }
 
 

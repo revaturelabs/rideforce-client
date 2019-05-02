@@ -1,5 +1,5 @@
 /** Represents an object that could appear on a map */
-export interface Marker {
+export class Marker {
     /** the actual location on the map */
     location: google.maps.LatLngLiteral;
     /** The address the marker represents */

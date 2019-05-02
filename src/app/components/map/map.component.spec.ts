@@ -1,13 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
-import { UsercardComponent } from '../usercard/usercard.component';
 import { User } from '../../models/user.model';
 import { Role } from '../../models/role.model';
 
-  xdescribe('MapComponent', () => {
+//  x
+describe('MapComponent', () => {
   let component: MapComponent;
   let fixture: ComponentFixture<MapComponent>;
 
@@ -27,14 +26,7 @@ import { Role } from '../../models/role.model';
     await component.ngOnInit();
   });
 
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(MapComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  //   component.ngOnInit();
-  // });
-
-  it('should create', () => {
+  it('should create the map component', () => {
     expect(component).toBeTruthy();
   });
 
@@ -62,27 +54,40 @@ import { Role } from '../../models/role.model';
     expect(component.currentUser).toBeTruthy();
   });
 
-  it('should populate selected user with a mock user', () => {
-    const user: User = {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'jdoe@outlook.com',
-      address: '508 Pride Ave., Herndon VA, 20170',
-      bio: 'Temp User',
-      password: '****',
-      photoUrl: '****',
-      office: '',
-      batchEnd: null,
-      dayStart: 0,
-      cars: [],
-      contactInfo: [],
-      active: 'INACTIVE',
-      role: Role.Rider
-    }; // = new User();
-    component.markerClicked(user);
-    expect(component.getSelectedUser()).toBe(user);
-  });
+  // it('should populate selected user with a mock user', () => {
+  //   const user: User = {
+  //     // id: 1,
+  //     // firstName: 'John',
+  //     // lastName: 'Doe',
+  //     // email: 'jdoe@outlook.com',
+  //     // password: '508 Pride Ave., Herndon VA, 20170',
+  //     // bio: 'Temp User',
+  //     // photoUrl: '****',
+  //     // office: '',
+  //     // batchEnd: null,
+  //     // startTime: 0,
+  //     // cars: [],
+  //     // contactInfo: [],
+  //     // active: 'INACTIVE',
+  //     // role: Role.Rider
+  //     id: 1,
+  // firstName: "string",
+  // lastName: "string",
+  // email: "string",
+  // password: "string",
+  // photoUrl: "string",
+  // bio: "string",
+  // active: "string",
+  // role: Role.Rider,
+  // office: '',
+  // startTime: 1,
+  // batchEnd: null,
+  // cars: [],
+  // contactInfo: []
+  //   }; // = new User();
+  //   component.markerClicked(user);
+  //   expect(component.getSelectedUser()).toBe(user);
+  // });
 
   xit('Should Return a route', async() => {
     await component.getRoute();
@@ -116,10 +121,31 @@ import { Role } from '../../models/role.model';
   });
 
   it('should toggle the map', () => {
+    spyOn(component, 'toggleMap').and.callThrough();
     const curTog = component.isHidden;
     component.toggleMap();
     expect(component.isHidden).toBe(!curTog);
     component.toggleMap();
     expect(component.isHidden).toBe(curTog);
+  });
+
+  it('should set given coordinates as the center', () => {
+    const coordObj = {
+      geometry: {
+        location: new google.maps.LatLng(39, -77)
+      }
+    };
+    let div = document.createElement('div');
+    component.map = new google.maps.Map(div);
+    component.setCenter(coordObj);
+    const marker = {
+      lat: component.currentLat,
+      lng: component.currentLong,
+      title: 'got you!'
+    };
+    // expect new center to match given location
+    expect(component.map.getCenter().lat()).toBe(39);
+    expect(component.map.getCenter().lng()).toBe(-77);
+    expect(component.placedMarkers).toContain(marker); // expect markers array to contain new marker of the center
   });
 });

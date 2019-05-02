@@ -1,59 +1,95 @@
-.navvy-ber{
-    background-color: #474C55;
-    font-size: 1.5em;
-    margin-bottom: 0px;
-    border-radius: 0%;
+.navvy-ber {
+  background-color: #474C55;
+  font-size: 1.5em;
+  margin-bottom: 0px;
+  border-radius: 0%;
 }
 
-.logo{
-    /* width: 40%;  */
-    height: 100%; 
-    padding-top:2%;
-    padding-bottom: 2%; 
-    position: relative;
-    /* padding-left:2%; */
+.logo {
+  /* width: 40%;  */
+  height: 100%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  position: relative;
+  /* padding-left:2%; */
 }
 
-#dropdownSettingsButton{
-    background-color: transparent;
-    border:none;
-    cursor:pointer;
-    overflow: hidden;
-    outline:none;
+#dropdownSettingsButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 }
-#dropdownSettingsButton2{
-    background-color: transparent;
-    border:none;
-    cursor:pointer;
-    overflow: hidden;
-    outline:none;
+
+#dropdownSettingsButton2 {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 }
 
 @media only screen and (min-width:766px) {
-    #dropdownSettingsButton{
-        display:none;
-    }
-    #dropdownSettingsButton2{
-        display:block;
-    }
+  #dropdownSettingsButton {
+    display: none;
+  }
+
+  #dropdownSettingsButton2 {
+    display: block;
+  }
 }
+
 @media only screen and (max-width:766px) {
-    #dropdownSettingsButton{
-        display:block;
-    }
-    #dropdownSettingsButton2{
-        display:none;
-    }
+  #dropdownSettingsButton {
+    display: block;
+  }
+
+  #dropdownSettingsButton2 {
+    display: none;
+  }
 }
+
 .mx-auto.d-sm-flex.d-block.flex-sm-nowrap {
-    text-align: center;
+  text-align: center;
 }
 
 .clearfix-xs:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+/* 
+    No idea about the stuff above, but I want
+    navbar to occupy 100% of the view width
+    AND follow the user as they scroll through
+    their "matches" when screen size reaches 
+    530 or lower.
+
+    I also have no idea why we do not have 
+    a footer component...and apparently it's in the
+    index.html.
+
+    Eh. As long as my usermatch looks and feels good.
+*/
+@media only screen and (max-width:530px) {
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 20vw;
+    }
+
+    .footer {
+        position: fixed;
+        width: 100vw;
+        height: 20vw;
+    }
+
 }

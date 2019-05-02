@@ -17,4 +17,7 @@ export class Car {
   model: string;
   /** THe year the car was produced */
   year: number;
+  color: string;
+  license: string;
+  state: string;
 }

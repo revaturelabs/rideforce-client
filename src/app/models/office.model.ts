@@ -1,5 +1,5 @@
 /** Represents Offices a User might hold */
-export interface Office {
+export class Office {
 
   /**
    * The ID of the office in the database.
