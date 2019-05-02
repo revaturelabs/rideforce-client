@@ -40,6 +40,14 @@ export class CarRegistrationComponent implements OnInit {
   //prints out if update is successful or not
   success:string;
 
+  carObjectlicense: string;
+  carObjectmake: string;
+  carObjectmodel: string;
+  carObjectyear: number;
+  carObjectcolor: string;
+
+
+
   /**
    * Sets up the Car Registration component with dependencies
    * @param {UserControllerService} userService - the Service that allows us to manager the user AND the cars available on the system
@@ -80,11 +88,11 @@ export class CarRegistrationComponent implements OnInit {
 
       console.log(JSON.parse(JSON.stringify(e)));
       this.carObject.owner = ("/users/" + e.id);
-      this.carObject.make = this.make.toUpperCase();
-      this.carObject.model = this.model.toUpperCase();
-      this.carObject.year = this.year;
-      this.carObject.color = this.color.toUpperCase();
-      this.carObject.license = this.license.toUpperCase();
+      this.carObject.make = this.carObjectmake.toUpperCase();
+      this.carObject.model = this.carObjectmodel.toUpperCase();
+      this.carObject.year = this.carObjectyear;
+      this.carObject.color = this.carObjectcolor.toUpperCase();
+      this.carObject.license = this.carObjectlicense.toUpperCase();
 
       console.log(this.carObject);
       console.log(environment.userUrl + e.cars);
