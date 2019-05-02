@@ -59,12 +59,6 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <label for="password-box">Password</label>
-                                  <input type="text" class="form-control" [(ngModel)]="password" #passwordIn="ngModel" id="passwordIn" required disabled>
-
-                  <button id="password-box" data-toggle="modal" data-target="#forgotModal"
-                  (click)="resetEmail()">Change Password</button>
-
                 </div>
               </div>
 
@@ -121,8 +115,11 @@
                 <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
               </div>
               <br>
+              <!--Change Password Button-->
               <div  id="password" hidden>
-                <button class="btn btn-success" (click)="editPassword()">Edit Password</button>
+                  <button class="btn btn-success" id="password-box" data-toggle="modal" data-target="#forgotModal"
+                  (click)="resetEmail()">Change Password</button>
+                <!--<button class="btn btn-success" (click)="editPassword()">Edit Password</button>-->
               </div>
               <br>
               <div>
@@ -238,7 +235,7 @@
   </div>
 </div>
 
-<!-- Modal (taken from login component)-->
+<!-- Change Password Modal (taken from login component)-->
 <div class="modal fade" id="forgotModal" #forgotmodal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -281,7 +278,7 @@
                 match.</small>
             </div>
             <button type="submit" class="btn btn-primary float-right mr-5 mt-2" [disabled]="reset.form.invalid"
-              (click)="resetEmail()">
+              (click)="resetEmail()"data-dismiss="modal"  >
               Reset
             </button>
           </form>

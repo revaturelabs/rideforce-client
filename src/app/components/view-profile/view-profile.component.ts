@@ -340,41 +340,22 @@ export class ViewProfileComponent implements OnInit {
   resetEmail() {
     // /*debug*/ console.log("in reset");
     try {
-      var messageLogin = document.getElementById('errorMessageLogin');
-      messageLogin.style.display = "none";
       const cognitoUser = this.createCognitoUser(this.username);
 
       // /*debug*/ console.log("aws");
       cognitoUser.forgotPassword({
         onSuccess: function (result) {
+          console.log('Email Sent!');
           // /*debug*/ console.log('call result:' + result);
-          $("#forgotModal").modal();
+          //$("#forgotModal").modal();
         },
         onFailure: function (err) {
         /*debug*/ console.log(err);
-          messageLogin.style.display = 'block';
-          messageLogin.style.color = 'red';
-          switch (err.name) {
-            case "UserNotFoundException": {
-              messageLogin.innerHTML = "Email not found.";
-              break;
-            }
-            case "LimitExceededException": {
-              messageLogin.innerHTML = err.message;
-              break;
-            }
-            default: {
-              messageLogin.innerHTML = "ERROR";
-            }
-          }
+         console.log('Failed inner!')
         }
       });
     } catch (err) {
-      // /*debug*/ console.log("catch");
-      var messageLogin = document.getElementById('errorMessageLogin');
-      messageLogin.style.display = 'block';
-      messageLogin.style.color = 'red';
-      messageLogin.innerHTML = "Please enter email.";
+      console.log('Failed first try!');
     }
   }
 
