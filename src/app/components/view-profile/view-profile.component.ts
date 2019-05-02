@@ -13,10 +13,10 @@ import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { GeocodeService } from '../../services/geocode.service';
 import { CustomtimePipe } from '../../pipes/customtime.pipe';
-import { HttpClient } from '@angular/common/http';
-import { CognitoUser } from 'amazon-cognito-identity-js';
-import { ContactType } from 'aws-sdk/clients/route53domains';
+import { NgForm } from '@angular/forms';
+import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -73,8 +73,6 @@ export class ViewProfileComponent implements OnInit {
   location: Location;
   startTime: Date;
   pipe: CustomtimePipe = new CustomtimePipe();
-  /** Pre-constructed list of possible contact-types in DB */
-  contactInfoTypes = ["Cell Phone", "Email", "Slack", "Skype", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
 
   session: boolean;
 
@@ -107,7 +105,6 @@ export class ViewProfileComponent implements OnInit {
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
         this.startTime = this.pipe.transform(this.principal.startTime);
         console.log(this.startTime);
-        this.getInfoById();
 
         //this.getOffice();
 
@@ -119,12 +116,13 @@ export class ViewProfileComponent implements OnInit {
 
         //loads the first car. done this way because original batch made car-user relationship a 1 to many
         //should've been a one to one
-        console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
-
-        this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe(e => {
-          this.car = e;
-          console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
-        });
+        //console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
+        if (this.currentRole == "DRIVER") {
+          this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe(e => {
+            this.car = e;
+            console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
+          });
+        }
 
         this.sessionCheck();
       }
@@ -177,7 +175,6 @@ export class ViewProfileComponent implements OnInit {
   updateContactInfo(type, content) {
     console.log("TYPE: " + type);
     console.log("CONTENT: " + content);
-    console.log(this.contactInfoTypes);
     let typeId: Number;
 
     let updatedContact: ContactInfo = {
@@ -212,6 +209,7 @@ export class ViewProfileComponent implements OnInit {
   edit() {
     document.getElementById('firstName').removeAttribute('disabled');
     document.getElementById('lastName').removeAttribute('disabled');
+    document.getElementById('password').removeAttribute('hidden');
     // document.getElementById("email").removeAttribute("disabled");
     // document.getElementById("password").removeAttribute("disabled");
     // document.getElementById("confirmPassword").removeAttribute("disabled");
@@ -230,6 +228,7 @@ export class ViewProfileComponent implements OnInit {
     // document.getElementById("currentOffice").style.display = "none";
     // document.getElementById("selectOffice").style.display = "inline";
     //document.getElementById('errorMessage').removeAttribute('hidden');
+    
   }
 
   /**
@@ -244,6 +243,7 @@ export class ViewProfileComponent implements OnInit {
     this.userService.update().then();
     this.authService.changePrincipal(this.principal);
     // debug console.log("routing");
+    this.updatePassword();
     this.router.navigate(['userProfile']);
   }
 
@@ -317,6 +317,9 @@ export class ViewProfileComponent implements OnInit {
     this.userService.updatePassword(this.principal.email, this.oldPassword, this.password).subscribe();
   }
 
+  editPassword(){
+    
+  }
 
   updateUserStatus(id: number, active: string) {
     if (active !== 'DISABLED') {
@@ -397,5 +400,66 @@ export class ViewProfileComponent implements OnInit {
   registerCar() {
     console.log("going to register car");
     this.router.navigate(['/cars']);
+  }
+  //imported from login component
+  resetEmail() {
+    // /*debug*/ console.log("in reset");
+    try {
+      const cognitoUser = this.createCognitoUser(this.username);
+
+      // /*debug*/ console.log("aws");
+      cognitoUser.forgotPassword({
+        onSuccess: function (result) {
+          console.log('Email Sent!');
+          // /*debug*/ console.log('call result:' + result);
+          //$("#forgotModal").modal();
+        },
+        onFailure: function (err) {
+        /*debug*/ console.log(err);
+         console.log('Failed inner!')
+        }
+      });
+    } catch (err) {
+      console.log('Failed first try!');
+    }
+  }
+
+  createCognitoUser(email: string): CognitoUser {
+    const userPool = new CognitoUserPool(environment.cognitoData);
+    const userData = {
+      Username: email,
+      Pool: userPool
+    };
+    const cognitoUser = new CognitoUser(userData);
+    return cognitoUser;
+  }
+  resetPassword(form: NgForm) {
+    const cognitoUser = this.createCognitoUser(this.username);
+    cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
+      onSuccess: () => {
+        //  /*debug*/ console.log("changed")
+        //$("#passwordModal").modal("hide");
+        var messageLogin = document.getElementById('errorMessageLogin');
+        messageLogin.style.display = 'block';
+        messageLogin.style.color = 'green';
+        messageLogin.innerHTML = "Password changed.";
+      },
+      onFailure: err => {
+        //   /*debug*/ console.log(err);`
+        switch (err.name) {
+          case "CodeMismatchException": {
+            let input: any = "";
+            input = document.getElementById("verifyCode");
+            input.value = "";
+            var error = document.getElementById("verifyMsg");
+            form.form.controls["verifyCode"].setErrors({ 'incorrect': true });
+            error.innerHTML = "Invalid Code";
+            break;
+          }
+          default: {
+          }
+        }
+      }
+    });
   }
 }

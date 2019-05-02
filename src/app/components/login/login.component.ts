@@ -128,12 +128,14 @@ export class LoginComponent implements OnInit {
     const cognitoUser = this.createCognitoUser(this.userEmail);
     cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
       onSuccess: () => {
+        
       //  /*debug*/ console.log("changed")
         $("#forgotModal").modal("hide");
         var messageLogin = document.getElementById('errorMessageLogin');
         messageLogin.style.display = 'block';
         messageLogin.style.color = 'green';
         messageLogin.innerHTML = "Password changed.";
+        // $('#forgotModal').modal("close");
       },
       onFailure: err => {
       //   /*debug*/ console.log(err);
