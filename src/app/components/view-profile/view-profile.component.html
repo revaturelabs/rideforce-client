@@ -182,7 +182,9 @@
         <ngb-tab title="Contact Info" id="4">
           <ng-template ngbTabContent>
             <div class="container-fluid">
-              <table *ngIf="contactInfoArray" class ="table">
+              
+              <div *ngIf="contactInfoArray.length > 0 ; else none">
+              <table  class ="table">
                 <thead>
                     <tr>
                         <th scope="col">Contact Type</th>
@@ -196,6 +198,10 @@
                   </tr>
                 
               </table>
+            </div>
+            <ng-template #none>
+                <h5>Looks like you don't have any contact info recorded. Add some below!</h5>
+              </ng-template>
               
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
