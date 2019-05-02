@@ -74,7 +74,7 @@ export class ViewProfileComponent implements OnInit {
   startTime: Date;
   pipe: CustomtimePipe = new CustomtimePipe();
   /** Pre-constructed list of possible contact-types in DB */
-  contactInfoTypes = ["Cell Phone", "Email", "Skype", "Slack", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
+  contactInfoTypes = ["Cell Phone", "Email", "Slack", "Skype", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
 
   session: boolean;
 
@@ -187,7 +187,7 @@ export class ViewProfileComponent implements OnInit {
     console.log("PREP'D INFO OBJECT: " + JSON.stringify(updatedContact));
     this.contactInfoTypes.forEach(function (value, i) {
         if(type == value){
-          typeId = i;
+          typeId = i+1;
         }
     });
     
@@ -198,7 +198,12 @@ export class ViewProfileComponent implements OnInit {
       info: content
     }
     console.log("PREP'D INFO OBJECT: " + JSON.stringify(contact_info_obj));
-    
+    this.http.post('http://turtlejr.sps.cuny.edu:5555/contact-info/addcinfo', contact_info_obj).subscribe(
+       response => {
+        
+        console.log("contact info sent");
+        this.ngOnInit();
+        });
 
   }
 

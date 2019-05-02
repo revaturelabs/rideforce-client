@@ -157,35 +157,44 @@
               <br>
               <br>
               <br>
-              <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
+              <!--<div *ngFor="let item of contactInfoArray" class="input-group mb-3">
                 <div class="input-group-prepend">
                   <div class="input-group-text" style="padding-right: 100px">
                     <select [(ngModel)]="item.type">
-                      <option *ngFor="let contact of contactTypeArray">{{contact}}</option>
+                     <option *ngFor="let contact of contactTypeArray">{{contact}}</option>
                     </select>
                   </div>
                   <input type="text" class="" [(ngModel)]="item.info">
                   <br>
                   <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
                   <br>
-                </div>
+                </div> 
               </div>
+              From previous batch
+            Moved contact info to its own tab, will leave thsi code here if future batch would like to move it back, keep in this this code was only able to get the arary
+            but wasnt able to make use of contact types
+            --> 
             </div>
           </ng-template>
         </ngb-tab>
       </div>
-      <div label="Contact div">
-        <ngb-tab title="Contact info" id="3">
+      <div label="Contact div" id="cinfo">
+        <ngb-tab title="Contact Info" id="4">
           <ng-template ngbTabContent>
             <div class="container-fluid">
-              <table *ngIf="contactInfoArray">
+              <table *ngIf="contactInfoArray" class ="table">
                 <thead>
+                    <tr>
+                        <th scope="col">Contact Type</th>
+                        <th scope="col">Contact Info</th>
+                      </tr>
+                </thead>
                   <tr *ngFor="let item of contactInfoArray">
 
-                    <td>{{item.type}}:</td>
+                    <td>{{item.type}}</td>
                     <td>{{item.info}}</td>
                   </tr>
-                </thead>
+                
               </table>
               
               <div class="input-group mb-3">
@@ -199,7 +208,7 @@
                   </span>
                 </div>
                 <input type="text" class="form-control" #contactContent required>
-                <button type="button" class="btn btn-warning" (click) = "updateContactInfo(contactType.value, contactContent.value)">Update</button>
+                <button type="button" id= "updatebtn" class="btn btn-warning" (click) = "updateContactInfo(contactType.value, contactContent.value)">Update</button>
               </div>
             
             </div>
