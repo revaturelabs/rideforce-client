@@ -31,7 +31,7 @@ export class UserControllerService {
   constructor(private http: HttpClient, auth: AuthService) {
     auth.principal.subscribe(user => {
       this.principal = user;});
-
+      
    }
 
   /** to be used with the url provided by back end */
