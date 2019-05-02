@@ -60,8 +60,6 @@
                   Email cannot be more than 25 characters
                 </div>
               </div>
-<<<<<<< HEAD
-=======
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 </div>
@@ -80,7 +78,6 @@
                 </div>
               </div> -->
 
->>>>>>> 9d1d2aeedbd97b15e24916974e32ec43f02b34a2
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -244,13 +241,8 @@
   </div>
 </div>
 
-<<<<<<< HEAD
-<!-- Modal -->
-<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel"
-=======
 <!-- Change Password Modal (taken from login component)-->
 <div class="modal fade" id="forgotModal" #forgotmodal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
->>>>>>> 9d1d2aeedbd97b15e24916974e32ec43f02b34a2
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -261,39 +253,6 @@
         </button>
       </div>
       <div class="modal-body">
-<<<<<<< HEAD
-        <div class="input-group mb-3 ">
-          <div class="input-group-prepend ">
-            <span class="input-group-text" id="basic-addon1 ">Password</span>
-          </div>
-          <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required
-            disabled>
-        </div>
-        <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
-          <div *ngIf="pWord.errors.required">
-            Password cannot be empty
-          </div>
-          <div *ngIf="pWord.errors.maxLength">
-            Password cannot be more than 15 characters
-          </div>
-        </div>
-        <div class="input-group mb-3 ">
-          <div class="input-group-prepend ">
-            <span class="input-group-text" id="basic-addon1 ">Confirm</span>
-          </div>
-          <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel"
-            id="confirmPassword" required disabled>
-        </div>
-        <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-          <div *ngIf="password != passwordConfirm">
-            Passwords do not match.
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="updatePassword()">Send</button>
-=======
         <div>
           <h5 class="text-center">Please check your email for the verification code.</h5>
           <form #reset="ngForm" (ngSubmit)="resetPassword(reset)" novalidate class="mt-5 ml-5">
@@ -330,7 +289,6 @@
             </button>
           </form>
         </div>
->>>>>>> 9d1d2aeedbd97b15e24916974e32ec43f02b34a2
       </div>
     </div>
   </div>
