@@ -11,7 +11,12 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { GeocodeService } from '../../services/geocode.service';
-import { CustomtimePipe} from '../../pipes/customtime.pipe';
+import { CustomtimePipe } from '../../pipes/customtime.pipe';
+import { NgForm } from '@angular/forms';
+import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { environment } from '../../../environments/environment';
+
+
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -61,21 +66,21 @@ export class ViewProfileComponent implements OnInit {
   filteredUsers: any[];
   result: boolean;
   car: Car;
-  location : Location;
-  startTime : Date;
-  pipe : CustomtimePipe = new CustomtimePipe();
+  location: Location;
+  startTime: Date;
+  pipe: CustomtimePipe = new CustomtimePipe();
 
   session: boolean;
-  
+
 
   /**
    * Sets up the component with the User Service injected
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService, 
-              private authService: AuthService, private zone: NgZone, private locationSerivce: GeocodeService, 
-              private router: Router) {
+  constructor(private userService: UserControllerService,
+    private authService: AuthService, private zone: NgZone, private locationSerivce: GeocodeService,
+    private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -94,30 +99,31 @@ export class ViewProfileComponent implements OnInit {
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
         this.startTime = this.pipe.transform(this.principal.startTime);
         console.log(this.startTime);
-        
+
 
         //this.getOffice();
 
-        
+
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
 
-        
+
         //loads the first car. done this way because original batch made car-user relationship a 1 to many
         //should've been a one to one
-        console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
-
-        this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe( e => {
-          this.car = e;
-          console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
-        });
+        //console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
+        if (this.currentRole == "DRIVER") {
+          this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe(e => {
+            this.car = e;
+            console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
+          });
+        }
 
         this.sessionCheck();
       }
       console.log(user);
       if (this.principal) {
-        
+
       }
     });
     this.getOffice();
@@ -173,6 +179,7 @@ export class ViewProfileComponent implements OnInit {
     this.userService.update().then();
     this.authService.changePrincipal(this.principal);
     // debug console.log("routing");
+    this.updatePassword();
     this.router.navigate(['userProfile']);
   }
 
@@ -296,7 +303,7 @@ export class ViewProfileComponent implements OnInit {
       alert('No changes will be made');
     }
   }
-  tabSelect($event){
+  tabSelect($event) {
     console.log($event);
   }
 
@@ -325,8 +332,69 @@ export class ViewProfileComponent implements OnInit {
     }
   }
 
-  registerCar(){
+  registerCar() {
     console.log("going to register car");
     this.router.navigate(['/cars']);
+  }
+  //imported from login component
+  resetEmail() {
+    // /*debug*/ console.log("in reset");
+    try {
+      const cognitoUser = this.createCognitoUser(this.username);
+
+      // /*debug*/ console.log("aws");
+      cognitoUser.forgotPassword({
+        onSuccess: function (result) {
+          console.log('Email Sent!');
+          // /*debug*/ console.log('call result:' + result);
+          //$("#forgotModal").modal();
+        },
+        onFailure: function (err) {
+        /*debug*/ console.log(err);
+         console.log('Failed inner!')
+        }
+      });
+    } catch (err) {
+      console.log('Failed first try!');
+    }
+  }
+
+  createCognitoUser(email: string): CognitoUser {
+    const userPool = new CognitoUserPool(environment.cognitoData);
+    const userData = {
+      Username: email,
+      Pool: userPool
+    };
+    const cognitoUser = new CognitoUser(userData);
+    return cognitoUser;
+  }
+  resetPassword(form: NgForm) {
+    const cognitoUser = this.createCognitoUser(this.username);
+    cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
+      onSuccess: () => {
+        //  /*debug*/ console.log("changed")
+        //$("#passwordModal").modal("hide");
+        var messageLogin = document.getElementById('errorMessageLogin');
+        messageLogin.style.display = 'block';
+        messageLogin.style.color = 'green';
+        messageLogin.innerHTML = "Password changed.";
+      },
+      onFailure: err => {
+        //   /*debug*/ console.log(err);`
+        switch (err.name) {
+          case "CodeMismatchException": {
+            let input: any = "";
+            input = document.getElementById("verifyCode");
+            input.value = "";
+            var error = document.getElementById("verifyMsg");
+            form.form.controls["verifyCode"].setErrors({ 'incorrect': true });
+            error.innerHTML = "Invalid Code";
+            break;
+          }
+          default: {
+          }
+        }
+      }
+    });
   }
 }

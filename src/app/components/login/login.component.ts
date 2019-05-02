@@ -135,7 +135,7 @@ export class LoginComponent implements OnInit {
         messageLogin.style.display = 'block';
         messageLogin.style.color = 'green';
         messageLogin.innerHTML = "Password changed.";
-        $('#forgotModal').modal("close");
+        // $('#forgotModal').modal("close");
       },
       onFailure: err => {
       //   /*debug*/ console.log(err);
