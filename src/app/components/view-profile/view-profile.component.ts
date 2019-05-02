@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Router } from '@angular/router';
 import { Login } from '../../models/login.model';
 import { NgZone } from '@angular/core';
@@ -11,7 +12,13 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
 import { GeocodeService } from '../../services/geocode.service';
-import { CustomtimePipe} from '../../pipes/customtime.pipe';
+import { CustomtimePipe } from '../../pipes/customtime.pipe';
+import { HttpClient } from '@angular/common/http';
+import { CognitoUser } from 'amazon-cognito-identity-js';
+import { ContactType } from 'aws-sdk/clients/route53domains';
+import { environment } from '../../../environments/environment';
+
+
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -42,6 +49,7 @@ export class ViewProfileComponent implements OnInit {
   _address: string;
   /** The day the User's batch ends*/
   batchEnd: any;
+  /** Array of User's contact-info from DB */
   contactInfoArray: ContactInfo[] = [];
   /** Whether the user can make changes (Currently not used) */
   canEdit = false;
@@ -59,23 +67,27 @@ export class ViewProfileComponent implements OnInit {
   users: any[];
   /** Holds the list of users filtered with search query */
   filteredUsers: any[];
+  /** Holds the list of contact-info items for the currently logged user */
   result: boolean;
   car: Car;
-  location : Location;
-  startTime : Date;
-  pipe : CustomtimePipe = new CustomtimePipe();
+  location: Location;
+  startTime: Date;
+  pipe: CustomtimePipe = new CustomtimePipe();
+  /** Pre-constructed list of possible contact-types in DB */
+  contactInfoTypes = ["Cell Phone", "Email", "Slack", "Skype", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
 
   session: boolean;
-  
+
 
   /**
    * Sets up the component with the User Service injected
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService, 
-              private authService: AuthService, private zone: NgZone, private locationSerivce: GeocodeService, 
-              private router: Router) {
+  constructor(private userService: UserControllerService,
+    private authService: AuthService, private zone: NgZone, private locationSerivce: GeocodeService,
+    private router: Router,
+    private http: HttpClient) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -83,6 +95,7 @@ export class ViewProfileComponent implements OnInit {
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
+
     this.authService.principal.subscribe(user => {
       this.principal = user;
       if (this.principal.id > 0) {
@@ -94,21 +107,21 @@ export class ViewProfileComponent implements OnInit {
         this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
         this.startTime = this.pipe.transform(this.principal.startTime);
         console.log(this.startTime);
-        
+        this.getInfoById();
 
         //this.getOffice();
 
-        
+
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
 
-        
+
         //loads the first car. done this way because original batch made car-user relationship a 1 to many
         //should've been a one to one
         console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
 
-        this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe( e => {
+        this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe(e => {
           this.car = e;
           console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
         });
@@ -117,10 +130,12 @@ export class ViewProfileComponent implements OnInit {
       }
       console.log(user);
       if (this.principal) {
-        
+
       }
     });
+
     this.getOffice();
+
     console.log(this.officeObject);
     console.log(this.principal);
   }
@@ -134,8 +149,65 @@ export class ViewProfileComponent implements OnInit {
   }
 
   /**
-   * Allows the form to be edited
+   * Get contact-info for specified user-id
    */
+  getInfoById() {
+    //return this.http.get<ContactInfo[]>("http://turtlejr.sps.cuny.edu:5555/contact-info/58");
+    console.log("pre");
+    console.log(this.principal.id);
+    console.log("post");  
+    console.log(environment.userUrl+"/contact-info/c/"+this.principal.id);
+     this.http.get(environment.userUrl+"/contact-info/c/"+this.principal.id).subscribe(
+       response => {
+        this.contactInfoArray = response as ContactInfo[];
+        console.log("CONTACT INFO ARRAY: " + this.contactInfoArray);
+        this.contactInfoArray.forEach(function (element) {
+          console.log(element.type);
+        });
+        console.log(response);
+      });
+    //get json array that is for slack and isolate id
+  }
+
+
+/**
+ * Configure and prepare object to update user contact info fields.
+ */
+  updateContactInfo(type, content) {
+    console.log("TYPE: " + type);
+    console.log("CONTENT: " + content);
+    console.log(this.contactInfoTypes);
+    let typeId: Number;
+
+    let updatedContact: ContactInfo = {
+      id: this.principal.id,
+      type: type,
+      info: content
+    };
+    console.log("PREP'D INFO OBJECT: " + JSON.stringify(updatedContact));
+    this.contactInfoTypes.forEach(function (value, i) {
+        if(type == value){
+          typeId = i+1;
+        }
+    });
+    
+    //The existing model does not match up to the DB config
+    let contact_info_obj = {
+      id: this.principal.id,
+      type: typeId,
+      info: content
+    }
+    console.log("PREP'D INFO OBJECT: " + JSON.stringify(contact_info_obj));
+    this.http.post(environment.userUrl+"/contact-info/addcinfo", contact_info_obj).subscribe(
+       response => {
+        
+        console.log("contact info sent");
+        this.ngOnInit();
+        });
+
+  }
+
+
   edit() {
     document.getElementById('firstName').removeAttribute('disabled');
     document.getElementById('lastName').removeAttribute('disabled');
@@ -291,8 +363,9 @@ export class ViewProfileComponent implements OnInit {
       alert('No changes will be made');
     }
   }
-  tabSelect($event){
+  tabSelect($event) {
     console.log($event);
+
   }
 
   /** Sets up contact information */
@@ -320,7 +393,7 @@ export class ViewProfileComponent implements OnInit {
     }
   }
 
-  registerCar(){
+  registerCar() {
     console.log("going to register car");
     this.router.navigate(['/cars']);
   }

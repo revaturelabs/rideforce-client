@@ -29,6 +29,11 @@ input, textarea[type="text"]
     font-size:15px;
 }
 
+#updatebtn{
+    background-color:#3ebf37;
+    border-color: #3ebf37;
+}
+
 .input-group-text {
     max-width: 150px;
     max-height: 34px;
