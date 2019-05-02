@@ -57,7 +57,16 @@
                   Email cannot be more than 25 characters
                 </div>
               </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label for="password-box">Password</label>
+                                  <input type="text" class="form-control" [(ngModel)]="password" #passwordIn="ngModel" id="passwordIn" required disabled>
 
+                  <button id="password-box" data-toggle="modal" data-target="#forgotModal"
+                  (click)="resetEmail()">Change Password</button>
+
+                </div>
+              </div>
 
 <!--               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -225,48 +234,55 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+<!-- Modal (taken from login component)-->
+<div class="modal fade" id="forgotModal" #forgotmodal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="passwordModalLabel">Change Password</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Password</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>
-              </div>
-              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
-                <div *ngIf="pWord.errors.required">
-                  Password cannot be empty
-                </div>
-                <div *ngIf="pWord.errors.maxLength">
-                  Password cannot be more than 15 characters
-                </div>
-              </div>
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Confirm</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel" id="confirmPassword" required disabled>
-              </div>
-              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-                <div *ngIf="password != passwordConfirm">
-                  Passwords do not match.
-                </div>
-              </div>
-          </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="updatePassword()">Send</button>
+        <div>
+          <h5 class="text-center">Please check your email for the verification code.</h5>
+          <form #reset="ngForm" (ngSubmit)="resetPassword(reset)" novalidate class="mt-5 ml-5">
+            <div class="form-group">
+              <label for="verifyCode">Verification Code</label>
+              <input type="text" class="form-control" name="verifyCode" id="verifyCode" required ngModel
+                #verify="ngModel" [class.is-invalid]="verify.invalid && verify.touched">
+              <br>
+              <small id="verifyMsg" [class.d-none]="verify.valid || verify.untouched" class="text-danger">
+                Verification code is required
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="resetPassword">Password</label>
+              <input type="password" class="form-control" name="resetPassword" id="resetPassword" required ngModel
+                #resetPass="ngModel" [class.is-invalid]="resetPass.invalid && resetPass.dirty"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+              <br>
+              <small [class.d-none]="resetPass.valid || resetPass.untouched" class="text-danger">
+                Password contain at least 8 characters, one captial letter, and one number.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="resetConfirm">Confirm Password</label>
+              <input type="password" class="form-control" name="resetConfirm" id="resetConfirm" required ngModel
+                #confirm="ngModel" [class.is-invalid]="confirm.invalid && confirm.dirty" pattern="{{resetPass.value}}">
+              <br>
+              <small [class.d-none]="confirm.valid || confirm.untouched" class="text-danger">Passwords do not
+                match.</small>
+            </div>
+            <button type="submit" class="btn btn-primary float-right mr-5 mt-2" [disabled]="reset.form.invalid"
+              (click)="resetEmail()">
+              Reset
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
