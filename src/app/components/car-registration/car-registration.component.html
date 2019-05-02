@@ -6,23 +6,23 @@
     <br>
   </div>
   <div class="container-fluid">
-    <form #VehicleForm="ngForm" (ngSubmit)="onSubmit(carObject)" ngNativeValidate>
+    <form>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="Make">Make</label>
-          <input [ngClass]="{ 'is-invalid': make.invalid && (make.dirty || make.touched), 'is-valid': make.valid }"
-            #make="ngModel" [(ngModel)]="carObject.make" type="text" class="form-control" name="make" id="make" placeholder = "Honda" required />
-            <div *ngIf="!!make?.errors?.required" class="invalid-feedback">Make cannot be empty
-            </div>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label for="Model">Model</label>
-            <input [ngClass]="{ 'is-invalid': model.invalid && (model.dirty || model.touched), 'is-valid': model.valid }"
-            [(ngModel)]="carObject.model" type="text" class="form-control" name="model" id="model" placeholder = "Civic" required />
-              <div *ngIf="!!model?.errors?.required" class="invalid-feedback">Model cannot be empty
+            <label for="Make">Make</label>
+            <input [ngClass]="{ 'is-invalid': make.invalid && (make.dirty || make.touched), 'is-valid': make.valid }"
+              #make="ngModel" [(ngModel)]="carObject.make" type="text" class="form-control" name="make" id="make" placeholder = "Honda" required />
+              <div *ngIf="!!make?.errors?.required" class="invalid-feedback">Make cannot be empty
               </div>
-          </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="Model">Model</label>
+              <input [ngClass]="{ 'is-invalid': model.invalid && (model.dirty || model.touched), 'is-valid': model.valid }"
+              #model="ngModel" [(ngModel)]="carObject.model" type="text" class="form-control" name="model" id="model" placeholder = "Civic" required />
+                <div *ngIf="!!model?.errors?.required" class="invalid-feedback">Model cannot be empty
+                </div>
+            </div>
+           
           <div class="form-group col-md-6">
             <label for="Year">Year</label>
             <select class="custom-select my-1 mr-sm-2" name="year" id="year" #year="ngModel" [(ngModel)]="carObject.year" required>
@@ -63,13 +63,13 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="License">License Plate</label>
-                <input
-              [ngClass]="{ 'is-invalid': license.invalid && (license.dirty || license.touched), 'is-valid': license.valid }"
-              #color="ngModel" [(ngModel)]="carObject.license" type="text" class="form-control" name="license" id="license"
+                <input [ngClass]="{ 'is-invalid': license.invalid && (license.dirty || license.touched), 'is-valid': license.valid }"
+                #license ="ngModel" [(ngModel)]="carObject.license" type="text" class="form-control" name="license" id="license"
               placeholder = "ABC 123" required />
                 <div *ngIf="!!license?.errors?.required" class="invalid-feedback">License Plate cannot be empty
                 </div>
               </div>
+            
               <div class="form-group col-md-6">
                 <label for="State">State: </label>
                 <select class="custom-select my-1 mr-sm-2" name="state" id="state" [(ngModel)]="carObject.state" required>

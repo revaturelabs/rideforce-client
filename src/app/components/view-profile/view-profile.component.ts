@@ -306,12 +306,26 @@ export class ViewProfileComponent implements OnInit {
     this.contactInfoArray.push(contact);
   }
 
-  updateBio(bioInput: string) {
+  /** Updates the bio info and redirects to userProfile */
+  updateBio() {
+    document.getElementById('aboutYou').removeAttribute('disabled');
+    document.getElementById('editBio').style.display = 'none';
+    document.getElementById('submitBio').style.display = 'inline';
+  }
+
+   /**
+   * Updates the user once he/she is content with the updates
+   */
+  submitBioChanges(bioInput: string) {
+    document.getElementById('submitBio').style.display = 'none';
+    document.getElementById('editBio').style.display = 'inline';
+    document.getElementById('aboutYou').setAttribute("disabled","disabled");
     this.userService.updateBio(bioInput);
     this.principal.bio = bioInput;
     this.authService.changePrincipal(this.principal);
-    this.router.navigate(['/userProfile']);
     this.existingBio = bioInput;
+    //this.router.navigate(['userProfile']);
+    
   }
 
   changeExistingBioStatus() {
