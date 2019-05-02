@@ -157,7 +157,7 @@ export class ViewProfileComponent implements OnInit {
     console.log(this.principal.id);
     console.log("post");  
     console.log(environment.userUrl+"/contact-info/c/"+this.principal.id);
-     this.http.get('http://turtlejr.sps.cuny.edu:5555/contact-info/c/'+this.principal.id).subscribe(
+     this.http.get(environment.userUrl+"/contact-info/c/"+this.principal.id).subscribe(
        response => {
         // console.log(this.contactInfoArray.length)
         this.contactInfoArray = response as ContactInfo[];
@@ -199,7 +199,7 @@ export class ViewProfileComponent implements OnInit {
       info: content
     }
     console.log("PREP'D INFO OBJECT: " + JSON.stringify(contact_info_obj));
-    this.http.post('http://turtlejr.sps.cuny.edu:5555/contact-info/addcinfo', contact_info_obj).subscribe(
+    this.http.post(environment.userUrl+'/contact-info/addcinfo', contact_info_obj).subscribe(
        response => {
         
         console.log("contact info sent");
