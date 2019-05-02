@@ -139,6 +139,7 @@ export class ViewProfileComponent implements OnInit {
   edit() {
     document.getElementById('firstName').removeAttribute('disabled');
     document.getElementById('lastName').removeAttribute('disabled');
+    document.getElementById('password').removeAttribute('hidden');
     // document.getElementById("email").removeAttribute("disabled");
     // document.getElementById("password").removeAttribute("disabled");
     // document.getElementById("confirmPassword").removeAttribute("disabled");
@@ -157,6 +158,7 @@ export class ViewProfileComponent implements OnInit {
     // document.getElementById("currentOffice").style.display = "none";
     // document.getElementById("selectOffice").style.display = "inline";
     //document.getElementById('errorMessage').removeAttribute('hidden');
+    
   }
 
   /**
@@ -244,6 +246,9 @@ export class ViewProfileComponent implements OnInit {
     this.userService.updatePassword(this.principal.email, this.oldPassword, this.password).subscribe();
   }
 
+  editPassword(){
+    
+  }
 
   updateUserStatus(id: number, active: string) {
     if (active !== 'DISABLED') {
