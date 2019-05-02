@@ -3,6 +3,7 @@
   <div class="col-5"></div>
   <div class="col-lg-4 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
+
       <div label="VIEW PROFILE div">
         <ngb-tab title="Your Profile" id="1">
           <ng-template ngbTabContent>
@@ -14,7 +15,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">First Name</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" id="firstName" required disabled>
+                <input type="text" class="form-control" [(ngModel)]="firstName" #firstname="ngModel" id="firstName"
+                  required disabled>
               </div>
               <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
                 <div *ngIf="firstname.errors.required">
@@ -30,7 +32,8 @@
                 <div class="input-group-prepend ">
                   <span class="input-group-text " id="basic-addon1 ">Last Name</span>
                 </div>
-                <input type="text" class="form-control" [(ngModel)]="lastName" #lastname="ngModel" id="lastName" required disabled>
+                <input type="text" class="form-control" [(ngModel)]="lastName" #lastname="ngModel" id="lastName"
+                  required disabled>
               </div>
               <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
                 <div *ngIf="lastname.errors.required">
@@ -46,8 +49,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Email</span>
                 </div>
-                <input type="email" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required placeholder="Email.."
-                  disabled>
+                <input type="email" class="form-control" [(ngModel)]="username" #uName="ngModel" id="email" required
+                  placeholder="Email.." disabled>
               </div>
               <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
                 <div *ngIf="uName.errors.required">
@@ -58,28 +61,14 @@
                 </div>
               </div>
 
-
-<!--               <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Office Address</span>
-                </div>
-                <div class="input-group-text" style="padding-right: 137px; display: inline" id="currentOffice">
-                </div>
-                <div class="input-group-text" style="padding-right: 100px; display: none" id="selectOffice">
-                   <select [(ngModel)]="officeObject">
-                    <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
-                  </select> 
-                </div>
-              </div> -->
-
-
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Address</span>
                 </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="autocompleteTest"
-                  appPlacesAutocomplete (addressSelect)="onAddressSelect($event)" [(ngModel)]="_address" #address="ngModel"
-                  required id="address" placeholder="Type to search.." disabled>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                  name="autocompleteTest" appPlacesAutocomplete (addressSelect)="onAddressSelect($event)"
+                  [(ngModel)]="_address" #address="ngModel" required id="address" placeholder="Type to search.."
+                  disabled>
               </div>
               <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
                 <div *ngIf="address.errors.required">
@@ -98,23 +87,28 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Starting Time</span>
                 </div>
-                <input type="text" id="dayStart" class="form-control" value= "{{startTime | date:'shortTime'}}" disabled> 
+                <input type="text" id="dayStart" class="form-control" value="{{startTime | date:'shortTime'}}" disabled>
               </div>
-            
+
               <div id="switchRoles" hidden>
-                <button *ngIf="currentRole === 'DRIVER'" class="btn btn-secondary" id="switchRider" (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
-                <button *ngIf="currentRole === 'RIDER'" class="btn btn-secondary" id="switchDriver" (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
+                <button *ngIf="currentRole === 'DRIVER'" class="btn btn-secondary" id="switchRider"
+                  (click)="switchRole()">Switch to Rider <i class="fas fa-walking"></i></button>
+                <button *ngIf="currentRole === 'RIDER'" class="btn btn-secondary" id="switchDriver"
+                  (click)="switchRole()">Switch to Driver <i class="fas fa-car"></i></button>
               </div>
               <br>
               <!--Inactivity does not affect admin/trainer functionality. No point in showing them the button-->
               <div *ngIf="currentRole !== 'ADMIN' && currentRole !== 'TRAINER'" id="switchStates" hidden>
-                <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive" (click)="switchState()">Switch to Inactive <i class='fas fa-bell-slash'></i></button>
-                <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive" (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
+                <button *ngIf="currentState === 'ACTIVE'" class="btn btn-danger" id="switchInactive"
+                  (click)="switchState()">Switch to Inactive <i class='fas fa-bell-slash'></i></button>
+                <button *ngIf="currentState === 'INACTIVE'" class="btn btn-success" id="switchActive"
+                  (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
               </div>
               <br>
               <div>
                 <button class="btn btnEdit" (click)="edit()" id="edit">Edit <i class="fas fa-pencil-alt"></i></button>
-                <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i class="fas fa-save"></i></button>
+                <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i
+                    class="fas fa-save"></i></button>
               </div>
               <div style="padding-top: 20px">
                 <div *ngIf="!requiredInfoFields" class="alert alert-danger" id="errorMessage" hidden>
@@ -132,7 +126,8 @@
             <div class="container-fluid">
               <div class="form-group">
                 <label for="aboutYou">Bio</label>
-                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required maxlength="225">{{existingBio}}</textarea>
+                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required
+                  maxlength="225">{{existingBio}}</textarea>
               </div>
               <br>
               <div>
@@ -166,55 +161,51 @@
         </ngb-tab>
       </div>
       <!-- <div *ngIf="currentRole === 'DRIVER'" label="CAR INFO div"> -->
-      <div  label="CAR INFO div">
+      <div label="CAR INFO div">
         <ngb-tab title="Your Garage" id="3">
           <ng-template ngbTabContent>
             <div class="container-fluid">
               <br>
               <h2>Car Information:</h2>
               <br>
-              <br>
-             
-              <div>
-                  
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <!--<span class="input-group-text" id="basic-addon1">Make</span>-->
-                    <span class="input-group-text" id="basic-addon1"><strong>Make</strong></span>                   
-                  </div>
-                  <input class="form-control" value="{{car['make']}}" disabled required>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <!--<span class="input-group-text" id="basic-addon1">Make</span>-->
+                  <span class="input-group-text" id="basic-addon1"><strong>Make</strong></span>
                 </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><strong>Model</strong></span>                    
-                  </div>
-                  <input class="form-control" value="{{car['model']}}" disabled required>                    
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><strong>Year</strong></span>                 
-                  </div>
-                  <input class="form-control" value="{{car['year']}}" disabled required>
-                </div>
-              
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><strong>Color</strong></span>                            
-                  </div>
-                  <input class="form-control" value="{{car['color']}}" disabled required>
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><strong>License</strong></span>
-                  </div>
-                  <input class="form-control" id="basic-addon1" value="{{car['license']}}" disabled required>
-                </div>
-
-                <button class="btn btnEdit" (click)="registerCar()">Update Car</button>
+                <input class="form-control" value="{{car['make']}}" disabled required>
               </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><strong>Model</strong></span>
+                </div>
+                <input class="form-control" value="{{car['model']}}" disabled required>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><strong>Year</strong></span>
+                </div>
+                <input class="form-control" value="{{car['year']}}" disabled required>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><strong>Color</strong></span>
+                </div>
+                <input class="form-control" value="{{car['color']}}" disabled required>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><strong>License</strong></span>
+                </div>
+                <input class="form-control" id="basic-addon1" value="{{car['license']}}" disabled required>
+              </div>
+
+              <button class="btn btnEdit" (click)="registerCar()">Update Car</button>
+
             </div>
           </ng-template>
         </ngb-tab>
@@ -226,7 +217,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -236,32 +228,34 @@
         </button>
       </div>
       <div class="modal-body">
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Password</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required disabled>
-              </div>
-              <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
-                <div *ngIf="pWord.errors.required">
-                  Password cannot be empty
-                </div>
-                <div *ngIf="pWord.errors.maxLength">
-                  Password cannot be more than 15 characters
-                </div>
-              </div>
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                  <span class="input-group-text" id="basic-addon1 ">Confirm</span>
-                </div>
-                <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel" id="confirmPassword" required disabled>
-              </div>
-              <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-                <div *ngIf="password != passwordConfirm">
-                  Passwords do not match.
-                </div>
-              </div>
+        <div class="input-group mb-3 ">
+          <div class="input-group-prepend ">
+            <span class="input-group-text" id="basic-addon1 ">Password</span>
           </div>
+          <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required
+            disabled>
+        </div>
+        <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
+          <div *ngIf="pWord.errors.required">
+            Password cannot be empty
+          </div>
+          <div *ngIf="pWord.errors.maxLength">
+            Password cannot be more than 15 characters
+          </div>
+        </div>
+        <div class="input-group mb-3 ">
+          <div class="input-group-prepend ">
+            <span class="input-group-text" id="basic-addon1 ">Confirm</span>
+          </div>
+          <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel"
+            id="confirmPassword" required disabled>
+        </div>
+        <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
+          <div *ngIf="password != passwordConfirm">
+            Passwords do not match.
+          </div>
+        </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="updatePassword()">Send</button>
@@ -269,4 +263,3 @@
     </div>
   </div>
 </div>
-
