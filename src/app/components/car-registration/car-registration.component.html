@@ -11,22 +11,21 @@
         <div class="form-group col-md-6">
             <label for="Make">Make</label>
             <input [ngClass]="{ 'is-invalid': make.invalid && (make.dirty || make.touched), 'is-valid': make.valid }"
-              #make="ngModel" [(ngModel)]="carObject.make" type="text" class="form-control" name="make" id="make" placeholder = "Honda" required />
+              #make="ngModel" [(ngModel)]="carObjectmake" type="text" class="form-control" name="make" id="make" placeholder= "{{car['make']}}" required />
               <div *ngIf="!!make?.errors?.required" class="invalid-feedback">Make cannot be empty
               </div>
             </div>
             <div class="form-group col-md-6">
               <label for="Model">Model</label>
               <input [ngClass]="{ 'is-invalid': model.invalid && (model.dirty || model.touched), 'is-valid': model.valid }"
-              #model="ngModel" [(ngModel)]="carObject.model" type="text" class="form-control" name="model" id="model" placeholder = "Civic" required />
+              #model="ngModel" [(ngModel)]="carObjectmodel" type="text" class="form-control" name="model" id="model" placeholder = "{{car['model']}}" required />
                 <div *ngIf="!!model?.errors?.required" class="invalid-feedback">Model cannot be empty
                 </div>
             </div>
            
           <div class="form-group col-md-6">
             <label for="Year">Year</label>
-            <select class="custom-select my-1 mr-sm-2" name="year" id="year" #year="ngModel" [(ngModel)]="carObject.year" required>
-                <option value="" selected="selected">(Select a Year)</option>
+            <select class="custom-select my-1 mr-sm-2" name="year" id="year" #year="ngModel" [(ngModel)]="carObjectyear" value="{{car.year}}" required>
                 <option value="2000">2000</option>
                 <option value="2001">2001</option>
                 <option value="2002">2002</option>
@@ -51,8 +50,8 @@
                </div>
           <div class="form-group col-md-6">
             <label for="Color">Color</label>
-            <select class="custom-select my-1 mr-sm-2" name="color" id="color" [(ngModel)]="carObject.color" required>
-                <option value="" selected="selected">(Select a Color)</option>
+            <select class="custom-select my-1 mr-sm-2" name="color" id="color" [(ngModel)]="carObjectcolor" value="{{car['color']}}" required>
+                <option value="orange">Orange</option>
                 <option value="black">Black</option>
                 <option value="white">White</option>
                 <option value="red">Red</option>
@@ -64,16 +63,16 @@
             <div class="form-group col-md-6">
                 <label for="License">License Plate</label>
                 <input [ngClass]="{ 'is-invalid': license.invalid && (license.dirty || license.touched), 'is-valid': license.valid }"
-                #license ="ngModel" [(ngModel)]="carObject.license" type="text" class="form-control" name="license" id="license"
-              placeholder = "ABC 123" required />
+                #license ="ngModel" [(ngModel)]="carObjectlicense" type="text" class="form-control" name="license" id="license"
+              placeholder = "{{car['license']}}" required />
                 <div *ngIf="!!license?.errors?.required" class="invalid-feedback">License Plate cannot be empty
                 </div>
               </div>
             
-              <div class="form-group col-md-6">
+<!--               <div class="form-group col-md-6">
                 <label for="State">State: </label>
                 <select class="custom-select my-1 mr-sm-2" name="state" id="state" [(ngModel)]="carObject.state" required>
-         <option value="" selected="selected">(please select a state)</option>
+         <option value="{{car['state']}}" selected="{{car['state']}}"></option>
          <option value="AL">Alabama</option>
          <option value="AK">Alaska</option>
          <option value="AZ">Arizona</option>
@@ -126,10 +125,11 @@
          <option value="WI">Wisconsin</option>
          <option value="WY">Wyoming</option>
        </select>
-        </div>
+        </div> -->
       </div>
     </form>
     <button type='submit' (click)="submitAutomobile()" style= "background-color:orange; width: 15%">Update Car</button>
     <span id="successLine">{{success}}</span>
  </div>
 </div>
+ 
