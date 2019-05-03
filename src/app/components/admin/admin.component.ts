@@ -23,7 +23,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
    /*copyToClipboard message for ngif*/
    private copyToClipboard;
    /*error popup for invalid date*/   
-   private ERROR;
+   public invalidDate;
 
   /**
    * Injects services into the component.
@@ -52,11 +52,11 @@ import { UserControllerService } from '../../services/api/user-controller.servic
      let today = new Date().getTime();
      let parse = Date.parse(this.rtr.batchEndDate);
      if (today > parse) {
-       this.ERROR = true;
+     this.invalidDate = true;
      }
      else{
        this.userService.getRegistrationKey(this.rtr).subscribe(data => this.registrationToken = data);
-       this.ERROR = false;
+     this.invalidDate = false;
      }
      this.copyToClipboard = false;
    }

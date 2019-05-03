@@ -24,10 +24,10 @@
               (click)="getRegistrationKey()">Get Key</button>
             </div>
           </div>
-          <div class="alert alert-danger" *ngIf="ERROR==true">
+          <div class="alert alert-danger" *ngIf="invalidDate==true">
               <strong>DATE INVALID:  Enter a valid date to recieve a registration token!!!</strong></div>
           <!-- Registration Token -->
-          <div class="form-group" *ngIf="ERROR==false">
+          <div class="form-group" *ngIf="invalidDate==false">
             <label for="registrationToken">Registration Token</label>
             <span (click)="copyUponclick(genkeyclip)"><textarea [(ngModel)]="registrationToken" class="form-control " id="registrationToken" rows="8" readonly #genkeyclip></textarea></span>
             <div class="alert alert-danger" *ngIf="copyToClipboard==true">

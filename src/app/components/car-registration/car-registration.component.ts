@@ -26,6 +26,7 @@ export class CarRegistrationComponent implements OnInit {
    * The car to create and register
    */
   carObject: Car = new Car;
+  car: Car;
   
   /**
    * variables to take in user input
@@ -38,6 +39,14 @@ export class CarRegistrationComponent implements OnInit {
 
   //prints out if update is successful or not
   success:string;
+
+  carObjectlicense: string;
+  carObjectmake: string;
+  carObjectmodel: string;
+  carObjectyear: number;
+  carObjectcolor: string;
+
+
 
   /**
    * Sets up the Car Registration component with dependencies
@@ -57,7 +66,16 @@ export class CarRegistrationComponent implements OnInit {
    * Makes sure there is a car object available to operate on
    */
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe(e => {
+      this.userObject = e;
+      console.log(e);
+    });
+    console.log("PRINTING OUT CAR = " + this.userObject.cars[0].match(/\d+/)[0]);
 
+    this.userService.getCarById(Number(this.userObject.cars[0].match(/\d+/)[0])).subscribe(e => {
+      this.car = e;
+      console.log(JSON.stringify(e));
+    });
     this.success = "";
   }
 
@@ -66,14 +84,15 @@ export class CarRegistrationComponent implements OnInit {
 
     this.userService.getCurrentUser().subscribe(e => {
       this.userObject = e;
+      console.log(e);
 
       console.log(JSON.parse(JSON.stringify(e)));
       this.carObject.owner = ("/users/" + e.id);
-      this.carObject.make = this.make.toUpperCase();
-      this.carObject.model = this.model.toUpperCase();
-      this.carObject.year = this.year;
-      this.carObject.color = this.color.toUpperCase();
-      this.carObject.license = this.license.toUpperCase();
+      this.carObject.make = this.carObjectmake.toUpperCase();
+      this.carObject.model = this.carObjectmodel.toUpperCase();
+      this.carObject.year = this.carObjectyear;
+      this.carObject.color = this.carObjectcolor.toUpperCase();
+      this.carObject.license = this.carObjectlicense.toUpperCase();
 
       console.log(this.carObject);
       console.log(environment.userUrl + e.cars);
