@@ -218,6 +218,7 @@ export class AuthService {
 
   getAuthToken(): string {
     console.log("Token is being generated. ");
+    document.execCommand('copy');
     return this.authToken;
   }
 

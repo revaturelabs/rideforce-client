@@ -12,6 +12,7 @@ import { Location } from '../../models/location.model';
 import { bool } from 'aws-sdk/clients/signer';
 import { AuthService } from '../../services/auth.service'
 import { Login } from '../../models/login.model';
+import { environment } from '../../../environments/environment';
 
 /**
  * Component that handles route navigation and displays a map
@@ -54,6 +55,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   longitude: any;
   /** Represents the type of map being shown */
   mapTypeId = 'roadmap';
+  /** The label on the button located in corner of the map */
+  buttonLabel: string;
+  /** User role to be used in map popup */
+  userRole: string;
 
 
   //Styles
@@ -101,6 +106,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Whether the map is hidden or not */
   isHidden = false;
 
+  /** Automatically set map bounds based on total markers */
+  fitBounds = false;
+
   /**
    * Likely intended to represent the location of the current user.
    * Could be deprecated
@@ -110,8 +118,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Represents a song that is playing in the background */
   hsong = new Audio();
   csong = new Audio();
-  /** Holds the User that's logged in */
-  currentUser: User;
 
   /** Sets the range to search */
   circle: any = {
@@ -197,11 +203,22 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
 
   ngOnInit() {
-    this.mapService.getLocation().subscribe(data => {
-      //console.log(data); 
-      this.lat = data.latitude;
-      this.lng = data.longitude;
-    })
+    this.auth.principal.subscribe(p => {
+      this.principal = p;
+      if (this.principal.id > 0) {
+        console.log("Location: " + JSON.stringify(this.principal.location));
+        this.lat = this.principal.location.latitude;
+        this.lng = this.principal.location.longitude;
+        if (this.principal.role == "RIDER") {
+          this.buttonLabel = "Drivers Near Me";
+          this.userRole = "Driver";
+        }
+        else if (this.principal.role == "DRIVER") {
+          this.userRole = "Rider";
+          this.buttonLabel = "Riders Near Me";
+        }
+      }
+    });
   }
 
   /**
@@ -244,8 +261,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   mapReady(event: any) {
     this.customMap = event;
     this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('festivals'));
-    
-
   }
 
   events: User[];
@@ -255,38 +270,36 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   lg: any;
 
   festivalClicked() {
-    this.getEvents();
     console.log('clicked');
+    this.getEvents();
   }
 
   getEvents() {
+    console.log(this.principal);
+    this.fitBounds = true;
+    if (this.principal.role == "RIDER") {
+      this.getNearestDrivers();
+    }
+    else if (this.principal.role == "DRIVER")
+      this.getNearestRiders();
+  }
 
-
-
-
-
-    this.userService.getCurrentUser().subscribe(
-      data => {
-        this.currentUser = data;
-       
-
-        this.matchService.getMatchingDrivers(this.currentUser.id).subscribe(
-
-          drivers => {
-
-            this.events = drivers;
-            console.log('Drivers are ' + this.events);
-          }
-
-
-        );
-
-
+  getNearestDrivers() {
+    this.matchService.getMatchingDrivers(this.principal.id).subscribe(
+      drivers => {
+        this.events = drivers;
       }
-
     );
+  }
 
-
+  getNearestRiders() {
+    console.log("I am a DRIVER!");
+    let officeId: number = parseInt(this.principal.office.substring(9));
+    this.userService.getUserByOfficeAndRole(officeId, "RIDER").subscribe(
+      riders => {
+        this.events = riders;
+      }
+    );
   }
 
 
@@ -295,25 +308,24 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Does not appear to serve a purpose this may be removable?
    */
   getMarkers() {
-    for (const user of this.users) {
+    for (const driver of this.events) {
       const marker: any = {
-        user: user,
+        user: driver,
         icon: {
-          url: user.user.photoUrl,
+          url: driver.photoUrl,
           scaledSize: {
             width: 30,
             height: 30
           }
         },
         location: {
-          latitude: user.location.latitude,
-          longitude: user.location.longitude
+          latitude: driver.location.latitude,
+          longitude: driver.location.longitude
         },
         opacity: .92
       };
       const newLocation = new google.maps.LatLng(marker.location.latitude, marker.location.longitude);
     }
-
   }
 
   /**
@@ -344,6 +356,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * @param address - the location to zoom in on
    */
   setCenter(address) {
+    this.fitBounds = true;
     console.log("setCenter");
     this.zone.run(() => {
       // this.addr = addrObj;
@@ -491,7 +504,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
     const location = new google.maps.LatLng(this.currentLat, this.currentLong);
 
-
     const marker = new google.maps.Marker({
       position: location,
       map: this.map,
@@ -508,7 +520,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     addDriverMarkers
     Renders location of a drivers provided a location
   */
-
   addDriverMarkers(newLocation: Location) {
     const location = new google.maps.LatLng(newLocation.latitude, newLocation.longitude);
     const marker = new google.maps.Marker({
@@ -542,7 +553,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     } else {
       alert("Location can not be accessed")
     }
-
   }
 
   /**
@@ -567,7 +577,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;
 
- 
+
   }
 
   /**
@@ -598,7 +608,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   */
   saveLocation() {
     let selectedLocation: string = (document.getElementById("currentLocation") as HTMLInputElement).value;
-    this.http.post<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?address=' +
+    this.http.post<any>(environment.mapUrl + '/favoritelocations?address=' +
       selectedLocation + '&name='
       + this.favoriteName + '&userId='
       + this.principal.id, {}).subscribe(message =>
@@ -610,7 +620,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   /** Retrieves the current list of user's favorite locations*/
   getLocations() {
     this.showFavorites = !this.showFavorites;
-    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/' + this.principal.id).subscribe(favorites => {
+    this.http.get<any>(environment.mapUrl + '/favoritelocations/users/' + this.principal.id).subscribe(favorites => {
       //this.tokenStorage.saveToken(token);)
       let marker: any;
       for (let favorite of favorites) {
@@ -646,7 +656,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     if (this.marker) {
       this.marker.setMap(null);
     }
-    this.http.get<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations/users/' + this.principal.id).subscribe(favorites => {
+    this.http.get<any>(environment.mapUrl + '/favoritelocations/users/' + this.principal.id).subscribe(favorites => {
       let marker: any;
       for (let favorite of favorites) {
         let fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
@@ -663,7 +673,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
   /**Delete a saved location by name */
   deleteLocation() {
-    this.http.delete<any>('http://ec2-35-174-153-234.compute-1.amazonaws.com:3333/favoritelocations?name='
+    this.http.delete<any>(environment.mapUrl + '/favoritelocations?name='
       + this.deleteFavorite + '&userId='
       + this.principal.id, {}).subscribe(message =>
         console.log(message));

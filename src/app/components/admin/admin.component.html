@@ -21,17 +21,20 @@
             <!-- Get Key button -->
             <div class="col-md-4 mt-3">
               <button class="btn btn-primary w-100" *ngIf="rtr.office && rtr.batchEndDate"
-                (click)="getRegistrationKey()">Get Key</button>
+              (click)="getRegistrationKey()">Get Key</button>
             </div>
           </div>
+          <div class="alert alert-danger" *ngIf="invalidDate==true">
+              <strong>DATE INVALID:  Enter a valid date to recieve a registration token!!!</strong></div>
           <!-- Registration Token -->
-          <div class="form-group">
+          <div class="form-group" *ngIf="invalidDate==false">
             <label for="registrationToken">Registration Token</label>
-            <textarea [(ngModel)]="registrationToken" class="form-control " id="registrationToken" rows="8"
-              readonly></textarea>
+            <span (click)="copyUponclick(genkeyclip)"><textarea [(ngModel)]="registrationToken" class="form-control " id="registrationToken" rows="8" readonly #genkeyclip></textarea></span>
+            <div class="alert alert-danger" *ngIf="copyToClipboard==true">
+              <strong>Copied to Clipboard</strong>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

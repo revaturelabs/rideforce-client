@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col">
       <br>
-      <agm-map [latitude]="lat" [longitude]="lng" (mapReady)="mapReady($event)" [fitBounds]="true">
-        <button class="btn btn-primary" id="festivals" (click)="festivalClicked()"> Drivers Near You
+      <agm-map [latitude]="lat" [longitude]="lng" (mapReady)="mapReady($event)" [fitBounds]="fitBounds" [zoom]="17">
+        <button class="btn btn-primary" id="festivals" (click)="festivalClicked()">{{buttonLabel}}
         </button>
         <agm-marker [latitude]='lat' [longitude]='lng' [label]="labelOptions" [agmFitBounds]="true">
         </agm-marker>
@@ -12,11 +12,11 @@
           [agmFitBounds]="true">
 
           <agm-info-window #window>
-            <h5>Driver Name:</h5>
+            <h5>{{userRole}} Name:</h5>
             <h6>{{ coords.firstName }} {{ coords.lastName }} </h6>
             
             <br>
-            <h5>Driver Contact Info:</h5>
+            <h5>{{userRole}} Contact Info:</h5>
             <h6>{{coords.email}}</h6>
           </agm-info-window>
         </agm-marker>

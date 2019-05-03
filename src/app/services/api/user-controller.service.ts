@@ -15,6 +15,8 @@ import { AuthService } from '../../services/auth.service';
 import { UserRegistration } from '../../models/user-registration.model';
 import { RegistrationToken } from '../../models/registration-token.model';
 import { Role } from '../../models/role.model';
+import { stringList } from 'aws-sdk/clients/datapipeline';
+import { String } from 'aws-sdk/clients/docdb';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -31,7 +33,7 @@ export class UserControllerService {
   constructor(private http: HttpClient, auth: AuthService) {
     auth.principal.subscribe(user => {
       this.principal = user;});
-
+      
    }
 
   /** to be used with the url provided by back end */
@@ -91,6 +93,21 @@ export class UserControllerService {
     return this.http.get<User>(environment.userUrl + '/users', {
       params: { email },
     }).toPromise();
+  }
+
+    /**
+   * Gets a single user via the given endpoint and email
+   * @param {number} office - the office of the users to retrieve
+   * @param {String} role - the role of the users to retrieve
+   * @returns {Observable<User>} - the user with the given email
+   * 
+   * /user/users?office={id}&role={string}
+   * 
+   */
+  getUserByOfficeAndRole(office: number, role: string): Observable<User[]> {
+    return this.http.get<User[]>(environment.userUrl + '/users', {
+      params: {'office' : office.toString(), 'role' : role},
+    });
   }
 
   /* getUsersByOfficeAndRole(office: number, role: string): Observable<User> {
