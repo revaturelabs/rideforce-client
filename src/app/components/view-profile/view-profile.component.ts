@@ -322,10 +322,12 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById('aboutYou').setAttribute("disabled","disabled");
     this.userService.updateBio(bioInput);
     this.principal.bio = bioInput;
+    this.existingBio = this.principal.bio;
     this.authService.changePrincipal(this.principal);
     this.existingBio = bioInput;
     //this.router.navigate(['userProfile']);
-    
+    console.log("bio " + this.principal.bio);
+    this.userService.updateBio(this.principal.bio);
   }
 
   changeExistingBioStatus() {
