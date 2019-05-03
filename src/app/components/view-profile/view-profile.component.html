@@ -60,6 +60,24 @@
                   Email cannot be more than 25 characters
                 </div>
               </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                </div>
+              </div>
+
+<!--               <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Office Address</span>
+                </div>
+                <div class="input-group-text" style="padding-right: 137px; display: inline" id="currentOffice">
+                </div>
+                <div class="input-group-text" style="padding-right: 100px; display: none" id="selectOffice">
+                   <select [(ngModel)]="officeObject">
+                    <option *ngFor="let office of officeObjectArray">{{office.name}}</option>
+                  </select> 
+                </div>
+              </div> -->
+
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -105,6 +123,13 @@
                   (click)="switchState()">Switch to Active <i class='fas fa-bell'></i></button>
               </div>
               <br>
+              <!--Change Password Button-->
+              <div  id="password" hidden>
+                  <button class="btn btn-success" id="password-box" data-toggle="modal" data-target="#forgotModal"
+                  (click)="resetEmail()">Change Password</button>
+                <!--<button class="btn btn-success" (click)="editPassword()">Edit Password</button>-->
+              </div>
+              <br>
               <div>
                 <button class="btn btnEdit" (click)="edit()" id="edit">Edit <i class="fas fa-pencil-alt"></i></button>
                 <button class="btn btnSubmit" (click)="submitChanges()" id="submit">Save Changes <i
@@ -126,8 +151,7 @@
             <div class="container-fluid">
               <div class="form-group">
                 <label for="aboutYou">Bio</label>
-                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required
-                  maxlength="225">{{existingBio}}</textarea>
+                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required maxlength="225" disabled>{{existingBio}}</textarea>
               </div>
               <br>
               <div>
@@ -139,7 +163,9 @@
                 <div style="padding-left: 20px">
                 </div>
               </div>
-              <button type="button" class="btn btnEdit" (click)="updateBio(bioInput.value)">Submit <i class='fas fa-person-booth'></i></button>
+              <br>
+              <button class="btn btnEdit" (click)="updateBio()" id="editBio">Edit Bio <i class="fas fa-pencil-alt"></i></button>
+              <button class="btn btnSubmit" (click)="submitBioChanges(bioInput.value)" id="submitBio">Save Changes <i class="fas fa-save"></i></button>
               <br>
               <br>
               <br>
@@ -210,55 +236,104 @@
           </ng-template>
         </ngb-tab>
       </div>
+      <div label="Contact div" id="cinfo">
+        <ngb-tab title="Contact Info" id="4">
+          <ng-template ngbTabContent>
+            <div class="container-fluid">
+              
+              <div *ngIf="contactInfoArray.length > 0 ; else none">
+              <table  class ="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Contact Type</th>
+                        <th scope="col">Contact Info</th>
+                      </tr>
+                </thead>
+                  <tr *ngFor="let item of contactInfoArray">
+
+                    <td>{{item.type}}</td>
+                    <td>{{item.info}}</td>
+                  </tr>
+                
+              </table>
+            </div>
+            <ng-template #none>
+                <h5>Looks like you don't have any contact info recorded. Add some below!</h5>
+              </ng-template>
+              
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <select class="browser-default custom-select" #contactType>
+                      <option [value] = "type" *ngFor="let type of contactInfoTypes">
+                              {{type}}
+                      </option>
+                    </select>
+                  </span>
+                </div>
+                <input type="text" class="form-control" #contactContent required>
+                <button type="button" id= "updatebtn" class="btn btn-warning" (click) = "updateContactInfo(contactType.value, contactContent.value)">Update</button>
+              </div>
+            
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </div>
 
 
     </ngb-tabset>
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel"
+
+<!-- Change Password Modal (taken from login component)-->
+<div class="modal fade" id="forgotModal" #forgotmodal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="passwordModalLabel">Change Password</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="input-group mb-3 ">
-          <div class="input-group-prepend ">
-            <span class="input-group-text" id="basic-addon1 ">Password</span>
-          </div>
-          <input type="password" class="form-control " [(ngModel)]="password" #pWord="ngModel" id="password" required
-            disabled>
+        <div>
+          <h5 class="text-center">Please check your email for the verification code.</h5>
+          <form #reset="ngForm" (ngSubmit)="resetPassword(reset)" novalidate class="mt-5 ml-5">
+            <div class="form-group">
+              <label for="verifyCode">Verification Code</label>
+              <input type="text" class="form-control" name="verifyCode" id="verifyCode" required ngModel
+                #verify="ngModel" [class.is-invalid]="verify.invalid && verify.touched">
+              <br>
+              <small id="verifyMsg" [class.d-none]="verify.valid || verify.untouched" class="text-danger">
+                Verification code is required
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="resetPassword">Password</label>
+              <input type="password" class="form-control" name="resetPassword" id="resetPassword" required ngModel
+                #resetPass="ngModel" [class.is-invalid]="resetPass.invalid && resetPass.dirty"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+              <br>
+              <small [class.d-none]="resetPass.valid || resetPass.untouched" class="text-danger">
+                Password contain at least 8 characters, one captial letter, and one number.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="resetConfirm">Confirm Password</label>
+              <input type="password" class="form-control" name="resetConfirm" id="resetConfirm" required ngModel
+                #confirm="ngModel" [class.is-invalid]="confirm.invalid && confirm.dirty" pattern="{{resetPass.value}}">
+              <br>
+              <small [class.d-none]="confirm.valid || confirm.untouched" class="text-danger">Passwords do not
+                match.</small>
+            </div>
+            <button type="submit" class="btn btn-primary float-right mr-5 mt-2" [disabled]="reset.form.invalid"
+              data-dismiss="modal"  >
+              Submit
+            </button>
+          </form>
         </div>
-        <div *ngIf="pWord.invalid && (pWord.dirty || pWord.touched)" class="alert alert-danger">
-          <div *ngIf="pWord.errors.required">
-            Password cannot be empty
-          </div>
-          <div *ngIf="pWord.errors.maxLength">
-            Password cannot be more than 15 characters
-          </div>
-        </div>
-        <div class="input-group mb-3 ">
-          <div class="input-group-prepend ">
-            <span class="input-group-text" id="basic-addon1 ">Confirm</span>
-          </div>
-          <input type="password" class="form-control " [(ngModel)]="confirmPassword" #pConfirm="ngModel"
-            id="confirmPassword" required disabled>
-        </div>
-        <div *ngIf="pConfirm.invalid && (pConfirm.dirty || pConfirm.touched)" class="alert alert-danger">
-          <div *ngIf="password != passwordConfirm">
-            Passwords do not match.
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="updatePassword()">Send</button>
       </div>
     </div>
   </div>

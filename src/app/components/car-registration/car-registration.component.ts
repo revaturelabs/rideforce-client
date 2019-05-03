@@ -36,6 +36,7 @@ export class CarRegistrationComponent implements OnInit {
   year:number;
   color:string;
   license:string;
+  state:string;
 
   //prints out if update is successful or not
   success:string;
@@ -88,11 +89,12 @@ export class CarRegistrationComponent implements OnInit {
 
       console.log(JSON.parse(JSON.stringify(e)));
       this.carObject.owner = ("/users/" + e.id);
-      this.carObject.make = this.carObjectmake.toUpperCase();
-      this.carObject.model = this.carObjectmodel.toUpperCase();
-      this.carObject.year = this.carObjectyear;
-      this.carObject.color = this.carObjectcolor.toUpperCase();
-      this.carObject.license = this.carObjectlicense.toUpperCase();
+      this.carObject.make = this.make.toUpperCase();
+      this.carObject.model = this.model.toUpperCase();
+      this.carObject.year = this.year;
+      this.carObject.color = this.color.toUpperCase();
+      this.carObject.license = this.license.toUpperCase();
+      this.carObject.state = this.state.toUpperCase();
 
       console.log(this.carObject);
       console.log(environment.userUrl + e.cars);
