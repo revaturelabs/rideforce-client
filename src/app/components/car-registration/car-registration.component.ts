@@ -89,12 +89,11 @@ export class CarRegistrationComponent implements OnInit {
 
       console.log(JSON.parse(JSON.stringify(e)));
       this.carObject.owner = ("/users/" + e.id);
-      this.carObject.make = this.make.toUpperCase();
-      this.carObject.model = this.model.toUpperCase();
-      this.carObject.year = this.year;
-      this.carObject.color = this.color.toUpperCase();
-      this.carObject.license = this.license.toUpperCase();
-      this.carObject.state = this.state.toUpperCase();
+      this.carObject.make = this.carObjectmake.toUpperCase();
+      this.carObject.model = this.carObjectmodel.toUpperCase();
+      this.carObject.year = this.carObjectyear;
+      this.carObject.color = this.carObjectcolor.toUpperCase();
+      this.carObject.license = this.carObjectlicense.toUpperCase();
 
       console.log(this.carObject);
       console.log(environment.userUrl + e.cars);
@@ -104,21 +103,23 @@ export class CarRegistrationComponent implements OnInit {
         this.http.post<Car>(environment.userUrl + '/cars/', this.carObject, {observe: 'response'}).subscribe(response => {
           if(response.status == 201){
             this.success = "Success";
-            this.route.navigate(['/userProfile']);}
+            }
           else
             this.success = "Failed";
 
         });
+        if (this.success = "Success") { this.route.navigate(['/userProfile']); }
       }
       else {
         this.http.put<Car>(environment.userUrl + e.cars, this.carObject, {observe: 'response'}).subscribe(response => {
         if(response.status == 200){
           this.success = "Success";
-          this.route.navigate(['/userProfile']);}
+          }
         else
           this.success = "Failed";
         
         });
+        if (this.success = "Success") { this.route.navigate(['/userProfile']); }
       }
     });
   }
