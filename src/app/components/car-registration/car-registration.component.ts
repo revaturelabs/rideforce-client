@@ -102,8 +102,9 @@ export class CarRegistrationComponent implements OnInit {
 
       if(e.cars.length == 0) {
         this.http.post<Car>(environment.userUrl + '/cars/', this.carObject, {observe: 'response'}).subscribe(response => {
-          if(response.status == 201)
+          if(response.status == 201){
             this.success = "Success";
+            this.route.navigate(['/userProfile']);}
           else
             this.success = "Failed";
 
@@ -111,14 +112,20 @@ export class CarRegistrationComponent implements OnInit {
       }
       else {
         this.http.put<Car>(environment.userUrl + e.cars, this.carObject, {observe: 'response'}).subscribe(response => {
-        if(response.status == 200)
+        if(response.status == 200){
           this.success = "Success";
+          this.route.navigate(['/userProfile']);}
         else
           this.success = "Failed";
         
         });
       }
     });
+  }
+
+  moveBack() {
+    console.log("going to register car");
+    this.route.navigate(['/userProfile']);
   }
 
 }
