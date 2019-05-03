@@ -151,8 +151,7 @@
             <div class="container-fluid">
               <div class="form-group">
                 <label for="aboutYou">Bio</label>
-                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required
-                  maxlength="225">{{existingBio}}</textarea>
+                <textarea id="aboutYou" type="text" class="form-control" rows="4" #bioInput required maxlength="225" disabled>{{existingBio}}</textarea>
               </div>
               <br>
               <div>
@@ -164,7 +163,9 @@
                 <div style="padding-left: 20px">
                 </div>
               </div>
-              <button type="button" class="btn btnEdit" (click)="updateBio(bioInput.value)">Submit <i class='fas fa-person-booth'></i></button>
+              <br>
+              <button class="btn btnEdit" (click)="updateBio()" id="editBio">Edit Bio <i class="fas fa-pencil-alt"></i></button>
+              <button class="btn btnSubmit" (click)="submitBioChanges(bioInput.value)" id="submitBio">Save Changes <i class="fas fa-save"></i></button>
               <br>
               <br>
               <br>
