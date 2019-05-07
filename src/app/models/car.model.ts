@@ -19,4 +19,5 @@ export class Car {
   year: number;
   color: string;
   license: string;
+  state: string;
 }
