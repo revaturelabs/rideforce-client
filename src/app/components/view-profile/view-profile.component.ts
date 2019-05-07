@@ -429,12 +429,12 @@ export class ViewProfileComponent implements OnInit {
     try {
       const cognitoUser = this.createCognitoUser(this.username);
 
-      // /*debug*/ console.log("aws");
+      // /*debug*/ console.log("resetEmail() try block");
       cognitoUser.forgotPassword({
         onSuccess: function (result) {
           console.log('Email Sent!');
           // /*debug*/ console.log('call result:' + result);
-          //$("#forgotModal").modal();
+
         },
         onFailure: function (err) {
         /*debug*/ console.log(err);
@@ -459,15 +459,13 @@ export class ViewProfileComponent implements OnInit {
     const cognitoUser = this.createCognitoUser(this.username);
     cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
       onSuccess: () => {
-        //  /*debug*/ console.log("changed")
-        //$("#passwordModal").modal("hide");
-        var messageLogin = document.getElementById('errorMessageLogin');
-        messageLogin.style.display = 'block';
-        messageLogin.style.color = 'green';
-        messageLogin.innerHTML = "Password changed.";
+          /*debug*/ console.log("ResetPassword(): changed")
+          alert("Password changed successfully!");
+          this.router.navigateByUrl("/landing");
+
       },
       onFailure: err => {
-        //   /*debug*/ console.log(err);`
+        /*debug*/ console.log(err);
         switch (err.name) {
           case "CodeMismatchException": {
             let input: any = "";

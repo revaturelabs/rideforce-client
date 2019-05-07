@@ -129,7 +129,7 @@ export class LoginComponent implements OnInit {
     cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
       onSuccess: () => {
         
-      //  /*debug*/ console.log("changed")
+        /*debug*/ console.log("resetPassword(): changed")
         $("#forgotModal").modal("hide");
         var messageLogin = document.getElementById('errorMessageLogin');
         messageLogin.style.display = 'block';
@@ -139,7 +139,7 @@ export class LoginComponent implements OnInit {
         //$('#forgotModal').modal("close");
       },
       onFailure: err => {
-      //   /*debug*/ console.log(err);
+         /*debug*/ console.log(err);
         switch (err.name) {
           case "CodeMismatchException": {
             let input: any = "";
