@@ -72,7 +72,7 @@
 <!--               <div class="form-group col-md-6">
                 <label for="State">State: </label>
                 <select class="custom-select my-1 mr-sm-2" name="state" id="state" [(ngModel)]="carObject.state" required>
-         <option value="" selected="selected">(please select a state)</option>
+         <option value="{{car['state']}}" selected="{{car['state']}}"></option>
          <option value="AL">Alabama</option>
          <option value="AK">Alaska</option>
          <option value="AZ">Arizona</option>
@@ -125,8 +125,12 @@
          <option value="WI">Wisconsin</option>
          <option value="WY">Wyoming</option>
        </select>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         </div>
+=======
+        </div> -->
+>>>>>>> r2s-rideswipe
       </div>
     </form>
     <button type='submit' (click)="submitAutomobile()" style= "background-color:orange; width: 15%">Update Car</button>
@@ -141,3 +145,4 @@
 </div>
 >>>>>>> Stashed changes
 </div>
+ 
