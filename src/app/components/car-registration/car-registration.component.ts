@@ -103,23 +103,23 @@ import { environment } from '../../../environments/environment';
          this.http.post<Car>(environment.userUrl + '/cars/', this.carObject, {observe: 'response'}).subscribe(response => {
            if(response.status == 201){
              this.success = "Success";
+             this.route.navigate(['/userProfile']);
            }
            else
              this.success = "Failed";
 
          });
-         if (this.success == "Success") { this.route.navigate(['/userProfile']); }
        }
        else {
          this.http.put<Car>(environment.userUrl + e.cars, this.carObject, {observe: 'response'}).subscribe(response => {
            if(response.status == 200){
              this.success = "Success";
+             this.route.navigate(['/userProfile']);
            }
            else
              this.success = "Failed";
            
          });
-         if (this.success == "Success") { this.route.navigate(['/userProfile']); }
        }
      });
    }
