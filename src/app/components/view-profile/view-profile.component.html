@@ -169,19 +169,6 @@
               <br>
               <br>
               <br>
-              <div *ngFor="let item of contactInfoArray" class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <div class="input-group-text" style="padding-right: 100px">
-                    <select [(ngModel)]="item.type">
-                      <option *ngFor="let contact of contactTypeArray">{{contact}}</option>
-                    </select>
-                  </div>
-                  <input type="text" class="" [(ngModel)]="item.info">
-                  <br>
-                  <button aria-hidden="true" class="btn" (click)="removeContact(item)">-</button>
-                  <br>
-                </div>
-              </div>
             </div>
           </ng-template>
         </ngb-tab>
