@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\app-routing",
+    "\\src\\app\\first",
+    "\\src\\app\\guards",
+    "\\src\\app\\models",
+    "\\src\\app\\pipes",
+    "\\src\\app\\services"
+  ],
+  "SelectedNode": "\\src\\app\\app-routing\\app-routing.module.spec.ts",
+  "PreviewInSolutionExplorer": false
+}

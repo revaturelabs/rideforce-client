@@ -37,6 +37,7 @@ export class ViewUsersComponent implements OnInit {
   paginatedUsers: any[];
   /**Number of pages */
   numPages: any[];
+  totalPage: number;
   /**save the current page for next and back buttons */
   currPage: number;
   /** Whether the user can make changes (Currently not used) */
@@ -54,6 +55,10 @@ export class ViewUsersComponent implements OnInit {
   accntRole: string;
   accntActive: string;
   accntEmail: string;
+  //pagination
+  pager: any = {};
+  pagedItems: any[];
+  private allItems: any[];
 
   constructor(private userService: UserControllerService, private authService: AuthService, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -63,6 +68,9 @@ export class ViewUsersComponent implements OnInit {
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
+   
+
+
     console.log('ngOnInit');
     this.authService.principal.subscribe(user => {
       this.principal = user;
@@ -75,7 +83,8 @@ export class ViewUsersComponent implements OnInit {
       this.filterUsers('');
     });
     this.getRole();
-    this.getState();
+    this.getState(); 
+
   }
 
   switchRole() {
@@ -119,24 +128,35 @@ export class ViewUsersComponent implements OnInit {
   getUsers() {
     let data;
     console.log('hitting users');
+   
+
     if (this.principal.role === Role.Admin) {
       return this.userService.getAllUsers().then((x) => {
         data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider || y.role === Role.Trainer || y.role === Role.Admin);
         this.users = data;
+        console.log('data info here!!!!!');
+        console.log(data);
+        console.log(data.length);
         return data;
       });
     } else if (this.principal.role === Role.Trainer) {
       this.userService.getAllUsers().then((x) => {
         data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider);
         this.users = data;
+        console.log('data info here');
+        console.log(data.length);
       });
     }
+    console.log('data info here');
     console.log(data);
   }
 
 
   paginate(users: any[], pageSize: number, pageNumber: number) {
     this.currPage = pageNumber;
+    console.log('Curr page values is ' + this.currPage);
+    console.log('Curr page values is ' + this.currPage);
+    console.log('Curr page values is ' + this.currPage);
     --pageNumber;
     const result = users.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
     console.log(pageNumber, pageSize);
@@ -150,12 +170,17 @@ export class ViewUsersComponent implements OnInit {
   dividePages(users: any[], divider: number) {
     this.numPages = [];
     let counter = 0;
+  
+    this.totalPage = Math.ceil(users.length / 10);
+    console.log(this.totalPage);
+  
     counter = Math.round(users.length / divider);
     let n = 1;
     while (n <= counter) {
       this.numPages.push(n++);
     }
     console.log('Number of pages: ' + this.numPages);
+   
     return this.numPages;
   }
 
