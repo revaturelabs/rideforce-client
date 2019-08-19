@@ -134,29 +134,19 @@ export class ViewUsersComponent implements OnInit {
       return this.userService.getAllUsers().then((x) => {
         data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider || y.role === Role.Trainer || y.role === Role.Admin);
         this.users = data;
-        console.log('data info here!!!!!');
-        console.log(data);
-        console.log(data.length);
         return data;
       });
     } else if (this.principal.role === Role.Trainer) {
       this.userService.getAllUsers().then((x) => {
         data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider);
         this.users = data;
-        console.log('data info here');
-        console.log(data.length);
       });
     }
-    console.log('data info here');
-    console.log(data);
   }
 
 
   paginate(users: any[], pageSize: number, pageNumber: number) {
     this.currPage = pageNumber;
-    console.log('Curr page values is ' + this.currPage);
-    console.log('Curr page values is ' + this.currPage);
-    console.log('Curr page values is ' + this.currPage);
     --pageNumber;
     const result = users.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
     console.log(pageNumber, pageSize);
@@ -170,10 +160,8 @@ export class ViewUsersComponent implements OnInit {
   dividePages(users: any[], divider: number) {
     this.numPages = [];
     let counter = 0;
-  
     this.totalPage = Math.ceil(users.length / 10);
     console.log(this.totalPage);
-  
     counter = Math.round(users.length / divider);
     let n = 1;
     while (n <= counter) {
