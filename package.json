@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json -s"
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json -s",
+    "sonar": "sonar-scanner"
   },
   "private": true,
   "dependencies": {
@@ -70,8 +71,10 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "^5.4.2",
+    "sonar-scanner": "^3.1.0",
     "ts-node": "^8.0.3",
     "tslint": "~5.12.1",
+    "tslint-sonarts": "^1.9.0",
     "typescript": "~3.2.4"
   }
 }
