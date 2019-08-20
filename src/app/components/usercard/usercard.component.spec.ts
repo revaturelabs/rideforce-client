@@ -52,7 +52,7 @@ describe('UsercardComponent', () => {
         addressID: 12,
         address: "12345 Pine Street, VA",
         city: "string",
-        state: "string",
+        stateCode: "string",
         zip: "string",
         latitude: 0,
         longitude: 0,

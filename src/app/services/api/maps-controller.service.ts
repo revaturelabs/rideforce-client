@@ -33,7 +33,8 @@ export class MapsControllerService {
 
 //  output = User.location; 
 
-  getDistance(Location: Location): Observable <Location>  { // gives back latitude and longitude
+  // getDistance(Location: Location): Observable <Location>  { // gives back latitude and longitude
+  getDistance(Location: string): Observable <Location>  { // gives back latitude and longitude
     // console.log(Location.address); 
     console.log(Location); 
 
