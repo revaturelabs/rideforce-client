@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppModule } from '../app.module';
+import { AppModule } from '../../app.module';
 import {APP_BASE_HREF} from '@angular/common';
 import { ImageUploadComponent } from './image-upload.component';
 

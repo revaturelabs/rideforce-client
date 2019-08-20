@@ -27,5 +27,3 @@ describe('AdminComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
-// new branch test

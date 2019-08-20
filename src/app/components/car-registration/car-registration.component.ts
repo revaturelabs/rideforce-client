@@ -68,16 +68,20 @@ import { environment } from '../../../environments/environment';
    */
    ngOnInit() {
      this.userService.getCurrentUser().subscribe(e => {
+       console.log('TXT====', e);
        this.userObject = e;
        console.log(e);
-     });
-     console.log("PRINTING OUT CAR = " + this.userObject.cars[0].match(/\d+/)[0]);
+       console.log("PRINTING OUT CAR = " + this.userObject.cars[0].match(/\d+/));
 
-     this.userService.getCarById(Number(this.userObject.cars[0].match(/\d+/)[0])).subscribe(e => {
-       this.car = e;
-       console.log(JSON.stringify(e));
+       const foundCar = this.userObject.cars[0].match(/\d+/);
+       this.userService.getCarById(Number(foundCar ? foundCar : '')).subscribe(e => {
+        this.car = e;
+        console.log(JSON.stringify(e));
+      });
+      this.success = "";
      });
-     this.success = "";
+
+
    }
 
 
