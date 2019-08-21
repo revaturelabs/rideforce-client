@@ -19,8 +19,8 @@ import { User } from "../models/user.model";
   providedIn: "root"
 })
 export class AuthService {
-  private principalSource = new BehaviorSubject(new User());
-  principal = this.principalSource.asObservable();
+  private principalSource = new BehaviorSubject(new User());//we are creating a member variable named principalSource that is a new instance of BehaviorSubject and setting the initial value to be the results from a new instance of User.
+  principal = this.principalSource.asObservable();//We are only returning the Observable part of our subject with the help of the asObservable function, 
   authToken: string;
 
   cognitoUser: CognitoUser;

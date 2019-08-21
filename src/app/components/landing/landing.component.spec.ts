@@ -6,7 +6,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
-describe('LandingComponent', async() => {
+fdescribe('LandingComponent', async() => {
   let component: LandingComponent;
   let fixture: ComponentFixture<LandingComponent>;
 

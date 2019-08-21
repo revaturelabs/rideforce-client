@@ -17,7 +17,7 @@ fdescribe('CarRegistrationComponent', () => {
 
   const mockUserService = {
     getCurrentUser: () => of({ cars: ['BMW', 'Toyota']}),
-    getCarById: (car) => of({ model: 'Camry', color: 'red'})
+    getCarById: (car) => of('BMW')
   }
 
     beforeEach(async() => {
