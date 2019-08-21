@@ -28,7 +28,6 @@ fdescribe('CarRegistrationComponent', () => {
         providers: [
           {provide: APP_BASE_HREF, useValue : '/'},
           {provide: UserControllerService, useValue: mockUserService},
-          
         ]
     })
     .compileComponents();
@@ -62,7 +61,7 @@ fdescribe('CarRegistrationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call the getCurrentUser method', function(){
+  it('should call the getCurrentUser method', function() {
     expect(userService.getCurrentUser).toHaveBeenCalled();
   });
 

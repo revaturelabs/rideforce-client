@@ -204,7 +204,7 @@ export class UserControllerService {
       lastName: this.principal.firstName,
       email: this.principal.email,
       role: this.principal.role,
-      address: this.principal.location.address,
+      address: this.principal.location,
       batchEnd: new Date(this.principal.batchEnd),
       active: this.principal.active,
       bio: bioInput

@@ -31,15 +31,15 @@ import { environment } from '../../../environments/environment';
   /**
    * variables to take in user input
    */
-   make:string;
-   model:string;
-   year:number;
-   color:string;
-   license:string;
-   state:string;
+   make: string;
+   model: string;
+   year: number;
+   color: string;
+   license: string;
+   state: string;
 
-   //prints out if update is successful or not
-   success:string;
+   // prints out if update is successful or not
+   success: string;
 
    carObjectlicense: string;
    carObjectmake: string;
@@ -57,9 +57,8 @@ import { environment } from '../../../environments/environment';
    constructor(
      private userService: UserControllerService,
      private route: Router,
-     private http: HttpClient 
-     )
-   {
+     private http: HttpClient
+     ) {
 
    }
 
@@ -71,14 +70,14 @@ import { environment } from '../../../environments/environment';
        console.log('TXT====', e);
        this.userObject = e;
        console.log(e);
-       console.log("PRINTING OUT CAR = " + this.userObject.cars[0].match(/\d+/));
+       console.log('PRINTING OUT CAR = ' + this.userObject.cars[0].match(/\d+/));
 
        const foundCar = this.userObject.cars[0].match(/\d+/);
        this.userService.getCarById(Number(foundCar ? foundCar : '')).subscribe(e => {
         this.car = e;
         console.log(JSON.stringify(e));
       });
-      this.success = "";
+      this.success = '';
      });
 
 
@@ -106,22 +105,22 @@ import { environment } from '../../../environments/environment';
        if(e.cars.length == 0) {
          this.http.post<Car>(environment.userUrl + '/cars/', this.carObject, {observe: 'response'}).subscribe(response => {
            if(response.status == 201){
-             this.success = "Success";
+             this.success = 'Success';
              this.route.navigate(['/userProfile']);
            }
            else
-             this.success = "Failed";
+             this.success = 'Failed';
 
          });
        }
        else {
          this.http.put<Car>(environment.userUrl + e.cars, this.carObject, {observe: 'response'}).subscribe(response => {
            if(response.status == 200){
-             this.success = "Success";
+             this.success = 'Success';
              this.route.navigate(['/userProfile']);
            }
            else
-             this.success = "Failed";
+             this.success = 'Failed';
            
          });
        }

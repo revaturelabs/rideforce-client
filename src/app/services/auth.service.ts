@@ -208,7 +208,7 @@ export class AuthService {
    * Logs the user out of the service
    */
   logout() {
-    console.log("Logging out.");
+    console.log('Logging out.');
     const userPool = new CognitoUserPool(environment.cognitoData);
     this.cognitoUser = userPool.getCurrentUser();
     this.cognitoUser.signOut();
@@ -219,14 +219,14 @@ export class AuthService {
   }
 
   getAuthToken(): string {
-    console.log("Token is being generated. ");
+    console.log('Token is being generated. ');
     document.execCommand('copy');
     return this.authToken;
   }
 
   getUserByEmail(email: string): Observable<User> {
-    console.log("getting by email");
-    return this.http.get<User>(environment.userUrl + "/users", {
+    console.log('getting email by email');
+    return this.http.get<User>(environment.userUrl + '/users', {
       params: { email }
     });
   }
