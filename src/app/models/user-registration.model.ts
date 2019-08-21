@@ -1,10 +1,10 @@
-import { Usr } from './usr.model';
+import {User} from './user.model';
 
 export class UserRegistration {
-  user: Usr;
+  user: User;
   registrationToken: string;
 
   constructor() {
-    this.user = new Usr();
+    this.user = new User();
   }
 }

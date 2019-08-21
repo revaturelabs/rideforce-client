@@ -46,7 +46,7 @@ describe('RegisterComponent', () => {
 
     it('select address', () => {
         component.onAddressSelect('123 test street');
-        expect(component.ur.user.address).toBe('123 test street');
+        expect(component.ur.user.location).toBe('123 test street');
     });
 
     it('addContactInfo check', () => {

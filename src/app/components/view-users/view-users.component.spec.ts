@@ -21,7 +21,7 @@ describe('ViewUsersComponent', () => {
         ]
     })
     .compileComponents();
-  })); 
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewUsersComponent);

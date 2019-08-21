@@ -43,19 +43,19 @@ describe('UsercardComponent', () => {
 
     component.currentUser = {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
-      email: "jdoe@gmail.com",
-      password: "jdopass",
-      photoUrl: "imgprofile",
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'jdoe@gmail.com',
+      password: 'jdopass',
+      photoUrl: 'imgprofile',
       location: {
-        addressID: 12,
-        address: "12345 Pine Street, VA",
-        city: "string",
-        state: "string",
-        zip: "string",
-        latitude: 0,
-        longitude: 0,
+        id: 12,
+        address: '12345 Pine Street, VA',
+        city: 'string',
+        stateCode: 'string',
+        zip: 'string',
+        latitude: 675,
+        longitude: -56778,
       },
       office: '/offices/' + 1,
       startTime: 0,
@@ -64,9 +64,8 @@ describe('UsercardComponent', () => {
       active: 'ACTIVE',
       contactInfo: [],
       role: Role.Rider,
-      bio: "My Bio",
-
-    }
+      bio: 'My Bio',
+    };
 
     component.currentSwipeCard = {
       user: component.currentUser,

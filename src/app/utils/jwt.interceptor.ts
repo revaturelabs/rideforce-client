@@ -16,7 +16,7 @@ principal: User;
    * @param tokenStorage - the Service that allows us to access our authentication token
    */
   constructor(private tokenStorage: TokenStorage, private auth: AuthService) {
-    this.auth.principal.subscribe(p =>{
+    this.auth.principal.subscribe(p => {
       this.principal = p;
     });
   }
@@ -30,7 +30,7 @@ principal: User;
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    //console.log("inter")
+    // console.log("inter")
     const token = this.auth.getAuthToken();
     if (token != null) {
       request = request.clone({

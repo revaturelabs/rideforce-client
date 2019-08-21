@@ -1,6 +1,5 @@
 import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Login } from '../../models/login.model';
 import { AuthService } from '../../services/auth.service';
 import { environment } from '../../../environments/environment';
 import bsCustomFileInput from 'bs-custom-file-input';
@@ -37,14 +36,14 @@ export class ImageUploadComponent implements OnInit {
     onFileUpload() {
       const fd = new FormData();
       const fileName = `user-${this.principal.id}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
-      console.log("FILENAME    ------ " + fileName);
+      console.log('FILENAME    ------ ' + fileName);
       fd.append('file', this.selectedFile, fileName);
       fd.append('user', this.principal.id.toString());
 
-      
-      
-      
-      
+
+
+
+
       if(this.principal.photoUrl != null){
         const req = new HttpRequest('POST', environment.userUrl + '/storage/uploadFile', fd, { reportProgress: true });
 
@@ -59,7 +58,7 @@ export class ImageUploadComponent implements OnInit {
         });
 
       } else {
-   
+
         const req = new HttpRequest('POST', environment.userUrl + '/storage/uploadFile', fd, { reportProgress: true });
 
         this.http.request(req).subscribe(event => {
@@ -71,7 +70,7 @@ export class ImageUploadComponent implements OnInit {
             document.getElementById('UploadStats').innerHTML = 'Upload Complete!';
           }
         });
-      } 
+      }
   }
 }
 

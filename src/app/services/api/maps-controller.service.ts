@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientJsonpModule } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { RouteInfo } from '../../models/route-info.model';
-import { Location } from '../../models/location.model';
-import { User } from '../../models/user.model';
-import { UserControllerService } from './user-controller.service';
-import { MatchingControllerService } from './matching-controller.service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpClientJsonpModule} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {RouteInfo} from '../../models/route-info.model';
+import {Location} from '../../models/location.model';
+import {User} from '../../models/user.model';
+import {UserControllerService} from './user-controller.service';
+import {MatchingControllerService} from './matching-controller.service';
 
 
 /**
@@ -19,39 +19,37 @@ export class MapsControllerService {
    * Sets up the mapping service to interact with the server
    * @param {HttpClient} http - provides the Means of communicating with the Server
    */
- public constructor(private http: HttpClient, private sb: UserControllerService) { }
+  public constructor(private http: HttpClient, private sb: UserControllerService) {
+  }
 
   /**
-  * Sends address as string to location endpoint in Map Service. Map Service returns geographic location
-  * in latitude and longitude as a LatLngLiteral. This can be used to create map markers.
-  * @returns {Observable<LatLngLiteral>} - Location info with latitude and longitude information
-  */
+   * Sends address as string to location endpoint in Map Service. Map Service returns geographic location
+   * in latitude and longitude as a LatLngLiteral. This can be used to create map markers.
+   * @returns {Observable<LatLngLiteral>} - Location info with latitude and longitude information
+   */
 
- /**
-  * new address object
-  */
+  /**
+   * new address object
+   */
 
-//  output = User.location; 
+//  output = User.location;
 
-  getDistance(Location: Location): Observable <Location>  { // gives back latitude and longitude
-    // console.log(Location.address); 
-    console.log(Location); 
+  getDistance(Location: string): Observable<Location> { // gives back latitude and longitude
+    // console.log(Location.address);
+    console.log(Location);
 
-    //this.sb.getCurrentUser().subscribe();
-    
-    return this.http.post<Location>(environment.mapUrl + '/location', Location); 
-    
+// this.sb.getCurrentUser().subscribe();
+
+    return this.http.post<Location>(environment.mapUrl + '/location', Location);
+
     //  {
-    //    //params: { Location }, 
+    //    //params: { Location },
     // }
-
-
     
   }
 
-  getLocation(){
-    return this.http.get<Location>('https://ipapi.co/json/')
-
+  getLocation() {
+    return this.http.get<Location>('https://ipapi.co/json/');
 
 
   }
@@ -65,7 +63,7 @@ export class MapsControllerService {
    */
   public getRoute(start: string, end: string): Observable<RouteInfo> { // gives back latitude and longitude
     return this.http.get<RouteInfo>(environment.mapUrl + '/route', {
-      params: { start, end },
+      params: {start, end},
     });
   }
 }

@@ -125,7 +125,7 @@ describe('ViewProfileComponent', () => {
   and remove the "x" from the below cases
   */
   xit('updateBio', () => {
-    component.updateBio('I have a Bio now..');
+    component.updateBio();
     expect(component.principal.bio).toEqual('I have a Bio now..');
   });
 
@@ -154,8 +154,8 @@ describe('ViewProfileComponent', () => {
   });
 
   xit('updateUserStatus without reload', () => {
-    /* 
-    just calls the function again so then you can 
+    /*
+    just calls the function again so then you can
     hit "ok" on the 2/3 of the alerts and hit "cancel" 
     on one of the alerts
     */

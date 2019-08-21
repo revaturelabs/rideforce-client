@@ -53,9 +53,9 @@ describe('UserControllerService', () => {
   it('#createUser should call an http post and return a string',
     inject([HttpTestingController],
       (httpMock: HttpTestingController) => {
-        spyOn(service,'createUser').and.callThrough();
+        spyOn(service, 'createUser').and.callThrough();
 
-        let testUR = new UserRegistration();
+        const testUR = new UserRegistration();
         service.createUser(testUR).subscribe(data => {
           const req = httpMock.expectOne(environment.userUrl + '/users/');
           expect(req.request.method).toEqual('POST');

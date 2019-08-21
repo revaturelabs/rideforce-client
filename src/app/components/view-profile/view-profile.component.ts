@@ -18,6 +18,8 @@ import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { ContactType } from 'aws-sdk/clients/route53domains';
 import { NgForm } from '@angular/forms';
 import { environment } from '../../../environments/environment';
+import {D} from '@angular/cdk/keycodes';
+import {Location} from '../../models/location.model';
 
 
 
@@ -75,7 +77,7 @@ export class ViewProfileComponent implements OnInit {
   startTime: Date;
   pipe: CustomtimePipe = new CustomtimePipe();
   /** Pre-constructed list of possible contact-types in DB */
-  contactInfoTypes = ["Cell Phone", "Email", "Slack", "Skype", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
+  contactInfoTypes = ['Cell Phone', 'Email', 'Slack', 'Skype', 'Discord', 'Facebook', 'GroupMe', 'Other', 'Venmo'];
 
   session: boolean;
 
@@ -110,22 +112,19 @@ export class ViewProfileComponent implements OnInit {
         console.log(this.startTime);
         this.getInfoById();
 
-
-        //this.getOffice();
-
-
+        // this.getOffice();
         this.getRole();
         this.getState();
         this.filteredUsers = this.users;
 
 
-        //loads the first car. done this way because original batch made car-user relationship a 1 to many
-        //should've been a one to one
-        //console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
-        if (this.currentRole == "DRIVER") {
+        // loads the first car. done this way because original batch made car-user relationship a 1 to many
+        // should've been a one to one
+        // console.log('PRINTING OUT CAR = ' + this.principal.cars[0].match(/\d+/)[0]);
+        if (this.currentRole === 'DRIVER') {
           this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe(e => {
             this.car = e;
-            console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
+            console.log('PRINTING OUT E KEVIN = ' + JSON.stringify(e));
           });
         }
 
@@ -139,8 +138,7 @@ export class ViewProfileComponent implements OnInit {
 
     this.getOffice();
 
-    console.log(this.officeObject);
-    console.log(this.principal);
+    console.log(this.principal.location);
   }
 
   sessionCheck() {
@@ -155,22 +153,22 @@ export class ViewProfileComponent implements OnInit {
    * Get contact-info for specified user-id
    */
   getInfoById() {
-    //return this.http.get<ContactInfo[]>("http://turtlejr.sps.cuny.edu:5555/contact-info/58");
-    console.log("pre");
+    // return this.http.get<ContactInfo[]>('http://turtlejr.sps.cuny.edu:5555/contact-info/58');
+    // console.log('pre');
     console.log(this.principal.id);
-    console.log("post");  
-    console.log(environment.userUrl+"/contact-info/c/"+this.principal.id);
-     this.http.get(environment.userUrl+"/contact-info/c/"+this.principal.id).subscribe(
+    // console.log('post');
+    console.log(environment.userUrl + '/contact-info/c/' + this.principal.id);
+     this.http.get(environment.userUrl + '/contact-info/c/' + this.principal.id).subscribe(
        response => {
         // console.log(this.contactInfoArray.length)
         this.contactInfoArray = response as ContactInfo[];
-        console.log("CONTACT INFO ARRAY: " + this.contactInfoArray);
+        console.log('CONTACT INFO ARRAY: ' + this.contactInfoArray);
         this.contactInfoArray.forEach(function (element) {
           console.log(element.type);
         });
         console.log(response);
       });
-    //get json array that is for slack and isolate id
+    // get json array that is for slack and isolate id
   }
 
 
@@ -178,34 +176,34 @@ export class ViewProfileComponent implements OnInit {
  * Configure and prepare object to update user contact info fields.
  */
   updateContactInfo(type, content) {
-    console.log("TYPE: " + type);
-    console.log("CONTENT: " + content);
+    console.log('TYPE: ' + type);
+    console.log('CONTENT: ' + content);
     console.log(this.contactInfoTypes);
     let typeId: Number;
 
-    let updatedContact: ContactInfo = {
+    const updatedContact: ContactInfo = {
       id: this.principal.id,
       type: type,
       info: content
     };
-    console.log("PREP'D INFO OBJECT: " + JSON.stringify(updatedContact));
+    // console.log('PREP'D INFO OBJECT: ' + JSON.stringify(updatedContact))',
     this.contactInfoTypes.forEach(function (value, i) {
-        if(type == value){
-          typeId = i+1;
+        if (type === value) {
+          typeId = i + 1;
         }
     });
-    
-    //The existing model does not match up to the DB config
+
+    // The existing model does not match up to the DB config
     let contact_info_obj = {
       id: this.principal.id,
       type: typeId,
       info: content
     }
-    console.log("PREP'D INFO OBJECT: " + JSON.stringify(contact_info_obj));
-    this.http.post(environment.userUrl+'/contact-info/addcinfo', contact_info_obj).subscribe(
+    // console.log('PREP'D INFO OBJECT: ' + JSON.stringify(contact_info_obj))'
+    this.http.post(environment.userUrl + '/contact-info/addcinfo', contact_info_obj).subscribe(
        response => {
-        
-        console.log("contact info sent");
+
+        console.log('contact info sent');
         this.ngOnInit();
         });
 
@@ -216,9 +214,9 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById('firstName').removeAttribute('disabled');
     document.getElementById('lastName').removeAttribute('disabled');
     document.getElementById('password').removeAttribute('hidden');
-    // document.getElementById("email").removeAttribute("disabled");
-    // document.getElementById("password").removeAttribute("disabled");
-    // document.getElementById("confirmPassword").removeAttribute("disabled");
+    // document.getElementById('email').removeAttribute('disabled');
+    // document.getElementById('password').removeAttribute('disabled');
+    // document.getElementById('confirmPassword').removeAttribute('disabled');
     document.getElementById('address').removeAttribute('disabled');
     //document.getElementById('batchEnd').removeAttribute('disabled');
     //document.getElementById('dayStart').removeAttribute('disabled');
@@ -230,11 +228,11 @@ export class ViewProfileComponent implements OnInit {
     }
     document.getElementById('edit').style.display = 'none';
     document.getElementById('submit').style.display = 'inline';
-    // document.getElementById("batchEnd").setAttribute("type", "date");
-    // document.getElementById("currentOffice").style.display = "none";
-    // document.getElementById("selectOffice").style.display = "inline";
+    // document.getElementById('batchEnd').setAttribute('type', 'date');
+    // document.getElementById('currentOffice').style.display = 'none';
+    // document.getElementById('selectOffice').style.display = 'inline';
     //document.getElementById('errorMessage').removeAttribute('hidden');
-    
+
   }
 
   /**
@@ -243,6 +241,7 @@ export class ViewProfileComponent implements OnInit {
   submitChanges() {
     this.principal.firstName = this.firstName;
     this.principal.lastName = this.lastName;
+    // this.principal.location = this.location;
     // this.principal.address = this.address2;
     // this.principal.startTime = this.startTime(); //Need this, but currently no value
     this.authService.changePrincipal(this.principal);
@@ -255,11 +254,21 @@ export class ViewProfileComponent implements OnInit {
 
   onAddressSelect(address: string) {
     this.zone.run(() => (this.principal.location.address = address));
+    console.log(this.zone.run(() => (this.principal.location.address = address))
+  );
     this.populateLocation();
+    console.log(this.principal);
+    console.log(this.populateLocation());
+    console.log('spam me');
+    console.log('spam me');
+    console.log('spam me');
+    console.log('spam me');
+    console.log(this.principal);
   }
 
-  //Populate user location by finding the latitude and logitude via Maps service. 
+  //  Populate user location by finding the latitude and logitude via Maps service.
   populateLocation() {
+    this.principal.location;
     this.locationSerivce.getlocation(this.principal.location).subscribe(data => {
       console.log(data);
       this.principal.location = data;
@@ -323,8 +332,7 @@ export class ViewProfileComponent implements OnInit {
     this.userService.updatePassword(this.principal.email, this.oldPassword, this.password).subscribe();
   }
 
-  editPassword(){
-    
+  editPassword() {
   }
 
   updateUserStatus(id: number, active: string) {
@@ -402,34 +410,34 @@ export class ViewProfileComponent implements OnInit {
   submitBioChanges(bioInput: string) {
     document.getElementById('submitBio').style.display = 'none';
     document.getElementById('editBio').style.display = 'inline';
-    document.getElementById('aboutYou').setAttribute("disabled","disabled");
+    document.getElementById('aboutYou').setAttribute('disabled', 'disabled');
     this.userService.updateBio(bioInput);
     this.principal.bio = bioInput;
     this.existingBio = this.principal.bio;
     this.authService.changePrincipal(this.principal);
     this.existingBio = bioInput;
-    //this.router.navigate(['userProfile']);
-    console.log("bio " + this.principal.bio);
+    //  this.router.navigate(['userProfile']);
+    console.log('bio ' + this.principal.bio);
     this.userService.updateBio(this.principal.bio);
   }
 
   changeExistingBioStatus() {
-    if (this.existingBioStatus != undefined) {
+    if ( this.existingBioStatus !== undefined) {
       this.existingBioStatus = true;
     }
   }
 
   registerCar() {
-    console.log("going to register car");
+    console.log('going to register car');
     this.router.navigate(['/cars']);
   }
-  //imported from login component
+  //  imported from login component
   resetEmail() {
-    // /*debug*/ console.log("in reset");
+    // /*debug*/ console.log('in reset');
     try {
       const cognitoUser = this.createCognitoUser(this.username);
 
-      // /*debug*/ console.log("resetEmail() try block");
+      // /*debug*/ console.log('resetEmail() try block');
       cognitoUser.forgotPassword({
         onSuccess: function (result) {
           console.log('Email Sent!');
@@ -438,7 +446,7 @@ export class ViewProfileComponent implements OnInit {
         },
         onFailure: function (err) {
         /*debug*/ console.log(err);
-         console.log('Failed inner!')
+         console.log('Failed inner!');
         }
       });
     } catch (err) {
@@ -459,21 +467,21 @@ export class ViewProfileComponent implements OnInit {
     const cognitoUser = this.createCognitoUser(this.username);
     cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
       onSuccess: () => {
-          /*debug*/ console.log("ResetPassword(): changed")
-          alert("Password changed successfully!");
-          this.router.navigateByUrl("/landing");
+          /*debug*/ console.log('ResetPassword(): changed');
+          alert('Password changed successfully!');
+          this.router.navigateByUrl('/landing');
 
       },
       onFailure: err => {
         /*debug*/ console.log(err);
         switch (err.name) {
-          case "CodeMismatchException": {
-            let input: any = "";
-            input = document.getElementById("verifyCode");
-            input.value = "";
-            var error = document.getElementById("verifyMsg");
-            form.form.controls["verifyCode"].setErrors({ 'incorrect': true });
-            error.innerHTML = "Invalid Code";
+          case 'CodeMismatchException': {
+            let input: any = '';
+            input = document.getElementById('verifyCode');
+            input.value = '';
+            const error = document.getElementById('verifyMsg');
+            form.form.controls['verifyCode'].setErrors({ 'incorrect': true });
+            error.innerHTML = 'Invalid Code';
             break;
           }
           default: {

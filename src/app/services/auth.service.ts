@@ -9,14 +9,14 @@ import {
   AuthenticationDetails,
   CognitoUser,
   CognitoUserPool
-} from "amazon-cognito-identity-js";
-import { User } from "../models/user.model";
+} from 'amazon-cognito-identity-js';
+import { User } from '../models/user.model';
 
 /**
  * Allows Users to authenticate themselves with the server
  */
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthService {
   private principalSource = new BehaviorSubject(new User());
@@ -46,8 +46,10 @@ export class AuthService {
       Pool: userPool
     };
     this.cognitoUser = new CognitoUser(userData);
-    return Observable.create(observer => {
-      this.cognitoUser.resendConfirmationCode(function(err, result) {
+    // return Observable.create(observer => {
+      return new Observable<any>(observer => {
+
+        this.cognitoUser.resendConfirmationCode(function(err, result) {
         if (err) {
           observer.error(err);
           return;

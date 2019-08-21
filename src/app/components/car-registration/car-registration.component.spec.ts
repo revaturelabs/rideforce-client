@@ -23,9 +23,9 @@ describe('CarRegistrationComponent', () => {
           {provide: APP_BASE_HREF, useValue : '/' }
         ]
     })
-    .compileComponents();    
+    .compileComponents();
     fixture = TestBed.createComponent(CarRegistrationComponent);
-    component = fixture.componentInstance;    
+    component = fixture.componentInstance;
     authService = TestBed.get(AuthService);
     await authService.authenticate('jljacko@outlook.com', 'johnPass');
     useServe = TestBed.get(UserControllerService);

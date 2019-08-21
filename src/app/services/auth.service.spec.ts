@@ -22,14 +22,14 @@ describe('AuthService', () => {
   beforeEach(() => {
     auth = TestBed.get(AuthService);
   });
-  
+
   it ('should be created', function() {
     expect(auth).toBeTruthy();
     expect(auth.principal).not.toBeNull();
   });
 
    it('#authenticator should return "User does not exist."', function() {
-    spyOn(auth,'authenticator').and.callThrough();
+    spyOn(auth, 'authenticator').and.callThrough();
     auth.authenticator('Garbage', 'Garbage').then(
       () => {
         expect().nothing();

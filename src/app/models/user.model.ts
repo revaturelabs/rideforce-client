@@ -26,14 +26,13 @@ export class User {
   active: string;
   role: Role;
 
-  //Address should be an object with location in it. 
+  // location should be an object with address in it.
   location: Location;
 
-  //Registration token. Will not persist in teh DB. 
+  // Registration token. Will not persist in the DB.
   registrationToken?: string;
   authToken?: string;
   api_token?: string;
   expires_at?: any;
   scopes?: any;
-  
 }

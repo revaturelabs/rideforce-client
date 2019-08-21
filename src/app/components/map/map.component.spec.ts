@@ -2,8 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
-import { User } from '../../models/user.model';
-import { Role } from '../../models/role.model';
 
 //  x
 describe('MapComponent', () => {
@@ -39,7 +37,7 @@ describe('MapComponent', () => {
     expect(component.mapTypeId).toBe('roadmap');
   });
 
-  xit('should set the tracking position marker', () => {
+  it('should set the tracking position marker', () => {
     component.showTrackingPosition( {
       coords : {
         latitude: 23.3,
@@ -50,8 +48,9 @@ describe('MapComponent', () => {
     expect(component.marker).toBeTruthy();
   });
 
-  xit('should have a user populated', () => {
-    expect(component.currentUser).toBeTruthy();
+  it('should have a user populated', () => {
+    component.findMe()
+    expect(component.getSelectedUser).toBeTruthy();
   });
 
   // it('should populate selected user with a mock user', () => {
@@ -89,7 +88,7 @@ describe('MapComponent', () => {
   //   expect(component.getSelectedUser()).toBe(user);
   // });
 
-  xit('Should Return a route', async() => {
+  it('Should Return a route', async() => {
     await component.getRoute();
     setTimeout(() => {
     console.log('Getting distance in test');

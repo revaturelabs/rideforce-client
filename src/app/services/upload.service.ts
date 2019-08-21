@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
-import { Login } from '../models/login.model';
 import { User } from '../models/user.model';
 
 // import * as S3 from 'aws-sdk/clients/s3';
@@ -26,7 +24,7 @@ export class UploadService {
    */
   constructor(private http: HttpClient, auth: AuthService) {
     auth.principal.subscribe(user => {
-      this.principal = user;});
+      this.principal = user; });
    }
 
   /**
@@ -38,7 +36,7 @@ export class UploadService {
   uploadfile(image: File): Observable<Object> {
     const formData = new FormData();
     const fileName = `user-${this.principal.id}${image.name.substr(image.name.length - 4)}`;
-    console.log("FILENAME    ------ " + fileName)
+    console.log('FILENAME    ------ ' + fileName);
     formData.append('image', image, fileName);
     const endpoint = 'http://localhost:2222/storage/uploadFile';
     // const payload = {file: formData};

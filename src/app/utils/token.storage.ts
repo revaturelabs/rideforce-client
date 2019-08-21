@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Login } from '../models/login.model';
 import { User } from '../models/user.model';
 
 /** Used to access the Authentication token in our session storage */
