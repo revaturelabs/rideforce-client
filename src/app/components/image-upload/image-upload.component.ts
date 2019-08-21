@@ -16,6 +16,8 @@ export class ImageUploadComponent implements OnInit {
   imageUploadProgress: string = '0';
   principal: User;
 
+  bsCustomFileInput = bsCustomFileInput;
+
   constructor(private http: HttpClient, private auth: AuthService) {
     this.auth.principal.subscribe(user => {
       this.principal = user;
@@ -24,7 +26,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    bsCustomFileInput.init();
+    this.bsCustomFileInput.init();
   }
 
   onFileSelect(event) {

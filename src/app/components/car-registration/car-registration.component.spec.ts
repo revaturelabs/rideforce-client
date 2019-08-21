@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
-fdescribe('CarRegistrationComponent', () => {
+describe('CarRegistrationComponent', () => {
   let component: CarRegistrationComponent;
   let authService: AuthService;
   let userService: UserControllerService;
@@ -17,7 +17,7 @@ fdescribe('CarRegistrationComponent', () => {
 
   const mockUserService = {
     getCurrentUser: () => of({ cars: ['BMW', 'Toyota']}),
-    getCarById: (car) => of({ model: 'Camry', color: 'red'})
+    getCarById: (car) => of('BMW')
   }
 
     beforeEach(async() => {
