@@ -1,10 +1,10 @@
-import { Router } from "@angular/router";
-import { Login } from "../models/login.model";
-import { Injectable } from "@angular/core";
-import { Role } from "../models/role.model";
-import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, Observable } from "rxjs";
-import { environment } from "../../environments/environment";
+import { Router } from '@angular/router';
+import { Login } from '../models/login.model';
+import { Injectable } from '@angular/core';
+import { Role } from '../models/role.model';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import {
   AuthenticationDetails,
   CognitoUser,
@@ -105,12 +105,12 @@ export class AuthService {
       x => {
         this.getUserByEmail(email).subscribe(
           resp => {
-            console.log("Retrieved email of user");
+            console.log('Retrieved email of user');
             const l: User = resp as User;
             l.authToken = x.idToken.jwtToken;
             this.authToken = l.authToken;
             this.changePrincipal(l);
-            this.route.navigate(["/landing"]);
+            this.route.navigate(['/landing']);
           },
           error => {
             this.cognitoUser.signOut();
@@ -119,19 +119,19 @@ export class AuthService {
       },
       e => {
         // error coming from the backend
-        console.log("Printing Login error (Promise Mode)!");
+        console.log('Printing Login error (Promise Mode)!');
         console.log(e);
         if (document) {
-          const messageLogin = document.getElementById("errorMessageLogin");
+          const messageLogin = document.getElementById('errorMessageLogin');
           console.log(messageLogin);
           if (messageLogin) {
-            messageLogin.style.display = "block";
+            messageLogin.style.display = 'block';
             console.log(e.message);
-            if (e.message == "GENERAL") {
-              messageLogin.innerHTML = "Server unavailable";
-            } else if (e.message == "undefined") {
-              messageLogin.innerHTML = "GATEWAY unavailable";
-            } else if (e.message == "User is not confirmed.") {
+            if (e.message == 'GENERAL') {
+              messageLogin.innerHTML = 'Server unavailable';
+            } else if (e.message == 'undefined') {
+              messageLogin.innerHTML = 'GATEWAY unavailable';
+            } else if (e.message == 'User is not confirmed.') {
               messageLogin.innerHTML =
                 e.message +
                 ' <a class="underlineHover" data-toggle="modal" data-target="#resendModal" ' +
@@ -141,14 +141,14 @@ export class AuthService {
             }
           }
         }
-        console.log("before return: " + e.message);
+        console.log('before return: ' + e.message);
         return e.message;
       }
     );
   }
 
   checkAuthenticate() {
-    console.log("calling check auth");
+    console.log('calling check auth');
     const userPool = new CognitoUserPool(environment.cognitoData);
     const cognitoUser = userPool.getCurrentUser();
     if (cognitoUser != null) {
@@ -165,17 +165,17 @@ export class AuthService {
               if (err) {
                 // Handle error
               } else {
-                console.log("attributes:");
+                console.log('attributes:');
                 console.log(attributes);
-                let email = "";
+                let email = '';
                 for (let i = 0; i < attributes.length; i++) {
-                  if (attributes[i].getName() == "email") {
+                  if (attributes[i].getName() == 'email') {
                     email = attributes[i].getValue();
                   }
                 }
-                console.log("email:" + email);
+                console.log('email:' + email);
                 this.getUserByEmail(email).subscribe(resp => {
-                  console.log("Retrieved email of user");
+                  console.log('Retrieved email of user');
                   const l: User = resp as User;
                   l.authToken = session.idToken.jwtToken;
                   this.authToken = l.authToken;

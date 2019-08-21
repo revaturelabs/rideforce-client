@@ -10,7 +10,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
 import { Router } from '@angular/router';
 import { Location } from '../../models/location.model';
 import { bool } from 'aws-sdk/clients/signer';
-import { AuthService } from '../../services/auth.service'
+import { AuthService } from '../../services/auth.service';
 import { Login } from '../../models/login.model';
 import { environment } from '../../../environments/environment';
 
@@ -27,6 +27,24 @@ import { environment } from '../../../environments/environment';
 })
 export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
+  /**
+   * Sets up the map component with dependency injection
+   * @param {MatchingControllerService} matchService - Allows management between riders and drivers
+   * @param {UserControllerService} userService - Allows management of the Users
+   * @param {MapsControllerService} mapService - Allows a map to be managed
+   * @param {NgZone} zone - Provides location services
+   * @param {Router} route - Allows Nav compnent to switch between sub-components
+   */
+  constructor(
+    private matchService: MatchingControllerService,
+    private userService: UserControllerService,
+    private mapService: MapsControllerService,
+    private auth: AuthService,
+    private zone: NgZone,
+    private route: Router,
+    private http: HttpClient
+  ) { }
+
   /** Where Users reside */
   private start = 'herndon';
   /** Where Users work */
@@ -37,7 +55,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   private time: number;
 
   /** Holds the currently selected user */
-  public selectedUser: User = null;// made public so it can build. was private
+  public selectedUser: User = null; // made public so it can build. was private
 
 
 
@@ -61,7 +79,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   userRole: string;
 
 
-  //Styles
+  // Styles
   styles: any = null;
   halloweenStyle: any = null;
   christmasStyle: any = null;
@@ -80,11 +98,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   currentLong: any;
   /** Current radious, set by a number control */
   currentRadius = 5000;
-  showingUser: boolean = false;
+  showingUser = false;
   /** Stores list of users favorited locations */
   favoriteLocations: any[] = [];
 
-  showFavorites: boolean = true;
+  showFavorites = true;
 
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 
@@ -143,22 +161,32 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   principal: User;
 
   /**
-   * Sets up the map component with dependency injection
-   * @param {MatchingControllerService} matchService - Allows management between riders and drivers
-   * @param {UserControllerService} userService - Allows management of the Users
-   * @param {MapsControllerService} mapService - Allows a map to be managed
-   * @param {NgZone} zone - Provides location services
-   * @param {Router} route - Allows Nav compnent to switch between sub-components
+   * Initializes the Map with data
    */
-  constructor(
-    private matchService: MatchingControllerService,
-    private userService: UserControllerService,
-    private mapService: MapsControllerService,
-    private auth: AuthService,
-    private zone: NgZone,
-    private route: Router,
-    private http: HttpClient
-  ) { }
+
+  addresses: string[] = ['9416 wooded glen avenue', '1099 godfrey road', '11740 Plaza America Dr', '829 East Sage Road'];
+
+  labelOptions = {
+
+    color: 'blue',
+
+    fontFamily: '',
+
+    fontSize: '14px',
+
+    fontWeight: 'bold',
+
+    text: 'You Are Here!',
+
+  };
+
+  customMap: any;
+
+  events: User[];
+  lat: any;
+  lng: any;
+  ll: any;
+  lg: any;
 
   /**
    * Retireves the distance of the current route (set by setRoute)
@@ -193,12 +221,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     return this.selectedUser;
   }
 
-  /**
-   * Initializes the Map with data
-   */
-
-  addresses: string[] = ["9416 wooded glen avenue", "1099 godfrey road", "11740 Plaza America Dr", "829 East Sage Road"];
-
 
 
 
@@ -206,16 +228,17 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.auth.principal.subscribe(p => {
       this.principal = p;
       if (this.principal.id > 0) {
-        console.log("Location: " + JSON.stringify(this.principal.location));
+        console.log('Location: ' + JSON.stringify(this.principal.location));
+        console.log(this.principal.location);
+        // console.log(this.showTrackingPosition(this.principal.location));
         this.lat = this.principal.location.latitude;
         this.lng = this.principal.location.longitude;
-        if (this.principal.role == "RIDER") {
-          this.buttonLabel = "Drivers Near Me";
-          this.userRole = "Driver";
-        }
-        else if (this.principal.role == "DRIVER") {
-          this.userRole = "Rider";
-          this.buttonLabel = "Riders Near Me";
+        if (this.principal.role === 'RIDER') {
+          this.buttonLabel = 'Drivers Near Me';
+          this.userRole = 'Driver';
+        } else if (this.principal.role === 'DRIVER') {
+          this.userRole = 'Rider';
+          this.buttonLabel = 'Riders Near Me';
         }
       }
     });
@@ -242,32 +265,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       zoom: 8
     });
   }
-
-  labelOptions = {
-
-    color: 'blue',
-
-    fontFamily: '',
-
-    fontSize: '14px',
-
-    fontWeight: 'bold',
-
-    text: 'You Are Here!',
-
-  }
-
-  customMap: any;
   mapReady(event: any) {
     this.customMap = event;
     this.customMap.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('festivals'));
   }
-
-  events: User[];
-  lat: any;
-  lng: any;
-  ll: any;
-  lg: any;
 
   festivalClicked() {
     console.log('clicked');
@@ -277,11 +278,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   getEvents() {
     console.log(this.principal);
     this.fitBounds = true;
-    if (this.principal.role == "RIDER") {
+    if (this.principal.role == 'RIDER') {
       this.getNearestDrivers();
-    }
-    else if (this.principal.role == "DRIVER")
+    } else if (this.principal.role == 'DRIVER') {
       this.getNearestRiders();
+         }
   }
 
   getNearestDrivers() {
@@ -293,9 +294,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   getNearestRiders() {
-    console.log("I am a DRIVER!");
-    let officeId: number = parseInt(this.principal.office.substring(9));
-    this.userService.getUserByOfficeAndRole(officeId, "RIDER").subscribe(
+    console.log('I am a DRIVER!');
+    const officeId: number = parseInt(this.principal.office.substring(9));
+    this.userService.getUserByOfficeAndRole(officeId, 'RIDER').subscribe(
       riders => {
         this.events = riders;
       }
@@ -357,7 +358,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    */
   setCenter(address) {
     this.fitBounds = true;
-    console.log("setCenter");
+    console.log('setCenter');
     this.zone.run(() => {
       // this.addr = addrObj;
       // this.addrKeys = Object.keys(addrObj);
@@ -423,7 +424,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Sets the component style
    * @param style - the style to set the component to
    */
-  //Halloween overlay for maps
+  // Halloween overlay for maps
   halloween() {
     if (this.halloweenStyle !== null) {
       this.halloweenStyle = null;
@@ -458,7 +459,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
-  //Christmas overlay for Map
+  // Christmas overlay for Map
   christmas() {
     if (this.christmasStyle !== null) {
       this.christmasStyle = null;
@@ -503,6 +504,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     this.map.setCenter(new google.maps.LatLng(this.currentLat, this.currentLong));
 
     const location = new google.maps.LatLng(this.currentLat, this.currentLong);
+    console.log(location);
 
     const marker = new google.maps.Marker({
       position: location,
@@ -512,7 +514,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       title: 'Got you!'
     });
     this.markers.push(marker);
-    //adds Marker for the current user
+    // adds Marker for the current user
     this.showingUser = true;
   }
 
@@ -547,11 +549,12 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         this.showPosition(position);
         this.circle.latitude = this.currentLat;
         this.circle.longitude = this.currentLong;
-        if (!this.showingUser) //makes it so it doesn't render twice due to multiple calls
+        if (!this.showingUser) { // makes it so it doesn't render twice due to multiple calls
           this.showCustomMarker();
+        }
       });
     } else {
-      alert("Location can not be accessed")
+      alert('Location can not be accessed');
     }
   }
 
@@ -607,24 +610,24 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Makes a request to update the user's favorite locations table
   */
   saveLocation() {
-    let selectedLocation: string = (document.getElementById("currentLocation") as HTMLInputElement).value;
+    const selectedLocation: string = (document.getElementById('currentLocation') as HTMLInputElement).value;
     this.http.post<any>(environment.mapUrl + '/favoritelocations?address=' +
       selectedLocation + '&name='
       + this.favoriteName + '&userId='
       + this.principal.id, {}).subscribe(message =>
         console.log(message));
-    console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
-    //this.refresh();
+    console.log((document.getElementById('currentLocation') as HTMLInputElement).value);
+    // this.refresh();
   }
 
   /** Retrieves the current list of user's favorite locations*/
   getLocations() {
     this.showFavorites = !this.showFavorites;
     this.http.get<any>(environment.mapUrl + '/favoritelocations/users/' + this.principal.id).subscribe(favorites => {
-      //this.tokenStorage.saveToken(token);)
+      // this.tokenStorage.saveToken(token);)
       let marker: any;
-      for (let favorite of favorites) {
-        let fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
+      for (const favorite of favorites) {
+        const fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
         marker = new google.maps.Marker({
           position: fav_location,
           map: this.map,
@@ -633,15 +636,15 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         this.favoriteLocations.push(marker);
       }
     }
-    )
+    );
   }
   tabSelect($event) {
     console.log($event);
   }
-  //**Hides user's saved locations **/
+  // **Hides user's saved locations **/
   hideLocations() {
     this.showFavorites = !this.showFavorites;
-    for (let favorite of this.favoriteLocations) {
+    for (const favorite of this.favoriteLocations) {
       favorite.setMap(null);
     }
     if (this.marker) {
@@ -650,7 +653,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
   /**TODO: Should refresh map once a location is either saved or deleted.**/
   refresh() {
-    for (let favorite of this.favoriteLocations) {
+    for (const favorite of this.favoriteLocations) {
       favorite.setMap(null);
     }
     if (this.marker) {
@@ -658,8 +661,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
     }
     this.http.get<any>(environment.mapUrl + '/favoritelocations/users/' + this.principal.id).subscribe(favorites => {
       let marker: any;
-      for (let favorite of favorites) {
-        let fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
+      for (const favorite of favorites) {
+        const fav_location = new google.maps.LatLng(favorite.latitude, favorite.longitude);
         marker = new google.maps.Marker({
           position: fav_location,
           map: this.map,
@@ -668,7 +671,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
         this.favoriteLocations.push(marker);
       }
     }
-    )
+    );
   }
 
   /**Delete a saved location by name */
@@ -677,7 +680,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
       + this.deleteFavorite + '&userId='
       + this.principal.id, {}).subscribe(message =>
         console.log(message));
-    console.log((document.getElementById("currentLocation") as HTMLInputElement).value);
-    //this.refresh();
+    console.log((document.getElementById('currentLocation') as HTMLInputElement).value);
+    // this.refresh();
   }
 }

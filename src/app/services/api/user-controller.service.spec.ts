@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 import { RegistrationToken } from '../../models/registration-token.model';
 import { Office } from '../../models/office.model';
 
-fdescribe('UserControllerService', () => {
+describe('UserControllerService', () => {
   let service: UserControllerService;
   let regKey: string;
   const userObj = {
@@ -56,7 +56,7 @@ fdescribe('UserControllerService', () => {
         spyOn(service, 'createUser').and.callThrough();
 
         const testUR = new UserRegistration();
-        service.createUser(testUR).subscribe(data => {
+        service.createUser(testU).subscribe(data => {
           const req = httpMock.expectOne(environment.userUrl + '/users/');
           expect(req.request.method).toEqual('POST');
         });

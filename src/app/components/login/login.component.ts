@@ -168,7 +168,8 @@ export class LoginComponent implements OnInit {
     return cognitoUser;
   }
 
-  resendEmail(){
+  resendEmail() {
+    console.log('resendEmail');
     this.authService.resendConfirmation(this.reEmail).subscribe(complete =>{
       this.errorLink = false;
       this.sentLink = true;
