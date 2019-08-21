@@ -4,7 +4,7 @@ import { FavoritesComponent } from './favorites.component';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
-fdescribe('FavoritesComponent', () => {
+describe('FavoritesComponent', () => {
   let component: FavoritesComponent;
   let fixture: ComponentFixture<FavoritesComponent>;
 

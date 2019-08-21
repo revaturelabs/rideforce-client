@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import {APP_BASE_HREF} from '@angular/common';
 import { ImageUploadComponent } from './image-upload.component';
 
-fdescribe('ImageUploadComponent', () => {
+describe('ImageUploadComponent', () => {
   let component: ImageUploadComponent;
   let fixture: ComponentFixture<ImageUploadComponent>;
   const httpClientMock = {};

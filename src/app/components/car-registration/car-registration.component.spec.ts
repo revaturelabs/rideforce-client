@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 
-fdescribe('CarRegistrationComponent', () => {
+describe('CarRegistrationComponent', () => {
   let component: CarRegistrationComponent;
   let authService: AuthService;
   let userService: UserControllerService;
