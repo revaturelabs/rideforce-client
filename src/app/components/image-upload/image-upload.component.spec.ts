@@ -1,18 +1,33 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppModule } from '../../app.module';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
+
+import { AuthService } from '../../services/auth.service';
+
 import {APP_BASE_HREF} from '@angular/common';
 import { ImageUploadComponent } from './image-upload.component';
 
 describe('ImageUploadComponent', () => {
   let component: ImageUploadComponent;
   let fixture: ComponentFixture<ImageUploadComponent>;
+  const httpClientMock = {};
+  const authServiceMock = {
+    principal: of({name: 'John'})
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      declarations: [
+        ImageUploadComponent
+      ],
         imports: [
-          AppModule
+          NgbModule
           ],
-        providers: [ {provide: APP_BASE_HREF, useValue : '/' }
+        providers: [
+          {provide: APP_BASE_HREF, useValue : '/' },
+          {provide: HttpClient, useValue: httpClientMock},
+          {provide: AuthService, useValue: authServiceMock}
         ]
     })
     .compileComponents();
@@ -21,10 +36,15 @@ describe('ImageUploadComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ImageUploadComponent);
     component = fixture.componentInstance;
+    component.bsCustomFileInput = {
+      init: () => {},
+      destroy: () => {}
+    }
     fixture.detectChanges();
   });
 
   it('should create image-upload.component', () => {
+  
     expect(component).toBeTruthy();
   });
 
