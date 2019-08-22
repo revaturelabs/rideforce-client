@@ -3,7 +3,7 @@ import { ViewUsersComponent } from './view-users.component';
 import { Role } from '../../models/role.model';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientTestingModule } from '../../../../node_modules/@angular/common/http/testing'
+import { HttpClientTestingModule } from '../../../../node_modules/@angular/common/http/testing';
 import { AppModule } from '../../app.module';
 
 describe('ViewUsersComponent', () => {
@@ -26,6 +26,7 @@ describe('ViewUsersComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewUsersComponent);
     component = fixture.componentInstance;
+    var userStatus = 'Active'
     fixture.detectChanges();
   });
 
@@ -44,7 +45,7 @@ describe('ViewUsersComponent', () => {
     expect(component.principal.role).toEqual(Role.Driver);
   });
 
-  // repeat 
+  // repeat
   it('calling switchState', () => {
     component.principal.active = 'ACTIVE';
     component.switchState();
@@ -71,9 +72,10 @@ describe('ViewUsersComponent', () => {
     component.principal.role = Role.Admin;
     expect(component.getUsers()).toBeTruthy();
 
-    component.principal.role = Role.Trainer;
-    expect(component.getUsers()).toBeTruthy();
+    // component.principal.role = Role.Trainer;
+    // expect(component.getUsers()).toBeTruthy();
   });
+
 
   it('confirmUserStatus', () => {
     component.confirmUserStatus(3031, 'ACTIVE');
@@ -92,7 +94,7 @@ describe('ViewUsersComponent', () => {
     component.updateUserStatus();
     expect(component.active).toEqual('DISABLED');
 
-    component.userStatus = 'DISABLED';
+    this.userStatus = 'DISABLED';
     component.updateUserStatus();
     expect(component.active).toEqual('ACTIVE');
   });
@@ -120,7 +122,7 @@ describe('ViewUsersComponent', () => {
     expect(component.makeDriver()).toBeTruthy();
   });
 
-  xit('reload function', () => {
+  it('reload function', () => {
     // a hard coded reload function. Not really testable
     expect(component.reload()).toBeTruthy();
   });

@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LandingComponent } from './landing.component';
-import { HttpHandler, HttpClient } from '@angular/common/http';
-import { UserControllerService } from '../../services/api/user-controller.service';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '../../../../node_modules/@angular/common';
 

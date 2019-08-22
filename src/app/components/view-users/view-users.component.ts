@@ -1,11 +1,9 @@
 import { Router } from '@angular/router';
-import { Login } from '../../models/login.model';
 import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { UserControllerService } from '../../services/api/user-controller.service';
-import { makeAnimationEvent } from '@angular/animations/browser/src/render/shared';
 
 @Component({
   selector: 'app-view-users',
@@ -48,7 +46,7 @@ export class ViewUsersComponent implements OnInit {
   principal: User;
   currentRole: Role;
   currentState: string;
-  //User firstname
+  // User firstname
   accntFirstName: string;
   accntLastName: string;
   accntRole: string;
@@ -70,13 +68,31 @@ export class ViewUsersComponent implements OnInit {
     });
 
     console.log('getting users');
-    this.getUsers().then(data => {
+    if (this.getUsers()) {this.getUsers().then(data => {
       this.users = data;
+      console.log(this.users);
       this.filterUsers('');
     });
     this.getRole();
     this.getState();
-  }
+   }}
+
+  // ngOnInit() {
+  //   console.log('ngOnInit');
+  //   this.authService.principal.subscribe(user => {
+  //     this.principal = user;
+  //     console.log(this.principal);
+  //   });
+  //
+  //   console.log('getting users');
+  //   this.getUsers().then(data => {
+  //     this.users = data;
+  //     console.log(this.users);
+  //     this.filterUsers('');
+  //   });
+  //   this.getRole();
+  //   this.getState();
+  // }
 
   switchRole() {
     if (this.principal.role === Role.Driver) {
@@ -97,12 +113,12 @@ export class ViewUsersComponent implements OnInit {
       this.principal.active = 'INACTIVE';
       this.authService.changePrincipal(this.principal);
       this.getState();
-      console.log("swtching to inactive");
+      console.log('swtching to inactive');
     } else if (this.principal.active === 'INACTIVE') {
       this.principal.active = 'ACTIVE';
       this.authService.changePrincipal(this.principal);
       this.getState();
-      console.log("swtching to active");
+      console.log('swtching to active');
     } else {
       console.log('Invalid State');
     }
@@ -119,10 +135,14 @@ export class ViewUsersComponent implements OnInit {
   getUsers() {
     let data;
     console.log('hitting users');
+    console.log(this.principal.role);
+    console.log(Role);
     if (this.principal.role === Role.Admin) {
       return this.userService.getAllUsers().then((x) => {
         data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider || y.role === Role.Trainer || y.role === Role.Admin);
+        console.log(data);
         this.users = data;
+        console.log(this.users);
         return data;
       });
     } else if (this.principal.role === Role.Trainer) {
@@ -169,6 +189,7 @@ export class ViewUsersComponent implements OnInit {
 
   updateUserStatus() {
     console.log('updating');
+    console.log(this.userStatus);
     if (this.userStatus !== 'DISABLED') {
       // this.result = window.confirm("Are you sure you want to disable this account?");
       this.userStatus = 'DISABLED';
@@ -184,7 +205,7 @@ export class ViewUsersComponent implements OnInit {
   setUserId(id: number) {
     this.userId = id;
   }
-  //set the whole user
+  // set the whole user
   setUser(id: number, fName: string, lName: string, email: string, role, active: string) {
     this.userId = id;
     this.accntFirstName = fName;
@@ -234,13 +255,13 @@ export class ViewUsersComponent implements OnInit {
     query = query.trim();
     const queryStrings = query.split(' ');
     this.filteredUsers = this.users.filter(user => {
-      for (let key in user) {
+      for (const key in user) {
         let data = user[key];
-        if (typeof data === "string") {
+        if (typeof data === 'string') {
           data = data.toLowerCase();
           for (let searchTerm of queryStrings) {
             searchTerm = searchTerm.toLocaleLowerCase();
-            let found = data.search(searchTerm);
+            const found = data.search(searchTerm);
             if (found > -1) {
               return user;
             }
@@ -256,42 +277,36 @@ export class ViewUsersComponent implements OnInit {
     this.router.navigate(['/viewUsers']);
   }
 
-  //submit changes user depending on new accntRole
+  // submit changes user depending on new accntRole
   changeRole() {
-    console.log("clicked on");
-    if (this.accntRole == "") {
-      console.log("nothing Happens");
-    }
-    else if (this.accntRole == "ADMIN") {
-      console.log("Made into an Admin");
+    console.log('clicked on');
+    if (this.accntRole === '') {
+      console.log('nothing Happens');
+    } else if (this.accntRole === 'ADMIN') {
+      console.log('Made into an Admin');
       this.makeAdmin();
-    }
-    else if (this.accntRole == "TRAINER") {
-      console.log("Made into a Trainer");
+    } else if (this.accntRole === 'TRAINER') {
+      console.log('Made into a Trainer');
       this.makeTrainer();
-    }
-    else if (this.accntRole == "DRIVER") {
-      console.log("Made into a Driver");
+    } else if (this.accntRole === 'DRIVER') {
+      console.log('Made into a Driver');
       this.makeDriver();
-    }
-    else if (this.accntRole == "RIDER") {
-      console.log("Made into Rider");
+    } else if (this.accntRole === 'RIDER') {
+      console.log('Made into Rider');
       this.makeRider();
     }
     this.updateUserStatus();
   }
 
-  //change state between active/inactive
+  // change state between active/inactive
   changeState() {
-    if (this.accntActive == "") {
-      console.log("nothing to change");
-    }
-    else if (this.accntActive == "ACTIVE") {
-      console.log("making account active");
+    if (this.accntActive === '') {
+      console.log('nothing to change');
+    } else if (this.accntActive === 'ACTIVE') {
+      console.log('making account active');
       this.switchState();
-    }
-    else if (this.accntActive == "INACTIVE") {
-      console.log("making account inactive");
+    } else if (this.accntActive === 'INACTIVE') {
+      console.log('making account inactive');
       this.switchState();
     }
     this.updateUserStatus();

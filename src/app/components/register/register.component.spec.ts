@@ -13,7 +13,6 @@ describe('RegisterComponent', () => {
                 AppModule
             ],
             providers: [{provide: APP_BASE_HREF, userValue: '/'}]
-            
         })
         .compileComponents();
     }));
@@ -28,19 +27,22 @@ describe('RegisterComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('validateToken with invalid token', () => {
-        component.validateToken();
-        expect(component.office).toBeNull();
-        expect(component.ur.user.office).toBeNull();
-        expect(component.ur.user.batchEnd).toBeNull();
-    });
+  it('validateToken with invalid token', () => {
+    this.user = new User();
+    this.user.registrationToken = 'asd123ad';
+    component.validateToken();
+    expect(component.office).toBeNull('office');
+    expect(component.user.office).toBeNull('user office');
+    expect(component.user.batchEnd).toBeNull('batchend');
+  });
 
-    it('register a user with Cognito', () =>{
+  import { User } from '../../models/user.model';
+
+    it('register a user with Cognito', () => {
         component.ur.user.email = 'testingTeam@TT.com';
         component.ur.user.password = 'whatisabenco';
         component.ur.user.firstName = 'Ben';
         component.ur.user.lastName = 'Co';
-        
         expect(component.register()).toBeTruthy();
     });
 
