@@ -35,6 +35,7 @@ export class ViewUsersComponent implements OnInit {
   paginatedUsers: any[];
   /**Number of pages */
   numPages: any[];
+  totalPage: number;
   /**save the current page for next and back buttons */
   currPage: number;
   /** Whether the user can make changes (Currently not used) */
@@ -151,7 +152,6 @@ export class ViewUsersComponent implements OnInit {
         this.users = data;
       });
     }
-    console.log(data);
   }
 
 
@@ -170,6 +170,7 @@ export class ViewUsersComponent implements OnInit {
   dividePages(users: any[], divider: number) {
     this.numPages = [];
     let counter = 0;
+    this.totalPage = Math.ceil(users.length / 10);
     counter = Math.round(users.length / divider);
     let n = 1;
     while (n <= counter) {

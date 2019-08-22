@@ -12,7 +12,7 @@ import { User } from '../../models/user.model';
 })
 export class ImageUploadComponent implements OnInit {
   selectedFile: File = null;
-  imageUploadProgress: string = '0';
+  imageUploadProgress = '0';
   principal: User;
 
   bsCustomFileInput = bsCustomFileInput;

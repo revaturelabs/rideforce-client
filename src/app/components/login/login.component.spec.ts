@@ -37,7 +37,7 @@ describe('LoginComponent', () => {
     component.userPass = 'notrealpass';
     fixture.debugElement.injector.get(LoginComponent).login();
 
-    fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
+    fixture.debugElement.query(By('input.fadeIn.fourth')).nativeElement.click();
     fixture.detectChanges();
 
     fixture.whenStable().then(() => {

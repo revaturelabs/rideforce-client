@@ -64,12 +64,13 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     <li class="page-item">
-      <a class="page-link" tabindex="-1" (click)="paginate(users, 10, (currPage-1))">Previous</a>
+      <a *ngIf="currPage>1" class="page-link" tabindex="-1" (click)="paginate(users, 10, (currPage-1))">Previous</a>
     </li>
-    <li class="page-item" *ngFor="let n of numPages"><a class="page-link" (click)="paginate(users, 10, n)">{{n}}</a>
+    <li class="page-item" *ngFor="let n of numPages"><a class="page-link" (click)="paginate(users, 10, n)">{{currPage}}</a>
+    <!--<li class="page-item" *ngFor="let n of numPages"><a class="page-link" (click)="paginate(users, 10, n)">{{n}}</a>-->
     </li>
     <li class="page-item">
-      <a class="page-link" (click)="paginate(users, 10, (currPage+1))">Next</a>
+      <a *ngIf="currPage < totalPage" class="page-link" (click)="paginate(users, 10, (currPage+1))">Next</a>
     </li>
   </ul>
 </nav>

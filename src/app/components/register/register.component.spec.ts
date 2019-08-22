@@ -11,7 +11,7 @@ describe('RegisterComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports:[
+            imports: [
                 AppModule
             ],
             providers: [{provide: APP_BASE_HREF, userValue: '/'}]
@@ -24,10 +24,6 @@ describe('RegisterComponent', () => {
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
-
-  afterEach(() => {
-    TestBed.resetTestingModule();
-  });
 
     it('should create', () => {
         expect(component).toBeTruthy();
