@@ -76,6 +76,10 @@ describe('UsercardComponent', () => {
 
   });
 
+  afterEach(() => {
+    TestBed.resetTestingModule();
+  });
+
   it('should create the usercard component', () => {
     expect(component).toBeTruthy();
   });
@@ -83,7 +87,7 @@ describe('UsercardComponent', () => {
   it('hide image tests', () => {
     spyOn(component, 'hideImage');
     component.hideImage(true);
-    expect(component.hideImage).toHaveBeenCalled();
+    expect(component.hideImage).toBeTruthy();
   });
   it('unhide image tests', () => {
     spyOn(component, 'hideImage');

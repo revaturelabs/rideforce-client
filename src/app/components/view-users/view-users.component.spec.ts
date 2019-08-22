@@ -26,8 +26,10 @@ describe('ViewUsersComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewUsersComponent);
     component = fixture.componentInstance;
-    var userStatus = 'Active'
     fixture.detectChanges();
+  });
+  afterEach(() => {
+    TestBed.resetTestingModule();
   });
 
   it('should create view-users component', () => {

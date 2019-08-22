@@ -41,7 +41,7 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
 
     fixture.whenStable().then(() => {
-      let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
+      const errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
       expect(errorMessage).toBe('User does not exist.');
       done();
     });
@@ -56,11 +56,11 @@ describe('LoginComponent', () => {
 
     fixture.debugElement.query(By.css('input.fadeIn.fourth')).nativeElement.click();
     fixture.detectChanges();
-    
+
     fixture.whenStable().then(() => {
-      let errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
+      const errorMessage = fixture.debugElement.query(By.css('p#errorMessageLogin')).nativeElement.innerText;
       expect(errorMessage).toBe('Missing required parameter USERNAME');
-      done();    
+      done();
     });
 
   });

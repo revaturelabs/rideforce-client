@@ -1,43 +1,43 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { User } from "../../models/user.model";
-import { Link } from "../../models/link.model";
-import { SwipecardModel } from "../../models/swipecard.model";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { User } from '../../models/user.model';
+import { Link } from '../../models/link.model';
+import { SwipecardModel } from '../../models/swipecard.model';
 import {
   animate,
   state,
   style,
   transition,
   trigger
-} from "@angular/animations";
-import { MatchingControllerService } from "../../services/api/matching-controller.service";
-import { UserControllerService } from "../../services/api/user-controller.service";
-import { Router } from "@angular/router";
+} from '@angular/animations';
+import { MatchingControllerService } from '../../services/api/matching-controller.service';
+import { UserControllerService } from '../../services/api/user-controller.service';
+import { Router } from '@angular/router';
 
 /**
  * Allows Views for Other Users in a mobile view
  */
 @Component({
-  selector: "app-usercard",
-  templateUrl: "./usercard.component.html",
-  styleUrls: ["./usercard.component.css"],
+  selector: 'app-usercard',
+  templateUrl: './usercard.component.html',
+  styleUrls: ['./usercard.component.css'],
   animations: [
-    trigger("slide", [
-      state("center", style({ transform: "translateX(0)" })),
-      state("left", style({ transform: "translateX(-200%)" })),
-      state("right", style({ transform: "translateX(200%)" })),
-      transition("* => *", animate(100))
+    trigger('slide', [
+      state('center', style({ transform: 'translateX(0)' })),
+      state('left', style({ transform: 'translateX(-200%)' })),
+      state('right', style({ transform: 'translateX(200%)' })),
+      transition('* => *', animate(100))
     ]),
-    trigger("pop", [
-      state("one", style({ transform: "scale(1)", opacity: 0 })),
-      state("two", style({ transform: "scale(1.2)", opacity: 0.8 })),
-      transition("one => two", animate(200)),
-      transition("two => one", animate(100))
+    trigger('pop', [
+      state('one', style({ transform: 'scale(1)', opacity: 0 })),
+      state('two', style({ transform: 'scale(1.2)', opacity: 0.8 })),
+      transition('one => two', animate(200)),
+      transition('two => one', animate(100))
     ])
   ]
 })
 export class UsercardComponent implements OnInit {
   /** constant for swipe action: left or right */
-  SWIPE_ACTION = { LEFT: "swipeleft", RIGHT: "swiperight" };
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   /** our list of swipecards: DUMMY DATA */
   swipecards: SwipecardModel[] = [];
 
@@ -46,16 +46,16 @@ export class UsercardComponent implements OnInit {
   /** Index of the Current User being viewed */
   currentIndex = 0;
   /** Keeps track of the Animation state */
-  animState = "center";
+  animState = 'center';
   /** Keeps track of the Thumb animation */
-  animThumbState = "one";
+  animThumbState = 'one';
   /** Location of the thumbnail image files */
-  thumbImg = "assets/icons/thumbsDown.png";
+  thumbImg = 'assets/icons/thumbsDown.png';
 
   /** Represents the div element 'swipeMain' */
-  @ViewChild("swipeMain") swipeCardMain: ElementRef;
+  @ViewChild('swipeMain') swipeCardMain: ElementRef;
   /** Represents the div element 'swipeBio' */
-  @ViewChild("swipeBio") swipeCardBio: ElementRef;
+  @ViewChild('swipeBio') swipeCardBio: ElementRef;
 
   /**
    * Sets up Component with the Matching and User services injected
@@ -77,15 +77,15 @@ export class UsercardComponent implements OnInit {
    */
   ngOnInit() {
     if (sessionStorage.length === 0) {
-      this.route.navigate(["/landing"]);
+      this.route.navigate(['/landing']);
     }
     this.matchService.getMatches().subscribe(function(users) {
       console.log(users);
-      for (let u of users) {
+      for (const u of users) {
         console.log(u);
-        if (!u.photoUrl || u.photoUrl === "null") {
+        if (!u.photoUrl || u.photoUrl === 'null') {
           console.log(u.photoUrl);
-          u.photoUrl = "http://semantic-ui.com/images/avatar/large/chris.jpg";
+          u.photoUrl = 'http://semantic-ui.com/images/avatar/large/chris.jpg';
         }
         const card: SwipecardModel = {
           user: u,
@@ -99,7 +99,7 @@ export class UsercardComponent implements OnInit {
       }
     });
     this.userService.getCurrentUser().subscribe(data => {
-      console.log("data");
+      console.log('data');
       this.currentUser = data;
       console.log(this.currentUser);
       this.matchService
@@ -118,9 +118,9 @@ export class UsercardComponent implements OnInit {
    */
   hideImage(hide: boolean) {
     if (hide) {
-      this.swipeCardMain.nativeElement.classList.add("hidden");
+      this.swipeCardMain.nativeElement.classList.add('hidden');
     } else {
-      this.swipeCardMain.nativeElement.classList.remove("hidden");
+      this.swipeCardMain.nativeElement.classList.remove('hidden');
     }
   }
 
@@ -128,11 +128,11 @@ export class UsercardComponent implements OnInit {
    *  action triggered when user swipes
    */
   swipe(action = this.SWIPE_ACTION.RIGHT, user) {
-    this.animThumbState = "two";
+    this.animThumbState = 'two';
     // swipe right, next avatar
     if (action === this.SWIPE_ACTION.RIGHT) {
-      this.animState = "right";
-      this.thumbImg = "assets/icons/thumbsUp.png";
+      this.animState = 'right';
+      this.thumbImg = 'assets/icons/thumbsUp.png';
       this.matchService
         .unDislikeDriver(
           this.currentUser.id,
@@ -149,8 +149,8 @@ export class UsercardComponent implements OnInit {
 
     // swipe left, previous avatar
     if (action === this.SWIPE_ACTION.LEFT) {
-      this.animState = "left";
-      this.thumbImg = "assets/icons/thumbsDown.png";
+      this.animState = 'left';
+      this.thumbImg = 'assets/icons/thumbsDown.png';
       console.log(this.currentUser.id);
       console.log(this.swipecards[this.currentIndex].user.id);
       this.matchService
@@ -173,15 +173,15 @@ export class UsercardComponent implements OnInit {
    * Called when the swipe animation has completed
    */
   swiped() {
-    if (this.animState === "left") {
-      this.animState = "center";
+    if (this.animState === 'left') {
+      this.animState = 'center';
       if (this.currentIndex + 1 > this.swipecards.length - 1) {
         this.currentIndex = 0;
       } else {
         this.currentIndex++;
       }
-    } else if (this.animState === "right") {
-      this.animState = "center";
+    } else if (this.animState === 'right') {
+      this.animState = 'center';
       if (this.currentIndex - 1 < 0) {
         this.currentIndex = this.swipecards.length - 1;
       } else {
@@ -197,8 +197,8 @@ export class UsercardComponent implements OnInit {
    * Called when the Thumb Animation is done
    */
   thumbAnimDone() {
-    if (this.animThumbState === "two") {
-      this.animThumbState = "one";
+    if (this.animThumbState === 'two') {
+      this.animThumbState = 'one';
     }
   }
 }

@@ -1,7 +1,9 @@
-import { RegisterComponent } from '../register/register.component';
+import { RegisterComponent } from './register.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '../../app.module';
 import { APP_BASE_HREF } from '@angular/common';
+import { User } from '../../models/user.model';
+
 
 describe('RegisterComponent', () => {
     let component: RegisterComponent;
@@ -23,6 +25,10 @@ describe('RegisterComponent', () => {
         fixture.detectChanges();
     });
 
+  afterEach(() => {
+    TestBed.resetTestingModule();
+  });
+
     it('should create', () => {
         expect(component).toBeTruthy();
     });
@@ -36,7 +42,6 @@ describe('RegisterComponent', () => {
     expect(component.user.batchEnd).toBeNull('batchend');
   });
 
-  import { User } from '../../models/user.model';
 
     it('register a user with Cognito', () => {
         component.ur.user.email = 'testingTeam@TT.com';
@@ -48,7 +53,7 @@ describe('RegisterComponent', () => {
 
     it('select address', () => {
         component.onAddressSelect('123 test street');
-        expect(component.ur.user.location).toBe('123 test street');
+        expect(component.ur.user.location.address).toBe('123 test street');
     });
 
     it('addContactInfo check', () => {

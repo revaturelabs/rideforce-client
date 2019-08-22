@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
   /** Password Confirmation Model */
   passwordConfirm: string;
   /** Contact Info Model */
-  contactInfo: ContactInfo;
+  contactInfo: any;
   /** Map containing JWK's */
   jwks: Map<String, RSAKey>;
   /** User Registration Info Model */

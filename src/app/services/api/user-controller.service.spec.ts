@@ -8,6 +8,7 @@ import { UserRegistration } from '../../models/user-registration.model';
 import { environment } from '../../../environments/environment';
 import { RegistrationToken } from '../../models/registration-token.model';
 import { Office } from '../../models/office.model';
+import {User} from '../../models/user.model';
 
 describe('UserControllerService', () => {
   let service: UserControllerService;
