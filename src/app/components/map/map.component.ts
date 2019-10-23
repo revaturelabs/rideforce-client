@@ -1,16 +1,16 @@
 /// <reference path="../../../../node_modules/@types/googlemaps/index.d.ts" />
 import { Component, OnInit, ViewChild, NgZone, AfterContentInit, OnDestroy } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
-import { MapsControllerService } from '../../services/api/maps-controller.service';
+// import { MapsControllerService } from '../../services/api/maps-controller.service';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.model';
 import { Link } from '../../models/link.model';
-import { MatchingControllerService } from '../../services/api/matching-controller.service';
-import { UserControllerService } from '../../services/api/user-controller.service';
+// import { MatchingControllerService } from '../../services/api/matching-controller.service';
+// import { UserControllerService } from '../../services/api/user-controller.service';
 import { Router } from '@angular/router';
 import { Location } from '../../models/location.model';
 import { bool } from 'aws-sdk/clients/signer';
-import { AuthService } from '../../services/auth.service'
+// import { AuthService } from '../../services/auth.service'
 import { Login } from '../../models/login.model';
 import { environment } from '../../../environments/environment';
 
@@ -151,10 +151,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
-    private matchService: MatchingControllerService,
-    private userService: UserControllerService,
-    private mapService: MapsControllerService,
-    private auth: AuthService,
+    // private matchService: MatchingControllerService,
+    // private userService: UserControllerService,
+    // private mapService: MapsControllerService,
+    // private auth: AuthService,
     private zone: NgZone,
     private route: Router,
     private http: HttpClient
@@ -203,22 +203,22 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
 
 
   ngOnInit() {
-    this.auth.principal.subscribe(p => {
-      this.principal = p;
-      if (this.principal.id > 0) {
-        console.log("Location: " + JSON.stringify(this.principal.location));
-        this.lat = this.principal.location.latitude;
-        this.lng = this.principal.location.longitude;
-        if (this.principal.role == "RIDER") {
-          this.buttonLabel = "Drivers Near Me";
-          this.userRole = "Driver";
-        }
-        else if (this.principal.role == "DRIVER") {
-          this.userRole = "Rider";
-          this.buttonLabel = "Riders Near Me";
-        }
-      }
-    });
+    // this.auth.principal.subscribe(p => {
+    //   this.principal = p;
+    //   if (this.principal.id > 0) {
+    //     console.log("Location: " + JSON.stringify(this.principal.location));
+    //     this.lat = this.principal.location.latitude;
+    //     this.lng = this.principal.location.longitude;
+    //     if (this.principal.role == "RIDER") {
+    //       this.buttonLabel = "Drivers Near Me";
+    //       this.userRole = "Driver";
+    //     }
+    //     else if (this.principal.role == "DRIVER") {
+    //       this.userRole = "Rider";
+    //       this.buttonLabel = "Riders Near Me";
+    //     }
+    //   }
+    // });
   }
 
   /**
@@ -285,21 +285,21 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   getNearestDrivers() {
-    this.matchService.getMatchingDrivers(this.principal.id).subscribe(
-      drivers => {
-        this.events = drivers;
-      }
-    );
+    // this.matchService.getMatchingDrivers(this.principal.id).subscribe(
+    //   drivers => {
+    //     this.events = drivers;
+    //   }
+    // );
   }
 
   getNearestRiders() {
     console.log("I am a DRIVER!");
     let officeId: number = parseInt(this.principal.office.substring(9));
-    this.userService.getUserByOfficeAndRole(officeId, "RIDER").subscribe(
-      riders => {
-        this.events = riders;
-      }
-    );
+    // this.userService.getUserByOfficeAndRole(officeId, "RIDER").subscribe(
+    //   riders => {
+    //     this.events = riders;
+    //   }
+    // );
   }
 
 
@@ -332,15 +332,15 @@ export class MapComponent implements OnInit, OnDestroy, AfterContentInit {
    * Get the metadata (distance, estimated duration) of a given route
    */
   public getRoute() {
-    this.mapService.getRoute(this.start, this.end).subscribe(
-      data => {
-        this.dist = data.distance;
-        this.time = data.duration;
-        console.log('printing route information...');
-        console.log(this.dist);
-        console.log(this.time);
-      }
-    );
+    // this.mapService.getRoute(this.start, this.end).subscribe(
+    //   data => {
+    //     this.dist = data.distance;
+    //     this.time = data.duration;
+    //     console.log('printing route information...');
+    //     console.log(this.dist);
+    //     console.log(this.time);
+    //   }
+    // );
   }
 
   /**

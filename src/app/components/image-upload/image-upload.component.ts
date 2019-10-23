@@ -1,7 +1,7 @@
 import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Login } from '../../models/login.model';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { environment } from '../../../environments/environment';
 import bsCustomFileInput from 'bs-custom-file-input';
 import { User } from '../../models/user.model';
@@ -16,11 +16,13 @@ export class ImageUploadComponent implements OnInit {
   imageUploadProgress: string = '0';
   principal: User;
 
-  constructor(private http: HttpClient, private auth: AuthService) {
-    this.auth.principal.subscribe(user => {
-      this.principal = user;
-      console.log(this.principal);
-    });
+  constructor(private http: HttpClient, 
+    // private auth: AuthService
+    ) {
+    // this.auth.principal.subscribe(user => {
+    //   this.principal = user;
+    //   console.log(this.principal);
+    // });
   }
 
   ngOnInit(): void {

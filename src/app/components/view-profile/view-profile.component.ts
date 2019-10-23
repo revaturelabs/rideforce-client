@@ -6,12 +6,12 @@ import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { Office } from '../../models/office.model';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { ContactInfo } from '../../models/contact-info.model';
-import { UserControllerService } from '../../services/api/user-controller.service';
+// import { UserControllerService } from '../../services/api/user-controller.service';
 import { Car } from '../../models/car.model';
 import { Link } from '../../models/link.model';
-import { GeocodeService } from '../../services/geocode.service';
+// import { GeocodeService } from '../../services/geocode.service';
 import { CustomtimePipe } from '../../pipes/customtime.pipe';
 import { HttpClient } from '@angular/common/http';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
@@ -85,8 +85,11 @@ export class ViewProfileComponent implements OnInit {
    * @param userService - Allows the component to work with the user service (for updating)
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
-  constructor(private userService: UserControllerService,
-    private authService: AuthService, private zone: NgZone, private locationSerivce: GeocodeService,
+  constructor(
+    // private userService: UserControllerService,
+    // private authService: AuthService, 
+    private zone: NgZone, 
+    // private locationSerivce: GeocodeService,
     private router: Router,
     private http: HttpClient) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -97,45 +100,45 @@ export class ViewProfileComponent implements OnInit {
   */
   ngOnInit() {
 
-    this.authService.principal.subscribe(user => {
-      this.principal = user;
-      if (this.principal.id > 0) {
-        this.existingBio = this.principal.bio;
-        this.firstName = this.principal.firstName;
-        this.lastName = this.principal.lastName;
-        this.username = this.principal.email;
-        this._address = this.principal.location.address;
-        this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
-        this.startTime = this.pipe.transform(this.principal.startTime);
-        console.log(this.startTime);
-        this.getInfoById();
+    // this.authService.principal.subscribe(user => {
+    //   this.principal = user;
+    //   if (this.principal.id > 0) {
+    //     this.existingBio = this.principal.bio;
+    //     this.firstName = this.principal.firstName;
+    //     this.lastName = this.principal.lastName;
+    //     this.username = this.principal.email;
+    //     this._address = this.principal.location.address;
+    //     this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
+    //     this.startTime = this.pipe.transform(this.principal.startTime);
+    //     console.log(this.startTime);
+    //     this.getInfoById();
 
 
-        //this.getOffice();
+    //     //this.getOffice();
 
 
-        this.getRole();
-        this.getState();
-        this.filteredUsers = this.users;
+    //     this.getRole();
+    //     this.getState();
+    //     this.filteredUsers = this.users;
 
 
-        //loads the first car. done this way because original batch made car-user relationship a 1 to many
-        //should've been a one to one
-        //console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
-        if (this.currentRole == "DRIVER") {
-          this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe(e => {
-            this.car = e;
-            console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
-          });
-        }
+    //     //loads the first car. done this way because original batch made car-user relationship a 1 to many
+    //     //should've been a one to one
+    //     //console.log("PRINTING OUT CAR = " + this.principal.cars[0].match(/\d+/)[0]);
+    //     if (this.currentRole == "DRIVER") {
+    //       this.userService.getCarById(Number(this.principal.cars[0].match(/\d+/)[0])).subscribe(e => {
+    //         this.car = e;
+    //         console.log("PRINTING OUT E KEVIN = " + JSON.stringify(e));
+    //       });
+    //     }
 
-        this.sessionCheck();
-      }
-      console.log(user);
-      if (this.principal) {
+    //     this.sessionCheck();
+    //   }
+    //   console.log(user);
+    //   if (this.principal) {
 
-      }
-    });
+    //   }
+    // });
 
     this.getOffice();
 
@@ -245,9 +248,9 @@ export class ViewProfileComponent implements OnInit {
     this.principal.lastName = this.lastName;
     // this.principal.address = this.address2;
     // this.principal.startTime = this.startTime(); //Need this, but currently no value
-    this.authService.changePrincipal(this.principal);
-    this.userService.update().then();
-    this.authService.changePrincipal(this.principal);
+    // this.authService.changePrincipal(this.principal);
+    // this.userService.update().then();
+    // this.authService.changePrincipal(this.principal);
     // debug console.log("routing");
     this.updatePassword();
     this.router.navigate(['userProfile']);
@@ -260,10 +263,10 @@ export class ViewProfileComponent implements OnInit {
 
   //Populate user location by finding the latitude and logitude via Maps service. 
   populateLocation() {
-    this.locationSerivce.getlocation(this.principal.location).subscribe(data => {
-      console.log(data);
-      this.principal.location = data;
-    });
+    // this.locationSerivce.getlocation(this.principal.location).subscribe(data => {
+    //   console.log(data);
+    //   this.principal.location = data;
+    // });
   }
 
   /**
@@ -297,15 +300,15 @@ export class ViewProfileComponent implements OnInit {
    * Gets the list of offices from the database
    */
   getOffices() {
-    this.userService.getAllOffices().subscribe(data => {
-      this.officeObjectArray = data;
-    });
+    // this.userService.getAllOffices().subscribe(data => {
+    //   this.officeObjectArray = data;
+    // });
   }
 
   getOffice() {
-    this.userService.getOfficeByLink(this.principal.office).subscribe(data => {
-      this.officeObject = data;
-    });
+    // this.userService.getOfficeByLink(this.principal.office).subscribe(data => {
+    //   this.officeObject = data;
+    // });
   }
 
   /**
@@ -320,7 +323,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   updatePassword() {
-    this.userService.updatePassword(this.principal.email, this.oldPassword, this.password).subscribe();
+    // this.userService.updatePassword(this.principal.email, this.oldPassword, this.password).subscribe();
   }
 
   editPassword(){
@@ -336,7 +339,7 @@ export class ViewProfileComponent implements OnInit {
       active = 'ACTIVE';
     }
     if (this.result) {
-      this.userService.updateStatus(id, active).then();
+      // this.userService.updateStatus(id, active).then();
       location.reload(true);
     } else {
       alert('No changes will be made');
@@ -347,7 +350,7 @@ export class ViewProfileComponent implements OnInit {
   makeRider(id: number) {
     this.result = window.confirm('Are you sure you want to make this trainer a rider?');
     if (this.result) {
-      this.userService.updateRole(id, Role.Rider).then();
+      // this.userService.updateRole(id, Role.Rider).then();
       location.reload(true);
     } else {
       alert('No changes will be made');
@@ -357,7 +360,7 @@ export class ViewProfileComponent implements OnInit {
   makeTrainer(id: number) {
     this.result = window.confirm('Are you sure you want to make this user a trainer?');
     if (this.result) {
-      this.userService.updateRole(id, Role.Trainer).then();
+      // this.userService.updateRole(id, Role.Trainer).then();
       location.reload(true);
     } else {
       alert('No changes will be made');
@@ -367,7 +370,7 @@ export class ViewProfileComponent implements OnInit {
   makeAdmin(id: number) {
     this.result = window.confirm('Are you sure you want to make this user an admin?');
     if (this.result) {
-      this.userService.updateRole(id, Role.Admin).then();
+      // this.userService.updateRole(id, Role.Admin).then();
       location.reload(true);
     } else {
       alert('No changes will be made');
@@ -403,14 +406,14 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById('submitBio').style.display = 'none';
     document.getElementById('editBio').style.display = 'inline';
     document.getElementById('aboutYou').setAttribute("disabled","disabled");
-    this.userService.updateBio(bioInput);
+    // this.userService.updateBio(bioInput);
     this.principal.bio = bioInput;
     this.existingBio = this.principal.bio;
-    this.authService.changePrincipal(this.principal);
+    // this.authService.changePrincipal(this.principal);
     this.existingBio = bioInput;
     //this.router.navigate(['userProfile']);
     console.log("bio " + this.principal.bio);
-    this.userService.updateBio(this.principal.bio);
+    // this.userService.updateBio(this.principal.bio);
   }
 
   changeExistingBioStatus() {

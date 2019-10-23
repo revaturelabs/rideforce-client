@@ -12,11 +12,11 @@ import { Login } from "../../models/login.model";
 import { Link } from "../../models/link.model";
 import { DriverCard } from "../../models/driver-card.model";
 import { User } from "../../models/user.model";
-import { MatchingControllerService } from "../../services/api/matching-controller.service";
-import { UserControllerService } from "../../services/api/user-controller.service";
-import { AuthService } from "../../services/auth.service";
-import { GeocodeService } from "../../services/geocode.service";
-import { DownloadService } from "../../services/download.service";
+// import { MatchingControllerService } from "../../services/api/matching-controller.service";
+// import { UserControllerService } from "../../services/api/user-controller.service";
+// import { AuthService } from "../../services/auth.service";
+// import { GeocodeService } from "../../services/geocode.service";
+// import { DownloadService } from "../../services/download.service";
 import { DomSanitizer } from "@angular/platform-browser";
 
 /**
@@ -54,13 +54,13 @@ export class UsermatchwebComponent implements OnInit {
    * @param {UserControllerService} userService - Enables access to User management
    */
   constructor(
-    private matchService: MatchingControllerService,
-    private userService: UserControllerService,
-    private route: Router,
+    // private matchService: MatchingControllerService,
+    // private userService: UserControllerService,
+    // private route: Router,
     private spinner: NgxSpinnerService,
-    private geocodeService: GeocodeService,
-    private auth: AuthService,
-    private ds: DownloadService,
+    // private geocodeService: GeocodeService,
+    // private auth: AuthService,
+    // private ds: DownloadService,
     public ss: DomSanitizer
   ) {}
 
@@ -83,67 +83,67 @@ export class UsermatchwebComponent implements OnInit {
    */
   ngOnInit() {
     console.clear();
-    this.matchService.getMatches().subscribe(
-      users => {
-        this.users = [];
-        for (let u of users) {
-          const card: DriverCard = {
-            user: u,
-            choose: "none",
-            face: "front",
-            distance: null,
-            image:
-              u.photoUrl ||
-              "http://semantic-ui.com/images/avatar/large/chris.jpg"
-          };
-          this.populateProfileImage(card);
+    // this.matchService.getMatches().subscribe(
+    //   users => {
+    //     this.users = [];
+    //     for (let u of users) {
+    //       const card: DriverCard = {
+    //         user: u,
+    //         choose: "none",
+    //         face: "front",
+    //         distance: null,
+    //         image:
+    //           u.photoUrl ||
+    //           "http://semantic-ui.com/images/avatar/large/chris.jpg"
+    //       };
+    //       this.populateProfileImage(card);
           
-          this.users.push(card);
-        }
-        // assign drivers to the list to render and shuffle
-        this.sortedUsers = this.users;
-      },
-      e => {
-        console.log("error getting match user!");
-        console.log(e);
-      }
-    );
-    this.auth.principal.subscribe(user => {
-      this.principal = user;
-      if (this.principal.id < 1) {
-        this.route.navigate(["/landing"]);
-      }
-      this.spinner.show();
-      this.loading = true;
-      console.log("Loading: " + this.loading);
+    //       this.users.push(card);
+    //     }
+    //     // assign drivers to the list to render and shuffle
+    //     this.sortedUsers = this.users;
+    //   },
+    //   e => {
+    //     console.log("error getting match user!");
+    //     console.log(e);
+    //   }
+    // );
+    // this.auth.principal.subscribe(user => {
+    //   this.principal = user;
+    //   if (this.principal.id < 1) {
+    //     this.route.navigate(["/landing"]);
+    //   }
+    //   this.spinner.show();
+    //   this.loading = true;
+    //   console.log("Loading: " + this.loading);
       
-      this.userService.getCurrentUser().subscribe(
+    //   this.userService.getCurrentUser().subscribe(
 
-        data => {
-          this.currentUser = data;
-          this.matchService.getMatchingDrivers(+this.principal.id).subscribe(
-            users => {
-              console.log(users);
-              this.matchService.updateMatches(users);
-              // sets loading to false
-              this.loading = false;
-              // hides the spinner
-              this.spinner.hide();
-            },
-            e => {
-              console.log("error getting match Drivers!");
-              console.log(e);
-            }
-          );
-        },
+    //     data => {
+    //       this.currentUser = data;
+    //       this.matchService.getMatchingDrivers(+this.principal.id).subscribe(
+    //         users => {
+    //           console.log(users);
+    //           this.matchService.updateMatches(users);
+    //           // sets loading to false
+    //           this.loading = false;
+    //           // hides the spinner
+    //           this.spinner.hide();
+    //         },
+    //         e => {
+    //           console.log("error getting match Drivers!");
+    //           console.log(e);
+    //         }
+    //       );
+    //     },
 
-        e => {
-          console.log("error getting user (matching service)!");
-          console.log(e);
-        }
+    //     e => {
+    //       console.log("error getting user (matching service)!");
+    //       console.log(e);
+    //     }
 
-      );
-    });
+    //   );
+    // });
   }
 
   /**
@@ -162,28 +162,28 @@ export class UsermatchwebComponent implements OnInit {
     if (interest !== 2) {
       if (interest === 1) {
         this.users[index].choose = "liked";
-        this.matchService
-          .unDislikeDriver(this.currentUser.id, this.users[index].user.id)
-          .subscribe();
-        this.matchService
-          .likeDriver(this.currentUser.id, this.users[index].user.id)
-          .subscribe(data => {});
+        // this.matchService
+        //   .unDislikeDriver(this.currentUser.id, this.users[index].user.id)
+        //   .subscribe();
+        // this.matchService
+        //   .likeDriver(this.currentUser.id, this.users[index].user.id)
+        //   .subscribe(data => {});
       } else if (interest === 0) {
         this.users[index].choose = "disliked";
-        this.matchService
-          .unlikeDriver(this.currentUser.id, this.users[index].user.id)
-          .subscribe();
-        this.matchService
-          .dislikeDriver(this.currentUser.id, this.users[index].user.id)
-          .subscribe(data => {});
+        // this.matchService
+        //   .unlikeDriver(this.currentUser.id, this.users[index].user.id)
+        //   .subscribe();
+        // this.matchService
+        //   .dislikeDriver(this.currentUser.id, this.users[index].user.id)
+        //   .subscribe(data => {});
       } else {
         this.users[index].choose = "none";
-        this.matchService
-          .unlikeDriver(this.currentUser.id, this.users[index].user.id)
-          .subscribe();
-        this.matchService
-          .unDislikeDriver(this.currentUser.id, this.users[index].user.id)
-          .subscribe();
+        // this.matchService
+        //   .unlikeDriver(this.currentUser.id, this.users[index].user.id)
+        //   .subscribe();
+        // this.matchService
+        //   .unDislikeDriver(this.currentUser.id, this.users[index].user.id)
+        //   .subscribe();
       }
     } else {
       if (this.users[index].choose === "disliked") {
@@ -283,34 +283,35 @@ export class UsermatchwebComponent implements OnInit {
 
   // get the address and append it
   async appendLocation(user) {
-    const myLocation = await this.geocodeService
-      .geocode(this.principal.location.address)
-      .toPromise();
-    const location = await this.geocodeService
-      .geocode(user.user.address)
-      .toPromise();
-    user["distance"] = this.calculateDistance(
-      myLocation["lng"],
-      location["lng"],
-      myLocation["lat"],
-      location["lat"]
-    );
+    // const myLocation = await this.geocodeService
+    //   .geocode(this.principal.location.address)
+    //   .toPromise();
+    // const location = await this.geocodeService
+    //   .geocode(user.user.address)
+    //   .toPromise();
+    // user["distance"] = this.calculateDistance(
+    //   myLocation["lng"],
+    //   location["lng"],
+    //   myLocation["lat"],
+    //   location["lat"]
+    // );
     console.log("usre with appended distance: " + user);
     return user;
   }
 
   async getLngLat(address: string): Promise<number> {
-    const otherLocation = await this.geocodeService
-      .geocode(address)
-      .toPromise();
-    const myLocation = await this.geocodeService
-      .geocode(this.principal.location.address)
-      .toPromise();
-    const x1 = myLocation["lng"];
-    const x2 = otherLocation["lng"];
-    const y1 = myLocation["lat"];
-    const y2 = otherLocation["lat"];
-    return this.calculateDistance(x1, x2, y1, y2);
+    // const otherLocation = await this.geocodeService
+    //   .geocode(address)
+    //   .toPromise();
+    // const myLocation = await this.geocodeService
+    //   .geocode(this.principal.location.address)
+    //   .toPromise();
+    // const x1 = myLocation["lng"];
+    // const x2 = otherLocation["lng"];
+    // const y1 = myLocation["lat"];
+    // const y2 = otherLocation["lat"];
+    // return this.calculateDistance(x1, x2, y1, y2);
+    return null;
   }
 
   getMyLocation() {
@@ -335,9 +336,9 @@ export class UsermatchwebComponent implements OnInit {
   }
 
   public populateProfileImage(dc: DriverCard) {
-    this.ds.downloadFile(dc.user.id.toString()).subscribe(b => {
-      dc.image = this.ss.bypassSecurityTrustUrl(window.URL.createObjectURL(b));
-    });
+    // this.ds.downloadFile(dc.user.id.toString()).subscribe(b => {
+    //   dc.image = this.ss.bypassSecurityTrustUrl(window.URL.createObjectURL(b));
+    // });
   }
 
 }

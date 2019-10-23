@@ -2,7 +2,7 @@ import { Login } from '../../models/login.model';
 import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 
 /**
  * Supports the Carousel Appearence as a Site Intro
@@ -26,21 +26,23 @@ export class LandingComponent implements OnInit {
 
   /**
    * Creates the Landing Component
-   * @param {UserControllerService} userService - Allows Component to utilize User Functionality
+  //  * @param {UserControllerService} userService - Allows Component to utilize User Functionality
    */
-  constructor(private auth: AuthService) { }
+  constructor(
+    // private auth: AuthService
+    ) { }
 
   /**
    * Initializes the component by retrieving the User
    */
   ngOnInit() {
     // console.log("oninit");
-    this.auth.principal.subscribe(user => {
-      this.principal = user;
-      // console.log(this.principal);
-      this.sessionCheck();
-      this.setCurrentRole();
-    });
+    // this.auth.principal.subscribe(user => {
+    //   this.principal = user;
+    //   // console.log(this.principal);
+    //   this.sessionCheck();
+    //   this.setCurrentRole();
+    // });
   }
 
   /**

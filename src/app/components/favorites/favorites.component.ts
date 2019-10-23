@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Login } from '../../models/login.model';
 import { User } from '../../models/user.model';
@@ -19,24 +19,24 @@ export class FavoritesComponent implements OnInit {
 
   /**
    * Simply sets up the Favorites component.
-   * @param {AuthService} authService - Allows Authentication Services to be utilized
+  //  * @param {AuthService} authService - Allows Authentication Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
-    private authService: AuthService,
+    // private authService: AuthService,
     private route: Router
   ) { }
 
   /** Checks to see if the device is amobile device and sets view accordingly */
   ngOnInit() {
-    this.authService.principal.subscribe(user => {
-      this.principal = user;
-      if (this.principal.id < 1)
-        this.route.navigate(["/landing"]);
-      if (window.screen.width <= 430) { // 768px portrait
-        this.mobile = true;
-      }
-    });
+    // this.authService.principal.subscribe(user => {
+    //   this.principal = user;
+    //   if (this.principal.id < 1)
+    //     this.route.navigate(["/landing"]);
+    //   if (window.screen.width <= 430) { // 768px portrait
+    //     this.mobile = true;
+    //   }
+    // });
   }
 
 }

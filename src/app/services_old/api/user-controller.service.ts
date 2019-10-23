@@ -11,7 +11,7 @@ import { Link } from '../../models/link.model';
 import { ContactInfo } from '../../models/contact-info.model';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { Login } from '../../models/login.model';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { UserRegistration } from '../../models/user-registration.model';
 import { RegistrationToken } from '../../models/registration-token.model';
 import { Role } from '../../models/role.model';
@@ -30,9 +30,11 @@ export class UserControllerService {
    * Sets up the User Service via the Injection of the HttpClient
    * @param {HttpClient} http - Allows service to communicate with the server via HTTP requests
    */
-  constructor(private http: HttpClient, auth: AuthService) {
-    auth.principal.subscribe(user => {
-      this.principal = user;});
+  constructor(private http: HttpClient, 
+    // auth: AuthService
+    ) {
+    // auth.principal.subscribe(user => {
+    //   this.principal = user;});
       
    }
 

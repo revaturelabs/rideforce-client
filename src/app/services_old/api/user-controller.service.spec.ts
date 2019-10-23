@@ -1,5 +1,5 @@
 import { UserControllerService } from './user-controller.service';
-import { HttpClientTestingModule, HttpTestingController } from '../../../../node_modules/@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Role } from '../../models/role.model';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { AppModule } from '../../app.module';

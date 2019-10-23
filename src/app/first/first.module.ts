@@ -12,9 +12,9 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { LikesComponent } from '../components/likes/likes.component';
 import { UsermatchwebComponent } from '../components/usermatchweb/usermatchweb.component';
 import { LikesmatchwebComponent } from '../components/likesmatchweb/likesmatchweb.component';
-import { UserControllerService } from '../services/api/user-controller.service';
-import { MapsControllerService } from '../services/api/maps-controller.service';
-import { MatchingControllerService } from '../services/api/matching-controller.service';
+// import { UserControllerService } from '../services/api/user-controller.service';
+// import { MapsControllerService } from '../services/api/maps-controller.service';
+// import { MatchingControllerService } from '../services/api/matching-controller.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PlacesAutocompleteDirective } from '../directives/places-autocomplete/places-autocomplete.directive';
 import { FavoritesComponent } from '../components/favorites/favorites.component';
@@ -69,10 +69,10 @@ import { RegisterComponent } from '../components/register/register.component';
   ],
   providers: [
     NgbActiveModal,
-    MapsControllerService,
-    UserControllerService,
+    // MapsControllerService,
+    // UserControllerService,
     // AuthService,
-    MatchingControllerService,
+    // MatchingControllerService,
     GoogleMapsAPIWrapper,
     {
       provide: HTTP_INTERCEPTORS,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from '../../models/login.model';
 import { User } from '../../models/user.model';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { NgForm } from '@angular/forms';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from '../../../environments/environment';
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
    * @param {Router} route - provides the ability to navigate to landing if user is already logged on
    */
   constructor(
-    private authService: AuthService,
+    // private authService: AuthService,
     private route: Router
   ) { }
 
@@ -62,12 +62,12 @@ export class LoginComponent implements OnInit {
    * Checking to see if there is a current user, and if there is, redirects to landing.
    */
   ngOnInit() {
-    this.authService.principal.subscribe(u => {
-      this.principal = u;
-      if (this.principal.id !== 0) {
-        this.route.navigate(['/landing']);
-      }
-    })
+    // this.authService.principal.subscribe(u => {
+    //   this.principal = u;
+    //   if (this.principal.id !== 0) {
+    //     this.route.navigate(['/landing']);
+    //   }
+    // })
 
   }
 
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
-    this.authService.authenticate(this.userEmail, this.userPass);
+    // this.authService.authenticate(this.userEmail, this.userPass);
   }
 
   resetEmail() {
@@ -169,13 +169,13 @@ export class LoginComponent implements OnInit {
   }
 
   resendEmail(){
-    this.authService.resendConfirmation(this.reEmail).subscribe(complete =>{
-      this.errorLink = false;
-      this.sentLink = true;
-    }, error =>{
-      this.errorLink = true;
-      this.sentLink = false;
-    });
+    // this.authService.resendConfirmation(this.reEmail).subscribe(complete =>{
+    //   this.errorLink = false;
+    //   this.sentLink = true;
+    // }, error =>{
+    //   this.errorLink = true;
+    //   this.sentLink = false;
+    // });
 
   }
 

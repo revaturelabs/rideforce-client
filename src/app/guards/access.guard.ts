@@ -7,14 +7,15 @@ import {
 } from '@angular/router';
 import { catchError, mapTo } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { UserControllerService } from '../../app/services/api/user-controller.service';
-
+// import { UserControllerService } from '../../app/services/api/user-controller.service';
 
 @Injectable({
     providedIn: 'root',
   })
   export class AccessGuard implements CanActivate {
-    constructor(private userService: UserControllerService, private router: Router) {}
+    constructor(
+      // private userService: UserControllerService, 
+      private router: Router) {}
   
     // RouterStateSnapshot to cache the url attempted to be accessed on the auth service
     // after user logs in, use this url to direct them to the page they want
@@ -23,13 +24,14 @@ import { UserControllerService } from '../../app/services/api/user-controller.se
       state: RouterStateSnapshot
     ): boolean | Observable<boolean> {
       if (route.data.requiresLogin) {
-        return this.userService.getCurrentUser().pipe(
-          mapTo(true),
-          catchError(_ => {
-            this.router.navigate(['login']);
-            return of(false);
-          })
-        );
+        return null;  //this will return a user
+        // return this.userService.getCurrentUser().pipe(
+        //   mapTo(true),
+        //   catchError(_ => {
+        //     this.router.navigate(['login']);
+        //     return of(false);
+        //   })
+        // );
       }
       return true;
     }

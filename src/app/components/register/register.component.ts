@@ -9,9 +9,9 @@ import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { ContactInfo } from '../../models/contact-info.model';
 import { environment } from '../../../environments/environment';
 import { UserRegistration } from '../../models/user-registration.model';
-import { UserControllerService } from '../../services/api/user-controller.service';
+// import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
-import { GeocodeService } from '../../services/geocode.service';
+// import { GeocodeService } from '../../services/geocode.service';
 import { Location } from '../../models/location.model';
 
 /**
@@ -51,7 +51,13 @@ export class RegisterComponent implements OnInit {
    * Import services.
    * @param userService contains various user services.
    */
-  constructor(private http: HttpClient, private router: Router, private zone: NgZone, private userService: UserControllerService, private locationService: GeocodeService) {}
+  constructor(
+    private http: HttpClient, 
+    private router: Router, 
+    private zone: NgZone 
+    // private userService: UserControllerService, 
+    // private locationService: GeocodeService
+    ) {}
 
   /**
    * Initialize variables.
@@ -62,7 +68,7 @@ export class RegisterComponent implements OnInit {
     this.jwks = new Map();
     this.ur = new UserRegistration();
     this.contactInfo = { type: 'Cell Phone', id: null, info: null };
-    this.userService.getAllOffices().subscribe(offices => (this.offices = offices));
+    // this.userService.getAllOffices().subscribe(offices => (this.offices = offices));
     this.contactTypes = ['Cell Phone', 'Email', 'Slack', 'Skype', 'Discord', 'Facebook', 'GroupMe', 'Other'];
     this.http.get<{ keys: { kid: string }[] }>(environment.userUrl + '/.well-known/jwks.json')
       .subscribe(d => d.keys.forEach(k => this.jwks.set(k.kid, KEYUTIL.getKey(k))));
@@ -143,22 +149,22 @@ export class RegisterComponent implements OnInit {
   register() {
     this.populateLocation();
     console.log(this.user);
-    this.userService.createUser(this.user).subscribe(data => {
-      alert(data);
-      console.log(this.user);
-      this.router.navigate(['/landing']);
-    }, error => {
-        alert("There was an error during registration.");
-      }
-    );
+    // this.userService.createUser(this.user).subscribe(data => {
+    //   alert(data);
+    //   console.log(this.user);
+    //   this.router.navigate(['/landing']);
+    // }, error => {
+    //     alert("There was an error during registration.");
+    //   }
+    // );
   }
 
   //Populate user location by finding the latitude and logitude via Maps service. 
   populateLocation() {
-    this.locationService.getlocation(this.user.location).subscribe(data => {
-      console.log(data);
-      this.user.location = data;
-    });
+    // this.locationService.getlocation(this.user.location).subscribe(data => {
+    //   console.log(data);
+    //   this.user.location = data;
+    // });
   }
 }
 
