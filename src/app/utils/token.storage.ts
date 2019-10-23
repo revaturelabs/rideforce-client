@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+// import { AuthService } from '../services/auth.service';
 import { Login } from '../models/login.model';
 import { User } from '../models/user.model';
 
@@ -15,9 +15,11 @@ export class TokenStorage {
    * @ignore
    */
   principal : User;
-  constructor(private auth: AuthService) {
-    auth.principal.subscribe(user => {
-      this.principal = user;});
+  constructor(
+    // private auth: AuthService
+    ) {
+    // auth.principal.subscribe(user => {
+    //   this.principal = user;});
   }
 
   /**
@@ -35,6 +37,7 @@ export class TokenStorage {
    * @returns {string} - the authentication token of the current session
    */
   public getToken(): string {
-    return this.auth.getAuthToken();
+    return null;
+    // return this.auth.getAuthToken();
   }
 }

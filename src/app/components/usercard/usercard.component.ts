@@ -9,8 +9,8 @@ import {
   transition,
   trigger
 } from "@angular/animations";
-import { MatchingControllerService } from "../../services/api/matching-controller.service";
-import { UserControllerService } from "../../services/api/user-controller.service";
+// import { MatchingControllerService } from "../../services/api/matching-controller.service";
+// import { UserControllerService } from "../../services/api/user-controller.service";
 import { Router } from "@angular/router";
 
 /**
@@ -64,8 +64,8 @@ export class UsercardComponent implements OnInit {
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
-    private matchService: MatchingControllerService,
-    private userService: UserControllerService,
+    // private matchService: MatchingControllerService,
+    // private userService: UserControllerService,
     private route: Router
   ) {}
 
@@ -79,36 +79,36 @@ export class UsercardComponent implements OnInit {
     if (sessionStorage.length === 0) {
       this.route.navigate(["/landing"]);
     }
-    this.matchService.getMatches().subscribe(function(users) {
-      console.log(users);
-      for (let u of users) {
-        console.log(u);
-        if (!u.photoUrl || u.photoUrl === "null") {
-          console.log(u.photoUrl);
-          u.photoUrl = "http://semantic-ui.com/images/avatar/large/chris.jpg";
-        }
-        const card: SwipecardModel = {
-          user: u,
-          visible: false
-        };
-        this.swipecards.push(card);
-        // Sets the current swipe card to the first element of the array if the array has something in it.
-        if (this.swipecards.length > 0) {
-          this.currentSwipeCard = this.swipecards[0];
-        }
-      }
-    });
-    this.userService.getCurrentUser().subscribe(data => {
-      console.log("data");
-      this.currentUser = data;
-      console.log(this.currentUser);
-      this.matchService
-        .getMatchingDrivers(this.currentUser.id)
-        .subscribe(users => {
-          console.log(users);
-          this.matchService.updateMatches(users);
-        });
-    });
+    // this.matchService.getMatches().subscribe(function(users) {
+    //   console.log(users);
+    //   for (let u of users) {
+    //     console.log(u);
+    //     if (!u.photoUrl || u.photoUrl === "null") {
+    //       console.log(u.photoUrl);
+    //       u.photoUrl = "http://semantic-ui.com/images/avatar/large/chris.jpg";
+    //     }
+    //     const card: SwipecardModel = {
+    //       user: u,
+    //       visible: false
+    //     };
+    //     this.swipecards.push(card);
+    //     // Sets the current swipe card to the first element of the array if the array has something in it.
+    //     if (this.swipecards.length > 0) {
+    //       this.currentSwipeCard = this.swipecards[0];
+    //     }
+    //   }
+    // });
+    // this.userService.getCurrentUser().subscribe(data => {
+    //   console.log("data");
+    //   this.currentUser = data;
+    //   console.log(this.currentUser);
+    //   this.matchService
+    //     .getMatchingDrivers(this.currentUser.id)
+    //     .subscribe(users => {
+    //       console.log(users);
+    //       this.matchService.updateMatches(users);
+    //     });
+    // });
   }
 
   /**
@@ -133,18 +133,18 @@ export class UsercardComponent implements OnInit {
     if (action === this.SWIPE_ACTION.RIGHT) {
       this.animState = "right";
       this.thumbImg = "assets/icons/thumbsUp.png";
-      this.matchService
-        .unDislikeDriver(
-          this.currentUser.id,
-          this.swipecards[this.currentIndex].user.id
-        )
-        .subscribe();
-      this.matchService
-        .likeDriver(
-          this.currentUser.id,
-          this.swipecards[this.currentIndex].user.id
-        )
-        .subscribe(data => {});
+      // this.matchService
+      //   .unDislikeDriver(
+      //     this.currentUser.id,
+      //     this.swipecards[this.currentIndex].user.id
+      //   )
+      //   .subscribe();
+      // this.matchService
+      //   .likeDriver(
+      //     this.currentUser.id,
+      //     this.swipecards[this.currentIndex].user.id
+      //   )
+      //   .subscribe(data => {});
     }
 
     // swipe left, previous avatar
@@ -153,18 +153,18 @@ export class UsercardComponent implements OnInit {
       this.thumbImg = "assets/icons/thumbsDown.png";
       console.log(this.currentUser.id);
       console.log(this.swipecards[this.currentIndex].user.id);
-      this.matchService
-        .unlikeDriver(
-          this.currentUser.id,
-          this.swipecards[this.currentIndex].user.id
-        )
-        .subscribe();
-      this.matchService
-        .dislikeDriver(
-          this.currentUser.id,
-          this.swipecards[this.currentIndex].user.id
-        )
-        .subscribe(data => {});
+      // this.matchService
+      //   .unlikeDriver(
+      //     this.currentUser.id,
+      //     this.swipecards[this.currentIndex].user.id
+      //   )
+      //   .subscribe();
+      // this.matchService
+      //   .dislikeDriver(
+      //     this.currentUser.id,
+      //     this.swipecards[this.currentIndex].user.id
+      //   )
+      //   .subscribe(data => {});
     }
     this.swipecards.splice(this.currentIndex, 1);
   }

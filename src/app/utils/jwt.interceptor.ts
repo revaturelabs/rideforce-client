@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+// import { AuthService } from '../services/auth.service';
 import { TokenStorage } from './token.storage';
 import { User } from '../models/user.model';
 
@@ -15,10 +15,12 @@ principal: User;
    * Sets up our interceptor for token addition
    * @param tokenStorage - the Service that allows us to access our authentication token
    */
-  constructor(private tokenStorage: TokenStorage, private auth: AuthService) {
-    this.auth.principal.subscribe(p =>{
-      this.principal = p;
-    });
+  constructor(private tokenStorage: TokenStorage 
+    // private auth: AuthService
+    ) {
+    // this.auth.principal.subscribe(p =>{
+    //   this.principal = p;
+    // });
   }
 
   /**
@@ -31,7 +33,8 @@ principal: User;
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     //console.log("inter")
-    const token = this.auth.getAuthToken();
+    // const token = this.auth.getAuthToken();
+    const token = null;
     if (token != null) {
       request = request.clone({
         setHeaders: {

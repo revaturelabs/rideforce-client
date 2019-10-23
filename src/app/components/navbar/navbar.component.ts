@@ -4,9 +4,9 @@ import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { UserControllerService } from '../../services/api/user-controller.service';
-import { DownloadService } from '../../services/download.service';
+// import { AuthService } from '../../services/auth.service';
+// import { UserControllerService } from '../../services/api/user-controller.service';
+// import { DownloadService } from '../../services/download.service';
 import { DomSanitizer } from '@angular/platform-browser';
 /**
  * Hosts the Component that allows users to navigate between components
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   /**
    * Whether the User is logged on or not
    */
-  session: boolean;
+  session: boolean = true;
 
   /**
    * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
@@ -47,9 +47,10 @@ export class NavbarComponent implements OnInit {
    * @param {UserControllerService} userService - Allows User Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
-  constructor(public authService: AuthService,
-    private downloadService: DownloadService,
-    private userService: UserControllerService,
+  constructor(
+    // public authService: AuthService,
+    // private downloadService: DownloadService,
+    // private userService: UserControllerService,
     public DomSanitizationService: DomSanitizer,
     private route: Router) {
     route.events.pipe(filter(e => e instanceof NavigationStart))
@@ -71,21 +72,21 @@ export class NavbarComponent implements OnInit {
   private imageFile: any;
 
   ngOnInit() {
-    this.authService.principal.subscribe(p => {
-      this.principal = p;
-      if (this.principal.id > 0) {
-        this.role = this.principal.role;
-        this.sessionCheck();
-      }
-    });
+    // this.authService.principal.subscribe(p => {
+    //   this.principal = p;
+    //   if (this.principal.id > 0) {
+    //     this.role = this.principal.role;
+    //     this.sessionCheck();
+    //   }
+    // });
   }
 
 downloadFile() {
-    this.downloadService.downloadFile(this.principal.id.toString()).subscribe(resp => {
-      this.createImageFromBlob(resp);
-    }, error => {
-      console.log(error);
-    });
+    // this.downloadService.downloadFile(this.principal.id.toString()).subscribe(resp => {
+    //   this.createImageFromBlob(resp);
+    // }, error => {
+    //   console.log(error);
+    // });
 
   console.log('Download service called');
   //console.log(this.imageFile);
@@ -105,22 +106,22 @@ createImageFromBlob(image: Blob) {
    * Updates session, telling if the user is logged in or not
    */
   sessionCheck() {
-    if (this.principal.id > 0) {
-      this.downloadFile();
-      this.session = true;
-    } else {
-      this.session = false;
-    }
+    // if (this.principal.id > 0) {
+    //   this.downloadFile();
+    //   this.session = true;
+    // } else {
+    //   this.session = false;
+    // }
   }
   /**
    * Sets up the current user
    */
   getCurrentUser() {
-    this.userService.getCurrentUser().subscribe(
-      data => {
-        this.currentUser = data;
-      }
-    );
+    // this.userService.getCurrentUser().subscribe(
+    //   data => {
+    //     this.currentUser = data;
+    //   }
+    // );
   }
 
   /**
@@ -128,10 +129,10 @@ createImageFromBlob(image: Blob) {
    * uses await/async to avoid forcing User to reload manually to see the 'log in' button after log out
    */
   async logout() {
-    this.authService.logout();
+    // this.authService.logout();
     this.principal = new Login();
     this.principal.id = 0;
-    this.authService.changePrincipal(this.principal);
+    // this.authService.changePrincipal(this.principal);
     if (this.route.url === '/landing') {
       location.reload(true);
     } else {

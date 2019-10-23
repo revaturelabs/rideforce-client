@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Office } from '../../models/office.model';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { RegistrationToken } from '../../models/registration-token.model';
-import { UserControllerService } from '../../services/api/user-controller.service';
+// import { UserControllerService } from '../../services/api/user-controller.service';
 
 /**
  * Allows extra features reserved for Administrators
@@ -32,17 +32,19 @@ import { UserControllerService } from '../../services/api/user-controller.servic
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
-   constructor(private userService: UserControllerService, private authService: AuthService, private route: Router) {}
+  constructor(
+    // private userService: UserControllerService, private authService: AuthService, 
+    private route: Router) {}
 
   /**
    * Initialize the component.
    */
    ngOnInit() {
-     if (!this.authService.isTrainer()) {
-       this.route.navigate(['/landing']);
-     }
+    //  if (!this.authService.isTrainer()) {
+    //   //  this.route.navigate(['/landing']);
+    //  }
      this.rtr = new RegistrationToken();
-     this.userService.getAllOffices().subscribe(offices => { this.offices = offices; this.rtr.office = offices[0]; });
+    //  this.userService.getAllOffices().subscribe(offices => { this.offices = offices; this.rtr.office = offices[0]; });
    }
 
   /**
@@ -55,7 +57,7 @@ import { UserControllerService } from '../../services/api/user-controller.servic
      this.invalidDate = true;
      }
      else{
-       this.userService.getRegistrationKey(this.rtr).subscribe(data => this.registrationToken = data);
+      //  this.userService.getRegistrationKey(this.rtr).subscribe(data => this.registrationToken = data);
      this.invalidDate = false;
      }
      this.copyToClipboard = false;

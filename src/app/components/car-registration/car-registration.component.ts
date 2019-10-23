@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Car } from '../../models/car.model';
-import { UserControllerService } from '../../services/api/user-controller.service';
+// import { UserControllerService } from '../../services/api/user-controller.service';
 import { User } from '../../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -51,11 +51,11 @@ import { environment } from '../../../environments/environment';
 
   /**
    * Sets up the Car Registration component with dependencies
-   * @param {UserControllerService} userService - the Service that allows us to manager the user AND the cars available on the system
+  //  * @param {UserControllerService} userService - the Service that allows us to manager the user AND the cars available on the system
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
    constructor(
-     private userService: UserControllerService,
+    //  private userService: UserControllerService,
      private route: Router,
      private http: HttpClient 
      )
@@ -67,61 +67,61 @@ import { environment } from '../../../environments/environment';
    * Makes sure there is a car object available to operate on
    */
    ngOnInit() {
-     this.userService.getCurrentUser().subscribe(e => {
-       this.userObject = e;
-       console.log(e);
-     });
+    //  this.userService.getCurrentUser().subscribe(e => {
+    //    this.userObject = e;
+    //    console.log(e);
+    //  });
      console.log("PRINTING OUT CAR = " + this.userObject.cars[0].match(/\d+/)[0]);
 
-     this.userService.getCarById(Number(this.userObject.cars[0].match(/\d+/)[0])).subscribe(e => {
-       this.car = e;
-       console.log(JSON.stringify(e));
-     });
+    //  this.userService.getCarById(Number(this.userObject.cars[0].match(/\d+/)[0])).subscribe(e => {
+    //    this.car = e;
+    //    console.log(JSON.stringify(e));
+    //  });
      this.success = "";
    }
 
 
    submitAutomobile() {
 
-     this.userService.getCurrentUser().subscribe(e => {
-       this.userObject = e;
-       console.log(e);
+  //    this.userService.getCurrentUser().subscribe(e => {
+  //      this.userObject = e;
+  //      console.log(e);
 
-       console.log(JSON.parse(JSON.stringify(e)));
-       this.carObject.owner = ("/users/" + e.id);
-       this.carObject.make = this.carObjectmake.toUpperCase();
-       this.carObject.model = this.carObjectmodel.toUpperCase();
-       this.carObject.year = this.carObjectyear;
-       this.carObject.color = this.carObjectcolor.toUpperCase();
-       this.carObject.license = this.carObjectlicense.toUpperCase();
+  //      console.log(JSON.parse(JSON.stringify(e)));
+  //      this.carObject.owner = ("/users/" + e.id);
+  //      this.carObject.make = this.carObjectmake.toUpperCase();
+  //      this.carObject.model = this.carObjectmodel.toUpperCase();
+  //      this.carObject.year = this.carObjectyear;
+  //      this.carObject.color = this.carObjectcolor.toUpperCase();
+  //      this.carObject.license = this.carObjectlicense.toUpperCase();
 
-       console.log(this.carObject);
-       console.log(environment.userUrl + e.cars);
+  //      console.log(this.carObject);
+  //      console.log(environment.userUrl + e.cars);
 
 
-       if(e.cars.length == 0) {
-         this.http.post<Car>(environment.userUrl + '/cars/', this.carObject, {observe: 'response'}).subscribe(response => {
-           if(response.status == 201){
-             this.success = "Success";
-             this.route.navigate(['/userProfile']);
-           }
-           else
-             this.success = "Failed";
+  //      if(e.cars.length == 0) {
+  //        this.http.post<Car>(environment.userUrl + '/cars/', this.carObject, {observe: 'response'}).subscribe(response => {
+  //          if(response.status == 201){
+  //            this.success = "Success";
+  //            this.route.navigate(['/userProfile']);
+  //          }
+  //          else
+  //            this.success = "Failed";
 
-         });
-       }
-       else {
-         this.http.put<Car>(environment.userUrl + e.cars, this.carObject, {observe: 'response'}).subscribe(response => {
-           if(response.status == 200){
-             this.success = "Success";
-             this.route.navigate(['/userProfile']);
-           }
-           else
-             this.success = "Failed";
+  //        });
+  //      }
+  //      else {
+  //        this.http.put<Car>(environment.userUrl + e.cars, this.carObject, {observe: 'response'}).subscribe(response => {
+  //          if(response.status == 200){
+  //            this.success = "Success";
+  //            this.route.navigate(['/userProfile']);
+  //          }
+  //          else
+  //            this.success = "Failed";
            
-         });
-       }
-     });
+  //        });
+  //      }
+  //    });
    }
 
  }

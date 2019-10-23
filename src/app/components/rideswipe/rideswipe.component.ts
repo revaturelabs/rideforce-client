@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { Login } from '../../models/login.model';
 import { User } from '../../models/user.model';
 
@@ -21,20 +21,20 @@ export class RideswipeComponent implements OnInit {
    * @param {Router} route - Allows Nav compnent to switch between sub-components
    */
   constructor(
-    private route: Router,
-    private authService :AuthService
+    private route: Router
+    // private authService :AuthService
     ) { }
 
   /**
    * Decides whether to set the view to mobile or not
    */
   ngOnInit() {
-    this.authService.principal.subscribe(user => {
-      this.principal = user
-    if (this.principal.id <1) {
-      this.route.navigate(['/landing']);
-    }
-  });
+  //   this.authService.principal.subscribe(user => {
+  //     this.principal = user
+  //   if (this.principal.id <1) {
+  //     this.route.navigate(['/landing']);
+  //   }
+  // });
     if (window.screen.width <= 430) { // 768px portrait
       this.mobile = true;
     }

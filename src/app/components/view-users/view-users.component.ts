@@ -2,9 +2,9 @@ import { Router } from '@angular/router';
 import { Login } from '../../models/login.model';
 import { Role } from '../../models/role.model';
 import { User } from '../../models/user.model';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { Component, OnInit, Injectable } from '@angular/core';
-import { UserControllerService } from '../../services/api/user-controller.service';
+// import { UserControllerService } from '../../services/api/user-controller.service';
 import { makeAnimationEvent } from '@angular/animations/browser/src/render/shared';
 
 @Component({
@@ -55,7 +55,10 @@ export class ViewUsersComponent implements OnInit {
   accntActive: string;
   accntEmail: string;
 
-  constructor(private userService: UserControllerService, private authService: AuthService, private router: Router) {
+  constructor(
+    // private userService: UserControllerService, 
+    // private authService: AuthService, 
+    private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -64,10 +67,10 @@ export class ViewUsersComponent implements OnInit {
   */
   ngOnInit() {
     console.log('ngOnInit');
-    this.authService.principal.subscribe(user => {
-      this.principal = user;
-      console.log(this.principal);
-    });
+    // this.authService.principal.subscribe(user => {
+    //   this.principal = user;
+    //   console.log(this.principal);
+    // });
 
     console.log('getting users');
     this.getUsers().then(data => {
@@ -81,11 +84,11 @@ export class ViewUsersComponent implements OnInit {
   switchRole() {
     if (this.principal.role === Role.Driver) {
       this.principal.role = Role.Rider;
-      this.authService.changePrincipal(this.principal);
+      // this.authService.changePrincipal(this.principal);
       this.getRole();
     } else if (this.principal.role === Role.Rider) {
       this.principal.role = Role.Driver;
-      this.authService.changePrincipal(this.principal);
+      // this.authService.changePrincipal(this.principal);
       this.getRole();
     } else {
       console.log('nope');
@@ -95,12 +98,12 @@ export class ViewUsersComponent implements OnInit {
   switchState() {
     if (this.principal.active === 'ACTIVE') {
       this.principal.active = 'INACTIVE';
-      this.authService.changePrincipal(this.principal);
+      // this.authService.changePrincipal(this.principal);
       this.getState();
       console.log("swtching to inactive");
     } else if (this.principal.active === 'INACTIVE') {
       this.principal.active = 'ACTIVE';
-      this.authService.changePrincipal(this.principal);
+      // this.authService.changePrincipal(this.principal);
       this.getState();
       console.log("swtching to active");
     } else {
@@ -120,16 +123,17 @@ export class ViewUsersComponent implements OnInit {
     let data;
     console.log('hitting users');
     if (this.principal.role === Role.Admin) {
-      return this.userService.getAllUsers().then((x) => {
-        data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider || y.role === Role.Trainer || y.role === Role.Admin);
-        this.users = data;
-        return data;
-      });
+      // return this.userService.getAllUsers().then((x) => {
+      //   data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider || y.role === Role.Trainer || y.role === Role.Admin);
+      //   this.users = data;
+      //   return data;
+      // });
+      return null;
     } else if (this.principal.role === Role.Trainer) {
-      this.userService.getAllUsers().then((x) => {
-        data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider);
-        this.users = data;
-      });
+      // this.userService.getAllUsers().then((x) => {
+      //   data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider);
+      //   this.users = data;
+      // });
     }
     console.log(data);
   }
@@ -177,7 +181,7 @@ export class ViewUsersComponent implements OnInit {
       this.userStatus = 'ACTIVE';
     }
 
-    this.userService.updateStatus(this.userId, this.userStatus).then();
+    // this.userService.updateStatus(this.userId, this.userStatus).then();
     this.router.navigate(['/viewUsers']);
   }
 
@@ -196,27 +200,27 @@ export class ViewUsersComponent implements OnInit {
 
   makeTrainer() {
     // this.result = window.confirm("Are you sure you want to make this user a trainer?");
-    this.userService.updateRole(this.userId, Role.Trainer).then();
+    // this.userService.updateRole(this.userId, Role.Trainer).then();
     this.router.navigate(['/viewUsers']);
   }
 
 
   makeAdmin() {
     // this.result = window.confirm("Are you sure you want to make this user an admin?");
-    this.userService.updateRole(this.userId, Role.Admin).then();
+    // this.userService.updateRole(this.userId, Role.Admin).then();
     this.router.navigate(['/viewUsers']);
   }
 
   makeDriver() {
     // this.result = window.confirm("This user is now a Driver");
-    this.userService.updateRole(this.userId, Role.Driver).then();
+    // this.userService.updateRole(this.userId, Role.Driver).then();
     this.router.navigate(['/viewUsers']);
   }
 
   makeRider() {
     // this.result = window.confirm("This user is now a Rider.");
     // console.log("Called makeRider");
-    this.userService.updateRole(this.userId, Role.Rider).then();
+    // this.userService.updateRole(this.userId, Role.Rider).then();
     this.router.navigate(['/viewUsers']);
   }
 
