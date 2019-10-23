@@ -5,8 +5,6 @@ import { HowToComponent } from '../components/how-to/how-to.component';
 import { LandingComponent } from '../components/landing/landing.component';
 import { LoginComponent } from '../components/login/login.component';
 import { MapComponent } from '../components/map/map.component';
-import { RideswipeComponent } from '../components/rideswipe/rideswipe.component';
-import { UsercardComponent } from '../components/usercard/usercard.component';
 import { AdminComponent } from '../components/admin/admin.component';
 import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
@@ -29,8 +27,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
   { path: 'register', component: RegisterComponent},
-  { path: 'rideswipe', component: RideswipeComponent },
-  { path: 'userCard', component: UsercardComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent},
