@@ -1,9 +1,6 @@
 import { filter } from 'rxjs/operators';
-import { Login } from '../../models/login.model';
-// import { Role } from '../../models/role.model';
-// import { User } from '../../models/user.model';
-import { User } from '../../models/user';
 import { Role } from '../../models/role';
+import { User } from '../../models/user';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 // import { AuthService } from '../../services/auth.service';
@@ -79,17 +76,6 @@ export class NavbarComponent implements OnInit {
     this.session = !(localStorage.getItem('currentUser').length === 0);
   }
 
-downloadFile() {
-    // this.downloadService.downloadFile(this.principal.id.toString()).subscribe(resp => {
-    //   this.createImageFromBlob(resp);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-  console.log('Download service called');
-  //console.log(this.imageFile);
-}
-
 createImageFromBlob(image: Blob) {
   const reader = new FileReader();
   reader.addEventListener('load', () => {
@@ -161,7 +147,7 @@ createImageFromBlob(image: Blob) {
         .then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
             console.log('User accepted the A2HS prompt');
-        this.isInstallable = false;
+            this.isInstallable = false;
           } else {
             console.log('User dismissed the A2HS prompt');
           }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { Login } from '../../models/login.model';
 import { User } from '../../models/user';
 import { Role } from '../../models/role';
 import { NgForm } from '@angular/forms';
@@ -56,7 +55,7 @@ export class LoginComponent implements OnInit {
 
   /**
    * Sets up the Login compoennt with dependency injection
-   * @param { AuthService} authService - Provides the ability to authenticate the user
+   * @param {AuthService} authService - Provides the ability to authenticate the user
    * @param {Router} route - provides the ability to navigate to landing if user is already logged on
    */
   constructor(
@@ -107,8 +106,6 @@ export class LoginComponent implements OnInit {
       is_active: true
     }
     
-
-
     this.userServ.isLoggedIn = true;
     this.userServ.currentUser = this.currentUser;
     

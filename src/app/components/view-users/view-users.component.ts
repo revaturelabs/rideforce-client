@@ -1,13 +1,7 @@
 import { Router } from '@angular/router';
-import { Login } from '../../models/login.model';
-// import { Role } from '../../models/role.model';
-// import { User } from '../../models/user.model';
 import { Role } from '../../models/role';
 import { User } from '../../models/user';
-// import { AuthService } from '../../services/auth.service';
 import { Component, OnInit, Injectable } from '@angular/core';
-// import { UserControllerService } from '../../services/api/user-controller.service';
-import { makeAnimationEvent } from '@angular/animations/browser/src/render/shared';
 
 @Component({
   selector: 'app-view-users',
@@ -140,7 +134,6 @@ export class ViewUsersComponent implements OnInit {
     // }
     console.log(data);
   }
-
 
   paginate(users: any[], pageSize: number, pageNumber: number) {
     this.currPage = pageNumber;
@@ -289,18 +282,10 @@ export class ViewUsersComponent implements OnInit {
   }
 
   //change state between active/inactive
-  // changeState() {
-    // if (this.accntActive == "") {
-    //   console.log("nothing to change");
-    // }
-    // else if (this.accntActive == "ACTIVE") {
-    //   console.log("making account active");
-    //   this.switchState();
-    // }
-    // else if (this.accntActive == "INACTIVE") {
-    //   console.log("making account inactive");
-    //   this.switchState();
-    // }
-  //   this.updateUserStatus();
-  // }
+  changeState() {
+    if (this.accntActive == "") {
+      console.log("nothing to change");
+    }
+    this.updateUserStatus();
+  }
 }
