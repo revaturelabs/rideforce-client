@@ -181,7 +181,7 @@ export class ViewProfileComponent implements OnInit {
         if(type == value){
           typeId = i+1;
         }
-    });*/
+    });
     
     //The existing model does not match up to the DB config
     let contact_info_obj = {
