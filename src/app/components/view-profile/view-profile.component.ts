@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { Router } from '@angular/router';
 import { Login } from '../../models/login.model';
 import { NgZone } from '@angular/core';
@@ -6,22 +5,12 @@ import { Role } from '../../models/role.model';
 import { User } from '../../models/user';
 import { Location } from '../../models/location';
 import { Component, OnInit } from '@angular/core';
-import { Office } from '../../models/office.model';
-// import { AuthService } from '../../services/auth.service';
-import { ContactInfo } from '../../models/contact-info.model';
-// import { UserControllerService } from '../../services/api/user-controller.service';
-import { Car } from '../../models/car.model';
-import { Link } from '../../models/link.model';
-// import { GeocodeService } from '../../services/geocode.service';
-import { CustomtimePipe } from '../../pipes/customtime.pipe';
 import { HttpClient } from '@angular/common/http';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { ContactType } from 'aws-sdk/clients/route53domains';
 import { NgForm } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
-
-
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -97,14 +86,9 @@ export class ViewProfileComponent implements OnInit {
     // private locationSerivce: GeocodeService,
     private router: Router,
     private http: HttpClient) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
-  /**
-  * Sets up the form with data about the durrent user
-  */
   ngOnInit() {
-
     this.principal = this.userServ.register(null);
 
     this.firstName = this.principal.fname;

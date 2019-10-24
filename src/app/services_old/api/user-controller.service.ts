@@ -4,19 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../../app/models/user';
 import { Observable, of, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { tap, catchError, map } from 'rxjs/operators';
-import { Office } from '../../models/office.model';
-import { Car } from '../../models/car.model';
-import { Link } from '../../models/link.model';
-import { ContactInfo } from '../../models/contact-info.model';
-import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
-import { Login } from '../../models/login.model';
-// import { AuthService } from '../../services/auth.service';
-import { UserRegistration } from '../../models/user-registration.model';
-import { RegistrationToken } from '../../models/registration-token.model';
-import { Role } from '../../models/role';
-import { stringList } from 'aws-sdk/clients/datapipeline';
-import { String } from 'aws-sdk/clients/docdb';
 
 /**
  * Enables multiple components to work with User services on the back-end
@@ -49,8 +36,6 @@ export class UserControllerService {
   /** Holds a list of users (does not appear to be used) */
   private users: User[] = [];
 
-  /** Holds a list of offices (does not appear to be used) */
-  private offices: Office[] = [];
 
   /** Behaves in a manner similar to that of Observables for Users */
   currentUserSubject = new Subject<User>();
