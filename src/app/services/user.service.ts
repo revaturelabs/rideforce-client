@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Role } from '../models/role';
 import { Location } from '../models/location';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -35,58 +36,9 @@ export class UserService {
   // private users: User[] = [];
 
 
-
-
-  register (userVar : User){
-    const role : Role = {
-      rid : 1,
-      rname : "rider"
-    };
-
-    const roles : [Role] = [
-      role
-    ];
-
-    const loc : Location = {
-      lid : 1,
-      address : "123 Cool Street",
-      city : "Morgantown",
-      state : "WV",
-      zip : 26508,
-      longitude : 39.6295,
-      latitude : 79.9559
-    };
-
-    const u : User = {
-      uid : 1,
-      email : "test@testarino.com",
-      password : "password",
-      fname : "Ali",
-      lname : "Hammoud",
-      roles : roles, 
-      location : loc,
-      is_active : true
-    };
-    return u; 
-  };
-
-
-  /**
-   * Gets a single user via the given endpoint and email
-   * @param {string} email - the email of the user to retrieve
-   * @returns {Observable<User>} - the user with the given email
-   */
-  getUserByEmail(email: string): Observable<User> {
-    // Not used yet
-
-    return this.http.get<User>('environment.userUrl' + '/users', {
-      params: { email }
-    });
-  }
-
-  login() {
+  login(user: User) {
     localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-    return this.http.get<User>('enviornment.userUrl' + '/users?email=' + this.currentUser.email);
+    return this.http.post<User>('enviornment.userUrl' + '/users', JSON.stringify(user));
   }
 
   register() {
