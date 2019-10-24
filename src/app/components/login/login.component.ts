@@ -85,6 +85,7 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
+    this.userServ.login();
     // this.currentUser = new User();
     this.currentUser = {
       uid: 1,

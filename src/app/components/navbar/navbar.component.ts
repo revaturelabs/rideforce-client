@@ -1,13 +1,16 @@
 import { filter } from 'rxjs/operators';
 import { Login } from '../../models/login.model';
-import { Role } from '../../models/role.model';
-import { User } from '../../models/user.model';
+// import { Role } from '../../models/role.model';
+// import { User } from '../../models/user.model';
+import { User } from '../../models/user';
+import { Role } from '../../models/role';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 // import { AuthService } from '../../services/auth.service';
 // import { UserControllerService } from '../../services/api/user-controller.service';
 // import { DownloadService } from '../../services/download.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from '../../services/user.service';
 /**
  * Hosts the Component that allows users to navigate between components
  */
@@ -52,7 +55,8 @@ export class NavbarComponent implements OnInit {
     // private downloadService: DownloadService,
     // private userService: UserControllerService,
     public DomSanitizationService: DomSanitizer,
-    private route: Router) {
+    private route: Router,
+    private userServ: UserService) {
     route.events.pipe(filter(e => e instanceof NavigationStart))
       .subscribe(e => this.sessionCheck());
 
@@ -72,13 +76,7 @@ export class NavbarComponent implements OnInit {
   private imageFile: any;
 
   ngOnInit() {
-    // this.authService.principal.subscribe(p => {
-    //   this.principal = p;
-    //   if (this.principal.id > 0) {
-    //     this.role = this.principal.role;
-    //     this.sessionCheck();
-    //   }
-    // });
+    this.session = !(localStorage.getItem('currentUser').length === 0);
   }
 
 downloadFile() {
@@ -129,9 +127,11 @@ createImageFromBlob(image: Blob) {
    * uses await/async to avoid forcing User to reload manually to see the 'log in' button after log out
    */
   async logout() {
+    this.userServ.logout();
     // this.authService.logout();
-    this.principal = new Login();
-    this.principal.id = 0;
+    this.session = false;
+    this.principal = new User();
+    this.principal.uid = 0;
     // this.authService.changePrincipal(this.principal);
     if (this.route.url === '/landing') {
       location.reload(true);
