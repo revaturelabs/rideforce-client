@@ -6,8 +6,8 @@ import { Role } from '../../models/role';
 import { NgForm } from '@angular/forms';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from '../../../environments/environment';
-import { UserControllerService } from '../../services_old/api/user-controller.service';
 import { Observable } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 declare var $: any;
 
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
    */
   constructor(
     // private authService: AuthService,
-    private userController: UserControllerService,
+    private userServ: UserService,
     private route: Router
   ) { }
 
@@ -108,8 +108,8 @@ export class LoginComponent implements OnInit {
     
 
 
-    this.userController.isLoggedIn = true;
-    this.userController.currentUser = this.currentUser;
+    this.userServ.isLoggedIn = true;
+    this.userServ.currentUser = this.currentUser;
     
     if (this.currentUser.uid !== 0) {
       this.route.navigate(['/landing']);
@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
       Use something like this when backend has login controller
     */
 
-    // this.userLogin = this.userController.getUserByEmail(this.userEmail);
+    // this.userLogin = this.userServ.getUserByEmail(this.userEmail);
     // this.userLogin.subscribe(
     //   (resUser) => {
     //     if(this.userPass !== resUser.password) {
