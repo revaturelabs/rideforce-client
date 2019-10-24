@@ -1,4 +1,4 @@
-export class RoleNew {
+export class Role {
     rid: number;
     rname: string;
 }

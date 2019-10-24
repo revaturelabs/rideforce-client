@@ -1,4 +1,4 @@
-export class LocationNew {
+export class Location {
     lid: number;
     address: string;
     city: string;

@@ -5,8 +5,8 @@ import { KJUR, KEYUTIL, RSAKey } from 'jsrsasign';
 import { HttpClient } from '@angular/common/http';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../environments/environment';
-import { UserNew } from '../../models/user';
-import { RoleNew } from '../../models/role';
+import { User } from '../../models/user';
+import { Role } from '../../models/role';
 
 
 /**
@@ -19,7 +19,7 @@ import { RoleNew } from '../../models/role';
   providers: [NgbTabset]
 })
 export class RegisterComponent implements OnInit {
-  user: UserNew;
+  user: User;
 
   /** Password Confirmation Model */
   passwordConfirm: string;
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
    * Initialize variables.
    */
   ngOnInit() {
-    this.user = new UserNew();
+    this.user = new User();
     this.passwordConfirm = "";
     // this.http.get<{ keys: { kid: string }[] }>(environment.userUrl + '/.well-known/jwks.json')
     //   .subscribe(d => d.keys.forEach(k => this.jwks.set(k.kid, KEYUTIL.getKey(k))));
@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
    * Sets the users role.
    * @param role the role to set for the user.
    */
-  onRoleSelect(role: RoleNew) {
+  onRoleSelect(role: Role) {
     console.log(this.user);
     this.user.roles.push(role);
     console.log(this.user);
