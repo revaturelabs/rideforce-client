@@ -6,7 +6,6 @@ import { LoginComponent } from '../components/login/login.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 import { ViewUsersComponent } from '../components/view-users/view-users.component';
 import { RegisterComponent } from '../components/register/register.component';
-import { UsermatchwebComponent } from '../components/usermatchweb/usermatchweb.component';
 
 
 
@@ -23,7 +22,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'userProfile', component: ViewProfileComponent},
-  { path: 'rideswipe', component: UsermatchwebComponent},
   { path: 'viewUsers', component: ViewUsersComponent}
   // { path: 'logout', redirectTo: 'landing' }
 ];

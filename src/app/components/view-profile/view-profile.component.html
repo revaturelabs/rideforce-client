@@ -1,6 +1,5 @@
 <br>
-<div class="form-group row" id="tablecont">
-  <div class="col-5"></div>
+<div class="form-group row" id="tablecont" style="width: 100%; display: flexbox; justify-content: space-evenly">
   <div class="col-lg-4 col-xs-12 extend">
     <ngb-tabset (tabChange)="tabSelect($event)">
 
@@ -194,56 +193,6 @@
               <br>
               <br>
               <br>
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </div>
-      <!-- <div *ngIf="currentRole === 'DRIVER'" label="CAR INFO div"> -->
-      <div label="CAR INFO div">
-        <ngb-tab title="Your Garage" id="3">
-          <ng-template ngbTabContent>
-            <div class="container-fluid">
-              <br>
-              <h2>Car Information:</h2>
-              <br>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <!--<span class="input-group-text" id="basic-addon1">Make</span>-->
-                  <span class="input-group-text" id="basic-addon1"><strong>Make</strong></span>
-                </div>
-                <input class="form-control" value="{{car['make']}}" disabled required>
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><strong>Model</strong></span>
-                </div>
-                <input class="form-control" value="{{car['model']}}" disabled required>
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><strong>Year</strong></span>
-                </div>
-                <input class="form-control" value="{{car['year']}}" disabled required>
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><strong>Color</strong></span>
-                </div>
-                <input class="form-control" value="{{car['color']}}" disabled required>
-              </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><strong>License</strong></span>
-                </div>
-                <input class="form-control" id="basic-addon1" value="{{car['license']}}" disabled required>
-              </div>
-
-              <button class="btn btnEdit" (click)="registerCar()">Update Car <i class='fas fa-car'></i></button>
-
             </div>
           </ng-template>
         </ngb-tab>
