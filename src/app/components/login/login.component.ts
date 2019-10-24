@@ -84,51 +84,26 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
-    this.userServ.login();
-    // this.currentUser = new User();
-    this.currentUser = {
-      uid: 1,
-      email: this.userEmail,
-      password: this.userPass,
-      fname: 'Testfirst',
-      lname: 'Testlast',
-      // roles: [{rid: 1, rname: 'Driver'}],
-      roles: [{rid: 1, rname: 'Rider'}],
-      location: {
-        lid: 1,
-        address: '555 Test Street',
-        city: 'Morgantown',
-        state: 'WV',
-        zip: 55555,
-        longitude: 0,
-        latitude: -1
-      },
-      is_active: true
-    }
-    
-    this.userServ.isLoggedIn = true;
-    this.userServ.currentUser = this.currentUser;
-    
-    if (this.currentUser.uid !== 0) {
-      this.route.navigate(['/landing']);
-    }
-    /*
-      Use something like this when backend has login controller
-    */
+    this.currentUser.email = this.userEmail;
+    this.currentUser.password = this.userPass;
 
-    // this.userLogin = this.userServ.getUserByEmail(this.userEmail);
-    // this.userLogin.subscribe(
-    //   (resUser) => {
-    //     if(this.userPass !== resUser.password) {
-    //       // Incorrect password
-    //     } else {
-    //       this.currentUser = resUser;
-    //     }
-    //   },
-    //   (resErr) => {
-    //     // Possibly email does not exist
-    //   }
-    // )
+    this.userLogin = this.userServ.login(this.currentUser);
+    this.userLogin.subscribe(
+      (resUser) => {
+        if(this.userPass !== resUser.password) {
+          // Incorrect password
+        } else {
+          this.userServ.currentUser = resUser;
+          this.userServ.isLoggedIn = true;
+        }
+      },
+      (resErr) => {
+        // Possibly email does not exist
+      }
+    )
+    // if (this.currentUser.uid !== 0) {
+    //   this.route.navigate(['/landing']);
+    // }
   }
 
   // resetEmail() {
