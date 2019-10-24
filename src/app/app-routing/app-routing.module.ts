@@ -4,8 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HowToComponent } from '../components/how-to/how-to.component';
 import { LandingComponent } from '../components/landing/landing.component';
 import { LoginComponent } from '../components/login/login.component';
-import { MapComponent } from '../components/map/map.component';
-import { CarRegistrationComponent } from '../components/car-registration/car-registration.component';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 import { ViewUsersComponent } from '../components/view-users/view-users.component';
 import { RegisterComponent } from '../components/register/register.component';
@@ -25,9 +23,7 @@ export const routes: Routes = [
   { path: 'howTo', component: HowToComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'map', component: MapComponent },
   { path: 'register', component: RegisterComponent},
-  { path: 'cars', component: CarRegistrationComponent },
   { path: 'userProfile', component: ViewProfileComponent},
   { path: 'rideswipe', component: UsermatchwebComponent},
   { path: 'viewUsers', component: ViewUsersComponent}
