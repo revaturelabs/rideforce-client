@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { Login } from '../../models/login.model';
 import { NgZone } from '@angular/core';
 import { Role } from '../../models/role.model';
-import { User } from '../../models/user.model';
+import { User } from '../../models/user';
+import { Location } from '../../models/location';
 import { Component, OnInit } from '@angular/core';
 import { Office } from '../../models/office.model';
 // import { AuthService } from '../../services/auth.service';
@@ -18,6 +19,7 @@ import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { ContactType } from 'aws-sdk/clients/route53domains';
 import { NgForm } from '@angular/forms';
 import { environment } from '../../../environments/environment';
+import { UserService } from '../../services/user.service';
 
 
 
@@ -63,7 +65,7 @@ export class ViewProfileComponent implements OnInit {
   existingBio: string;
   existingBioStatus: boolean = false;
   principal: User;
-  currentState: string;
+  currentState: boolean;
   /** Holds the list of all users in the system */
   users: any[];
   /** Holds the list of users filtered with search query */
@@ -88,7 +90,8 @@ export class ViewProfileComponent implements OnInit {
    * @param {AuthService} authService - Allows Authentication Services to be utilized
    */
   constructor(
-    // private userService: UserControllerService,
+    private userServ: UserService,
+    //private userService: UserControllerService,
     // private authService: AuthService, 
     private zone: NgZone, 
     // private locationSerivce: GeocodeService,
@@ -102,12 +105,29 @@ export class ViewProfileComponent implements OnInit {
   */
   ngOnInit() {
 
+    this.principal = this.userServ.register(null);
+
+    this.firstName = this.principal.fname;
+    this.lastName = this.principal.lname;
+    this.username = this.principal.email;
+    this.currentState = this.principal.is_active;
+    this._address = this.principal.location.address;
+
+    //TODO: update state selector so it can be grabbed by Angular
+    if(this.currentState){
+
+    }else{
+
+    }
+
+    //this.users.subscribe(user => {})
+
     // this.authService.principal.subscribe(user => {
     //   this.principal = user;
-    //   if (this.principal.id > 0) {
+    //   if (this.principal.uid > 0) {
     //     this.existingBio = this.principal.bio;
-    //     this.firstName = this.principal.firstName;
-    //     this.lastName = this.principal.lastName;
+    //     this.firstName = this.principal.fname;
+    //     this.lastName = this.principal.lname;
     //     this.username = this.principal.email;
     //     this._address = this.principal.location.address;
     //     this.batchEnd = new Date(this.principal.batchEnd).toLocaleDateString();
@@ -149,7 +169,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   sessionCheck() {
-    if (this.principal.id > 0) {
+    if (this.principal.uid > 0) {
       this.session = true;
     } else {
       this.session = false;
@@ -162,10 +182,10 @@ export class ViewProfileComponent implements OnInit {
   getInfoById() {
     //return this.http.get<ContactInfo[]>("http://turtlejr.sps.cuny.edu:5555/contact-info/58");
     console.log("pre");
-    console.log(this.principal.id);
+    console.log(this.principal.uid);
     console.log("post");  
-    console.log(environment.userUrl+"/contact-info/c/"+this.principal.id);
-     this.http.get(environment.userUrl+"/contact-info/c/"+this.principal.id).subscribe(
+    console.log(environment.userUrl+"/contact-info/c/"+this.principal.uid);
+     this.http.get(environment.userUrl+"/contact-info/c/"+this.principal.uid).subscribe(
        response => {
         // console.log(this.contactInfoArray.length)
         this.contactInfoArray = response as ContactInfo[];
@@ -189,7 +209,7 @@ export class ViewProfileComponent implements OnInit {
     let typeId: Number;
 
     let updatedContact: ContactInfo = {
-      id: this.principal.id,
+      id: this.principal.uid,
       type: type,
       info: content
     };
@@ -202,7 +222,7 @@ export class ViewProfileComponent implements OnInit {
     
     //The existing model does not match up to the DB config
     let contact_info_obj = {
-      id: this.principal.id,
+      id: this.principal.uid,
       type: typeId,
       info: content
     }
@@ -248,8 +268,8 @@ export class ViewProfileComponent implements OnInit {
    * Updates the user once he/she is content with the updates
    */
   submitChanges() {
-    this.principal.firstName = this.firstName;
-    this.principal.lastName = this.lastName;
+    this.principal.fname = this.firstName;
+    this.principal.lname = this.lastName;
     // this.principal.address = this.address2;
     // this.principal.startTime = this.startTime(); //Need this, but currently no value
     // this.authService.changePrincipal(this.principal);
@@ -276,7 +296,7 @@ export class ViewProfileComponent implements OnInit {
   /**
    * Enables limited ability to modify the User's role in the system
    */
-  switchRole() {
+  /*switchRole() {
     if (this.principal.role === Role.Driver) {
       this.principal.role = Role.Rider;
       this.getRole();
@@ -286,14 +306,14 @@ export class ViewProfileComponent implements OnInit {
     } else {
       console.log('nope');
     }
-  }
+  }*/
 
   switchState() {
-    if (this.principal.active === 'ACTIVE') {
-      this.principal.active = 'INACTIVE';
+    if (this.principal.is_active == true) {
+      this.principal.is_active = false;
       this.getState();
-    } else if (this.principal.active === 'INACTIVE') {
-      this.principal.active = 'ACTIVE';
+    } else if (this.principal.is_active == false) {
+      this.principal.is_active = true;
       this.getState();
     } else {
       console.log('Invalid State');
@@ -318,12 +338,12 @@ export class ViewProfileComponent implements OnInit {
   /**
    * Sets up the User's current role in the system
    */
-  getRole() {
+  /*getRole() {
     this.currentRole = this.principal.role;
-  }
+  }*/
 
   getState() {
-    this.currentState = this.principal.active;
+    this.currentState = this.principal.is_active;
   }
 
   updatePassword() {
@@ -406,7 +426,7 @@ export class ViewProfileComponent implements OnInit {
    /**
    * Updates the user once he/she is content with the updates
    */
-  submitBioChanges(bioInput: string) {
+  /*submitBioChanges(bioInput: string) {
     document.getElementById('submitBio').style.display = 'none';
     document.getElementById('editBio').style.display = 'inline';
     document.getElementById('aboutYou').setAttribute("disabled","disabled");
@@ -418,7 +438,7 @@ export class ViewProfileComponent implements OnInit {
     //this.router.navigate(['userProfile']);
     console.log("bio " + this.principal.bio);
     // this.userService.updateBio(this.principal.bio);
-  }
+  }*/
 
   changeExistingBioStatus() {
     if (this.existingBioStatus != undefined) {
