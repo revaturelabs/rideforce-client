@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
-import { Login } from '../../models/login.model';
+//import { Login } from '../../models/login';
 import { NgZone } from '@angular/core';
-import { Role } from '../../models/role.model';
+import { Role } from '../../models/role';
 import { User } from '../../models/user';
 import { Location } from '../../models/location';
 import { Component, OnInit } from '@angular/core';
@@ -42,13 +42,13 @@ export class ViewProfileComponent implements OnInit {
   /** The day the User's batch ends*/
   batchEnd: any;
   /** Array of User's contact-info from DB */
-  contactInfoArray: ContactInfo[] = [];
+  //contactInfoArray: ContactInfo[] = [];
   /** Whether the user can make changes (Currently not used) */
   canEdit = false;
   /** List of offices held by the user */
-  officeObjectArray: Office[] = [];
+  //officeObjectArray: Office[] = [];
   /** Current office being examined */
-  officeObject: Office;
+  //officeObject: Office;
   /** User's active state */
   active: string;
   existingBio: string;
@@ -61,10 +61,10 @@ export class ViewProfileComponent implements OnInit {
   filteredUsers: any[];
   /** Holds the list of contact-info items for the currently logged user */
   result: boolean;
-  car: Car;
+  //car: Car;
   location: Location;
   startTime: Date;
-  pipe: CustomtimePipe = new CustomtimePipe();
+  //pipe: CustomtimePipe = new CustomtimePipe();
   /** Pre-constructed list of possible contact-types in DB */
   contactInfoTypes = ["Cell Phone", "Email", "Slack", "Skype", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
   userRoleTypes = ["Driver", "Rider"];
@@ -89,13 +89,24 @@ export class ViewProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.principal = this.userServ.register(null);
+    this.principal = JSON.parse(localStorage.getItem('currentUser'));
+    //this.principal = this.userServ.register();
 
-    this.firstName = this.principal.fname;
-    this.lastName = this.principal.lname;
-    this.username = this.principal.email;
-    this.currentState = this.principal.is_active;
-    this._address = this.principal.location.address;
+    if(this.principal==null){
+      this.firstName = "Error: First Name not found.";
+      this.lastName = "Error: Last Name not found.";
+      this.username = "Error: Username not found.";
+      this.currentState = false;
+      this._address = "Error: Address not found.";
+    }else{
+      this.firstName = this.principal.fname;
+      this.lastName = this.principal.lname;
+      this.username = this.principal.email;
+      this.currentState = this.principal.is_active;
+      this._address = this.principal.location.address;
+    }
+
+    
 
     //TODO: update state selector so it can be grabbed by Angular
     if(this.currentState){
@@ -148,7 +159,7 @@ export class ViewProfileComponent implements OnInit {
 
     this.getOffice();
 
-    console.log(this.officeObject);
+    //console.log(this.officeObject);
     console.log(this.principal);
   }
 
@@ -163,7 +174,7 @@ export class ViewProfileComponent implements OnInit {
   /**
    * Get contact-info for specified user-id
    */
-  getInfoById() {
+  /*getInfoById() {
     //return this.http.get<ContactInfo[]>("http://turtlejr.sps.cuny.edu:5555/contact-info/58");
     console.log("pre");
     console.log(this.principal.uid);
@@ -180,7 +191,7 @@ export class ViewProfileComponent implements OnInit {
         console.log(response);
       });
     //get json array that is for slack and isolate id
-  }
+  }*/
 
 
 /**
@@ -192,17 +203,17 @@ export class ViewProfileComponent implements OnInit {
     console.log(this.contactInfoTypes);
     let typeId: Number;
 
-    let updatedContact: ContactInfo = {
+    /*let updatedContact: ContactInfo = {
       id: this.principal.uid,
       type: type,
       info: content
-    };
-    console.log("PREP'D INFO OBJECT: " + JSON.stringify(updatedContact));
+    };*/
+    /*console.log("PREP'D INFO OBJECT: " + JSON.stringify(updatedContact));
     this.contactInfoTypes.forEach(function (value, i) {
         if(type == value){
           typeId = i+1;
         }
-    });
+    });*/
     
     //The existing model does not match up to the DB config
     let contact_info_obj = {
@@ -236,9 +247,9 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById('switchRoles').removeAttribute('hidden');
     // Had to put this in an if; Page would break if Admin or Trainer clicked edit
     // Since for them, this button didn't exist to make visible
-    if (this.currentRole === Role.Driver || this.currentRole === Role.Rider) {
+    /*if (this.currentRole === Role.Driver || this.currentRole === Role.Rider) {
       document.getElementById('switchStates').removeAttribute('hidden');
-    }
+    }*/
     document.getElementById('edit').style.display = 'none';
     document.getElementById('submit').style.display = 'inline';
     // document.getElementById("batchEnd").setAttribute("type", "date");
@@ -390,7 +401,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   /** Sets up contact information */
-  addContact(): void {
+ /* addContact(): void {
     const contact: ContactInfo = {
       id: null,
       type: null,
@@ -398,7 +409,7 @@ export class ViewProfileComponent implements OnInit {
     };
 
     this.contactInfoArray.push(contact);
-  }
+  }*/
 
   /** Updates the bio info and redirects to userProfile */
   updateBio() {
