@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Login } from '../../models/login.model';
-import { User } from '../../models/user.model';
-// import { AuthService } from '../../services/auth.service';
+// import { Login } from '../../models/login.model';
+import { User } from '../../models/user';
+import { Role } from '../../models/role';
 import { NgForm } from '@angular/forms';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from '../../../environments/environment';
