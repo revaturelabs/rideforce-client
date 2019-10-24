@@ -76,6 +76,8 @@ export class ViewProfileComponent implements OnInit {
   pipe: CustomtimePipe = new CustomtimePipe();
   /** Pre-constructed list of possible contact-types in DB */
   contactInfoTypes = ["Cell Phone", "Email", "Slack", "Skype", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
+  userRoleTypes = ["Driver", "Rider"];
+  userActivityTypes = ["Active", "Inactive"];
 
   session: boolean;
 
@@ -222,6 +224,8 @@ export class ViewProfileComponent implements OnInit {
     // document.getElementById("email").removeAttribute("disabled");
     // document.getElementById("password").removeAttribute("disabled");
     // document.getElementById("confirmPassword").removeAttribute("disabled");
+    document.getElementById('user_role').removeAttribute('disabled');
+    document.getElementById('user_activity').removeAttribute('disabled');
     document.getElementById('address').removeAttribute('disabled');
     //document.getElementById('batchEnd').removeAttribute('disabled');
     //document.getElementById('dayStart').removeAttribute('disabled');

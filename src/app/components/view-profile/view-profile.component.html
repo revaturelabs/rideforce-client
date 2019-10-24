@@ -81,6 +81,28 @@
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Role</span>
+                </div>
+                <select id="user_role" class="browser-default custom-select" #roleType disabled>
+                  <option [value]="type" *ngFor="let type of userRoleTypes">
+                    {{type}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Status</span>
+                  </div>
+                  <select id="user_activity" class="browser-default custom-select" #roleType disabled>
+                    <option [value]="type" *ngFor="let type of userActivityTypes">
+                      {{type}}
+                    </option>
+                  </select>
+                </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Address</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"

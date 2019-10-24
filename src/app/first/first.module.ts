@@ -14,7 +14,7 @@ import { LikesmatchwebComponent } from '../components/likesmatchweb/likesmatchwe
 // import { MatchingControllerService } from '../services/api/matching-controller.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PlacesAutocompleteDirective } from '../directives/places-autocomplete/places-autocomplete.directive';
-import { FavoritesComponent } from '../components/favorites/favorites.component';
+// import { FavoritesComponent } from '../components/favorites/favorites.component';
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { JwtInterceptor } from '../utils/jwt.interceptor';
 import { ErrorInterceptor } from '../utils/error.interceptor';
@@ -32,7 +32,7 @@ import { RegisterComponent } from '../components/register/register.component';
     UsermatchwebComponent,
     LikesmatchwebComponent,
     PlacesAutocompleteDirective,
-    FavoritesComponent,
+    // FavoritesComponent,
     RegisterComponent,
     ViewProfileComponent,
     SearchUsersComponent,
