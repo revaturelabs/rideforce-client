@@ -62,6 +62,77 @@ export class ViewUsersComponent implements OnInit {
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
+    console.log('ngOnInit');
+    // this.authService.principal.subscribe(user => {
+    //   this.principal = user;
+    //   console.log(this.principal);
+    // });
+
+    console.log('getting users');
+    // this.getUsers().then(data => {
+    //   this.users = data;
+    //   this.filterUsers('');
+    // });
+    // this.getRole();
+    // this.getState();
+  }
+
+  // switchRole() {
+    // if (this.principal.roles.length > 0) {
+    //   this.principal.role = Role.Rider;
+    //   // this.authService.changePrincipal(this.principal);
+    //   this.getRole();
+    // } else if (this.principal.role === Role.Rider) {
+    //   // this.principal.role = Role.Driver;
+    //   this.principal.roles = Role.Driver;
+    //   // this.authService.changePrincipal(this.principal);
+    //   this.getRole();
+    // } else {
+    //   console.log('nope');
+    // }
+  // }
+
+  // switchState() {
+  //   if (this.principal.active === 'ACTIVE') {
+  //     this.principal.active = 'INACTIVE';
+  //     // this.authService.changePrincipal(this.principal);
+  //     this.getState();
+  //     console.log("swtching to inactive");
+  //   } else if (this.principal.active === 'INACTIVE') {
+  //     this.principal.active = 'ACTIVE';
+  //     // this.authService.changePrincipal(this.principal);
+  //     this.getState();
+  //     console.log("swtching to active");
+  //   } else {
+  //     console.log('Invalid State');
+  //   }
+  // }
+
+  getRole() {
+    // this.currentRole = this.principal.role;
+  }
+
+  getState() {
+    // this.currentState = this.principal.active;
+  }
+  /** Sets up all users in the system */
+  getUsers() {
+    let data;
+    console.log('hitting users');
+    // if (this.principal.role === Role.Admin) {
+    //   // return this.userService.getAllUsers().then((x) => {
+    //   //   data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider || y.role === Role.Trainer || y.role === Role.Admin);
+    //   //   this.users = data;
+    //   //   return data;
+    //   // });
+    //   return null;
+    // } else if (this.principal.role === Role.Trainer) {
+    //   // this.userService.getAllUsers().then((x) => {
+    //   //   data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider);
+    //   //   this.users = data;
+    //   // });
+    // }
+    console.log(data);
   }
 
   paginate(users: any[], pageSize: number, pageNumber: number) {

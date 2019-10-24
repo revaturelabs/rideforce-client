@@ -7,6 +7,7 @@ import { Router, NavigationStart } from '@angular/router';
 // import { UserControllerService } from '../../services/api/user-controller.service';
 // import { DownloadService } from '../../services/download.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from '../../services/user.service';
 /**
  * Hosts the Component that allows users to navigate between components
  */
@@ -51,7 +52,8 @@ export class NavbarComponent implements OnInit {
     // private downloadService: DownloadService,
     // private userService: UserControllerService,
     public DomSanitizationService: DomSanitizer,
-    private route: Router) {
+    private route: Router,
+    private userServ: UserService) {
     route.events.pipe(filter(e => e instanceof NavigationStart))
       .subscribe(e => this.sessionCheck());
 
@@ -71,6 +73,7 @@ export class NavbarComponent implements OnInit {
   private imageFile: any;
 
   ngOnInit() {
+    this.session = !(localStorage.getItem('currentUser').length === 0);
   }
 
 createImageFromBlob(image: Blob) {
@@ -110,6 +113,12 @@ createImageFromBlob(image: Blob) {
    * uses await/async to avoid forcing User to reload manually to see the 'log in' button after log out
    */
   async logout() {
+    this.userServ.logout();
+    // this.authService.logout();
+    this.session = false;
+    this.principal = new User();
+    this.principal.uid = 0;
+    // this.authService.changePrincipal(this.principal);
     if (this.route.url === '/landing') {
       location.reload(true);
     } else {

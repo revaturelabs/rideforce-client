@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
+import { Role } from '../../models/role';
+import { NgForm } from '@angular/forms';
+import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 declare var $: any;
 
@@ -54,6 +59,8 @@ export class LoginComponent implements OnInit {
    * @param {Router} route - provides the ability to navigate to landing if user is already logged on
    */
   constructor(
+    // private authService: AuthService,
+    private userServ: UserService,
     private route: Router
   ) { }
 
@@ -77,6 +84,7 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
+    this.userServ.login();
     // this.currentUser = new User();
     this.currentUser = {
       uid: 1,
@@ -98,6 +106,9 @@ export class LoginComponent implements OnInit {
       is_active: true
     }
     
+    this.userServ.isLoggedIn = true;
+    this.userServ.currentUser = this.currentUser;
+    
     if (this.currentUser.uid !== 0) {
       this.route.navigate(['/landing']);
     }
@@ -105,7 +116,7 @@ export class LoginComponent implements OnInit {
       Use something like this when backend has login controller
     */
 
-    // this.userLogin = this.userController.getUserByEmail(this.userEmail);
+    // this.userLogin = this.userServ.getUserByEmail(this.userEmail);
     // this.userLogin.subscribe(
     //   (resUser) => {
     //     if(this.userPass !== resUser.password) {
