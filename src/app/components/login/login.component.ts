@@ -6,6 +6,8 @@ import { Role } from '../../models/role';
 import { NgForm } from '@angular/forms';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from '../../../environments/environment';
+import { UserControllerService } from '../../services_old/api/user-controller.service';
+import { Observable } from 'rxjs';
 
 declare var $: any;
 
@@ -19,34 +21,38 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
 
+  
+  /**
+   * code to verifiy forgotten password
+   */
+  // forgotCode: string;
+
+  // sentLink: boolean;
+  // errorLink: boolean;
+
+  /**
+   * The email to resend confirmation link to
+   */
+  // reEmail: string;
+  // principal: User;
+
+  
+
+
   /**
    * The "username" of the user
    */
   userEmail: string;
   /**
-   * code to verifiy forgotten password
+   * The User to log on to
    */
-  forgotCode: string;
-
+  currentUser: User;
+  testLocation: Location;
   /**
    * The password associated with the indended account
    */
   userPass: string;
 
-  sentLink: boolean;
-  errorLink: boolean;
-
-  /**
-   * The email to resend confirmation link to
-   */
-  reEmail: string;
-
-  /**
-   * The User to log on to
-   */
-  currentUser: User;
-
-  principal: User;
 
   /**
    * Sets up the Login compoennt with dependency injection
@@ -55,6 +61,7 @@ export class LoginComponent implements OnInit {
    */
   constructor(
     // private authService: AuthService,
+    private userController: UserControllerService,
     private route: Router
   ) { }
 
@@ -71,104 +78,151 @@ export class LoginComponent implements OnInit {
 
   }
 
+  userLogin : Observable<User>;
+
   /**
    * Gets the parameters from the login fields.
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
-    // this.authService.authenticate(this.userEmail, this.userPass);
-  }
-
-  resetEmail() {
-     // /*debug*/ console.log("in reset");
-    try {
-      var messageLogin = document.getElementById('errorMessageLogin');
-      messageLogin.style.display = "none";
-      const cognitoUser = this.createCognitoUser(this.userEmail);
-
-      // /*debug*/ console.log("aws");
-      cognitoUser.forgotPassword({
-        onSuccess: function (result) {
-          // /*debug*/ console.log('call result:' + result);
-          $("#forgotModal").modal();
-        },
-        onFailure: function (err) {
-           /*debug*/ console.log(err);
-          messageLogin.style.display = 'block';
-          messageLogin.style.color = 'red';
-          switch(err.name){
-            case "UserNotFoundException":{
-              messageLogin.innerHTML = "Email not found.";
-              break;
-            }
-            case "LimitExceededException":{
-              messageLogin.innerHTML = err.message;
-              break;
-            }
-            default:{
-              messageLogin.innerHTML = "ERROR";
-            }
-          }
-
-        }
-      });
-    } catch (err) {
-     // /*debug*/ console.log("catch");
-      var messageLogin = document.getElementById('errorMessageLogin');
-      messageLogin.style.display = 'block';
-      messageLogin.style.color = 'red';
-      messageLogin.innerHTML = "Please enter email.";
-    }
-
-
-  }
-
-
-  resetPassword(form: NgForm) {
-    const cognitoUser = this.createCognitoUser(this.userEmail);
-    cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
-      onSuccess: () => {
-        
-        /*debug*/ console.log("resetPassword(): changed")
-        $("#forgotModal").modal("hide");
-        var messageLogin = document.getElementById('errorMessageLogin');
-        messageLogin.style.display = 'block';
-        messageLogin.style.color = 'green';
-        messageLogin.innerHTML = "Password changed.";
-        this.route.navigateByUrl("/");
-        //$('#forgotModal').modal("close");
+    // this.currentUser = new User();
+    this.currentUser = {
+      uid: 1,
+      email: this.userEmail,
+      password: this.userPass,
+      fname: 'Testfirst',
+      lname: 'Testlast',
+      // roles: [{rid: 1, rname: 'Driver'}],
+      roles: [{rid: 1, rname: 'Rider'}],
+      location: {
+        lid: 1,
+        address: '555 Test Street',
+        city: 'Morgantown',
+        state: 'WV',
+        zip: 55555,
+        longitude: 0,
+        latitude: -1
       },
-      onFailure: err => {
-         /*debug*/ console.log(err);
-        switch (err.name) {
-          case "CodeMismatchException": {
-            let input: any = "";
-            input = document.getElementById("verifyCode");
-            input.value = "";
-            var error = document.getElementById("verifyMsg");
-            form.form.controls["verifyCode"].setErrors({ 'incorrect': true });
-            error.innerHTML = "Invalid Code";
-            break;
-          }
-          default:{
-          }
-        }
-      }
-    });
+      is_active: true
+    }
+    
+
+
+    this.userController.isLoggedIn = true;
+    this.userController.currentUser = this.currentUser;
+    
+    if (this.currentUser.uid !== 0) {
+      this.route.navigate(['/landing']);
+    }
+    /*
+      Use something like this when backend has login controller
+    */
+
+    // this.userLogin = this.userController.getUserByEmail(this.userEmail);
+    // this.userLogin.subscribe(
+    //   (resUser) => {
+    //     if(this.userPass !== resUser.password) {
+    //       // Incorrect password
+    //     } else {
+    //       this.currentUser = resUser;
+    //     }
+    //   },
+    //   (resErr) => {
+    //     // Possibly email does not exist
+    //   }
+    // )
   }
 
+  // resetEmail() {
+  //    // /*debug*/ console.log("in reset");
+  //   try {
+  //     var messageLogin = document.getElementById('errorMessageLogin');
+  //     messageLogin.style.display = "none";
+  //     const cognitoUser = this.createCognitoUser(this.userEmail);
 
-  createCognitoUser(email: string): CognitoUser {
-    const userPool = new CognitoUserPool(environment.cognitoData);
-    const userData = {
-      Username: email,
-      Pool: userPool
-    };
-    const cognitoUser = new CognitoUser(userData);
-    return cognitoUser;
-  }
+  //     // /*debug*/ console.log("aws");
+  //     cognitoUser.forgotPassword({
+  //       onSuccess: function (result) {
+  //         // /*debug*/ console.log('call result:' + result);
+  //         $("#forgotModal").modal();
+  //       },
+  //       onFailure: function (err) {
+  //          /*debug*/ console.log(err);
+  //         messageLogin.style.display = 'block';
+  //         messageLogin.style.color = 'red';
+  //         switch(err.name){
+  //           case "UserNotFoundException":{
+  //             messageLogin.innerHTML = "Email not found.";
+  //             break;
+  //           }
+  //           case "LimitExceededException":{
+  //             messageLogin.innerHTML = err.message;
+  //             break;
+  //           }
+  //           default:{
+  //             messageLogin.innerHTML = "ERROR";
+  //           }
+  //         }
 
-  resendEmail(){
+  //       }
+  //     });
+  //   } catch (err) {
+  //    // /*debug*/ console.log("catch");
+  //     var messageLogin = document.getElementById('errorMessageLogin');
+  //     messageLogin.style.display = 'block';
+  //     messageLogin.style.color = 'red';
+  //     messageLogin.innerHTML = "Please enter email.";
+  //   }
+
+
+  // }
+
+
+  // resetPassword(form: NgForm) {
+  //   const cognitoUser = this.createCognitoUser(this.userEmail);
+  //   cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
+  //     onSuccess: () => {
+        
+  //       /*debug*/ console.log("resetPassword(): changed")
+  //       $("#forgotModal").modal("hide");
+  //       var messageLogin = document.getElementById('errorMessageLogin');
+  //       messageLogin.style.display = 'block';
+  //       messageLogin.style.color = 'green';
+  //       messageLogin.innerHTML = "Password changed.";
+  //       this.route.navigateByUrl("/");
+  //       //$('#forgotModal').modal("close");
+  //     },
+  //     onFailure: err => {
+  //        /*debug*/ console.log(err);
+  //       switch (err.name) {
+  //         case "CodeMismatchException": {
+  //           let input: any = "";
+  //           input = document.getElementById("verifyCode");
+  //           input.value = "";
+  //           var error = document.getElementById("verifyMsg");
+  //           form.form.controls["verifyCode"].setErrors({ 'incorrect': true });
+  //           error.innerHTML = "Invalid Code";
+  //           break;
+  //         }
+  //         default:{
+  //         }
+  //       }
+  //     }
+  //   });
+  // }
+
+
+  // createCognitoUser(email: string): CognitoUser {
+  //   const userPool = new CognitoUserPool(environment.cognitoData);
+  //   const userData = {
+  //     Username: email,
+  //     Pool: userPool
+  //   };
+  //   const cognitoUser = new CognitoUser(userData);
+  //   return cognitoUser;
+  // }
+
+  // resendEmail(){
     // this.authService.resendConfirmation(this.reEmail).subscribe(complete =>{
     //   this.errorLink = false;
     //   this.sentLink = true;
@@ -177,12 +231,12 @@ export class LoginComponent implements OnInit {
     //   this.sentLink = false;
     // });
 
-  }
+  // }
 
-  initModal(){
-    console.log("Initializing modal");
-    this.errorLink = false;
-    this.sentLink = false;
-    this.reEmail = "";
-  }
+  // initModal(){
+  //   console.log("Initializing modal");
+  //   this.errorLink = false;
+  //   this.sentLink = false;
+  //   this.reEmail = "";
+  // }
 }
