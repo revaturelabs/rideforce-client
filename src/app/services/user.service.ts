@@ -23,7 +23,7 @@ export class UserService {
   /** Is the user currently logged in? */
   isLoggedIn: boolean;
   /** Who is the current user of the system? */
-  currentUser?: User;
+  currentUser: User;
 
   /** Holds a list of users (does not appear to be used) */
   // private users: User[] = [];

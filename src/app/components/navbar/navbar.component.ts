@@ -1,7 +1,6 @@
 import { filter } from 'rxjs/operators';
-import { Login } from '../../models/login.model';
-import { Role } from '../../models/role.model';
-import { User } from '../../models/user.model';
+import { Role } from '../../models/role';
+import { User } from '../../models/user';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 // import { AuthService } from '../../services/auth.service';
@@ -72,25 +71,7 @@ export class NavbarComponent implements OnInit {
   private imageFile: any;
 
   ngOnInit() {
-    // this.authService.principal.subscribe(p => {
-    //   this.principal = p;
-    //   if (this.principal.id > 0) {
-    //     this.role = this.principal.role;
-    //     this.sessionCheck();
-    //   }
-    // });
   }
-
-downloadFile() {
-    // this.downloadService.downloadFile(this.principal.id.toString()).subscribe(resp => {
-    //   this.createImageFromBlob(resp);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-  console.log('Download service called');
-  //console.log(this.imageFile);
-}
 
 createImageFromBlob(image: Blob) {
   const reader = new FileReader();
@@ -129,10 +110,6 @@ createImageFromBlob(image: Blob) {
    * uses await/async to avoid forcing User to reload manually to see the 'log in' button after log out
    */
   async logout() {
-    // this.authService.logout();
-    this.principal = new Login();
-    this.principal.id = 0;
-    // this.authService.changePrincipal(this.principal);
     if (this.route.url === '/landing') {
       location.reload(true);
     } else {
@@ -161,7 +138,7 @@ createImageFromBlob(image: Blob) {
         .then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
             console.log('User accepted the A2HS prompt');
-        this.isInstallable = false;
+            this.isInstallable = false;
           } else {
             console.log('User dismissed the A2HS prompt');
           }

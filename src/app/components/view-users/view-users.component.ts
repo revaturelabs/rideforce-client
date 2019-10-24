@@ -1,11 +1,7 @@
 import { Router } from '@angular/router';
-import { Login } from '../../models/login.model';
-import { Role } from '../../models/role.model';
-import { User } from '../../models/user.model';
-// import { AuthService } from '../../services/auth.service';
+import { Role } from '../../models/role';
+import { User } from '../../models/user';
 import { Component, OnInit, Injectable } from '@angular/core';
-// import { UserControllerService } from '../../services/api/user-controller.service';
-import { makeAnimationEvent } from '@angular/animations/browser/src/render/shared';
 
 @Component({
   selector: 'app-view-users',
@@ -66,78 +62,7 @@ export class ViewUsersComponent implements OnInit {
   * Sets up the form with data about the durrent user
   */
   ngOnInit() {
-    console.log('ngOnInit');
-    // this.authService.principal.subscribe(user => {
-    //   this.principal = user;
-    //   console.log(this.principal);
-    // });
-
-    console.log('getting users');
-    this.getUsers().then(data => {
-      this.users = data;
-      this.filterUsers('');
-    });
-    this.getRole();
-    this.getState();
   }
-
-  switchRole() {
-    if (this.principal.role === Role.Driver) {
-      this.principal.role = Role.Rider;
-      // this.authService.changePrincipal(this.principal);
-      this.getRole();
-    } else if (this.principal.role === Role.Rider) {
-      this.principal.role = Role.Driver;
-      // this.authService.changePrincipal(this.principal);
-      this.getRole();
-    } else {
-      console.log('nope');
-    }
-  }
-
-  switchState() {
-    if (this.principal.active === 'ACTIVE') {
-      this.principal.active = 'INACTIVE';
-      // this.authService.changePrincipal(this.principal);
-      this.getState();
-      console.log("swtching to inactive");
-    } else if (this.principal.active === 'INACTIVE') {
-      this.principal.active = 'ACTIVE';
-      // this.authService.changePrincipal(this.principal);
-      this.getState();
-      console.log("swtching to active");
-    } else {
-      console.log('Invalid State');
-    }
-  }
-
-  getRole() {
-    this.currentRole = this.principal.role;
-  }
-
-  getState() {
-    this.currentState = this.principal.active;
-  }
-  /** Sets up all users in the system */
-  getUsers() {
-    let data;
-    console.log('hitting users');
-    if (this.principal.role === Role.Admin) {
-      // return this.userService.getAllUsers().then((x) => {
-      //   data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider || y.role === Role.Trainer || y.role === Role.Admin);
-      //   this.users = data;
-      //   return data;
-      // });
-      return null;
-    } else if (this.principal.role === Role.Trainer) {
-      // this.userService.getAllUsers().then((x) => {
-      //   data = x.filter(y => y.role === Role.Driver || y.role === Role.Rider);
-      //   this.users = data;
-      // });
-    }
-    console.log(data);
-  }
-
 
   paginate(users: any[], pageSize: number, pageNumber: number) {
     this.currPage = pageNumber;
@@ -289,14 +214,6 @@ export class ViewUsersComponent implements OnInit {
   changeState() {
     if (this.accntActive == "") {
       console.log("nothing to change");
-    }
-    else if (this.accntActive == "ACTIVE") {
-      console.log("making account active");
-      this.switchState();
-    }
-    else if (this.accntActive == "INACTIVE") {
-      console.log("making account inactive");
-      this.switchState();
     }
     this.updateUserStatus();
   }

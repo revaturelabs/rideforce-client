@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { Login } from '../../models/login.model';
 import { User } from '../../models/user';
-import { Role } from '../../models/role';
-import { NgForm } from '@angular/forms';
-import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
-import { environment } from '../../../environments/environment';
-import { UserControllerService } from '../../services_old/api/user-controller.service';
 import { Observable } from 'rxjs';
 
 declare var $: any;
@@ -56,12 +50,10 @@ export class LoginComponent implements OnInit {
 
   /**
    * Sets up the Login compoennt with dependency injection
-   * @param { AuthService} authService - Provides the ability to authenticate the user
+   * @param {AuthService} authService - Provides the ability to authenticate the user
    * @param {Router} route - provides the ability to navigate to landing if user is already logged on
    */
   constructor(
-    // private authService: AuthService,
-    private userController: UserControllerService,
     private route: Router
   ) { }
 
@@ -105,11 +97,6 @@ export class LoginComponent implements OnInit {
       },
       is_active: true
     }
-    
-
-
-    this.userController.isLoggedIn = true;
-    this.userController.currentUser = this.currentUser;
     
     if (this.currentUser.uid !== 0) {
       this.route.navigate(['/landing']);

@@ -6,15 +6,12 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../components/login/login.component';
 import { HowToComponent } from '../components/how-to/how-to.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
-import { UsermatchwebComponent } from '../components/usermatchweb/usermatchweb.component';
 // import { UserControllerService } from '../services/api/user-controller.service';
 // import { MapsControllerService } from '../services/api/maps-controller.service';
 // import { MatchingControllerService } from '../services/api/matching-controller.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { FavoritesComponent } from '../components/favorites/favorites.component';
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
-import { JwtInterceptor } from '../utils/jwt.interceptor';
-import { ErrorInterceptor } from '../utils/error.interceptor';
 import { ViewProfileComponent } from '../components/view-profile/view-profile.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ViewUsersComponent } from '../components/view-users/view-users.component';
@@ -25,8 +22,6 @@ import { RegisterComponent } from '../components/register/register.component';
 @NgModule({
   declarations: [
     HowToComponent,
-    UsermatchwebComponent,
-    // FavoritesComponent,
     RegisterComponent,
     ViewProfileComponent,
     SearchUsersComponent,
@@ -57,17 +52,7 @@ import { RegisterComponent } from '../components/register/register.component';
     // UserControllerService,
     // AuthService,
     // MatchingControllerService,
-    GoogleMapsAPIWrapper,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true,
-    },
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [LoginComponent]
 })

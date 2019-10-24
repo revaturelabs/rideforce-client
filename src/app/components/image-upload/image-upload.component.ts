@@ -1,10 +1,9 @@
 import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Login } from '../../models/login.model';
 // import { AuthService } from '../../services/auth.service';
 import { environment } from '../../../environments/environment';
 import bsCustomFileInput from 'bs-custom-file-input';
-import { User } from '../../models/user.model';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-image-upload',
@@ -38,16 +37,15 @@ export class ImageUploadComponent implements OnInit {
 
     onFileUpload() {
       const fd = new FormData();
-      const fileName = `user-${this.principal.id}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
+      const fileName = `user-${this.principal.uid}${this.selectedFile.name.substr(this.selectedFile.name.length - 4)}`;
       console.log("FILENAME    ------ " + fileName);
       fd.append('file', this.selectedFile, fileName);
-      fd.append('user', this.principal.id.toString());
+      fd.append('user', this.principal.uid.toString());
 
       
       
       
       
-      if(this.principal.photoUrl != null){
         const req = new HttpRequest('POST', environment.userUrl + '/storage/uploadFile', fd, { reportProgress: true });
 
         this.http.request(req).subscribe(event => {
@@ -59,21 +57,7 @@ export class ImageUploadComponent implements OnInit {
             document.getElementById('UploadStats').innerHTML = 'Upload Complete!';
           }
         });
-
-      } else {
-   
-        const req = new HttpRequest('POST', environment.userUrl + '/storage/uploadFile', fd, { reportProgress: true });
-
-        this.http.request(req).subscribe(event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            this.imageUploadProgress = Math.round((100 * event.loaded) / event.total) + '%';
-            console.log('Upload Progress: ', this.imageUploadProgress);
-          } else if (event.type === HttpEventType.Response) {
-            // File uploaded
-            document.getElementById('UploadStats').innerHTML = 'Upload Complete!';
-          }
-        });
-      } 
+      
   }
 }
 
