@@ -90,15 +90,14 @@ export class LoginComponent implements OnInit {
     this.userLogin = this.userServ.login(this.currentUser);
     this.userLogin.subscribe(
       (resUser) => {
-        if(this.userPass !== resUser.password) {
-          // Incorrect password
-        } else {
-          this.userServ.currentUser = resUser;
-          this.userServ.isLoggedIn = true;
-        }
+        this.userServ.currentUser = resUser;
+        this.userServ.isLoggedIn = true;
       },
       (resErr) => {
-        // Possibly email does not exist
+        var messageLogin = document.getElementById('errorMessageLogin');
+        messageLogin.style.display = 'block';
+        messageLogin.style.color = 'red';
+        messageLogin.innerHTML = resErr.message;
       }
     )
     // if (this.currentUser.uid !== 0) {
