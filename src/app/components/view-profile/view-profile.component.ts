@@ -1,14 +1,10 @@
 import { Router } from '@angular/router';
-import { Login } from '../../models/login.model';
 import { NgZone } from '@angular/core';
-import { Role } from '../../models/role.model';
 import { User } from '../../models/user';
+import { Role } from '../../models/role';
 import { Location } from '../../models/location';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
-import { ContactType } from 'aws-sdk/clients/route53domains';
-import { NgForm } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 
@@ -41,14 +37,8 @@ export class ViewProfileComponent implements OnInit {
   _address: string;
   /** The day the User's batch ends*/
   batchEnd: any;
-  /** Array of User's contact-info from DB */
-  contactInfoArray: ContactInfo[] = [];
   /** Whether the user can make changes (Currently not used) */
   canEdit = false;
-  /** List of offices held by the user */
-  officeObjectArray: Office[] = [];
-  /** Current office being examined */
-  officeObject: Office;
   /** User's active state */
   active: string;
   existingBio: string;
@@ -61,10 +51,8 @@ export class ViewProfileComponent implements OnInit {
   filteredUsers: any[];
   /** Holds the list of contact-info items for the currently logged user */
   result: boolean;
-  car: Car;
   location: Location;
   startTime: Date;
-  pipe: CustomtimePipe = new CustomtimePipe();
   /** Pre-constructed list of possible contact-types in DB */
   contactInfoTypes = ["Cell Phone", "Email", "Slack", "Skype", "Discord", "Facebook", "GroupMe", "Other", "Venmo"];
   userRoleTypes = ["Driver", "Rider"];
@@ -98,9 +86,9 @@ export class ViewProfileComponent implements OnInit {
     this._address = this.principal.location.address;
 
     //TODO: update state selector so it can be grabbed by Angular
-    if(this.currentState){
+    if(this.currentState) {
 
-    }else{
+    } else {
 
     }
 
@@ -119,14 +107,9 @@ export class ViewProfileComponent implements OnInit {
     //     console.log(this.startTime);
     //     this.getInfoById();
 
-
-    //     //this.getOffice();
-
-
     //     this.getRole();
     //     this.getState();
     //     this.filteredUsers = this.users;
-
 
     //     //loads the first car. done this way because original batch made car-user relationship a 1 to many
     //     //should've been a one to one
@@ -146,9 +129,6 @@ export class ViewProfileComponent implements OnInit {
     //   }
     // });
 
-    this.getOffice();
-
-    console.log(this.officeObject);
     console.log(this.principal);
   }
 
@@ -169,14 +149,8 @@ export class ViewProfileComponent implements OnInit {
     console.log(this.principal.uid);
     console.log("post");  
     console.log(environment.userUrl+"/contact-info/c/"+this.principal.uid);
-     this.http.get(environment.userUrl+"/contact-info/c/"+this.principal.uid).subscribe(
-       response => {
-        // console.log(this.contactInfoArray.length)
-        this.contactInfoArray = response as ContactInfo[];
-        console.log("CONTACT INFO ARRAY: " + this.contactInfoArray);
-        this.contactInfoArray.forEach(function (element) {
-          console.log(element.type);
-        });
+    this.http.get(environment.userUrl+"/contact-info/c/"+this.principal.uid).subscribe(
+      response => {
         console.log(response);
       });
     //get json array that is for slack and isolate id
@@ -192,12 +166,6 @@ export class ViewProfileComponent implements OnInit {
     console.log(this.contactInfoTypes);
     let typeId: Number;
 
-    let updatedContact: ContactInfo = {
-      id: this.principal.uid,
-      type: type,
-      info: content
-    };
-    console.log("PREP'D INFO OBJECT: " + JSON.stringify(updatedContact));
     this.contactInfoTypes.forEach(function (value, i) {
         if(type == value){
           typeId = i+1;
@@ -236,9 +204,6 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById('switchRoles').removeAttribute('hidden');
     // Had to put this in an if; Page would break if Admin or Trainer clicked edit
     // Since for them, this button didn't exist to make visible
-    if (this.currentRole === Role.Driver || this.currentRole === Role.Rider) {
-      document.getElementById('switchStates').removeAttribute('hidden');
-    }
     document.getElementById('edit').style.display = 'none';
     document.getElementById('submit').style.display = 'inline';
     // document.getElementById("batchEnd").setAttribute("type", "date");
@@ -260,37 +225,12 @@ export class ViewProfileComponent implements OnInit {
     // this.userService.update().then();
     // this.authService.changePrincipal(this.principal);
     // debug console.log("routing");
-    this.updatePassword();
     this.router.navigate(['userProfile']);
   }
 
   onAddressSelect(address: string) {
     this.zone.run(() => (this.principal.location.address = address));
-    this.populateLocation();
   }
-
-  //Populate user location by finding the latitude and logitude via Maps service. 
-  populateLocation() {
-    // this.locationSerivce.getlocation(this.principal.location).subscribe(data => {
-    //   console.log(data);
-    //   this.principal.location = data;
-    // });
-  }
-
-  /**
-   * Enables limited ability to modify the User's role in the system
-   */
-  /*switchRole() {
-    if (this.principal.role === Role.Driver) {
-      this.principal.role = Role.Rider;
-      this.getRole();
-    } else if (this.principal.role === Role.Rider) {
-      this.principal.role = Role.Driver;
-      this.getRole();
-    } else {
-      console.log('nope');
-    }
-  }*/
 
   switchState() {
     if (this.principal.is_active == true) {
@@ -304,38 +244,8 @@ export class ViewProfileComponent implements OnInit {
     }
   }
 
-  /**
-   * Gets the list of offices from the database
-   */
-  getOffices() {
-    // this.userService.getAllOffices().subscribe(data => {
-    //   this.officeObjectArray = data;
-    // });
-  }
-
-  getOffice() {
-    // this.userService.getOfficeByLink(this.principal.office).subscribe(data => {
-    //   this.officeObject = data;
-    // });
-  }
-
-  /**
-   * Sets up the User's current role in the system
-   */
-  /*getRole() {
-    this.currentRole = this.principal.role;
-  }*/
-
   getState() {
     this.currentState = this.principal.is_active;
-  }
-
-  updatePassword() {
-    // this.userService.updatePassword(this.principal.email, this.oldPassword, this.password).subscribe();
-  }
-
-  editPassword(){
-    
   }
 
   updateUserStatus(id: number, active: string) {
@@ -389,108 +299,11 @@ export class ViewProfileComponent implements OnInit {
 
   }
 
-  /** Sets up contact information */
-  addContact(): void {
-    const contact: ContactInfo = {
-      id: null,
-      type: null,
-      info: null
-    };
-
-    this.contactInfoArray.push(contact);
-  }
-
   /** Updates the bio info and redirects to userProfile */
   updateBio() {
     document.getElementById('aboutYou').removeAttribute('disabled');
     document.getElementById('editBio').style.display = 'none';
     document.getElementById('submitBio').style.display = 'inline';
   }
-
-   /**
-   * Updates the user once he/she is content with the updates
-   */
-  /*submitBioChanges(bioInput: string) {
-    document.getElementById('submitBio').style.display = 'none';
-    document.getElementById('editBio').style.display = 'inline';
-    document.getElementById('aboutYou').setAttribute("disabled","disabled");
-    // this.userService.updateBio(bioInput);
-    this.principal.bio = bioInput;
-    this.existingBio = this.principal.bio;
-    // this.authService.changePrincipal(this.principal);
-    this.existingBio = bioInput;
-    //this.router.navigate(['userProfile']);
-    console.log("bio " + this.principal.bio);
-    // this.userService.updateBio(this.principal.bio);
-  }*/
-
-  changeExistingBioStatus() {
-    if (this.existingBioStatus != undefined) {
-      this.existingBioStatus = true;
-    }
-  }
-
-  registerCar() {
-    console.log("going to register car");
-    this.router.navigate(['/cars']);
-  }
-  //imported from login component
-  resetEmail() {
-    // /*debug*/ console.log("in reset");
-    try {
-      const cognitoUser = this.createCognitoUser(this.username);
-
-      // /*debug*/ console.log("resetEmail() try block");
-      cognitoUser.forgotPassword({
-        onSuccess: function (result) {
-          console.log('Email Sent!');
-          // /*debug*/ console.log('call result:' + result);
-
-        },
-        onFailure: function (err) {
-        /*debug*/ console.log(err);
-         console.log('Failed inner!')
-        }
-      });
-    } catch (err) {
-      console.log('Failed first try!');
-    }
-  }
-
-  createCognitoUser(email: string): CognitoUser {
-    const userPool = new CognitoUserPool(environment.cognitoData);
-    const userData = {
-      Username: email,
-      Pool: userPool
-    };
-    const cognitoUser = new CognitoUser(userData);
-    return cognitoUser;
-  }
-  resetPassword(form: NgForm) {
-    const cognitoUser = this.createCognitoUser(this.username);
-    cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
-      onSuccess: () => {
-          /*debug*/ console.log("ResetPassword(): changed")
-          alert("Password changed successfully!");
-          this.router.navigateByUrl("/landing");
-
-      },
-      onFailure: err => {
-        /*debug*/ console.log(err);
-        switch (err.name) {
-          case "CodeMismatchException": {
-            let input: any = "";
-            input = document.getElementById("verifyCode");
-            input.value = "";
-            var error = document.getElementById("verifyMsg");
-            form.form.controls["verifyCode"].setErrors({ 'incorrect': true });
-            error.innerHTML = "Invalid Code";
-            break;
-          }
-          default: {
-          }
-        }
-      }
-    });
-  }
+  
 }
