@@ -1,18 +1,13 @@
 import { Router } from '@angular/router';
-import { Role } from '../../models/role.model';
 import { ViewChild, NgZone } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { KJUR, KEYUTIL, RSAKey } from 'jsrsasign';
 import { HttpClient } from '@angular/common/http';
-import { Office } from '../../models/office.model';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
-import { ContactInfo } from '../../models/contact-info.model';
 import { environment } from '../../../environments/environment';
-import { UserRegistration } from '../../models/user-registration.model';
-// import { UserControllerService } from '../../services/api/user-controller.service';
-import { User } from '../../models/user.model';
-// import { GeocodeService } from '../../services/geocode.service';
-import { Location } from '../../models/location.model';
+import { UserNew } from '../../models/user';
+import { RoleNew } from '../../models/role';
+
 
 /**
  * Used for new user registration.
@@ -24,25 +19,10 @@ import { Location } from '../../models/location.model';
   providers: [NgbTabset]
 })
 export class RegisterComponent implements OnInit {
+  user: UserNew;
 
-  user: User = new User();
-
-  /** User Roles */
-  roles = Role;
-  /** Current Office */
-  office: Office;
-  /** Office Locations */
-  offices: Office[];
-  /** Possible Contact Types */
-  contactTypes: string[];
   /** Password Confirmation Model */
   passwordConfirm: string;
-  /** Contact Info Model */
-  contactInfo: ContactInfo;
-  /** Map containing JWK's */
-  jwks: Map<String, RSAKey>;
-  /** User Registration Info Model */
-  ur: UserRegistration;
   /** Tabset Object */
   @ViewChild(NgbTabset) private tabset: NgbTabset;
 
@@ -63,64 +43,30 @@ export class RegisterComponent implements OnInit {
    * Initialize variables.
    */
   ngOnInit() {
-    this.user.location = new Location;
-
-    this.jwks = new Map();
-    this.ur = new UserRegistration();
-    this.contactInfo = { type: 'Cell Phone', id: null, info: null };
-    // this.userService.getAllOffices().subscribe(offices => (this.offices = offices));
-    this.contactTypes = ['Cell Phone', 'Email', 'Slack', 'Skype', 'Discord', 'Facebook', 'GroupMe', 'Other'];
-    this.http.get<{ keys: { kid: string }[] }>(environment.userUrl + '/.well-known/jwks.json')
-      .subscribe(d => d.keys.forEach(k => this.jwks.set(k.kid, KEYUTIL.getKey(k))));
+    this.user = new UserNew();
+    this.passwordConfirm = "";
+    // this.http.get<{ keys: { kid: string }[] }>(environment.userUrl + '/.well-known/jwks.json')
+    //   .subscribe(d => d.keys.forEach(k => this.jwks.set(k.kid, KEYUTIL.getKey(k))));
   }
 
-  /**
-   * Checks if the provided registration token is valid and updates the user with its data.
-   */
-  validateToken() {
-    try {
-      // Parse the token
-      const parsedToken = KJUR.jws.JWS.parse(this.user.registrationToken);
-      // Attempt to verify the token
-      if (KJUR.jws.JWS.verifyJWT(this.user.registrationToken, this.jwks.get(parsedToken.headerObj.kid), { alg: [`${parsedToken.headerObj.alg}`] })) {
-        // Set the office based on the token data
-        this.offices.filter(o => o.id === parsedToken.payloadObj.oid)
-          .forEach(o => {
-            this.office = o;
-            this.user.office = '/offices/' + this.office.id;
-          });
-        console.log(parsedToken);
-        // Set the batch end date based on the token data
-        this.user.batchEnd = new Date(parsedToken.payloadObj.bed * 1000).toISOString().split('T')[0];
-      } else {
-        throw new Error('Token not valid');
-      }
-    } catch (err) {
-      console.log(err);
-      // Token is invalid, reset values
-      this.office = null;
-      this.user.office = null;
-      this.user.batchEnd = null;
-    }
-  }
-
-  /**
-   * Adds contact into to the current user.
-   */
-  addContactInfo() {
-    this.ur.user.contactInfo.push(this.contactInfo);
-    this.contactInfo = { type: 'Cell Phone', id: null, info: null };
+  validateEmail() {
+    // for (let i = 0; i < this.user.email.length; i++) {
+    //   if (this.user.email[i] === '@') {
+        // return (this.user.email.substr(i, this.user.email.length-i) === "revature.com");
+    //   }
+    // }
+    return (this.user.email === "^[a-zA-Z0-9_.+!%#$&'*?^{|}`~-]+@?(revature)\.com$");
   }
 
   /**
    * Sets the users role.
    * @param role the role to set for the user.
    */
-  onRoleSelect(role: Role) {
+  onRoleSelect(role: RoleNew) {
     console.log(this.user);
-    this.user.role = role;
+    this.user.roles.push(role);
     console.log(this.user);
-    console.log(this.user.role);
+    console.log(this.user.roles);
   }
 
   /**

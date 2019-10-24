@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Login } from '../../models/login.model';
-import { User } from '../../models/user.model';
-// import { AuthService } from '../../services/auth.service';
+// import { Login } from '../../models/login.model';
+import { UserNew } from '../../models/user';
+import { RoleNew } from '../../models/role';
 import { NgForm } from '@angular/forms';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from '../../../environments/environment';
@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
   /**
    * The User to log on to
    */
-  currentUser: User;
+  currentUser: UserNew;
 
-  principal: User;
+  principal: UserNew;
 
   /**
    * Sets up the Login compoennt with dependency injection
