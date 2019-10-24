@@ -5,17 +5,23 @@ import { User } from '../models/user';
 import { Role } from '../models/role';
 import { Location } from '../models/location';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-   /**
+  /**
+   * use headers in http calls to circumvent 
+   */
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'x-rapidapi-host': 'omgvamp-hearthstone-v1.p.rapidapi.com',
+    'x-rapidapi-key': '87de82526cmshe4c5e6d4b8edcedp126831jsn193b85d91e9b'
+  });
+  /**
    * Sets up the User Service via the Injection of the HttpClient
    * @param {HttpClient} http - Allows service to communicate with the server via HTTP requests
    */
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   /** to be used with the url provided by back end */
   private url = '';
@@ -76,6 +82,23 @@ export class UserService {
     return this.http.get<User>('environment.userUrl' + '/users', {
       params: { email }
     });
+  }
+
+  login() {
+    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    return this.http.get<User>('enviornment.userUrl' + '/users?email=' + this.currentUser.email);
+  }
+
+  register() {
+    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    return this.http.post<User>('enviornment.userUrl' + '/users', this.currentUser);
+  }
+
+  logout() {
+    localStorage.setItem('currentUser', '');
+    this.currentUser = null;
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 
 }
