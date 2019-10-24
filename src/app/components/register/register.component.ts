@@ -7,6 +7,7 @@ import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../environments/environment';
 import { User } from '../../models/user';
 import { Role } from '../../models/role';
+import { Location } from '../../models/location';
 
 
 /**
@@ -19,7 +20,18 @@ import { Role } from '../../models/role';
   providers: [NgbTabset]
 })
 export class RegisterComponent implements OnInit {
+  //this saves the user info that is typed in
   user: User;
+  //this saves the location info that is typed in
+  loc: Location = {
+    lid : null,
+    address : null,
+    city : null,
+    state : null,
+    zip : null,
+    longitude : null,
+    latitude : null
+  }
 
   /** Password Confirmation Model */
   passwordConfirm: string;
@@ -60,23 +72,53 @@ export class RegisterComponent implements OnInit {
 
   /**
    * Sets the users role.
-   * @param role the role to set for the user.
    */
-  onRoleSelect(role: Role) {
-    console.log(this.user);
-    this.user.roles.push(role);
-    console.log(this.user);
+  setRole(roleIn : string) {
+    //if no role has been selected
+    if (this.user.roles == undefined) {
+      this.user.roles = [];
+      this.user.roles.push({rid: 0, rname: roleIn});  //roleIn will either be 'rider' or 'driver'
+      document.getElementById(roleIn + "").style.backgroundColor = "lightblue";
+    }
+    else {
+      let index = null; //if the user has already selected a role, this index will represent where it is in the 'roles' array
+      for (let i in this.user.roles) {
+        if (this.user.roles[i].rname === roleIn) {
+          index = i;
+        }
+      }
+      if (index != null) {  //if the user has deselected a role
+        this.user.roles.splice(index, 1); //remove the role from the roles array
+        document.getElementById(roleIn + "").style.backgroundColor = "white";
+
+      }
+      else {  //the user has selected a second role
+        this.user.roles.push({rid: 0, rname: roleIn});
+        document.getElementById(roleIn + "").style.backgroundColor = "lightblue";
+
+      }
+    }
     console.log(this.user.roles);
   }
 
-  /**
-   * Sets the users address.
-   * @param address the address to set for the user.
-   */
-  onAddressSelect(address: string) {
-    this.zone.run(() => (this.user.location.address = address));
-    this.populateLocation();
+  getRoles() {
+    if (this.user.roles == undefined || this.user.roles.length == 0) {
+      return "";
+    }
+    else if (this.user.roles.length == 1) {
+      if (this.user.roles[0].rname === 'rider') {
+        return "Rider";
+      }
+      else if (this.user.roles[0].rname === 'driver') {
+        return "Driver";
+      }
+    }
+    else if (this.user.roles.length == 2) {
+      return "Rider, Driver";
+    }
   }
+  
+
 
   /**
    * Changes from the current tab to the desired one.
@@ -93,7 +135,6 @@ export class RegisterComponent implements OnInit {
 
  //Register new user with Cognito in server-side application. 
   register() {
-    this.populateLocation();
     console.log(this.user);
     // this.userService.createUser(this.user).subscribe(data => {
     //   alert(data);
@@ -105,13 +146,6 @@ export class RegisterComponent implements OnInit {
     // );
   }
 
-  //Populate user location by finding the latitude and logitude via Maps service. 
-  populateLocation() {
-    // this.locationService.getlocation(this.user.location).subscribe(data => {
-    //   console.log(data);
-    //   this.user.location = data;
-    // });
-  }
 }
 
 

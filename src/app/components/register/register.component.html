@@ -29,14 +29,35 @@
               <!-- Email Input -->
               <div class="form-group">
                 <label for="email">Email</label>
-                <input [ngClass]="{ 'is-invalid': e.invalid && (e.dirty || e.touched), 'is-valid': e.valid }" #e="ngModel" pattern="[a-zA-z0-9\.]+@[a-zA-z0-9]+\.[a-zA-z0-9.]+" [(ngModel)]="user.email" type="text" class="form-control" name="email" id="email" placeholder="john.doe@example.com" required/>
+                <input [ngClass]="{ 'is-invalid': e.invalid && (e.dirty || e.touched), 'is-valid': e.valid }" #e="ngModel" pattern="^[a-zA-Z0-9_.+!%#$&'*?^{|}`~-]+@?(revature)\.com$" [(ngModel)]="user.email" type="text" class="form-control" name="email" id="email" placeholder="john.doe@example.com" required/>
                 <div *ngIf="!!e?.errors?.required" class="invalid-feedback">Email cannot be empty.</div>
                 <div *ngIf="!!e?.errors?.pattern" class="invalid-feedback">Email must be a valid email.</div>
               </div>
               <!-- Address Input -->
               <div class="form-group">
                 <label for="address">Address</label>
-                <input [(ngModel)]="user.location" (addressSelect)="onAddressSelect($event)" type="text" class="form-control" name="address" id="address" placeholder="Your Address" appPlacesAutocomplete required/>
+                <input [(ngModel)]="loc.address" type="text" class="form-control" name="address" id="address" placeholder="Your Address" appPlacesAutocomplete required/>
+              </div>
+              <!-- City Input -->
+              <div class="form-group">
+                <label for="city">City</label>
+                <input [(ngModel)]="loc.city" type="text" class="form-control" name="city" id="city" placeholder="Your City" appPlacesAutocomplete required/>
+              </div>
+              <!-- State Input -->
+              <div class="form-group">
+                <label for="state">State</label>
+                <input [(ngModel)]="loc.state" type="text" class="form-control" name="state" id="state" placeholder="Your State" appPlacesAutocomplete required/>
+              </div>
+              <!-- Zip Code Input -->
+              <div class="form-group">
+                <label for="zip">Zip Code</label>
+                <input [(ngModel)]="loc.zip" type="number" class="form-control" name="zip" id="zip" placeholder="Your Zip Code" appPlacesAutocomplete required/>
+              </div>
+              <!-- Role Selection -->
+              <label>Role</label>
+              <div class="btn-group w-100 mb-3" role="group">
+                <button type="button" class="btn" id="rider" (click)="setRole('rider')">Rider</button>
+                <button type="button" class="btn" id="driver" (click)="setRole('driver')">Driver</button>
               </div>
               <!-- Password Input -->
               <div class="form-row">
@@ -70,94 +91,37 @@
             </form>
           </ng-template>
         </ngb-tab>
-        <ngb-tab title="Profile" id="tab2" [disabled]="true">
-          <!-- Tab 2 Content -->
-          <ng-template ngbTabContent>
-            <br />
-            <!-- Bio Input -->
-            <div class="form-group">
-              <label for="aboutYou">Bio</label>
-              <textarea [(ngModel)]="user.bio" class="form-control" name="aboutYou" id="aboutYou" placeholder="Tell me about yourself." required></textarea>
-            </div>
-            <!-- Role Selection -->
-            <label>Role</label>
-            <div class="btn-group w-100 mb-3" role="group">
-              <button type="button" class="btn" [ngClass]="user.role === roles.Rider ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Rider)">Rider</button>
-              <button type="button" class="btn" [ngClass]="user.role === roles.Driver ? 'btn-secondary' : 'btn-outline-secondary'" (click)="onRoleSelect(roles.Driver)">Driver</button>
-            </div>
-            <!--
 
-             Contact Info Input - Removed because the improper HATEOAS implementation
-             prevents this from ever bing possible. Hopefully the next batch can properly
-             implement it. To help you guys out, the reason this doesnt work is because the
-             server expects the contactInfo array to be a array of contactInfo links
-             (eg /contact-info/{id}) and not contactInfo objects. But how can you create
-             contactInfo objects without having a user? You cant! Good Luck!
-
-            <label>Contact Info</label>
-            <div class="input-group">
-              <select [(ngModel)]="contactInfo.type" name="contactTypes" id="contactTypes" class="form-control">
-                <option *ngFor="let item of contactTypes">{{ item }}</option>
-              </select>
-              <input type="text" class="form-control" [(ngModel)]="contactInfo.info" />
-              <div class="input-group-append"><button class="btn btn-primary" type="button" (click)="addContactInfo()" [disabled]="!contactInfo.info">Add Contact Info</button></div>
-            </div>
-            -->
-
-            <!-- Contact Info Display -->
-            <ul class="list-group">
-              <li *ngFor="let item of user.contactInfo" class="list-group-item d-flex justify-content-between align-items-center">
-                {{ item.info }} <span class="badge badge-primary badge-pill">{{ item.type }}</span>
-              </li>
-            </ul>
-            <br />
-            <button class="btn btn-primary float-left" (click)="changeTab('tab1')">Previous</button>
-            <button class="btn btn-primary float-right" (click)="changeTab('tab3')">Next</button>
-          </ng-template>
-        </ngb-tab>
-        <ngb-tab title="Review" id="tab3" [disabled]="true">
+        <ngb-tab title="Review" id="tab2" [disabled]="true">
           <!-- Tab 3 Content -->
           <ng-template ngbTabContent>
             <!-- Display Gathered Data -->
             <br />
             <dl class="row">
               <dt class="col-sm-4">Name:</dt>
-              <dd class="col-sm-8">{{ user.firstName }} {{ user.lastName }}</dd>
+              <dd class="col-sm-8">{{ user.fname }} {{ user.lname }}</dd>
 
               <dt class="col-sm-4">Email:</dt>
-              <dd class="col-sm-8" pattern="^[a-zA-Z0-9_.+!%#$&'*?^{|}`~-]+@?(revature)\.com$">{{ user.email }}</dd>
+              <dd class="col-sm-8" >{{ user.email }}</dd>
 
               <dt class="col-sm-4">Address:</dt>
-              <dd class="col-sm-8">{{ user.location.address }}</dd>
+              <dd class="col-sm-8">{{ loc.address }}</dd>
+
+              <dt class="col-sm-4">City:</dt>
+              <dd class="col-sm-8">{{ loc.city }}</dd>
+
+              <dt class="col-sm-4">State:</dt>
+              <dd class="col-sm-8">{{ loc.state }}</dd>
+
+              <dt class="col-sm-4">Zip Code:</dt>
+              <dd class="col-sm-8">{{ loc.zip }}</dd>
 
               <dt class="col-sm-4">Role:</dt>
-              <dd class="col-sm-8">{{ user.role }}</dd>
+              <dd class="col-sm-8">{{ getRoles() }}</dd>
 
-              <dt class="col-sm-4">Day Start:</dt>
-              <dd class="col-sm-8">{{ user.startTime }}</dd>
 
-              <dt class="col-sm-4">Batch End Date:</dt>
-              <dd class="col-sm-8">{{ user.batchEnd | date }}</dd>
-
-              <dt class="col-sm-4" *ngIf="office">Office Location:</dt>
-              <dd class="col-sm-8" *ngIf="office">
-                {{ office.name }} <br />
-                {{ office.address }}
-              </dd>
-
-              <dt class="col-sm-4">Bio:</dt>
-              <dd class="col-sm-8">{{ user.bio }}</dd>
-              <!--
-              <dt class="col-sm-4">Contact Info:</dt>
-              <dd class="col-sm-8">
-                <dl class="row" *ngFor="let item of ur.user.contactInfo">
-                  <dt class="col-sm-3">{{ item.type }}:</dt>
-                  <dd class="col-sm-9">{{ item.info }}</dd>
-                </dl>
-              </dd>
-              -->
             </dl>
-            <button class="btn btn-primary float-left" (click)="changeTab('tab2')">Previous</button>
+            <button class="btn btn-primary float-left" (click)="changeTab('tab1')">Previous</button>
             <button class="btn btn-primary float-right" (click)="register()">Register</button>
           </ng-template>
         </ngb-tab>
