@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { RideswipeComponent } from '../components/rideswipe/rideswipe.component';
 import { LoginComponent } from '../components/login/login.component';
-import { UsercardComponent } from '../components/usercard/usercard.component';
 import { HowToComponent } from '../components/how-to/how-to.component';
 import { MapComponent } from '../components/map/map.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
@@ -32,8 +30,6 @@ import { RegisterComponent } from '../components/register/register.component';
 
 @NgModule({
   declarations: [
-    RideswipeComponent,
-    UsercardComponent,
     HowToComponent,
     MapComponent,
     LikesComponent,
