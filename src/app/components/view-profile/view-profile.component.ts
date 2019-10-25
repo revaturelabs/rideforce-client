@@ -167,7 +167,7 @@ export class ViewProfileComponent implements OnInit {
     if(this.principal == null){
       return "Inactive";
     }else{
-      if(this.principal.is_active){
+      if(this.principal.isActive){
         return "Active";
       }else{
         return "Inactive";
