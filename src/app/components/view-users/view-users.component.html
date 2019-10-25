@@ -1,10 +1,8 @@
 <br>
+<h2 style="text-align: center;">Active Drivers</h2>
 <div class="form-group row justify-content-center">
   <div class="col-lg-8 col-xs-12 extend" id="tablecont">
     <div class="container-fluid">
-      <span>
-        <app-search-users></app-search-users>
-      </span>
       <br>
       <table class="table table-striped table-bordered table-hover table-sm">
 
@@ -12,22 +10,25 @@
           <tr>
             <th>Name</th>
             <th>Email</th>
+
+            <th>Address</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of paginatedUsers" data-toggle="modal" data-target="#user-change-modal"
-            (click)="setUser(user.id, user.fname, user.lname, user.email)">
+          <tr *ngFor="let user of users">
             <td>{{ user.fname }}&nbsp;{{ user.lname }}</td>
             <td>{{ user.email }}</td>
+            <td>{{ user.location.address }}</td>
+
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-
+</div>
 
 <!-- Pagination -->
-<nav aria-label="Page navigation example">
+<!-- <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     <li class="page-item">
       <a class="page-link" tabindex="-1" (click)="paginate(users, 10, (currPage-1))">Previous</a>
@@ -38,209 +39,4 @@
       <a class="page-link" (click)="paginate(users, 10, (currPage+1))">Next</a>
     </li>
   </ul>
-</nav>
-<!-- 
-<div class="modal" tabindex="-1" role="dialog" id="accountConfirmation">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Please Confirm</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to submit the changes?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateUserStatus()">Yes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- 
-<div class="modal" tabindex="-1" role="dialog" id="makeAdmin">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Please Confirm</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to submit the changes?.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="makeAdmin()">Yes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div class="modal" tabindex="-1" role="dialog" id="makeTrainer">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Please Confirm</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to submit the changes?.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="makeTrainer()">Yes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- 
-<div class="modal" tabindex="-1" role="dialog" id="makeDriver">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Please Confirm</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to submit the changes?.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="makeDriver()">Yes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- <div class="modal" tabindex="-1" role="dialog" id="makeRider">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Please Confirm</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to submit the changes?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="makeRider()">Yes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">No</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!--Change role Modal-->
-<!-- <div class="modal" role="dialog" id="user-change-modal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Account Settings</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <h6 class="col-sm-4">
-            Name:
-          </h6>        
-          <h6 class="col-sm-4">{{accntFirstName}} {{accntLastName}}</h6> <br>
-
-        </div>
-        <div class="row">
-          <h6 class="col-sm-4">Email: </h6>
-          <p class="col-sm-4">{{accntEmail}}</p>
-        </div>
-        
-        <div class="row">
-          <div class="form-group col-sm-4">
-            <h6>Change Role: </h6>
-          </div> -->
-          <!-- <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
-            <label class="btn btn-outline-info active" data-toggle="modal">
-              <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
-            </label>
-            <label class="btn btn-outline-info" data-toggle="modal" >
-              <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
-            </label>
-            <label class="btn btn-outline-info" data-toggle="modal" >
-              <input type="radio" name="options" id="driver" autocomplete="off"> Driver
-            </label>
-            <label class="btn btn-outline-info" data-toggle="modal">
-              <input type="radio" name="options" id="rider" autocomplete="off"> Rider
-            </label>
-          </div> -->
-          <!-- <div class="col-sm-4"> -->
-            <!--<mat-form-field>
-              <mat-label>Change Role</mat-label>
-              <mat-select [(value)] = "accntRole">
-                <mat-option value="ADMIN">Admin</mat-option>
-                <mat-option value="TRAINER">Trainer</mat-option>
-                <mat-option value="DRIVER">Driver</mat-option>
-                <mat-option value="RIDER">Rider</mat-option>
-              </mat-select>
-            </mat-form-field>-->
-  <!-- <select class="form-group" matNativeControl [(ngModel)]= "accntRole" required>
-    <option value="ADMIN">Admin</option>
-    <option value="TRAINER">Trainer</option>
-    <option value="DRIVER">Driver</option>
-    <option value="RIDER">Rider</option>
-  </select>
-          </div>
-        </div>
-
-    <div class="row">
-          <div class="form-group col-sm-4">
-            <h6>Activate/Deactivate: </h6>
-          </div> -->
-          <!-- <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
-            <label class="btn btn-outline-info active" data-toggle="modal">
-              <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
-            </label>
-            <label class="btn btn-outline-info" data-toggle="modal" >
-              <input type="radio" name="options" id="trainer" autocomplete="off"> Trainer
-            </label>
-            <label class="btn btn-outline-info" data-toggle="modal" >
-              <input type="radio" name="options" id="driver" autocomplete="off"> Driver
-            </label>
-            <label class="btn btn-outline-info" data-toggle="modal">
-              <input type="radio" name="options" id="rider" autocomplete="off"> Rider
-            </label>
-          </div> -->
-          <!-- <div class="col-sm-4"> -->
-            <!--<mat-form-field>
-              <mat-label>Change Role</mat-label>
-              <mat-select [(value)] = "accntRole">
-                <mat-option value="ADMIN">Admin</mat-option>
-                <mat-option value="TRAINER">Trainer</mat-option>
-                <mat-option value="DRIVER">Driver</mat-option>
-                <mat-option value="RIDER">Rider</mat-option>
-              </mat-select>
-            </mat-form-field>-->
-            <!-- <select class="form-group" matNativeControl [(ngModel)]="accntActive" required>
-            <option value="ACTIVE">Active</option>
-            <option value="INACTIVE">Inactive</option>
-  </select>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-dismiss="modal" id="deny-btn">Cancel</button>
-          <button class="btn btn-primary" data-dismiss="modal" id="confirm-btn"
-          (click)="changeRole(); changeState()">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-</div>
+</nav> -->
