@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+  user: User;
   userLogin : Observable<User>;
 
   /**
@@ -84,6 +85,21 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
+    // this.userLogin = this.userServ.login(this.user);
+    this.userLogin = this.userServ.login();
+   this.userLogin.subscribe(
+     (resUser) => {
+       this.userServ.currentUser = resUser;
+       this.userServ.isLoggedIn = true;
+     },
+     (resErr) => {
+       var messageLogin = document.getElementById('errorMessageLogin');
+       messageLogin.style.display = 'block';
+       messageLogin.style.color = 'red';
+       messageLogin.innerHTML = resErr.message;
+     }
+   )
+   
     this.userServ.login();
     // this.currentUser = new User();
     this.currentUser = {

@@ -86,13 +86,19 @@ export class UserService {
   }
 
   login() {
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-    return this.http.get<User>('enviornment.userUrl' + '/users?email=' + this.currentUser.email);
+    let obs: Observable<User> = this.http.get<User>('enviornment.userUrl' + '/users?email=' + this.currentUser.email);
+    if (obs !== null) {
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    }
+    return obs;
   }
 
   register() {
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-    return this.http.post<User>('enviornment.userUrl' + '/users', this.currentUser);
+    let obs: Observable<User> = this.http.post<User>('enviornment.userUrl' + '/users', this.currentUser);
+    if (obs !== null) {
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    }
+    return obs
   }
 
   logout() {
