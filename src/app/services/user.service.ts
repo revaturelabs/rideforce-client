@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
+
+  host = "http://ec2-3-133-13-98.us-east-2.compute.amazonaws.com:8888";
   /**
    * use headers in http calls to circumvent 
    */
@@ -24,31 +26,26 @@ export class UserService {
    */
   constructor(private http: HttpClient, private router: Router) { }
 
-  /** to be used with the url provided by back end */
-  private url = '';
 
   /** Is the user currently logged in? */
   isLoggedIn: boolean;
-  /** Who is the current user of the system? */
-  currentUser: User;
+
 
   /** Holds a list of users (does not appear to be used) */
   // private users: User[] = [];
 
 
   login(user: User) {
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    localStorage.setItem('currentUser', JSON.stringify(user));
     return this.http.post<User>('enviornment.userUrl' + '/users', JSON.stringify(user));
   }
 
-  register() {
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-    return this.http.post<User>('enviornment.userUrl' + '/users', this.currentUser);
+  register(user: User) {
+    return this.http.post<User>(this.host + '/users', user, {headers: this.headers});
   }
 
   logout() {
     localStorage.setItem('currentUser', '');
-    this.currentUser = null;
     this.isLoggedIn = false;
     this.router.navigate(['/login']);
   }

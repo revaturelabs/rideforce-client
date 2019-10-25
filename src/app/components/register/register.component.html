@@ -51,13 +51,13 @@
               <!-- Zip Code Input -->
               <div class="form-group">
                 <label for="zip">Zip Code</label>
-                <input [(ngModel)]="loc.zip" type="number" class="form-control" name="zip" id="zip" placeholder="Your Zip Code" appPlacesAutocomplete required/>
+                <input [(ngModel)]="zipNum" type="number" class="form-control" name="zip" id="zip" placeholder="Your Zip Code" appPlacesAutocomplete required/>
               </div>
               <!-- Role Selection -->
               <label>Role</label>
               <div class="btn-group w-100 mb-3" role="group">
-                <button type="button" class="btn" id="rider" (click)="setRole('rider')">Rider</button>
-                <button type="button" class="btn" id="driver" (click)="setRole('driver')">Driver</button>
+                <button type="button" class="btn" id="rider" (click)="setRole('Rider')" [style.background-color]="this.colorButtons('Rider')">Rider</button>
+                <button type="button" class="btn" id="driver" (click)="setRole('Driver')" [style.background-color]="this.colorButtons('Driver')">Driver</button>
               </div>
               <!-- Password Input -->
               <div class="form-row">
@@ -87,7 +87,7 @@
                   <!-- <input [(ngModel)]="user.batchEnd" type="date" class="form-control" name="batchEndDate" id="batchEndDate" placeholder="Batch End Date" disabled /> -->
                 </div>
               </div>
-              <button type="button" class="btn btn-primary float-right" (click)="changeTab('tab2')" [disabled]="fn.invalid || ln.invalid || e.invalid || p.invalid || pc.invalid || user.invalid">Next</button>
+              <button type="button" class="btn btn-primary float-right" (click)="changeTab('tab2')" [disabled]="fn.invalid || ln.invalid || e.invalid || p.invalid || pc.invalid || user.invalid || this.user.roles == undefined || this.user.roles.length == 0">Next</button>
             </form>
           </ng-template>
         </ngb-tab>
@@ -114,7 +114,7 @@
               <dd class="col-sm-8">{{ loc.state }}</dd>
 
               <dt class="col-sm-4">Zip Code:</dt>
-              <dd class="col-sm-8">{{ loc.zip }}</dd>
+              <dd class="col-sm-8">{{ zipNum }}</dd>
 
               <dt class="col-sm-4">Role:</dt>
               <dd class="col-sm-8">{{ getRoles() }}</dd>
