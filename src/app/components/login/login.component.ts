@@ -19,25 +19,6 @@ declare var $: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  
-  /**
-   * code to verifiy forgotten password
-   */
-  // forgotCode: string;
-
-  // sentLink: boolean;
-  // errorLink: boolean;
-
-  /**
-   * The email to resend confirmation link to
-   */
-  // reEmail: string;
-  // principal: User;
-
-  
-
-
   /**
    * The "username" of the user
    */
@@ -84,13 +65,33 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
+    this.currentUser = {
+      uid: 1,
+      email: this.userEmail,
+      password: this.userPass,
+      fname: 'Testfirst',
+      lname: 'Testlast',
+      // roles: [{rid: 1, rname: 'Driver'}],
+      roles: [{id: 1, rname: 'Rider'}],
+      location: {
+        lid: 1,
+        address: '555 Test Street',
+        city: 'Morgantown',
+        state: 'WV',
+        zip: '55555',
+        longitude: 0,
+        latitude: -1
+      },
+      isActive: true
+    }
+
     this.currentUser.email = this.userEmail;
     this.currentUser.password = this.userPass;
 
     this.userLogin = this.userServ.login(this.currentUser);
     this.userLogin.subscribe(
       (resUser) => {
-        this.userServ.isLoggedIn = true;
+        localStorage.setItem('currentUser', JSON.stringify(resUser));
       },
       (resErr) => {
         var messageLogin = document.getElementById('errorMessageLogin');
@@ -99,115 +100,5 @@ export class LoginComponent implements OnInit {
         messageLogin.innerHTML = resErr.message;
       }
     )
-    // if (this.currentUser.uid !== 0) {
-    //   this.route.navigate(['/landing']);
-    // }
   }
-
-  // resetEmail() {
-  //    // /*debug*/ console.log("in reset");
-  //   try {
-  //     var messageLogin = document.getElementById('errorMessageLogin');
-  //     messageLogin.style.display = "none";
-  //     const cognitoUser = this.createCognitoUser(this.userEmail);
-
-  //     // /*debug*/ console.log("aws");
-  //     cognitoUser.forgotPassword({
-  //       onSuccess: function (result) {
-  //         // /*debug*/ console.log('call result:' + result);
-  //         $("#forgotModal").modal();
-  //       },
-  //       onFailure: function (err) {
-  //          /*debug*/ console.log(err);
-  //         messageLogin.style.display = 'block';
-  //         messageLogin.style.color = 'red';
-  //         switch(err.name){
-  //           case "UserNotFoundException":{
-  //             messageLogin.innerHTML = "Email not found.";
-  //             break;
-  //           }
-  //           case "LimitExceededException":{
-  //             messageLogin.innerHTML = err.message;
-  //             break;
-  //           }
-  //           default:{
-  //             messageLogin.innerHTML = "ERROR";
-  //           }
-  //         }
-
-  //       }
-  //     });
-  //   } catch (err) {
-  //    // /*debug*/ console.log("catch");
-  //     var messageLogin = document.getElementById('errorMessageLogin');
-  //     messageLogin.style.display = 'block';
-  //     messageLogin.style.color = 'red';
-  //     messageLogin.innerHTML = "Please enter email.";
-  //   }
-
-
-  // }
-
-
-  // resetPassword(form: NgForm) {
-  //   const cognitoUser = this.createCognitoUser(this.userEmail);
-  //   cognitoUser.confirmPassword(form.value.verifyCode, form.value.resetPassword, {
-  //     onSuccess: () => {
-        
-  //       /*debug*/ console.log("resetPassword(): changed")
-  //       $("#forgotModal").modal("hide");
-  //       var messageLogin = document.getElementById('errorMessageLogin');
-  //       messageLogin.style.display = 'block';
-  //       messageLogin.style.color = 'green';
-  //       messageLogin.innerHTML = "Password changed.";
-  //       this.route.navigateByUrl("/");
-  //       //$('#forgotModal').modal("close");
-  //     },
-  //     onFailure: err => {
-  //        /*debug*/ console.log(err);
-  //       switch (err.name) {
-  //         case "CodeMismatchException": {
-  //           let input: any = "";
-  //           input = document.getElementById("verifyCode");
-  //           input.value = "";
-  //           var error = document.getElementById("verifyMsg");
-  //           form.form.controls["verifyCode"].setErrors({ 'incorrect': true });
-  //           error.innerHTML = "Invalid Code";
-  //           break;
-  //         }
-  //         default:{
-  //         }
-  //       }
-  //     }
-  //   });
-  // }
-
-
-  // createCognitoUser(email: string): CognitoUser {
-  //   const userPool = new CognitoUserPool(environment.cognitoData);
-  //   const userData = {
-  //     Username: email,
-  //     Pool: userPool
-  //   };
-  //   const cognitoUser = new CognitoUser(userData);
-  //   return cognitoUser;
-  // }
-
-  // resendEmail(){
-    // this.authService.resendConfirmation(this.reEmail).subscribe(complete =>{
-    //   this.errorLink = false;
-    //   this.sentLink = true;
-    // }, error =>{
-    //   this.errorLink = true;
-    //   this.sentLink = false;
-    // });
-
-  // }
-
-  // initModal(){
-  //   console.log("Initializing modal");
-  //   this.errorLink = false;
-  //   this.sentLink = false;
-  //   this.reEmail = "";
-  // }
 }
