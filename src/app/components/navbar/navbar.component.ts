@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   /**
    * Whether the User is logged on or not
    */
-  session: boolean = !(localStorage.getItem('currentUser') === null);
+  session: boolean = !(localStorage.getItem('currentUser') === '');
 
   /**
    * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
