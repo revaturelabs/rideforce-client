@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   /**
    * Whether the User is logged on or not
    */
-  session: boolean = true;
+  session: boolean = !(localStorage.getItem('currentUser').length === 0);
 
   /**
    * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
@@ -74,6 +74,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.session = !(localStorage.getItem('currentUser').length === 0);
+    console.log(this.session)
+
   }
 
 createImageFromBlob(image: Blob) {
@@ -116,8 +118,8 @@ createImageFromBlob(image: Blob) {
     this.userServ.logout();
     // this.authService.logout();
     this.session = false;
-    this.principal = new User();
-    this.principal.uid = 0;
+    // this.principal = new User();
+    // this.principal.uid = 0;
     // this.authService.changePrincipal(this.principal);
     if (this.route.url === '/landing') {
       location.reload(true);

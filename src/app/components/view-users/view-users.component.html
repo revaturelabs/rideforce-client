@@ -12,53 +12,19 @@
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Role</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of paginatedUsers" data-toggle="modal" data-target="#user-change-modal"
-            (click)="setUser(user.id, user.firstName, user.lastName, user.email, user.role, user.active)">
-            <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
+            (click)="setUser(user.id, user.fname, user.lname, user.email)">
+            <td>{{ user.fname }}&nbsp;{{ user.lname }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div *ngIf="currentRole === 'TRAINER'" label="TRAINER div">
 
-    <div class="container-fluid">
-      <br>
-      <h2>View Associates</h2>
-      <table class="table table-striped table-bordered table-hover table-sm">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Deactivate Account</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of paginatedUsers">
-            <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
-            <td>
-              <button *ngIf="user.active === 'DISABLED'" class="btn btn-success"
-                (click)="confirmUserStatus(user.id, user.active)">
-                <i class="fas fa-user-check"></i></button>
-              <button *ngIf="user.active !== 'DISABLED'" class="btn btn-danger"
-                (click)="confirmUserStatus(user.id, user.active)">
-                <i class="fas fa-user-times"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
 
 <!-- Pagination -->
 <nav aria-label="Page navigation example">
@@ -73,7 +39,7 @@
     </li>
   </ul>
 </nav>
-
+<!-- 
 <div class="modal" tabindex="-1" role="dialog" id="accountConfirmation">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -92,8 +58,8 @@
       </div>
     </div>
   </div>
-</div>
-
+</div> -->
+<!-- 
 <div class="modal" tabindex="-1" role="dialog" id="makeAdmin">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -112,7 +78,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="modal" tabindex="-1" role="dialog" id="makeTrainer">
   <div class="modal-dialog" role="document">
@@ -133,7 +99,7 @@
     </div>
   </div>
 </div>
-
+<!-- 
 <div class="modal" tabindex="-1" role="dialog" id="makeDriver">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -152,9 +118,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-<div class="modal" tabindex="-1" role="dialog" id="makeRider">
+<!-- <div class="modal" tabindex="-1" role="dialog" id="makeRider">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -172,9 +138,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!--Change role Modal-->
-<div class="modal" role="dialog" id="user-change-modal">
+<!-- <div class="modal" role="dialog" id="user-change-modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -199,7 +165,7 @@
         <div class="row">
           <div class="form-group col-sm-4">
             <h6>Change Role: </h6>
-          </div>
+          </div> -->
           <!-- <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
             <label class="btn btn-outline-info active" data-toggle="modal">
               <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
@@ -214,7 +180,7 @@
               <input type="radio" name="options" id="rider" autocomplete="off"> Rider
             </label>
           </div> -->
-          <div class="col-sm-4">
+          <!-- <div class="col-sm-4"> -->
             <!--<mat-form-field>
               <mat-label>Change Role</mat-label>
               <mat-select [(value)] = "accntRole">
@@ -224,7 +190,7 @@
                 <mat-option value="RIDER">Rider</mat-option>
               </mat-select>
             </mat-form-field>-->
-  <select class="form-group" matNativeControl [(ngModel)]= "accntRole" required>
+  <!-- <select class="form-group" matNativeControl [(ngModel)]= "accntRole" required>
     <option value="ADMIN">Admin</option>
     <option value="TRAINER">Trainer</option>
     <option value="DRIVER">Driver</option>
@@ -236,7 +202,7 @@
     <div class="row">
           <div class="form-group col-sm-4">
             <h6>Activate/Deactivate: </h6>
-          </div>
+          </div> -->
           <!-- <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
             <label class="btn btn-outline-info active" data-toggle="modal">
               <input type="radio" name="options" id="admin" autocomplete="off" checked> Admin
@@ -251,7 +217,7 @@
               <input type="radio" name="options" id="rider" autocomplete="off"> Rider
             </label>
           </div> -->
-          <div class="col-sm-4">
+          <!-- <div class="col-sm-4"> -->
             <!--<mat-form-field>
               <mat-label>Change Role</mat-label>
               <mat-select [(value)] = "accntRole">
@@ -261,7 +227,7 @@
                 <mat-option value="RIDER">Rider</mat-option>
               </mat-select>
             </mat-form-field>-->
-            <select class="form-group" matNativeControl [(ngModel)]="accntActive" required>
+            <!-- <select class="form-group" matNativeControl [(ngModel)]="accntActive" required>
             <option value="ACTIVE">Active</option>
             <option value="INACTIVE">Inactive</option>
   </select>
@@ -275,6 +241,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </div>
