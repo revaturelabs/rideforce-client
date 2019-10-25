@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   /**
    * The User to log on to
    */
-  currentUser: User;
+  currentUser: User = new User();
   testLocation: Location;
   /**
    * The password associated with the indended account
@@ -65,33 +65,18 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
-    this.currentUser = {
-      uid: 1,
-      email: this.userEmail,
-      password: this.userPass,
-      fname: 'Testfirst',
-      lname: 'Testlast',
-      // roles: [{rid: 1, rname: 'Driver'}],
-      roles: [{id: 1, rname: 'Rider'}],
-      location: {
-        lid: 1,
-        address: '555 Test Street',
-        city: 'Morgantown',
-        state: 'WV',
-        zip: '55555',
-        longitude: 0,
-        latitude: -1
-      },
-      isActive: true
-    }
-
     this.currentUser.email = this.userEmail;
     this.currentUser.password = this.userPass;
+    console.log(this.currentUser)
 
     this.userLogin = this.userServ.login(this.currentUser);
+
     this.userLogin.subscribe(
       (resUser) => {
+        console.log(resUser)
         localStorage.setItem('currentUser', JSON.stringify(resUser));
+        this.userServ.isLoggedIn = true;
+        this.route.navigate(['/landing']);
       },
       (resErr) => {
         var messageLogin = document.getElementById('errorMessageLogin');

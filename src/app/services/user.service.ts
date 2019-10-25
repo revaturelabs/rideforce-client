@@ -29,7 +29,7 @@ export class UserService {
 
 
   /** Is the user currently logged in? */
-  isLoggedIn: boolean;
+  isLoggedIn: boolean = !(localStorage.getItem('currentUser') === '');
 
 
   /** Holds a list of users (does not appear to be used) */
@@ -41,6 +41,7 @@ export class UserService {
   }
 
   login(user : User) : Observable<User> {
+    console.log(user)
     return this.http.post<User>(this.host + '/users/login', user, this.options);
   }
 
