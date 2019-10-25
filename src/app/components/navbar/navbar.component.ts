@@ -118,6 +118,7 @@ createImageFromBlob(image: Blob) {
     this.userServ.logout();
     // this.authService.logout();
     this.session = false;
+    localStorage.setItem('currentUser', '');
     // this.principal = new User();
     // this.principal.uid = 0;
     // this.authService.changePrincipal(this.principal);
