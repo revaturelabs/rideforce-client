@@ -50,4 +50,13 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
+
+  allUsers() : Observable<User[]> {
+    return this.http.get<User[]>(this.host + '/users');
+  }
+
+  allDrivers() : Observable<User[]> {
+    return this.http.get<User[]>(this.host + '/users/drivers?isActive=true');
+  }
+
 }

@@ -16,9 +16,5 @@ export class SearchUsersComponent implements OnInit {
   ngOnInit() {
   }
 
-  public getQuery(e) {
-    console.log("query: ", this.query);
-    this.viewUsers.filterUsers(this.query);
-  }
 
 }
