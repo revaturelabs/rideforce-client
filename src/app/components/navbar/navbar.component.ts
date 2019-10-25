@@ -73,21 +73,24 @@ export class NavbarComponent implements OnInit {
   private imageFile: any;
 
   ngOnInit() {
+    if(localStorage.getItem('currentUser') === null) {
+      localStorage.setItem('currentUser', '');
+    }
     this.session = !(localStorage.getItem('currentUser') === '');
     console.log(this.session)
 
   }
 
-createImageFromBlob(image: Blob) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => {
-     this.imageFile = reader.result;
-  }, false);
+// createImageFromBlob(image: Blob) {
+//   const reader = new FileReader();
+//   reader.addEventListener('load', () => {
+//      this.imageFile = reader.result;
+//   }, false);
 
-  if (image) {
-     reader.readAsDataURL(image);
-  }
-}
+//   if (image) {
+//      reader.readAsDataURL(image);
+//   }
+// }
   /**
    * Updates session, telling if the user is logged in or not
    */
