@@ -53,4 +53,9 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
+  allDrivers() : Observable<User[]> {
+    console.log("No drivers here to show!");
+    return this.http.get<User[]>("http://ec2-3-133-13-98.us-east-2.compute.amazonaws.com:8888/users");
+  }
+
 }

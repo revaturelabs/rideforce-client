@@ -77,7 +77,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.principal = this.userServ.register(null);
+    this.principal =null; // this.userServ.register(null);
 
     this.firstName = this.principal.fname;
     this.lastName = this.principal.lname;

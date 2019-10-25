@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FirstModule } from './first/first.module';
 import { CustomtimePipe } from './pipes/customtime.pipe';
+import { BrowseDriverComponent } from './components/browse-driver/browse-driver.component';
 
 
 
@@ -27,7 +28,8 @@ import { CustomtimePipe } from './pipes/customtime.pipe';
     LandingComponent,
     NavbarComponent,
     LoginComponent,
-    CustomtimePipe
+    CustomtimePipe,
+    BrowseDriverComponent
   ],
   imports: [
     FirstModule,
