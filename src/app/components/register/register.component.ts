@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 import { User } from '../../models/user';
 import { Role } from '../../models/role';
 import { Location } from '../../models/location';
+import { UserService } from '../../services/user.service';
 
 
 /**
@@ -22,13 +23,14 @@ import { Location } from '../../models/location';
 export class RegisterComponent implements OnInit {
   //this saves the user info that is typed in
   user: User;
+  zipNum : number;  //the zip code as a number (will be casted to string)
   //this saves the location info that is typed in
   loc: Location = {
-    lid : null,
+    lid : 0,
     address : null,
     city : null,
     state : null,
-    zip : null,
+    zip : "",
     longitude : null,
     latitude : null
   }
@@ -46,9 +48,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     private router: Router, 
-    private zone: NgZone 
-    // private userService: UserControllerService, 
-    // private locationService: GeocodeService
+    private zone: NgZone,
+    private userService: UserService
+
     ) {}
 
   /**
@@ -70,15 +72,24 @@ export class RegisterComponent implements OnInit {
     return (this.user.email === "^[a-zA-Z0-9_.+!%#$&'*?^{|}`~-]+@?(revature)\.com$");
   }
 
+
+  getRoleId(roleIn : string) {
+    if (roleIn == "Driver") {
+      return 1;
+    }
+    else if (roleIn == "Rider") {
+      return 2;
+    }
+  }
+
   /**
-   * Sets the users role.
+   * Sets the users role(s).
    */
   setRole(roleIn : string) {
     //if no role has been selected
     if (this.user.roles == undefined) {
-      this.user.roles = [];
-      this.user.roles.push({rid: 0, rname: roleIn});  //roleIn will either be 'rider' or 'driver'
-      document.getElementById(roleIn + "").style.backgroundColor = "lightblue";
+      this.user.roles = [];      
+      this.user.roles.push({id: this.getRoleId(roleIn), rname: roleIn});  //roleIn will either be 'rider' or 'driver'
     }
     else {
       let index = null; //if the user has already selected a role, this index will represent where it is in the 'roles' array
@@ -89,16 +100,23 @@ export class RegisterComponent implements OnInit {
       }
       if (index != null) {  //if the user has deselected a role
         this.user.roles.splice(index, 1); //remove the role from the roles array
-        document.getElementById(roleIn + "").style.backgroundColor = "white";
-
       }
       else {  //the user has selected a second role
-        this.user.roles.push({rid: 0, rname: roleIn});
-        document.getElementById(roleIn + "").style.backgroundColor = "lightblue";
-
+        this.user.roles.push({id: this.getRoleId(roleIn), rname: roleIn});
       }
     }
-    console.log(this.user.roles);
+  }
+
+  //this colors the 'rider' and 'driver' buttons if they are selected
+  colorButtons(roleIn : string) {
+    if (this.user.roles != undefined) {
+      for (let i in this.user.roles) {
+        if (this.user.roles[i].rname == roleIn) {
+          return "lightblue";
+        }
+      }
+    }
+    return "white";
   }
 
   getRoles() {
@@ -106,10 +124,10 @@ export class RegisterComponent implements OnInit {
       return "";
     }
     else if (this.user.roles.length == 1) {
-      if (this.user.roles[0].rname === 'rider') {
+      if (this.user.roles[0].rname === 'Rider') {
         return "Rider";
       }
-      else if (this.user.roles[0].rname === 'driver') {
+      else if (this.user.roles[0].rname === 'Driver') {
         return "Driver";
       }
     }
@@ -135,7 +153,23 @@ export class RegisterComponent implements OnInit {
 
  //Register new user with Cognito in server-side application. 
   register() {
+    this.user.uid = 0;
+    this.loc.zip = this.zipNum + "";
+    this.user.location = this.loc;
+    this.user.isActive = true;
     console.log(this.user);
+    console.log(JSON.stringify(this.user));
+    this.userService.register(this.user).subscribe(
+      (response) => {
+        console.log(response);
+        let validUser :User = response;
+        localStorage.setItem('currentUser', JSON.stringify(validUser));
+
+      },
+      (response) => {
+        console.log(response);
+      }
+    );
     // this.userService.createUser(this.user).subscribe(data => {
     //   alert(data);
     //   console.log(this.user);

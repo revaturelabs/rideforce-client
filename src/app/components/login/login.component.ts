@@ -90,7 +90,6 @@ export class LoginComponent implements OnInit {
     this.userLogin = this.userServ.login(this.currentUser);
     this.userLogin.subscribe(
       (resUser) => {
-        this.userServ.currentUser = resUser;
         this.userServ.isLoggedIn = true;
       },
       (resErr) => {
