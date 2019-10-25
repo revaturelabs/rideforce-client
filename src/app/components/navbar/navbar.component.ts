@@ -73,7 +73,7 @@ export class NavbarComponent implements OnInit {
   private imageFile: any;
 
   ngOnInit() {
-    this.session = !(localStorage.getItem('currentUser') === null);
+    this.session = !(localStorage.getItem('currentUser') === '');
     console.log(this.session)
 
   }
