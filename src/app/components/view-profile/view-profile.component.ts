@@ -100,7 +100,7 @@ export class ViewProfileComponent implements OnInit {
       this.firstName = this.principal.fname;
       this.lastName = this.principal.lname;
       this.username = this.principal.email;
-      this.currentState = this.principal.is_active;
+      this.currentState = this.principal.isActive;
       this._address = this.principal.location.address;
       
     }
