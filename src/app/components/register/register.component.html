@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label for="confirmPassword">Confirm Password</label>
-                  <input [ngClass]="{ 'is-invalid': pc.invalid && (pc.dirty || pc.touched), 'is-valid': pc.valid }" [pattern]="user.password" #pc="ngModel" [(ngModel)]="passwordConfirm" type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required/>
+                  <input [ngClass]="{ 'is-invalid': pc.invalid && (pc.dirty || pc.touched), 'is-valid': pc.valid }" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,})" #pc="ngModel" [(ngModel)]="passwordConfirm" type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required/>
                   <div class="invalid-feedback">Password doesn't match.</div>
                 </div>
               </div>
