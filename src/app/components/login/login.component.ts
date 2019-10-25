@@ -65,6 +65,27 @@ export class LoginComponent implements OnInit {
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
+    this.currentUser = {
+      uid: 1,
+      email: this.userEmail,
+      password: this.userPass,
+      fname: 'Testfirst',
+      lname: 'Testlast',
+      // roles: [{rid: 1, rname: 'Driver'}],
+      roles: [{id: 1, rname: 'Rider'}],
+      location: {
+        lid: 1,
+        address: '555 Test Street',
+        city: 'Morgantown',
+        state: 'WV',
+        zip: '55555',
+        longitude: 0,
+        latitude: -1
+      },
+      distance: "",
+      isActive: true
+    }
+
     this.currentUser.email = this.userEmail;
     this.currentUser.password = this.userPass;
     console.log(this.currentUser)
