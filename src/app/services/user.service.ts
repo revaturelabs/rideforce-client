@@ -59,4 +59,8 @@ export class UserService {
     return this.http.get<User[]>(this.host + '/users/drivers?isActive=true');
   }
 
+  updateUser(user : User) : Observable<User> {
+    return this.http.put<User>(this.host + '/users', user, this.options);
+  }
+
 }
