@@ -77,14 +77,25 @@ export class ViewProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.principal = null;
 
-    this.firstName = this.principal.fname;
-    this.lastName = this.principal.lname;
-    this.username = this.principal.email;
-    this.currentState = this.principal.isActive;
-    this._address = this.principal.location.address;
+    this.principal = JSON.parse(localStorage.getItem('currentUser'));
+    //this.principal = this.userServ.register();
 
+    if(this.principal==null){
+      this.firstName = "Error: First Name not found.";
+      this.lastName = "Error: Last Name not found.";
+      this.username = "Error: Username not found.";
+      this.currentState = false;
+      this._address = "Error: Address not found.";
+    }else{
+      this.firstName = this.principal.fname;
+      this.lastName = this.principal.lname;
+      this.username = this.principal.email;
+      this.currentState = this.principal.is_active;
+      this._address = this.principal.location.address;
+    }
+
+    
     //TODO: update state selector so it can be grabbed by Angular
     if(this.currentState) {
 
@@ -143,7 +154,7 @@ export class ViewProfileComponent implements OnInit {
   /**
    * Get contact-info for specified user-id
    */
-  getInfoById() {
+  /*getInfoById() {
     //return this.http.get<ContactInfo[]>("http://turtlejr.sps.cuny.edu:5555/contact-info/58");
     console.log("pre");
     console.log(this.principal.uid);
@@ -154,7 +165,7 @@ export class ViewProfileComponent implements OnInit {
         console.log(response);
       });
     //get json array that is for slack and isolate id
-  }
+  }*/
 
 
 /**
