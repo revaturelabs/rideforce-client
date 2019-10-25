@@ -9,5 +9,5 @@ export class User {
     lname: string;
     roles: Role[];
     location: Location;
-    is_active: boolean;
+    isActive: boolean;
 }

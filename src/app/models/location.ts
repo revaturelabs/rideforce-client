@@ -3,7 +3,7 @@ export class Location {
     address: string;
     city: string;
     state: string;
-    zip: number;
+    zip: string;
     longitude: number;
     latitude: number;
 }

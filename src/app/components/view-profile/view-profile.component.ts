@@ -77,12 +77,12 @@ export class ViewProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.principal = this.userServ.register(null);
+    this.principal = null;
 
     this.firstName = this.principal.fname;
     this.lastName = this.principal.lname;
     this.username = this.principal.email;
-    this.currentState = this.principal.is_active;
+    this.currentState = this.principal.isActive;
     this._address = this.principal.location.address;
 
     //TODO: update state selector so it can be grabbed by Angular
@@ -233,11 +233,11 @@ export class ViewProfileComponent implements OnInit {
   }
 
   switchState() {
-    if (this.principal.is_active == true) {
-      this.principal.is_active = false;
+    if (this.principal.isActive == true) {
+      this.principal.isActive = false;
       this.getState();
-    } else if (this.principal.is_active == false) {
-      this.principal.is_active = true;
+    } else if (this.principal.isActive == false) {
+      this.principal.isActive = true;
       this.getState();
     } else {
       console.log('Invalid State');
@@ -245,7 +245,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   getState() {
-    this.currentState = this.principal.is_active;
+    this.currentState = this.principal.isActive;
   }
 
   updateUserStatus(id: number, active: string) {
