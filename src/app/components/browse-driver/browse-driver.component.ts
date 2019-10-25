@@ -32,7 +32,7 @@ export class BrowseDriverComponent implements OnInit {
       //receives information
       (response) => {
         this.activeDrivers = response;
-        console.log(response);
+        console.log(this.activeDrivers);
       },
       //function to execute when the Observable receives
       //incorrect/faulty information
