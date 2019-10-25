@@ -33,6 +33,10 @@ export class ViewProfileComponent implements OnInit {
   password: string;
   /** The new password of the user, used to confirm User knows the password (hooked to form item in html) */
   confirmPassword: string;
+  // PLACEHOLDER Temporary storage of role for workaround to design oriented around single role
+  userRolePlaceholderString: string;
+  // Temporary storage of user activity for workaround to select
+  userActivityString: string;
   /** The address of the user (hooked to form item in html) */
   _address: string;
   /** The day the User's batch ends*/
@@ -87,12 +91,18 @@ export class ViewProfileComponent implements OnInit {
       this.username = "Error: Username not found.";
       this.currentState = false;
       this._address = "Error: Address not found.";
+      //var actelem = document.getElementById("user_activity");
+      //console.log(actelem);
+      // @ts-ignore
+      this.userRolePlaceholderString = this.userRoleTypes[1];
+      this.userActivityString = this.userActivityTypes[1];
     }else{
       this.firstName = this.principal.fname;
       this.lastName = this.principal.lname;
       this.username = this.principal.email;
       this.currentState = this.principal.is_active;
       this._address = this.principal.location.address;
+      
     }
 
     
@@ -141,6 +151,28 @@ export class ViewProfileComponent implements OnInit {
     // });
 
     console.log(this.principal);
+  }
+
+  //TEMPORARY METHOD
+  getRole(){
+    if(this.principal == null){
+      return "Rider";
+    }else{
+      return this.principal.roles[0].rname
+    }
+  }
+
+  //TEMPORARY METHOD
+  getStatus(){
+    if(this.principal == null){
+      return "Inactive";
+    }else{
+      if(this.principal.is_active){
+        return "Active";
+      }else{
+        return "Inactive";
+      }
+    }
   }
 
   sessionCheck() {
@@ -208,7 +240,19 @@ export class ViewProfileComponent implements OnInit {
     // document.getElementById("password").removeAttribute("disabled");
     // document.getElementById("confirmPassword").removeAttribute("disabled");
     document.getElementById('user_role').removeAttribute('disabled');
+    document.getElementById('user_role').removeAttribute('hidden');
+    document.getElementById('decoy_user_role').setAttribute('hidden', 'true');
+    var actelem1 = document.getElementById("user_role");
+    // @ts-ignore
+    actelem1.value = this.getRole();
     document.getElementById('user_activity').removeAttribute('disabled');
+    document.getElementById('user_activity').removeAttribute('hidden');
+    document.getElementById('decoy_user_activity').setAttribute('hidden', 'true');
+    var actelem2 = document.getElementById("user_activity");
+    console.log("Status is: " + this.getStatus());
+    // @ts-ignore
+    actelem2.value = this.getStatus();
+    //TODO: set user activity to the current user's active status
     document.getElementById('address').removeAttribute('disabled');
     //document.getElementById('batchEnd').removeAttribute('disabled');
     //document.getElementById('dayStart').removeAttribute('disabled');

@@ -82,7 +82,9 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Role</span>
                 </div>
-                <select id="user_role" class="browser-default custom-select" #roleType disabled>
+                <input type="email" class="form-control" [(ngModel)]="userRolePlaceholderString" #uName="ngModel" id="decoy_user_role"
+                  placeholder="Error: userRolePlaceholderString ngModel not set." disabled>
+                <select id="user_role" class="browser-default custom-select" #roleType disabled hidden>
                   <option [value]="type" *ngFor="let type of userRoleTypes">
                     {{type}}
                   </option>
@@ -93,7 +95,9 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Status</span>
                   </div>
-                  <select id="user_activity" class="browser-default custom-select" #roleType disabled>
+                  <input type="email" class="form-control" [(ngModel)]="userActivityString" #uName="ngModel" id="decoy_user_activity"
+                  placeholder="Error: userActivityString ngModel not set." disabled>
+                  <select id="user_activity" class="browser-default custom-select" #roleType disabled hidden>
                     <option [value]="type" *ngFor="let type of userActivityTypes">
                       {{type}}
                     </option>
@@ -115,7 +119,7 @@
                 </div>
               </div>
 
-              <div class="input-group mb-3">
+              <!--<div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Batch End</span>
                 </div>
@@ -127,7 +131,7 @@
                   <span class="input-group-text" id="basic-addon1">Starting Time</span>
                 </div>
                 <input type="text" id="dayStart" class="form-control" value="{{startTime | date:'shortTime'}}" disabled>
-              </div>
+              </div>-->
 
               <div id="switchRoles" hidden>
                 <button *ngIf="currentRole === 'DRIVER'" class="btn btn-secondary" id="switchRider"
