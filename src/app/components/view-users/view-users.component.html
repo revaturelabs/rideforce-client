@@ -4,19 +4,19 @@
   <div class="col-lg-8 col-xs-12 extend" id="tablecont">
     <div class="container-fluid">
       <br>
+      Filter to drivers within <input type="number" #vicinity> miles <button (click)=filterDrivers(vicinity.value)>Filter</button>
       <table class="table table-striped table-bordered table-hover table-sm">
 
         <thead>
           <tr>
             <th>Name</th>
             <th>Email</th>
-
             <th>Address</th>
             <th>Distance</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of users">
+          <tr *ngFor="let user of vicinityDrivers">
             <td>{{ user.fname }}&nbsp;{{ user.lname }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.location.address }}</td>
