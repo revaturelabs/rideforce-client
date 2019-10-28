@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
+import { State } from '../../models/state.model';
 
 /**
  * Represents the page that allows users to view (and edit) their profile
@@ -45,6 +46,8 @@ export class ViewProfileComponent implements OnInit {
   /** Holds the list of all users in the system */
   users: any[];
   location: Location;
+  s : State = new State();
+
   userActivityTypes = ["Active", "Inactive"];
 
 
@@ -183,12 +186,15 @@ export class ViewProfileComponent implements OnInit {
     this.currentUser.lname = this.lastName;
     this.currentUser.location.address = this._address;
     this.currentUser.location.city = this.city;
-    this.currentUser.location.state = this.state;
+    // this.currentUser.location.state = this.state;
     this.currentUser.location.zip = this.zip + "";
 
     var activeElement = document.getElementById("user_activity");
+    var stateElement = document.getElementById("state");
     // @ts-ignore
     this.currentUser.isActive = this.getStatusBool(activeElement.value);
+    // @ts-ignore
+    this.currentUser.location.state = stateElement.value;
 
     console.log(this.currentUser);
 

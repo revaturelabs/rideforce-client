@@ -44,10 +44,22 @@
                 <input [(ngModel)]="loc.city" type="text" class="form-control" name="city" id="city" placeholder="Your City" appPlacesAutocomplete required/>
               </div>
               <!-- State Input -->
+<!-- 
               <div class="form-group">
                 <label for="state">State</label>
                 <input [(ngModel)]="loc.state" type="text" class="form-control" name="state" id="state" placeholder="Your State" appPlacesAutocomplete required/>
+              </div> -->
+
+              <div class="form-group">
+                <label for="state">State</label>
+                <select id="state" class="browser-default custom-select">
+                  <option [value]="state" *ngFor="let state of s.states" [selected]="state === loc.state">
+                    {{state}}
+                  </option>
+                </select>
               </div>
+
+
               <!-- Zip Code Input -->
               <div class="form-group">
                 <label for="zip">Zip Code</label>
