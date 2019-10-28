@@ -35,14 +35,8 @@
     <p *ngIf="session" class="lead fadeIn second">Start browsing for your perfect match here!</p>
     <a *ngIf="!session" class="button nav-link started fadeIn third" routerLink="/login"
       style="vertical-align:middle"><span>Get Started</span></a>
-    <a *ngIf="role != 'ADMIN' && session" class="button nav-link started fadeIn third" routerLink="/rideswipe"
+    <a *ngIf="session" class="button nav-link started fadeIn third" routerLink="/viewUsers"
       style="padding-right:30px;"><span>Browse</span></a>
-    <a *ngIf="role == 'ADMIN' && session" class="button nav-link started fadeIn third" routerLink="/viewUsers"
-      style="padding-right:30px;"><span>View Users</span></a>
-    <div class="fadeIn fourth">
-      For more information,
-      <a href="/howTo">click here</a>
-    </div>
   </div>
 
   <div class="cover-container d-flex h-100 p-3 mx-auto">
