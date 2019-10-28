@@ -34,7 +34,7 @@ export class ViewProfileComponent implements OnInit {
   _address: string;
   city: string;
   state: string;
-  zip: number;
+  zip: string;
   /** The day the User's batch ends*/
   batchEnd: any;
   /** Whether the user can make changes (Currently not used) */
@@ -77,7 +77,7 @@ export class ViewProfileComponent implements OnInit {
       this._address = this.currentUser.location.address;
       this.city = this.currentUser.location.city;
       this.state = this.currentUser.location.state;
-      this.zip = parseInt(this.currentUser.location.zip);
+      this.zip = this.currentUser.location.zip;
       this.userActivityString = this.getStatus();
     }
 
@@ -187,7 +187,7 @@ export class ViewProfileComponent implements OnInit {
     this.currentUser.location.address = this._address;
     this.currentUser.location.city = this.city;
     // this.currentUser.location.state = this.state;
-    this.currentUser.location.zip = this.zip + "";
+    this.currentUser.location.zip = this.zip;
 
     var activeElement = document.getElementById("user_activity");
     var stateElement = document.getElementById("state");
