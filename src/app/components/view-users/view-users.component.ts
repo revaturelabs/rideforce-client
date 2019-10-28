@@ -39,7 +39,7 @@ export class ViewUsersComponent implements OnInit {
       //receives information
       (response) => {
         this.users = response;
-        const currentUser= JSON.parse(localStorage.getItem("currentUser"));
+        const currentUser= JSON.parse(sessionStorage.getItem("currentUser"));
         
         this.users.forEach(user => {
           var origin = new google.maps.LatLng(currentUser.location.latitude, currentUser.location.longitude);
