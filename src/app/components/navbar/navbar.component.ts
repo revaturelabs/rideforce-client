@@ -77,6 +77,8 @@ export class NavbarComponent implements OnInit {
       sessionStorage.setItem('currentUser', '');
     }
     this.session = !(sessionStorage.getItem('currentUser') === '');
+    this.userServ.isLoggedIn = this.session;
+
     console.log(this.session)
 
   }
