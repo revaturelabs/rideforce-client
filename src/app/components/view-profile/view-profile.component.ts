@@ -27,12 +27,6 @@ export class ViewProfileComponent implements OnInit {
   lastName: string;
   /** The user name of the user (hooked to form item in html) */
   username: string;
-  /** The old password of the user (will be hooked up to form in html) */
-  oldPassword: string;
-  /** The new password of the user (hooked to form item in html) */
-  password: string;
-  /** The new password of the user, used to confirm User knows the password (hooked to form item in html) */
-  confirmPassword: string;
   // Temporary storage of user activity for workaround to select
   userActivityString: string;
   /** The address of the user (hooked to form item in html) */
@@ -164,7 +158,6 @@ export class ViewProfileComponent implements OnInit {
   edit() {
     document.getElementById('firstName').removeAttribute('disabled');
     document.getElementById('lastName').removeAttribute('disabled');
-    document.getElementById('password').removeAttribute('hidden');
 
     document.getElementById('user_activity').removeAttribute('disabled');
     document.getElementById('user_activity').removeAttribute('hidden');
