@@ -183,7 +183,6 @@ export class ViewProfileComponent implements OnInit {
   edit() {
     document.getElementById('firstName').removeAttribute('disabled');
     document.getElementById('lastName').removeAttribute('disabled');
-    document.getElementById('password').removeAttribute('hidden');
     // document.getElementById("email").removeAttribute("disabled");
     // document.getElementById("password").removeAttribute("disabled");
     // document.getElementById("confirmPassword").removeAttribute("disabled");
