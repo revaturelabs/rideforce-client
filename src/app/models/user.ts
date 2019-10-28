@@ -10,5 +10,4 @@ export class User {
     roles: Role[];
     location: Location;
     isActive: boolean;
-    distance: string;
 }

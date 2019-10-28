@@ -82,7 +82,6 @@ export class LoginComponent implements OnInit {
         longitude: 0,
         latitude: -1
       },
-      distance: "",
       isActive: true
     }
 

@@ -4,15 +4,22 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
   allScriptsTimeout: 11000,
   specs: [
-    './e2e/**/*.e2e-spec.ts'
+    './e2e/**/*.e2e-spec.ts',
+    './src/app/components/landing/*.spec.ts',
+    './src/app/components/navbar/*.spec.ts',
+    './src/app/components/register/*.spec.ts',
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    chromeOptions: {
+        args:["--incognito"]
+    }
   },
-  directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  // directConnect: true,
+  baseUrl: 'http://localhost:4200',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
