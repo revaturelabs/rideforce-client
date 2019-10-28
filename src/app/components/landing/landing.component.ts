@@ -15,7 +15,7 @@ export class LandingComponent implements OnInit {
   /** Holds the current user of the program */
   currentUser: User;
   /** Whether a User is, in fact, logged on */
-  session: boolean;
+  session: boolean = !(sessionStorage.getItem('currentUser') === '');
   /**
  * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
  */
