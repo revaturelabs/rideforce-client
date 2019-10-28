@@ -9,6 +9,7 @@ import { User } from '../../models/user';
 import { Role } from '../../models/role';
 import { Location } from '../../models/location';
 import { UserService } from '../../services/user.service';
+import { State } from '../../models/state.model';
 
 
 /**
@@ -33,6 +34,9 @@ export class RegisterComponent implements OnInit {
     longitude : null,
     latitude : null
   }
+
+  s : State = new State();
+
 
   /** Password Confirmation Model */
   passwordConfirm: string;
@@ -142,6 +146,10 @@ export class RegisterComponent implements OnInit {
    * @param newTab the tab to change to.
    */
   changeTab(newTab: string) {
+    if (document.getElementById("state") != null) {
+      // @ts-ignore
+      this.loc.state = document.getElementById("state").value;
+    }
     // Enable the next tab
     this.tabset.tabs.find(t => t.id === newTab).disabled = false;
     // Disable the previous tab

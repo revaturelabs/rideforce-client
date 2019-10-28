@@ -83,15 +83,18 @@ export class ViewUsersComponent implements OnInit {
           return true;
         }
         else {
+          vicinity = parseFloat(vicinity);
           const distanceParts = user.distance.split(" ", 2);
+          distanceParts[0] = parseFloat(distanceParts[0].replace(/,/g, ''));
+          console.log(distanceParts[0]);
           if (distanceParts[1] === "mi") {
-            if (vicinity >= parseFloat(distanceParts[0])) {
+            if (vicinity >= distanceParts[0]) {
               return true;
             }
           }
           else if (distanceParts[1] === "ft") {
             const vicinityDistanceFt = vicinity * 5280;
-            if (vicinityDistanceFt >= parseFloat(distanceParts[0])) {
+            if (vicinityDistanceFt >= distanceParts[0]) {
               return true;
             }
           }
@@ -108,6 +111,8 @@ export class ViewUsersComponent implements OnInit {
   sortDriversByDistance(a: any, b: any) {
     const aDistanceParts = a.distance.split(" ", 2);
     const bDistanceParts = b.distance.split(" ", 2);
+    aDistanceParts[0] = parseFloat(aDistanceParts[0].replace(/,/g, ''));
+    bDistanceParts[0] = parseFloat(bDistanceParts[0].replace(/,/g, ''));
 
     if (aDistanceParts[1] === "mi") {
       aDistanceParts[0] *= 5280;

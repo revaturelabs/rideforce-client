@@ -71,10 +71,10 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Status</span>
                   </div>
-                  <input type="email" class="form-control" [(ngModel)]="userActivityString" #uName="ngModel" id="decoy_user_activity"
+                  <input type="text" class="form-control" [(ngModel)]="userActivityString" #uName="ngModel" id="decoy_user_activity"
                   placeholder="Error: userActivityString ngModel not set." disabled>
                   <select id="user_activity" class="browser-default custom-select" #roleType disabled hidden>
-                    <option [value]="type" *ngFor="let type of userActivityTypes">
+                    <option [value]="type" *ngFor="let type of userActivityTypes" [selected]="type === getStatus()">
                       {{type}}
                     </option>
                   </select>
@@ -106,10 +106,11 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">State</span>
                 </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                   
-                  [(ngModel)]="state" required id="state"
-                  disabled>
+                <select id="state" class="browser-default custom-select" #roleType disabled>
+                  <option [value]="state" *ngFor="let state of s.states" [selected]="state === currentUser.location.state">
+                    {{state}}
+                  </option>
+                </select>
               </div>
 
 
