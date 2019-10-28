@@ -51,7 +51,7 @@
               <!-- Zip Code Input -->
               <div class="form-group">
                 <label for="zip">Zip Code</label>
-                <input [(ngModel)]="zipNum" type="number" class="form-control" name="zip" id="zip" placeholder="Your Zip Code" appPlacesAutocomplete required/>
+                <input [(ngModel)]="loc.zip" type="text" pattern="^[0-9][0-9][0-9][0-9][0-9]$" class="form-control" name="zip" id="zip" placeholder="Your Zip Code" appPlacesAutocomplete required/>
               </div>
               <!-- Role Selection -->
               <label>Role</label>
@@ -114,7 +114,7 @@
               <dd class="col-sm-8">{{ loc.state }}</dd>
 
               <dt class="col-sm-4">Zip Code:</dt>
-              <dd class="col-sm-8">{{ zipNum }}</dd>
+              <dd class="col-sm-8">{{ loc.zip }}</dd>
 
               <dt class="col-sm-4">Role:</dt>
               <dd class="col-sm-8">{{ getRoles() }}</dd>

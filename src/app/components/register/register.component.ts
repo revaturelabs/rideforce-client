@@ -23,7 +23,6 @@ import { UserService } from '../../services/user.service';
 export class RegisterComponent implements OnInit {
   //this saves the user info that is typed in
   user: User;
-  zipNum : number;  //the zip code as a number (will be casted to string)
   //this saves the location info that is typed in
   loc: Location = {
     lid : 0,
@@ -154,7 +153,6 @@ export class RegisterComponent implements OnInit {
  //Register new user with Cognito in server-side application. 
   register() {
     this.user.uid = 0;
-    this.loc.zip = this.zipNum + "";
     this.user.location = this.loc;
     this.user.isActive = true;
     console.log(this.user);
