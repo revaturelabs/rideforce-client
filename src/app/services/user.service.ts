@@ -29,7 +29,7 @@ export class UserService {
 
 
   /** Is the user currently logged in? */
-  isLoggedIn: boolean = !(localStorage.getItem('currentUser') === '');
+  isLoggedIn: boolean = !(sessionStorage.getItem('currentUser') === '');
 
 
   /** Holds a list of users (does not appear to be used) */
@@ -46,7 +46,7 @@ export class UserService {
   }
 
   logout() {
-    localStorage.setItem('currentUser', '');
+    sessionStorage.setItem('currentUser', '');
     this.isLoggedIn = false;
     this.router.navigate(['/login']);
   }
@@ -59,9 +59,10 @@ export class UserService {
   allDrivers() : Observable<User[]> {
     return this.http.get<User[]>(this.host + '/users/drivers?isActive=true');
   }
-
+  
   updateUser(user : User) : Observable<User> {
-    return this.http.put<User>(this.host + '/users', user, this.options);
+
+    return this.http.put<User>(this.host + '/users/' + user.uid, user, this.options);
   }
 
 }

@@ -46,65 +46,46 @@ export class ViewProfileComponent implements OnInit {
   canEdit = false;
   /** User's active state */
   active: string;
-  principal: User;
+  currentUser: User;
   currentState: boolean;
   /** Holds the list of all users in the system */
   users: any[];
-  /** Holds the list of users filtered with search query */
-  filteredUsers: any[];
-  /** Holds the list of contact-info items for the currently logged user */
-  result: boolean;
   location: Location;
-  startTime: Date;
   userActivityTypes = ["Active", "Inactive"];
 
-  session: boolean;
 
-
-  /**
-   * Sets up the component with the User Service injected
-   * @param userService - Allows the component to work with the user service (for updating)
-   * @param {AuthService} authService - Allows Authentication Services to be utilized
-   */
   constructor(
     private userService: UserService,
-    //private userService: UserControllerService,
-    // private authService: AuthService, 
     private zone: NgZone, 
-    // private locationSerivce: GeocodeService,
     private router: Router,
     private http: HttpClient) {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('currentUser') != undefined && localStorage.getItem('currentUser') != null && localStorage.getItem('currentUser') != "") {
+      this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+    }
+    else {
+      this.currentUser = null;
+    }
 
-    this.principal = JSON.parse(localStorage.getItem('currentUser'));
-    //this.principal = this.userServ.register();
+    if(this.currentUser==null){
+      this.router.navigate(['landing']);
 
-    if(this.principal==null){
-      this.firstName = "Error: First Name not found.";
-      this.lastName = "Error: Last Name not found.";
-      this.username = "Error: Username not found.";
-      this.currentState = false;
-      this._address = "Error: Address not found.";
-      //var actelem = document.getElementById("user_activity");
-      //console.log(actelem);
-      // @ts-ignore
-      this.userRolePlaceholderString = this.userRoleTypes[1];
-      this.userActivityString = this.userActivityTypes[1];
+
     }else{
-      this.firstName = this.principal.fname;
-      this.lastName = this.principal.lname;
-      this.username = this.principal.email;
-      this.currentState = this.principal.isActive;
-      this._address = this.principal.location.address;
-      this.city = this.principal.location.city;
-      this.state = this.principal.location.state;
-      this.zip = parseInt(this.principal.location.zip);
+      this.firstName = this.currentUser.fname;
+      this.lastName = this.currentUser.lname;
+      this.username = this.currentUser.email;
+      this.currentState = this.currentUser.isActive;
+      this._address = this.currentUser.location.address;
+      this.city = this.currentUser.location.city;
+      this.state = this.currentUser.location.state;
+      this.zip = parseInt(this.currentUser.location.zip);
       this.userActivityString = this.getStatus();
     }
 
-    console.log(this.principal);
+    console.log(this.currentUser);
   }
 
 
@@ -122,31 +103,31 @@ export class ViewProfileComponent implements OnInit {
    */
   setRole(roleIn : string) {
     //if no role has been selected
-    if (this.principal.roles == undefined) {
-      this.principal.roles = [];      
-      this.principal.roles.push({id: this.getRoleId(roleIn), rname: roleIn});  //roleIn will either be 'rider' or 'driver'
+    if (this.currentUser.roles == undefined) {
+      this.currentUser.roles = [];      
+      this.currentUser.roles.push({id: this.getRoleId(roleIn), rname: roleIn});  //roleIn will either be 'rider' or 'driver'
     }
     else {
       let index = null; //if the user has already selected a role, this index will represent where it is in the 'roles' array
-      for (let i in this.principal.roles) {
-        if (this.principal.roles[i].rname === roleIn) {
+      for (let i in this.currentUser.roles) {
+        if (this.currentUser.roles[i].rname === roleIn) {
           index = i;
         }
       }
       if (index != null) {  //if the user has deselected a role
-        this.principal.roles.splice(index, 1); //remove the role from the roles array
+        this.currentUser.roles.splice(index, 1); //remove the role from the roles array
       }
       else {  //the user has selected a second role
-        this.principal.roles.push({id: this.getRoleId(roleIn), rname: roleIn});
+        this.currentUser.roles.push({id: this.getRoleId(roleIn), rname: roleIn});
       }
     }
   }
 
   //this colors the 'rider' and 'driver' buttons if they are selected
   colorButtons(roleIn : string) {
-    if (this.principal.roles != undefined) {
-      for (let i in this.principal.roles) {
-        if (this.principal.roles[i].rname == roleIn) {
+    if (this.currentUser != undefined && this.currentUser != null) {
+      for (let i in this.currentUser.roles) {
+        if (this.currentUser.roles[i].rname == roleIn) {
           return "lightblue";
         }
       }
@@ -156,10 +137,10 @@ export class ViewProfileComponent implements OnInit {
 
 
   getStatus(){
-    if(this.principal == null){
+    if(this.currentUser == null){
       return "Inactive";
     }else{
-      if(this.principal.isActive){
+      if(this.currentUser.isActive){
         return "Active";
       }else{
         return "Inactive";
@@ -168,7 +149,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   getStatusBool(status : string) {
-    if(this.principal == null){
+    if(this.currentUser == null){
       return false;
     }else{
       if(status === "Active"){
@@ -183,19 +164,15 @@ export class ViewProfileComponent implements OnInit {
   edit() {
     document.getElementById('firstName').removeAttribute('disabled');
     document.getElementById('lastName').removeAttribute('disabled');
-    // document.getElementById("email").removeAttribute("disabled");
-    // document.getElementById("password").removeAttribute("disabled");
-    // document.getElementById("confirmPassword").removeAttribute("disabled");
+    document.getElementById('password').removeAttribute('hidden');
+
     document.getElementById('user_activity').removeAttribute('disabled');
     document.getElementById('user_activity').removeAttribute('hidden');
     document.getElementById('decoy_user_activity').setAttribute('hidden', 'true');
-    var actelem2 = document.getElementById("user_activity");
 
     document.getElementById('rider').removeAttribute('disabled');
     document.getElementById('driver').removeAttribute('disabled');
     console.log("Status is: " + this.getStatus());
-    // @ts-ignore
-    actelem2.value = this.getStatus();
     document.getElementById('address').removeAttribute('disabled');
     document.getElementById('city').removeAttribute('disabled');
     document.getElementById('state').removeAttribute('disabled');
@@ -203,7 +180,6 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById('edit').style.display = 'none';
     document.getElementById('submit').style.display = 'inline';
 
-    //document.getElementById('errorMessage').removeAttribute('hidden');
     
   }
 
@@ -211,23 +187,23 @@ export class ViewProfileComponent implements OnInit {
    * Updates the user once he/she is content with the updates
    */
   submitChanges() {
-    this.principal.fname = this.firstName;
-    this.principal.lname = this.lastName;
-    this.principal.location.address = this._address;
-    this.principal.location.city = this.city;
-    this.principal.location.state = this.state;
-    this.principal.location.zip = this.zip + "";
+    this.currentUser.fname = this.firstName;
+    this.currentUser.lname = this.lastName;
+    this.currentUser.location.address = this._address;
+    this.currentUser.location.city = this.city;
+    this.currentUser.location.state = this.state;
+    this.currentUser.location.zip = this.zip + "";
 
     var activeElement = document.getElementById("user_activity");
     // @ts-ignore
-    this.principal.isActive = this.getStatusBool(activeElement.value);
+    this.currentUser.isActive = this.getStatusBool(activeElement.value);
 
-    console.log(this.principal);
+    console.log(this.currentUser);
 
-    this.userService.updateUser(this.principal).subscribe(
+    this.userService.updateUser(this.currentUser).subscribe(
       (response) => {
         console.log(response);
-        localStorage.setItem("currentUser", JSON.stringify(this.principal));
+        sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser));
         this.router.navigate(['userProfile']);
         this.responseText = "Changes submitted successfully!";
       },

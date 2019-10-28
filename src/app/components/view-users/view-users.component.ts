@@ -39,27 +39,8 @@ export class ViewUsersComponent implements OnInit {
       //receives information
       (response) => {
         this.users = response;
-        //const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-        const currentUser = {
-          uid: 1,
-          email: 'this.userEmail',
-          password: 'this.userPass',
-          fname: 'Testfirst',
-          lname: 'Testlast',
-          // roles: [{rid: 1, rname: 'Driver'}],
-          roles: [{ id: 1, rname: 'Rider' }],
-          location: {
-            lid: 1,
-            address: '555 Test Street',
-            city: 'Morgantown',
-            state: 'WV',
-            zip: '55555',
-            longitude: -79.9247098,
-            latitude: 39.6566119
-          },
-          distance: "",
-          isActive: true
-        };
+        const currentUser= JSON.parse(sessionStorage.getItem("currentUser"));
+        
         this.users.forEach(user => {
           var origin = new google.maps.LatLng(currentUser.location.latitude, currentUser.location.longitude);
           var destination = new google.maps.LatLng(user.location.latitude, user.location.longitude);
