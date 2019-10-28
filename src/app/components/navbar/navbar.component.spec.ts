@@ -115,10 +115,10 @@ describe('Nav Bar Logged In', () =>{
     var loginButton = element(by.xpath('/html/body/app-root/div/app-login/div[2]/div/div[2]/form/input[3]'));
     browser.wait(ExpectedConditions.elementToBeClickable(login));
 
-    login.sendKeys("timsemail1@revature.com");
+    login.sendKeys("timsemail@revature.com");
     browser.wait(ExpectedConditions.elementToBeClickable(password));
     password.sendKeys("pass");
-    browser.wait(ExpectedConditions.textToBePresentInElementValue(login, "timsemail1@revature.com"));
+    browser.wait(ExpectedConditions.textToBePresentInElementValue(login, "timsemail@revature.com"));
     browser.wait(ExpectedConditions.textToBePresentInElementValue(password, "pass"));
     browser.wait(ExpectedConditions.elementToBeClickable(loginButton));
     loginButton.click();
@@ -134,14 +134,14 @@ describe('Nav Bar Logged In', () =>{
   });
 
   // Revisit, doesn't work for some reason 
-  //
+  
   // it('Click Profile', () => {
   //   var profileButton = element(by.xpath('/html/body/app-root/app-navbar/nav/div[1]/div/a[3]'));
   //   browser.wait(ExpectedConditions.elementToBeClickable(profileButton));
   //   profileButton.click();
   //   expect(browser.getCurrentUrl()).toBe(`${browser.baseUrl}/userProfile`);
   // });
-  //
+  
   // it('Click Logout', () => {
   //   var logoutButton = element(by.xpath('/html/body/app-root/app-navbar/nav/button[2]'));
   //   browser.wait(ExpectedConditions.elementToBeClickable(logoutButton));
