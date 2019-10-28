@@ -63,7 +63,7 @@ export class ViewProfileComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('currentUser') != undefined && localStorage.getItem('currentUser') != null && localStorage.getItem('currentUser') != "") {
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     }
     else {
       this.currentUser = null;
@@ -71,6 +71,7 @@ export class ViewProfileComponent implements OnInit {
 
     if(this.currentUser==null){
       this.router.navigate(['landing']);
+
 
     }else{
       this.firstName = this.currentUser.fname;
@@ -164,6 +165,7 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById('firstName').removeAttribute('disabled');
     document.getElementById('lastName').removeAttribute('disabled');
     document.getElementById('password').removeAttribute('hidden');
+
     document.getElementById('user_activity').removeAttribute('disabled');
     document.getElementById('user_activity').removeAttribute('hidden');
     document.getElementById('decoy_user_activity').setAttribute('hidden', 'true');
@@ -201,7 +203,7 @@ export class ViewProfileComponent implements OnInit {
     this.userService.updateUser(this.currentUser).subscribe(
       (response) => {
         console.log(response);
-        localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
+        sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser));
         this.router.navigate(['userProfile']);
         this.responseText = "Changes submitted successfully!";
       },

@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   /**
    * Whether the User is logged on or not
    */
-  session: boolean = !(localStorage.getItem('currentUser') === '');
+  session: boolean = !(sessionStorage.getItem('currentUser') === '');
 
   /**
    * Will store the current role of the user for the purpose of utilizing *ngIf rendering on the navBar
@@ -73,10 +73,10 @@ export class NavbarComponent implements OnInit {
   private imageFile: any;
 
   ngOnInit() {
-    if(localStorage.getItem('currentUser') === null) {
-      localStorage.setItem('currentUser', '');
+    if(sessionStorage.getItem('currentUser') === null) {
+      sessionStorage.setItem('currentUser', '');
     }
-    this.session = !(localStorage.getItem('currentUser') === '');
+    this.session = !(sessionStorage.getItem('currentUser') === '');
     console.log(this.session)
 
   }
@@ -121,7 +121,7 @@ export class NavbarComponent implements OnInit {
     this.userServ.logout();
     // this.authService.logout();
     this.session = false;
-    localStorage.setItem('currentUser', '');
+    sessionStorage.setItem('currentUser', '');
     // this.principal = new User();
     // this.principal.uid = 0;
     // this.authService.changePrincipal(this.principal);
