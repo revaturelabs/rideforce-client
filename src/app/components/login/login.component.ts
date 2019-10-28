@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
 
     this.userLogin.subscribe(
       (resUser) => {
-        console.log(resUser)
+        console.log(resUser);
         localStorage.setItem('currentUser', JSON.stringify(resUser));
         this.userServ.isLoggedIn = true;
         this.route.navigate(['/landing']);
