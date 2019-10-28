@@ -78,7 +78,7 @@ export class ViewProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    this.principal = JSON.parse(localStorage.getItem('currentUser'));
+    this.principal = JSON.parse(sessionStorage.getItem('currentUser'));
     //this.principal = this.userServ.register();
 
     if(this.principal==null){
@@ -228,7 +228,7 @@ export class ViewProfileComponent implements OnInit {
     this.userService.updateUser(this.principal).subscribe(
       (response) => {
         console.log(response);
-        localStorage.setItem("currentUser", JSON.stringify(this.principal));
+        sessionStorage.setItem("currentUser", JSON.stringify(this.principal));
         this.router.navigate(['userProfile']);
         this.responseText = "Changes submitted successfully!";
       },

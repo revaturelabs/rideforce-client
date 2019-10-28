@@ -161,7 +161,7 @@ export class RegisterComponent implements OnInit {
       (response) => {
         console.log(response);
         let validUser :User = response;
-        localStorage.setItem('currentUser', JSON.stringify(validUser));
+        sessionStorage.setItem('currentUser', JSON.stringify(validUser));
 
       },
       (response) => {
