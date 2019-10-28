@@ -162,7 +162,8 @@ export class RegisterComponent implements OnInit {
         console.log(response);
         let validUser :User = response;
         sessionStorage.setItem('currentUser', JSON.stringify(validUser));
-
+        this.userService.isLoggedIn = true;
+        this.router.navigateByUrl('landing');
       },
       (response) => {
         console.log(response);
