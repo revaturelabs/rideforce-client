@@ -56,7 +56,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('currentUser') != undefined && localStorage.getItem('currentUser') != null && localStorage.getItem('currentUser') != "") {
+    if (sessionStorage.getItem('currentUser') != undefined && sessionStorage.getItem('currentUser') != null && sessionStorage.getItem('currentUser') != "") {
       this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     }
     else {
