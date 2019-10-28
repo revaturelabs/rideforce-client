@@ -74,7 +74,7 @@
                   <input type="email" class="form-control" [(ngModel)]="userActivityString" #uName="ngModel" id="decoy_user_activity"
                   placeholder="Error: userActivityString ngModel not set." disabled>
                   <select id="user_activity" class="browser-default custom-select" #roleType disabled hidden>
-                    <option [value]="type" *ngFor="let type of userActivityTypes">
+                    <option [value]="type" *ngFor="let type of userActivityTypes" [selected]="type === getStatus()">
                       {{type}}
                     </option>
                   </select>
