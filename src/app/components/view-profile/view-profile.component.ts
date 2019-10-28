@@ -66,7 +66,6 @@ export class ViewProfileComponent implements OnInit {
     if(this.currentUser==null){
       this.router.navigate(['landing']);
 
-
     }else{
       this.firstName = this.currentUser.fname;
       this.lastName = this.currentUser.lname;
@@ -162,7 +161,7 @@ export class ViewProfileComponent implements OnInit {
     document.getElementById('user_activity').removeAttribute('disabled');
     document.getElementById('user_activity').removeAttribute('hidden');
     document.getElementById('decoy_user_activity').setAttribute('hidden', 'true');
-
+    // document.getElementById('user_activity').value = this.getStatus();
     document.getElementById('rider').removeAttribute('disabled');
     document.getElementById('driver').removeAttribute('disabled');
     console.log("Status is: " + this.getStatus());
