@@ -20,27 +20,27 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
   /**
-   * The "username" of the user
+   * String bound to Email field via [(ngModel)]
    */
   userEmail: string;
   /**
-   * The User to log on to
-   */
-  currentUser: User = new User();
-  testLocation: Location;
-  /**
-   * The password associated with the indended account
+   * String bound to Password field via [(ngModel)]
    */
   userPass: string;
-
+  /**
+   * User model sent to the backend via Http POST
+   * Contains blank fields except for defined email and password
+   * To be compared to full user entities on the backend
+   * Backend sends a reply with with a full user on successful match
+   */
+  currentUser: User = new User();
 
   /**
    * Sets up the Login compoennt with dependency injection
-   * @param {AuthService} authService - Provides the ability to authenticate the user
+   * @param {UserService} userServ - gets user information from the back end with login function - defines navbar display with isLoggedIn
    * @param {Router} route - provides the ability to navigate to landing if user is already logged on
    */
   constructor(
-    // private authService: AuthService,
     private userServ: UserService,
     private route: Router
   ) { }
@@ -49,54 +49,27 @@ export class LoginComponent implements OnInit {
    * Checking to see if there is a current user, and if there is, redirects to landing.
    */
   ngOnInit() {
-    // this.authService.principal.subscribe(u => {
-    //   this.principal = u;
-    //   if (this.principal.id !== 0) {
-    //     this.route.navigate(['/landing']);
-    //   }
-    // })
-
+    if (sessionStorage.getItem('currentuser') == null || sessionStorage.getItem('currentuser') == '') {
+      this.route.navigateByUrl('landing');
+    }
   }
-
-  userLogin : Observable<User>;
 
   /**
    * Gets the parameters from the login fields.
+   * On success, sets the currentUser in sessionStorage and routes to landing.
    * If the login fails, displays the error message sent by the server under the password field.
    */
   login() {
-    this.currentUser = {
-      uid: 1,
-      email: this.userEmail,
-      password: this.userPass,
-      fname: 'Testfirst',
-      lname: 'Testlast',
-      // roles: [{rid: 1, rname: 'Driver'}],
-      roles: [{id: 1, rname: 'Rider'}],
-      location: {
-        lid: 1,
-        address: '555 Test Street',
-        city: 'Morgantown',
-        state: 'WV',
-        zip: '55555',
-        longitude: 0,
-        latitude: -1
-      },
-      isActive: true
-    }
-
     this.currentUser.email = this.userEmail;
     this.currentUser.password = this.userPass;
-    console.log(this.currentUser)
+    //console.log(this.currentUser)
 
-    this.userLogin = this.userServ.login(this.currentUser);
-
-    this.userLogin.subscribe(
+    this.userServ.login(this.currentUser).subscribe(
       (resUser) => {
-        console.log(resUser)
+        //console.log(resUser)
         sessionStorage.setItem('currentUser', JSON.stringify(resUser));
         this.userServ.isLoggedIn = true;
-        this.route.navigate(['/landing']);
+        this.route.navigateByUrl('landing');
       },
       (resErr) => {
         var messageLogin = document.getElementById('errorMessageLogin');
