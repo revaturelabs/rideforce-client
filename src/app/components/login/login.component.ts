@@ -45,13 +45,7 @@ export class LoginComponent implements OnInit {
     private route: Router
   ) { }
 
-  /**
-   * Checking to see if there is a current user, and if there is, redirects to landing.
-   */
   ngOnInit() {
-    if (sessionStorage.getItem('currentuser') == null || sessionStorage.getItem('currentuser') == '') {
-      this.route.navigateByUrl('landing');
-    }
   }
 
   /**
